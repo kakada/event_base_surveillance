@@ -1,0 +1,27 @@
+version: '3'
+
+volumes:
+  bundle:
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+
+  web: &rails
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+    tmpfs: /app/tmp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file: .env
+    tty: true
+    stdin_open: true
