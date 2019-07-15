@@ -1497,3 +1497,41 @@ Processing by Devise::SessionsController#new as HTML
 Completed 200 OK in 1404ms (Views: 1379.2ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/sign_in" for 172.26.0.1 at 2019-07-15 08:47:23 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.haml within layouts/application
+  Rendered devise/shared/_links.html.haml (104.5ms)
+  Rendered devise/sessions/new.html.haml within layouts/application (345.5ms)
+  Rendered shared/_notify_message.html.haml (137.6ms)
+Completed 200 OK in 1415ms (Views: 1389.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sign_in" for 172.26.0.1 at 2019-07-15 08:50:11 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.haml within layouts/application
+  Rendered devise/shared/_links.html.haml (99.4ms)
+  Rendered devise/sessions/new.html.haml within layouts/application (324.2ms)
+  Rendered shared/_notify_message.html.haml (138.8ms)
+Completed 200 OK in 1368ms (Views: 1350.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sign_in" for 172.26.0.1 at 2019-07-15 08:50:15 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lWcAx2aCFMOUwjOWL9UQpdgtU6y2GRSt5BlswggKJ5dBSR4UJ4XmseK+9PXyveUepawAM/Zr5xMu+RFppATqKA==", "user"=>{"email"=>"sokly@instedd.org", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (4.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "sokly@instedd.org"], ["LIMIT", 1]]
+  ↳ /usr/local/bundle/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Completed 401 Unauthorized in 70ms (ActiveRecord: 4.4ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lWcAx2aCFMOUwjOWL9UQpdgtU6y2GRSt5BlswggKJ5dBSR4UJ4XmseK+9PXyveUepawAM/Zr5xMu+RFppATqKA==", "user"=>{"email"=>"sokly@instedd.org", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.haml within layouts/application
+  Rendered devise/shared/_links.html.haml (107.3ms)
+  Rendered devise/sessions/new.html.haml within layouts/application (347.9ms)
+  Rendered shared/_notify_message.html.haml (128.9ms)
+Completed 200 OK in 1557ms (Views: 1395.7ms | ActiveRecord: 0.0ms)
+
+
