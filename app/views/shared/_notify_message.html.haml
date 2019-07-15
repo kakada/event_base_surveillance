@@ -1,0 +1,13 @@
+- if notice.present?
+  .alert.alert-success.notify-message
+    %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+    = notice
+- if alert.present?
+  .alert.alert-danger.notify-message
+    %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+    = alert
+
+:javascript
+  setTimeout(function() {
+    $( ".alert" ).fadeOut( "slow" )
+  }, 3000);

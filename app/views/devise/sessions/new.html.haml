@@ -1,17 +1,29 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.column
+  .wrapper
+    .logo-wrapper
+      = image_tag 'doctor.png', class: 'logo'
+
+    .form-wrapper
+      %h2 Event Base Surveillance
+
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+
+        .form-group
+          = f.label :password
+          = f.password_field :password, autocomplete: "current-password", class: 'form-control'
+
+        - if devise_mapping.rememberable?
+          .form-group.form-check
+            = f.check_box :remember_me, class: 'form-check-input'
+            = f.label :remember_me, class: 'form-check-label'
+        .actions
+          = f.submit "Log in", class: 'btn btn-primary mb-2'
+
+      = render "devise/shared/links"
+
+  .footer
+    = link_to '© 2018 InSTEDD', 'http://instedd.org', target: '_blank'
+    %div Version 1.0.0
