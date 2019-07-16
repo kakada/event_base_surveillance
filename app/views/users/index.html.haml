@@ -19,16 +19,13 @@
           %tr
             %th Email
             %th Role
+            %th Status
             %th
         %tbody
           - @users.each do |user|
             %tr
               %th= user.email
               %td= 'user.roles'
+              %td= user.confirmed? ? 'active' : 'pending';
               %td
-                = link_to 'Edit', '#', class: 'badge badge-info'
-                = '/'
-                = link_to 'Delete', '#', class: 'badge badge-danger'
-
-
-
+                = link_to 'Delete' , user_path(user), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this user?'}
