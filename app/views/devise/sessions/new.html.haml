@@ -1,7 +1,6 @@
-.column
+#devise-form.column
   .wrapper
-    .logo-wrapper
-      = image_tag 'doctor.png', class: 'logo'
+    = render 'devise/shared/logo'
 
     .form-wrapper
       %h2 Event Base Surveillance
@@ -24,6 +23,4 @@
 
       = render "devise/shared/links"
 
-  .footer
-    = link_to '© 2018 InSTEDD', 'http://instedd.org', target: '_blank'
-    %div Version 1.0.0
+  = render 'devise/shared/footer'
