@@ -1,0 +1,42 @@
+%nav#sidebar
+  .sidebar-header
+    %h3 Event Base Surveillance
+    %strong EBS
+
+  %ul.list-unstyled.components
+    %li.active
+      %a{:href => "#"}
+        %i.fas.fa-home
+        Home
+
+    %li
+      = link_to users_path do
+        %i.fas.fa-users
+        Users
+
+    %li
+      = link_to events_path do
+        %i.fas.fa-calendar-alt
+        Events
+
+    %li
+      %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#pageSubmenu"}
+        %i.fas.fa-copy
+        Pages
+      %ul#pageSubmenu.collapse.list-unstyled
+        %li
+          %a{:href => "#"} Page 1
+        %li
+          %a{:href => "#"} Page 2
+        %li
+          %a{:href => "#"} Page 3
+
+    %li
+      %a{:href => "#"}
+        %i.fas.fa-info-circle
+        About
+
+    %li
+      = link_to destroy_user_session_path, method: :delete do
+        %i.fas.fa-key
+        Logout
