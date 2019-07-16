@@ -25,7 +25,7 @@
           - @users.each do |user|
             %tr
               %th= user.email
-              %td= 'user.roles'
+              %td= user.role
               %td= user.confirmed? ? 'active' : 'pending';
               %td
                 = link_to 'Delete' , user_path(user), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this user?'}

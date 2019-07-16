@@ -10,6 +10,8 @@ class User < ApplicationRecord
     staff: 3
   }
 
+  validates :role, presence: true
+
   def password_match?
      self.errors[:password] << I18n.t('errors.messages.blank') if password.blank?
      self.errors[:password_confirmation] << I18n.t('errors.messages.blank') if password_confirmation.blank?
