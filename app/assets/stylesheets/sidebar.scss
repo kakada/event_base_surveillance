@@ -1,14 +1,3 @@
-body {
-  background: #fafafa;
-}
-
-p {
-  font-size: 1.1em;
-  font-weight: 300;
-  line-height: 1.7em;
-  color: #999;
-}
-
 a,
 a:hover,
 a:focus {
@@ -106,10 +95,13 @@ a:focus {
 #sidebar .sidebar-header {
   padding: 20px;
   background: #6d7fcc;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 #sidebar .sidebar-header strong {
-  margin-left: -10px;
+  margin-left: -15px;
   display: none;
   font-size: 1.8em;
 }

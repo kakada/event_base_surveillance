@@ -5,4 +5,12 @@ module ApplicationHelper
 
     "#{prefix}-#{subfix}"
   end
+
+  def getCssActiveClass(name)
+    if (params['controller'] == name)
+      return 'active'
+    end
+
+    return nil
+  end
 end
