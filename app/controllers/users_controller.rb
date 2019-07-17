@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      UserWorker.perform_async(@user.id)
       redirect_to users_url
     else
       render :new

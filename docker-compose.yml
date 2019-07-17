@@ -17,6 +17,9 @@ services:
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
+    depends_on:
+      - db
+      - sidekiq
     tmpfs: /app/tmp
     ports:
       - "3000:3000"
@@ -25,3 +28,16 @@ services:
     env_file: .env
     tty: true
     stdin_open: true
+  sidekiq:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    command: bundle exec sidekiq
+  redis:
+    container_name: redis
+    image: redis
+

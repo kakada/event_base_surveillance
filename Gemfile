@@ -34,12 +34,19 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
-gem 'devise', '~> 4.6.2'
-gem 'haml-rails', '~> 2.0'
-gem 'jquery-rails', '~> 4.3.5'
-gem 'bootstrap', '~> 4.3.1'
-gem 'simple_form', '~> 4.1.0'
+gem 'bootsnap',       '>= 1.1.0', require: false
+gem 'devise',         '~> 4.6.2'
+gem 'devise-async',   '~> 1.0.0'
+
+gem 'sidekiq',        '~> 5.2.7'
+gem 'sidekiq-scheduler'
+gem 'sidekiq-unique-jobs'
+gem 'sinatra', require: nil
+
+gem 'haml-rails',     '~> 2.0'
+gem 'jquery-rails',   '~> 4.3.5'
+gem 'bootstrap',      '~> 4.3.1'
+gem 'simple_form',    '~> 4.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
