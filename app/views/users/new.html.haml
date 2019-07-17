@@ -5,11 +5,11 @@
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container-fluid
         %h3 New Users
-        = link_to 'Back', users_path, class: 'btn btn-secondary'
 
     .w-50.view-center
       = simple_form_for @user do |f|
-        = f.input :email, placeholder: 'user@domain.com', input_html: { required: true }
-        = f.input :role, collection: User.roles.keys.to_a, input_html: { class: 'form-control', required: true }
+        = f.input :email
+        = f.input :role, collection: User::ROLES
 
         = f.button :submit, class: 'btn btn-primary'
+        = link_to 'Cancel', users_path, class: 'btn btn-secondary'

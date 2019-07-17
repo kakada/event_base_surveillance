@@ -10,6 +10,8 @@ class User < ApplicationRecord
     staff: 3
   }
 
+  ROLES = self.roles.keys.map { |r| [r.titlecase, r] }
+
   validates :role, presence: true
 
   def password_match?
@@ -38,7 +40,6 @@ class User < ApplicationRecord
   def only_if_unconfirmed
     pending_any_confirmation {yield}
   end
-
 
   protected
 
