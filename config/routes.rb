@@ -13,6 +13,11 @@ Rails.application.routes.draw do
 
   resources :users
   resources :events
+  resources :event_types do
+    scope module: :event_types do
+      resources :forms
+    end
+  end
 
   mount Sidekiq::Web => '/sidekiq'
 end

@@ -8,10 +8,7 @@
         = link_to new_user_path, class: 'btn btn-primary' do
           %i.fas.fa-plus
 
-    - if @users.blank?
-      .text-center
-        %h2 No data found
-        %p Please use (+) button to add items!
+    = render partial: "shared/no_data", locals: { items: @users }
 
     - if @users.present?
       %table.table.table-hover.medium-width
@@ -24,7 +21,7 @@
         %tbody
           - @users.each do |user|
             %tr
-              %th= user.email
+              %td= user.email
               %td= user.role.titlecase
               %td= user.confirmed? ? 'Active' : 'Pending';
               %td

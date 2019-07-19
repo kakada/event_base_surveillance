@@ -5,16 +5,14 @@
 #  id         :bigint           not null, primary key
 #  name       :string           not null
 #  filed_type :string
-#  min        :integer
-#  max        :integer
+#  form_id    :integer
 #  required   :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class Field < ApplicationRecord
-  has_many :form_fields
-  has_many :forms, through: :form_fields
+  belongs_to :form
 
   validates :name, presence: true
 end

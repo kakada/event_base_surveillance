@@ -29,27 +29,19 @@ ActiveRecord::Schema.define(version: 2019_07_19_021602) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "fields", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "filed_type"
-    t.integer "min"
-    t.integer "max"
-    t.boolean "required"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "form_field_values", force: :cascade do |t|
-    t.integer "form_field_id"
+  create_table "field_values", force: :cascade do |t|
+    t.integer "field_id"
     t.integer "event_id"
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "form_fields", force: :cascade do |t|
+  create_table "fields", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "field_type"
     t.integer "form_id"
-    t.integer "field_id"
+    t.boolean "required"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

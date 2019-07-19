@@ -1,0 +1,31 @@
+.wrapper
+  = render 'shared/sidebar'
+
+  #content
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .container-fluid
+        %h3 Event Type
+        = link_to new_event_type_path, class: 'btn btn-primary' do
+          %i.fas.fa-plus
+
+    = render partial: "shared/no_data", locals: { items: @event_types }
+
+    - if @event_types.present?
+      %table.table.table-hover.medium-width
+        %thead
+          %tr
+            %th Name
+            %th Form Amount
+            %th
+        %tbody
+          - @event_types.each do |event_type|
+            %tr
+              %td= event_type.name
+              %td= event_type.forms.size
+              %td
+                = link_to 'Manage Form', event_type_forms_path(event_type), class: "badge badge-primary"
+                = ' / '
+                = link_to 'Edit', edit_event_type_path(event_type), class: "badge badge-info"
+                = ' / '
+                = link_to 'Delete', event_type_path(event_type), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this event type?'}
+

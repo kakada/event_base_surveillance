@@ -15,6 +15,11 @@
         %i.fas.fa-users
         Users
 
+    %li{class: (getCssActiveClass('event_types') || getCssActiveClass('event_types/forms')) }
+      = link_to event_types_path do
+        %i.fas.fa-calendar-alt
+        Event Type and Form
+
     %li{class: getCssActiveClass('events') }
       = link_to events_path do
         %i.fas.fa-calendar-alt

@@ -1,0 +1,11 @@
+.wrapper
+  = render 'shared/sidebar'
+
+  #content
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .container-fluid
+        %h3 New Form
+
+    .w-50.view-center
+      = form_for @form, url: event_type_forms_path(@event_type), method: :post do |f|
+        = render 'form', f: f

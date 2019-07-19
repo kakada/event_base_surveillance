@@ -31,6 +31,8 @@ class User < ApplicationRecord
 
   ROLES = self.roles.keys.map { |r| [r.titlecase, r] }
 
+  has_many :event_types
+
   validates :role, presence: true
 
   def password_match?

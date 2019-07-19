@@ -13,5 +13,5 @@ class Event < ApplicationRecord
   belongs_to :event_type
   belongs_to :creator, class_name: 'User'
   has_many   :form_values
-  has_many   :form_field_values
+  has_many   :field_values
 end

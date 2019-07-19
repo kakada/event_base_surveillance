@@ -12,9 +12,10 @@
 
 class Form < ApplicationRecord
   belongs_to :event_type
-  has_many :form_fields
-  has_many :fields, through: :form_fields
+  has_many :fields
   has_many :form_values
 
   validates :name, presence: true
+
+  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
 end

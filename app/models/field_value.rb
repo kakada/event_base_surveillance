@@ -1,16 +1,16 @@
 # == Schema Information
 #
-# Table name: form_fields
+# Table name: field_values
 #
 #  id         :bigint           not null, primary key
-#  form_id    :integer
 #  field_id   :integer
+#  event_id   :integer
+#  value      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class FormField < ApplicationRecord
-  belongs_to :form
+class FieldValue < ApplicationRecord
   belongs_to :field
-  has_many   :form_field_values
+  belongs_to :event
 end

@@ -1,0 +1,13 @@
+.form-group
+  = f.label :name
+  = f.text_field :name, class: 'form-control'
+
+%div
+  = f.fields_for :fields do |builder|
+    = render 'field_fields', f: builder
+
+  = link_to_add_fields "+ Add Field", f, :fields
+
+.actions{style: 'margin-top: 20px'}
+  = f.button :submit, class: 'btn btn-primary'
+  = link_to 'Cancel', event_type_forms_path(@event_type), class: 'btn btn-secondary'

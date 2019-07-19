@@ -1,0 +1,12 @@
+%fieldset
+  %div{style: 'display: flex; align-items: center'}
+
+    %div{style: 'display: flex; width: 70%'}
+      = f.select :field_type, %w[text_field check_box], {}, class: 'form-control w-50'
+      = f.text_field :name, placeholder: "field_name", class: 'form-control w-50'
+
+    %div{style: 'width: 30%; padding-left: 20px'}
+      = f.check_box :required, style: 'margin-right: 5px'
+      = f.label :required, style: 'margin-right: 20px'
+      = f.hidden_field :_destroy
+      = link_to "remove", '#', class: "remove_fields badge badge-danger", style: 'margin-top: 30px'
