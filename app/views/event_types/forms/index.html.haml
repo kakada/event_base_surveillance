@@ -5,8 +5,12 @@
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container-fluid
         %h3= "#{@event_type.name}: Forms"
-        = link_to new_event_type_form_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+        %div
+          = link_to event_types_path, class: 'btn btn-info', style: 'margin-right: 16px' do
+            Done
+
+          = link_to new_event_type_form_path, class: 'btn btn-primary' do
+            %i.fas.fa-plus
 
     = render partial: "shared/no_data", locals: { items: @forms }
 

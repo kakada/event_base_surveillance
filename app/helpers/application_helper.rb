@@ -21,6 +21,6 @@ module ApplicationHelper
       render(association.to_s.singularize + "_fields", f: builder)
     end
 
-    link_to(name, '#', class: "add_fields btn btn-outline-secondary", data: {id: id, fields: fields.gsub("\n", "")})
+    link_to(name, '#', class: "add_fields btn", data: {id: id, fields: fields.gsub("\n", "")})
   end
 end
