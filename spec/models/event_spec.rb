@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to belong_to(:event_type) }
+  it { is_expected.to belong_to(:creator).class_name('User') }
+  it { is_expected.to have_many(:form_values) }
+  it { is_expected.to have_many(:form_field_values) }
 end

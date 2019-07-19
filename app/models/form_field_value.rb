@@ -11,4 +11,6 @@
 #
 
 class FormFieldValue < ApplicationRecord
+  belongs_to :form_field
+  belongs_to :event
 end

@@ -10,4 +10,7 @@
 #
 
 class FormField < ApplicationRecord
+  belongs_to :form
+  belongs_to :field
+  has_many   :form_field_values
 end

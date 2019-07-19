@@ -11,4 +11,10 @@
 #
 
 class Form < ApplicationRecord
+  belongs_to :event_type
+  has_many :form_fields
+  has_many :fields, through: :form_fields
+  has_many :form_values
+
+  validates :name, presence: true
 end

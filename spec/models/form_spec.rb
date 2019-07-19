@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Form, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to belong_to(:event_type) }
+  it { is_expected.to have_many(:form_fields) }
+  it { is_expected.to have_many(:fields).through(:form_fields) }
+  it { is_expected.to have_many(:form_values) }
+  it { is_expected.to validate_presence_of(:name) }
 end

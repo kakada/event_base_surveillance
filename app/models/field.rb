@@ -13,4 +13,8 @@
 #
 
 class Field < ApplicationRecord
+  has_many :form_fields
+  has_many :forms, through: :form_fields
+
+  validates :name, presence: true
 end

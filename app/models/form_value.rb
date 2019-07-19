@@ -12,4 +12,7 @@
 #
 
 class FormValue < ApplicationRecord
+  belongs_to :event
+  belongs_to :form
+  belongs_to :submitter, class_name: 'User'
 end
