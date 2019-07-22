@@ -7,7 +7,7 @@ module EventTypes
     end
 
     def new
-      @form_type = Form.new
+      @form_type = FormType.new
     end
 
     def create
@@ -20,11 +20,11 @@ module EventTypes
     end
 
     def edit
-      @form_type = Form.find(params[:id])
+      @form_type = FormType.find(params[:id])
     end
 
     def update
-      @form_type = Form.find(params[:id])
+      @form_type = FormType.find(params[:id])
 
       if @form_type.update_attributes(form_params)
         redirect_to event_type_forms_url
@@ -34,7 +34,7 @@ module EventTypes
     end
 
     def destroy
-      @form_type = Form.find(params[:id])
+      @form_type = FormType.find(params[:id])
       @form_type.destroy
 
       redirect_to event_type_forms_url

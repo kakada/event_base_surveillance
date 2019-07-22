@@ -7,5 +7,5 @@
         %h3 New Form
 
     .w-50.view-center
-      = form_for @form, url: event_type_forms_path(@event_type), method: :post do |f|
+      = form_for @form, url: event_type_form_types_path(@event_type), method: :post do |f|
         = render 'form', f: f

@@ -12,16 +12,16 @@
           = link_to new_event_type_form_type_path, class: 'btn btn-primary' do
             %i.fas.fa-plus
 
-    = render partial: "shared/no_data", locals: { items: @forms }
+    = render partial: "shared/no_data", locals: { items: @form_types }
 
-    - if @forms.present?
+    - if @form_types.present?
       %table.table.table-hover.medium-width
         %thead
           %tr
             %th Name
             %th
         %tbody
-          - @forms.each do |form|
+          - @form_types.each do |form|
             %tr
               %td= form.name
               %td
