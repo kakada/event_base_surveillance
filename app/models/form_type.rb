@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: forms
+# Table name: form_types
 #
 #  id            :bigint           not null, primary key
 #  name          :string           not null

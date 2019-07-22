@@ -14,17 +14,17 @@
       %table.table.table-hover.medium-width
         %thead
           %tr
-            %th Eventy Type
+            %th Event Type
+            %th Event Progress
             %th
         %tbody
           - @events.each do |event|
             %tr
               %td= event.event_type_name
+              %td= render 'event_progress', event: event
               %td
                 = link_to 'Edit', edit_event_path(event), class: "badge badge-info"
                 = ' / '
                 = link_to 'Delete', event_path(event), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this event?'}
-
-
 
 = render 'event_types_modal'

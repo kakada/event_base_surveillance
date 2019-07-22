@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def index
-    @event_types = EventType.all
-    @events = Event.all
+    @event_types = EventType.includes(:form_types)
+    @events = Event.includes(:forms)
   end
 
   def new

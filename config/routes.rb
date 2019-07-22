@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :events
+  resources :events do
+    scope module: :events do
+      resources :forms
+    end
+  end
+
   resources :event_types do
     scope module: :event_types do
       resources :form_types

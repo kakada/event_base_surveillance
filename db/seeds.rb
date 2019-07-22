@@ -15,7 +15,8 @@ event_type = u.event_types.create(name: 'H5N1')
 # Create Forms
 form_types = [
   { name: 'New' },
-  { name: 'Assessment'}
+  { name: 'Assessment'},
+  { name: 'Investigation'}
 ]
 
 fields = [

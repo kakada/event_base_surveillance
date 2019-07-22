@@ -2,13 +2,13 @@
 #
 # Table name: fields
 #
-#  id         :bigint           not null, primary key
-#  name       :string           not null
-#  filed_type :string
-#  form_id    :integer
-#  required   :boolean
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :bigint           not null, primary key
+#  name         :string           not null
+#  field_type   :string
+#  form_type_id :integer
+#  required     :boolean
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class Field < ApplicationRecord
