@@ -7,3 +7,26 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 u = User.new(email: 'admin@instedd.org', role: :system_admin, password: '123456')
 u.confirm
+
+
+# Create Event type
+event_type = u.event_types.create(name: 'H5N1')
+
+# Create Forms
+form_types = [
+  { name: 'New' },
+  { name: 'Assessment'}
+]
+
+fields = [
+  { name: 'Name', field_type: 'text_field' },
+  { name: 'Case', field_type: 'text_field' }
+]
+
+form_types.each do |form|
+  f = event_type.form_types.create(name: form[:name])
+
+  fields.each do |field|
+    f.fields.create(name: field[:name], field_type: field[:field_type])
+  end
+end

@@ -1,18 +1,18 @@
 module EventTypes
-  class FormsController < ::ApplicationController
+  class FormTypesController < ::ApplicationController
     before_action :assign_event_type
 
     def index
-      @forms = @event_type.forms
+      @form_types = @event_type.form_types
     end
 
     def new
-      @form = Form.new
+      @form_type = Form.new
     end
 
     def create
-      @form = @event_type.forms.new(form_params)
-      if @form.save
+      @form_type = @event_type.form_types.new(form_params)
+      if @form_type.save
         redirect_to event_type_forms_url
       else
         render :new
@@ -20,13 +20,13 @@ module EventTypes
     end
 
     def edit
-      @form = Form.find(params[:id])
+      @form_type = Form.find(params[:id])
     end
 
     def update
-      @form = Form.find(params[:id])
+      @form_type = Form.find(params[:id])
 
-      if @form.update_attributes(form_params)
+      if @form_type.update_attributes(form_params)
         redirect_to event_type_forms_url
       else
         render :edit
@@ -34,8 +34,8 @@ module EventTypes
     end
 
     def destroy
-      @form = Form.find(params[:id])
-      @form.destroy
+      @form_type = Form.find(params[:id])
+      @form_type.destroy
 
       redirect_to event_type_forms_url
     end

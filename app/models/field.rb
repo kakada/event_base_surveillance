@@ -12,7 +12,10 @@
 #
 
 class Field < ApplicationRecord
-  belongs_to :form
+  FIELD_TYPES = %w[text_field check_box date]
+
+  belongs_to :form_type
 
   validates :name, presence: true
+  validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
 end

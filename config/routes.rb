@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :events
   resources :event_types do
     scope module: :event_types do
-      resources :forms
+      resources :form_types
     end
   end
 

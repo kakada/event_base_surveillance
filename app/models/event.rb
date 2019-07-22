@@ -12,6 +12,9 @@
 class Event < ApplicationRecord
   belongs_to :event_type
   belongs_to :creator, class_name: 'User'
-  has_many   :form_values
-  has_many   :field_values
+  has_many   :forms
+
+  delegate :name, to: :event_type, prefix: :event_type
+
+  accepts_nested_attributes_for :forms, allow_destroy: true
 end

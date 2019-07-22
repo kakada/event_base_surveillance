@@ -32,6 +32,7 @@ class User < ApplicationRecord
   ROLES = self.roles.keys.map { |r| [r.titlecase, r] }
 
   has_many :event_types
+  has_many :events, foreign_key: :creator_id
 
   validates :role, presence: true
 

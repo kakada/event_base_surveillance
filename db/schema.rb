@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_021602) do
+ActiveRecord::Schema.define(version: 2019_07_19_021557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,36 +29,29 @@ ActiveRecord::Schema.define(version: 2019_07_19_021602) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "field_values", force: :cascade do |t|
-    t.integer "field_id"
-    t.integer "event_id"
-    t.string "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "fields", force: :cascade do |t|
     t.string "name", null: false
     t.string "field_type"
-    t.integer "form_id"
+    t.integer "form_type_id"
     t.boolean "required"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "form_values", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "form_id"
-    t.integer "submitter_id"
-    t.string "priority"
+  create_table "form_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "event_type_id"
+    t.integer "display_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "forms", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "event_type_id"
-    t.integer "display_order"
+    t.integer "event_id"
+    t.integer "form_type_id"
+    t.integer "submitter_id"
+    t.string "priority"
+    t.text "properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

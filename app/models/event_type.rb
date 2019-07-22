@@ -12,7 +12,7 @@
 class EventType < ApplicationRecord
   has_many :events
   belongs_to :user
-  has_many :forms
+  has_many :form_types
 
   validates :name, presence: true
 end

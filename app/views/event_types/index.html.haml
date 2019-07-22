@@ -21,9 +21,9 @@
           - @event_types.each do |event_type|
             %tr
               %td= event_type.name
-              %td= event_type.forms.size
+              %td= event_type.form_types.size
               %td
-                = link_to 'Manage Form', event_type_forms_path(event_type), class: "badge badge-primary"
+                = link_to 'Manage Form', event_type_form_types_path(event_type), class: "badge badge-primary"
                 = ' / '
                 = link_to 'Edit', edit_event_type_path(event_type), class: "badge badge-info"
                 = ' / '

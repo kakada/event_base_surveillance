@@ -1,21 +1,28 @@
 # == Schema Information
 #
-# Table name: forms
+# Table name: form_values
 #
-#  id            :bigint           not null, primary key
-#  name          :string           not null
-#  event_type_id :integer
-#  display_order :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id           :bigint           not null, primary key
+#  event_id     :integer
+#  form_id      :integer
+#  submitter_id :integer
+#  priority     :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class Form < ApplicationRecord
-  belongs_to :event_type
-  has_many :fields
-  has_many :form_values
+  belongs_to :event
+  belongs_to :form_type
+  belongs_to :submitter, class_name: 'User'
 
-  validates :name, presence: true
+  serialize :properties, Hash
 
-  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
+  def validate_properties
+    form_type.fields.each do |field|
+      if field.required? && properties[field.name].blank?
+        errors.add field.name, "cannot be blank"
+      end
+    end
+  end
 end

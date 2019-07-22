@@ -1,6 +1,6 @@
 class EventTypesController < ApplicationController
   def index
-    @event_types = EventType.includes(:forms)
+    @event_types = EventType.includes(:form_types)
   end
 
   def new
@@ -32,8 +32,8 @@ class EventTypesController < ApplicationController
   end
 
   def destroy
-    @user = EventType.find(params[:id])
-    @user.destroy
+    @event_type = EventType.find(params[:id])
+    @event_type.destroy
 
     redirect_to event_types_url
   end

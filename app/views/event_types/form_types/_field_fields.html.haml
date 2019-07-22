@@ -2,7 +2,7 @@
   %div{style: 'display: flex; align-items: center'}
 
     %div{style: 'display: flex; width: 70%'}
-      = f.select :field_type, %w[text_field check_box], {}, class: 'form-control w-50'
+      = f.select :field_type, Field::FIELD_TYPES, {}, class: 'form-control w-50'
       = f.text_field :name, placeholder: "field_name", class: 'form-control w-50'
 
     %div{style: 'width: 30%; padding-left: 20px'}
