@@ -1,15 +1,17 @@
 %div{style: 'display: flex; align-items: center'}
+  - is_next = true
   - form_type_ids = event.forms.pluck(:form_type_id)
   - form_types = event.event_type.form_types
   - form_types.each_with_index do |form_type, index|
-
     - if form_type_ids.include?(form_type.id)
       - form = event.forms.find_by(form_type_id: form_type.id)
-      = link_to form_type.name, edit_event_form_path(event, form), class: 'btn btn-link'
-
+      = link_to edit_event_form_path(event, form), class: 'btn btn-link' do
+        = form_type.name
+        %span.badge.badge-light{style: 'top: -12px; left: -6px'} edit
     - else
-      = link_to form_type.name, new_event_form_path(event_id: event.id, form_type_id: form_type.id), class: 'btn btn-link'
+      - css_class = is_next ? 'btn btn-link' : 'btn btn-link disabled'
+      - is_next = false
+      = link_to form_type.name, new_event_form_path(event_id: event.id, form_type_id: form_type.id), class: css_class
 
     - if index < form_types.length - 1
       %i.fa.fa-chevron-right
-
