@@ -11,6 +11,7 @@ module Events
       if @form.save
         redirect_to events_url
       else
+        flash.now[:alert] = @form.errors.full_messages
         render :new
       end
     end
@@ -25,6 +26,7 @@ module Events
       if @form.update_attributes(form_params)
         redirect_to events_url
       else
+        flash.now[:alert] = @form.errors.full_messages
         render :edit
       end
     end

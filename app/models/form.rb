@@ -19,10 +19,12 @@ class Form < ApplicationRecord
 
   serialize :properties, Hash
 
+  validate :validate_properties, on: [:create, :update]
+
   def validate_properties
     form_type.fields.each do |field|
-      if field.required? && properties[field.name].blank?
-        errors.add field.name, "cannot be blank"
+      if field.required? && properties[field.name.downcase].blank?
+        errors.add field.name.downcase, "cannot be blank"
       end
     end
   end

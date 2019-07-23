@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       UserWorker.perform_async(@user.id)
       redirect_to users_url
     else
+      flash.now[:alert] = @user.errors.full_messages
       render :new
     end
   end

@@ -13,8 +13,9 @@
             .col-sm-9
               - @event_types.each do |event_type|
                 .form-check
-                  %input.form-check-input{type: 'radio', name: 'event_type_id', id: 'event_type_id', value: event_type.id}
-                  %label.form-check-label{for: 'event_type_id'}= event_type.name
+                  %input.form-check-input{ type: 'radio', name: 'event_type_id', id: "event_type_id_#{event_type.id}", value: event_type.id }
+                  %label.form-check-label{for: "event_type_id_#{event_type.id}"}
+                    = event_type.name
 
       .modal-footer
         %button.btn.btn-primary{type: 'submit'} Next

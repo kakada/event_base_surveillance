@@ -15,6 +15,7 @@ module EventTypes
       if @form_type.save
         redirect_to event_type_form_types_url
       else
+        flash.now[:alert] = @form_type.errors.full_messages
         render :new
       end
     end
@@ -27,8 +28,9 @@ module EventTypes
       @form_type = FormType.find(params[:id])
 
       if @form_type.update_attributes(form_type_params)
-        redirect_to event_type_forms_url
+        redirect_to event_type_form_types_url
       else
+        flash.now[:alert] = @form_type.errors.full_messages
         render :edit
       end
     end

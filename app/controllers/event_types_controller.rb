@@ -13,6 +13,7 @@ class EventTypesController < ApplicationController
     if @event_type.save
       redirect_to event_types_url
     else
+      flash.now[:alert] = @event_type.errors.full_messages
       render :new
     end
   end
@@ -27,6 +28,7 @@ class EventTypesController < ApplicationController
     if @event_type.update_attributes(event_type_params)
       redirect_to event_types_url
     else
+      flash.now[:alert] = @event_type.errors.full_messages
       render :edit
     end
   end

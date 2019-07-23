@@ -9,26 +9,12 @@ class EventsController < ApplicationController
     @form_type = FormType.find_by(event_type_id: params[:event_type_id])
   end
 
-  def edit
-    @event = Event.find(params[:id])
-    @form_type = FormType.find_by(event_type_id: @event.event_type_id)
-  end
-
-  def update
-    @event = Event.find(params[:id])
-
-    if @event.update_attibutes(event_params)
-      redirect_to events_url
-    else
-      render :edit
-    end
-  end
-
   def create
     @event = current_user.events.new(event_params)
     if @event.save
       redirect_to events_url
     else
+      flash.now[:alert] = @event.errors.full_messages
       render :new
     end
   end
