@@ -6,7 +6,6 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new(event_type_id: params[:event_type_id])
-    @form_type = FormType.find_by(event_type_id: params[:event_type_id])
   end
 
   def create
