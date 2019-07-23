@@ -1,0 +1,2 @@
+class FieldOption < ApplicationRecord
+end

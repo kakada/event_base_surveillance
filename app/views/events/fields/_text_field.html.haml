@@ -1,3 +1,9 @@
-.form-group
-  = f.label field.name
-  = f.text_field field.name.downcase, class: 'form-control'
+- field_name = field.name.downcase
+- error_msg = @form.errors[field_name]
+
+%div{class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group'}
+  = f.label field_name
+  = f.text_field field_name, class: error_msg.present? ? 'form-control is-invalid' : 'form-control'
+
+  - if error_msg.present?
+    %div.invalid-feedback= error_msg.join('; ')
