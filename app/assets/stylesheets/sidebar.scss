@@ -45,6 +45,9 @@ a:focus {
   background: #7386D5;
   color: #fff;
   transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 #sidebar.active {
@@ -109,6 +112,8 @@ a:focus {
 #sidebar ul.components {
   padding: 20px 0;
   border-bottom: 1px solid #47748b;
+  overflow: scroll;
+  flex-grow: 1;
 }
 
 #sidebar ul li a {
@@ -172,6 +177,13 @@ a.article:hover {
   background: #6d7fcc !important;
   color: #fff !important;
 }
+
+.copyright {
+  text-decoration: none;
+  font-size: 12px;
+  padding: 10px;
+}
+
 
 /* ---------------------------------------------------
     CONTENT STYLE
