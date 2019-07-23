@@ -12,7 +12,7 @@
 #
 
 class Field < ApplicationRecord
-  FIELD_TYPES = %w[text_field check_box date]
+  FIELD_TYPES = %w[text integer date select_one note image]
 
   belongs_to :form_type
   has_many   :field_options, dependent: :destroy
