@@ -6,8 +6,9 @@
     - if form_type_ids.include?(form_type.id)
       - form = event.forms.find_by(form_type_id: form_type.id)
       = link_to form_type.name, edit_event_form_path(event, form), class: 'btn btn-link'
+
     - else
-      = link_to form_type.name, new_event_form_path(event), class: 'btn btn-link'
+      = link_to form_type.name, new_event_form_path(event_id: event.id, form_type_id: form_type.id), class: 'btn btn-link'
 
     - if index < form_types.length - 1
       %i.fa.fa-chevron-right

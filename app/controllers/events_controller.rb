@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.update_attibutes(event_params)
-      redirect_to event_types_url
+      redirect_to events_url
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.new(event_params)
     if @event.save
-      redirect_to event_types_url
+      redirect_to events_url
     else
       render :new
     end

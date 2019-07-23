@@ -12,7 +12,7 @@
 class Event < ApplicationRecord
   belongs_to :event_type
   belongs_to :creator, class_name: 'User'
-  has_many   :forms
+  has_many   :forms, dependent: :destroy
 
   delegate :name, to: :event_type, prefix: :event_type
 
