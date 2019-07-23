@@ -45,7 +45,15 @@ module EventTypes
     private
 
     def form_type_params
-      params.require(:form_type).permit(:name, fields_attributes: [:id, :name, :field_type, :required, :_destroy])
+      params.require(:form_type).permit(
+        :name,
+        fields_attributes: [
+          :id, :name, :field_type, :required, :_destroy,
+          field_options_attributes: [
+            :id, :name, :value, :_destroy
+          ]
+        ]
+      )
     end
 
     def assign_event_type

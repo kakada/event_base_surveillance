@@ -1,0 +1,45 @@
+.fieldset {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.field-wrapper {
+  display: flex;
+  align-items: center;
+
+  .wrapper {
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+  }
+
+  .btn-remove-field {
+    position: absolute;
+    right: 5px;
+    top: 0;
+
+    i {
+      color: #dc3545;
+    }
+  }
+
+  .btn-remove-option {
+    i {
+      color: #dc3545;
+    }
+  }
+
+  .w-35 {
+    width: 35%;
+    margin-right: 10px
+  }
+}
+
+.options-wrapper {
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  display: none;
+}

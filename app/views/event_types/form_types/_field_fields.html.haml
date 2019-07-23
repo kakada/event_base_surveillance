@@ -1,12 +1,18 @@
-%fieldset
-  %div{style: 'display: flex; align-items: center'}
+%fieldset.fieldset
+  .field-wrapper
+    .wrapper
+      = f.select :field_type, Field::FIELD_TYPES, {}, class: 'form-control w-35'
+      = f.text_field :name, placeholder: "field_name", class: 'form-control w-35'
 
-    %div{style: 'display: flex; width: 70%'}
-      = f.select :field_type, Field::FIELD_TYPES, {}, class: 'form-control w-50'
-      = f.text_field :name, placeholder: "field_name", class: 'form-control w-50'
+      .form-check
+        = f.check_box :required, class: 'form-check-input required'
+        = f.label :required, class: 'form-check-label required-label'
 
-    %div{style: 'width: 30%; padding-left: 20px'}
-      = f.check_box :required, style: 'margin-right: 5px'
-      = f.label :required, style: 'margin-right: 20px'
-      = f.hidden_field :_destroy
-      = link_to "remove", '#', class: "remove_fields badge badge-danger", style: 'margin-top: 30px'
+    = f.hidden_field :_destroy
+    = link_to '#', class: "remove_fields btn-remove-field" do
+      %i.fa.fa-times-circle
+
+  .options-wrapper
+    = f.fields_for :field_options do |builder|
+      = render 'field_option_fields', f: builder
+    = link_to_add_fields "+ Add Option", f, :field_options
