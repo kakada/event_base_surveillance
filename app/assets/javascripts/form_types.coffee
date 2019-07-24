@@ -3,6 +3,7 @@ document.addEventListener 'turbolinks:load', ->
     handleToggleOptionsWrapper()
     onClickAddField()
     onClickRemoveField()
+    onClickAddFieldOption()
     onChangeSelectFieldType()
 
   handleToggleOptionsWrapper = ->
@@ -24,6 +25,13 @@ document.addEventListener 'turbolinks:load', ->
       $(this).before($(this).data('fields').replace(regexp, time))
       event.preventDefault()
 
+  onClickAddFieldOption = ->
+    $(document).on 'click', 'form .add_field_options', (event) ->
+      time = new Date().getTime()
+      regexp = new RegExp($(this).data('id'), 'g')
+      $(this).before($(this).data('fields').replace(regexp, time))
+      event.preventDefault()
+
   onChangeSelectFieldType = ->
     $(document).on 'change', 'select[name*=field_type]', (event) ->
       dom = event.target
@@ -34,7 +42,7 @@ document.addEventListener 'turbolinks:load', ->
   showBtnAddSelectOption = (dom)->
     optionsWrapper = $(dom).parents('.fieldset').find('.options-wrapper')
     optionsWrapper.show()
-    optionsWrapper.find('.add_fields').click();
+    optionsWrapper.find('.add_field_options').click()
 
   disabledSelectFieldType = (dom) ->
     $(dom).css('background-color', '#e9ecef')

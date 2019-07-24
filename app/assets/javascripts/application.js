@@ -20,4 +20,6 @@
 //= require bootstrap
 //= require sidebar
 
+//= require pumi
+
 //= require_tree .
