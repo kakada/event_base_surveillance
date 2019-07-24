@@ -1,31 +1,28 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Event Type
+      = link_to new_event_type_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3 Event Type
-        = link_to new_event_type_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+  = render partial: "shared/no_data", locals: { items: @event_types }
 
-    = render partial: "shared/no_data", locals: { items: @event_types }
-
-    - if @event_types.present?
-      %table.table.table-hover.medium-width
-        %thead
+  - if @event_types.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Name
+          %th Number of Forms
+          %th
+      %tbody
+        - @event_types.each do |event_type|
           %tr
-            %th Name
-            %th Number of Forms
-            %th
-        %tbody
-          - @event_types.each do |event_type|
-            %tr
-              %td= event_type.name
-              %td= event_type.form_types.size
-              %td
-                = link_to 'Manage Form', event_type_form_types_path(event_type), class: "badge badge-primary"
-                = ' / '
-                = link_to 'Edit', edit_event_type_path(event_type), class: "badge badge-info"
-                = ' / '
-                = link_to 'Delete', event_type_path(event_type), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this event type?'}
+            %td= event_type.name
+            %td= event_type.form_types.size
+            %td
+              = link_to 'Manage Form', event_type_form_types_path(event_type), class: "badge badge-primary"
+              = ' / '
+              = link_to 'Edit', edit_event_type_path(event_type), class: "badge badge-info"
+              = ' / '
+              = link_to 'Delete', event_type_path(event_type), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this event type?'}
 

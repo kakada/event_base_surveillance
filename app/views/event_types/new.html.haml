@@ -1,9 +1,6 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 New Event Type
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3 New Event Type
-
-    = render 'form'
+  = render 'form'

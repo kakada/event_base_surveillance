@@ -1,11 +1,8 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Edit Form Type
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3 Edit Form Type
-
-    .w-50.view-center
-      = form_for @form_type, url: event_type_form_type_path(@event_type, @form_type), method: :put do |f|
-        = render 'form', f: f
+  .w-50.view-center
+    = form_for @form_type, url: event_type_form_type_path(@event_type, @form_type), method: :put do |f|
+      = render 'form', f: f

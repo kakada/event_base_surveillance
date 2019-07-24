@@ -1,11 +1,8 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3="#{@event.event_type_name}: #{@form.form_type.name} "
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3="#{@event.event_type_name}: #{@form.form_type.name} "
-
-    .w-50.view-center
-      = simple_form_for @form, url: event_forms_path(@event), method: :post do |f|
-        = render 'form', f: f
+  .w-50.view-center
+    = simple_form_for @form, url: event_forms_path(@event), method: :post do |f|
+      = render 'form', f: f

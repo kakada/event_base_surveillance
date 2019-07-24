@@ -1,27 +1,24 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Event
+      = link_to new_event_path, class: 'btn btn-primary', "data-target" => '#exampleModal', 'data-toggle' => 'modal' do
+        %i.fas.fa-plus
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3 Event
-        = link_to new_event_path, class: 'btn btn-primary', "data-target" => '#exampleModal', 'data-toggle' => 'modal' do
-          %i.fas.fa-plus
+  = render partial: "shared/no_data", locals: { items: @events }
 
-    = render partial: "shared/no_data", locals: { items: @events }
-
-    - if @events.present?
-      %table.table.table-hover.medium-width
-        %thead
+  - if @events.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Event Type
+          %th Event Progress
+          %th
+      %tbody
+        - @events.each do |event|
           %tr
-            %th Event Type
-            %th Event Progress
-            %th
-        %tbody
-          - @events.each do |event|
-            %tr
-              %td= event.event_type_name
-              %td= render 'event_progress', event: event
-              %td= link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}
+            %td= event.event_type_name
+            %td= render 'event_progress', event: event
+            %td= link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}
 
 = render 'event_types_modal'

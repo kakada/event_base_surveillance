@@ -1,28 +1,24 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 New Event
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3 New Event
+  .w-50.view-center
+    = simple_form_for @event do |f|
+      = f.input :event_type_id, as: :hidden
 
-    .w-50.view-center
-      = simple_form_for @event do |f|
-        = f.input :event_type_id, as: :hidden
+      .form-group
+        %label Event Type
+        %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
 
-        .form-group
-          %label Event Type
-          %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
+      - form_type = @event.event_type.form_types.first
+      = f.simple_fields_for :forms, @event.forms.new do |ff|
+        = ff.input :submitter_id, input_html: {value: current_user.id}, as: :hidden
+        = ff.input :form_type_id, input_html: {value: form_type.id}, as: :hidden
 
-        - form_type = @event.event_type.form_types.first
-        = f.simple_fields_for :forms, @event.forms.new do |ff|
-          = ff.input :submitter_id, input_html: {value: current_user.id}, as: :hidden
-          = ff.input :form_type_id, input_html: {value: form_type.id}, as: :hidden
+        = ff.fields_for :properties, OpenStruct.new(@event.forms.first.properties) do |builder|
+          - form_type.fields.each do |field|
+            = render "events/fields/#{field.field_type}", field: field, f: builder
 
-          = ff.fields_for :properties, OpenStruct.new(@event.forms.first.properties) do |builder|
-            - form_type.fields.each do |field|
-              = render "events/fields/#{field.field_type}", field: field, f: builder
-
-        = f.button :submit, class: 'btn btn-primary'
-        = link_to 'Cancel', events_path, class: 'btn btn-secondary'
-
+      = f.button :submit, class: 'btn btn-primary'
+      = link_to 'Cancel', events_path, class: 'btn btn-secondary'

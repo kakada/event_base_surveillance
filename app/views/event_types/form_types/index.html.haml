@@ -1,31 +1,28 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "#{@event_type.name}: Form Types"
+      %div
+        = link_to event_types_path, class: 'btn btn-info', style: 'margin-right: 16px' do
+          Done
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3= "#{@event_type.name}: Form Types"
-        %div
-          = link_to event_types_path, class: 'btn btn-info', style: 'margin-right: 16px' do
-            Done
+        = link_to new_event_type_form_type_path, class: 'btn btn-primary' do
+          %i.fas.fa-plus
 
-          = link_to new_event_type_form_type_path, class: 'btn btn-primary' do
-            %i.fas.fa-plus
+  = render partial: "shared/no_data", locals: { items: @form_types }
 
-    = render partial: "shared/no_data", locals: { items: @form_types }
-
-    - if @form_types.present?
-      %table.table.table-hover.medium-width
-        %thead
+  - if @form_types.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Name
+          %th
+      %tbody
+        - @form_types.each do |form|
           %tr
-            %th Name
-            %th
-        %tbody
-          - @form_types.each do |form|
-            %tr
-              %td= form.name
-              %td
-                = link_to 'Edit', edit_event_type_form_type_path(@event_type, form), class: "badge badge-info"
-                = ' / '
-                = link_to 'Delete', event_type_form_type_path(@event_type, form), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this form?'}
+            %td= form.name
+            %td
+              = link_to 'Edit', edit_event_type_form_type_path(@event_type, form), class: "badge badge-info"
+              = ' / '
+              = link_to 'Delete', event_type_form_type_path(@event_type, form), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this form?'}
 
