@@ -7,15 +7,12 @@
           %span{"aria-hidden" => "true"} ×
 
       .modal-body
-        %fieldset.form-group
-          .row
-            %legend.col-form-label.col-sm-3.pt-0 Event Type
-            .col-sm-9
+        .form-group.row
+          %label.col-sm-3.col-form-label Event Type
+          .col-sm-9
+            %select.form-control{name: 'event_type_id'}
               - @event_types.each do |event_type|
-                .form-check
-                  %input.form-check-input{ type: 'radio', name: 'event_type_id', id: "event_type_id_#{event_type.id}", value: event_type.id }
-                  %label.form-check-label{for: "event_type_id_#{event_type.id}"}
-                    = event_type.name
+                %option{value: event_type.id}= event_type.name
 
       .modal-footer
         %button.btn.btn-primary{type: 'submit'} Next
