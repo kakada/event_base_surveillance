@@ -11,4 +11,9 @@
 
   %body{ id: css_class_name }
     = render 'shared/notify_message'
-    = yield
+
+    #devise-form.column
+      .wrapper
+        = render 'devise/shared/logo'
+        = yield
+      = render 'devise/shared/footer'

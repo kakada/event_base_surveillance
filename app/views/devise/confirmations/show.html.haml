@@ -1,27 +1,22 @@
-#devise-form.column
-  .wrapper
-    = render 'devise/shared/logo'
+.form-wrapper
+  %h2 Account Activation
 
-    .form-wrapper
-      %h2 Account Activation
+  = form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'put'}, :id => 'activation-form' do |f|
+    = devise_error_messages!
+    %fieldset
+      %legend
+        - if resource.try(:email)
+          for #{resource.email}
+      - if @requires_password
+        .form-group
+          = f.label :password, 'Choose a Password'
+          = f.password_field :password, class: 'form-control'
+        .form-group
+          = f.label :password_confirmation, 'Password Confirmation'
+          = f.password_field :password_confirmation, class: 'form-control'
 
-      = form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'put'}, :id => 'activation-form' do |f|
-        = devise_error_messages!
-        %fieldset
-          %legend
-            - if resource.try(:email)
-              for #{resource.email}
-          - if @requires_password
-            .form-group
-              = f.label :password, 'Choose a Password'
-              = f.password_field :password, class: 'form-control'
-            .form-group
-              = f.label :password_confirmation, 'Password Confirmation'
-              = f.password_field :password_confirmation, class: 'form-control'
+      = hidden_field_tag :confirmation_token, @confirmation_token
 
-          = hidden_field_tag :confirmation_token, @confirmation_token
+      .actions
+        = f.submit "Activate", class: 'btn btn-primary mb-2'
 
-          .actions
-            = f.submit "Activate", class: 'btn btn-primary mb-2'
-
-  = render 'devise/shared/footer'
