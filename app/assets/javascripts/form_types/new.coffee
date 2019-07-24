@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+EBS.Event_typesForm_typesNew = do ->
   init = ->
     handleToggleOptionsWrapper()
     onClickAddField()
@@ -20,16 +20,12 @@ document.addEventListener 'turbolinks:load', ->
 
   onClickAddField = ->
     $(document).on 'click', 'form .add_fields', (event) ->
-      time = new Date().getTime()
-      regexp = new RegExp($(this).data('id'), 'g')
-      $(this).before($(this).data('fields').replace(regexp, time))
+      appendField(this);
       event.preventDefault()
 
   onClickAddFieldOption = ->
     $(document).on 'click', 'form .add_field_options', (event) ->
-      time = new Date().getTime()
-      regexp = new RegExp($(this).data('id'), 'g')
-      $(this).before($(this).data('fields').replace(regexp, time))
+      appendField(this);
       event.preventDefault()
 
   onChangeSelectFieldType = ->
@@ -38,6 +34,11 @@ document.addEventListener 'turbolinks:load', ->
       if dom.value == 'select_one'
         disabledSelectFieldType(dom)
         showBtnAddSelectOption(dom)
+
+  appendField = (dom) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(dom).data('id'), 'g')
+    $(dom).before($(dom).data('fields').replace(regexp, time))
 
   showBtnAddSelectOption = (dom)->
     optionsWrapper = $(dom).parents('.fieldset').find('.options-wrapper')
@@ -48,4 +49,4 @@ document.addEventListener 'turbolinks:load', ->
     $(dom).css('background-color', '#e9ecef')
     $(dom).next().show()
 
-  init();
+  { init: init }

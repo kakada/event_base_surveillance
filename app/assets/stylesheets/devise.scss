@@ -1,10 +1,4 @@
-#devise-form.column,
-#devise-sessions-new,
-#devise-sessions-create,
-#devise-passwords-new,
-#devise-passwords-create,
-#devise-passwords-edit,
-#devise-passwords-update {
+.devise-form {
   display: flex;
   flex-direction: column;
   height: 100%;

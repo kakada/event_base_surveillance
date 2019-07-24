@@ -18,8 +18,21 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
-//= require sidebar
 
+//= require application/namespace
+//= require application/util
+
+//= require common/sidebar
 //= require pumi
 
-//= require_tree .
+// All Pages
+//= require form_types/new
+//= require form_types/edit
+
+
+document.addEventListener('turbolinks:load', function() {
+  EBS.Common.Sidebar.init();
+
+  let currentPage = EBS.Util.getCurrentPage();
+  !!EBS[currentPage] && EBS[currentPage].init();
+})

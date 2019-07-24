@@ -1,4 +1,4 @@
-document.addEventListener 'turbolinks:load', ->
+EBS.Common.Sidebar = do ->
   init = ->
     handleActiveSidebar();
     onClickSidebar();
@@ -12,4 +12,4 @@ document.addEventListener 'turbolinks:load', ->
       $('#sidebar').toggleClass 'active'
       localStorage.setItem('miniSidebar', $('#sidebar').hasClass('active'));
 
-  return init();
+  { init: init }

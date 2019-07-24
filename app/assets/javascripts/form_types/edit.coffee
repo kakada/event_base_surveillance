@@ -1,0 +1,1 @@
+EBS.Event_typesForm_typesEdit = EBS.Event_typesForm_typesNew
