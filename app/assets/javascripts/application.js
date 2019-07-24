@@ -28,6 +28,9 @@
 // All Pages
 //= require form_types/new
 //= require form_types/edit
+//= require event_forms/new
+//= require event_forms/edit
+//= require events/new
 
 
 document.addEventListener('turbolinks:load', function() {

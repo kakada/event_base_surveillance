@@ -1,0 +1,1 @@
+EBS.EventsNew = EBS.EventsFormsNew
