@@ -10,7 +10,7 @@ EBS.Event_typesForm_typesNew = do ->
     $('select[name*=field_type]').each (index, dom) ->
       if dom.value == 'select_one'
         disabledSelectFieldType(dom)
-        $(dom).parents('.fieldset').find('.options-wrapper').show();
+        $(dom).parents('.fieldset').find('.options-wrapper').show()
 
   onClickRemoveField = ->
     $(document).on 'click', 'form .remove_fields', (event) ->
@@ -19,16 +19,19 @@ EBS.Event_typesForm_typesNew = do ->
       event.preventDefault()
 
   onClickAddField = ->
-    $(document).on 'click', 'form .add_fields', (event) ->
+    $('form .add_fields').off('click')
+    $('form .add_fields').on 'click', (event) ->
       appendField(this);
       event.preventDefault()
 
   onClickAddFieldOption = ->
+    $(document).off('click', 'form .add_field_options')
     $(document).on 'click', 'form .add_field_options', (event) ->
       appendField(this);
       event.preventDefault()
 
   onChangeSelectFieldType = ->
+    $(document).off('change', 'select[name*=field_type]')
     $(document).on 'change', 'select[name*=field_type]', (event) ->
       dom = event.target
       if dom.value == 'select_one'
