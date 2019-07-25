@@ -7,7 +7,6 @@
 #  form_type_id :integer
 #  submitter_id :integer
 #  priority     :string
-#  properties   :text
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -16,14 +15,20 @@ class Form < ApplicationRecord
   belongs_to :event
   belongs_to :form_type
   belongs_to :submitter, class_name: 'User'
+  has_many   :field_values
 
-  serialize :properties, Hash
+  validate :validate_field_values, on: [:create, :update]
 
-  validate :validate_properties, on: [:create, :update]
+  accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
+    attributes['id'].blank? && attributes['value'].blank?
+  }
 
-  def validate_properties
+  def validate_field_values
     form_type && form_type.fields.each do |field|
-      if field.required? && properties[field.name.downcase].blank?
+      next if !field.required?
+
+      obj = field_values.select{ |value| value.field_id == field.id }.first
+      if !obj || obj[:value].blank?
         errors.add field.name.downcase, "cannot be blank"
       end
     end

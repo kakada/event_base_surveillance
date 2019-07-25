@@ -34,7 +34,7 @@ module Events
     private
 
     def form_params
-      params.require(:form).permit(:submitter_id, :form_type_id, properties: {})
+      params.require(:form).permit(:submitter_id, :form_type_id, field_values_attributes: [:id, :field_id, :value, properties: {}])
     end
 
     def assign_event

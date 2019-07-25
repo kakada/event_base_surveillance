@@ -5,4 +5,16 @@
 
   .w-50.view-center
     = simple_form_for @form, url: event_forms_path(@event), method: :post do |f|
-      = render 'form', f: f
+      .form-group
+        %label Event Type
+        %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
+
+      = f.input :submitter_id, input_html: {value: current_user.id}, as: :hidden
+      = f.input :form_type_id, input_html: {value: @form.form_type.id}, as: :hidden
+
+      - @form.form_type.fields.each do |field|
+        = f.fields_for :field_values, @form.field_values.new do |builder|
+          = render "events/fields/#{field.field_type}", field: field, f: builder
+
+      = f.button :submit, class: 'btn btn-primary'
+      = link_to 'Cancel', events_path, class: 'btn btn-secondary'

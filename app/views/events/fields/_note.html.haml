@@ -3,7 +3,8 @@
 
 %div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
   = f.label field_name
-  = f.text_area field_name, class: error_msg.present? ? 'form-control is-invalid' : 'form-control'
+  = f.hidden_field :field_id, value: field.id
+  = f.text_area :value, class: error_msg.present? ? 'form-control is-invalid' : 'form-control'
 
   - if error_msg.present?
     %div.invalid-feedback= error_msg.join('; ')

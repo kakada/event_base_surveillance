@@ -5,7 +5,6 @@ class CreateForms < ActiveRecord::Migration[5.2]
       t.integer :form_type_id
       t.integer :submitter_id
       t.string  :priority
-      t.text    :properties
 
       t.timestamps
     end

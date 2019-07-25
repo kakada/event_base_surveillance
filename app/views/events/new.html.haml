@@ -16,8 +16,8 @@
         = ff.input :submitter_id, input_html: {value: current_user.id}, as: :hidden
         = ff.input :form_type_id, input_html: {value: form_type.id}, as: :hidden
 
-        = ff.fields_for :properties, OpenStruct.new(@event.forms.first.properties) do |builder|
-          - form_type.fields.each do |field|
+        - form_type.fields.each do |field|
+          = ff.fields_for :field_values, ff.object.field_values.new do |builder|
             = render "events/fields/#{field.field_type}", field: field, f: builder
 
       = f.button :submit, class: 'btn btn-primary'

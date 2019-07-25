@@ -30,7 +30,12 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(
       :name, :event_type_id,
-      forms_attributes: [ :submitter_id, :form_type_id, properties: {} ]
+      forms_attributes: [
+        :submitter_id, :form_type_id,
+        field_values_attributes: [
+          :id, :field_id, :value, properties: {}
+        ]
+      ]
     )
   end
 end
