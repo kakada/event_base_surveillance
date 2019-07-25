@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_042345) do
     t.boolean "required"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "form_type_id"], name: "index_fields_on_name_and_form_type_id", unique: true
   end
 
   create_table "form_types", force: :cascade do |t|

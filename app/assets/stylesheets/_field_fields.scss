@@ -37,6 +37,10 @@
     margin-right: 10px;
     position: relative;
   }
+
+  .field_with_errors input {
+    border-color: #dc3545;
+  }
 }
 
 .options-wrapper {

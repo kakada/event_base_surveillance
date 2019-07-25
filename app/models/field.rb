@@ -17,7 +17,7 @@ class Field < ApplicationRecord
   belongs_to :form_type
   has_many   :field_options, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :form_type, message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
 
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }

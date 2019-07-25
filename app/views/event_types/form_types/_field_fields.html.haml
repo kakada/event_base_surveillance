@@ -5,7 +5,8 @@
         = f.select :field_type, Field::FIELD_TYPES, {}, class: 'form-control'
         .disabled-select-layer
 
-      = f.text_field :name, placeholder: "field_name", class: 'form-control w-35'
+      .w-35
+        = f.text_field :name, placeholder: "field_name", class: 'form-control'
 
       .form-check
         = f.check_box :required, class: 'form-check-input required'
