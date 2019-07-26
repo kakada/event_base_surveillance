@@ -2,7 +2,7 @@
   = f.label :name
   = f.text_field :name, class: 'form-control'
 
-.fields
+%ol.fields
   = f.fields_for :fields do |builder|
     = render 'field_fields', f: builder
 

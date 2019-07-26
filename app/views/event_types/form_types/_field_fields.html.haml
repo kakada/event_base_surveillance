@@ -1,22 +1,26 @@
-%fieldset.fieldset
-  .field-wrapper
-    .wrapper
-      .w-35
-        = f.select :field_type, Field::FIELD_TYPES, {}, class: 'form-control'
-        .disabled-select-layer
+%li
+  %fieldset.fieldset
+    .field-wrapper
+      %button.btn
+        %i.fa.fa-arrows-alt.move
 
-      .w-35
-        = f.text_field :name, placeholder: "field_name", class: 'form-control'
+      .wrapper
+        .w-35
+          = f.select :field_type, Field::FIELD_TYPES, {}, class: 'form-control'
+          .disabled-select-layer
 
-      .form-check
-        = f.check_box :required, { class: 'form-check-input required' }
-        = f.label :required, class: 'form-check-label required-label'
+        .w-35
+          = f.text_field :name, placeholder: "field_name", class: 'form-control'
 
-    = f.hidden_field :_destroy
-    = link_to '#', class: "remove_fields btn-remove-field" do
-      %i.fa.fa-times-circle
+        .form-check
+          = f.check_box :required, { class: 'form-check-input required' }
+          = f.label :required, class: 'form-check-label required-label'
 
-  .options-wrapper
-    = f.fields_for :field_options do |builder|
-      = render 'field_option_fields', f: builder
-    = link_to_add_fields "+ Add Option", f, :field_options
+      = f.hidden_field :_destroy
+      = link_to '#', class: "remove_fields btn-remove-field" do
+        %i.fa.fa-times-circle
+
+    .options-wrapper
+      = f.fields_for :field_options do |builder|
+        = render 'field_option_fields', f: builder
+      = link_to_add_fields "+ Add Option", f, :field_options

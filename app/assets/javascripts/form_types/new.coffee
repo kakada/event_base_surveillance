@@ -5,6 +5,7 @@ EBS.Event_typesForm_typesNew = do ->
     onClickRemoveField()
     onClickAddFieldOption()
     onChangeSelectFieldType()
+    setupSortable()
 
   handleToggleOptionsWrapper = ->
     $('select[name*=field_type]').each (index, dom) ->
@@ -51,5 +52,18 @@ EBS.Event_typesForm_typesNew = do ->
   disabledSelectFieldType = (dom) ->
     $(dom).css('background-color', '#e9ecef')
     $(dom).next().show()
+
+  setupSortable = ->
+    $(document).find('ol.fields').sortable
+      handle: '.move'
+      onDrop: ($item, container, _super) ->
+        $clonedItem = $('<li/>').css(height: 0)
+        $item.before $clonedItem
+        $clonedItem.animate 'height': $item.height()
+        $item.animate $clonedItem.position(), ->
+          $clonedItem.detach()
+          _super $item, container
+          return
+        return
 
   { init: init }

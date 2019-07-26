@@ -19,11 +19,13 @@
 //= require popper
 //= require bootstrap
 
+//= require pumi
+//= require jquery-sortable
+
 //= require application/namespace
 //= require application/util
 
 //= require common/sidebar
-//= require pumi
 
 // All Pages
 //= require form_types/new

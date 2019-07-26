@@ -13,9 +13,13 @@
  */
 
 @import "bootstrap";
+@import "sortable";
+
 @import 'base';
 @import 'common';
 @import 'devise';
+
+// pages
 @import 'events';
 @import 'sidebar';
 @import '_field_fields';
