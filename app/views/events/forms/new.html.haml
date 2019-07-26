@@ -13,7 +13,8 @@
       = f.input :form_type_id, input_html: {value: @form.form_type.id}, as: :hidden
 
       - @form.form_type.fields.each do |field|
-        = f.fields_for :field_values, @form.field_values.new do |builder|
+        - obj = @form.field_values.select{ |a| a.field_id==field.id }.first || @form.field_values.new
+        = f.fields_for :field_values, obj do |builder|
           = render "events/fields/#{field.field_type}", field: field, f: builder
 
       = f.button :submit, class: 'btn btn-primary'

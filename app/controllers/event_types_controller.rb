@@ -11,7 +11,7 @@ class EventTypesController < ApplicationController
     @event_type = current_user.event_types.new(event_type_params)
 
     if @event_type.save
-      redirect_to event_types_url
+      redirect_to event_type_form_types_url(@event_type)
     else
       flash.now[:alert] = @event_type.errors.full_messages
       render :new

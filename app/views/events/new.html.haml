@@ -11,13 +11,17 @@
         %label Event Type
         %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
 
+
       - form_type = @event.event_type.form_types.first
-      = f.simple_fields_for :forms, @event.forms.new do |ff|
+      - form = @event.forms.first || @event.forms.new
+
+      = f.simple_fields_for :forms, form do |ff|
         = ff.input :submitter_id, input_html: {value: current_user.id}, as: :hidden
         = ff.input :form_type_id, input_html: {value: form_type.id}, as: :hidden
 
         - form_type.fields.each do |field|
-          = ff.fields_for :field_values, ff.object.field_values.new do |builder|
+          - obj = form.field_values.select{ |a| a.field_id==field.id }.first || ff.object.field_values.new
+          = ff.fields_for :field_values, obj do |builder|
             = render "events/fields/#{field.field_type}", field: field, f: builder
 
       = f.button :submit, class: 'btn btn-primary'

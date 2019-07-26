@@ -20,5 +20,7 @@ class Field < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :form_type, message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
 
+  default_scope { order(created_at: :asc) }
+
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
 end
