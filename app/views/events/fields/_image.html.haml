@@ -1,0 +1,18 @@
+- field_name = field.name.downcase
+- error_msg = (@form && @form.errors[field_name]) || (@event && @event.errors["forms.#{field_name}"])
+
+%div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
+  = f.label field_name
+  = f.hidden_field :field_id, value: field.id
+
+  .image-wrapper
+    .image
+      - image = f.object.image_url || 'default_image.png'
+      = image_tag image, data: { default_image: image_url('default_image.png') }
+
+    = f.file_field :image, class: 'image-input'
+    = f.hidden_field :image_cache
+
+    = f.hidden_field :_destroy
+    = link_to '#', class: "remove-image", style: f.object.image? ? '' : 'display: none' do
+      %i.fa.fa-times-circle

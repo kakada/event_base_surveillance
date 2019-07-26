@@ -7,11 +7,14 @@
 #  field_id   :integer
 #  value      :string
 #  properties :text
+#  image      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class FieldValue < ApplicationRecord
+  mount_uploader :image, ImageUploader
+
   belongs_to :field
   belongs_to :form
 

@@ -33,7 +33,7 @@ class EventsController < ApplicationController
       forms_attributes: [
         :submitter_id, :form_type_id,
         field_values_attributes: [
-          :id, :field_id, :value, properties: {}
+          :id, :field_id, :value, :image, :image_cache, :_destroy, properties: {}
         ]
       ]
     )

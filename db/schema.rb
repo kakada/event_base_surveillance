@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_064403) do
     t.integer "field_id"
     t.string "value"
     t.text "properties"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

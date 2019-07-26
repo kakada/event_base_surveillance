@@ -4,7 +4,8 @@ EBS.EventsFormsNew = do ->
     onChangeDistrict()
     onChangeCommune()
     onChangeVillage()
-    console.log('hellow')
+    onChangeImage()
+    onClickRemoveImage()
 
   onChangeProvince = ->
     $('#province .select-location').on 'change', (event)->
@@ -28,5 +29,47 @@ EBS.EventsFormsNew = do ->
 
   setLocationValue = (event) ->
     $('.location').val(event.target.value)
+
+  readURL = (input) ->
+    if input.files and input.files[0]
+      reader = new FileReader
+
+      reader.onload = (e) ->
+        parent = $(input).parent()
+        img = parent.find('img')
+        btnRemoveImage = parent.find('.remove-image')
+        hiddenField = parent.find('input[type=hidden]')
+
+        $(img).attr 'src', e.target.result
+        $(btnRemoveImage).show()
+        $(hiddenField).val('0')
+        return
+
+      reader.readAsDataURL input.files[0]
+    return
+
+  hideBtnRemove = (input)->
+    $(input).prev('input[type=hidden]').val('1')
+    $(input).hide()
+
+  clearValueAndShowDefaultImage = (input)->
+    parent = $(input).parent()
+    img = parent.find('img')
+    imgInput = parent.find('.image-input')
+
+    $(img).attr 'src', $(img).data('default-image')
+    $(imgInput).val('')
+
+  onChangeImage = ->
+    $('.image-input').change ->
+      readURL this
+      return
+
+  onClickRemoveImage = ->
+    $('.remove-image').on 'click', (event)->
+      clearValueAndShowDefaultImage(this)
+      hideBtnRemove(this)
+
+      event.preventDefault();
 
   { init: init }
