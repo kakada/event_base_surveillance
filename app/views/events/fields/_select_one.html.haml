@@ -7,4 +7,4 @@
   = f.collection_select :value, field.field_options, :id, :name, {include_blank: true}, { class: error_msg.present? ? 'form-control is-invalid' : 'form-control' }
 
   - if error_msg.present?
-    %div.invalid-feedback= error_msg.join('; ')
+    .invalid-feedback= error_msg.join('; ')

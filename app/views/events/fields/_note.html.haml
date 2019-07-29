@@ -7,4 +7,4 @@
   = f.text_area :value, class: error_msg.present? ? 'form-control is-invalid' : 'form-control'
 
   - if error_msg.present?
-    %div.invalid-feedback= error_msg.join('; ')
+    .invalid-feedback= error_msg.join('; ')

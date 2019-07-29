@@ -5,6 +5,8 @@
   = f.label field_name
   = f.hidden_field :field_id, value: field.id
   = f.hidden_field :value, class: 'form-control location'
+  - if error_msg.present?
+    .invalid-feedback{style: 'display: block'}= error_msg.join('; ')
 
   = f.fields_for :properties, OpenStruct.new(f.object.properties) do |ff|
     .locations
