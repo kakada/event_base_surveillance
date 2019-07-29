@@ -5,6 +5,7 @@ class CreateFields < ActiveRecord::Migration[5.2]
       t.string    :field_type
       t.integer   :form_type_id
       t.boolean   :required
+      t.integer   :display_order
 
       t.timestamps
     end

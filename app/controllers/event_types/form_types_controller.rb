@@ -48,7 +48,7 @@ module EventTypes
       params.require(:form_type).permit(
         :name,
         fields_attributes: [
-          :id, :name, :field_type, :required, :_destroy,
+          :id, :name, :field_type, :required, :display_order, :_destroy,
           field_options_attributes: [
             :id, :name, :value, :_destroy
           ]

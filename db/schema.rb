@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_064403) do
     t.string "field_type"
     t.integer "form_type_id"
     t.boolean "required"
+    t.integer "display_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "form_type_id"], name: "index_fields_on_name_and_form_type_id", unique: true

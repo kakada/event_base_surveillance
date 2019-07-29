@@ -43,6 +43,7 @@ EBS.Event_typesForm_typesNew = do ->
     time = new Date().getTime()
     regexp = new RegExp($(dom).data('id'), 'g')
     $(dom).before($(dom).data('fields').replace(regexp, time))
+    assignDisplayOrderToListItem()
 
   showBtnAddSelectOption = (dom)->
     optionsWrapper = $(dom).parents('.fieldset').find('.options-wrapper')
@@ -53,17 +54,24 @@ EBS.Event_typesForm_typesNew = do ->
     $(dom).css('background-color', '#e9ecef')
     $(dom).next().show()
 
+  animateListItems = ($item, container, _super) ->
+    $clonedItem = $('<li/>').css(height: 0)
+    $item.before $clonedItem
+    $clonedItem.animate 'height': $item.height()
+    $item.animate $clonedItem.position(), ->
+      $clonedItem.detach()
+      _super $item, container
+    return
+
+  assignDisplayOrderToListItem = ->
+    $('ol.fields li').each (index)->
+      $(this).find('.display-order').val(index)
+
   setupSortable = ->
     $(document).find('ol.fields').sortable
       handle: '.move'
       onDrop: ($item, container, _super) ->
-        $clonedItem = $('<li/>').css(height: 0)
-        $item.before $clonedItem
-        $clonedItem.animate 'height': $item.height()
-        $item.animate $clonedItem.position(), ->
-          $clonedItem.detach()
-          _super $item, container
-          return
-        return
+        animateListItems($item, container, _super)
+        assignDisplayOrderToListItem()
 
   { init: init }

@@ -15,6 +15,7 @@
         .form-check
           = f.check_box :required, { class: 'form-check-input required' }
           = f.label :required, class: 'form-check-label required-label'
+          = f.hidden_field :display_order, class: 'display-order'
 
       = f.hidden_field :_destroy
       = link_to '#', class: "remove_fields btn-remove-field" do
