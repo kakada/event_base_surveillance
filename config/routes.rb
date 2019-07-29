@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     match '/confirmation' => 'confirmations#update', :via => :put, :as => :update_user_confirmation
   end
 
+  resources :programs
   resources :users
   resources :events do
     scope module: :events do

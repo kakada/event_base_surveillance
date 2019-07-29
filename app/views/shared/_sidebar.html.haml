@@ -10,6 +10,11 @@
         %i.fas.fa-home
         Home
 
+    %li{class: getCssActiveClass('programs') }
+      = link_to programs_path do
+        %i.fas.fa-tasks
+        Programs
+
     %li{class: getCssActiveClass('users') }
       = link_to users_path do
         %i.fas.fa-users
