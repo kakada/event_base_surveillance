@@ -6,12 +6,22 @@ EBS.Event_typesForm_typesNew = do ->
     onClickAddFieldOption()
     onChangeSelectFieldType()
     setupSortable()
+    disabledPredefinedFields()
 
   handleToggleOptionsWrapper = ->
     $('select[name*=field_type]').each (index, dom) ->
       if dom.value == 'select_one'
-        disabledSelectFieldType(dom)
+        disabledElement(dom)
         $(dom).parents('.fieldset').find('.options-wrapper').show()
+
+  disabledPredefinedFields = ->
+    $('ol.fields li').each (index) ->
+      if $(this).find('.predefined').val() == "true"
+        fieldType = $(this).find('select[name*=field_type]')
+        fieldName = $(this).find('.field-name')
+
+        disabledElement(fieldType)
+        disabledElement(fieldName)
 
   onClickRemoveField = ->
     $(document).on 'click', 'form .remove_fields', (event) ->
@@ -22,7 +32,7 @@ EBS.Event_typesForm_typesNew = do ->
   onClickAddField = ->
     $('form .add_fields').off('click')
     $('form .add_fields').on 'click', (event) ->
-      appendField(this);
+      appendField(this)
       event.preventDefault()
 
   onClickAddFieldOption = ->
@@ -36,7 +46,7 @@ EBS.Event_typesForm_typesNew = do ->
     $(document).on 'change', 'select[name*=field_type]', (event) ->
       dom = event.target
       if dom.value == 'select_one'
-        disabledSelectFieldType(dom)
+        disabledElement(dom)
         showBtnAddSelectOption(dom)
 
   appendField = (dom) ->
@@ -50,7 +60,7 @@ EBS.Event_typesForm_typesNew = do ->
     optionsWrapper.show()
     optionsWrapper.find('.add_field_options').click()
 
-  disabledSelectFieldType = (dom) ->
+  disabledElement = (dom) ->
     $(dom).css('background-color', '#e9ecef')
     $(dom).next().show()
 

@@ -6,20 +6,24 @@
 
       .wrapper
         .w-35
-          = f.select :field_type, Field::FIELD_TYPES, {}, class: 'form-control'
+          = f.select :field_type, Field::FIELD_TYPES, {}, class: 'form-control field-type'
           .disabled-select-layer
 
         .w-35
-          = f.text_field :name, placeholder: "field_name", class: 'form-control'
+          = f.text_field :name, placeholder: "field_name", class: 'form-control field-name'
+          .disabled-select-layer
 
         .form-check
-          = f.check_box :required, { class: 'form-check-input required' }
+          = f.check_box :required, { class: 'form-check-input field-required' }
           = f.label :required, class: 'form-check-label required-label'
           = f.hidden_field :display_order, class: 'display-order'
 
-      = f.hidden_field :_destroy
-      = link_to '#', class: "remove_fields btn-remove-field" do
-        %i.fa.fa-times-circle
+      - unless f.object.predefined?
+        = f.hidden_field :_destroy
+        = link_to '#', class: "remove_fields btn-remove-field" do
+          %i.fa.fa-times-circle
+
+      = f.hidden_field :predefined, class: 'predefined'
 
     .options-wrapper
       = f.fields_for :field_options do |builder|

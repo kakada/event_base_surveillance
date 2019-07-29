@@ -7,7 +7,12 @@ module EventTypes
     end
 
     def new
-      @form_type = FormType.new
+      @form_type = @event_type.form_types.new
+      return if @event_type.form_types.length > 1
+
+      @form_type.fields.build(name: 'Value', field_type: 'integer', required: true, predefined: true)
+      @form_type.fields.build(name: 'Description', field_type: 'text', predefined: true)
+      @form_type.fields.build(name: 'Location', field_type: 'location', required: true, predefined: true)
     end
 
     def create
@@ -48,7 +53,7 @@ module EventTypes
       params.require(:form_type).permit(
         :name,
         fields_attributes: [
-          :id, :name, :field_type, :required, :display_order, :_destroy,
+          :id, :name, :field_type, :required, :display_order, :predefined, :_destroy,
           field_options_attributes: [
             :id, :name, :value, :_destroy
           ]
