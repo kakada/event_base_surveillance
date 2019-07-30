@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    @programs = Program.all
     @user = User.new
   end
 

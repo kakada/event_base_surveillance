@@ -1,0 +1,8 @@
+- predefined_fields = [{type: 'integer', value: 'Value'}, {type: 'text', value: 'Description'}, {type: 'location', value: 'Location'}]
+- predefined_fields.each do |obj|
+  %fieldset.fieldset
+    .field-wrapper
+      .wrapper
+        %select.form-control.field-type.w-35{disabled: true}
+          %option= obj[:type]
+        %input.form-control.field-name.w-35{value: obj[:value], disabled: true}

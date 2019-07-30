@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 2019_07_29_075623) do
   create_table "events", force: :cascade do |t|
     t.integer "event_type_id"
     t.integer "creator_id"
+    t.integer "value"
+    t.text "description"
+    t.string "location"
+    t.string "geo_point"
+    t.text "properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,6 +44,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_075623) do
 
   create_table "field_values", force: :cascade do |t|
     t.integer "form_id"
+    t.integer "event_id"
     t.integer "field_id"
     t.string "value"
     t.text "properties"
@@ -51,9 +57,9 @@ ActiveRecord::Schema.define(version: 2019_07_29_075623) do
     t.string "name", null: false
     t.string "field_type"
     t.integer "form_type_id"
+    t.integer "event_type_id"
     t.boolean "required"
     t.integer "display_order"
-    t.boolean "predefined"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "form_type_id"], name: "index_fields_on_name_and_form_type_id", unique: true

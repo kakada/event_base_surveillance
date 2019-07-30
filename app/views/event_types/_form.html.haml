@@ -1,5 +1,13 @@
 .w-50.view-center
   = simple_form_for @event_type do |f|
     = f.input :name
+
+    = render 'mock_predefined_fields'
+
+    %ol.fields
+      = f.fields_for :fields do |builder|
+        = render 'event_types/shared/field_fields', f: builder
+      = link_to_add_fields "+ Add Field", f, :fields
+
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', event_types_path, class: 'btn btn-secondary'

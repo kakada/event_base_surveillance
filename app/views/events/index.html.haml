@@ -12,13 +12,20 @@
       %thead
         %tr
           %th Event Type
-          %th Event Progress
+          %th Location
+          %th Value
+          %th Description
           %th
       %tbody
         - @events.each do |event|
           %tr
-            %td= event.event_type_name
-            %td= render 'event_progress', event: event
-            %td= link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}
+            %td= link_to event.event_type_name, event_path(event), class: 'btn btn-link'
+            %td= event.address
+            %td= event.value
+            %td= event.description
+            %td
+              = link_to 'Edit', edit_event_path(event), class: 'badge badge-info'
+              = "/"
+              = link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}
 
 = render 'event_types_modal'

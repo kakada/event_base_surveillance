@@ -6,6 +6,7 @@
   .w-50.view-center
     = simple_form_for @user do |f|
       = f.input :email
+      = f.input :program_id, collection: @programs
       = f.input :role, collection: User::ROLES
 
       = f.button :submit, class: 'btn btn-primary'

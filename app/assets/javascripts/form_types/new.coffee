@@ -6,22 +6,12 @@ EBS.Event_typesForm_typesNew = do ->
     onClickAddFieldOption()
     onChangeSelectFieldType()
     setupSortable()
-    disabledPredefinedFields()
 
   handleToggleOptionsWrapper = ->
     $('select[name*=field_type]').each (index, dom) ->
       if dom.value == 'select_one'
         disabledElement(dom)
         $(dom).parents('.fieldset').find('.options-wrapper').show()
-
-  disabledPredefinedFields = ->
-    $('ol.fields li').each (index) ->
-      if $(this).find('.predefined').val() == "true"
-        fieldType = $(this).find('select[name*=field_type]')
-        fieldName = $(this).find('.field-name')
-
-        disabledElement(fieldType)
-        disabledElement(fieldName)
 
   onClickRemoveField = ->
     $(document).on 'click', 'form .remove_fields', (event) ->

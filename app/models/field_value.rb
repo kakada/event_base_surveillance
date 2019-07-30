@@ -16,7 +16,8 @@ class FieldValue < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   belongs_to :field
-  belongs_to :form
+  belongs_to :form, optional: true
+  belongs_to :event, optional: true
 
   serialize :properties, Hash
 end

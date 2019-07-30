@@ -5,7 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-u = User.new(email: 'admin@instedd.org', role: :system_admin, password: '123456')
+program = Program.create(name: 'CDC')
+
+u = User.new(email: 'admin@instedd.org', role: :system_admin, password: '123456', program_id: program.id)
 u.confirm
 
 

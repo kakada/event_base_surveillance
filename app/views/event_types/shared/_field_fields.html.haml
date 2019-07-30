@@ -18,14 +18,11 @@
           = f.label :required, class: 'form-check-label required-label'
           = f.hidden_field :display_order, class: 'display-order'
 
-      - unless f.object.predefined?
-        = f.hidden_field :_destroy
-        = link_to '#', class: "remove_fields btn-remove-field" do
-          %i.fa.fa-times-circle
-
-      = f.hidden_field :predefined, class: 'predefined'
+      = f.hidden_field :_destroy
+      = link_to '#', class: "remove_fields btn-remove-field" do
+        %i.fa.fa-times-circle
 
     .options-wrapper
       = f.fields_for :field_options do |builder|
-        = render 'field_option_fields', f: builder
+        = render 'event_types/shared/field_option_fields', f: builder
       = link_to_add_fields "+ Add Option", f, :field_options

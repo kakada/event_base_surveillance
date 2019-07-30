@@ -1,0 +1,8 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= @event.event_type_name
+      %div
+        = link_to 'Back', events_path, class: 'btn btn-info'
+
+  = render 'event_progress', event: @event

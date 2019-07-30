@@ -1,34 +1,36 @@
 EBS.EventsFormsNew = do ->
   init = ->
-    onChangeProvince()
-    onChangeDistrict()
-    onChangeCommune()
-    onChangeVillage()
+    # onChangeProvince()
+    # onChangeDistrict()
+    # onChangeCommune()
+    # onChangeVillage()
     onChangeImage()
     onClickRemoveImage()
 
-  onChangeProvince = ->
-    $('#province .select-location').on 'change', (event)->
-      setLocationValue(event)
-      true
+  # onChangeProvince = ->
+  #   $('#province .select-location').on 'change', (event)->
+  #     setLocationValue(event)
+  #     true
 
-  onChangeDistrict = ->
-    $('#district .select-location').on 'change', (event)->
-      setLocationValue(event)
-      true
+  # onChangeDistrict = ->
+  #   $('#district .select-location').on 'change', (event)->
+  #     setLocationValue(event)
+  #     true
 
-  onChangeCommune = ->
-    $('#commune .select-location').on 'change', (event)->
-      setLocationValue(event)
-      true
+  # onChangeCommune = ->
+  #   $('#commune .select-location').on 'change', (event)->
+  #     $('event[properties][village_id]').val('')
+  #     setLocationValue(event)
+  #     true
 
-  onChangeVillage = ->
-    $('#village .select-location').on 'change', (event)->
-      setLocationValue(event)
-      true
+  # onChangeVillage = ->
+  #   $('#village .select-location').on 'change', (event)->
+  #     setLocationValue(event)
+  #     true
 
-  setLocationValue = (event) ->
-    $('.location').val(event.target.value)
+  # setLocationValue = (event) ->
+  #   console.log('event===', event.target.value)
+  #   $('.location').val(event.target.value)
 
   readURL = (input) ->
     if input.files and input.files[0]
@@ -61,11 +63,13 @@ EBS.EventsFormsNew = do ->
     $(imgInput).val('')
 
   onChangeImage = ->
+    $('.image-input').off('change')
     $('.image-input').change ->
       readURL this
       return
 
   onClickRemoveImage = ->
+    $('.remove-image').off('click')
     $('.remove-image').on 'click', (event)->
       clearValueAndShowDefaultImage(this)
       hideBtnRemove(this)
