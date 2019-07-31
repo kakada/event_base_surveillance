@@ -4,7 +4,17 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    create?
+    if (record.id == user.id)
+      return false
+    end
+
+    if user.system_admin?
+      true
+    elsif user.program_admin? and not record.system_admin?
+      true
+    else
+      false
+    end
   end
 
   def roles
@@ -17,7 +27,11 @@ class UserPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.all
+      if user.system_admin?
+        scope.all
+      else
+        scope.where(program_id: user.program_id)
+      end
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 
 class EventType < ApplicationRecord
-  has_many :events
+  has_many :events, dependent: :destroy
   belongs_to :user
   has_many :form_types
   has_many :fields

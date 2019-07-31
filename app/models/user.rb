@@ -35,6 +35,9 @@ class User < ApplicationRecord
 
   has_many :event_types
   has_many :events, foreign_key: :creator_id
+  belongs_to :program
+
+  delegate :name, to: :program, prefix: :program, allow_nil: true
 
   validates :role, presence: true
   validates :program_id, presence: true, unless: -> { role == 'system_admin' }

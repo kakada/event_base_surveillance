@@ -9,7 +9,7 @@
       = f.input :role, collection: policy(User).roles, input_html: { class: 'role' }
 
       .program.hidden
-        = f.input :program_id, collection: Program.all
+        = f.input :program_id, collection: policy_scope(Program.all)
 
       = f.button :submit, class: 'btn btn-primary'
       = link_to 'Cancel', users_path, class: 'btn btn-secondary'

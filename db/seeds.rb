@@ -5,14 +5,26 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-program = Program.create(name: 'CDC')
 
-u = User.new(email: 'admin@instedd.org', role: :system_admin, password: '123456', program_id: program.id)
-u.confirm
+program_cdc = Program.create(name: 'CDC')
+program_gdaph = Program.create(name: 'GDAPH')
 
+users = [
+  { email: 'admin@instedd.org', role: :system_admin, program_id: nil },
+  { email: 'cdc@program.org', role: :program_admin, program_id: program_cdc.id },
+  { email: 'gdaph@program.org', role: :program_admin, program_id: program_gdaph.id },
+  { email: 'staff@cdc.org', role: :staff, program_id: program_cdc.id },
+  { email: 'staff@gdaph.org', role: :staff, program_id: program_gdaph.id },
+  { email: 'guest@cdc.org', role: :guest, program_id: program_cdc.id },
+  { email: 'guest@gdaph.org', role: :guest, program_id: program_gdaph.id },
+]
+users.each do |user|
+  u = User.new(email: user[:email], role: user[:role], password: '123456', program_id: user.program_id)
+  u.confirm
+end
 
 # Create Event type
-event_type = u.event_types.create(name: 'H5N1')
+event_type = User.find_by(email: 'cdc@program.org').event_types.create(name: 'H5N1')
 
 # Create Forms
 form_types = [

@@ -5,9 +5,9 @@
       %div
         = link_to event_types_path, class: 'btn btn-info', style: 'margin-right: 16px' do
           Done
-
-        = link_to new_event_type_form_type_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+        - if policy(FormType).update?
+          = link_to new_event_type_form_type_path, class: 'btn btn-primary' do
+            %i.fas.fa-plus
 
   = render partial: "shared/no_data", locals: { items: @form_types }
 
@@ -22,7 +22,8 @@
           %tr
             %td= form.name
             %td
-              = link_to 'Edit', edit_event_type_form_type_path(@event_type, form), class: "badge badge-info"
-              = ' / '
-              = link_to 'Delete', event_type_form_type_path(@event_type, form), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this form?'}
+              - if policy(FormType).update?
+                = link_to 'Edit', edit_event_type_form_type_path(@event_type, form), class: "badge badge-info"
+                = ' / '
+                = link_to 'Delete', event_type_form_type_path(@event_type, form), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this form?'}
 

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = policy_scope(User.includes(:program))
   end
 
   def new

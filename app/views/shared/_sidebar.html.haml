@@ -1,6 +1,9 @@
 %nav#sidebar
   #sidebarCollapse.sidebar-header
-    %h3 Event Base Surveillance
+    %h3
+      Event Base Surveillance
+      %span{style: 'font-size: 12px'}= current_user.email
+
     %strong EBS
     %i.fas.fa-align-left
 
@@ -22,7 +25,7 @@
           %i.fas.fa-users
           Users
 
-    - if policy(EventType).update?
+    - if policy(EventType).index?
       %li{class: (getCssActiveClass('event_types') || getCssActiveClass('event_types/forms')) }
         = link_to event_types_path do
           %i.fas.fa-calendar-alt

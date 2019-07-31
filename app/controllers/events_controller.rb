@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @event_types = EventType.includes(:form_types)
+    @event_types = policy_scope(EventType.includes(:form_types))
     @events = Event.includes(:forms)
   end
 
