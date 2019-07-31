@@ -36,7 +36,7 @@ class Event < ApplicationRecord
   end
 
   def validate_field_values
-    event_type.fields.each do |field|
+    event_type && event_type.fields.each do |field|
       next if !field.required?
 
       obj = field_values.select{ |value| value.field_id == field.id }.first
