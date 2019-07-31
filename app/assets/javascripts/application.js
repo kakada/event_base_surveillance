@@ -34,6 +34,7 @@
 //= require event_forms/edit
 //= require events/new
 //= require event_types/new
+//= require users/new
 
 
 document.addEventListener('turbolinks:load', function() {

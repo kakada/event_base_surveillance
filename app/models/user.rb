@@ -27,7 +27,8 @@ class User < ApplicationRecord
   enum role: {
     system_admin: 1,
     program_admin: 2,
-    staff: 3
+    staff: 3,
+    guest: 4
   }
 
   ROLES = self.roles.keys.map { |r| [r.titlecase, r] }
@@ -36,6 +37,7 @@ class User < ApplicationRecord
   has_many :events, foreign_key: :creator_id
 
   validates :role, presence: true
+  validates :program_id, presence: true, unless: -> { role == 'system_admin' }
 
   def password_match?
      self.errors[:password] << I18n.t('errors.messages.blank') if password.blank?

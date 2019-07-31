@@ -10,25 +10,29 @@
         %i.fas.fa-home
         Home
 
-    %li{class: getCssActiveClass('programs') }
-      = link_to programs_path do
-        %i.fas.fa-tasks
-        Programs
+    - if policy(Program).update?
+      %li{class: getCssActiveClass('programs') }
+        = link_to programs_path do
+          %i.fas.fa-tasks
+          Programs
 
-    %li{class: getCssActiveClass('users') }
-      = link_to users_path do
-        %i.fas.fa-users
-        Users
+    - if policy(User).update?
+      %li{class: getCssActiveClass('users') }
+        = link_to users_path do
+          %i.fas.fa-users
+          Users
 
-    %li{class: (getCssActiveClass('event_types') || getCssActiveClass('event_types/forms')) }
-      = link_to event_types_path do
-        %i.fas.fa-calendar-alt
-        Event Type and Form
+    - if policy(EventType).update?
+      %li{class: (getCssActiveClass('event_types') || getCssActiveClass('event_types/forms')) }
+        = link_to event_types_path do
+          %i.fas.fa-calendar-alt
+          Event Type and Form
 
-    %li{class: getCssActiveClass('events') }
-      = link_to events_path do
-        %i.fas.fa-calendar-alt
-        Events
+    - if policy(Event).index?
+      %li{class: getCssActiveClass('events') }
+        = link_to events_path do
+          %i.fas.fa-calendar-alt
+          Events
 
     %li{class: getCssActiveClass('abouts') }
       %a{:href => "#"}

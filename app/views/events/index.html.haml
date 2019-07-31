@@ -2,8 +2,9 @@
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
       %h3 Event
-      = link_to new_event_path, class: 'btn btn-primary', "data-target" => '#exampleModal', 'data-toggle' => 'modal' do
-        %i.fas.fa-plus
+      - if policy(Event).update?
+        = link_to new_event_path, class: 'btn btn-primary', "data-target" => '#exampleModal', 'data-toggle' => 'modal' do
+          %i.fas.fa-plus
 
   = render partial: "shared/no_data", locals: { items: @events }
 
@@ -23,9 +24,10 @@
             %td= event.address
             %td= event.value
             %td= event.description
-            %td
-              = link_to 'Edit', edit_event_path(event), class: 'badge badge-info'
-              = "/"
-              = link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}
+            - if policy(Event).update?
+              %td
+                = link_to 'Edit', edit_event_path(event), class: 'badge badge-info'
+                = "/"
+                = link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}
 
 = render 'event_types_modal'
