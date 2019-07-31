@@ -26,6 +26,7 @@
 //= require application/util
 
 //= require common/sidebar
+//= require common/location
 
 // All Pages
 //= require form_types/new
@@ -36,6 +37,9 @@
 //= require event_types/new
 //= require users/new
 
+$(document).ready(function() {
+  EBS.Location.init();
+})
 
 document.addEventListener('turbolinks:load', function() {
   EBS.Common.Sidebar.init();

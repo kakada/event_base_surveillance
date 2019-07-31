@@ -9,7 +9,11 @@ class EventPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.all
+      if user.system_admin?
+        scope.all
+      else
+        scope.joins(:creator => :program).where('programs.id = ?', user.program_id)
+      end
     end
   end
 end
