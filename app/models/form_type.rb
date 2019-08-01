@@ -16,13 +16,19 @@ class FormType < ApplicationRecord
   has_many :forms
 
   validates :name, presence: true
-  validate :validate_unique_fields, on: :create
+  validate :validate_unique_field_name
+  validate :validate_unique_field_type_location
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
 
   private
 
-  def validate_unique_fields
-    validate_uniqueness_of_in_memory(
-      fields, [:name, :form_type_id], 'duplicate')
+  def validate_unique_field_name
+    validate_uniqueness_of_in_memory(fields, [:name, :form_type_id], 'duplicate')
+  end
+
+  def validate_unique_field_type_location
+    return if fields.select{|field| field.field_type == 'location'}.length < 2
+
+    errors.add :field_type, "location cannot be more than one"
   end
 end

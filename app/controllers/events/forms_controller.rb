@@ -9,7 +9,7 @@ module Events
     def create
       @form = @event.forms.new(form_params)
       if @form.save
-        redirect_to events_url
+        redirect_to event_url(@event)
       else
         flash.now[:alert] = @form.errors.full_messages
         render :new
@@ -24,7 +24,7 @@ module Events
       @form = Form.find(params[:id])
 
       if @form.update_attributes(form_params)
-        redirect_to events_url
+        redirect_to event_url(@event)
       else
         flash.now[:alert] = @form.errors.full_messages
         render :edit

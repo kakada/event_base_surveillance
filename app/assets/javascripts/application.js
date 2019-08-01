@@ -37,9 +37,6 @@
 //= require event_types/new
 //= require users/new
 
-$(document).ready(function() {
-  EBS.Location.init();
-})
 
 document.addEventListener('turbolinks:load', function() {
   EBS.Common.Sidebar.init();

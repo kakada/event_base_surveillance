@@ -18,4 +18,4 @@
           = render "events/fields/#{field.field_type}", field: field, f: builder
 
       = f.button :submit, class: 'btn btn-primary'
-      = link_to 'Cancel', events_path, class: 'btn btn-secondary'
+      = link_to 'Cancel', event_path(@event), class: 'btn btn-secondary'

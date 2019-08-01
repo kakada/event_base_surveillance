@@ -23,6 +23,8 @@ class Form < ApplicationRecord
     attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank?
   }
 
+  private
+
   def validate_field_values
     form_type && form_type.fields.each do |field|
       next if !field.required?

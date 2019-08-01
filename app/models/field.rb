@@ -6,9 +6,9 @@
 #  name          :string           not null
 #  field_type    :string
 #  form_type_id  :integer
+#  event_type_id :integer
 #  required      :boolean
 #  display_order :integer
-#  predefined    :boolean
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

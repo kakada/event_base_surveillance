@@ -19,7 +19,7 @@ users = [
   { email: 'guest@gdaph.org', role: :guest, program_id: program_gdaph.id },
 ]
 users.each do |user|
-  u = User.new(email: user[:email], role: user[:role], password: '123456', program_id: user.program_id)
+  u = User.new(email: user[:email], role: user[:role], password: '123456', program_id: user[:program_id])
   u.confirm
 end
 

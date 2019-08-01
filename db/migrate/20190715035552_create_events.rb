@@ -6,7 +6,8 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.integer :value
       t.text    :description
       t.string  :location
-      t.string  :geo_point
+      t.float   :latitude
+      t.float   :longitude
       t.text    :properties
 
       t.timestamps
