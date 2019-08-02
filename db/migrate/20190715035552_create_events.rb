@@ -9,6 +9,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.float   :latitude
       t.float   :longitude
       t.text    :properties
+      t.boolean :templated
       t.boolean :shared
 
       t.timestamps

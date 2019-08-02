@@ -11,6 +11,8 @@
 #  latitude      :float
 #  longitude     :float
 #  properties    :text
+#  templated     :boolean
+#  shared        :boolean
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -19,7 +21,7 @@ class Event < ApplicationRecord
   belongs_to :event_type
   belongs_to :creator, class_name: 'User'
   has_many   :forms, dependent: :destroy
-  has_many   :field_values
+  has_many   :field_values, as: :valueable
 
   serialize :properties, Hash
 

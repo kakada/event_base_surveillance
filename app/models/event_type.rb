@@ -13,7 +13,7 @@ class EventType < ApplicationRecord
   has_many :events, dependent: :destroy
   belongs_to :user
   has_many :form_types
-  has_many :fields
+  has_many :fields, as: :fieldable
 
   validates :name, presence: true
   validate :validate_unique_fields, on: :create
@@ -24,6 +24,6 @@ class EventType < ApplicationRecord
 
   def validate_unique_fields
     validate_uniqueness_of_in_memory(
-      fields, [:name, :form_type_id], 'duplicate')
+      fields, [:name, :fieldable_id, :fieldable_type], 'duplicate')
   end
 end

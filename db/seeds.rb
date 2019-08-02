@@ -41,7 +41,7 @@ fields = [
 form_types.each do |form|
   f = event_type.form_types.create(name: form[:name])
 
-  fields.each do |field|
-    f.fields.create(name: field[:name], field_type: field[:field_type])
-  end
+  # fields.each do |field|
+  #   f.fields.create(name: field[:name], field_type: field[:field_type])
+  # end
 end

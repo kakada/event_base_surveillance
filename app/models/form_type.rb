@@ -12,7 +12,7 @@
 
 class FormType < ApplicationRecord
   belongs_to :event_type
-  has_many :fields
+  has_many :fields, as: :fieldable
   has_many :forms
 
   validates :name, presence: true
@@ -23,7 +23,7 @@ class FormType < ApplicationRecord
   private
 
   def validate_unique_field_name
-    validate_uniqueness_of_in_memory(fields, [:name, :form_type_id], 'duplicate')
+    validate_uniqueness_of_in_memory(fields, [:name, :fieldable_id, :fieldable_type], 'duplicate')
   end
 
   def validate_unique_field_type_location

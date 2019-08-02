@@ -15,7 +15,7 @@ class Form < ApplicationRecord
   belongs_to :event
   belongs_to :form_type
   belongs_to :submitter, class_name: 'User'
-  has_many   :field_values
+  has_many   :field_values, as: :valueable
 
   validate :validate_field_values, on: [:create, :update]
 
