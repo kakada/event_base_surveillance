@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     scope module: :event_types do
       resources :form_types
     end
+
+    get 'clone', on: :member
   end
 
   mount Pumi::Engine => '/pumi'

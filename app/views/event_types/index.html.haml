@@ -14,18 +14,35 @@
         %tr
           %th Name
           %th Number of Forms
+          %th Last Modified
           %th
+
       %tbody
         - @event_types.each do |event_type|
           %tr
             %td= event_type.name
             %td= event_type.form_types.size
+            %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
             %td
-              = link_to 'Manage Form', event_type_form_types_path(event_type), class: "badge badge-primary"
+              .btn-group
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
 
-              - if policy(event_type).update?
-                = ' / '
-                = link_to 'Edit', edit_event_type_path(event_type), class: "badge badge-info"
-                = ' / '
-                = link_to 'Delete', event_type_path(event_type), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this event type?'}
+                .dropdown-menu.dropdown-menu-right
+                  = link_to event_type_form_types_path(event_type), class: "btn dropdown-item" do
+                    %i.fas.fa-tasks.drop-menu-icon
+                    %span Manage Form
 
+                  - if policy(event_type).update?
+                    = link_to edit_event_type_path(event_type), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span Edit
+
+                  = link_to clone_event_type_path(event_type), class: "btn dropdown-item" do
+                    %i.fas.fa-clone.drop-menu-icon
+                    %span Clone
+
+                  - if policy(event_type).destroy?
+                    = link_to event_type_path(event_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this event type?'} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span Delete

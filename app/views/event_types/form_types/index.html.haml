@@ -20,7 +20,10 @@
       %tbody
         - @form_types.each do |form|
           %tr
-            %td= form.name
+            %td
+              %span.badge.badge-pill.badge-info= form.fields.count
+              = form.name
+
             %td
               - if policy(FormType).update?
                 = link_to 'Edit', edit_event_type_form_type_path(@event_type, form), class: "badge badge-info"

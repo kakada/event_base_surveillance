@@ -40,6 +40,13 @@ class EventTypesController < ApplicationController
     redirect_to event_types_url
   end
 
+  def clone
+    @event_type = EventTypeService.new(params[:id])
+    @event_type.clone
+
+    redirect_to event_types_url
+  end
+
   private
 
   def event_type_params

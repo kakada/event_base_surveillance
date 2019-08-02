@@ -7,6 +7,10 @@ class EventTypePolicy < ApplicationPolicy
     user.program_admin?
   end
 
+  def destroy?
+    create?
+  end
+
   class Scope < Scope
     def resolve
       if user.system_admin?

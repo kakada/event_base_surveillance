@@ -3,7 +3,7 @@ module EventTypes
     before_action :assign_event_type
 
     def index
-      @form_types = @event_type.form_types
+      @form_types = @event_type.form_types.includes(:fields)
     end
 
     def new
