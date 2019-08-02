@@ -2,7 +2,7 @@
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
       %h3 Event
-      - if policy(Event).update?
+      - if policy(Event).create?
         = link_to new_event_path, class: 'btn btn-primary', "data-target" => '#exampleModal', 'data-toggle' => 'modal' do
           %i.fas.fa-plus
 
@@ -16,6 +16,7 @@
           %th Location
           %th Value
           %th Description
+          %th From
           %th
       %tbody
         - @events.each do |event|
@@ -24,8 +25,9 @@
             %td= event.address
             %td= event.value
             %td= event.description
-            - if policy(Event).update?
-              %td
+            %td= event.creator.program_name
+            %td
+              - if policy(event).update?
                 = link_to 'Edit', edit_event_path(event), class: 'badge badge-info'
                 = "/"
                 = link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}

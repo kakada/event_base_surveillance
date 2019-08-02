@@ -10,8 +10,8 @@
   %ul.list-unstyled.components
     %li{class: getCssActiveClass('home') }
       = link_to root_path do
-        %i.fas.fa-home
-        Home
+        %i.fas.fa-tachometer-alt
+        Dashboard
 
     - if policy(Program).update?
       %li{class: getCssActiveClass('programs') }
@@ -28,7 +28,7 @@
     - if policy(EventType).index?
       %li{class: (getCssActiveClass('event_types') || getCssActiveClass('event_types/forms')) }
         = link_to event_types_path do
-          %i.fas.fa-calendar-alt
+          %i.fas.fa-calendar
           Event Type and Form
 
     - if policy(Event).index?
