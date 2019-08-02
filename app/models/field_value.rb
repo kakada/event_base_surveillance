@@ -21,7 +21,7 @@ class FieldValue < ApplicationRecord
 
   serialize :properties, Hash
 
-  delegate :field_type, to: :field
+  delegate :field_type, to: :field, allow_nil: true
 
   before_validation :set_location_value
 
