@@ -24,7 +24,7 @@ users.each do |user|
 end
 
 # Create Event type
-event_type = User.find_by(email: 'cdc@program.org').event_types.create(name: 'H5N1')
+event_type = User.find_by(email: 'cdc@program.org').event_types.create(name: 'H5N1', color: "##{SecureRandom.hex(3)}")
 
 # Create Forms
 form_types = [

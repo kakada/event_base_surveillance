@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
   create_table "event_types", force: :cascade do |t|
     t.string "name", null: false
     t.integer "user_id"
+    t.integer "program_id"
     t.boolean "shared"
     t.string "color"
     t.datetime "created_at", null: false
