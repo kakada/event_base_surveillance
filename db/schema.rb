@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
   create_table "event_types", force: :cascade do |t|
     t.string "name", null: false
     t.integer "user_id"
+    t.boolean "shared"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,14 +48,13 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
   create_table "events", force: :cascade do |t|
     t.integer "event_type_id"
     t.integer "creator_id"
+    t.integer "program_id"
     t.integer "value"
     t.text "description"
     t.string "location"
     t.float "latitude"
     t.float "longitude"
     t.text "properties"
-    t.boolean "templated"
-    t.boolean "shared"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

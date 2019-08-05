@@ -25,7 +25,8 @@ Rails.application.routes.draw do
       resources :form_types
     end
 
-    get 'clone', on: :member
+    get :clone, on: :member
+    get :shared, on: :member
   end
 
   mount Pumi::Engine => '/pumi'

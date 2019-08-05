@@ -39,6 +39,7 @@ class Event < ApplicationRecord
   validates :value, presence: true
   validate  :validate_field_values, on: [:create, :update]
   before_validation :set_location
+  before_validation :set_program_id
   after_validation :geocode, :if => :location_changed?
 
   # Nested Attributes
@@ -62,6 +63,10 @@ class Event < ApplicationRecord
 
   def set_location
     self.location = addresses.map(&:name_en).join(',')
+  end
+
+  def set_program_id
+    creator && self.program_id = creator.program_id
   end
 
   def validate_field_values

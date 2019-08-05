@@ -15,6 +15,7 @@
           %th Name
           %th Number of Forms
           %th Last Modified
+          %td Status
           %th
 
       %tbody
@@ -23,6 +24,7 @@
             %td= event_type.name
             %td= event_type.form_types.size
             %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
+            %td= event_type.shared ? 'shared' : '-'
             %td
               .btn-group
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
@@ -41,6 +43,10 @@
                   = link_to clone_event_type_path(event_type), class: "btn dropdown-item" do
                     %i.fas.fa-clone.drop-menu-icon
                     %span Clone
+
+                  = link_to shared_event_type_path(event_type), class: "btn dropdown-item" do
+                    %i.fas.fa-share-alt.drop-menu-icon
+                    %span Shared Data
 
                   - if policy(event_type).destroy?
                     = link_to event_type_path(event_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this event type?'} do
