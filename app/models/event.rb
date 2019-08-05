@@ -5,14 +5,13 @@
 #  id            :bigint           not null, primary key
 #  event_type_id :integer
 #  creator_id    :integer
+#  program_id    :integer
 #  value         :integer
 #  description   :text
 #  location      :string
 #  latitude      :float
 #  longitude     :float
 #  properties    :text
-#  templated     :boolean
-#  shared        :boolean
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

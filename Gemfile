@@ -50,7 +50,8 @@ gem 'simple_form',    '~> 4.1.0'
 gem 'carrierwave',    '>= 2.0.0.rc', '< 3.0'
 gem 'pundit',         '~> 2.0.1'
 gem 'geocoder',       '~> 1.5.1'
-gem "audited",        '~> 4.9'
+gem 'audited',        '~> 4.9'
+gem 'jquery-minicolors-rails',    '~> 2.2.6.1'
 
 gem 'pumi', github: 'dwilkie/pumi', require: 'pumi/rails'
 
@@ -61,7 +62,6 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 5.0'
   gem 'ffaker', '~> 2.9.0'
 end
-
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

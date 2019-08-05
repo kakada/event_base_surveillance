@@ -12,8 +12,9 @@
  *
  */
 
-@import "bootstrap";
-@import "sortable";
+@import 'bootstrap';
+@import 'sortable';
+@import 'jquery.minicolors';
 
 @import 'base';
 @import 'common';
@@ -21,5 +22,7 @@
 
 // pages
 @import 'events';
+@import 'event_types';
 @import 'sidebar';
 @import '_field_fields';
+

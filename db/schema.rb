@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
     t.string "name", null: false
     t.integer "user_id"
     t.boolean "shared"
+    t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

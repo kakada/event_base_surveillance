@@ -21,6 +21,7 @@
 
 //= require pumi
 //= require jquery-sortable
+//= require jquery.minicolors
 
 //= require application/namespace
 //= require application/util

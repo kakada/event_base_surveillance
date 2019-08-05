@@ -4,7 +4,7 @@ class EventTypesController < ApplicationController
   end
 
   def new
-    @event_type = EventType.new
+    @event_type = EventType.new(color: SecureRandom.hex(3))
   end
 
   def create
@@ -59,7 +59,7 @@ class EventTypesController < ApplicationController
 
   def event_type_params
     params.require(:event_type).permit(
-      :name,
+      :name, :color,
       fields_attributes: [
         :id, :name, :field_type, :required, :display_order, :predefined, :_destroy,
         field_options_attributes: [

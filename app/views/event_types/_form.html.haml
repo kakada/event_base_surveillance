@@ -1,7 +1,7 @@
 .w-50.view-center
   = simple_form_for @event_type do |f|
     = f.input :name
-
+    = f.input :color, as: :minicolors, input_html: { class: 'color', data: {minicolors: {theme: :bootstrap, position: :right}}}
     = render 'mock_predefined_fields'
 
     %ol.fields

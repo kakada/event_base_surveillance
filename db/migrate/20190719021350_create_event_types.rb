@@ -4,6 +4,7 @@ class CreateEventTypes < ActiveRecord::Migration[5.2]
       t.string  :name, null: false
       t.integer :user_id
       t.boolean :shared
+      t.string  :color
 
       t.timestamps
     end
