@@ -23,7 +23,11 @@ class FieldValue < ApplicationRecord
 
   delegate :field_type, to: :field, allow_nil: true
 
+  # Validation
   before_validation :set_location_value
+
+  # History
+  audited associated_with: :valueable
 
   private
 

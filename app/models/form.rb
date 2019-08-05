@@ -17,6 +17,10 @@ class Form < ApplicationRecord
   belongs_to :submitter, class_name: 'User'
   has_many   :field_values, as: :valueable
 
+  # History
+  has_associated_audits
+
+  # Validations
   validate :validate_field_values, on: [:create, :update]
 
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|

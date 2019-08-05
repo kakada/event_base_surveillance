@@ -25,13 +25,16 @@ class Event < ApplicationRecord
 
   serialize :properties, Hash
 
+  # History
+  has_associated_audits
+
   # Deligation
   delegate :name, to: :event_type, prefix: :event_type
 
   # Geo location
   geocoded_by :location
 
-  # Vdlidation
+  # Validation
   validates :location, presence: true
   validates :value, presence: true
   validate  :validate_field_values, on: [:create, :update]
