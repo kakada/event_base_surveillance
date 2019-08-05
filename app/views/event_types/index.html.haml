@@ -2,7 +2,7 @@
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
       %h3 Event Type
-      - if policy(EventType).update?
+      - if policy(EventType).create?
         = link_to new_event_type_path, class: 'btn btn-primary' do
           %i.fas.fa-plus
 

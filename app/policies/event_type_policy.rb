@@ -7,8 +7,12 @@ class EventTypePolicy < ApplicationPolicy
     user.program_admin?
   end
 
+  def update?
+    user.program_admin? && record.events.blank?
+  end
+
   def destroy?
-    create?
+    update?
   end
 
   class Scope < Scope
