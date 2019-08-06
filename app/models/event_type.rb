@@ -24,6 +24,7 @@ class EventType < ApplicationRecord
   validate :validate_unique_fields, on: :create
 
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
+  accepts_nested_attributes_for :form_types, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
 
   private
 

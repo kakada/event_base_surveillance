@@ -6,9 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Programs
+
 program_cdc = Program.create(name: 'CDC')
 program_gdaph = Program.create(name: 'GDAPH')
 
+
+# Users
 users = [
   { email: 'admin@instedd.org', role: :system_admin, program_id: nil },
   { email: 'cdc@program.org', role: :program_admin, program_id: program_cdc.id },
@@ -23,25 +27,55 @@ users.each do |user|
   u.confirm
 end
 
-# Create Event type
-event_type = User.find_by(email: 'cdc@program.org').event_types.create(name: 'H5N1', color: "##{SecureRandom.hex(3)}")
+# Event type
+obj = {
+  name: 'Influenza',
+  user_id: User.find_by(email: 'cdc@program.org').id,
+  color: "##{SecureRandom.hex(3)}",
+  fields_attributes: [
+    { name: "Source of information", field_type: "select_one", field_options_attributes: [{name: "Hotline"}, {name: "RRT"}, {name: "Media monitoring"}, {name: "CamEWARN"}, {name: "CamLIS"}, {name: "NGO Partners"}, {name: "Other"}]},
+    { name: "Additional information", field_type: "text"},
+    { name: "Event Date", field_type: "date"},
+    { name: "Report Date", field_type: "date"},
+    { name: "WHO notified date", field_type: "date"},
+    { name: "Status of report", field_type: "select_one", field_options_attributes: [{ name: "For verification by RRT" }, { name: "Verfified (confirmed)" }, { name: "False report" }, { name: "Refer to other agency" }]},
+    { name: "Verification Date", field_type: "date"}
+  ],
+  form_types_attributes: [
+    {
+      name: "Risk Assessment",
+      fields_attributes: [
+        { name: "# of Male", field_type: "integer" },
+        { name: "# of Female", field_type: "integer" },
+        { name: "# of Hospitalized", field_type: "integer" },
+        { name: "# of Recovered", field_type: "integer" },
+        { name: "# of Death", field_type: "integer" },
+        { name: "Summary", field_type: "note" },
+        { name: "Risk Assessment conducted", field_type: "select_one", field_options_attributes: [{ name: "Yes" }, { name: "No" }] },
+        { name: "Risk Level", field_type: "select_one", field_options_attributes: [{ name: "Low" }, { name: "Moderate" }, { name: "High" }, { name: "Very High" }] },
+        { name: "Risk assessment date", field_type: "date" },
+      ]
+    },
+    {
+      name: "Investigation",
+      fields_attributes: [
+        { name: "Investigation conducted", field_type: "select_one", field_options_attributes: [{ name: "Yes" }, { name: "No" }] },
+        { name: "Investigation date", field_type: "date" },
+        { name: "Action Taken", field_type: "note" },
+        { name: "Samples collected", field_type: "text" },
+        { name: "Sample collected date", field_type: "date" },
+        { name: "Laboratory Results", field_type: "text" },
+        { name: "Status of event", field_type: "select_one", field_options_attributes: [{ name: "Follow up" }, { name: "Closed" }] }
+      ]
+    },
+    {
+      name: "Conclusion",
+      fields_attributes: [
+        { name: "Conclusion", field_type: "select_one", field_options_attributes: [{ name: "Methanol poisoning" }, { name: "H5N1" }, { name: "Khmer Noodle poisoning" }, { name: "H3N2 cluster" }, { name: "Parasite" }, { name: "Bread with meal" }, { name: "Water borne" }, { name: "Food borne" }, { name: "Zoonoic" }, { name: "Polultry death" }, { name: "Dog bites" }, { name: "Snake bites" }, { name: "Fever with rash" }, { name: "Acute diarrhea" }, { name: "Acute flaccid paralysis" }, { name: "Environmental pollution" }, { name: "uspected nosocomial" }, { name: "Skin" }, { name: "Meniningoencephalitis syndrome" }, { name: "Acute jaundice" }, { name: "Meningitis or encephalitis" }, { name: "Acute hemorrhagic fever" }, { name: "Acute respiratory infection" }]},
+        { name: "Close Date", field_type: "date"}
+      ]
+    }
+  ]
+}
 
-# Create Forms
-form_types = [
-  { name: 'New' },
-  { name: 'Assessment'},
-  { name: 'Investigation'}
-]
-
-fields = [
-  { name: 'Name', field_type: 'text_field' },
-  { name: 'Case', field_type: 'text_field' }
-]
-
-form_types.each do |form|
-  f = event_type.form_types.create(name: form[:name])
-
-  # fields.each do |field|
-  #   f.fields.create(name: field[:name], field_type: field[:field_type])
-  # end
-end
+EventType.create(obj)
