@@ -21,6 +21,7 @@ class EventType < ApplicationRecord
   validates :name, presence: true
   validates :color, presence: true, uniqueness: { scope: [:program_id] }
   before_validation :set_program_id
+  before_validation :set_color
   validate :validate_unique_fields, on: :create
 
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
@@ -35,5 +36,9 @@ class EventType < ApplicationRecord
 
   def set_program_id
     user && self.program_id = user.program_id
+  end
+
+  def set_color
+    self.color ||= "##{SecureRandom.hex(3)}"
   end
 end

@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.new(event_params)
     if @event.save
-      redirect_to events_url
+      redirect_to @event
     else
       flash.now[:alert] = @event.errors.full_messages
       render :new
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.update_attributes(event_params)
-      redirect_to events_url
+      redirect_to @event
     else
       flash.now[:alert] = @event.errors.full_messages
       render :edit
