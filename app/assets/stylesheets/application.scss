@@ -13,17 +13,17 @@
  */
 
 @import 'bootstrap';
-@import 'sortable';
 @import 'jquery.minicolors';
 
-@import 'base';
-@import 'common';
-@import 'devise';
+@import 'shared/flex_layout';
+@import 'shared/sortable';
+@import 'shared/base';
+@import 'shared/common';
+@import 'shared/devise';
+@import 'shared/sidebar';
+@import 'shared/stepper';
+@import 'shared/field_fields';
 
 // pages
 @import 'events';
 @import 'event_types';
-@import 'sidebar';
-@import 'stepper';
-@import '_field_fields';
-

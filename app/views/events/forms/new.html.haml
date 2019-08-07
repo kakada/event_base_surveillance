@@ -9,6 +9,7 @@
         %label Event Type
         %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
 
+      = f.input :conducted_at, as: :date, html5: true
       = f.input :submitter_id, input_html: {value: current_user.id}, as: :hidden
       = f.input :form_type_id, input_html: {value: @form.form_type.id}, as: :hidden
 
