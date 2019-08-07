@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
     t.float "latitude"
     t.float "longitude"
     t.text "properties"
+    t.date "event_date"
+    t.date "report_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
     t.integer "event_id"
     t.integer "form_type_id"
     t.integer "submitter_id"
+    t.date "conducted_at"
     t.string "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -6,6 +6,7 @@
 #  event_id     :integer
 #  form_type_id :integer
 #  submitter_id :integer
+#  conducted_at :date
 #  priority     :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -21,6 +22,7 @@ class Form < ApplicationRecord
   has_associated_audits
 
   # Validations
+  validates :conducted_at, presence: true
   validate :validate_field_values, on: [:create, :update]
 
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|

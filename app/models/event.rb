@@ -12,6 +12,8 @@
 #  latitude      :float
 #  longitude     :float
 #  properties    :text
+#  event_date    :date
+#  report_date   :date
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

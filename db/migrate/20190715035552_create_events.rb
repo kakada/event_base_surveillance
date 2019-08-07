@@ -10,6 +10,8 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.float   :latitude
       t.float   :longitude
       t.text    :properties
+      t.date    :event_date
+      t.date    :report_date
 
       t.timestamps
     end
