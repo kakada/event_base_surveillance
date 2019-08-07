@@ -46,9 +46,14 @@
                     %i.fas.fa-clone.drop-menu-icon
                     %span Clone
 
-                  = link_to shared_event_type_path(event_type), class: "btn dropdown-item" do
-                    %i.fas.fa-share-alt.drop-menu-icon
-                    %span Shared Data
+                  - unless event_type.shared?
+                    = link_to shared_event_type_path(event_type), class: "btn dropdown-item" do
+                      %i.fas.fa-share-alt.drop-menu-icon
+                      %span Shared Data
+                  - if event_type.shared?
+                    = link_to unshared_event_type_path(event_type), class: "btn dropdown-item" do
+                      %i.fas.fa-share-alt.drop-menu-icon
+                      %span Unshared Data
 
                   - if policy(event_type).destroy?
                     = link_to event_type_path(event_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this event type?'} do

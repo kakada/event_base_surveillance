@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
     get :clone, on: :member
     get :shared, on: :member
+    get :unshared, on: :member
   end
 
   mount Pumi::Engine => '/pumi'

@@ -55,6 +55,14 @@ class EventTypesController < ApplicationController
     redirect_to event_types_url
   end
 
+  def unshared
+    @event_type = EventType.find(params[:id])
+    @event_type.update_attributes(shared: false)
+
+    flash.now[:notice] = 'set unshared successfully'
+    redirect_to event_types_url
+  end
+
   private
 
   def event_type_params
