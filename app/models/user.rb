@@ -61,7 +61,7 @@ class User < ApplicationRecord
   end
 
   # new function to return whether a password has been set
-  def has_no_password?
+  def no_password?
     encrypted_password.blank?
   end
 

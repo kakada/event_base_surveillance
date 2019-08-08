@@ -8,36 +8,36 @@
     %i.fas.fa-align-left
 
   %ul.list-unstyled.components
-    %li{class: getCssActiveClass('home') }
+    %li{class: get_css_active_class('home') }
       = link_to root_path do
         %i.fas.fa-tachometer-alt
         = t('sidebar.dashboard')
 
     - if policy(Program).update?
-      %li{class: getCssActiveClass('programs') }
+      %li{class: get_css_active_class('programs') }
         = link_to programs_path do
           %i.fas.fa-tasks
           = t('sidebar.programs')
 
     - if policy(User).update?
-      %li{class: getCssActiveClass('users') }
+      %li{class: get_css_active_class('users') }
         = link_to users_path do
           %i.fas.fa-users
           = t('sidebar.users')
 
     - if policy(EventType).index?
-      %li{class: (getCssActiveClass('event_types') || getCssActiveClass('event_types/forms')) }
+      %li{class: (get_css_active_class('event_types') || get_css_active_class('event_types/forms')) }
         = link_to event_types_path do
           %i.fas.fa-calendar
           = t('sidebar.event_type_and_form')
 
     - if policy(Event).index?
-      %li{class: getCssActiveClass('events') }
+      %li{class: get_css_active_class('events') }
         = link_to events_path do
           %i.fas.fa-calendar-alt
           = t('sidebar.events')
 
-    %li{class: getCssActiveClass('abouts') }
+    %li{class: get_css_active_class('abouts') }
       %a{:href => "#"}
         %i.fas.fa-info-circle
         = t('sidebar.about')
