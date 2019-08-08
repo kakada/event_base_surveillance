@@ -11,41 +11,41 @@
     %li{class: getCssActiveClass('home') }
       = link_to root_path do
         %i.fas.fa-tachometer-alt
-        Dashboard
+        = t('sidebar.dashboard')
 
     - if policy(Program).update?
       %li{class: getCssActiveClass('programs') }
         = link_to programs_path do
           %i.fas.fa-tasks
-          Programs
+          = t('sidebar.programs')
 
     - if policy(User).update?
       %li{class: getCssActiveClass('users') }
         = link_to users_path do
           %i.fas.fa-users
-          Users
+          = t('sidebar.users')
 
     - if policy(EventType).index?
       %li{class: (getCssActiveClass('event_types') || getCssActiveClass('event_types/forms')) }
         = link_to event_types_path do
           %i.fas.fa-calendar
-          Event Type and Form
+          = t('sidebar.event_type_and_form')
 
     - if policy(Event).index?
       %li{class: getCssActiveClass('events') }
         = link_to events_path do
           %i.fas.fa-calendar-alt
-          Events
+          = t('sidebar.events')
 
     %li{class: getCssActiveClass('abouts') }
       %a{:href => "#"}
         %i.fas.fa-info-circle
-        About
+        = t('sidebar.about')
 
     %li
       = link_to destroy_user_session_path, method: :delete do
         %i.fas.fa-key
-        Logout
+        = t('sidebar.logout')
 
   .copyright
     © 2019 InSTEDD

@@ -51,7 +51,7 @@ class EventTypesController < ApplicationController
     @event_type = EventType.find(params[:id])
     @event_type.update_attributes(shared: true)
 
-    flash.now[:notice] = 'set shared successfully'
+    flash[:notice] = 'set shared successfully'
     redirect_to event_types_url
   end
 
@@ -59,7 +59,7 @@ class EventTypesController < ApplicationController
     @event_type = EventType.find(params[:id])
     @event_type.update_attributes(shared: false)
 
-    flash.now[:notice] = 'set unshared successfully'
+    flash[:notice] = 'set unshared successfully'
     redirect_to event_types_url
   end
 
