@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProgramPolicy < ApplicationPolicy
   def create?
     user.system_admin?

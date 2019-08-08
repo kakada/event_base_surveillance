@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
   def index
     @event_types = policy_scope(EventType.includes(:form_types))
-    @events = policy_scope(Event.includes(:forms).includes(:creator => :program))
+    @events = policy_scope(Event.includes(:forms).includes(creator: :program))
   end
 
   def show
@@ -50,9 +52,9 @@ class EventsController < ApplicationController
     params.require(:event).permit(
       :name, :event_type_id, :value, :description, :event_date, :report_date,
       :location, :geo_point, properties: {},
-      field_values_attributes: [
-        :id, :field_id, :value, :image, :image_cache, :_destroy, properties: {}
-      ]
+                             field_values_attributes: [
+                               :id, :field_id, :value, :image, :image_cache, :_destroy, properties: {}
+                             ]
     )
   end
 end

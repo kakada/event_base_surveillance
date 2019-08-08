@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventTypePolicy < ApplicationPolicy
   def index?
     user.system_admin? || user.program_admin?
@@ -20,7 +22,7 @@ class EventTypePolicy < ApplicationPolicy
       if user.system_admin?
         scope.all
       else
-        scope.joins(:user => :program).where('programs.id = ?', user.program_id)
+        scope.joins(user: :program).where('programs.id = ?', user.program_id)
       end
     end
   end

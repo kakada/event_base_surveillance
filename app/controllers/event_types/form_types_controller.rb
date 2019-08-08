@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EventTypes
   class FormTypesController < ::ApplicationController
     before_action :assign_event_type
@@ -49,8 +51,8 @@ module EventTypes
         :name,
         fields_attributes: [
           :id, :name, :field_type, :required, :display_order, :predefined, :_destroy,
-          field_options_attributes: [
-            :id, :name, :value, :_destroy
+          field_options_attributes: %i[
+            id name value _destroy
           ]
         ]
       )

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: events
@@ -39,10 +41,10 @@ class Event < ApplicationRecord
   validates :location, presence: true
   validates :value, presence: true
   validates :event_date, presence: true
-  validate  :validate_field_values, on: [:create, :update]
+  validate  :validate_field_values, on: %i[create update]
   before_validation :set_location
   before_validation :set_program_id
-  after_validation :geocode, :if => :location_changed?
+  after_validation :geocode, if: :location_changed?
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -72,13 +74,11 @@ class Event < ApplicationRecord
   end
 
   def validate_field_values
-    event_type && event_type.fields.each do |field|
-      next if !field.required?
+    event_type&.fields&.each do |field|
+      next unless field.required?
 
-      obj = field_values.select{ |value| value.field_id == field.id }.first
-      if !obj || obj[:value].blank?
-        errors.add field.name.downcase, "cannot be blank"
-      end
+      obj = field_values.select { |value| value.field_id == field.id }.first
+      errors.add field.name.downcase, 'cannot be blank' if !obj || obj[:value].blank?
     end
   end
 end

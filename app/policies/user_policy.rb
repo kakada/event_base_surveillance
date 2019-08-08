@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 class UserPolicy < ApplicationPolicy
   def create?
     user.system_admin? || user.program_admin?
   end
 
   def destroy?
-    if (record.id == user.id)
-      return false
-    end
+    return false if record.id == user.id
 
     if user.system_admin?
       true
-    elsif user.program_admin? and not record.system_admin?
+    elsif user.program_admin? && !record.system_admin?
       true
     else
       false

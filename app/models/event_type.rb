@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: event_types
@@ -24,14 +26,15 @@ class EventType < ApplicationRecord
   before_validation :set_color
   validate :validate_unique_fields, on: :create
 
-  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
-  accepts_nested_attributes_for :form_types, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
+  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+  accepts_nested_attributes_for :form_types, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
   private
 
   def validate_unique_fields
     validate_uniqueness_of_in_memory(
-      fields, [:name, :fieldable_id, :fieldable_type], 'duplicate')
+      fields, %i[name fieldable_id fieldable_type], 'duplicate'
+    )
   end
 
   def set_program_id

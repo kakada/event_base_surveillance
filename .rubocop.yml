@@ -1,0 +1,26 @@
+AllCops:
+  Exclude:
+    - app/uploaders/*.rb
+    - db/schema.rb
+    - db/seeds.rb
+    - db/migrate/*.rb
+    - config/**/*.rb
+    - test/**/*.rb
+    - bin/**
+    - lib/**
+    - lib/tasks/auto_annotate_models.rake
+    - lib/tasks/capistrano.rake
+    - Gemfile
+    - Rakefile
+    - spec/**/*.rb
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+

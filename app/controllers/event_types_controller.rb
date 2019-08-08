@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventTypesController < ApplicationController
   def index
     @event_types = policy_scope(EventType.includes(:form_types))
@@ -70,8 +72,8 @@ class EventTypesController < ApplicationController
       :name, :color,
       fields_attributes: [
         :id, :name, :field_type, :required, :display_order, :predefined, :_destroy,
-        field_options_attributes: [
-          :id, :name, :value, :_destroy
+        field_options_attributes: %i[
+          id name value _destroy
         ]
       ]
     )

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: forms
@@ -23,7 +25,7 @@ class Form < ApplicationRecord
 
   # Validations
   validates :conducted_at, presence: true
-  validate :validate_field_values, on: [:create, :update]
+  validate :validate_field_values, on: %i[create update]
 
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
     attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank?
@@ -32,13 +34,11 @@ class Form < ApplicationRecord
   private
 
   def validate_field_values
-    form_type && form_type.fields.each do |field|
-      next if !field.required?
+    form_type&.fields&.each do |field|
+      next unless field.required?
 
-      obj = field_values.select{ |value| value.field_id == field.id }.first
-      if !obj || obj[:value].blank?
-        errors.add field.name.downcase, "cannot be blank"
-      end
+      obj = field_values.select { |value| value.field_id == field.id }.first
+      errors.add field.name.downcase, 'cannot be blank' if !obj || obj[:value].blank?
     end
   end
 end

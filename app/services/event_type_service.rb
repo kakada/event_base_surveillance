@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventTypeService
   def initialize(event_type_id)
     @event_type = EventType.find(event_type_id)
@@ -38,6 +40,6 @@ class EventTypeService
   end
 
   def except_attributes
-    %w(id created_at updated_at color)
+    %w[id created_at updated_at color]
   end
 end

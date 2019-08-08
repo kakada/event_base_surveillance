@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -31,7 +33,7 @@ class User < ApplicationRecord
     guest: 4
   }
 
-  ROLES = self.roles.keys.map { |r| [r.titlecase, r] }
+  ROLES = roles.keys.map { |r| [r.titlecase, r] }
 
   has_many :event_types
   has_many :events, foreign_key: :creator_id
@@ -43,10 +45,10 @@ class User < ApplicationRecord
   validates :program_id, presence: true, unless: -> { role == 'system_admin' }
 
   def password_match?
-     self.errors[:password] << I18n.t('errors.messages.blank') if password.blank?
-     self.errors[:password_confirmation] << I18n.t('errors.messages.blank') if password_confirmation.blank?
-     self.errors[:password_confirmation] << I18n.translate("errors.messages.confirmation", attribute: "password") if password != password_confirmation
-     password == password_confirmation && !password.blank?
+    errors[:password] << I18n.t('errors.messages.blank') if password.blank?
+    errors[:password_confirmation] << I18n.t('errors.messages.blank') if password_confirmation.blank?
+    errors[:password_confirmation] << I18n.translate('errors.messages.confirmation', attribute: 'password') if password != password_confirmation
+    password == password_confirmation && !password.blank?
   end
 
   # new function to set the password without knowing the current
@@ -60,13 +62,13 @@ class User < ApplicationRecord
 
   # new function to return whether a password has been set
   def has_no_password?
-    self.encrypted_password.blank?
+    encrypted_password.blank?
   end
 
   # Devise::Models:unless_confirmed` method doesn't exist in Devise 2.0.0 anymore.
   # Instead you should use `pending_any_confirmation`.
   def only_if_unconfirmed
-    pending_any_confirmation {yield}
+    pending_any_confirmation { yield }
   end
 
   protected
@@ -74,5 +76,4 @@ class User < ApplicationRecord
   def password_required?
     confirmed? ? super : false
   end
-
 end
