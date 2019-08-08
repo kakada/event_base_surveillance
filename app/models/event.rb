@@ -38,6 +38,7 @@ class Event < ApplicationRecord
   # Validation
   validates :location, presence: true
   validates :value, presence: true
+  validates :event_date, presence: true
   validate  :validate_field_values, on: [:create, :update]
   before_validation :set_location
   before_validation :set_program_id

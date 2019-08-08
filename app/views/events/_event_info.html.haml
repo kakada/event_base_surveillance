@@ -1,19 +1,19 @@
-.flex1
-  .flex-row
-    %span{style: 'display: block; width: 200px;'} Event Type
-    = @event.event_type_name
-  .flex-row
-    %span{style: 'display: block; width: 200px;'} Value
-    = @event.value
-  .flex-row
-    %span{style: 'display: block; width: 200px;'} Description
-    = @event.description
-  .flex-row
-    %span{style: 'display: block; width: 200px;'} Adress
-    = @event.address
-  .flex-row
-    %span{style: 'display: block; width: 200px;'} Event Date
-    = @event.event_date
-  .flex-row
-    %span{style: 'display: block; width: 200px;'} Report Date
-    = @event.report_date
+%ul.list.flex1
+  %li
+    %span.type Event Type:
+    %span.value= @event.event_type_name
+  %li
+    %span.type Value:
+    %span.value= @event.value
+  %li
+    %span.type Description:
+    %span.value= @event.description
+  %li
+    %span.type Adress:
+    %span.value= @event.address
+  %li
+    %span.type Event Date:
+    %span.value= @event.event_date
+  %li
+    %span.type Report Date:
+    %span.value= @event.report_date || '-'

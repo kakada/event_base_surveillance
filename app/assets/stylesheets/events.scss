@@ -56,3 +56,18 @@
     margin-right: 0 !important;
   }
 }
+
+#events-show {
+  .list li{
+    display: flex;
+    padding: 10px 0;
+
+    .type {
+      display: block;
+      width: 200px;
+    }
+    .value {
+
+    }
+  }
+}
