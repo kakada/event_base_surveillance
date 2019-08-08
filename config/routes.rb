@@ -49,6 +49,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :maps
+
   mount Pumi::Engine => '/pumi'
   mount Sidekiq::Web => '/sidekiq'
 end

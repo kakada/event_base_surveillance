@@ -24,6 +24,8 @@
 //= require jquery.minicolors
 //= require bootstrap-select.min
 
+//= require lib/leaflet
+
 //= require application/namespace
 //= require application/util
 
@@ -38,8 +40,11 @@
 //= require events/new
 //= require event_types/new
 //= require users/new
+
 //= require client_apps/index
 //= require client_apps/new
+
+//= require maps/index
 
 
 document.addEventListener('turbolinks:load', function() {
@@ -47,4 +52,4 @@ document.addEventListener('turbolinks:load', function() {
 
   let currentPage = EBS.Util.getCurrentPage();
   !!EBS[currentPage] && EBS[currentPage].init();
-})
+});
