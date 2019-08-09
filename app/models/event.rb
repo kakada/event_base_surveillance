@@ -41,7 +41,6 @@ class Event < ApplicationRecord
   validate  :validate_field_values, on: %i[create update]
   before_validation :set_location
   before_validation :set_program_id
-  after_validation :geocode, if: :location_changed?
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
