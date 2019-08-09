@@ -49,7 +49,6 @@ gem 'bootstrap',      '~> 4.3.1'
 gem 'simple_form',    '~> 4.1.0'
 gem 'carrierwave',    '>= 2.0.0.rc', '< 3.0'
 gem 'pundit',         '~> 2.0.1'
-gem 'geocoder',       '~> 1.5.1'
 gem 'audited',        '~> 4.9'
 gem 'jquery-minicolors-rails',    '~> 2.2.6.1'
 

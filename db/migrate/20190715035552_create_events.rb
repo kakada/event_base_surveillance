@@ -7,11 +7,11 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.integer :value
       t.text    :description
       t.string  :location
-      t.float   :latitude
-      t.float   :longitude
       t.text    :properties
       t.date    :event_date
       t.date    :report_date
+      t.string  :status
+      t.string  :risk_level
 
       t.timestamps
     end

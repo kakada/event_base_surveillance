@@ -54,11 +54,11 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
     t.integer "value"
     t.text "description"
     t.string "location"
-    t.float "latitude"
-    t.float "longitude"
     t.text "properties"
     t.date "event_date"
     t.date "report_date"
+    t.string "status"
+    t.string "risk_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

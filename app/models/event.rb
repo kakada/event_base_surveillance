@@ -11,11 +11,11 @@
 #  value         :integer
 #  description   :text
 #  location      :string
-#  latitude      :float
-#  longitude     :float
 #  properties    :text
 #  event_date    :date
 #  report_date   :date
+#  status        :string
+#  risk_level    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -33,9 +33,6 @@ class Event < ApplicationRecord
 
   # Deligation
   delegate :name, to: :event_type, prefix: :event_type
-
-  # Geo location
-  geocoded_by :location
 
   # Validation
   validates :location, presence: true
