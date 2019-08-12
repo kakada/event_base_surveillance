@@ -6,7 +6,12 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.integer :program_id
       t.integer :value
       t.text    :description
-      t.string  :location
+      t.float   :latitude
+      t.float   :longitude
+      t.string  :province_id
+      t.string  :district_id
+      t.string  :commune_id
+      t.string  :village_id
       t.text    :properties
       t.date    :event_date
       t.date    :report_date
