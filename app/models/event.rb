@@ -10,7 +10,12 @@
 #  program_id    :integer
 #  value         :integer
 #  description   :text
-#  location      :string
+#  latitude      :float
+#  longitude     :float
+#  province_id   :string
+#  district_id   :string
+#  commune_id    :string
+#  village_id    :string
 #  properties    :text
 #  event_date    :date
 #  report_date   :date
@@ -18,6 +23,7 @@
 #  risk_level    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  location      :string
 #
 
 class Event < ApplicationRecord

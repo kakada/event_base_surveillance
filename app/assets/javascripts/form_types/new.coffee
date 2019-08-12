@@ -1,17 +1,63 @@
 EBS.Event_typesForm_typesNew = do ->
   init = ->
-    handleToggleOptionsWrapper()
+    setInitView()
     onClickAddField()
     onClickRemoveField()
     onClickAddFieldOption()
-    onChangeSelectFieldType()
+    onChooseFieldType()
+    onChangeMappingField()
+    onClickCollapseTrigger()
+    onClickBtnAdd()
     setupSortable()
 
-  handleToggleOptionsWrapper = ->
-    $('select[name*=field_type]').each (index, dom) ->
+  setInitView = ->
+    $('input.field-type').each (index, dom) ->
+      parent = $(dom).parents('.fieldset')
+
+      icon = parent.find('[data-field_type=' + dom.value + '] .icon').clone()
+      btnMove = parent.find('.move')
+      btnMove.empty()
+      btnMove.append(icon)
+      btnMove.show()
+
+      parent.find('.field-name').addClass('no-style as-title')
+      parent.find('.btn-add-field').hide()
+
       if dom.value == 'select_one'
-        disabledElement(dom)
-        $(dom).parents('.fieldset').find('.options-wrapper').show()
+        parent.find('.options-wrapper').show()
+        parent.find('.collapse-trigger').show()
+      else if dom.value == 'mapping_field'
+        parent.find('.mapping-field-wrapper').show()
+        parent.find('.options-wrapper').show()
+        parent.find('.collapse-trigger').show()
+      return
+
+  onClickBtnAdd = ->
+    $(document).off('click', '.btn-add-field')
+    $(document).on 'click', '.btn-add-field', (event) ->
+      $(this).hide()
+      parent = $(event.currentTarget).parents('.fieldset')
+      fieldTypeWrapper = parent.find('.field-type-wrapper')
+      fieldTypeWrapper.show()
+
+      fieldName = parent.find('.field-name')
+      fieldName.addClass('no-style')
+
+  onClickCollapseTrigger = ->
+    $(document).off('click', '.collapse-trigger')
+    $(document).on 'click', '.collapse-trigger', (event) ->
+      dom = event.currentTarget
+      content = $(dom).parents('.fieldset').find('.collapse-content')
+      icon = $($(dom).find('i'))
+
+      content.toggle()
+
+      if $(content).is(":visible")
+        icon.removeClass('fa-caret-right')
+        icon.addClass('fa-caret-down')
+      else
+        icon.addClass('fa-caret-right')
+        icon.removeClass('fa-caret-down')
 
   onClickRemoveField = ->
     $(document).on 'click', 'form .remove_fields', (event) ->
@@ -31,13 +77,68 @@ EBS.Event_typesForm_typesNew = do ->
       appendField(this);
       event.preventDefault()
 
-  onChangeSelectFieldType = ->
-    $(document).off('change', 'select[name*=field_type]')
-    $(document).on 'change', 'select[name*=field_type]', (event) ->
-      dom = event.target
-      if dom.value == 'select_one'
-        disabledElement(dom)
-        showBtnAddSelectOption(dom)
+  onChooseFieldType = ->
+    $(document).off('click', '.field-type-list')
+    $(document).on 'click', '.field-type-list', (event) ->
+      dom = event.currentTarget
+      field_type = $(dom).data('field_type')
+      fieldName = $(dom).parents('.fieldset').find('.field-name')
+      fieldName.addClass('as-title')
+
+      setBtnMove(dom)
+
+      assignFieldType(dom, field_type)
+      handleHiddenContent(dom, field_type)
+
+  handleHiddenContent = (dom, field_type) ->
+    if field_type == 'select_one'
+      showBtnAddSelectOption(dom)
+      showArrowDownIcon(dom)
+    else if field_type == 'mapping_field'
+      showMappingField(dom)
+      showArrowDownIcon(dom)
+
+    hideFieldTypeList(dom)
+
+  showArrowDownIcon = (dom)->
+    icon = $(dom).parents('.fieldset').find('.collapse-trigger i')
+    icon.removeClass('fa-caret-right')
+    icon.addClass('fa-caret-down')
+
+    btnCollapseTrigger = $(dom).parents('.fieldset').find('.collapse-trigger')
+    btnCollapseTrigger.show()
+
+  hideFieldTypeList = (dom)->
+    fieldTypeWrapper = $(dom).parents('.fieldset').find('.field-type-wrapper')
+    fieldTypeWrapper.hide()
+
+  showMappingField = (dom) ->
+    mappingFieldWrapper = $(dom).parents('.fieldset').find('.mapping-field-wrapper')
+    mappingFieldWrapper.show()
+
+  setBtnMove = (dom) ->
+    btnMove = $(dom).parents('.fieldset').find('.move')
+    btnMove.empty()
+    btnMove.append($($(dom).find('.icon')).clone())
+    btnMove.show()
+
+  onChangeMappingField = ->
+    $(document).off('change', 'select.mapping-field')
+    $(document).on 'change', 'select.mapping-field', (event)->
+      setMappingFieldType(event.target)
+
+  setMappingFieldType = (dom)->
+    field_type = $(dom).find(':selected').data('field_type')
+    $(dom).next().val(field_type)
+    assignFieldType(dom, 'mapping_field')
+
+    if field_type == 'select_one'
+      showBtnAddSelectOption(dom)
+      return
+
+  assignFieldType = (dom, field_type)->
+    fieldType = $(dom).parents('.fieldset').find('.field-type')
+    fieldType.val(field_type)
 
   appendField = (dom) ->
     time = new Date().getTime()
@@ -49,10 +150,6 @@ EBS.Event_typesForm_typesNew = do ->
     optionsWrapper = $(dom).parents('.fieldset').find('.options-wrapper')
     optionsWrapper.show()
     optionsWrapper.find('.add_field_options').click()
-
-  disabledElement = (dom) ->
-    $(dom).css('background-color', '#e9ecef')
-    $(dom).next().show()
 
   animateListItems = ($item, container, _super) ->
     $clonedItem = $('<li/>').css(height: 0)

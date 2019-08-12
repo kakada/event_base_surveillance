@@ -71,7 +71,8 @@ class EventTypesController < ApplicationController
     params.require(:event_type).permit(
       :name, :color,
       fields_attributes: [
-        :id, :name, :field_type, :required, :display_order, :predefined, :_destroy,
+        :id, :name, :field_type, :required, :display_order,
+        :mapping_field, :mapping_field_type, :_destroy,
         field_options_attributes: %i[
           id name value _destroy
         ]
