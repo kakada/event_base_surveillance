@@ -23,53 +23,13 @@
       = link_to '#', class: "remove_fields btn-remove-field" do
         %i.fa.fa-times-circle
 
-    .field-type-wrapper
-      .flex-row
-        .flex1
-          .field-type-list{'data-field_type' => 'select_one'}
-            %i.far.fa-dot-circle.icon
-            Select one
-
-          .field-type-list{'data-field_type' => 'select_multiple '}
-            %i.fas.fa-list-ul.icon
-            Select Multiple
-
-          .field-type-list{'data-field_type' => 'date'}
-            %i.fas.fa-calendar-alt.icon
-            Date
-
-        .flex1
-          .field-type-list{'data-field_type' => 'integer'}
-            %strong.icon 123
-            Integer
-
-          .field-type-list{'data-field_type' => 'note'}
-            %i.fas.fa-bars.icon
-            Note
-
-          .field-type-list{'data-field_type' => 'image'}
-            %i.fas.fa-image.icon
-            Image
-
-        .flex1
-          .field-type-list{'data-field_type' => 'text'}
-            %strong.icon abc
-            Text
-
-          .field-type-list{'data-field_type' => 'location'}
-            %i.fas.fa-map-marker-alt.icon
-            Location
-
-          .field-type-list{'data-field_type' => 'mapping_field'}
-            %i.fas.fa-exchange-alt.icon
-            Mapping field
+    = render 'event_types/shared/field_types'
 
     .collapse-content
       .mapping-field-wrapper
         %label Mapping to
         .wrapper
           = f.select :mapping_field, options_for_select( EventType::MAPPING_FIELDS.map{ |c| [c[:name].titlecase, c[:name], {'data-field_type'=>c[:field_type]}] }), {prompt: 'Select event type field'}, class: 'form-control mapping-field'
-
 
           = f.text_field :mapping_field_type, placeholder: "field type", class: 'form-control mapping-field-type', disabled: true
 

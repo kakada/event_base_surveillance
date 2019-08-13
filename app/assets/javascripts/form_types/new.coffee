@@ -100,16 +100,18 @@ EBS.Event_typesForm_typesNew = do ->
     $(document).on 'click', '.field-type-list', (event) ->
       dom = event.currentTarget
       field_type = $(dom).data('field_type')
-      fieldName = $(dom).parents('.fieldset').find('.field-name')
-      fieldName.addClass('as-title')
 
-      setBtnMove(dom)
-
+      setFieldNameInputAsTitleStyle(dom)
+      assignBtnMove(dom)
       assignFieldType(dom, field_type)
-      handleHiddenContent(dom, field_type)
+      handleCollapseContent(dom, field_type)
 
-  handleHiddenContent = (dom, field_type) ->
-    if field_type == 'select_one'
+  setFieldNameInputAsTitleStyle = (dom) ->
+    fieldName = $(dom).parents('.fieldset').find('.field-name')
+    fieldName.addClass('as-title')
+
+  handleCollapseContent = (dom, field_type) ->
+    if field_type == 'select_one' || field_type == 'select_multiple'
       showBtnAddSelectOption(dom)
       showArrowDownIcon(dom)
     else if field_type == 'mapping_field'
@@ -134,7 +136,7 @@ EBS.Event_typesForm_typesNew = do ->
     mappingFieldWrapper = $(dom).parents('.fieldset').find('.mapping-field-wrapper')
     mappingFieldWrapper.show()
 
-  setBtnMove = (dom) ->
+  assignBtnMove = (dom) ->
     btnMove = $(dom).parents('.fieldset').find('.move')
     btnMove.empty()
     btnMove.append($($(dom).find('.icon')).clone())
@@ -151,7 +153,7 @@ EBS.Event_typesForm_typesNew = do ->
     $(dom).next().val(field_type)
     assignFieldType(dom, 'mapping_field')
 
-    if field_type == 'select_one'
+    if field_type == 'select_one' || field_type == 'select_multiple'
       showBtnAddSelectOption(dom)
       return
 
