@@ -1,9 +1,10 @@
 class MapsController < ApplicationController
-  # before_action: :set_
   def index
-    events = Event.where('event_date <= ?', Date.today).group(:latitude, :longitude, :event_type_id).count
+    events = Event.where('event_date <= ?', Date.today).where(options).group(:latitude, :longitude, :event_type_id).count
     @event_data = build_event_data(events)
     @event_legend = build_event_legend
+    @event_types = EventType.all
+    @event_type_id = params[:event_type]
   end
 
   private
@@ -41,5 +42,10 @@ class MapsController < ApplicationController
     end
 
     legend
+  end
+
+  def options
+    option = {}
+    option.merge!({ event_type_id: params[:event_type]}) if params[:event_type].present?
   end
 end

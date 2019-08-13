@@ -1,8 +1,9 @@
 #content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3 Map
+  %form{ method: :get }
 
+    %label{ for: :event_type } Event Type:
+    = select_tag :event_type, options_from_collection_for_select(@event_types, 'id', 'name', @event_type_id), include_blank: "All"
+    %button.btn.btn-primary.btn-sm.mb-1{ type: 'submit' } Apply
   #map
 
 :javascript

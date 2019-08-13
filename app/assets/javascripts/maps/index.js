@@ -14,7 +14,7 @@ EBS.MapsIndex = (() => {
   function _renderMap() {
     map = new L.Map('map');
 
-    map.setView(new L.LatLng(11.5564, 104.9282), 7);
+    // map.setView(new L.LatLng(11.5564, 104.9282), 7);
 
     _renderMarker();
     _renderLegend();
@@ -32,6 +32,7 @@ EBS.MapsIndex = (() => {
   function _renderMarker() {
     let variant = 0;
     let latCursor;
+    let markers = [];
 
     eventData.sort((a, b) => (a.lat > b.lat) ? 1 : -1);
 
@@ -43,9 +44,10 @@ EBS.MapsIndex = (() => {
         variant = 0;
       }
 
-      const extraRadius = Math.floor(data.count / 3) * 25;
+      const extraRadius = Math.floor(data.count / 10) * 25;
+      const latlng = [ data.lat + variant, data.lng + variant];
 
-      const marker = L.circle([data.lat + variant, data.lng + variant], {
+      const marker = L.circle(latlng, {
         color: data.color,
         fillColor: data.color,
         fillOpacity: 0.8,
@@ -54,8 +56,14 @@ EBS.MapsIndex = (() => {
         radius: 200 + extraRadius
       }).addTo(map);
 
+      markers.push(latlng);
+
       marker.bindPopup(`Event count: ${data.count}<br>Event type: ${data.event_type}`);
     });
+
+    // var group = new L.featureGroup(markers);
+
+    map.fitBounds(markers);
   }
 
   function _renderLegend() {
