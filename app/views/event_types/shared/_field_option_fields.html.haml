@@ -3,4 +3,15 @@
     = f.hidden_field :_destroy
     = link_to '#', class: "remove_fields btn btn-link btn-remove-option" do
       %i.fa.fa-trash-alt
-    = f.text_field :name, placeholder: "option", class: 'form-control'
+    .flex-row.flex1
+      .flex1
+        = f.text_field :name, placeholder: "option", class: 'form-control'
+      .flex1.flex-row{style: 'align-items: center'}
+        %label{style: 'margin: 0 10px 0 20px'}
+          Value
+        = f.text_field :value, placeholder: "option", class: 'form-control'
+
+      .field-option-color-wrapper.flex1
+        .flex-row{style: 'align-items: center; height: 100%'}
+          %label Color
+          = f.text_field :color, class: 'field-option-color form-control'

@@ -125,10 +125,23 @@
   }
 }
 
+.options-wrapper.visible-color .field-option-color-wrapper{
+  display: block;
+}
+
 .options-wrapper, .mapping-field-wrapper {
   border-top: 1px solid #ccc;
   display: none;
   padding: 10px;
+}
+
+.field-option-color-wrapper {
+  align-items: center;
+  display: none;
+
+  label {
+    margin: 0 10px 0 20px;
+  }
 }
 
 .disabled-select-layer {

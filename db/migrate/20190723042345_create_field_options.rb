@@ -4,6 +4,7 @@ class CreateFieldOptions < ActiveRecord::Migration[5.2]
       t.integer :field_id
       t.string  :name
       t.string  :value
+      t.string  :color
 
       t.timestamps
     end

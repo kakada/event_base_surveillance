@@ -8,6 +8,7 @@
 #  field_id   :integer
 #  name       :string
 #  value      :string
+#  color      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

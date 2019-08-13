@@ -74,7 +74,7 @@ class EventTypesController < ApplicationController
         :id, :name, :field_type, :required, :display_order,
         :mapping_field, :mapping_field_type, :_destroy,
         field_options_attributes: %i[
-          id name value _destroy
+          id name value color _destroy
         ]
       ]
     )

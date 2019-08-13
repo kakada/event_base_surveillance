@@ -1,6 +1,9 @@
 EBS.Event_typesForm_typesNew = do ->
   init = ->
-    setInitView()
+    initView()
+    initSortable()
+    initMiniColorPicker()
+
     onClickAddField()
     onClickRemoveField()
     onClickAddFieldOption()
@@ -8,29 +11,43 @@ EBS.Event_typesForm_typesNew = do ->
     onChangeMappingField()
     onClickCollapseTrigger()
     onClickBtnAdd()
-    setupSortable()
 
-  setInitView = ->
+  initView = ->
     $('input.field-type').each (index, dom) ->
-      parent = $(dom).parents('.fieldset')
+      initBtnMove(dom)
+      initFieldNameStyleAsTitle(dom)
+      initCollapseContent(dom)
 
-      icon = parent.find('[data-field_type=' + dom.value + '] .icon').clone()
-      btnMove = parent.find('.move')
-      btnMove.empty()
-      btnMove.append(icon)
-      btnMove.show()
+  initCollapseContent = (dom) ->
+    parentDom = $(dom).parents('.fieldset')
+    parentDom.find('.collapse-content').hide()
 
-      parent.find('.field-name').addClass('no-style as-title')
-      parent.find('.btn-add-field').hide()
+    if dom.value == 'select_one'
+      parentDom.find('.collapse-trigger').show()
+      parentDom.find('.options-wrapper').show()
+    else if dom.value == 'mapping_field'
+      parentDom.find('.collapse-trigger').show()
+      parentDom.find('.mapping-field-wrapper').show()
+      parentDom.find('.options-wrapper').show()
+      visibleColorFieldOption(dom)
+    return
 
-      if dom.value == 'select_one'
-        parent.find('.options-wrapper').show()
-        parent.find('.collapse-trigger').show()
-      else if dom.value == 'mapping_field'
-        parent.find('.mapping-field-wrapper').show()
-        parent.find('.options-wrapper').show()
-        parent.find('.collapse-trigger').show()
-      return
+  initFieldNameStyleAsTitle = (dom) ->
+    parentDom = $(dom).parents('.fieldset')
+    parentDom.find('.field-name').addClass('no-style as-title')
+    parentDom.find('.btn-add-field').hide()
+
+  initBtnMove = (dom)->
+    parentDom = $(dom).parents('.fieldset')
+    icon = parentDom.find('[data-field_type=' + dom.value + '] .icon').clone()
+    btnMove = parentDom.find('.move')
+    btnMove.empty()
+    btnMove.append(icon)
+    btnMove.show()
+
+  visibleColorFieldOption = (dom)->
+    $(dom).parents('.fieldset').find('.options-wrapper').addClass('visible-color')
+    initMiniColorPicker()
 
   onClickBtnAdd = ->
     $(document).off('click', '.btn-add-field')
@@ -74,7 +91,8 @@ EBS.Event_typesForm_typesNew = do ->
   onClickAddFieldOption = ->
     $(document).off('click', 'form .add_field_options')
     $(document).on 'click', 'form .add_field_options', (event) ->
-      appendField(this);
+      appendField(this)
+      initMiniColorPicker()
       event.preventDefault()
 
   onChooseFieldType = ->
@@ -126,6 +144,7 @@ EBS.Event_typesForm_typesNew = do ->
     $(document).off('change', 'select.mapping-field')
     $(document).on 'change', 'select.mapping-field', (event)->
       setMappingFieldType(event.target)
+      visibleColorFieldOption(event.currentTarget)
 
   setMappingFieldType = (dom)->
     field_type = $(dom).find(':selected').data('field_type')
@@ -164,11 +183,14 @@ EBS.Event_typesForm_typesNew = do ->
     $('ol.fields li').each (index)->
       $(this).find('.display-order').val(index)
 
-  setupSortable = ->
+  initSortable = ->
     $(document).find('ol.fields').sortable
       handle: '.move'
       onDrop: ($item, container, _super) ->
         animateListItems($item, container, _super)
         assignDisplayOrderToListItem()
+
+  initMiniColorPicker = ->
+    $(document).find('input.field-option-color').minicolors()
 
   { init: init }

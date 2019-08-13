@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
     t.integer "field_id"
     t.string "name"
     t.string "value"
+    t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
