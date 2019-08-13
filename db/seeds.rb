@@ -50,7 +50,7 @@ obj = {
         { name: "# of Death", field_type: "integer" },
         { name: "Summary", field_type: "note" },
         { name: "Risk Assessment conducted", field_type: "select_one", field_options_attributes: [{ name: "Yes" }, { name: "No" }] },
-        { name: "Risk Level", field_type: "select_one", field_options_attributes: [{ name: "Low" }, { name: "Moderate" }, { name: "High" }, { name: "Very High" }] },
+        { name: "Risk Level", field_type: "mapping_field", mapping_field: 'risk_level', mapping_field_type: "select_one", field_options_attributes: [{ name: "Low", color: '#51b8b8' }, { name: "Moderate", color: '#51b865' }, { name: "High", color: '#d68bb2' }, { name: "Very High", color: '#e81c2a' }] },
         { name: "Risk assessment date", field_type: "date" },
       ]
     },

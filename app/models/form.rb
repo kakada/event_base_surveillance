@@ -27,6 +27,9 @@ class Form < ApplicationRecord
   validates :conducted_at, presence: true
   validate :validate_field_values, on: %i[create update]
 
+  # Callback
+  after_create :set_event_status
+
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
     attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank?
   }
@@ -40,5 +43,10 @@ class Form < ApplicationRecord
       obj = field_values.select { |value| value.field_id == field.id }.first
       errors.add field.name.downcase, 'cannot be blank' if !obj || obj[:value].blank?
     end
+  end
+
+  def set_event_status
+    event.status = form_type.name
+    event.save
   end
 end

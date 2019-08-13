@@ -4,7 +4,7 @@
 %div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
   = f.label field_name
   = f.hidden_field :field_id, value: field.id
-  = f.collection_select :value, field.field_options, :id, :name, {include_blank: true}, { class: error_msg.present? ? 'form-control is-invalid' : 'form-control' }
+  = f.collection_select :value, field.field_options, :value, :name, {include_blank: true}, { class: error_msg.present? ? 'form-control is-invalid' : 'form-control' }
 
   - if error_msg.present?
     .invalid-feedback= error_msg.join('; ')

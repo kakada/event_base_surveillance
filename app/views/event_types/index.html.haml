@@ -22,8 +22,10 @@
         - @event_types.each do |event_type|
           %tr
             %td
-              .small-color{style: "background-color: #{event_type.color}"}
-              = event_type.name
+              .flex-row-vertical-center
+                .small-color{style: "background-color: #{event_type.color}"}
+                  = event_type.name[0]
+                %span= event_type.name
             %td= event_type.form_types.size
             %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
             %td= event_type.shared ? 'shared' : '-'

@@ -27,6 +27,7 @@ class FieldValue < ApplicationRecord
 
   # Validation
   before_validation :set_location_value
+  after_save :handle_mapping_field
 
   # History
   audited associated_with: :valueable
@@ -42,5 +43,13 @@ class FieldValue < ApplicationRecord
     village  = Pumi::Village.find_by_id(properties[:village_id]) if commune && properties[:village_id].present?
 
     self.value = [province, district, commune, village].reject(&:blank?).map(&:name_km).join(',')
+  end
+
+  def handle_mapping_field
+    return unless field.field_type == 'mapping_field'
+
+    valueable.event[field.mapping_field] = value
+    valueable.event.risk_color = field.field_options.find_by(value: value).color
+    valueable.event.save
   end
 end

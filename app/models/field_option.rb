@@ -15,4 +15,12 @@
 
 class FieldOption < ApplicationRecord
   belongs_to :field
+
+  before_validation :set_option_value
+
+  private
+
+  def set_option_value
+    self.value ||= name
+  end
 end

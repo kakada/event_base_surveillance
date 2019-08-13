@@ -10,6 +10,7 @@
 #  program_id    :integer
 #  value         :integer
 #  description   :text
+#  location      :string
 #  latitude      :float
 #  longitude     :float
 #  province_id   :string
@@ -21,9 +22,9 @@
 #  report_date   :date
 #  status        :string
 #  risk_level    :string
+#  risk_color    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  location      :string
 #
 
 class Event < ApplicationRecord
@@ -38,7 +39,7 @@ class Event < ApplicationRecord
   has_associated_audits
 
   # Deligation
-  delegate :name, to: :event_type, prefix: :event_type
+  delegate :name, :color, to: :event_type, prefix: :event_type
 
   # Validation
   validates :location, presence: true
