@@ -1,5 +1,7 @@
 EBS.MapsIndex = (() => {
   let map;
+  const start = moment().subtract(29, 'days');
+  const end = moment();
 
   const publicApi = {
     init: init
@@ -8,7 +10,10 @@ EBS.MapsIndex = (() => {
   return publicApi;
 
   function init() {
-    _renderMap();
+    if (eventData.length) {
+      _renderMap();
+    }
+    _renderDateFilter();
   }
 
   function _renderMap() {
@@ -61,9 +66,11 @@ EBS.MapsIndex = (() => {
       marker.bindPopup(`Event count: ${data.count}<br>Event type: ${data.event_type}`);
     });
 
-    // var group = new L.featureGroup(markers);
-
-    map.fitBounds(markers);
+    if (markers.length == 1) {
+      map.setView(new L.LatLng(markers[0][0], markers[0][1]), 12);
+    } else {
+      map.fitBounds(markers);
+    }
   }
 
   function _renderLegend() {
@@ -96,5 +103,27 @@ EBS.MapsIndex = (() => {
     }
 
     return result;
+  }
+
+  function cb(start, end) {
+    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+  }
+
+  function _renderDateFilter() {
+
+    $('#reportrange').daterangepicker({
+      startDate: startDate,
+      endDate: endDate,
+      ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }
+    }, cb);
+
+    cb(start, end);
   }
 })();

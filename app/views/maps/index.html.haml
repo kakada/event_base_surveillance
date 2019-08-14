@@ -1,11 +1,21 @@
 #content
-  %form{ method: :get }
+  %form.form-inline{ method: :get }
+    .form-group.mb-2
+      %label{ for: :event_type } Event Type:&nbsp;
+      = select_tag :event_type, options_from_collection_for_select(@event_types, 'id', 'name', @event_type_id), include_blank: "All"
 
-    %label{ for: :event_type } Event Type:
-    = select_tag :event_type, options_from_collection_for_select(@event_types, 'id', 'name', @event_type_id), include_blank: "All"
+    .form-group.mb-2
+      %label{ for: 'reportrange' } Date:&nbsp;
+      %input#reportrange{ type: :text, name: 'daterange', value: "#{@start_date.strftime("%m/%d/%Y")} - #{@end_date.strftime('%m/%d/%Y')}" }
+
     %button.btn.btn-primary.btn-sm.mb-1{ type: 'submit' } Apply
-  #map
+  - if @event_data.present?
+    #map
+  - else
+    .text-center
+      %h2 No data found
 
 :javascript
-  const eventData = #{ raw @event_data.to_json }
-  const eventLegend = #{ raw @event_legend.to_json }
+  const eventData = #{ raw @event_data.to_json };
+  const startDate = "#{ @start_date.strftime('%m/%d/%Y') }";
+  const endDate = "#{ @end_date.strftime('%m/%d/%Y') }";
