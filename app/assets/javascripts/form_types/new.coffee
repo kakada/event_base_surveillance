@@ -22,7 +22,7 @@ EBS.Event_typesForm_typesNew = do ->
     parentDom = $(dom).parents('.fieldset')
     parentDom.find('.collapse-content').hide()
 
-    if dom.value == 'select_one'
+    if dom.value == 'select_one' || dom.value == 'select_multiple'
       parentDom.find('.collapse-trigger').show()
       parentDom.find('.options-wrapper').show()
     else if dom.value == 'mapping_field'

@@ -21,6 +21,6 @@ class FieldOption < ApplicationRecord
   private
 
   def set_option_value
-    self.value ||= name
+    self.value = value.presence || name
   end
 end

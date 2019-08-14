@@ -7,6 +7,7 @@
 #  id             :bigint           not null, primary key
 #  field_id       :integer
 #  value          :string
+#  values         :text             is an Array
 #  properties     :text
 #  image          :string
 #  valueable_type :string

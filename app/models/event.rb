@@ -51,7 +51,7 @@ class Event < ApplicationRecord
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
-    attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank?
+    attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank?
   }
 
   def address

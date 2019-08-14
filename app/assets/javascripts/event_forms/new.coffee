@@ -4,6 +4,8 @@ EBS.EventsFormsNew = do ->
     # onChangeDistrict()
     # onChangeCommune()
     # onChangeVillage()
+
+    initSelectPicker()
     onChangeImage()
     onClickRemoveImage()
 
@@ -31,6 +33,9 @@ EBS.EventsFormsNew = do ->
   # setLocationValue = (event) ->
   #   console.log('event===', event.target.value)
   #   $('.location').val(event.target.value)
+
+  initSelectPicker = ->
+    $('.selectpicker').selectpicker();
 
   readURL = (input) ->
     if input.files and input.files[0]
@@ -74,6 +79,6 @@ EBS.EventsFormsNew = do ->
       clearValueAndShowDefaultImage(this)
       hideBtnRemove(this)
 
-      event.preventDefault();
+      event.preventDefault()
 
   { init: init }

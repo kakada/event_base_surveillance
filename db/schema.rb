@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
   create_table "field_values", force: :cascade do |t|
     t.integer "field_id"
     t.string "value"
+    t.text "values", array: true
     t.text "properties"
     t.string "image"
     t.string "valueable_type"

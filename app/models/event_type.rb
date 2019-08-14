@@ -31,7 +31,7 @@ class EventType < ApplicationRecord
 
   MAPPING_FIELDS = [
     { name: 'risk_level', field_type: 'select_one' }
-  ]
+  ].freeze
 
   private
 

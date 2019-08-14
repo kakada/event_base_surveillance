@@ -3,6 +3,7 @@ class CreateFieldValues < ActiveRecord::Migration[5.2]
     create_table :field_values do |t|
       t.integer :field_id
       t.string  :value
+      t.text    :values, array: true
       t.text    :properties
       t.string  :image
       t.references :valueable, polymorphic: true, index: true
