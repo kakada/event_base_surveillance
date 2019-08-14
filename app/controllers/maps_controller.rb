@@ -2,7 +2,6 @@ class MapsController < ApplicationController
   def index
     events = Event.where('event_date <= ?', Date.today).where(options).group(:latitude, :longitude, :event_type_id).count
     @event_data = build_event_data(events)
-    @event_legend = build_event_legend
     @event_types = EventType.all
     @event_type_id = params[:event_type]
   end
@@ -25,23 +24,6 @@ class MapsController < ApplicationController
     end
 
     event_data
-  end
-
-  def build_event_legend
-    legend = []
-    event_type_ids = Event.distinct.pluck(:event_type_id)
-    event_types = EventType.where(id: event_type_ids)
-
-    event_types.each do |type|
-      data = {
-        color: type.color,
-        name: type.name
-      }
-
-      legend << data
-    end
-
-    legend
   end
 
   def options

@@ -68,10 +68,10 @@ EBS.MapsIndex = (() => {
 
   function _renderLegend() {
     const legend = L.control({ position: "bottomright" });
-
     const div = L.DomUtil.create("div", "legend");
+    const mapLegend = _getLegendData();
 
-    eventLegend.forEach( (data, index) => {
+    mapLegend.forEach( (data) => {
       div.innerHTML += `<div><i style="background: ${data.color}"></i><span>${data.name}</span></div>`;
     });
 
@@ -80,5 +80,21 @@ EBS.MapsIndex = (() => {
     };
 
     legend.addTo(map);
+  }
+
+  function _getLegendData() {
+    const result = [];
+    const mapLegend = new Map();
+    for (const item of eventData) {
+      if(!mapLegend.has(item.event_type)){
+        mapLegend.set(item.event_type, true);
+        result.push({
+          name: item.event_type,
+          color: item.color
+        });
+      }
+    }
+
+    return result;
   }
 })();
