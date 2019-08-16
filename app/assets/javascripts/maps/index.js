@@ -66,7 +66,8 @@ EBS.MapsIndex = (() => {
       marker.bindPopup(`Event count: ${data.count}<br>Event type: ${data.event_type}`);
     });
 
-    if (markers.length == 1) {
+    const locationCount = [...new Set(eventData.map(x => x.lat))].length;
+    if (locationCount == 1) {
       map.setView(new L.LatLng(markers[0][0], markers[0][1]), 12);
     } else {
       map.fitBounds(markers);
