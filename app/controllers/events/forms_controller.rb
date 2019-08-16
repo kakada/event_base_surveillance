@@ -39,7 +39,7 @@ module Events
       params.require(:form).permit(
         :submitter_id, :form_type_id, :conducted_at,
         field_values_attributes: [
-          :id, :field_id, :value, :image, :image_cache, :_destroy, properties: {}
+          :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
         ]
       )
     end

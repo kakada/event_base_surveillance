@@ -18,7 +18,7 @@
 #
 
 class Field < ApplicationRecord
-  FIELD_TYPES = %w[text integer date select_one select_multiple note image location mapping_field].freeze
+  FIELD_TYPES = %w[text integer date select_one select_multiple note image location mapping_field file].freeze
 
   belongs_to :fieldable, polymorphic: true
   has_many   :field_options, dependent: :destroy

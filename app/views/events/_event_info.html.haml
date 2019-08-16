@@ -17,3 +17,14 @@
   %li
     %span.type Report Date:
     %span.value= @event.report_date || '-'
+
+  - @event.field_values.each do |field_value|
+    %li
+      %span.type= field_value.field_name
+      %span.value
+        - if field_value.field_type == 'file'
+          = link_to field_value.file_url.split('/').last, download_events_path(file: field_value.file_url), target: "_blank", style:'color: #007bff'
+
+        - else
+          = field_value.value || field_value.values
+

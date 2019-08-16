@@ -46,6 +46,10 @@ class EventsController < ApplicationController
     redirect_to events_url
   end
 
+  def download
+    send_file "#{Rails.root}/public/#{params[:file]}", :disposition => 'attachment'
+  end
+
   private
 
   def event_params
@@ -53,7 +57,7 @@ class EventsController < ApplicationController
       :name, :event_type_id, :value, :description, :event_date, :report_date, :location, :geo_point,
       properties: {},
       field_values_attributes: [
-        :id, :field_id, :value, { values: [] }, :image, :image_cache, :_destroy, properties: {}
+        :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
       ]
     )
   end

@@ -1,0 +1,18 @@
+- field_name = field.name.downcase
+- error_msg = (@form && @form.errors[field_name]) || (@event && @event.errors["forms.#{field_name}"])
+
+%div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
+  = f.label field_name
+  = f.hidden_field :field_id, value: field.id
+  = f.file_field :file, class: 'form-control file-input'
+
+  - if f.object.file.present?
+    .flex-row
+      = f.hidden_field :_destroy, class: 'destroy'
+      = link_to '#', class: "remove-file", style: f.object.file? ? '' : 'display: none' do
+        %i.far.fa-trash-alt{style: 'color: red; margin-right: 5px'}
+
+      %small.form-text.text-muted= f.object.file_url.split('/').last
+
+  - if error_msg.present?
+    .invalid-feedback= error_msg.join('; ')

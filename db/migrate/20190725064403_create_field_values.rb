@@ -6,6 +6,7 @@ class CreateFieldValues < ActiveRecord::Migration[5.2]
       t.text    :values, array: true
       t.text    :properties
       t.string  :image
+      t.string  :file
       t.references :valueable, polymorphic: true, index: true
 
       t.timestamps

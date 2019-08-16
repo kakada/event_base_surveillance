@@ -13,7 +13,6 @@
         %i.fas.fa-calendar-alt.icon
         Date
 
-    .flex1
       .field-type-list{'data-field_type' => 'integer'}
         %strong.icon 123
         Integer
@@ -22,18 +21,22 @@
         %i.fas.fa-bars.icon
         Note
 
-      .field-type-list{'data-field_type' => 'image'}
-        %i.fas.fa-image.icon
-        Image
-
     .flex1
       .field-type-list{'data-field_type' => 'text'}
         %strong.icon abc
         Text
 
+      .field-type-list{'data-field_type' => 'image'}
+        %i.fas.fa-image.icon
+        Image
+
       .field-type-list{'data-field_type' => 'location'}
         %i.fas.fa-map-marker-alt.icon
         Location
+
+      .field-type-list{'data-field_type' => 'file'}
+        %i.fas.fa-paperclip.icon
+        File
 
       - if params['controller'] == 'event_types/form_types'
         .field-type-list{'data-field_type' => 'mapping_field'}

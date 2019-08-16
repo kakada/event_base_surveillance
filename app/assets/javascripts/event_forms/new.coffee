@@ -8,6 +8,27 @@ EBS.EventsFormsNew = do ->
     initSelectPicker()
     onChangeImage()
     onClickRemoveImage()
+    onChangeFile()
+    onClickRemoveFile()
+
+  onClickRemoveFile = ->
+    $('.remove-file').off('click')
+    $('.remove-file').on 'click', (event)->
+      removeFile(event)
+      event.preventDefault()
+
+  removeFile = (event)->
+    dom = event.currentTarget
+    $(dom).hide()
+    $(dom).next().hide()
+    $(dom).prev().val(1)
+
+  onChangeFile = ->
+    $('.file-input').off('change')
+    $('.file-input').change ->
+      parent = $(this).parent()
+      parent.find('input.destroy[type=hidden]').val(0)
+      return
 
   # onChangeProvince = ->
   #   $('#province .select-location').on 'change', (event)->

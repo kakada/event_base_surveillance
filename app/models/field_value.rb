@@ -18,13 +18,15 @@
 
 class FieldValue < ApplicationRecord
   mount_uploader :image, ImageUploader
+  mount_uploader :file, FileUploader
 
   belongs_to :field
   belongs_to :valueable, polymorphic: true
 
   serialize :properties, Hash
 
-  delegate :field_type, to: :field, allow_nil: true
+  delegate :field_type, :name, to: :field, allow_nil: true
+  delegate :name, to: :field, prefix: :field, allow_nil: true
 
   # Validation
   before_validation :set_location_value

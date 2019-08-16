@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_065209) do
     t.text "values", array: true
     t.text "properties"
     t.string "image"
+    t.string "file"
     t.string "valueable_type"
     t.bigint "valueable_id"
     t.datetime "created_at", null: false

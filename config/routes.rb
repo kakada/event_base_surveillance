@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     scope module: :events do
       resources :forms
     end
+
+    get :download, on: :collection
   end
 
   resources :event_types do

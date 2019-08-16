@@ -31,7 +31,7 @@ class Form < ApplicationRecord
   after_create :set_event_status
 
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
-    attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank?
+    attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank? && attributes['file'].blank?
   }
 
   private
