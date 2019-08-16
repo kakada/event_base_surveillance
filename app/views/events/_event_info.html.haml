@@ -10,7 +10,7 @@
     %span.value= @event.description
   %li
     %span.type Adress:
-    %span.value= @event.address
+    %span.value= @event.location
   %li
     %span.type Event Date:
     %span.value= @event.event_date
@@ -24,7 +24,5 @@
       %span.value
         - if field_value.field_type == 'file'
           = link_to field_value.file_url.split('/').last, download_events_path(file: field_value.file_url), target: "_blank", style:'color: #007bff'
-
         - else
           = field_value.value || field_value.values
-

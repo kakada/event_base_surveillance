@@ -1,29 +1,29 @@
 .form-group
-  %label.form-control-label Location
-  = f.input :location, as: :hidden, input_html: {class: 'location'}
+  %label.form-control-label.required
+    Location
+    %abbr{title: "required"}*
 
-  = f.fields_for :properties, OpenStruct.new(f.object.properties) do |ff|
-    .locations
-      #province.form-group.row
-        = ff.label(:province_id, class: 'col-sm-3 col-form-label')
-        = ff.hidden_field(:province_id)
-        .col-sm-9
-          = ff.select(:province_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_target => "district", :pumi_select_collection_url => pumi.provinces_path, :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: 'select-location form-control'})
+.locations
+  #province.form-group.row
+    = f.label(:province_id, class: 'col-sm-3 col-form-label')
+    = f.hidden_field(:province_id)
+    .col-sm-9
+      = f.select(:province_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_target => "district", :pumi_select_collection_url => pumi.provinces_path, :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: 'select-location form-control'})
 
-      #district.form-group.row
-        = ff.label(:district_id, class: 'col-sm-3 col-form-label')
-        = ff.hidden_field(:district_id)
-        .col-sm-9
-          = ff.select(:district_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'select-location form-control'})
+  #district.form-group.row
+    = f.label(:district_id, class: 'col-sm-3 col-form-label')
+    = f.hidden_field(:district_id)
+    .col-sm-9
+      = f.select(:district_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'select-location form-control'})
 
-      #commune.form-group.row
-        = ff.label(:commune_id, class: 'col-sm-3 col-form-label')
-        = ff.hidden_field(:commune_id)
-        .col-sm-9
-          = ff.select(:commune_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'select-location form-control'})
+  #commune.form-group.row
+    = f.label(:commune_id, class: 'col-sm-3 col-form-label')
+    = f.hidden_field(:commune_id)
+    .col-sm-9
+      = f.select(:commune_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'select-location form-control'})
 
-      #village.form-group.row
-        = ff.label(:village_id, class: 'col-sm-3 col-form-label')
-        = ff.hidden_field(:village_id)
-        .col-sm-9
-          = ff.select(:village_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "village", :pumi_select_collection_url => pumi.villages_path(:commune_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#village", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'select-location form-control'})
+  #village.form-group.row
+    = f.label(:village_id, class: 'col-sm-3 col-form-label')
+    = f.hidden_field(:village_id)
+    .col-sm-9
+      = f.select(:village_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "village", :pumi_select_collection_url => pumi.villages_path(:commune_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#village", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'select-location form-control'})

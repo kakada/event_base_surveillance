@@ -10,6 +10,7 @@
 #  values         :text             is an Array
 #  properties     :text
 #  image          :string
+#  file           :string
 #  valueable_type :string
 #  valueable_id   :bigint
 #  created_at     :datetime         not null

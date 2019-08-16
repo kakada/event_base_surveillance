@@ -13,7 +13,6 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string  :district_id
       t.string  :commune_id
       t.string  :village_id
-      t.text    :properties
       t.date    :event_date
       t.date    :report_date
       t.string  :status

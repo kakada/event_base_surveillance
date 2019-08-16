@@ -17,7 +17,6 @@
 #  district_id   :string
 #  commune_id    :string
 #  village_id    :string
-#  properties    :text
 #  event_date    :date
 #  report_date   :date
 #  status        :string
@@ -32,8 +31,6 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   has_many   :forms, dependent: :destroy
   has_many   :field_values, as: :valueable
-
-  serialize :properties, Hash
 
   # History
   has_associated_audits
@@ -54,22 +51,18 @@ class Event < ApplicationRecord
     attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank? && attributes['file'].blank?
   }
 
-  def address
-    addresses.map(&:name_km).join(' > ')
-  end
-
   private
 
   def addresses
-    province = Pumi::Province.find_by_id(properties[:province_id]) if properties[:province_id].present?
-    district = Pumi::District.find_by_id(properties[:district_id]) if province && properties[:district_id].present?
-    commune  = Pumi::Commune.find_by_id(properties[:commune_id]) if district && properties[:commune_id].present?
-    village  = Pumi::Village.find_by_id(properties[:village_id]) if commune && properties[:village_id].present?
+    province = Pumi::Province.find_by_id(province_id) if province_id.present?
+    district = Pumi::District.find_by_id(district_id) if province && district_id.present?
+    commune  = Pumi::Commune.find_by_id(commune_id) if district && commune_id.present?
+    village  = Pumi::Village.find_by_id(village_id) if commune && village_id.present?
     [province, district, commune, village].reject(&:blank?)
   end
 
   def set_location
-    self.location = addresses.map(&:name_en).join(',')
+    self.location = addresses.map(&:name_km).join(',')
   end
 
   def set_program_id
