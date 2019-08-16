@@ -30,8 +30,9 @@ class FieldValue < ApplicationRecord
   delegate :name, to: :field, prefix: :field, allow_nil: true
 
   # Validation
-  before_validation :set_location_value
-  after_save :handle_mapping_field
+  before_validation :set_location_value, if: -> { field_type == 'location' }
+  before_validation :cleanup_values
+  after_save :handle_mapping_field, if: -> { field.field_type == 'mapping_field' }
 
   # History
   audited associated_with: :valueable
@@ -39,8 +40,6 @@ class FieldValue < ApplicationRecord
   private
 
   def set_location_value
-    return if field_type != 'location'
-
     province = Pumi::Province.find_by_id(properties[:province_id]) if properties[:province_id].present?
     district = Pumi::District.find_by_id(properties[:district_id]) if province && properties[:district_id].present?
     commune  = Pumi::Commune.find_by_id(properties[:commune_id]) if district && properties[:commune_id].present?
@@ -50,10 +49,14 @@ class FieldValue < ApplicationRecord
   end
 
   def handle_mapping_field
-    return unless field.field_type == 'mapping_field'
-
     valueable.event[field.mapping_field] = value
     valueable.event.risk_color = field.field_options.find_by(value: value).color
     valueable.event.save
+  end
+
+  def cleanup_values
+    return if values.blank?
+
+    self.values = values.reject(&:blank?)
   end
 end

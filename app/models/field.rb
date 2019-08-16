@@ -25,8 +25,18 @@ class Field < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: %i[fieldable_id fieldable_type], message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
+  before_validation :set_mapping_field_type
 
   default_scope { order(display_order: :asc) }
 
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+
+  private
+
+  def set_mapping_field_type
+    return unless field_type == 'mapping_field'
+
+    event_mapping_field = EventType::MAPPING_FIELDS.find { |obj| obj[:name] == mapping_field }
+    self.mapping_field_type = event_mapping_field.present? && event_mapping_field[:field_type]
+  end
 end

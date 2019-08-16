@@ -51,7 +51,7 @@ gem 'carrierwave',    '>= 2.0.0.rc', '< 3.0'
 gem 'pundit',         '~> 2.0.1'
 gem 'audited',        '~> 4.9'
 gem 'jquery-minicolors-rails',    '~> 2.2.6.1'
-
+gem 'strip_attributes',           '~> 1.9.0'
 gem 'pumi', github: 'dwilkie/pumi', require: 'pumi/rails'
 
 group :development, :test do

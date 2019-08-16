@@ -50,9 +50,10 @@ module EventTypes
       params.require(:form_type).permit(
         :name,
         fields_attributes: [
-          :id, :name, :field_type, :required, :display_order, :predefined, :_destroy,
+          :id, :name, :field_type, :required, :display_order,
+          :mapping_field, :mapping_field_type, :predefined, :_destroy,
           field_options_attributes: %i[
-            id name value _destroy
+            id name value color _destroy
           ]
         ]
       )

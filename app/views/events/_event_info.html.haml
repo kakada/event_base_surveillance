@@ -6,8 +6,11 @@
     %span.type Value:
     %span.value= @event.value
   %li
+    %span.type Risk Level:
+    %span.value= @event.risk_level || '-'
+  %li
     %span.type Description:
-    %span.value= @event.description
+    %span.value= @event.description || '-'
   %li
     %span.type Adress:
     %span.value= @event.location
