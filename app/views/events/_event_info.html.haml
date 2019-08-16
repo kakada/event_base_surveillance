@@ -7,7 +7,13 @@
     %span.value= @event.value
   %li
     %span.type Risk Level:
-    %span.value= @event.risk_level || '-'
+    %span.value
+      - style = @event.risk_level.present? ? "background-color: #{@event.risk_color}; color: #fff" : ''
+      %span.badge{style: style}
+        = @event.risk_level || '-'
+  %li
+    %span.type Status:
+    %span.value= @event.status || '-'
   %li
     %span.type Description:
     %span.value= @event.description || '-'
