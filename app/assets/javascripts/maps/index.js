@@ -10,6 +10,8 @@ EBS.MapsIndex = (() => {
   return publicApi;
 
   function init() {
+    _filterLocation();
+
     if (eventData.length) {
       _renderMap();
     }
@@ -18,9 +20,6 @@ EBS.MapsIndex = (() => {
 
   function _renderMap() {
     map = new L.Map('map');
-
-    // map.setView(new L.LatLng(11.5564, 104.9282), 7);
-
     _renderMarker();
     _renderLegend();
     _renderOSM();
@@ -42,7 +41,7 @@ EBS.MapsIndex = (() => {
     eventData.sort((a, b) => (a.lat > b.lat) ? 1 : -1);
 
     eventData.forEach( (data) => {
-      variant += 0.003;
+      variant += 0.001;
 
       if (latCursor != data.lat) {
         latCursor = data.lat;
@@ -63,12 +62,12 @@ EBS.MapsIndex = (() => {
 
       markers.push(latlng);
 
-      marker.bindPopup(`Event count: ${data.count}<br>Event type: ${data.event_type}`);
+      marker.bindPopup(`Event count: ${data.count}<br>Event type: ${data.event_type}<br>geopoint: ${data.lat},${data.lng}`);
     });
 
     const locationCount = [...new Set(eventData.map(x => x.lat))].length;
     if (locationCount == 1) {
-      map.setView(new L.LatLng(markers[0][0], markers[0][1]), 12);
+      map.setView(new L.LatLng(markers[0][0], markers[0][1]), 13);
     } else {
       map.fitBounds(markers);
     }
@@ -94,8 +93,8 @@ EBS.MapsIndex = (() => {
     const result = [];
     const mapLegend = new Map();
     for (const item of eventData) {
-      if(!mapLegend.has(item.event_type)){
-        mapLegend.set(item.event_type, true);
+      if(!mapLegend.has(item.event_id)){
+        mapLegend.set(item.event_id, true);
         result.push({
           name: item.event_type,
           color: item.color
@@ -126,5 +125,34 @@ EBS.MapsIndex = (() => {
     }, cb);
 
     cb(start, end);
+  }
+
+  function _filterLocation() {
+    $('#filter-location-input').on('click', () => {
+      $("#filter-location").show();
+    });
+
+    $('#location-action').on('click', function() {
+      $("#filter-location").hide();
+    });
+
+    _renderSelectedValue();
+  }
+
+  function _showLocationFilter() {
+    $("#filter-location").addClass("show");
+  }
+
+  function _renderSelectedValue() {
+    $('.select-location').change( () => {
+      let text = '';
+      $('.select-location option:selected').toArray().forEach( (item, index) => {
+        if (item.value) {
+          text += `${item.text} `;
+        }
+      });
+
+      $('#filter-location-input').val(text);
+    });
   }
 })();

@@ -64,7 +64,8 @@ class Event < ApplicationRecord
     district = Pumi::District.find_by_id(district_id) if province && district_id.present?
     commune  = Pumi::Commune.find_by_id(commune_id) if district && commune_id.present?
     village  = Pumi::Village.find_by_id(village_id) if commune && village_id.present?
-    [province, district, commune, village].reverse.reject(&:blank?)
+
+    [village, commune, district, province].reject(&:blank?)
   end
 
   def set_location

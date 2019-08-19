@@ -2,17 +2,20 @@ class MapsController < ApplicationController
   before_action :set_date_range
   def index
     events = Event.where(options).group(:latitude, :longitude, :event_type_id).count
+    @event_types = EventType.where(program_option)
     @event_data = get_event_data(events)
-    @event_types = EventType.select(:id, :name).where(program_option)
     @event_type_id = params[:event_type]
     @programs = Program.select(:id, :name).order(name: :asc) if current_user.system_admin?
+    @provinces = Location.where(kind: 'province')
   end
 
   private
   def get_event_data(events)
     event_data = []
+
     events.each do |data, value|
-      event_type = EventType.find(data[2])
+      event_type = @event_types.find { |t| t.id == data[2] }
+      # event_type = EventType.find(data[2])
 
       data = {
         event_id: event_type.id,
@@ -32,6 +35,10 @@ class MapsController < ApplicationController
     option = {}
     option.merge!({ event_type_id: params[:event_type]}) if params[:event_type].present?
     option.merge!({ event_date: @start_date..@end_date })
+    option.merge!({ province_id: params[:province_id] }) if params[:province_id].present?
+    option.merge!({ district_id: params[:district_id] }) if params[:district_id].present?
+    option.merge!({ commune_id: params[:commune_id] }) if params[:commune_id].present?
+    option.merge!({ village_id: params[:village_id] }) if params[:village_id].present?
     option.merge! program_option
   end
 

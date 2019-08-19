@@ -37,4 +37,24 @@
       opacity: 0.7;
     }
   }
+
+  .location-group {
+    position: relative;
+  }
+
+  #filter-location {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    top: 31px;
+    left: 60px;
+    width: 270px;
+    padding: 10px;
+  }
+
+  .show {display: block;}
 }

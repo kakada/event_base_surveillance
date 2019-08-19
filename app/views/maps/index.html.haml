@@ -2,8 +2,10 @@
   %form.form-inline{ method: :get }
     - if current_user.system_admin?
       .form-group.mb-2
-        %label{ for: :event_type } Program:&nbsp;
+        %label{ for: :program_id } Program:&nbsp;
         = select_tag :program_id, options_from_collection_for_select(@programs, 'id', 'name', params[:program_id]), include_blank: "All"
+
+    = render 'location'
 
     .form-group.mb-2
       %label{ for: :event_type } Event Type:&nbsp;
