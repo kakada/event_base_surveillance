@@ -11,12 +11,16 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
+          %th Name
+          %th Creation date
           %th Ip address
-          %th Access Token
+          %th Key
           %th
       %tbody
         - @api_keys.each do |api_key|
           %tr
+            %td= api_key.name
+            %td= l(api_key.created_at, format: :long)
             %td= api_key.ip_address
             %td= api_key.access_token
             %td

@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
   enable_extension "plpgsql"
 
   create_table "api_keys", force: :cascade do |t|
+    t.string "name"
     t.string "access_token"
     t.string "ip_address"
     t.datetime "created_at", null: false

@@ -40,6 +40,6 @@ class ApiKeysController < ApplicationController
   private
 
   def api_key_params
-    params.require(:api_key).permit(:ip_address)
+    params.require(:api_key).permit(:ip_address, :name, :access_token)
   end
 end
