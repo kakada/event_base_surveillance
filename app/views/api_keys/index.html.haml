@@ -1,0 +1,25 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 API Keys
+      = link_to new_api_key_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus
+
+  / = render partial: "shared/no_data", locals: { items: @api_keys }
+
+  - if @api_keys.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Ip address
+          %th Access Token
+          %th
+      %tbody
+        - @api_keys.each do |api_key|
+          %tr
+            %td= api_key.ip_address
+            %td= api_key.access_token
+            %td
+              = link_to 'Edit', edit_api_key_path(api_key), class: 'badge badge-info'
+              = "/"
+              = link_to 'Delete', api_key_path(api_key), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this key?'}

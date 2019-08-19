@@ -54,3 +54,4 @@ build-iPhoneSimulator/
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+public/uploads

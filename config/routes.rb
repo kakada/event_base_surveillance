@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   resources :users
   resources :events
 
+  resources :api_keys
+
   mount Sidekiq::Web => '/sidekiq'
 end

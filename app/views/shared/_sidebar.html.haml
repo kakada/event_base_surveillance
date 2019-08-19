@@ -25,6 +25,11 @@
         %i.fas.fa-info-circle
         About
 
+    %li{class: getCssActiveClass('api_keys') }
+      %a{:href => api_keys_path}
+        %i.fas API
+        APIs & Services
+
     %li
       = link_to destroy_user_session_path, method: :delete do
         %i.fas.fa-key
