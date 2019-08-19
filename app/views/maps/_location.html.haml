@@ -1,12 +1,14 @@
-.form-group.mb-2.location-group
-  %label.form-control-label Location
-  %input#filter-location-input.location{ autocomplete: 'off'}
+.form-group.mb-2.location-group.mx-sm-2
+  %label.form-control-label Location:
+  %input#filter-location-input.form-control.location{ autocomplete: 'off'}
 
   #filter-location
     #province.form-group
       %label.col-form-label{ for: :province_id }Province
       %select.select-location.form-control{ name: :province_id, :data => {pumi_select_target: "district", pumi_select_collection_url: pumi.provinces_path, pumi_select_collection_label_method: "name_en", pumi_select_collection_value_method: "id", pumi_select_populate_on_load: true} }
         %option{ value: '' }Please select
+
+      -# = select_tag :province_id, options_from_collection_for_select(@provinces, 'id', 'name_en', params[:province_id]), include_blank: "Please select", class: 'form-control select-location', :data => {pumi_select_target: "district", pumi_select_collection_url: pumi.provinces_path, pumi_select_collection_label_method: "name_en", pumi_select_collection_value_method: "id", pumi_select_populate_on_load: true}
 
     #district.form-group
       %label.col-form-label{ for: :district_id }District
@@ -23,4 +25,4 @@
       %select.select-location.form-control{ name: :village_id, :data => {:pumi_select_id => "village", :pumi_select_collection_url => pumi.villages_path(:commune_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#village", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}}
         %option{ value: '' }Please select
 
-    %button#location-action.btn.btn-primary.btn-sm.float-right Close
+    %button#location-action.btn.btn-primary.btn-sm.float-right{ type: :button } Close

@@ -7,6 +7,7 @@ class MapsController < ApplicationController
     @event_type_id = params[:event_type]
     @programs = Program.select(:id, :name).order(name: :asc) if current_user.system_admin?
     @provinces = Location.where(kind: 'province')
+    set_location
   end
 
   private
@@ -55,5 +56,14 @@ class MapsController < ApplicationController
   def program_option
     program_id = current_user.program_id || params[:program_id]
     if program_id.present? then { program_id: program_id } else {} end
+  end
+
+  def set_location
+    province = Location.find(params[:province_id]) if params[:province_id].present?
+    @districts = province.children if province.present?
+    district = Location.find(params[:district_id]) if params[:district_id].present?
+    @communes = district.children if district.present?
+    commune = Location.find(params[:commune_id]) if params[:commune_id].present?
+    @villages = commune.children if commune.present?
   end
 end

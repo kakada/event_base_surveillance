@@ -1,7 +1,5 @@
 EBS.MapsIndex = (() => {
   let map;
-  const start = moment().subtract(29, 'days');
-  const end = moment();
 
   const publicApi = {
     init: init
@@ -10,12 +8,15 @@ EBS.MapsIndex = (() => {
   return publicApi;
 
   function init() {
+    const start = moment(new Date(startDate));
+    const end = moment(new Date(endDate));
+
     _filterLocation();
 
     if (eventData.length) {
       _renderMap();
     }
-    _renderDateFilter();
+    _renderDateFilter(start, end);
   }
 
   function _renderMap() {
@@ -106,14 +107,16 @@ EBS.MapsIndex = (() => {
   }
 
   function cb(start, end) {
+    const value = start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY');
     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+    $('#reportrange-input').val(`${moment(start).format('MM/DD/Y')} - ${moment(end).format('MM/DD/Y')}`);
   }
 
-  function _renderDateFilter() {
-
+  function _renderDateFilter(start, end) {
     $('#reportrange').daterangepicker({
-      startDate: startDate,
-      endDate: endDate,
+      startDate: start,
+      endDate: end,
       ranges: {
           'Today': [moment(), moment()],
           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -128,7 +131,7 @@ EBS.MapsIndex = (() => {
   }
 
   function _filterLocation() {
-    $('#filter-location-input').on('click', () => {
+    $('#filter-location-input').click((event) => {
       $("#filter-location").show();
     });
 
@@ -146,7 +149,7 @@ EBS.MapsIndex = (() => {
   function _renderSelectedValue() {
     $('.select-location').change( () => {
       let text = '';
-      $('.select-location option:selected').toArray().forEach( (item, index) => {
+      $('.select-location option:selected').toArray().forEach( (item) => {
         if (item.value) {
           text += `${item.text} `;
         }
