@@ -11,6 +11,7 @@ require 'webdrivers'
 require 'webdrivers/chromedriver'
 require 'capybara/rspec'
 require 'database_cleaner'
+require 'support/factory_bot'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
