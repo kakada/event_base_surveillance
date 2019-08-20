@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
     t.string "ip_address"
     t.boolean "active", default: true
     t.string "permissions", array: true
+    t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

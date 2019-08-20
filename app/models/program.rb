@@ -11,6 +11,7 @@
 #
 
 class Program < ApplicationRecord
-  has_many :users
+  has_many  :users
+  has_many  :api_keys
   validates :name, presence: true
 end

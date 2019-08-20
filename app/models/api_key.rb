@@ -16,6 +16,7 @@
 
 class ApiKey < ApplicationRecord
   PERMISSIONS = %w[read write].freeze
+  belongs_to :program
 
   validates :name, presence: true
   validates :ip_address, presence: true

@@ -6,6 +6,7 @@ class CreateApiKeys < ActiveRecord::Migration[5.2]
       t.string  :ip_address
       t.boolean :active, default: true
       t.string  :permissions, array: true
+      t.integer :program_id
 
       t.timestamps
     end

@@ -4,5 +4,6 @@ FactoryBot.define do
     ip_address  { FFaker::Internet.ip_v4_address }
     permissions { ['read', 'write'] }
     active      { true }
+    program
   end
 end
