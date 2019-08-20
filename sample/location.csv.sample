@@ -1,0 +1,5 @@
+code,name_en,name_km,kind,parent_id,latitude,longitude
+01,Banteay Meanchey,បន្ទាយមានជ័យ,province,,,
+0102,Mongkol Borei,មង្គលបូរី,district,01,,
+010201,Banteay Neang,បន្ទាយនាង,commune,0102,,
+01020101,Ou Thum,អូរធំ,village,010201,13.5157174,103.0354764

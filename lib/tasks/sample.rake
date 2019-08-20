@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-namespace :db do
-  desc 'prepare to run the test'
-  task prepare_for_test: :environment do
+namespace :sample do
+  desc 'generate sample event'
+  task events: :environment do
     creator_id = 2
     user = User.find creator_id
     event_types = EventType.where(program_id: user.program_id).collect(&:id)
