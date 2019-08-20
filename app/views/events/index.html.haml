@@ -43,4 +43,8 @@
                 = "/"
                 = link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}
 
+  - if @pagy.pages > 1
+    .pagy-wrapper
+      != pagy_bootstrap_nav(@pagy)
+
 = render 'event_types_modal'
