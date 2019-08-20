@@ -2,7 +2,7 @@
   = simple_form_for @api_key do |f|
     = f.input :name
     = f.input :ip_address
-    = f.input :permissions, collection: ApiKey::PERMISSIONS, input_html: {"data-live-search" => "true", :multiple => "multiple", class: ['form-control selectpicker']}
+    = f.input :permissions, collection: ApiKey::PERMISSIONS, input_html: {:multiple => "multiple", class: 'selectpicker'}
 
     - if token = @api_key.access_token.presence
       .form-row
@@ -19,4 +19,3 @@
 
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', api_keys_path, class: 'btn btn-secondary'
-

@@ -37,12 +37,12 @@
           %i.fas.fa-calendar-alt
           = t('sidebar.events')
 
-    %li{class: get_css_active_class('abouts') }
-      %a{:href => "#"}
-        %i.fas.fa-info-circle
-        = t('sidebar.about')
+    / %li{class: get_css_active_class('abouts') }
+    /   %a{:href => "#"}
+    /     %i.fas.fa-info-circle
+    /     = t('sidebar.about')
 
-    %li{class: getCssActiveClass('api_keys') }
+    %li{class: get_css_active_class('api_keys') }
       %a{:href => api_keys_path}
         %i.fas API
         APIs & Services

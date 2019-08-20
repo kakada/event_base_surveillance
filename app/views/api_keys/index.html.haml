@@ -5,7 +5,7 @@
       = link_to new_api_key_path, class: 'btn btn-primary' do
         %i.fas.fa-plus
 
-  / = render partial: "shared/no_data", locals: { items: @api_keys }
+  = render partial: "shared/no_data", locals: { items: @api_keys }
 
   - if @api_keys.present?
     %table.table.table-hover.medium-width

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApiKeysController < ApplicationController
   def index
     @api_keys = ApiKey.all

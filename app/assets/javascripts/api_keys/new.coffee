@@ -1,11 +1,10 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
-
-document.addEventListener 'turbolinks:load', ->
+EBS.Api_keysNew = do ->
   init = ->
+    initSelectPicker()
     onClickBtnRegenerateToken()
+
+  initSelectPicker = ->
+    $('.selectpicker').selectpicker();
 
   hex = (n) ->
     n = n or 16
@@ -21,4 +20,8 @@ document.addEventListener 'turbolinks:load', ->
       $('.access-token-view').html(key)
       $('.access-token').val(key)
 
-  init()
+  { init: init }
+
+EBS.Api_keysCreate = EBS.Api_keysNew
+EBS.Api_keysEdit = EBS.Api_keysNew
+EBS.Api_keysUpdate = EBS.Api_keysNew

@@ -38,6 +38,7 @@
 //= require events/new
 //= require event_types/new
 //= require users/new
+//= require api_keys/new
 
 
 document.addEventListener('turbolinks:load', function() {
