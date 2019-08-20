@@ -2,6 +2,7 @@
   = simple_form_for @api_key do |f|
     = f.input :name
     = f.input :ip_address
+    = f.input :permissions, collection: ApiKey::PERMISSIONS, input_html: {"data-live-search" => "true", :multiple => "multiple", class: ['form-control selectpicker']}
 
     - if token = @api_key.access_token.presence
       .form-row

@@ -37,9 +37,25 @@ class ApiKeysController < ApplicationController
     redirect_to api_keys_url
   end
 
+  def deactivate
+    @api_key = ApiKey.find(params[:id])
+    @api_key.update_attributes(active: false)
+
+    flash[:notice] = 'set shared successfully'
+    redirect_to api_keys_url
+  end
+
+  def activate
+    @api_key = ApiKey.find(params[:id])
+    @api_key.update_attributes(active: true)
+
+    flash[:notice] = 'set shared successfully'
+    redirect_to api_keys_url
+  end
+
   private
 
   def api_key_params
-    params.require(:api_key).permit(:ip_address, :name, :access_token)
+    params.require(:api_key).permit(:ip_address, :name, :access_token, permissions: [])
   end
 end

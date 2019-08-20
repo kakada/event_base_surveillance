@@ -15,6 +15,8 @@
           %th Creation date
           %th Ip address
           %th Key
+          %th Permissions
+          %th Status
           %th
       %tbody
         - @api_keys.each do |api_key|
@@ -23,7 +25,25 @@
             %td= l(api_key.created_at, format: :long)
             %td= api_key.ip_address
             %td= api_key.access_token
+            %td= api_key.permissions.join(', ')
+            %td= api_key.active? ? 'Active' : 'Inactive'
             %td
               = link_to 'Edit', edit_api_key_path(api_key), class: 'badge badge-info'
               = "/"
-              = link_to 'Delete', api_key_path(api_key), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this key?'}
+              .btn-group
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
+
+                .dropdown-menu.dropdown-menu-right
+                  - unless api_key.active?
+                    = link_to activate_api_key_path(api_key), class: "btn dropdown-item" do
+                      %i.fas.fa-check.drop-menu-icon
+                      %span Activate
+                  - if api_key.active?
+                    = link_to deactivate_api_key_path(api_key), class: "btn dropdown-item" do
+                      %i.fas.fa-ban.drop-menu-icon
+                      %span Deactivate
+
+                  = link_to api_key_path(api_key), method: :delete, class: 'btn dropdown-item', :data => {confirm: 'Are you sure to delete this key?'} do
+                    %i.fas.fa-trash-alt.drop-menu-icon
+                    %span Delete

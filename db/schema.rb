@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
     t.string "name"
     t.string "access_token"
     t.string "ip_address"
+    t.boolean "active", default: true
+    t.string "permissions", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

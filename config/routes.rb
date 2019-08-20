@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   resources :users
   resources :events
 
-  resources :api_keys
+  resources :api_keys do
+    get :activate, on: :member
+    get :deactivate, on: :member
+  end
 
   mount Sidekiq::Web => '/sidekiq'
 end
