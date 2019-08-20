@@ -14,6 +14,7 @@ EBS.Event_typesForm_typesNew = do ->
 
   initView = ->
     $('input.field-type').each (index, dom) ->
+      return unless dom.value
       initBtnMove(dom)
       initFieldNameStyleAsTitle(dom)
       initCollapseContent(dom)

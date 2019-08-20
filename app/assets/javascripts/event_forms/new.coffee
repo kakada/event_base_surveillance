@@ -1,10 +1,5 @@
 EBS.EventsFormsNew = do ->
   init = ->
-    # onChangeProvince()
-    # onChangeDistrict()
-    # onChangeCommune()
-    # onChangeVillage()
-
     initSelectPicker()
     onChangeImage()
     onClickRemoveImage()
@@ -29,31 +24,6 @@ EBS.EventsFormsNew = do ->
       parent = $(this).parent()
       parent.find('input.destroy[type=hidden]').val(0)
       return
-
-  # onChangeProvince = ->
-  #   $('#province .select-location').on 'change', (event)->
-  #     setLocationValue(event)
-  #     true
-
-  # onChangeDistrict = ->
-  #   $('#district .select-location').on 'change', (event)->
-  #     setLocationValue(event)
-  #     true
-
-  # onChangeCommune = ->
-  #   $('#commune .select-location').on 'change', (event)->
-  #     $('event[properties][village_id]').val('')
-  #     setLocationValue(event)
-  #     true
-
-  # onChangeVillage = ->
-  #   $('#village .select-location').on 'change', (event)->
-  #     setLocationValue(event)
-  #     true
-
-  # setLocationValue = (event) ->
-  #   console.log('event===', event.target.value)
-  #   $('.location').val(event.target.value)
 
   initSelectPicker = ->
     $('.selectpicker').selectpicker();
