@@ -1,0 +1,37 @@
+%ul.list.flex1
+  %li
+    %span.type Event Type:
+    %span.value= @event.event_type_name
+  %li
+    %span.type Value:
+    %span.value= @event.value
+  %li
+    %span.type Risk Level:
+    %span.value
+      - style = @event.risk_level.present? ? "background-color: #{@event.risk_color}; color: #fff" : ''
+      %span.badge{style: style}
+        = @event.risk_level || '-'
+  %li
+    %span.type Status:
+    %span.value= @event.status || 'New'
+  %li
+    %span.type Description:
+    %span.value= @event.description || '-'
+  %li
+    %span.type Location:
+    %span.value= @event.location
+  %li
+    %span.type Event Date:
+    %span.value= @event.event_date
+  %li
+    %span.type Report Date:
+    %span.value= @event.report_date || '-'
+
+  - @event.field_values.each do |field_value|
+    %li
+      %span.type= field_value.field_name
+      %span.value
+        - if field_value.field_type == 'file'
+          = link_to field_value.file_url.split('/').last, download_events_path(file: field_value.file_url), target: "_blank", style:'color: #007bff'
+        - else
+          = field_value.value || field_value.values

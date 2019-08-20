@@ -47,6 +47,13 @@ gem 'haml-rails',     '~> 2.0'
 gem 'jquery-rails',   '~> 4.3.5'
 gem 'bootstrap',      '~> 4.3.1'
 gem 'simple_form',    '~> 4.1.0'
+gem 'carrierwave',    '>= 2.0.0.rc', '< 3.0'
+gem 'pundit',         '~> 2.0.1'
+gem 'audited',        '~> 4.9'
+gem 'pagy',           '~> 3.4.1'
+gem 'jquery-minicolors-rails',    '~> 2.2.6.1'
+gem 'strip_attributes',           '~> 1.9.0'
+gem 'pumi', github: 'dwilkie/pumi', require: 'pumi/rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -56,7 +63,6 @@ group :development, :test do
   gem 'ffaker', '~> 2.9.0'
 end
 
-
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -64,6 +70,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'annotate'
+  gem 'rubocop', '~> 0.74.0', require: false
 end
 
 group :test do

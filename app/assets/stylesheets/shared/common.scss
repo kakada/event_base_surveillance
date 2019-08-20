@@ -1,0 +1,31 @@
+.notify-message {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+}
+
+.medium-width {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.view-center {
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.drop-menu-icon {
+  width: 30px;
+}
+
+.pagy-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+}

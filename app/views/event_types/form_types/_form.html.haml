@@ -1,0 +1,17 @@
+.form-group
+  = f.label :name
+  = f.text_field :name, class: 'form-control'
+
+= render 'event_types/mock_predefined_fields', predefined_fields: [{type: 'date', value: 'Conducted_at'}]
+
+%fieldset
+  %legend Additional Fields
+  %ol.fields
+    = f.fields_for :fields do |builder|
+      = render 'event_types/shared/field_fields', f: builder
+
+    = link_to_add_fields "+ Add Field", f, :fields
+
+  .actions{style: 'margin-top: 20px'}
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', event_type_form_types_path(@event_type), class: 'btn btn-secondary'

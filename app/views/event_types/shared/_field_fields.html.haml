@@ -1,0 +1,39 @@
+%li
+  %fieldset.fieldset
+    .field-wrapper
+      %button.btn.move{type: :button}
+        %i.fa.fa-arrows-alt
+
+      .wrapper
+        %button.btn.collapse-trigger{type: :button}
+          %i.fas.fa-caret-right
+
+        .flex1
+          = f.hidden_field :field_type, class: 'field-type'
+          = f.text_field :name, placeholder: "field_name", class: 'form-control field-name'
+
+        .form-check
+          / = f.check_box :required, { class: 'form-check-input field-required' }
+          / = f.label :required, class: 'form-check-label required-label'
+          = f.hidden_field :display_order, class: 'display-order'
+
+        %button.btn.btn-outline-primary.btn-add-field{type: 'button'} +Add Field
+
+      = f.hidden_field :_destroy
+      = link_to '#', class: "remove_fields btn-remove-field" do
+        %i.fa.fa-times-circle
+
+    = render 'event_types/shared/field_types'
+
+    .collapse-content
+      .mapping-field-wrapper
+        %label Mapping to
+        .wrapper
+          = f.select :mapping_field, options_for_select( EventType::MAPPING_FIELDS.map{ |c| [c[:name].titlecase, c[:name], {'data-field_type'=>c[:field_type]}] }), {prompt: 'Select event type field'}, class: 'form-control mapping-field'
+
+          = f.text_field :mapping_field_type, placeholder: "field type", class: 'form-control mapping-field-type', disabled: true
+
+      .options-wrapper
+        = f.fields_for :field_options do |builder|
+          = render 'event_types/shared/field_option_fields', f: builder
+        = link_to_add_fields "+ Add Option", f, :field_options

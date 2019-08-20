@@ -1,0 +1,62 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: field_values
+#
+#  id             :bigint           not null, primary key
+#  field_id       :integer
+#  value          :string
+#  values         :text             is an Array
+#  properties     :text
+#  image          :string
+#  file           :string
+#  valueable_type :string
+#  valueable_id   :bigint
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+class FieldValue < ApplicationRecord
+  mount_uploader :image, ImageUploader
+  mount_uploader :file, FileUploader
+
+  belongs_to :field
+  belongs_to :valueable, polymorphic: true
+
+  serialize :properties, Hash
+
+  delegate :field_type, :name, to: :field, allow_nil: true
+  delegate :name, to: :field, prefix: :field, allow_nil: true
+
+  # Validation
+  before_validation :set_location_value, if: -> { field_type == 'location' }
+  before_validation :cleanup_values
+  after_save :handle_mapping_field, if: -> { field.field_type == 'mapping_field' }
+
+  # History
+  audited associated_with: :valueable
+
+  private
+
+  def set_location_value
+    province = Pumi::Province.find_by_id(properties[:province_id]) if properties[:province_id].present?
+    district = Pumi::District.find_by_id(properties[:district_id]) if province && properties[:district_id].present?
+    commune  = Pumi::Commune.find_by_id(properties[:commune_id]) if district && properties[:commune_id].present?
+    village  = Pumi::Village.find_by_id(properties[:village_id]) if commune && properties[:village_id].present?
+
+    self.value = [province, district, commune, village].reverse.reject(&:blank?).map(&:name_km).join(',')
+  end
+
+  def handle_mapping_field
+    valueable.event[field.mapping_field] = value
+    valueable.event.risk_color = field.field_options.find_by(value: value).color
+    valueable.event.save
+  end
+
+  def cleanup_values
+    return if values.blank?
+
+    self.values = values.reject(&:blank?)
+  end
+end

@@ -1,0 +1,160 @@
+.fieldsets {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.fieldset {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.field-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .wrapper {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    align-items: baseline;
+    border-left: 1px solid #ccc;
+  }
+
+  .btn-remove-field {
+    position: absolute;
+    right: 4px;
+    top: 0px;
+
+    i {
+      color: #dc3545;
+    }
+  }
+
+  .btn-remove-option {
+    i {
+      color: #dc3545;
+    }
+  }
+
+  .w-35 {
+    width: 35%;
+    margin-right: 10px;
+    position: relative;
+  }
+
+  .field_with_errors input {
+    border-color: #dc3545;
+  }
+
+  .btn-add-field {
+    margin: 0 20px 0 10px;
+  }
+
+  .icon {
+    width: 28px;
+    display: inline-block;
+  }
+
+  .move, .collapse-trigger {
+    display: none;
+    color: #8a8ea3;
+    box-shadow: none;
+  }
+
+  .move {
+    cursor: move;
+  }
+
+  .collapse-trigger {
+    width: 24px;
+    margin-left: -10px;
+    position: absolute;
+  }
+
+  .no-style {
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .as-title {
+    color: #8a8ea3;
+    font-weight: normal;
+    padding-left: 14px;
+
+    &:focus {
+      color: #495057;
+      font-weight: bold;
+    }
+  }
+
+  button {
+    box-shadow: none;
+  }
+}
+
+.field-type-wrapper {
+  border-top: 1px solid #3fa2ee;
+  padding: 0 20px;
+  position: relative;
+
+  display: none;
+
+  .field-type-list {
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+
+    &:hover {
+      border-color: #3fa2ee;
+      color: #3fa2ee;
+    }
+
+    .icon {
+      width: 50px;
+      display: inline-block;
+      font-size: 16px;
+    }
+  }
+}
+
+.options-wrapper.visible-color .field-option-color-wrapper{
+  display: block;
+}
+
+.options-wrapper, .mapping-field-wrapper {
+  border-top: 1px solid #ccc;
+  display: none;
+  padding: 10px;
+}
+
+.mapping-field-wrapper {
+  .mapping-field-type {
+    margin-left: 10px;
+  }
+}
+
+.field-option-color-wrapper {
+  align-items: center;
+  display: none;
+
+  label {
+    margin: 0 10px 0 20px;
+  }
+}
+
+.disabled-select-layer {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  border-radius: 3px;
+  height: 100%;
+  display: none;
+}

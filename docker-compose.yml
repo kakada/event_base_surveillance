@@ -23,13 +23,14 @@ services:
     tmpfs: /app/tmp
     ports:
       - "3000:3000"
-    depends_on:
-      - db
     env_file: .env
     tty: true
     stdin_open: true
+
   sidekiq:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     volumes:
       - .:/app
     depends_on:

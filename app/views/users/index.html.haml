@@ -1,31 +1,28 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Users
+      = link_to new_user_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3 Users
-        = link_to new_user_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+  = render partial: "shared/no_data", locals: { items: @users }
 
-    - if @users.blank?
-      .text-center
-        %h2 No data found
-        %p Please use (+) button to add items!
-
-    - if @users.present?
-      %table.table.table-hover.medium-width
-        %thead
+  - if @users.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Email
+          %th Role
+          %th Program
+          %th Status
+          %th
+      %tbody
+        - @users.each do |user|
           %tr
-            %th Email
-            %th Role
-            %th Status
-            %th
-        %tbody
-          - @users.each do |user|
-            %tr
-              %th= user.email
-              %td= user.role.titlecase
-              %td= user.confirmed? ? 'Active' : 'Pending';
-              %td
+            %td= user.email
+            %td= user.role.titlecase
+            %td= user.program_name
+            %td= user.confirmed? ? 'Active' : 'Pending'
+            %td
+              - if policy(user).destroy?
                 = link_to 'Delete' , user_path(user), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this user?'}

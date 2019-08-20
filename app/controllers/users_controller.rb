@@ -1,25 +1,28 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = policy_scope(User.includes(:program))
   end
 
   def new
-    @user = User.new
+    @user = authorize User.new
   end
 
   def create
-    @user = User.new(user_params)
+    @user = authorize User.new(user_params)
 
     if @user.save
       UserWorker.perform_async(@user.id)
       redirect_to users_url
     else
+      flash.now[:alert] = @user.errors.full_messages
       render :new
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = authorize User.find(params[:id])
     @user.destroy
 
     redirect_to users_url
@@ -28,6 +31,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :role)
+    params.require(:user).permit(:email, :role, :program_id)
   end
 end
