@@ -22,6 +22,7 @@
 #  status        :string
 #  risk_level    :string
 #  risk_color    :string
+#  source        :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

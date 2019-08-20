@@ -10,6 +10,7 @@
 #  ip_address   :string
 #  active       :boolean          default(TRUE)
 #  permissions  :string           is an Array
+#  program_id   :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

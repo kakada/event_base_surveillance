@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
     t.string "status"
     t.string "risk_level"
     t.string "risk_color"
+    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
