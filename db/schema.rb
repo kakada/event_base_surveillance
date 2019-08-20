@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_045009) do
     t.string "district_id"
     t.string "commune_id"
     t.string "village_id"
+    t.text "properties"
     t.date "event_date"
     t.date "report_date"
     t.string "status"
@@ -85,7 +86,6 @@ ActiveRecord::Schema.define(version: 2019_08_09_045009) do
     t.integer "field_id"
     t.string "name"
     t.string "value"
-    t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -93,10 +93,8 @@ ActiveRecord::Schema.define(version: 2019_08_09_045009) do
   create_table "field_values", force: :cascade do |t|
     t.integer "field_id"
     t.string "value"
-    t.text "values", array: true
     t.text "properties"
     t.string "image"
-    t.string "file"
     t.string "valueable_type"
     t.bigint "valueable_id"
     t.datetime "created_at", null: false
@@ -108,8 +106,6 @@ ActiveRecord::Schema.define(version: 2019_08_09_045009) do
     t.string "name", null: false
     t.string "field_type"
     t.boolean "required"
-    t.string "mapping_field"
-    t.string "mapping_field_type"
     t.integer "display_order"
     t.string "fieldable_type"
     t.bigint "fieldable_id"
@@ -130,7 +126,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_045009) do
     t.integer "event_id"
     t.integer "form_type_id"
     t.integer "submitter_id"
-
+    t.date "conducted_at"
     t.string "priority"
     t.string "source"
     t.datetime "created_at", null: false
