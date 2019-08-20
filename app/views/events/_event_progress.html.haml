@@ -1,25 +1,26 @@
 .content-element.circles-list.flex1
   %ol
     %li
-      = link_to edit_event_path(@event), class: 'btn btn-link' do
+      = link_to edit_event_path(event), class: 'btn btn-link' do
         New
         %span.badge.badge-light{style: 'top: -12px; left: -6px'} edit
-      .at= @event.event_date
+      .at= event.conducted_at
 
     - is_next = true
-    - form_type_ids = event.forms.pluck(:form_type_id)
+    - forms = event.forms
+    - form_type_ids = forms.collect(&:form_type_id)
     - event.event_type.form_types.each_with_index do |form_type, index|
       %li
         - if form_type_ids.include?(form_type.id)
-          - form = event.forms.find_by(form_type_id: form_type.id)
+          - pre_milestone = index == 0 ? event : forms.select { |f| f.form_type_id == form_type_ids[index-1] }.first
+          - current_milestone = forms.select { |f| f.form_type_id == form_type.id }.first
 
-          = link_to edit_event_form_path(event, form), class: 'btn btn-link' do
+          = link_to edit_event_form_path(event, current_milestone), class: 'btn btn-link' do
             %span= form_type.name
             %span.badge.badge-light.btn-edit edit
 
-          - conducted_at = index == 0 ? event.event_date : form.conducted_at
-          %span.badge.badge-light.duration= distance_of_time_in_words(Time.now, conducted_at)
-          .at= conducted_at
+          %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
+          .at= current_milestone.conducted_at
 
         - else
           = link_to form_type.name, new_event_form_path(event_id: event.id, form_type_id: form_type.id), class: ['btn btn-link', ('disabled' unless is_next)]

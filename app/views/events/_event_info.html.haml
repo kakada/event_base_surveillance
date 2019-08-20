@@ -13,12 +13,12 @@
         = @event.risk_level || '-'
   %li
     %span.type Status:
-    %span.value= @event.status || '-'
+    %span.value= @event.status || 'New'
   %li
     %span.type Description:
     %span.value= @event.description || '-'
   %li
-    %span.type Adress:
+    %span.type Location:
     %span.value= @event.location
   %li
     %span.type Event Date:

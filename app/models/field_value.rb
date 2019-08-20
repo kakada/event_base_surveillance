@@ -45,7 +45,7 @@ class FieldValue < ApplicationRecord
     commune  = Pumi::Commune.find_by_id(properties[:commune_id]) if district && properties[:commune_id].present?
     village  = Pumi::Village.find_by_id(properties[:village_id]) if commune && properties[:village_id].present?
 
-    self.value = [province, district, commune, village].reject(&:blank?).map(&:name_km).join(',')
+    self.value = [province, district, commune, village].reverse.reject(&:blank?).map(&:name_km).join(',')
   end
 
   def handle_mapping_field
