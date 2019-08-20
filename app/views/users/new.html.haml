@@ -1,15 +1,15 @@
-.wrapper
-  = render 'shared/sidebar'
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 New Users
 
-  #content
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
-        %h3 New Users
+  .w-50.view-center
+    = simple_form_for @user do |f|
+      = f.input :email
+      = f.input :role, collection: policy(User).roles, input_html: { class: 'role' }
 
-    .w-50.view-center
-      = simple_form_for @user do |f|
-        = f.input :email
-        = f.input :role, collection: User::ROLES
+      .program.hidden
+        = f.input :program_id, collection: policy_scope(Program.all)
 
-        = f.button :submit, class: 'btn btn-primary'
-        = link_to 'Cancel', users_path, class: 'btn btn-secondary'
+      = f.button :submit, class: 'btn btn-primary'
+      = link_to 'Cancel', users_path, class: 'btn btn-secondary'

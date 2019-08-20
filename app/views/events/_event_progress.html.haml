@@ -1,0 +1,27 @@
+.content-element.circles-list.flex1
+  %ol
+    %li
+      = link_to edit_event_path(event), class: 'btn btn-link' do
+        New
+        %span.badge.badge-light{style: 'top: -12px; left: -6px'} edit
+      .at= event.conducted_at
+
+    - is_next = true
+    - forms = event.forms
+    - form_type_ids = forms.collect(&:form_type_id)
+    - event.event_type.form_types.each_with_index do |form_type, index|
+      %li
+        - if form_type_ids.include?(form_type.id)
+          - pre_milestone = index == 0 ? event : forms.select { |f| f.form_type_id == form_type_ids[index-1] }.first
+          - current_milestone = forms.select { |f| f.form_type_id == form_type.id }.first
+
+          = link_to edit_event_form_path(event, current_milestone), class: 'btn btn-link' do
+            %span= form_type.name
+            %span.badge.badge-light.btn-edit edit
+
+          %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
+          .at= current_milestone.conducted_at
+
+        - else
+          = link_to form_type.name, new_event_form_path(event_id: event.id, form_type_id: form_type.id), class: ['btn btn-link', ('disabled' unless is_next)]
+          - is_next = false

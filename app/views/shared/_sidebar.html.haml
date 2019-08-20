@@ -1,34 +1,54 @@
 %nav#sidebar
   #sidebarCollapse.sidebar-header
-    %h3 Event Base Surveillance
+    %h3
+      Event Base Surveillance
+      %span{style: 'font-size: 12px'}= current_user.email
+
     %strong EBS
     %i.fas.fa-align-left
 
   %ul.list-unstyled.components
-    %li{class: getCssActiveClass('home') }
+    %li{class: get_css_active_class('home') }
       = link_to root_path do
-        %i.fas.fa-home
-        Home
+        %i.fas.fa-tachometer-alt
+        = t('sidebar.dashboard')
 
-    %li{class: getCssActiveClass('users') }
-      = link_to users_path do
-        %i.fas.fa-users
-        Users
+    - if policy(Program).update?
+      %li{class: get_css_active_class('programs') }
+        = link_to programs_path do
+          %i.fas.fa-tasks
+          = t('sidebar.programs')
 
-    %li{class: getCssActiveClass('events') }
-      = link_to events_path do
-        %i.fas.fa-calendar-alt
-        Events
+    - if policy(User).update?
+      %li{class: get_css_active_class('users') }
+        = link_to users_path do
+          %i.fas.fa-users
+          = t('sidebar.users')
 
-    %li{class: getCssActiveClass('abouts') }
+    - if policy(EventType).index?
+      %li{class: (get_css_active_class('event_types') || get_css_active_class('event_types/forms')) }
+        = link_to event_types_path do
+          %i.fas.fa-calendar
+          = t('sidebar.event_type_and_form')
+
+    - if policy(Event).index?
+      %li{class: get_css_active_class('events') }
+        = link_to events_path do
+          %i.fas.fa-calendar-alt
+          = t('sidebar.events')
+
+    %li{class: get_css_active_class('abouts') }
       %a{:href => "#"}
         %i.fas.fa-info-circle
-        About
+        = t('sidebar.about')
 
     %li
       = link_to destroy_user_session_path, method: :delete do
         %i.fas.fa-key
-        Logout
+        = t('sidebar.logout')
+
+  .copyright
+    © 2019 InSTEDD
 
     / %li
     /   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#pageSubmenu"}

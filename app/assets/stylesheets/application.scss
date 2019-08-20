@@ -12,9 +12,19 @@
  *
  */
 
-@import "bootstrap";
-@import 'base';
-@import 'common';
-@import 'session';
+@import 'bootstrap';
+@import 'jquery.minicolors';
+@import 'bootstrap-select';
+
+@import 'shared/flex_layout';
+@import 'shared/sortable';
+@import 'shared/base';
+@import 'shared/common';
+@import 'shared/devise';
+@import 'shared/sidebar';
+@import 'shared/stepper';
+@import 'shared/field_fields';
+
+// pages
 @import 'events';
-@import 'sidebar';
+@import 'event_types';

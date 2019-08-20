@@ -1,0 +1,24 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Programs
+      = link_to new_program_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @programs }
+
+  - if @programs.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Name
+          %th
+      %tbody
+        - @programs.each do |program|
+          %tr
+            %td= program.name
+            %td
+              = link_to 'Edit' , edit_program_path(program), class: "badge badge-info"
+              = "/"
+              = link_to 'Delete' , program_path(program), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this program?'}
+

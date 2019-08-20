@@ -1,0 +1,58 @@
+.content-element{
+  margin:50px 0 0 50px;
+}
+.circles-list {
+  ol {
+    list-style-type: none;
+    margin-left: 1.25em;
+    padding-left: 2.5em;
+    counter-reset: li-counter;
+    border-left: 1px solid #00c4cc;
+    position: relative;
+  }
+
+  ol > li {
+    position: relative;
+    margin-bottom: 6em;
+    clear: both;
+  }
+
+  ol > li:before {
+    position: absolute;
+    bottom: -1px;
+    font-weight: 600;
+    font-size: 1em;
+    left: -3.7em;
+    width: 2.25em;
+    height: 2.25em;
+    line-height: 2em;
+    text-align: center;
+    z-index: 9;
+    color: #00c4cc;
+    border: 2px solid #00c4cc;
+    border-radius: 50%;
+    content: counter(li-counter);
+    background-color: #ebeced;
+    counter-increment: li-counter;
+  }
+
+  ol > li:first-of-type:before {
+    top: -1px;
+  }
+
+  .at {
+    position: absolute;
+  }
+
+  .duration {
+    position: absolute;
+    top: -4em;
+    display: block;
+  }
+
+  .btn-edit {
+    top: -12px;
+    left: -6px;
+  }
+}
+

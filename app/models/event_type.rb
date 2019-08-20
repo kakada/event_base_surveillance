@@ -1,0 +1,51 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: event_types
+#
+#  id         :bigint           not null, primary key
+#  name       :string           not null
+#  user_id    :integer
+#  program_id :integer
+#  shared     :boolean
+#  color      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+class EventType < ApplicationRecord
+  has_many :events, dependent: :destroy
+  belongs_to :user
+  has_many :form_types
+  has_many :fields, as: :fieldable
+
+  validates :name, presence: true
+  validates :color, presence: true, uniqueness: { scope: [:program_id] }
+  before_validation :set_program_id
+  before_validation :set_color
+  validate :validate_unique_fields, on: :create
+
+  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+  accepts_nested_attributes_for :form_types, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+
+  MAPPING_FIELDS = [
+    { name: 'risk_level', field_type: 'select_one' }
+  ].freeze
+
+  private
+
+  def validate_unique_fields
+    validate_uniqueness_of_in_memory(
+      fields, %i[name fieldable_id fieldable_type], 'duplicate'
+    )
+  end
+
+  def set_program_id
+    user && self.program_id = user.program_id
+  end
+
+  def set_color
+    self.color ||= "##{SecureRandom.hex(3)}"
+  end
+end

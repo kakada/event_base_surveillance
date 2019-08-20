@@ -18,6 +18,31 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
-//= require sidebar
 
-//= require_tree .
+//= require pumi
+//= require jquery-sortable
+//= require jquery.minicolors
+//= require bootstrap-select.min
+
+//= require application/namespace
+//= require application/util
+
+//= require common/sidebar
+//= require common/location
+
+// All Pages
+//= require form_types/new
+//= require form_types/edit
+//= require event_forms/new
+//= require event_forms/edit
+//= require events/new
+//= require event_types/new
+//= require users/new
+
+
+document.addEventListener('turbolinks:load', function() {
+  EBS.Common.Sidebar.init();
+
+  let currentPage = EBS.Util.getCurrentPage();
+  !!EBS[currentPage] && EBS[currentPage].init();
+})
