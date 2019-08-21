@@ -12,8 +12,9 @@ class EventTypeSerializer < ActiveModel::Serializer
 
     object.form_types.each do |form_type|
       custom_form_type = form_type.attributes
-      custom_form_type[:fields] = form_type.fields.collect{ |field|
-        field.slice(:id, :name, :field_type, :mapping_field, :mapping_field_type, :display_order)}
+      custom_form_type[:fields] = form_type.fields.collect do |field|
+        field.slice(:id, :name, :field_type, :mapping_field, :mapping_field_type, :display_order)
+      end
       customized_form_types.push(custom_form_type)
     end
 

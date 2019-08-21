@@ -39,6 +39,7 @@ class Event < ApplicationRecord
 
   # Deligation
   delegate :name, :color, to: :event_type, prefix: :event_type
+  delegate :name, to: :program, prefix: true
 
   # Validation
   validates :location, :value, :event_date, :report_date, presence: true

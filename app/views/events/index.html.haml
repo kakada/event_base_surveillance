@@ -36,7 +36,7 @@
                 = event.risk_level || '-'
             %td= event.status || 'New'
             %td= l(event.created_at, format: :long)
-            %td= event.creator.program_name
+            %td= event.program_name
             %td
               - if policy(event).update?
                 = link_to 'Edit', edit_event_path(event), class: 'badge badge-info'
