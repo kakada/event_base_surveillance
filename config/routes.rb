@@ -40,7 +40,8 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      resources :events, only: [:index, :create, :update, :destroy]
+      resources :event_types, except: [:new, :edit]
+      resources :events, except: [:new, :edit]
     end
   end
 

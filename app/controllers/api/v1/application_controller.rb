@@ -3,6 +3,7 @@
 module Api
   module V1
     class ApplicationController < ::ActionController::Base
+      include Pagy::Backend
       before_action :restrict_access
 
       def current_program

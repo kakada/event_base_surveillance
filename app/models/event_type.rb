@@ -15,8 +15,9 @@
 #
 
 class EventType < ApplicationRecord
-  has_many :events, dependent: :destroy
   belongs_to :user
+  belongs_to :program
+  has_many :events, dependent: :destroy
   has_many :form_types
   has_many :fields, as: :fieldable
 

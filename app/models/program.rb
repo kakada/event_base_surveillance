@@ -14,6 +14,7 @@ class Program < ApplicationRecord
   has_many  :users
   has_many  :api_keys
   has_many  :events
+  has_many  :event_types
 
   validates :name, presence: true
 end

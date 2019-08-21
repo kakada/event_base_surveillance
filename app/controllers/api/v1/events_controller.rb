@@ -4,8 +4,9 @@ module Api
   module V1
     class EventsController < ApplicationController
       def index
-        @events = current_program.events
-        render json: @events
+        @pagy, @events = pagy(current_program.events)
+
+        render json: @events, adapter: :json, meta: @pagy
       end
 
       def create
