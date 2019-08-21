@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_045009) do
+ActiveRecord::Schema.define(version: 2019_08_21_075614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string "name"
+    t.string "access_token"
+    t.string "ip_address"
+    t.boolean "active", default: true
+    t.string "permissions", array: true
+    t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
@@ -80,6 +91,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_045009) do
     t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_date", "program_id"], name: "index_events_on_event_date_and_program_id"
   end
 
   create_table "field_options", force: :cascade do |t|
