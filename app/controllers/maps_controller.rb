@@ -6,7 +6,6 @@ class MapsController < ApplicationController
     @event_data = get_event_data(events)
     @event_type_id = params[:event_type]
     @programs = Program.select(:id, :name).order(name: :asc) if current_user.system_admin?
-    @provinces = Location.where(kind: 'province')
     set_location
   end
 

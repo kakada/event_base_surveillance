@@ -13,16 +13,21 @@ EBS.MapsIndex = (() => {
 
     _filterLocation();
 
-    if (eventData.length) {
-      _renderMap();
-    }
+
+    _renderMap();
+
     _renderDateFilter(start, end);
   }
 
   function _renderMap() {
     map = new L.Map('map');
-    _renderMarker();
-    _renderLegend();
+    if (eventData.length) {
+      _renderMarker();
+      _renderLegend();
+    } else {
+      map.setView(new L.LatLng(12.33233, 104.875305), 7);
+    }
+
     _renderOSM();
   }
 
@@ -42,7 +47,7 @@ EBS.MapsIndex = (() => {
     eventData.sort((a, b) => (a.lat > b.lat) ? 1 : -1);
 
     eventData.forEach( (data) => {
-      variant += 0.0002;
+      variant += 0.00025;
 
       if (latCursor != data.lat) {
         latCursor = data.lat;

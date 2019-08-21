@@ -6,6 +6,7 @@
   #content {
     display: flex;
     flex-flow: column;
+    position: relative;
   }
 
   #map {
@@ -66,5 +67,18 @@
     width: 100%;
     font-size: 14px;
     color: #495057;
+  }
+
+  .no-data {
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    background: #fff;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+    border-radius: 4px;
+    padding: 40px;
+    z-index: 1000;
+    width: 200px;
   }
 }

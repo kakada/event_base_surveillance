@@ -21,11 +21,10 @@
         %i.fa.fa-caret-down
 
     %button.btn.btn-primary.btn-sm.mb-2{ type: 'submit' } Apply
-  - if @event_data.present?
-    #map
-  - else
-    .text-center
-      %h2 No data found
+  #map
+  - unless @event_data.present?
+    .no-data
+      %span No result found!
 
 :javascript
   const eventData = #{ raw @event_data.to_json };

@@ -24,9 +24,9 @@
 //= require jquery.minicolors
 //= require bootstrap-select.min
 
-//= require lib/leaflet
-//= require lib/moment.min
-//= require lib/daterangepicker.min
+//= require leaflet
+//= require moment.min
+//= require daterangepicker.min
 
 //= require application/namespace
 //= require application/util
