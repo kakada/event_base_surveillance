@@ -11,6 +11,7 @@ class ApiKeysController < ApplicationController
 
   def create
     @api_key = current_program.api_keys.new(api_key_params)
+    authorize @api_key
 
     if @api_key.save
       redirect_to api_keys_url
@@ -25,6 +26,7 @@ class ApiKeysController < ApplicationController
 
   def update
     @api_key = current_program.api_keys.find(params[:id])
+    authorize @api_key
 
     if @api_key.update_attributes(api_key_params)
       redirect_to api_keys_url
@@ -35,22 +37,26 @@ class ApiKeysController < ApplicationController
 
   def destroy
     @api_key = ApiKey.find(params[:id])
+    authorize @api_key
+
     @api_key.destroy
     redirect_to api_keys_url
   end
 
   def deactivate
     @api_key = ApiKey.find(params[:id])
-    @api_key.update_attributes(active: false)
+    authorize @api_key, :update?
 
+    @api_key.update_attributes(active: false)
     flash[:notice] = 'set shared successfully'
     redirect_to api_keys_url
   end
 
   def activate
     @api_key = ApiKey.find(params[:id])
-    @api_key.update_attributes(active: true)
+    authorize @api_key, :update?
 
+    @api_key.update_attributes(active: true)
     flash[:notice] = 'set shared successfully'
     redirect_to api_keys_url
   end
