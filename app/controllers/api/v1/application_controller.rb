@@ -2,15 +2,25 @@
 
 module Api
   module V1
-    class ApplicationController < ActionController::Base
+    class ApplicationController < ::ActionController::Base
       before_action :restrict_access
+
+      def current_program
+        @current_program ||= @current_api_key.program
+      end
+      helper_method :current_program
+
+      def current_api_key
+        @current_api_key
+      end
+      helper_method :current_api_key
 
       private
 
       def restrict_access
         authenticate_or_request_with_http_token do |token, _options|
-          # ApiKey.exists?(access_token: token, ip_address: request.remote_ip)
-          ApiKey.exists?(access_token: token)
+          # @current_api_key = ApiKey.find_by(access_token: token, ip_address: request.remote_ip).presence
+          @current_api_key = ApiKey.find_by(access_token: token).presence
         end
       end
     end

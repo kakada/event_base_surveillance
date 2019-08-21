@@ -37,6 +37,13 @@ Rails.application.routes.draw do
     get :deactivate, on: :member
   end
 
+  # API
+  namespace :api do
+    namespace :v1 do
+      resources :events, only: [:index, :create, :update, :destroy]
+    end
+  end
+
   mount Pumi::Engine => '/pumi'
   mount Sidekiq::Web => '/sidekiq'
 end
