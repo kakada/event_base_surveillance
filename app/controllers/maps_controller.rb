@@ -1,7 +1,7 @@
 class MapsController < ApplicationController
   before_action :set_date_range
   def index
-    events = Event.where(options).group(:latitude, :longitude, :event_type_id).count
+    events = Event.where(options).group(:latitude, :longitude, :event_type_id, :location).count
     @event_types = EventType.where(program_option)
     @event_data = get_event_data(events)
     @event_type_id = params[:event_type]
@@ -24,7 +24,8 @@ class MapsController < ApplicationController
         color: event_type.color,
         count: value,
         lat: data[0],
-        lng: data[1]
+        lng: data[1],
+        location: data[3]
       }
       event_data << data
     end

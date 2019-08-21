@@ -29,7 +29,7 @@ EBS.MapsIndex = (() => {
   function _renderOSM() {
     const osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-    const osm = new L.TileLayer(osmUrl, { minZoom: 6, maxZoom: 19, attribution: osmAttrib });
+    const osm = new L.TileLayer(osmUrl, { minZoom: 6, maxZoom: 15, attribution: osmAttrib });
 
     map.addLayer(osm);
   }
@@ -42,33 +42,33 @@ EBS.MapsIndex = (() => {
     eventData.sort((a, b) => (a.lat > b.lat) ? 1 : -1);
 
     eventData.forEach( (data) => {
-      variant += 0.001;
+      variant += 0.0002;
 
       if (latCursor != data.lat) {
         latCursor = data.lat;
         variant = 0;
       }
 
-      const extraRadius = Math.floor(data.count / 10) * 25;
+      const extraRadius = Math.floor(data.count / 10) + 0.5;
       const latlng = [ data.lat + variant, data.lng + variant];
 
-      const marker = L.circle(latlng, {
+      const marker = L.circleMarker(latlng, {
         color: data.color,
         fillColor: data.color,
         fillOpacity: 0.8,
         weight: 1,
         opacity: 1,
-        radius: 200 + extraRadius
+        radius: 5 + extraRadius
       }).addTo(map);
 
       markers.push(latlng);
 
-      marker.bindPopup(`Event count: ${data.count}<br>Event type: ${data.event_type}<br>geopoint: ${data.lat},${data.lng}`);
+      marker.bindPopup(`Event count: ${data.count}<br>Event type: ${data.event_type}<br>Location: ${data.location}`);
     });
 
     const locationCount = [...new Set(eventData.map(x => x.lat))].length;
     if (locationCount == 1) {
-      map.setView(new L.LatLng(markers[0][0], markers[0][1]), 13);
+      map.setView(new L.LatLng(markers[0][0], markers[0][1]), 15);
     } else {
       map.fitBounds(markers);
     }
