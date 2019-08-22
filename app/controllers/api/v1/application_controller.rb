@@ -10,7 +10,7 @@ module Api
       before_action :restrict_access
 
       def current_program
-        @current_program ||= @current_api_key.program
+        @current_program ||= current_api_key.program
       end
       helper_method :current_program
 
