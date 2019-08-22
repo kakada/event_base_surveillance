@@ -40,8 +40,12 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      resources :event_types, except: [:new, :edit]
-      resources :events, except: [:new, :edit]
+      resources :event_types, only: [:index]
+      resources :events, except: [:new, :edit] do
+        scope module: :events do
+          resources :forms, except: [:new, :edit]
+        end
+      end
     end
   end
 

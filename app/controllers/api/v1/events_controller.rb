@@ -9,6 +9,10 @@ module Api
         render json: @events, adapter: :json, meta: @pagy
       end
 
+      def show
+        @event = current_program.events.find(params[:id])
+      end
+
       def create
         @event = current_program.events.new(event_params)
 
