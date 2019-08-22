@@ -74,6 +74,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
   gem 'rubocop', '~> 0.74.0', require: false
+  gem 'guard-rspec', require: false
+
 end
 
 group :test do
@@ -81,8 +83,6 @@ group :test do
   gem 'webdrivers', '~> 4.0'
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 
   gem 'shoulda-matchers',       '~> 4.1.1'
   gem 'database_cleaner',       '~> 1.7.0'

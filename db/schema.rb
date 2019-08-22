@@ -105,8 +105,10 @@ ActiveRecord::Schema.define(version: 2019_08_21_075614) do
   create_table "field_values", force: :cascade do |t|
     t.integer "field_id"
     t.string "value"
+    t.text "values", array: true
     t.text "properties"
     t.string "image"
+    t.string "file"
     t.string "valueable_type"
     t.bigint "valueable_id"
     t.datetime "created_at", null: false
@@ -118,6 +120,8 @@ ActiveRecord::Schema.define(version: 2019_08_21_075614) do
     t.string "name", null: false
     t.string "field_type"
     t.boolean "required"
+    t.string "mapping_field"
+    t.string "mapping_field_type"
     t.integer "display_order"
     t.string "fieldable_type"
     t.bigint "fieldable_id"

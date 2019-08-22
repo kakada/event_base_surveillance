@@ -3,8 +3,8 @@ FactoryBot.define do
     code { "01" }
     name_en { "Banteay Meanchey" }
     name_km { "បន្ទាយមានជ័យ" }
-    geopoint { '' }
+    geopoint { nil }
     parent_id { nil }
-    type { "province" }
+    kind { "province" }
   end
 end
