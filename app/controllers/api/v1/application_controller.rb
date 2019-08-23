@@ -21,8 +21,8 @@ module Api
 
       def restrict_access
         authenticate_or_request_with_http_token do |token, _options|
-          # @current_api_key = ApiKey.find_by(access_token: token, ip_address: request.remote_ip)
-          @current_api_key = ApiKey.find_by(access_token: token)
+          @current_api_key = ApiKey.find_by(access_token: token, ip_address: request.remote_ip)
+          # @current_api_key = ApiKey.find_by(access_token: token)
 
           if @current_api_key.nil? || !@current_api_key.active?
             false

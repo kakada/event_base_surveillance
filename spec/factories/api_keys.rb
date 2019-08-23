@@ -5,5 +5,13 @@ FactoryBot.define do
     permissions { ['read', 'write'] }
     active      { true }
     program
+
+    trait :permission_read do
+      permissions {['read']}
+    end
+
+    trait :permission_write do
+      permissions {['write']}
+    end
   end
 end

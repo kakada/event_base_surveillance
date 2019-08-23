@@ -16,7 +16,7 @@ RSpec.describe Api::V1::EventTypesController, type: :controller do
     end
 
     it { expect(JSON.parse(response.body)['event_types']).not_to be_nil }
-    it { expect(JSON.parse(response.body)['event_types']).not_to be_nil }
+    it { expect(JSON.parse(response.body)['meta']).not_to be_nil }
     it { expect(response.status).to eq(200) }
   end
 end
