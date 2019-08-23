@@ -1,0 +1,15 @@
+#client_apps-index {
+  .access-token {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+  }
+
+  .status {
+    color: red;
+  }
+
+  .status.active {
+    color: green;
+  }
+}

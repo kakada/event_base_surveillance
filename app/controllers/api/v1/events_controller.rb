@@ -11,6 +11,8 @@ module Api
 
       def show
         @event = current_program.events.find(params[:id])
+
+        render json: @event
       end
 
       def create

@@ -1,7 +1,7 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 API Keys
+      %h3 Client App
       - if policy(ClientApp).create?
         = link_to new_client_app_path, class: 'btn btn-primary' do
           %i.fas.fa-plus
@@ -12,10 +12,10 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
-          %th Name
+          %th App name
           %th Creation date
           %th Ip address
-          %th Key
+          %th Access token
           %th Permissions
           %th Status
           %th
@@ -25,9 +25,14 @@
             %td= client_app.name
             %td= l(client_app.created_at, format: :long)
             %td= client_app.ip_address
-            %td= client_app.access_token
+            %td
+              %span= client_app.access_token
+              %input.access-token{ value: client_app.access_token }
+              %button.btn.btn-copy{ 'data-toggle' => 'tooltip', title: 'copy to clipboard' }
+                %i.far.fa-copy
             %td= client_app.permissions.join(', ')
-            %td= client_app.active? ? 'Active' : 'Inactive'
+            %td{ class: ['status', ('active' if client_app.active?)] }
+              = client_app.active? ? 'Active' : 'Inactive'
             %td
               - if policy(client_app).update?
                 = link_to 'Edit', edit_client_app_path(client_app), class: 'badge badge-info'

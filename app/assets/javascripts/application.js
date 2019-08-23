@@ -38,6 +38,7 @@
 //= require events/new
 //= require event_types/new
 //= require users/new
+//= require client_apps/index
 //= require client_apps/new
 
 

@@ -14,6 +14,8 @@ module Api
 
         def show
           @form = @event.forms.find(params[:id])
+
+          render json: @form
         end
 
         def create

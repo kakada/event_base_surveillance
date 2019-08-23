@@ -25,6 +25,8 @@ class ClientApp < ApplicationRecord
   before_validation :generate_access_token, on: :create
   before_validation :cleanup_permissions
 
+  default_scope { order(created_at: :asc) }
+
   def authorize?(action)
     return false unless active?
     return permissions.include?('read') if action == 'GET'
