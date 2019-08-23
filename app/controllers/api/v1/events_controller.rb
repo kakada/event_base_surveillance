@@ -33,13 +33,6 @@ module Api
         end
       end
 
-      def destroy
-        @event = current_program.events.find(params[:id])
-        @event.destroy
-
-        head :no_content
-      end
-
       private
 
       def event_params
@@ -50,7 +43,7 @@ module Api
           field_values_attributes: [
             :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
           ]
-        ).merge(source: current_api_key.name)
+        ).merge(source: current_client_app.name)
       end
     end
   end

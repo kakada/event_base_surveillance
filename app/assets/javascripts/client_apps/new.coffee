@@ -1,4 +1,4 @@
-EBS.Api_keysNew = do ->
+EBS.Client_appsNew = do ->
   init = ->
     initSelectPicker()
     onClickBtnRegenerateToken()
@@ -22,6 +22,6 @@ EBS.Api_keysNew = do ->
 
   { init: init }
 
-EBS.Api_keysCreate = EBS.Api_keysNew
-EBS.Api_keysEdit = EBS.Api_keysNew
-EBS.Api_keysUpdate = EBS.Api_keysNew
+EBS.Client_appsCreate = EBS.Client_appsNew
+EBS.Client_appsEdit = EBS.Client_appsNew
+EBS.Client_appsUpdate = EBS.Client_appsNew

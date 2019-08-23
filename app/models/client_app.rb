@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: api_keys
+# Table name: client_apps
 #
 #  id           :bigint           not null, primary key
 #  name         :string
@@ -15,7 +15,7 @@
 #  updated_at   :datetime         not null
 #
 
-class ApiKey < ApplicationRecord
+class ClientApp < ApplicationRecord
   PERMISSIONS = %w[read write].freeze
   belongs_to :program
 
@@ -24,6 +24,13 @@ class ApiKey < ApplicationRecord
   validates :access_token, presence: true, uniqueness: true
   before_validation :generate_access_token, on: :create
   before_validation :cleanup_permissions
+
+  def authorize?(action)
+    return false unless active?
+    return permissions.include?('read') if action == 'GET'
+
+    permissions.include?('write')
+  end
 
   private
 

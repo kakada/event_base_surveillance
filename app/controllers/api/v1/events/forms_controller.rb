@@ -36,13 +36,6 @@ module Api
           end
         end
 
-        def destroy
-          @form = @event.forms.find(params[:id])
-          @form.destroy
-
-          head :no_content
-        end
-
         private
 
         def form_params
@@ -51,7 +44,7 @@ module Api
             field_values_attributes: [
               :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
             ]
-          ).merge(source: current_api_key.name)
+          ).merge(source: current_client_app.name)
         end
 
         def assign_event

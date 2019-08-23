@@ -12,7 +12,7 @@
 
 class Program < ApplicationRecord
   has_many  :users
-  has_many  :api_keys
+  has_many  :client_apps
   has_many  :events
   has_many  :event_types
 

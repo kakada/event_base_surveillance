@@ -1,0 +1,51 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 API Keys
+      - if policy(ClientApp).create?
+        = link_to new_client_app_path, class: 'btn btn-primary' do
+          %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @client_apps }
+
+  - if @client_apps.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Name
+          %th Creation date
+          %th Ip address
+          %th Key
+          %th Permissions
+          %th Status
+          %th
+      %tbody
+        - @client_apps.each do |client_app|
+          %tr
+            %td= client_app.name
+            %td= l(client_app.created_at, format: :long)
+            %td= client_app.ip_address
+            %td= client_app.access_token
+            %td= client_app.permissions.join(', ')
+            %td= client_app.active? ? 'Active' : 'Inactive'
+            %td
+              - if policy(client_app).update?
+                = link_to 'Edit', edit_client_app_path(client_app), class: 'badge badge-info'
+                = "/"
+                .btn-group
+                  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                    %i.fas.fa-ellipsis-v
+
+                  .dropdown-menu.dropdown-menu-right
+                    - unless client_app.active?
+                      = link_to activate_client_app_path(client_app), class: "btn dropdown-item" do
+                        %i.fas.fa-check.drop-menu-icon
+                        %span Activate
+                    - if client_app.active?
+                      = link_to deactivate_client_app_path(client_app), class: "btn dropdown-item" do
+                        %i.fas.fa-ban.drop-menu-icon
+                        %span Deactivate
+
+                    = link_to client_app_path(client_app), method: :delete, class: 'btn dropdown-item', :data => {confirm: 'Are you sure to delete this key?'} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span Delete

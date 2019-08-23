@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApiKeyPolicy < ApplicationPolicy
+class ClientAppPolicy < ApplicationPolicy
   def index?
     user.system_admin? || user.program_admin?
   end

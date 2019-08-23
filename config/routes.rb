@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get :unshared, on: :member
   end
 
-  resources :api_keys do
+  resources :client_apps do
     get :activate, on: :member
     get :deactivate, on: :member
   end

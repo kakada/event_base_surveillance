@@ -18,14 +18,14 @@ RSpec.describe ApplicationController, type: :controller do
       request.env["HTTP_ACCEPT"] = 'application/json'
     end
 
-    context 'when no api key' do
+    context 'when no client_app' do
       it 'returns 401' do
         get :index
         expect(response.status).to eq(401)
       end
     end
 
-    context 'when wrong api key' do
+    context 'when wrong client_app' do
       it 'returns 401' do
         request.headers['Authorization'] = "Token #{SecureRandom.hex}"
         get :index
@@ -34,11 +34,11 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     context 'when wrong ip address' do
-      let! (:api_key) { create(:api_key) }
+      let! (:client_app) { create(:client_app) }
 
       it 'returns 401' do
         allow(request).to receive(:remote_ip).and_return('1.1.1.1')
-        request.headers['Authorization'] = "Token #{api_key.access_token}"
+        request.headers['Authorization'] = "Token #{client_app.access_token}"
         get :index
 
         expect(response.status).to eq(401)
@@ -46,11 +46,11 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     context 'when only permission read' do
-      let! (:api_key) { create(:api_key, :permission_read) }
+      let! (:client_app) { create(:client_app, :permission_read) }
 
       before(:each) do
-        controller.request.remote_addr = api_key.ip_address
-        request.headers['Authorization'] = "Token #{api_key.access_token}"
+        controller.request.remote_addr = client_app.ip_address
+        request.headers['Authorization'] = "Token #{client_app.access_token}"
       end
 
       it 'returns 200' do
@@ -65,11 +65,11 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     context 'when only permission write' do
-      let! (:api_key) { create(:api_key, :permission_write) }
+      let! (:client_app) { create(:client_app, :permission_write) }
 
       before(:each) do
-        controller.request.remote_addr = api_key.ip_address
-        request.headers['Authorization'] = "Token #{api_key.access_token}"
+        controller.request.remote_addr = client_app.ip_address
+        request.headers['Authorization'] = "Token #{client_app.access_token}"
       end
 
       it 'returns 401' do
@@ -84,11 +84,11 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     context 'when both permission read and write' do
-      let! (:api_key) { create(:api_key) }
+      let! (:client_app) { create(:client_app) }
 
       before(:each) do
-        controller.request.remote_addr = api_key.ip_address
-        request.headers['Authorization'] = "Token #{api_key.access_token}"
+        controller.request.remote_addr = client_app.ip_address
+        request.headers['Authorization'] = "Token #{client_app.access_token}"
       end
 
       it 'returns 200' do

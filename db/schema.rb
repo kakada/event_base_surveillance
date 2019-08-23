@@ -15,17 +15,6 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "api_keys", force: :cascade do |t|
-    t.string "name"
-    t.string "access_token"
-    t.string "ip_address"
-    t.boolean "active", default: true
-    t.string "permissions", array: true
-    t.integer "program_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
@@ -46,6 +35,17 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "client_apps", force: :cascade do |t|
+    t.string "name"
+    t.string "access_token"
+    t.string "ip_address"
+    t.boolean "active", default: true
+    t.string "permissions", array: true
+    t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "event_types", force: :cascade do |t|

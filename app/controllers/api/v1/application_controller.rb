@@ -10,27 +10,20 @@ module Api
       before_action :restrict_access
 
       def current_program
-        @current_program ||= current_api_key.program
+        @current_program ||= current_client_app.program
       end
       helper_method :current_program
 
-      attr_reader :current_api_key
-      helper_method :current_api_key
+      attr_reader :current_client_app
+      helper_method :current_client_app
 
       private
 
       def restrict_access
         authenticate_or_request_with_http_token do |token, _options|
-          @current_api_key = ApiKey.find_by(access_token: token, ip_address: request.remote_ip)
-          # @current_api_key = ApiKey.find_by(access_token: token)
-
-          if @current_api_key.nil? || !@current_api_key.active?
-            false
-          elsif request.method == 'GET'
-            @current_api_key.permissions.include?('read')
-          else
-            @current_api_key.permissions.include?('write')
-          end
+          @current_client_app = ClientApp.find_by(access_token: token, ip_address: request.remote_ip)
+          # @current_client_app = ClientApp.find_by(access_token: token)
+          @current_client_app.present? && @current_client_app.authorize?(request.method)
         end
       end
     end

@@ -42,9 +42,9 @@
     /     %i.fas.fa-info-circle
     /     = t('sidebar.about')
 
-    - if policy(ApiKey).index?
-      %li{class: get_css_active_class('api_keys') }
-        %a{:href => api_keys_path}
+    - if policy(ClientApp).index?
+      %li{class: get_css_active_class('client_apps') }
+        %a{:href => client_apps_path}
           %i.fas API
           APIs & Services
 

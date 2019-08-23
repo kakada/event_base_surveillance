@@ -1,10 +1,10 @@
 .w-50.view-center
-  = simple_form_for @api_key do |f|
+  = simple_form_for @client_app do |f|
     = f.input :name
     = f.input :ip_address
-    = f.input :permissions, collection: ApiKey::PERMISSIONS, input_html: {:multiple => "multiple", class: 'selectpicker'}
+    = f.input :permissions, collection: ClientApp::PERMISSIONS, input_html: {:multiple => "multiple", class: 'selectpicker'}
 
-    - if token = @api_key.access_token.presence
+    - if token = @client_app.access_token.presence
       .form-row
         .form-group.col-md-9
           %label Access Token
@@ -18,4 +18,4 @@
             Regenerate token
 
     = f.button :submit, class: 'btn btn-primary'
-    = link_to 'Cancel', api_keys_path, class: 'btn btn-secondary'
+    = link_to 'Cancel', client_apps_path, class: 'btn btn-secondary'
