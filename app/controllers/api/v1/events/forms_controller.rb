@@ -51,7 +51,7 @@ module Api
             field_values_attributes: [
               :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
             ]
-          )
+          ).merge(source: current_api_key.name)
         end
 
         def assign_event

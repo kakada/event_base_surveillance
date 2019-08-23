@@ -17,7 +17,7 @@
 class Form < ApplicationRecord
   belongs_to :event
   belongs_to :form_type
-  belongs_to :submitter, class_name: 'User'
+  belongs_to :submitter, class_name: 'User', optional: true
   has_many   :field_values, as: :valueable
 
   # History

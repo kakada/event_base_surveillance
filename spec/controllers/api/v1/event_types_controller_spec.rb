@@ -1,0 +1,22 @@
+require 'rails_helper'
+
+RSpec.describe Api::V1::EventTypesController, type: :controller do
+  let! (:api_key)    { create(:api_key) }
+  let! (:event_type) { create(:event_type, :with_field, :with_assessment_form_type, program: api_key.program) }
+
+  before(:each) do
+    allow(controller).to receive(:restrict_access).and_return(true)
+    allow(controller).to receive(:current_api_key).and_return(api_key)
+    allow(controller).to receive(:current_program).and_return(event_type.program)
+  end
+
+  describe 'GET #index' do
+    before(:each) do
+      get :index
+    end
+
+    it { expect(JSON.parse(response.body)['event_types']).not_to be_nil }
+    it { expect(JSON.parse(response.body)['event_types']).not_to be_nil }
+    it { expect(response.status).to eq(200) }
+  end
+end

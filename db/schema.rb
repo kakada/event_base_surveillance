@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
     t.integer "submitter_id"
     t.date "conducted_at"
     t.string "priority"
+    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
