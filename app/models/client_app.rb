@@ -17,6 +17,13 @@
 
 class ClientApp < ApplicationRecord
   PERMISSIONS = %w[read write].freeze
+  PERMISSION_ACTION = {
+    get: 'read',
+    post: 'write',
+    put: 'write',
+    patch: 'write'
+  }.freeze
+
   belongs_to :program
 
   validates :name, presence: true
@@ -29,9 +36,8 @@ class ClientApp < ApplicationRecord
 
   def authorize?(action)
     return false unless active?
-    return permissions.include?('read') if action == 'GET'
 
-    permissions.include?('write')
+    permissions.include?(PERMISSION_ACTION[action.downcase.to_sym])
   end
 
   private
