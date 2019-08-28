@@ -32,6 +32,23 @@ Rails.application.routes.draw do
     get :unshared, on: :member
   end
 
+  resources :client_apps do
+    get :activate, on: :member
+    get :deactivate, on: :member
+  end
+
+  # API
+  namespace :api do
+    namespace :v1 do
+      resources :event_types, only: [:index]
+      resources :events, except: [:new, :edit] do
+        scope module: :events do
+          resources :forms, except: [:new, :edit]
+        end
+      end
+    end
+  end
+
   mount Pumi::Engine => '/pumi'
   mount Sidekiq::Web => '/sidekiq'
 end

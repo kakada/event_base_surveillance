@@ -1,0 +1,21 @@
+.w-50.view-center
+  = simple_form_for @client_app do |f|
+    = f.input :name
+    = f.input :ip_address
+    = f.input :permissions, collection: ClientApp::PERMISSIONS, input_html: {:multiple => "multiple", class: 'selectpicker'}
+
+    - if token = @client_app.access_token.presence
+      .form-row
+        .form-group.col-md-9
+          %label Access Token
+          .form-control.access-token-view= token
+          = f.input :access_token, as: :hidden, input_html: {class: 'access-token'}
+
+        .form-group.col-md-3
+          %label
+          %button.btn.btn-light.btn-regenerate-token{type: 'button'}
+            %i.fas.fa-redo-alt
+            Regenerate token
+
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', client_apps_path, class: 'btn btn-secondary'

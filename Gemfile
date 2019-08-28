@@ -53,6 +53,8 @@ gem 'audited',        '~> 4.9'
 gem 'pagy',           '~> 3.4.1'
 gem 'jquery-minicolors-rails',    '~> 2.2.6.1'
 gem 'strip_attributes',           '~> 1.9.0'
+gem 'active_model_serializers',   '~> 0.10.10'
+gem 'rack-cors',                  '~> 1.0.3'
 gem 'pumi', github: 'dwilkie/pumi', require: 'pumi/rails'
 
 group :development, :test do

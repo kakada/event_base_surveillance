@@ -22,13 +22,15 @@
 #  status        :string
 #  risk_level    :string
 #  risk_color    :string
+#  source        :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
 
 class Event < ApplicationRecord
   belongs_to :event_type
-  belongs_to :creator, class_name: 'User'
+  belongs_to :creator, class_name: 'User', optional: true
+  belongs_to :program
   has_many   :forms, dependent: :destroy
   has_many   :field_values, as: :valueable
 
@@ -37,6 +39,7 @@ class Event < ApplicationRecord
 
   # Deligation
   delegate :name, :color, to: :event_type, prefix: :event_type
+  delegate :name, to: :program, prefix: true
 
   # Validation
   validates :location, :value, :event_date, :report_date, presence: true
@@ -48,6 +51,7 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
     attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank? && attributes['file'].blank?
   }
+  accepts_nested_attributes_for :forms, allow_destroy: true
 
   def conducted_at
     report_date

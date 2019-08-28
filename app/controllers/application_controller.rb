@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
 
   layout :set_layout
 
+  def current_program
+    @current_program ||= current_user.program
+  end
+  helper_method :current_program
+
   protected
 
   def set_layout

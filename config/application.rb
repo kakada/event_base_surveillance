@@ -17,8 +17,14 @@ module Ebs
     # the framework and any gems in your application.
     config.active_job.queue_adapter = :sidekiq
 
-
     config.i18n.load_path += Dir[Rails.root.join('app', 'locales', '**', '*.{rb,yml}').to_s]
     I18n.config.available_locales = [:en, :km]
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :options]
+      end
+    end
   end
 end

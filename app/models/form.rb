@@ -10,6 +10,7 @@
 #  submitter_id :integer
 #  conducted_at :date
 #  priority     :string
+#  source       :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -17,7 +18,7 @@
 class Form < ApplicationRecord
   belongs_to :event
   belongs_to :form_type
-  belongs_to :submitter, class_name: 'User'
+  belongs_to :submitter, class_name: 'User', optional: true
   has_many   :field_values, as: :valueable
 
   # History

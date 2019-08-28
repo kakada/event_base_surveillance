@@ -11,6 +11,10 @@
 #
 
 class Program < ApplicationRecord
-  has_many :users
+  has_many  :users
+  has_many  :client_apps
+  has_many  :events
+  has_many  :event_types
+
   validates :name, presence: true
 end

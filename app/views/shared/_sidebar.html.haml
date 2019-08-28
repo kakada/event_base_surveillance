@@ -37,10 +37,16 @@
           %i.fas.fa-calendar-alt
           = t('sidebar.events')
 
-    %li{class: get_css_active_class('abouts') }
-      %a{:href => "#"}
-        %i.fas.fa-info-circle
-        = t('sidebar.about')
+    / %li{class: get_css_active_class('abouts') }
+    /   %a{:href => "#"}
+    /     %i.fas.fa-info-circle
+    /     = t('sidebar.about')
+
+    - if policy(ClientApp).index?
+      %li{class: get_css_active_class('client_apps') }
+        %a{:href => client_apps_path}
+          %i.fas API
+          APIs & Services
 
     %li
       = link_to destroy_user_session_path, method: :delete do

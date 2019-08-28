@@ -18,6 +18,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string  :status
       t.string  :risk_level
       t.string  :risk_color
+      t.string  :source
 
       t.timestamps
     end
