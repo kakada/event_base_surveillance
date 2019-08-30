@@ -12,8 +12,6 @@ EBS.MapsIndex = (() => {
     const end = moment(new Date(endDate));
 
     _filterLocation();
-
-
     _renderMap();
 
     _renderDateFilter(start, end);
@@ -141,14 +139,30 @@ EBS.MapsIndex = (() => {
     });
 
     $('#location-action').on('click', function() {
-      $("#filter-location").hide();
+      $("#filter-location").fadeOut(200);
+    });
+
+    $('body').click(function() {
+      $("#filter-location").fadeOut(200);
+    });
+
+    $('.location-group').click(function(e) {
+      e.stopPropagation();
     });
 
     _renderSelectedValue();
+    _handleFormSubmit();
   }
 
-  function _showLocationFilter() {
-    $("#filter-location").addClass("show");
+  function _handleFormSubmit() {
+    $('#event-form').submit(function() {
+      $(this)
+        .find('input[name], select')
+        .filter(function () {
+          return !this.value;
+        })
+        .prop('name', '');
+    });
   }
 
   function _renderSelectedValue() {

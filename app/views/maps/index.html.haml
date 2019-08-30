@@ -1,5 +1,5 @@
 #content
-  %form.form-inline{ method: :get }
+  %form#event-form.form-inline{ method: :get }
     - if current_user.system_admin?
       .form-group.mb-2.mx-sm-2
         %label.col-form-label-sm{ for: :program_id } Program:&nbsp;

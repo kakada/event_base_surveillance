@@ -6,7 +6,6 @@ class MapsController < ApplicationController
     @event_data = get_event_data(events)
     @event_type_id = params[:event_type]
     @programs = Program.select(:id, :name).order(name: :asc) if current_user.system_admin?
-    set_location
   end
 
   private
@@ -15,7 +14,6 @@ class MapsController < ApplicationController
 
     events.each do |data, value|
       event_type = @event_types.find { |t| t.id == data[2] }
-      # event_type = EventType.find(data[2])
 
       data = {
         event_id: event_type.id,
@@ -33,13 +31,9 @@ class MapsController < ApplicationController
   end
 
   def options
-    option = {}
-    option.merge!({ event_type_id: params[:event_type]}) if params[:event_type].present?
+    option = maps_params
+    option.delete :daterange
     option.merge!({ event_date: @start_date..@end_date })
-    option.merge!({ province_id: params[:province_id] }) if params[:province_id].present?
-    option.merge!({ district_id: params[:district_id] }) if params[:district_id].present?
-    option.merge!({ commune_id: params[:commune_id] }) if params[:commune_id].present?
-    option.merge!({ village_id: params[:village_id] }) if params[:village_id].present?
     option.merge! program_option
   end
 
@@ -58,12 +52,7 @@ class MapsController < ApplicationController
     if program_id.present? then { program_id: program_id } else {} end
   end
 
-  def set_location
-    province = Location.find(params[:province_id]) if params[:province_id].present?
-    @districts = province.children if province.present?
-    district = Location.find(params[:district_id]) if params[:district_id].present?
-    @communes = district.children if district.present?
-    commune = Location.find(params[:commune_id]) if params[:commune_id].present?
-    @villages = commune.children if commune.present?
+  def maps_params
+    params.permit(:daterange, :program_id, :province_id, :district_id, :village_id, :commune_id, :event_type)
   end
 end
