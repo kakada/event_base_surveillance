@@ -33,6 +33,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - .:/app
+      - bundle:/usr/local/bundle
     depends_on:
       - redis
     env_file:

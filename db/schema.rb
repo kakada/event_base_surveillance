@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 2019_08_21_075614) do
     t.string "district_id"
     t.string "commune_id"
     t.string "village_id"
-    t.text "properties"
     t.date "event_date"
     t.date "report_date"
     t.string "status"
@@ -98,6 +97,7 @@ ActiveRecord::Schema.define(version: 2019_08_21_075614) do
     t.integer "field_id"
     t.string "name"
     t.string "value"
+    t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

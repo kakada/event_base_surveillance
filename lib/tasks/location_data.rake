@@ -37,21 +37,15 @@ namespace :location_data do
 
     provinces = Location.where(kind: 'province').order(code: :asc)
     provinces.each do |province|
-      csv << [province.code, province.name_en, province.name_km, province.kind, province.parent_id, province.geopoint.try(:x), province.geopoint.try(:y)]
+      location_to_csv province, csv
+    end
+  end
 
-      districts = province.children.order(code: :asc)
-      districts.each do |district|
-        csv << [district.code, district.name_en, district.name_km, district.kind, district.parent_id, district.geopoint.try(:x), district.geopoint.try(:y)]
-        communes = district.children.order(code: :asc)
-        communes.each do |commune|
-          csv << [commune.code, commune.name_en, commune.name_km, commune.kind, commune.parent_id, commune.geopoint.try(:x), commune.geopoint.try(:y)]
-
-          villages = commune.children.order(code: :asc)
-          villages.each do |village|
-            csv << [village.code, village.name_en, village.name_km, village.kind, village.parent_id, village.geopoint.try(:x), village.geopoint.try(:y)]
-          end
-        end
-      end
+  def location_to_csv location, csv
+    csv << [location.code, location.name_en, location.name_km, location.kind, location.parent_id, location.geopoint.try(:x), location.geopoint.try(:y)]
+    children = location.children.order(code: :asc)
+    children.each do |child|
+      location_to_csv child, csv
     end
   end
 end
