@@ -163,6 +163,19 @@ EBS.MapsIndex = (() => {
         })
         .prop('name', '');
     });
+
+    _constructDateRange();
+  }
+
+  function _constructDateRange() {
+    const dateRangeEle = $('#reportrange-input');
+    const dateRange = dateRangeEle.val().split(' - ');
+    const startDate = moment(new Date(dateRange[0])).format('DD/MM/Y');
+    const endDate = moment(new Date(dateRange[1])).format('DD/MM/Y');
+    const startDateEle = $(`<input type='hidden' name='start_date' value='${startDate}' />`);
+    const endDateEle = $(`<input type='hidden' name='end_date' value='${endDate}' />`);
+    $('#event-form').append(startDateEle, endDateEle);
+    dateRangeEle.remove();
   }
 
   function _renderSelectedValue() {

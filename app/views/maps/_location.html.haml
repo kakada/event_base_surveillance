@@ -5,22 +5,22 @@
   #filter-location
     #province.form-group.mb-2
       %label.col-form-label-sm.col-sm-3{ for: :province_id }Province
-      %select#province_id.select-location.form-control.form-control-sm.col-sm-9{ 'data-pumi-select-target' => :district, 'data-pumi-select-collection-url' => pumi.provinces_path, 'data-pumi-select-collection-label-method' => :name_en, 'data-pumi-select-collection-value-method' => :id, 'data-pumi-select-populate-on-load' => 'true', name: 'province_id', 'data-pumi-select-default-value' => params[:province_id] }
+      %select#province_id.select-location.form-control.form-control-sm.col-sm-9{ 'data-pumi-select-target' => :district, 'data-pumi-select-collection-url' => pumi.provinces_path, 'data-pumi-select-collection-label-method' => :name_en, 'data-pumi-select-collection-value-method' => :id, 'data-pumi-select-populate-on-load' => 'true', name: 'event[province_id]', 'data-pumi-select-default-value' => params[:event].try(:[], :province_id) }
         %option{ value: '' }Please select
 
     #district.form-group.mb-2
       %label.col-form-label-sm.col-sm-3{ for: :district_id }District
-      %select.select-location.form-control.form-control-sm.col-sm-9{ name: :district_id, :data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", pumi_select_default_value: params[:district_id]} }
+      %select.select-location.form-control.form-control-sm.col-sm-9{ name: 'event[district_id]', :data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", pumi_select_default_value: params[:event].try(:[], :district_id)} }
         %option{ value: '' }Please select
 
     #commune.form-group.mb-2
       %label.col-form-label-sm.col-sm-3{ for: :commune_id }Commune
-      %select.select-location.form-control.form-control-sm.col-sm-9{ name: :commune_id, :data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", pumi_select_default_value: params[:commune_id]}}
+      %select.select-location.form-control.form-control-sm.col-sm-9{ name: 'event[commune_id]', :data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", pumi_select_default_value: params[:event].try(:[], :commune_id)}}
         %option{ value: '' }Please select
 
     #village.form-group.mb-2
       %label.col-form-label-sm.col-sm-3{ for: :village_id }Village
-      %select.select-location.form-control.form-control-sm.col-sm-9{ name: :village_id, :data => {:pumi_select_id => "village", :pumi_select_collection_url => pumi.villages_path(:commune_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#village", :pumi_select_disabled_class => "my-disabled-class", pumi_select_default_value: params[:village_id]}}
+      %select.select-location.form-control.form-control-sm.col-sm-9{ name: 'event[village_id]', :data => {:pumi_select_id => "village", :pumi_select_collection_url => pumi.villages_path(:commune_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#village", :pumi_select_disabled_class => "my-disabled-class", pumi_select_default_value: params[:event].try(:[], :village_id)}}
         %option{ value: '' }Please select
 
     %button#location-action.btn.btn-primary.btn-sm.float-right{ type: :button } Close

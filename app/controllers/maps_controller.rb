@@ -1,7 +1,8 @@
 class MapsController < ApplicationController
   before_action :set_date_range
+
   def index
-    events = Event.where(options).group(:latitude, :longitude, :event_type_id, :location).count
+    events = Event.where(filter_params).group(:latitude, :longitude, :event_type_id, :location).count
     @event_types = EventType.where(program_option)
     @event_data = get_event_data(events)
     @event_type_id = params[:event_type]
@@ -30,21 +31,15 @@ class MapsController < ApplicationController
     event_data
   end
 
-  def options
-    option = maps_params
-    option.delete :daterange
+  def filter_params
+    option = maps_params[:event] || {}
     option.merge!({ event_date: @start_date..@end_date })
     option.merge! program_option
   end
 
   def set_date_range
-    if params[:daterange].present?
-      @start_date = Date.strptime(params[:daterange].split(' - ')[0], "%m/%d/%Y")
-      @end_date = Date.strptime(params[:daterange].split(' - ')[1], "%m/%d/%Y")
-    else
-      @start_date = Time.zone.today - 29
-      @end_date = Time.zone.today
-    end
+    @start_date = maps_params[:start_date].present? ? Date.parse(maps_params[:start_date]) : Time.zone.today - 29
+    @end_date = maps_params[:end_date].present? ? Date.parse(maps_params[:end_date]) : Time.zone.today
   end
 
   def program_option
@@ -53,6 +48,6 @@ class MapsController < ApplicationController
   end
 
   def maps_params
-    params.permit(:daterange, :program_id, :province_id, :district_id, :village_id, :commune_id, :event_type)
+    params.permit(:start_date, :end_date, event: [:program_id, :province_id, :district_id, :village_id, :commune_id, :event_type])
   end
 end
