@@ -28,6 +28,8 @@
 #
 
 class Event < ApplicationRecord
+  include Events::Searchable
+
   before_create :set_uuid
 
   belongs_to :event_type, optional: true
