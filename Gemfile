@@ -58,6 +58,7 @@ gem 'rack-cors',                  '~> 1.0.3'
 gem 'pumi', github: 'dwilkie/pumi', require: 'pumi/rails'
 
 gem 'elasticsearch-model',        '~> 7.0.0'
+gem 'elasticsearch-rails',        '~> 7.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
