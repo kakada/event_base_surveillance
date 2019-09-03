@@ -6,7 +6,7 @@ module Events::Searchable
     # include Elasticsearch::Model::Callbacks
 
     index_name    "events"
-    # document_type "events"
+    document_type "test"
 
     mapping do
     end

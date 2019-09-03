@@ -76,7 +76,7 @@ class Event < ApplicationRecord
   end
 
   def set_location
-    self.location = addresses.map(&:name_km).join(',')
+    # self.location = addresses.map(&:name_km).join(',')
   end
 
   def set_program_id
