@@ -162,9 +162,9 @@ EBS.MapsIndex = (() => {
           return !this.value;
         })
         .prop('name', '');
-    });
 
-    _constructDateRange();
+      _constructDateRange();
+    });
   }
 
   function _constructDateRange() {
