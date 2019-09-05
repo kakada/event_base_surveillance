@@ -10,6 +10,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string  :location
       t.float   :latitude
       t.float   :longitude
+      t.point   :geopoint
       t.string  :province_id
       t.string  :district_id
       t.string  :commune_id

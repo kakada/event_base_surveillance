@@ -3,12 +3,10 @@ module Events::Searchable
 
   included do
     include Elasticsearch::Model
-    # include Elasticsearch::Model::Callbacks
-
-    index_name    "events"
-    document_type "test"
+    include Elasticsearch::Model::Callbacks
 
     mapping do
+      indexes :geo_point, type: :geo_point
     end
   end
 end

@@ -19,6 +19,9 @@ namespace :sample do
 
           villages.each do |village|
             max_event = rand(5..30)
+            lat = rand(12.0...12.5657)
+            lng = rand(102.0...104.9910)
+
             (1..max_event).each do |i|
               date = Date.today - rand(0..7)
               event = Event.new(
@@ -27,8 +30,9 @@ namespace :sample do
                 district_id: district.id,
                 commune_id: commune.id,
                 village_id: village.id,
-                latitude: rand(12.0...12.5657),
-                longitude: rand(102.0...104.9910),
+                latitude: lat,
+                longitude: lng,
+                geopoint: "#{lat},#{lng}",
                 location: [province.name_en, district.name_en, commune.name_en, village.name_en].join(','),
                 value: rand(1..5),
                 event_date: date,

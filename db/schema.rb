@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_074604) do
     t.string "location"
     t.float "latitude"
     t.float "longitude"
+    t.point "geopoint"
     t.string "province_id"
     t.string "district_id"
     t.string "commune_id"
