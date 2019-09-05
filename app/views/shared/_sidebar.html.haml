@@ -25,6 +25,12 @@
           %i.fas.fa-users
           = t('sidebar.users')
 
+    - if policy(Milestone).index?
+      %li{class: get_css_active_class('milestones')}
+        = link_to milestones_path do
+          %i.fas.fa-tasks
+          = t('sidebar.milestones')
+
     - if policy(EventType).index?
       %li{class: (get_css_active_class('event_types') || get_css_active_class('event_types/forms')) }
         = link_to event_types_path do

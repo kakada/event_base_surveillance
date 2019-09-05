@@ -31,6 +31,7 @@
 //= require common/location
 
 // All Pages
+//= require milestones/new
 //= require form_types/new
 //= require form_types/edit
 //= require event_forms/new

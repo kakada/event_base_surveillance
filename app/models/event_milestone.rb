@@ -1,0 +1,2 @@
+class EventMilestone < ApplicationRecord
+end

@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     get :unshared, on: :member
   end
 
+  resources :milestones
+
   resources :client_apps do
     get :activate, on: :member
     get :deactivate, on: :member

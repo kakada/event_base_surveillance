@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_16_070451) do
+ActiveRecord::Schema.define(version: 2019_09_05_075152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,31 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_milestone_attributes", force: :cascade do |t|
+    t.integer "milestone_attribute_id"
+    t.string "value"
+    t.text "values", array: true
+    t.text "properties"
+    t.string "image"
+    t.string "file"
+    t.string "valueable_type"
+    t.bigint "valueable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["valueable_type", "valueable_id"], name: "index_attr_on_valueable_type_and_valueable_id"
+  end
+
+  create_table "event_milestones", force: :cascade do |t|
+    t.integer "event_uuid"
+    t.integer "milestone_id"
+    t.integer "submitter_id"
+    t.date "conducted_at"
+    t.string "priority"
+    t.string "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "event_types", force: :cascade do |t|
     t.string "name", null: false
     t.integer "user_id"
@@ -59,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.string "uuid"
     t.integer "event_type_id"
     t.integer "creator_id"
     t.integer "program_id"
@@ -133,6 +159,35 @@ ActiveRecord::Schema.define(version: 2019_08_16_070451) do
     t.date "conducted_at"
     t.string "priority"
     t.string "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "milestone_attribute_options", force: :cascade do |t|
+    t.integer "milestone_attribute_id"
+    t.string "name"
+    t.string "value"
+    t.string "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "milestone_attributes", force: :cascade do |t|
+    t.integer "milestone_id"
+    t.string "name", null: false
+    t.string "kind"
+    t.boolean "required"
+    t.string "mapping_field"
+    t.string "mapping_field_type"
+    t.integer "display_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "milestones", force: :cascade do |t|
+    t.integer "program_id"
+    t.string "name"
+    t.integer "display_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
