@@ -10,7 +10,6 @@
 #  program_id    :integer
 #  value         :integer
 #  description   :text
-#  location      :string
 #  latitude      :float
 #  longitude     :float
 #  province_id   :string
@@ -46,9 +45,8 @@ class Event < ApplicationRecord
   delegate :name, to: :program, prefix: true
 
   # Validation
-  validates :location, :value, :event_date, :report_date, presence: true
+  validates :value, :event_date, :report_date, presence: true
   validate  :validate_field_values, on: %i[create update]
-  before_validation :set_location
   before_validation :set_program_id
 
   # Nested Attributes
@@ -59,6 +57,10 @@ class Event < ApplicationRecord
 
   def conducted_at
     report_date
+  end
+
+  def location_name(reverse = false)
+    (reverse ? addresses.reverse : addresses).map(&:name_km).join(',')
   end
 
   private
@@ -72,11 +74,7 @@ class Event < ApplicationRecord
     district = Pumi::District.find_by_id(district_id) if province && district_id.present?
     commune  = Pumi::Commune.find_by_id(commune_id) if district && commune_id.present?
     village  = Pumi::Village.find_by_id(village_id) if commune && village_id.present?
-    [province, district, commune, village].reverse.reject(&:blank?)
-  end
-
-  def set_location
-    # self.location = addresses.map(&:name_km).join(',')
+    [province, district, commune, village].reject(&:blank?)
   end
 
   def set_program_id

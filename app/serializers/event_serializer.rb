@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :value, :description, :location, :latitude,
+  attributes :id, :value, :description, :location_name, :latitude,
              :longitude, :event_date, :report_date, :status,
              :risk_level, :source, :status, :event_milestones
 
