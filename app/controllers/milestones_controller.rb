@@ -2,7 +2,7 @@
 
 class MilestonesController < ::ApplicationController
   def index
-    @milestones = current_program.milestones.includes(:milestone_fields)
+    @milestones = current_program.milestones.includes(:fields)
   end
 
   def new
@@ -46,10 +46,10 @@ class MilestonesController < ::ApplicationController
   def milestone_params
     params.require(:milestone).permit(
       :name, :display_order,
-      milestone_fields_attributes: [
-        :id, :name, :kind, :required, :display_order,
+      fields_attributes: [
+        :id, :name, :field_type, :required, :display_order,
         :mapping_field, :mapping_field_type, :_destroy,
-        milestone_field_options_attributes: %i[
+        field_options_attributes: %i[
           id name value color _destroy
         ]
       ]

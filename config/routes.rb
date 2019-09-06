@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :users
   resources :events do
     scope module: :events do
-      resources :forms
+      resources :event_milestones
     end
 
     get :download, on: :collection

@@ -28,17 +28,19 @@
 #
 
 class Event < ApplicationRecord
-  belongs_to :event_type
+  before_create :set_uuid
+
+  belongs_to :event_type, optional: true
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
-  has_many   :forms, dependent: :destroy
+  has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
   has_many   :field_values, as: :valueable
 
   # History
   has_associated_audits
 
   # Deligation
-  delegate :name, :color, to: :event_type, prefix: :event_type
+  delegate :name, :color, to: :event_type, prefix: :event_type, allow_nil: true
   delegate :name, to: :program, prefix: true
 
   # Validation
@@ -51,13 +53,17 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
     attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank? && attributes['file'].blank?
   }
-  accepts_nested_attributes_for :forms, allow_destroy: true
+  accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
   def conducted_at
     report_date
   end
 
   private
+
+  def set_uuid
+    self.uuid = SecureRandom.uuid
+  end
 
   def addresses
     province = Pumi::Province.find_by_id(province_id) if province_id.present?
@@ -76,7 +82,7 @@ class Event < ApplicationRecord
   end
 
   def validate_field_values
-    event_type&.fields&.each do |field|
+    program.milestones.first&.fields&.each do |field|
       next unless field.required?
 
       obj = field_values.select { |value| value.field_id == field.id }.first

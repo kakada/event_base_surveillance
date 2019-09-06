@@ -1,2 +1,0 @@
-class MilestoneFieldValue < ApplicationRecord
-end

@@ -9,7 +9,7 @@
           %i.fas.fa-caret-right
 
         .flex1
-          = f.hidden_field :kind, class: 'field-type'
+          = f.hidden_field :field_type, class: 'field-type'
           = f.text_field :name, placeholder: "field_name", class: 'form-control field-name'
 
         .form-check
@@ -34,6 +34,6 @@
           = f.text_field :mapping_field_type, placeholder: "field type", class: 'form-control mapping-field-type', disabled: true
 
       .options-wrapper
-        = f.fields_for :milestone_field_options do |builder|
-          = render 'milestone_field_option_fields', f: builder
-        = link_to_add_fields "+ Add Option", f, :milestone_field_options
+        = f.fields_for :field_options do |builder|
+          = render 'field_option_fields', f: builder
+        = link_to_add_fields "+ Add Option", f, :field_options

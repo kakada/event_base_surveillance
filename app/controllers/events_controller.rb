@@ -2,8 +2,7 @@
 
 class EventsController < ApplicationController
   def index
-    @event_types = policy_scope(EventType.includes(:form_types))
-    @pagy, @events = pagy(policy_scope(Event.includes(:forms).includes(creator: :program)))
+    @pagy, @events = pagy(policy_scope(Event.includes(:event_milestones).includes(creator: :program)))
   end
 
   def show
@@ -11,7 +10,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event_types = policy_scope(EventType.includes(:form_types))
+    @event_types = policy_scope(EventType.all)
     @event = Event.new(event_type_id: params[:event_type_id])
   end
 
@@ -26,7 +25,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event_types = policy_scope(EventType.includes(:form_types))
+    @event_types = policy_scope(EventType.all)
     @event = Event.find(params[:id])
   end
 

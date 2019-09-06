@@ -84,14 +84,14 @@ EBS.MilestonesNew = do ->
       event.preventDefault()
 
   onClickAddField = ->
-    $('form .add_milestone_fields').off('click')
-    $('form .add_milestone_fields').on 'click', (event) ->
+    $('form .add_fields').off('click')
+    $('form .add_fields').on 'click', (event) ->
       appendField(this)
       event.preventDefault()
 
   onClickAddFieldOption = ->
-    $(document).off('click', 'form .add_milestone_field_options')
-    $(document).on 'click', 'form .add_milestone_field_options', (event) ->
+    $(document).off('click', 'form .add_field_options')
+    $(document).on 'click', 'form .add_field_options', (event) ->
       appendField(this)
       initMiniColorPicker()
       event.preventDefault()
@@ -171,7 +171,7 @@ EBS.MilestonesNew = do ->
   showBtnAddSelectOption = (dom)->
     optionsWrapper = $(dom).parents('.fieldset').find('.options-wrapper')
     optionsWrapper.show()
-    optionsWrapper.find('.add_milestone_field_options').click()
+    optionsWrapper.find('.add_field_options').click()
 
   animateListItems = ($item, container, _super) ->
     $clonedItem = $('<li/>').css(height: 0)

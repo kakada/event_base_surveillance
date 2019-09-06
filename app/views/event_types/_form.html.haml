@@ -2,14 +2,14 @@
   = simple_form_for @event_type do |f|
     = f.input :name
     = f.input :color, as: :minicolors, input_html: { class: 'color', data: {minicolors: {theme: :bootstrap, position: :right}}}
-    = render 'mock_predefined_fields'
+    / = render 'mock_predefined_fields'
 
-    %fieldset
-      %legend Additional Fields
-      %ol.fields
-        = f.fields_for :fields do |builder|
-          = render 'event_types/shared/field_fields', f: builder
-        = link_to_add_fields "+ Add Field", f, :fields
+    / %fieldset
+    /   %legend Additional Fields
+    /   %ol.fields
+    /     = f.fields_for :fields do |builder|
+    /       = render 'event_types/shared/field_fields', f: builder
+    /     = link_to_add_fields "+ Add Field", f, :fields
 
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', event_types_path, class: 'btn btn-secondary'

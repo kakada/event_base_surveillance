@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_05_075152) do
+ActiveRecord::Schema.define(version: 2019_09_05_074604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_075152) do
   end
 
   create_table "event_milestones", force: :cascade do |t|
-    t.integer "event_uuid"
+    t.string "event_uuid"
     t.integer "milestone_id"
     t.integer "submitter_id"
     t.date "conducted_at"
@@ -69,8 +69,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_075152) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string "uuid"
+  create_table "events", primary_key: "uuid", id: :string, limit: 36, force: :cascade do |t|
     t.integer "event_type_id"
     t.integer "creator_id"
     t.integer "program_id"
@@ -123,11 +122,9 @@ ActiveRecord::Schema.define(version: 2019_09_05_075152) do
     t.string "mapping_field"
     t.string "mapping_field_type"
     t.integer "display_order"
-    t.string "fieldable_type"
-    t.bigint "fieldable_id"
+    t.integer "milestone_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fieldable_type", "fieldable_id"], name: "index_fields_on_fieldable_type_and_fieldable_id"
   end
 
   create_table "form_types", force: :cascade do |t|
@@ -145,41 +142,6 @@ ActiveRecord::Schema.define(version: 2019_09_05_075152) do
     t.date "conducted_at"
     t.string "priority"
     t.string "source"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "milestone_field_options", force: :cascade do |t|
-    t.integer "milestone_field_id"
-    t.string "name"
-    t.string "value"
-    t.string "color"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "milestone_field_values", force: :cascade do |t|
-    t.integer "milestone_field_id"
-    t.string "value"
-    t.text "values", array: true
-    t.text "properties"
-    t.string "image"
-    t.string "file"
-    t.string "valueable_type"
-    t.bigint "valueable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["valueable_type", "valueable_id"], name: "index_field_value_on_valueable_type_and_valueable_id"
-  end
-
-  create_table "milestone_fields", force: :cascade do |t|
-    t.integer "milestone_id"
-    t.string "name", null: false
-    t.string "kind"
-    t.boolean "required"
-    t.string "mapping_field"
-    t.string "mapping_field_type"
-    t.integer "display_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

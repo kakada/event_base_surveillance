@@ -20,10 +20,10 @@
 class Field < ApplicationRecord
   FIELD_TYPES = %w[text integer date select_one select_multiple note image location mapping_field file].freeze
 
-  belongs_to :fieldable, polymorphic: true
+  belongs_to :milestone
   has_many   :field_options, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: { scope: %i[fieldable_id fieldable_type], message: 'already exist' }
+  validates :name, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
   before_validation :set_mapping_field_type
 

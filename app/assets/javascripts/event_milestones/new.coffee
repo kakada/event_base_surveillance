@@ -1,4 +1,4 @@
-EBS.EventsFormsNew = do ->
+EBS.EventsEvent_milestonesNew = do ->
   init = ->
     initSelectPicker()
     onChangeImage()
