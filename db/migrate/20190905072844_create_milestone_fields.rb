@@ -1,6 +1,6 @@
-class CreateMilestoneAttributes < ActiveRecord::Migration[5.2]
+class CreateMilestoneFields < ActiveRecord::Migration[5.2]
   def change
-    create_table :milestone_attributes do |t|
+    create_table :milestone_fields do |t|
       t.integer   :milestone_id
       t.string    :name, null: false
       t.string    :kind

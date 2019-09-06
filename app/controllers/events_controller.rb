@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    @event_types = policy_scope(EventType.includes(:form_types))
     @event = Event.new(event_type_id: params[:event_type_id])
   end
 
@@ -25,6 +26,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event_types = policy_scope(EventType.includes(:form_types))
     @event = Event.find(params[:id])
   end
 

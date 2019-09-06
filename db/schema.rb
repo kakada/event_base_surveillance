@@ -48,20 +48,6 @@ ActiveRecord::Schema.define(version: 2019_09_05_075152) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "event_milestone_attributes", force: :cascade do |t|
-    t.integer "milestone_attribute_id"
-    t.string "value"
-    t.text "values", array: true
-    t.text "properties"
-    t.string "image"
-    t.string "file"
-    t.string "valueable_type"
-    t.bigint "valueable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["valueable_type", "valueable_id"], name: "index_attr_on_valueable_type_and_valueable_id"
-  end
-
   create_table "event_milestones", force: :cascade do |t|
     t.integer "event_uuid"
     t.integer "milestone_id"
@@ -163,8 +149,8 @@ ActiveRecord::Schema.define(version: 2019_09_05_075152) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "milestone_attribute_options", force: :cascade do |t|
-    t.integer "milestone_attribute_id"
+  create_table "milestone_field_options", force: :cascade do |t|
+    t.integer "milestone_field_id"
     t.string "name"
     t.string "value"
     t.string "color"
@@ -172,7 +158,21 @@ ActiveRecord::Schema.define(version: 2019_09_05_075152) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "milestone_attributes", force: :cascade do |t|
+  create_table "milestone_field_values", force: :cascade do |t|
+    t.integer "milestone_field_id"
+    t.string "value"
+    t.text "values", array: true
+    t.text "properties"
+    t.string "image"
+    t.string "file"
+    t.string "valueable_type"
+    t.bigint "valueable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["valueable_type", "valueable_id"], name: "index_field_value_on_valueable_type_and_valueable_id"
+  end
+
+  create_table "milestone_fields", force: :cascade do |t|
     t.integer "milestone_id"
     t.string "name", null: false
     t.string "kind"

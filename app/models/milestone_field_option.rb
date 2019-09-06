@@ -1,5 +1,5 @@
-class MilestoneAttributeOption < ApplicationRecord
-  belongs_to :milestone_attribute
+class MilestoneFieldOption < ApplicationRecord
+  belongs_to :milestone_field
 
   before_validation :set_option_value
 

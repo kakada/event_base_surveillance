@@ -1,11 +1,11 @@
-class MilestoneAttribute < ApplicationRecord
+class MilestoneField < ApplicationRecord
   FIELD_TYPES = %w[text integer date select_one select_multiple note image location mapping_field file].freeze
   MAPPING_FIELDS = [
     { name: 'risk_level', field_type: 'select_one' }
   ].freeze
 
   belongs_to :milestone
-  has_many   :milestone_attribute_options, dependent: :destroy
+  has_many   :milestone_field_options, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
   validates :kind, presence: true, inclusion: { in: FIELD_TYPES }
@@ -13,7 +13,7 @@ class MilestoneAttribute < ApplicationRecord
 
   default_scope { order(display_order: :asc) }
 
-  accepts_nested_attributes_for :milestone_attribute_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+  accepts_nested_attributes_for :milestone_field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
   private
 

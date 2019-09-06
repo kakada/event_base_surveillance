@@ -1,2 +1,0 @@
-class EventMilestoneAttribute < ApplicationRecord
-end

@@ -34,6 +34,6 @@
           = f.text_field :mapping_field_type, placeholder: "field type", class: 'form-control mapping-field-type', disabled: true
 
       .options-wrapper
-        = f.fields_for :milestone_attribute_options do |builder|
-          = render 'milestone_attribute_option_fields', f: builder
-        = link_to_add_fields "+ Add Option", f, :milestone_attribute_options
+        = f.fields_for :milestone_field_options do |builder|
+          = render 'milestone_field_option_fields', f: builder
+        = link_to_add_fields "+ Add Option", f, :milestone_field_options

@@ -10,10 +10,10 @@
 %fieldset
   %legend Additional Fields
   %ol.fields
-    = f.fields_for :milestone_attributes do |builder|
-      = render 'milestone_attribute_fields', f: builder
+    = f.fields_for :milestone_fields do |builder|
+      = render 'milestone_field_fields', f: builder
 
-    = link_to_add_fields "+ Add Field", f, :milestone_attributes
+    = link_to_add_fields "+ Add Field", f, :milestone_fields
 
   .actions{style: 'margin-top: 20px'}
     = f.button :submit, class: 'btn btn-primary'

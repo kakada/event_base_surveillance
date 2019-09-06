@@ -1,0 +1,2 @@
+class MilestoneFieldValue < ApplicationRecord
+end
