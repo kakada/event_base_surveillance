@@ -1,21 +1,14 @@
-DB_HOST=db
-DB_USER=postgres
-DB_PWD=
-RAILS_MAX_THREADS=5
-ELASTICSEARCH_URL=elasticsearch:9200
-REDIS_URL=redis://redis:6379
-KIBANA_HOST=kibana
-KIBANA_PORT=5601
-
-
 # Rails configuration
 DB_HOST=db
 DB_USER=postgres
 DB_PWD=
 RAILS_MAX_THREADS=5
 
+REDIS_URL=redis://redis:6379
+
+ELASTICSEARCH_URL=elasticsearch:9200
+KIBANA_HOST=kibana
+KIBANA_PORT=5601
+
 # Shell with unicode support
 LANG=C.UTF-8
-
-JOB_WORKER_URL=redis://redis:6379/0
-
