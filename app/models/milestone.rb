@@ -1,6 +1,6 @@
 class Milestone < ApplicationRecord
   belongs_to :program
-  has_many   :fields
+  has_many   :fields, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validate :validate_unique_field_name
