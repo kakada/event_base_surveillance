@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MilestonePolicy < ApplicationPolicy
   def index?
     user.program_admin?

@@ -11,8 +11,7 @@
 #  mapping_field      :string
 #  mapping_field_type :string
 #  display_order      :integer
-#  fieldable_type     :string
-#  fieldable_id       :bigint
+#  milestone_id       :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

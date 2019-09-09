@@ -1,3 +1,20 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: event_milestones
+#
+#  id           :bigint           not null, primary key
+#  event_uuid   :string
+#  milestone_id :integer
+#  submitter_id :integer
+#  conducted_at :date
+#  priority     :string
+#  source       :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 class EventMilestone < ApplicationRecord
   belongs_to :event, foreign_key: :event_uuid
   belongs_to :milestone

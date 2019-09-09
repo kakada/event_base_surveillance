@@ -4,7 +4,7 @@
 #
 # Table name: events
 #
-#  id            :bigint           not null, primary key
+#  uuid          :string(36)       not null, primary key
 #  event_type_id :integer
 #  creator_id    :integer
 #  program_id    :integer
@@ -82,7 +82,7 @@ class Event < ApplicationRecord
   end
 
   def validate_field_values
-    !!program && program.milestones.first&.fields&.each do |field|
+    program.present? && program.milestones.first&.fields&.each do |field|
       next unless field.required?
 
       obj = field_values.select { |value| value.field_id == field.id }.first

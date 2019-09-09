@@ -1,3 +1,17 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: milestones
+#
+#  id            :bigint           not null, primary key
+#  program_id    :integer
+#  name          :string
+#  display_order :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class Milestone < ApplicationRecord
   belongs_to :program
   has_many   :fields, dependent: :destroy

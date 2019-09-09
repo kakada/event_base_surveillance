@@ -127,25 +127,6 @@ ActiveRecord::Schema.define(version: 2019_09_05_074604) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "form_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "event_type_id"
-    t.integer "display_order"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "forms", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "form_type_id"
-    t.integer "submitter_id"
-    t.date "conducted_at"
-    t.string "priority"
-    t.string "source"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "milestones", force: :cascade do |t|
     t.integer "program_id"
     t.string "name"
