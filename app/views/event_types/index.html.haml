@@ -13,7 +13,6 @@
       %thead
         %tr
           %th Name
-          %th Number of Forms
           %th Last Modified
           %td Status
           %th
@@ -26,7 +25,7 @@
                 .small-color{style: "background-color: #{event_type.color}"}
                   = event_type.name[0]
                 %span= event_type.name
-            %td= event_type.form_types.size
+
             %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
             %td= event_type.shared ? 'shared' : '-'
             %td
@@ -35,23 +34,16 @@
                   %i.fas.fa-ellipsis-v
 
                 .dropdown-menu.dropdown-menu-right
-                  = link_to event_type_form_types_path(event_type), class: "btn dropdown-item" do
-                    %i.fas.fa-tasks.drop-menu-icon
-                    %span Manage Form
-
                   - if policy(event_type).update?
                     = link_to edit_event_type_path(event_type), class: "btn dropdown-item" do
                       %i.fas.fa-pen.drop-menu-icon
                       %span Edit
 
-                  = link_to clone_event_type_path(event_type), class: "btn dropdown-item" do
-                    %i.fas.fa-clone.drop-menu-icon
-                    %span Clone
-
                   - unless event_type.shared?
                     = link_to shared_event_type_path(event_type), class: "btn dropdown-item" do
                       %i.fas.fa-share-alt.drop-menu-icon
                       %span Shared Data
+
                   - if event_type.shared?
                     = link_to unshared_event_type_path(event_type), class: "btn dropdown-item" do
                       %i.fas.fa-share-alt.drop-menu-icon

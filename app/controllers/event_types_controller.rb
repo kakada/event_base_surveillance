@@ -2,7 +2,7 @@
 
 class EventTypesController < ApplicationController
   def index
-    @event_types = policy_scope(EventType.includes(:form_types))
+    @event_types = policy_scope(EventType.all)
   end
 
   def new
@@ -38,13 +38,6 @@ class EventTypesController < ApplicationController
   def destroy
     @event_type = EventType.find(params[:id])
     @event_type.destroy
-
-    redirect_to event_types_url
-  end
-
-  def clone
-    @event_type = EventTypeService.new(params[:id])
-    @event_type.clone
 
     redirect_to event_types_url
   end

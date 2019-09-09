@@ -1,7 +1,5 @@
 EBS.Event_typesNew = do ->
   init = ->
-    EBS.Event_typesForm_typesNew.init()
-
     setupColor()
 
   setupColor = ->

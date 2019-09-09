@@ -23,11 +23,6 @@ Rails.application.routes.draw do
   end
 
   resources :event_types do
-    scope module: :event_types do
-      resources :form_types
-    end
-
-    get :clone, on: :member
     get :shared, on: :member
     get :unshared, on: :member
   end
@@ -43,11 +38,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :event_types, only: [:index]
-      resources :events, except: [:new, :edit] do
-        scope module: :events do
-          resources :forms, except: [:new, :edit]
-        end
-      end
+      resources :events, except: [:new, :edit]
     end
   end
 

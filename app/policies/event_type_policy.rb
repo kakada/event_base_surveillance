@@ -10,7 +10,7 @@ class EventTypePolicy < ApplicationPolicy
   end
 
   def update?
-    user.program_admin? && record.events.blank?
+    user.program_admin?
   end
 
   def destroy?

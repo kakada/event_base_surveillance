@@ -82,7 +82,7 @@ class Event < ApplicationRecord
   end
 
   def validate_field_values
-    program.milestones.first&.fields&.each do |field|
+    !!program && program.milestones.first&.fields&.each do |field|
       next unless field.required?
 
       obj = field_values.select { |value| value.field_id == field.id }.first
