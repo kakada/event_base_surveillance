@@ -35,25 +35,25 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - .:/app
+      - bundle:/usr/local/bundle
     depends_on:
       - redis
     env_file: docker-env
     command: bundle exec sidekiq
+
   redis:
     container_name: redis
     image: redis
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.1
+    image: elasticsearch:7.3.1
     environment:
       - discovery.type=single-node
     volumes:
       - elastic:/usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.3.1
+    image: kibana:7.3.1
     env_file: docker-env
     depends_on:
       - elasticsearch
