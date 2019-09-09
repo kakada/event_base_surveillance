@@ -1,10 +1,5 @@
 .w-50.view-center
   = simple_form_for @event do |f|
-    = f.input :event_type_id, as: :hidden
-
-    .form-group
-      %label Event Type
-      %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
     = f.input :event_type_id, collection: @event_types
     = f.input :value
     = f.input :description
