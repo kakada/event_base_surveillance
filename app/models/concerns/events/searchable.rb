@@ -6,7 +6,15 @@ module Events::Searchable
     include Elasticsearch::Model::Callbacks
 
     mapping do
-      indexes :geo_point, type: :geo_point
+      indexes :location_name, type: :text
+      indexes :location, type: :geo_point
+    end
+
+    def as_indexed_json(_options = {})
+      self.as_json.merge(
+        location_name: self.location_name,
+        location: {lat: self.latitude, lon: self.longitude}
+      )
     end
   end
 end

@@ -47,6 +47,7 @@ class Event < ApplicationRecord
   # Validation
   validates :value, :event_date, :report_date, presence: true
   validate  :validate_field_values, on: %i[create update]
+  
   before_validation :set_program_id
 
   # Nested Attributes
@@ -59,8 +60,8 @@ class Event < ApplicationRecord
     report_date
   end
 
-  def location_name(reverse = false)
-    (reverse ? addresses.reverse : addresses).map(&:name_km).join(',')
+  def location_name(reverse = false, delimeter = ',')
+    (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
   end
 
   private

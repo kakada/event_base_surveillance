@@ -23,20 +23,20 @@ namespace :sample do
             lng = rand(102.0...104.9910)
 
             (1..max_event).each do |i|
-              date = Date.today - rand(0..7)
+              date = Date.today - rand(0..30)
               event = Event.new(
                 creator_id: creator_id,
                 event_type_id: event_types.sample,
+                province_id: province.id,
                 district_id: district.id,
                 commune_id: commune.id,
                 village_id: village.id,
                 latitude: lat,
                 longitude: lng,
-                geopoint: "#{lat},#{lng}",
-                location: [province.name_en, district.name_en, commune.name_en, village.name_en].join(','),
+                location: "#{lat},#{lng}",
                 value: rand(1..5),
                 event_date: date,
-                report_date: date
+                report_date: Date.today
               )
 
               event.save
