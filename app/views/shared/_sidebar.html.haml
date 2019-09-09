@@ -32,10 +32,10 @@
           = t('sidebar.milestones')
 
     - if policy(EventType).index?
-      %li{class: (get_css_active_class('event_types') || get_css_active_class('event_types/forms')) }
+      %li{class: get_css_active_class('event_types') }
         = link_to event_types_path do
           %i.fas.fa-calendar
-          = t('sidebar.event_type_and_form')
+          = t('sidebar.event_types')
 
     - if policy(Event).index?
       %li{class: get_css_active_class('events') }
