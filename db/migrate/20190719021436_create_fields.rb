@@ -7,7 +7,7 @@ class CreateFields < ActiveRecord::Migration[5.2]
       t.string    :mapping_field
       t.string    :mapping_field_type
       t.integer   :display_order
-      t.references :fieldable, polymorphic: true, index: true
+      t.integer   :milestone_id
 
       t.timestamps
     end

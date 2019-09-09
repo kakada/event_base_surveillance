@@ -1,18 +1,13 @@
 .w-50.view-center
   = simple_form_for @event do |f|
-    = f.input :event_type_id, as: :hidden
-
-    .form-group
-      %label Event Type
-      %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
-
+    = f.input :event_type_id, collection: @event_types
     = f.input :value
     = f.input :description
     = render 'location', f: f
     = f.input :event_date, as: :date, html5: true
     = f.input :report_date, as: :date, html5: true
 
-    - @event.event_type.fields.each do |field|
+    - current_program.milestones.first.fields.each do |field|
       - obj = @event.field_values.select{ |a| a.field_id==field.id }.first || f.object.field_values.new
       = f.fields_for :field_values, obj do |builder|
         = render "events/fields/#{field.field_type}", field: field, f: builder

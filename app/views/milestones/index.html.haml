@@ -1,0 +1,30 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "Milestones"
+      %div
+        - if policy(Milestone).update?
+          = link_to new_milestone_path, class: 'btn btn-primary' do
+            %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @milestone }
+
+  - if @milestones.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Name
+          %th
+      %tbody
+        - @milestones.each do |milestone|
+          %tr
+            %td
+              %span.badge.badge-pill.badge-info= milestone.fields.size
+              = milestone.name
+
+            %td
+              - if policy(Milestone).update?
+                = link_to 'Edit', edit_milestone_path(milestone), class: "badge badge-info"
+                = ' / '
+                = link_to 'Delete', milestone_path(milestone), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this milestone?'}
+

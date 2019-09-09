@@ -1,0 +1,3 @@
+EBS.EventsEvent_milestonesEdit = EBS.EventsEvent_milestonesNew
+EBS.EventsEvent_milestonesUpdate = EBS.EventsEvent_milestonesNew
+EBS.EventsEvent_milestonesCreate = EBS.EventsEvent_milestonesNew

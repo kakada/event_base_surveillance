@@ -15,6 +15,7 @@ class Program < ApplicationRecord
   has_many  :client_apps
   has_many  :events
   has_many  :event_types
+  has_many  :milestones
 
   validates :name, presence: true
 end

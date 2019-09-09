@@ -1,0 +1,22 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
+
+  .w-50.view-center
+    = simple_form_for @event_milestone, url: event_event_milestones_path(@event), method: :post do |f|
+      .form-group
+        %label Event Type
+        %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
+
+      = f.input :conducted_at, as: :date, html5: true
+      = f.input :submitter_id, input_html: {value: current_user.id}, as: :hidden
+      = f.input :milestone_id, input_html: {value: @event_milestone.milestone.id}, as: :hidden
+
+      - @event_milestone.milestone.fields.each do |field|
+        - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id }.first || @event_milestone.field_values.new
+        = f.fields_for :field_values, obj do |builder|
+          = render "events/fields/#{field.field_type}", field: field, f: builder
+
+      = f.button :submit, class: 'btn btn-primary'
+      = link_to 'Cancel', event_path(@event), class: 'btn btn-secondary'
