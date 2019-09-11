@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::EventsController, type: :controller do
   let! (:client_app)    { create(:client_app) }
-  let! (:event_type) { create(:event_type, program: client_app.program) }
+  let! (:province) { create(:location)}
+  let! (:commune) { create(:location, code: '110402', kind: 'commune')}
+  let! (:event_type) { create(:event_type, :with_field, :with_assessment_form_type, program: client_app.program) }
   let  (:event_attributes) {
     {
       "event":{
