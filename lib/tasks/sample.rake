@@ -7,20 +7,19 @@ namespace :sample do
     user = User.find creator_id
     event_types = EventType.where(program_id: user.program_id).collect(&:id)
 
-    provinces = Pumi::Province.all
+    provinces = Location.where(kind: 'province')
 
     provinces.each do |province|
-      districts = Pumi::District.where(:province_id => province.id).sample(1)
+      districts = province.children.order('random()').limit(3)
 
       districts.each do |district|
-        communes = Pumi::Commune.where(:district_id => district.id).sample(1)
+        communes = district.children.order('random()').limit(5)
+
         communes.each do |commune|
-          villages = Pumi::Village.where(:commune_id => commune.id).sample(1)
+          villages = commune.children.where.not(latitude: nil).limit(2)
 
           villages.each do |village|
             max_event = rand(5..30)
-            lat = rand(12.0...12.5657)
-            lng = rand(102.0...104.9910)
 
             (1..max_event).each do |i|
               date = Date.today - rand(0..30)
@@ -31,9 +30,6 @@ namespace :sample do
                 district_id: district.id,
                 commune_id: commune.id,
                 village_id: village.id,
-                latitude: lat,
-                longitude: lng,
-                location: "#{lat},#{lng}",
                 value: rand(1..5),
                 event_date: date,
                 report_date: Date.today

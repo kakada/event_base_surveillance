@@ -44,7 +44,7 @@ namespace :location_data do
   end
 
   def location_to_csv location, csv
-    csv << [location.code, location.name_en, location.name_km, location.kind, location.parent_id, location.geopoint.try(:x), location.geopoint.try(:y)]
+    csv << [location.code, location.name_en, location.name_km, location.kind, location.parent_id, location.latitude, location.longitude]
     children = location.children.order(code: :asc)
     children.each do |child|
       location_to_csv child, csv
