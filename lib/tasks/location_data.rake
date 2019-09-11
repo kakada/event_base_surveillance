@@ -19,8 +19,10 @@ namespace :location_data do
       loc.name_km = data[2]
       loc.kind = data[3]
       loc.parent_id = data[4]
-      loc.geopoint = if data[5].present? && data[6].present? then "#{data[5]},#{data[6]}" else nil end
-
+      if data[5].present? && data[6].present?
+        loc.latitude = data[5]
+        loc.longitude = data[6]
+      end
       loc.save
     end
   end

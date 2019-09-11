@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :location do
-    code { "MyString" }
-    name_en { "MyString" }
-    name_km { "MyString" }
-    kind { "MyString" }
-    parent_id { "MyString" }
-    latitude { 1.5 }
-    longitude { 1.5 }
+    code { "01" }
+    name_en { "Banteay Meanchey" }
+    name_km { "បន្ទាយមានជ័យ" }
+    kind { "province" }
+    parent_id { nil }
+    latitude { 13.7531914 }
+    longitude { 102.989615 }
   end
 end
