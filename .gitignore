@@ -57,3 +57,4 @@ build-iPhoneSimulator/
 
 public/uploads/
 sample/locations.csv
+config/master.key
