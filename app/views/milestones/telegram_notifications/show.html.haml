@@ -1,0 +1,13 @@
+#content{style: 'display: flex; flex-direction: column'}
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Telegram Notification
+
+  .w-50.view-center{style: 'flex: 1; display: flex; align-items: center; justify-content: center;'}
+
+    %div{style: 'text-align: center'}
+      %div Please setup your telegram notification
+      - url = @telegram.nil? ? new_milestone_telegram_notification_path(@milestone) : edit_milestone_telegram_notification_path(@milestone)
+      = link_to 'Setup', url, class: 'btn btn-primary'
+
+

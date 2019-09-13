@@ -27,7 +27,11 @@ Rails.application.routes.draw do
     get :unshared, on: :member
   end
 
-  resources :milestones
+  resources :milestones do
+    scope module: :milestones do
+      resource :telegram_notification
+    end
+  end
 
   resources :client_apps do
     get :activate, on: :member

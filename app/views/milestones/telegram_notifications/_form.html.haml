@@ -1,0 +1,8 @@
+.w-50.view-center
+  = simple_form_for @telegram, url: milestone_telegram_notification_path(@milestone) do |f|
+    = f.input :message
+    = f.input :chat_ids, label: 'Chat groups', collection: @chats, input_html: {:multiple => "multiple", class: 'selectpicker'}
+
+    = @chat_ids
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', milestone_telegram_notification_path, class: 'btn btn-secondary'
