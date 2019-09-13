@@ -31,15 +31,15 @@ namespace :location_data do
   desc 'export location data'
   task export: :environment do
     require 'csv'
-    file_path = "#{Rails.root}/tmp/locations.csv"
-    File.delete(file_path) if File.file?(file_path)
-    File.new(file_path, "w")
-    csv = CSV.open(file_path, 'w')
-    csv << ['code', 'name_en', 'name_km', 'kind', 'parent_id', 'latitude', 'longitude']
 
-    provinces = Location.where(kind: 'province').order(code: :asc)
-    provinces.each do |province|
-      location_to_csv province, csv
+    file_path = "#{Rails.root}/tmp/locations.csv"
+    CSV.open(file_path, 'w') do |csv|
+      csv << ['code', 'name_en', 'name_km', 'kind', 'parent_id', 'latitude', 'longitude']
+
+      provinces = Location.where(kind: 'province').order(code: :asc)
+      provinces.each do |province|
+        location_to_csv province, csv
+      end
     end
   end
 
