@@ -1,13 +1,24 @@
-#content{style: 'display: flex; flex-direction: column'}
+#content.flex-column
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 Telegram Notification
+      %h3= "#{@milestone.name}: Telegram Notification"
+      = link_to 'Done', milestones_path, class: 'btn btn-light'
 
-  .w-50.view-center{style: 'flex: 1; display: flex; align-items: center; justify-content: center;'}
+  - if @telegram.present?
+    .w-50.view-center
+      %ul.list.flex1
+        %li
+          %span.type Message:
+          %span.value= @telegram.message
+        %li
+          %span.type Chat groups:
+          %span.value= @telegram.telegram_groups.pluck(:title).join(', ')
 
-    %div{style: 'text-align: center'}
-      %div Please setup your telegram notification
-      - url = @telegram.nil? ? new_milestone_telegram_notification_path(@milestone) : edit_milestone_telegram_notification_path(@milestone)
-      = link_to 'Setup', url, class: 'btn btn-primary'
+      %div
+        = link_to 'Change', edit_milestone_telegram_notification_path(@milestone), class: 'btn btn-primary'
 
-
+  - else
+    .w-50.view-center.flex1.flex-row-vertical-center
+      .flex1
+        %div Please setup your telegram notification
+        = link_to 'Setup', new_milestone_telegram_notification_path(@milestone), class: 'btn btn-primary'

@@ -29,3 +29,16 @@
   margin: 0 auto;
   margin-top: 30px;
 }
+
+.list li{
+  display: flex;
+  padding: 10px 0;
+
+  .type {
+    display: block;
+    width: 200px;
+  }
+  .value {
+
+  }
+}

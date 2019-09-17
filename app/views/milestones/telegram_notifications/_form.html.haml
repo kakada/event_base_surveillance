@@ -1,8 +1,14 @@
 .w-50.view-center
   = simple_form_for @telegram, url: milestone_telegram_notification_path(@milestone) do |f|
     = f.input :message
-    = f.input :chat_ids, label: 'Chat groups', collection: @chats, input_html: {:multiple => "multiple", class: 'selectpicker'}
 
-    = @chat_ids
+    .form-group
+      %label Chat Group
+      - @groups.each do |group|
+        .form-check
+          - css_id = "tele-group-#{group.id}"
+          = check_box_tag "telegram_notification[telegram_group_ids][]", group.id, @telegram.telegram_group_ids.include?(group.id), class: 'form-check-input', id: css_id
+          %label.form-check-label{for: css_id}= group.title
+
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', milestone_telegram_notification_path, class: 'btn btn-secondary'

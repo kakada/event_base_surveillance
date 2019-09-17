@@ -3,7 +3,7 @@
 module Milestones
   class TelegramNotificationsController < ::ApplicationController
     before_action :set_milestone
-    before_action :set_telegram_chat, only: [:new, :edit]
+    before_action :set_telegram_group, only: [:new, :edit]
 
     def show
       @telegram = @milestone.telegram_notification
@@ -43,7 +43,7 @@ module Milestones
 
     def telegram_params
       params.require(:telegram_notification).permit(
-        :message, chat_ids: []
+        :message, telegram_group_ids: []
       )
     end
 
@@ -51,8 +51,8 @@ module Milestones
       @milestone = Milestone.find(params[:milestone_id])
     end
 
-    def set_telegram_chat
-      @chats = TelegramBot.new.chats
+    def set_telegram_group
+      @groups = TelegramGroup.all
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_12_090704) do
+ActiveRecord::Schema.define(version: 2019_09_17_021102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,12 +140,26 @@ ActiveRecord::Schema.define(version: 2019_09_12_090704) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "telegram_groups", force: :cascade do |t|
+    t.string "title"
+    t.integer "chat_id"
+    t.boolean "is_active"
+    t.text "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "telegram_notifications", force: :cascade do |t|
     t.integer "milestone_id"
     t.string "chat_ids", array: true
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "telegram_notifications_groups", force: :cascade do |t|
+    t.integer "telegram_notification_id"
+    t.integer "telegram_group_id"
   end
 
   create_table "users", force: :cascade do |t|

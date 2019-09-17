@@ -1,9 +1,6 @@
 EBS.MilestonesTelegram_notificationsNew = do ->
   init = ->
-    initSelectPicker()
 
-  initSelectPicker = ->
-    $('.selectpicker').selectpicker();
 
   { init: init }
 
