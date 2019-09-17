@@ -4,11 +4,11 @@
 
     .form-group
       %label Chat Group
+      = hidden_field_tag "telegram_notification[telegram_group_ids][]", nil
       - @groups.each do |group|
         .form-check
-          - css_id = "tele-group-#{group.id}"
-          = check_box_tag "telegram_notification[telegram_group_ids][]", group.id, @telegram.telegram_group_ids.include?(group.id), class: 'form-check-input', id: css_id
-          %label.form-check-label{for: css_id}= group.title
+          = check_box_tag "telegram_notification[telegram_group_ids][]", group.id, @telegram.telegram_group_ids.include?(group.id), class: 'form-check-input', id: dom_id(group)
+          %label.form-check-label{for: dom_id(group)}= group.title
 
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', milestone_telegram_notification_path, class: 'btn btn-secondary'

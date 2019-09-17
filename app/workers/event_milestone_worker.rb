@@ -10,8 +10,6 @@ class EventMilestoneWorker
     telegram_notification = event_milestone.milestone.telegram_notification
     return if telegram_notification.nil?
 
-    telegram_notification.chat_ids.each do |chat_id|
-      TelegramBot.new().bot.send_message(chat_id: chat_id.to_i, text: telegram_notification.message)
-    end
+    telegram_notification.notify_groups
   end
 end
