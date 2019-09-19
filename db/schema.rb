@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_021102) do
+ActiveRecord::Schema.define(version: 2019_09_19_092346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 2019_09_17_021102) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "chat_groups", force: :cascade do |t|
+    t.string "title"
+    t.integer "chat_id"
+    t.boolean "is_active", default: true
+    t.text "reason"
+    t.string "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "client_apps", force: :cascade do |t|
@@ -134,32 +144,25 @@ ActiveRecord::Schema.define(version: 2019_09_17_021102) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notification_chat_groups", force: :cascade do |t|
+    t.integer "notification_id"
+    t.integer "chat_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "milestone_id"
+    t.text "message"
+    t.string "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "telegram_groups", force: :cascade do |t|
-    t.string "title"
-    t.integer "chat_id"
-    t.boolean "is_active"
-    t.text "reason"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "telegram_notifications", force: :cascade do |t|
-    t.integer "milestone_id"
-    t.string "chat_ids", array: true
-    t.text "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "telegram_notifications_groups", force: :cascade do |t|
-    t.integer "telegram_notification_id"
-    t.integer "telegram_group_id"
   end
 
   create_table "users", force: :cascade do |t|

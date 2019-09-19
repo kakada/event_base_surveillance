@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: notifications
+#
+#  id           :bigint           not null, primary key
+#  milestone_id :integer
+#  message      :text
+#  provider     :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+
+class Notification < ApplicationRecord
+  self.inheritance_column = :provider
+
+  belongs_to :milestone
+  has_many :notification_chat_groups
+  has_many :chat_groups, through: :notification_chat_groups
+
+  scope :telegrams, -> { where(provider: 'Telegram') }
+
+  def notify_groups(_message)
+    raise 'Abstract Method'
+  end
+
+  # Class Methods
+  def self.providers
+    %w[Telegram]
+  end
+end

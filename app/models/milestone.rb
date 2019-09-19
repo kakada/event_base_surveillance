@@ -16,7 +16,7 @@
 class Milestone < ApplicationRecord
   # Association
   belongs_to :program
-  has_one    :telegram_notification
+  has_one    :telegram, class_name: 'Notifications::Telegram'
   has_many   :fields, dependent: :destroy
 
   # Validation

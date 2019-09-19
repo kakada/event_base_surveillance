@@ -12,13 +12,13 @@
           %span.value= @telegram.message
         %li
           %span.type Chat groups:
-          %span.value= @telegram.telegram_groups.pluck(:title).join(', ')
+          %span.value= @telegram.chat_groups.pluck(:title).join(', ')
 
       %div
-        = link_to 'Change', edit_milestone_telegram_notification_path(@milestone), class: 'btn btn-primary'
+        = link_to 'Change', edit_milestone_telegram_path(@milestone), class: 'btn btn-primary'
 
   - else
     .w-50.view-center.flex1.flex-row-vertical-center
       .flex1
         %div Please setup your telegram notification
-        = link_to 'Setup', new_milestone_telegram_notification_path(@milestone), class: 'btn btn-primary'
+        = link_to 'Setup', new_milestone_telegram_path(@milestone), class: 'btn btn-primary'

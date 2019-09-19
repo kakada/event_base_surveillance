@@ -29,7 +29,7 @@
 
                 .dropdown-menu.dropdown-menu-right
                   - if policy(Milestone).update?
-                    = link_to milestone_telegram_notification_path(milestone), class: "btn dropdown-item" do
+                    = link_to milestone_telegram_path(milestone), class: "btn dropdown-item" do
                       %i.fab.fa-telegram.drop-menu-icon
                       %span Telegram Notification
 

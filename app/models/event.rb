@@ -29,6 +29,7 @@ class Event < ApplicationRecord
   # Deligation
   delegate :name, :color, to: :event_type, prefix: :event_type
   delegate :name, to: :program, prefix: true
+  delegate :email, to: :creator, prefix: true
 
   # Validation
   validates :event_type_id, presence: true

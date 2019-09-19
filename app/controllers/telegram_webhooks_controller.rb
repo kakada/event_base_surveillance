@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TelegramWebhooksController < Telegram::Bot::UpdatesController
   include Telegram::Bot::UpdatesController::MessageContext
 
@@ -10,12 +12,11 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     # message can be also accessed via instance method
     # {"id"=>-366633200, "title"=>"EBS_Group", "type"=>"group", "all_members_are_administrators"=>true}
 
-
     chat = message['chat']
     return unless chat['type'] == 'group'
-    group = TelegramGroup.find_or_initialize_by(chat_id: chat['id'])
-    group.update_attributes(title: chat['title'])
 
+    group = ChatGroup.find_or_initialize_by(chat_id: chat['id'], provider: 'Telegram')
+    group.update_attributes(title: chat['title'])
 
     # left_chat_member = message['left_chat_member']
 

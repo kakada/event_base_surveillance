@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :telegram_notification do
+  factory :notification do
     
   end
 end

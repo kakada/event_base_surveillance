@@ -40,7 +40,7 @@
 //= require users/new
 //= require client_apps/index
 //= require client_apps/new
-//= require telegram_notifications/new
+//= require telegrams/new
 
 
 document.addEventListener('turbolinks:load', function() {

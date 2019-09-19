@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :telegram_group do
+  factory :chat_group do
     
   end
 end
