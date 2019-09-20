@@ -42,7 +42,7 @@ module Milestones
     private
 
     def telegram_params
-      params.require(:notification_telegram).permit(
+      params.require(:notifications_telegram).permit(
         :message, chat_group_ids: []
       )
     end

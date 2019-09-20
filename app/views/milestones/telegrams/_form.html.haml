@@ -3,18 +3,18 @@
 
     = f.input :message
     .form-group
-      - @milestone.default_fields.each do |field|
+      - @milestone.event_template_fields.each do |field|
         = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}
 
-      - @milestone.additional_fields.each do |field|
+      - @milestone.template_fields.each do |field|
         = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}
 
     .form-group
       %label Chat Group
-      = hidden_field_tag "notification_telegram[chat_group_ids][]", nil
+      = hidden_field_tag "notifications_telegram[chat_group_ids][]", nil
       - @groups.each do |group|
         .form-check
-          = check_box_tag "notification_telegram[chat_group_ids][]", group.id, @telegram.chat_group_ids.include?(group.id), class: 'form-check-input', id: dom_id(group)
+          = check_box_tag "notifications_telegram[chat_group_ids][]", group.id, @telegram.chat_group_ids.include?(group.id), class: 'form-check-input', id: dom_id(group)
           %label.form-check-label{for: dom_id(group)}= group.title
 
     = f.button :submit, class: 'btn btn-primary'
