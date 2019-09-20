@@ -15,10 +15,10 @@
 
 module Notifications
   class Telegram < ::Notification
-    def notify_groups(message)
-      # telegram_groups.each do |group|
-      #   Telegram.bot.send_message(chat_id: group.chat_id, text: message)
-      # end
+    def notify_groups(sms)
+      chat_groups.each do |group|
+        ::Telegram.bot.send_message(chat_id: group.chat_id, text: sms)
+      end
     end
   end
 end
