@@ -1,21 +1,21 @@
-.w-50.view-center
-  = simple_form_for @telegram, url: milestone_telegram_path(@milestone) do |f|
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "#{@milestone.name}: Telegram Notification"
 
-    = f.input :message
-    .form-group
-      - @milestone.event_template_fields.each do |field|
-        = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}
+  .w-50.view-center
+    = simple_form_for @telegram, url: milestone_telegram_path(@milestone) do |f|
+      = f.input :message
+      = render 'stepper_template_fields'
 
-      - @milestone.template_fields.each do |field|
-        = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}
+      .form-group
+        %label Chat Group
+        = hidden_field_tag "notifications_telegram[chat_group_ids][]", nil
+        - @groups.each do |group|
+          .form-check
+            = check_box_tag "notifications_telegram[chat_group_ids][]", group.id, @telegram.chat_group_ids.include?(group.id), class: 'form-check-input', id: dom_id(group)
+            %label.form-check-label{for: dom_id(group)}= group.title
 
-    .form-group
-      %label Chat Group
-      = hidden_field_tag "notifications_telegram[chat_group_ids][]", nil
-      - @groups.each do |group|
-        .form-check
-          = check_box_tag "notifications_telegram[chat_group_ids][]", group.id, @telegram.chat_group_ids.include?(group.id), class: 'form-check-input', id: dom_id(group)
-          %label.form-check-label{for: dom_id(group)}= group.title
-
-    = f.button :submit, class: 'btn btn-primary'
-    = link_to 'Cancel', milestone_telegram_path, class: 'btn btn-secondary'
+      .actions
+        = f.button :submit, class: 'btn btn-primary'
+        = link_to 'Cancel', milestone_telegram_path, class: 'btn btn-secondary'

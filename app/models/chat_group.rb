@@ -20,4 +20,5 @@ class ChatGroup < ApplicationRecord
   has_many :notifications, through: :notification_chat_groups
 
   scope :telegrams, -> { where(provider: 'Telegram') }
+  scope :actives, -> { where(is_active: true) }
 end

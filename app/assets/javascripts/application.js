@@ -45,6 +45,7 @@
 
 document.addEventListener('turbolinks:load', function() {
   EBS.Common.Sidebar.init();
+  $('[data-toggle="tooltip"]').tooltip();
 
   let currentPage = EBS.Util.getCurrentPage();
   !!EBS[currentPage] && EBS[currentPage].init();
