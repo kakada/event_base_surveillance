@@ -39,6 +39,19 @@ class Milestone < ApplicationRecord
     create(name: 'New', is_default: true, fields_attributes: Field.roots)
   end
 
+  # Instand methods
+  def template_fields
+    return [] if self == Milestone.first
+
+    EventMilestone.template_fields +
+    fields.map { |field|
+      {
+        code: "#{EventMilestone.dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}",
+        label: field.name
+      }
+    }
+  end
+
   private
 
   def set_display_order

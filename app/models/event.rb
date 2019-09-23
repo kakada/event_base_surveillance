@@ -50,6 +50,34 @@ class Event < ApplicationRecord
   }
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
+  # Class Methods
+  def self.template_fields
+    fields = [
+      { code: 'event_type_name', label: 'Event Type' },
+      { code: 'creator_email', label: 'Creator' },
+      { code: 'program_name', label: 'Program' },
+      { code: 'value', label: 'Value' },
+      { code: 'description', label: 'Description' },
+      { code: 'location', label: 'Location' },
+      { code: 'event_date', label: 'Event Date' },
+      { code: 'report_date', label: 'Report Date' },
+      { code: 'status', label: 'Status' },
+      { code: 'risk_level', label: 'Risk Level' }
+    ]
+    fields.each { |field| field[:code] = "#{default_template_code}#{field[:code]}" }
+    fields += Milestone.root.fields.map { |field| { code: "#{dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}", label: field.name } } if Milestone.first.present?
+    fields
+  end
+
+  def self.default_template_code
+    'de_'
+  end
+
+  def self.dynamic_template_code
+    'dy_'
+  end
+
+  # Instant Methods
   def conducted_at
     field_values.find_by(field_code: 'report_date').value
   end

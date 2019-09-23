@@ -38,6 +38,22 @@ class EventMilestone < ApplicationRecord
     field_values.find_by(field_code: 'conducted_at').value
   end
 
+  # Class Methods
+  def self.template_fields
+    fields = [
+      { code: "#{default_template_code}conducted_at", label: 'Conducted at' },
+      { code: "#{default_template_code}source", label: 'Source' }
+    ]
+  end
+
+  def self.default_template_code
+    'emde_'
+  end
+
+  def self.dynamic_template_code
+    'emdy_'
+  end
+
   private
 
   def validate_field_values
