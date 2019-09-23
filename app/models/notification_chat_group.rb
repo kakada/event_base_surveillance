@@ -11,7 +11,6 @@
 #  updated_at      :datetime         not null
 #
 
-
 class NotificationChatGroup < ApplicationRecord
   belongs_to :notification
   belongs_to :chat_group

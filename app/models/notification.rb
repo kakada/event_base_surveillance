@@ -12,7 +12,6 @@
 #  updated_at   :datetime         not null
 #
 
-
 class Notification < ApplicationRecord
   self.inheritance_column = :provider
 

@@ -40,8 +40,8 @@ class MessageInterpretor
     dynamic_fields = select_elements_starting_with(fields, obj_code)
     dynamic_fields.each do |field|
       field_id = field.split('_')[1].to_i
-      fv       = obj.field_values.select{ |fv| fv.field_id == field_id }.first
-      field_value    = fv.try(:value) || fv.try(:values) || fv.try(:image_url) || fv.try(file_url)
+      fv       = obj.field_values.select { |field_value| field_value.field_id == field_id }.first
+      field_value = fv.try(:value) || fv.try(:values) || fv.try(:image_url) || fv.try(file_url)
       field_template = "{{#{field}}}"
 
       @message = @message.gsub(/#{field_template}/, field_value)

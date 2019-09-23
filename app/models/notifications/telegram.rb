@@ -12,16 +12,13 @@
 #  updated_at   :datetime         not null
 #
 
-
 module Notifications
   class Telegram < ::Notification
     def notify_groups(sms)
       chat_groups.actives.each do |group|
-        begin
-          ::Telegram.bot.send_message(chat_id: group.chat_id, text: sms)
-        rescue ::Telegram::Bot::Forbidden => e
-          group.update_attributes(is_active: false, reason: e)
-        end
+        ::Telegram.bot.send_message(chat_id: group.chat_id, text: sms)
+      rescue ::Telegram::Bot::Forbidden => e
+        group.update_attributes(is_active: false, reason: e)
       end
     end
   end
