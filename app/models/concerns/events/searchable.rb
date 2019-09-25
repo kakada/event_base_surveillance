@@ -51,7 +51,7 @@ module Events
       private
 
       def initial_milestone_attributes
-        %w[value description event_date report_date province_id district_id commune_id village_id]
+        %w[number_of_case number_of_death description event_date report_date province_id district_id commune_id village_id]
       end
     end
   end
