@@ -4,27 +4,28 @@
 #
 # Table name: events
 #
-#  uuid          :string(36)       not null, primary key
-#  event_type_id :integer
-#  creator_id    :integer
-#  program_id    :integer
-#  value         :integer
-#  description   :text
-#  location      :string
-#  latitude      :float
-#  longitude     :float
-#  province_id   :string
-#  district_id   :string
-#  commune_id    :string
-#  village_id    :string
-#  event_date    :date
-#  report_date   :date
-#  status        :string
-#  risk_level    :string
-#  risk_color    :string
-#  source        :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  uuid            :string(36)       not null, primary key
+#  event_type_id   :integer
+#  creator_id      :integer
+#  program_id      :integer
+#  description     :text
+#  location        :string
+#  latitude        :float
+#  longitude       :float
+#  province_id     :string
+#  district_id     :string
+#  commune_id      :string
+#  village_id      :string
+#  event_date      :date
+#  report_date     :date
+#  status          :string
+#  risk_level      :string
+#  risk_color      :string
+#  source          :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  number_of_case  :integer
+#  number_of_death :integer
 #
 
 class Event < ApplicationRecord
@@ -44,7 +45,7 @@ class Event < ApplicationRecord
   delegate :name, to: :program, prefix: true
 
   # Validation
-  validates :location, :value, :event_date, :report_date, presence: true
+  validates :location, :event_date, :report_date, presence: true
   validate  :validate_field_values, on: %i[create update]
   before_validation :set_location
   before_validation :set_program_id
