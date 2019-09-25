@@ -27,14 +27,13 @@ namespace :location_data do
     end
   end
 
-
   desc 'export location data'
   task export: :environment do
     require 'csv'
 
     file_path = "#{Rails.root}/tmp/locations.csv"
     CSV.open(file_path, 'w') do |csv|
-      csv << ['code', 'name_en', 'name_km', 'kind', 'parent_id', 'latitude', 'longitude']
+      csv << %w[code name_en name_km kind parent_id latitude longitude]
 
       provinces = Location.where(kind: 'province').order(code: :asc)
       provinces.each do |province|
@@ -43,7 +42,7 @@ namespace :location_data do
     end
   end
 
-  def location_to_csv location, csv
+  def location_to_csv(location, csv)
     csv << [location.code, location.name_en, location.name_km, location.kind, location.parent_id, location.latitude, location.longitude]
     children = location.children.order(code: :asc)
     children.each do |child|

@@ -21,7 +21,7 @@ namespace :sample do
           villages.each do |village|
             max_event = rand(5..30)
 
-            (1..max_event).each do |i|
+            (1..max_event).each do |_i|
               date = Date.today - rand(0..30)
               event = Event.new(
                 creator_id: creator_id,
