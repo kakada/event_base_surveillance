@@ -45,7 +45,7 @@ class Event < ApplicationRecord
   delegate :name, to: :program, prefix: true
 
   # Validation
-  validates :event_date, :report_date, :province_id, presence: true
+  # validates :event_date, :report_date, :province_id, presence: true
   validate  :validate_field_values, on: %i[create update]
 
   before_validation :set_program_id
@@ -57,13 +57,13 @@ class Event < ApplicationRecord
   }
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
-  def conducted_at
-    report_date
-  end
+  # def conducted_at
+  #   report_date
+  # end
 
-  def location_name(reverse = false, delimeter = ',')
-    (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
-  end
+  # def location_name(reverse = false, delimeter = ',')
+  #   (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
+  # end
 
   private
 
@@ -71,25 +71,25 @@ class Event < ApplicationRecord
     self.uuid = SecureRandom.uuid
   end
 
-  def addresses
-    province = Pumi::Province.find_by_id(province_id) if province_id.present?
-    district = Pumi::District.find_by_id(district_id) if province && district_id.present?
-    commune  = Pumi::Commune.find_by_id(commune_id) if district && commune_id.present?
-    village  = Pumi::Village.find_by_id(village_id) if commune && village_id.present?
-    [province, district, commune, village].reject(&:blank?)
-  end
+  # def addresses
+  #   province = Pumi::Province.find_by_id(province_id) if province_id.present?
+  #   district = Pumi::District.find_by_id(district_id) if province && district_id.present?
+  #   commune  = Pumi::Commune.find_by_id(commune_id) if district && commune_id.present?
+  #   village  = Pumi::Village.find_by_id(village_id) if commune && village_id.present?
+  #   [province, district, commune, village].reject(&:blank?)
+  # end
 
   def set_program_id
     creator && self.program_id = creator.program_id
   end
 
-  def set_geo_point
-    location_id = village_id || commune_id || district_id || province_id
-    location = Location.find location_id
+  # def set_geo_point
+  #   location_id = village_id || commune_id || district_id || province_id
+  #   location = Location.find location_id
 
-    self.latitude = location.latitude
-    self.longitude = location.longitude
-  end
+  #   self.latitude = location.latitude
+  #   self.longitude = location.longitude
+  # end
 
   def validate_field_values
     program.present? && program.milestones.first&.fields&.each do |field|

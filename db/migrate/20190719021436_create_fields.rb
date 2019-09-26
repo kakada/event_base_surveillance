@@ -8,6 +8,7 @@ class CreateFields < ActiveRecord::Migration[5.2]
       t.string    :mapping_field_type
       t.integer   :display_order
       t.integer   :milestone_id
+      t.boolean   :is_default, default: false
 
       t.timestamps
     end

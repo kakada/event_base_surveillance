@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_074424) do
+ActiveRecord::Schema.define(version: 2019_09_11_033431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,24 +73,8 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
     t.integer "event_type_id"
     t.integer "creator_id"
     t.integer "program_id"
-    t.text "description"
-    t.float "latitude"
-    t.float "longitude"
-    t.point "location"
-    t.string "province_id"
-    t.string "district_id"
-    t.string "commune_id"
-    t.string "village_id"
-    t.date "event_date"
-    t.date "report_date"
-    t.string "status"
-    t.string "risk_level"
-    t.string "risk_color"
-    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "number_of_case"
-    t.integer "number_of_death"
   end
 
   create_table "field_options", force: :cascade do |t|
@@ -124,6 +108,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
     t.string "mapping_field_type"
     t.integer "display_order"
     t.integer "milestone_id"
+    t.boolean "is_default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -143,6 +128,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
     t.integer "program_id"
     t.string "name"
     t.integer "display_order"
+    t.boolean "is_default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

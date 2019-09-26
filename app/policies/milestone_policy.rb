@@ -9,6 +9,10 @@ class MilestonePolicy < ApplicationPolicy
     user.program_admin?
   end
 
+  def delete?
+    user.program_admin? && !record.is_default?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

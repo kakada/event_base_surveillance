@@ -38,16 +38,16 @@ EventType.create(obj)
 
 # Milestone
 milestones = [
-  {
-    name: 'New',
-    fields_attributes: [
-      { name: "Source of information", field_type: "select_one", field_options_attributes: [{name: "Hotline"}, {name: "RRT"}, {name: "Media monitoring"}, {name: "CamEWARN"}, {name: "CamLIS"}, {name: "NGO Partners"}, {name: "Other"}]},
-      { name: "Additional information", field_type: "text"},
-      { name: "WHO notified date", field_type: "date"},
-      { name: "Status of report", field_type: "select_one", field_options_attributes: [{ name: "For verification by RRT" }, { name: "Verfified (confirmed)" }, { name: "False report" }, { name: "Refer to other agency" }]},
-      { name: "Verification Date", field_type: "date"}
-    ]
-  },
+  # {
+  #   name: 'New',
+  #   fields_attributes: [
+  #     { name: "Source of information", field_type: "select_one", field_options_attributes: [{name: "Hotline"}, {name: "RRT"}, {name: "Media monitoring"}, {name: "CamEWARN"}, {name: "CamLIS"}, {name: "NGO Partners"}, {name: "Other"}]},
+  #     { name: "Additional information", field_type: "text"},
+  #     { name: "WHO notified date", field_type: "date"},
+  #     { name: "Status of report", field_type: "select_one", field_options_attributes: [{ name: "For verification by RRT" }, { name: "Verfified (confirmed)" }, { name: "False report" }, { name: "Refer to other agency" }]},
+  #     { name: "Verification Date", field_type: "date"}
+  #   ]
+  # },
   {
     name: "Risk Assessment",
     fields_attributes: [
@@ -82,6 +82,8 @@ milestones = [
     ]
   }
 ]
+
+program_cdc.milestones.create_default
 
 milestones.each do |milestone|
   program_cdc.milestones.create(milestone)

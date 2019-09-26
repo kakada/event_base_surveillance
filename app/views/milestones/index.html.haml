@@ -25,6 +25,7 @@
             %td
               - if policy(Milestone).update?
                 = link_to 'Edit', edit_milestone_path(milestone), class: "badge badge-info"
+
+              - if policy(milestone).delete?
                 = ' / '
                 = link_to 'Delete', milestone_path(milestone), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this milestone?'}
-
