@@ -30,7 +30,7 @@ namespace :sample do
                 district_id: district.id,
                 commune_id: commune.id,
                 village_id: village.id,
-                value: rand(1..5),
+                number_of_case: rand(1..5),
                 event_date: date,
                 report_date: Date.today
               )
