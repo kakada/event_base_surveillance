@@ -45,7 +45,7 @@ class Event < ApplicationRecord
   delegate :name, to: :program, prefix: true
 
   # Validation
-  validates :location, :event_date, :report_date, presence: true
+  validates :location, :number_of_case, :event_date, :report_date, presence: true
   validate  :validate_field_values, on: %i[create update]
   before_validation :set_location
   before_validation :set_program_id
