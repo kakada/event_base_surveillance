@@ -36,6 +36,7 @@
 //= require event_milestones/edit
 //= require events/new
 //= require event_types/new
+//= require users/index
 //= require users/new
 //= require client_apps/index
 //= require client_apps/new
