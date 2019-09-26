@@ -28,14 +28,7 @@
                 .small-color{style: "background-color: #{event.event_type_color}"}
                   = event.event_type_name[0]
                 %span= link_to event.event_type_name, event_path(event), class: 'btn btn-link'
-            %td= event.location_name(reverse=true)
-            %td= event.value
-            %td
-              - style = event.risk_level.present? ? "background-color: #{event.risk_color}; color: #fff" : ''
-              %span.badge{style: style}
-                = event.risk_level || '-'
-            %td= event.status || 'New'
-            %td= l(event.created_at, format: :long)
+
             %td= event.program_name
             %td
               - if policy(event).update?
@@ -46,5 +39,3 @@
   - if @pagy.pages > 1
     .pagy-wrapper
       != pagy_bootstrap_nav(@pagy)
-
-/ = render 'event_types_modal'

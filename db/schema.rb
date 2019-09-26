@@ -52,9 +52,6 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
     t.string "event_uuid"
     t.integer "milestone_id"
     t.integer "submitter_id"
-    t.date "conducted_at"
-    t.string "priority"
-    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

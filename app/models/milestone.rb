@@ -27,6 +27,7 @@ class Milestone < ApplicationRecord
 
   # Scope
   default_scope { order(display_order: :asc) }
+  scope :default, -> { where(is_default: true) }
 
   # Nested attribute
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }

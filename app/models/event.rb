@@ -27,7 +27,7 @@
 #
 
 class Event < ApplicationRecord
-  include Events::Searchable
+  # include Events::Searchable
 
   before_create :set_uuid
 
@@ -49,7 +49,7 @@ class Event < ApplicationRecord
   validate  :validate_field_values, on: %i[create update]
 
   before_validation :set_program_id
-  before_save :set_geo_point
+  # before_save :set_geo_point
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|

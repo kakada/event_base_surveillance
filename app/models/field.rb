@@ -28,8 +28,10 @@ class Field < ApplicationRecord
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
   before_validation :set_mapping_field_type
 
+  before_create :set_display_order
+
   # Scope
-  default_scope { order(display_order: :asc) }
+  default_scope { order(is_default: :desc).order(display_order: :asc) }
   scope :dynamic, -> { where(is_default: false) }
 
   # Nested attributes
@@ -40,7 +42,7 @@ class Field < ApplicationRecord
     [
       { field_type: 'integer', name: 'Number of case', is_default: true, required: true },
       { field_type: 'integer', name: 'Number of death', is_default: true },
-      { field_type: 'text', name: 'Description', is_default: true },
+      { field_type: 'note', name: 'Description', is_default: true },
       { field_type: 'location', name: 'Location', is_default: true },
       { field_type: 'text', name: 'Province', is_default: true, required: true },
       { field_type: 'text', name: 'District', is_default: true },
@@ -63,6 +65,10 @@ class Field < ApplicationRecord
   end
 
   private
+
+  def set_display_order
+    self.display_order = self.class.maximum(:display_order).to_i + 1
+  end
 
   def set_mapping_field_type
     return unless field_type == 'mapping_field'

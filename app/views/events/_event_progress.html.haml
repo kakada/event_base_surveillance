@@ -4,7 +4,7 @@
       = link_to edit_event_path(event), class: 'btn btn-link' do
         New
         %span.badge.badge-light{style: 'top: -12px; left: -6px'} edit
-      .at= event.conducted_at
+      / .at= event.conducted_at
 
     - is_next = true
     - event_milestones = event.event_milestones
@@ -19,8 +19,8 @@
             %span= milestone.name
             %span.badge.badge-light.btn-edit edit
 
-          %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
-          .at= current_milestone.conducted_at
+          / %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
+          / .at= current_milestone.conducted_at
 
         - else
           = link_to milestone.name, new_event_event_milestone_path(event_id: event.id, milestone_id: milestone.id), class: ['btn btn-link', ('disabled' unless is_next)]
