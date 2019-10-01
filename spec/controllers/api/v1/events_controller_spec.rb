@@ -7,7 +7,8 @@ RSpec.describe Api::V1::EventsController, type: :controller do
     {
       "event":{
         "event_type_id": event_type.id,
-        "value": "1",
+        "number_of_case": "1",
+        "number_of_death": "0",
         "description": "Description about H5N1",
         "event_date": "2019-08-06",
         "report_date": "2019-08-12",

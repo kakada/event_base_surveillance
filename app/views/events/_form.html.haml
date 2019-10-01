@@ -1,7 +1,8 @@
 .w-50.view-center
   = simple_form_for @event do |f|
     = f.input :event_type_id, collection: @event_types
-    = f.input :value
+    = f.input :number_of_case
+    = f.input :number_of_death
     = f.input :description
     = render 'location', f: f
     = f.input :event_date, as: :date, html5: true
