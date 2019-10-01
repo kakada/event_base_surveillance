@@ -14,9 +14,9 @@
         %tr
           %th Event Type
           %th Location
-          %th Value
-          %th Risk Level
+          %th # of Case
           %th Status
+          %th Risk Level
           %th Open case date
           %th Owner
           %th
@@ -28,7 +28,17 @@
                 .small-color{style: "background-color: #{event.event_type_color}"}
                   = event.event_type_name[0]
                 %span= link_to event.event_type_name, event_path(event), class: 'btn btn-link'
+            %td= event.location_name
+            - ['number_of_case', 'status'].each do |code|
+              %td= event.field_values.select{|fv| fv.field_code == code}.first.try(:value) || '-'
 
+            %td
+              - risk_level = event.field_values.select{|fv| fv.field_code == 'risk_level'}.first.try(:value)
+              - risk_color = event.field_values.select{|fv| fv.field_code == 'risk_color'}.first.try(:value)
+              - style = risk_level.present? ? "background-color: #{risk_color}; color: #fff" : ''
+              %span.badge{style: style}
+                = risk_level || '-'
+            %td= l(event.created_at, format: :long)
             %td= event.program_name
             %td
               - if policy(event).update?

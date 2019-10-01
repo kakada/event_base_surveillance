@@ -29,7 +29,7 @@
       .mapping-field-wrapper
         %label Mapping to
         .wrapper
-          = f.select :mapping_field, options_for_select( EventType::MAPPING_FIELDS.map{ |c| [c[:name].titlecase, c[:name], {'data-field_type'=>c[:field_type]}] }), {prompt: 'Select event type field'}, class: 'form-control mapping-field'
+          = f.select :mapping_field, options_for_select( Field::MAPPING_FIELDS.map{ |c| [c[:code].titlecase, c[:code], {'data-field_type'=>c[:field_type]}] }), {prompt: 'Select event type field'}, class: 'form-control mapping-field'
 
           = f.text_field :mapping_field_type, placeholder: "field type", class: 'form-control mapping-field-type', disabled: true
 

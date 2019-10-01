@@ -4,7 +4,7 @@ module Api
   module V1
     class EventsController < ApplicationController
       def index
-        @pagy, @events = pagy(current_program.events)
+        @pagy, @events = pagy(current_program.events.includes(:field_values))
 
         render json: @events, adapter: :json, meta: @pagy
       end
@@ -43,7 +43,7 @@ module Api
           :province_id, :district_id, :commune_id, :village_id,
           properties: {},
           field_values_attributes: [
-            :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
+            :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
           ]
         ).merge(source: current_client_app.name)
       end

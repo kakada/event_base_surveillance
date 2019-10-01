@@ -8,6 +8,7 @@
 #  program_id    :integer
 #  name          :string
 #  display_order :integer
+#  is_default    :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -27,14 +28,14 @@ class Milestone < ApplicationRecord
 
   # Scope
   default_scope { order(display_order: :asc) }
-  scope :default, -> { where(is_default: true) }
+  scope :root, -> { where(is_default: true) }
 
   # Nested attribute
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
   # Class methods
-  def self.create_default
-    self.create({ name: 'New', is_default: true, fields_attributes: Field.primary_default_fields})
+  def self.create_root
+    self.create({ name: 'New', is_default: true, fields_attributes: Field.roots })
   end
 
   private
@@ -44,7 +45,7 @@ class Milestone < ApplicationRecord
   end
 
   def set_default_fields
-    self.fields_attributes = Field.secondary_default_fields
+    self.fields_attributes = Field.defaults
   end
 
   def validate_unique_field_name

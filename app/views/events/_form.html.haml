@@ -1,17 +1,15 @@
 .w-50.view-center
   = simple_form_for @event do |f|
     = f.input :event_type_id, collection: @event_types
-    / = f.input :number_of_case
-    / = f.input :number_of_death
-    / = f.input :description
-    / = render 'location', f: f
-    / = f.input :event_date, as: :date, html5: true
-    / = f.input :report_date, as: :date, html5: true
 
-    - current_program.milestones.default.first.fields.each do |field|
+    - current_program.milestones.root.first.fields.entry_able.each do |field|
       - obj = @event.field_values.select{ |a| a.field_id==field.id }.first || f.object.field_values.new
+
       = f.fields_for :field_values, obj do |builder|
-        = render "events/fields/#{field.field_type}", field: field, f: builder, main_object: @event
+        - if ['province_id', 'district_id', 'commune_id', 'village_id'].include?(field.code)
+          = render "events/fields/#{field.code}", field: field, f: builder, main_object: @event
+        - else
+          = render "events/fields/#{field.field_type}", field: field, f: builder, main_object: @event
 
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', events_path, class: 'btn btn-secondary'

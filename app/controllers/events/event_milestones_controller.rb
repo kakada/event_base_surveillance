@@ -38,11 +38,11 @@ module Events
 
     def event_milestone_params
       params.require(:event_milestone).permit(
-        :submitter_id, :milestone_id, :conducted_at,
+        :milestone_id,
         field_values_attributes: [
-          :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
+          :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
         ]
-      )
+      ).merge(submitter_id: current_user.id)
     end
 
     def assign_event

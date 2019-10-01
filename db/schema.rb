@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
 
   create_table "field_values", force: :cascade do |t|
     t.integer "field_id"
+    t.string "field_code"
     t.string "value"
     t.text "values", array: true
     t.text "properties"
@@ -98,6 +99,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
   end
 
   create_table "fields", force: :cascade do |t|
+    t.string "code"
     t.string "name", null: false
     t.string "field_type"
     t.boolean "required"
@@ -106,6 +108,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
     t.integer "display_order"
     t.integer "milestone_id"
     t.boolean "is_default", default: false
+    t.boolean "entry_able", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

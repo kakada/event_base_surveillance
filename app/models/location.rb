@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: locations
+#
+#  code       :string           not null, primary key
+#  name_en    :string           not null
+#  name_km    :string           not null
+#  kind       :string           not null
+#  parent_id  :string
+#  latitude   :float
+#  longitude  :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+
 class Location < ApplicationRecord
   validates :code, :name_en, :name_km, :kind, presence: true
   validates_inclusion_of :kind, in: %w[province district commune village], message: 'type %{value} is invalid'

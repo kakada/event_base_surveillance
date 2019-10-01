@@ -28,10 +28,6 @@ class EventType < ApplicationRecord
 
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
-  MAPPING_FIELDS = [
-    { name: 'risk_level', field_type: 'select_one' }
-  ].freeze
-
   private
 
   def validate_unique_fields

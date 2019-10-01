@@ -6,6 +6,7 @@
 #
 #  id             :bigint           not null, primary key
 #  field_id       :integer
+#  field_code     :string
 #  value          :string
 #  values         :text             is an Array
 #  properties     :text
@@ -32,7 +33,7 @@ class FieldValue < ApplicationRecord
   # Validation
   before_validation :set_location_value, if: -> { field_type == 'location' }
   before_validation :cleanup_values
-  after_save :handle_mapping_field, if: -> { field.field_type == 'mapping_field' }
+  after_save :handle_risk_level, if: -> { field.field_type == 'mapping_field' && field.mapping_field == 'risk_level' }
 
   # History
   audited associated_with: :valueable
@@ -48,10 +49,23 @@ class FieldValue < ApplicationRecord
     self.value = [province, district, commune, village].reverse.reject(&:blank?).map(&:name_km).join(',')
   end
 
-  def handle_mapping_field
-    valueable.event[field.mapping_field] = value
-    valueable.event.risk_color = field.field_options.find_by(value: value).color
-    valueable.event.save
+  def handle_risk_level
+    assign_risk_level
+    assign_risk_color
+  end
+
+  def assign_risk_level
+    fv = valueable.event.field_values.find_or_initialize_by(field_code: 'risk_level')
+    fv.value = value
+    fv.field_id ||= Milestone.root.first.fields.find_by(code: 'risk_level').id
+    fv.save
+  end
+
+  def assign_risk_color
+    fv = valueable.event.field_values.find_or_initialize_by(field_code: 'risk_color')
+    fv.value = field.field_options.find_by(value: value).color
+    fv.field_id ||= Milestone.root.first.fields.find_by(code: 'risk_color').id
+    fv.save
   end
 
   def cleanup_values

@@ -8,20 +8,6 @@
 #  event_type_id :integer
 #  creator_id    :integer
 #  program_id    :integer
-#  value         :integer
-#  description   :text
-#  latitude      :float
-#  longitude     :float
-#  province_id   :string
-#  district_id   :string
-#  commune_id    :string
-#  village_id    :string
-#  event_date    :date
-#  report_date   :date
-#  status        :string
-#  risk_level    :string
-#  risk_color    :string
-#  source        :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -61,9 +47,9 @@ class Event < ApplicationRecord
   #   report_date
   # end
 
-  # def location_name(reverse = false, delimeter = ',')
-  #   (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
-  # end
+  def location_name(reverse = false, delimeter = ',')
+    (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
+  end
 
   private
 
@@ -71,13 +57,18 @@ class Event < ApplicationRecord
     self.uuid = SecureRandom.uuid
   end
 
-  # def addresses
-  #   province = Pumi::Province.find_by_id(province_id) if province_id.present?
-  #   district = Pumi::District.find_by_id(district_id) if province && district_id.present?
-  #   commune  = Pumi::Commune.find_by_id(commune_id) if district && commune_id.present?
-  #   village  = Pumi::Village.find_by_id(village_id) if commune && village_id.present?
-  #   [province, district, commune, village].reject(&:blank?)
-  # end
+  def addresses
+    arr = []
+    ['province_id', 'district_id', 'commune_id', 'village_id'].each do |code|
+      fv = field_values.find_by(field_code: code)
+      next if fv.nil?
+
+      klass_name = "Pumi::#{code.split('_').first.titlecase}".constantize
+      arr.push(klass_name.find_by_id(fv.value))
+    end
+
+    arr
+  end
 
   def set_program_id
     creator && self.program_id = creator.program_id

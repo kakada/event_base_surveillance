@@ -19,7 +19,6 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to @event
     else
-      flash.now[:alert] = @event.errors.full_messages
       render :new
     end
   end
@@ -59,7 +58,7 @@ class EventsController < ApplicationController
       :report_date, :province_id, :district_id, :commune_id, :village_id,
       properties: {},
       field_values_attributes: [
-        :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
+        :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
       ]
     )
   end
