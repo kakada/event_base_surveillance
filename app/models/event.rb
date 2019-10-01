@@ -31,11 +31,10 @@ class Event < ApplicationRecord
   delegate :name, to: :program, prefix: true
 
   # Validation
-  # validates :event_date, :report_date, :province_id, presence: true
   validate  :validate_field_values, on: %i[create update]
 
   before_validation :set_program_id
-  # before_save :set_geo_point
+  after_save :assign_geo_point
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -70,17 +69,24 @@ class Event < ApplicationRecord
     arr
   end
 
+  def assign_geo_point
+    location = ['village_id', 'commune_id', 'district_id', 'province_id'].map do |code|
+      field_values.select{ |fv| fv.field_code == code }.first.try(:value)
+    end.reject(&:blank?).first
+
+    location = Location.find(location)
+
+    ['latitude', 'longitude'].each do |code|
+      fv = field_values.find_or_initialize_by(field_code: code)
+      fv.value = location[code]
+      fv.field_id = Milestone.root.first.fields.find_by(code: code).id
+      fv.save
+    end
+  end
+
   def set_program_id
     creator && self.program_id = creator.program_id
   end
-
-  # def set_geo_point
-  #   location_id = village_id || commune_id || district_id || province_id
-  #   location = Location.find location_id
-
-  #   self.latitude = location.latitude
-  #   self.longitude = location.longitude
-  # end
 
   def validate_field_values
     program.present? && program.milestones.first&.fields&.each do |field|

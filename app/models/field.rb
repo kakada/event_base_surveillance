@@ -47,21 +47,24 @@ class Field < ApplicationRecord
 
   # Class methods
   def self.roots
-    [
-      { code: 'number_of_case', field_type: 'integer', name: 'Number of case', is_default: true, required: true },
-      { code: 'number_of_death', field_type: 'integer', name: 'Number of death', is_default: true },
-      { code: 'description', field_type: 'note', name: 'Description', is_default: true },
-      { code: 'province_id', field_type: 'text', name: 'Province', is_default: true, required: true },
-      { code: 'district_id', field_type: 'text', name: 'District', is_default: true },
-      { code: 'commune_id', field_type: 'text', name: 'Commune', is_default: true },
-      { code: 'village_id', field_type: 'text', name: 'Village', is_default: true },
-      { code: 'event_date', field_type: 'date', name: 'Event date', is_default: true, required: true },
-      { code: 'report_date', field_type: 'date', name: 'Report date', is_default: true, required: true },
-      { code: 'status', field_type: 'text', name: 'Status', is_default: true, entry_able: false },
-      { code: 'risk_level', field_type: 'text', name: 'Risk level', is_default: true, entry_able: false },
-      { code: 'risk_color', field_type: 'text', name: 'Risk color', is_default: true, entry_able: false },
-      { code: 'source', field_type: 'text', name: 'Source', is_default: true, entry_able: false }
+    fields = [
+      { code: 'number_of_case', field_type: 'integer', name: 'Number of case', required: true },
+      { code: 'number_of_death', field_type: 'integer', name: 'Number of death'},
+      { code: 'description', field_type: 'note', name: 'Description'},
+      { code: 'province_id', field_type: 'text', name: 'Province', required: true },
+      { code: 'district_id', field_type: 'text', name: 'District'},
+      { code: 'commune_id', field_type: 'text', name: 'Commune'},
+      { code: 'village_id', field_type: 'text', name: 'Village'},
+      { code: 'event_date', field_type: 'date', name: 'Event date', required: true },
+      { code: 'report_date', field_type: 'date', name: 'Report date', required: true },
+      { code: 'status', field_type: 'text', name: 'Status', entry_able: false },
+      { code: 'risk_level', field_type: 'text', name: 'Risk level', entry_able: false },
+      { code: 'risk_color', field_type: 'text', name: 'Risk color', entry_able: false },
+      { code: 'source', field_type: 'text', name: 'Source', entry_able: false },
+      { code: 'latitude', field_type: 'text', name: 'Latitude', entry_able: false },
+      { code: 'longitude', field_type: 'text', name: 'Longitude', entry_able: false }
     ]
+    fields.each { |field| field[:is_default] = true }
   end
 
   def self.defaults
