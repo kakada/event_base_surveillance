@@ -39,13 +39,11 @@ module Api
 
       def event_params
         params.require(:event).permit(
-          :name, :event_type_id, :number_of_case, :number_of_death, :description, :event_date, :report_date,
-          :province_id, :district_id, :commune_id, :village_id,
-          properties: {},
+          :event_type_id, properties: {},
           field_values_attributes: [
             :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
           ]
-        ).merge(source: current_client_app.name)
+        )
       end
     end
   end

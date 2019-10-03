@@ -4,20 +4,12 @@ RSpec.describe Api::V1::EventsController, type: :controller do
   let! (:client_app) { create(:client_app) }
   let! (:province) { create(:location)}
   let! (:commune) { create(:location, code: '110402', kind: 'commune')}
-  let! (:event_type) { create(:event_type, program: client_app.program) }
+  let! (:h5n1) { create(:event_type, program: client_app.program) }
+  let! (:influenza) { create(:event_type, name: 'Influenza', program: client_app.program) }
   let  (:event_attributes) {
     {
       "event":{
-        "event_type_id": event_type.id,
-        "number_of_case": "1",
-        "number_of_death": "0",
-        "description": "Description about H5N1",
-        "event_date": "2019-08-06",
-        "report_date": "2019-08-12",
-        "province_id": "11",
-        "district_id": "1104",
-        "commune_id": "110402",
-        "village_id": "",
+        "event_type_id": h5n1.id,
         "field_values_attributes":[ {  "field_id":"1", "field_value":"Hello" } ]
       }
     }
@@ -37,14 +29,14 @@ RSpec.describe Api::V1::EventsController, type: :controller do
   end
 
   describe 'PUT #update/:id' do
-    let! (:event)      { create(:event, event_type: event_type, program: client_app.program) }
+    let! (:event)      { create(:event, event_type: h5n1, program: client_app.program) }
 
     before(:each) do
       allow(controller).to receive(:current_program).and_return(event.program)
-      put :update, params: { id: event.id, event: {description: 'event description'} }
+      put :update, params: { id: event.id, event: {event_type_id: influenza.id} }
     end
 
     it { expect(response.status).to eq(200) }
-    it { expect(event.reload.description).to eq('event description') }
+    it { expect(event.reload.event_type_id).to eq(influenza.id) }
   end
 end

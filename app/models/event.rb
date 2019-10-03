@@ -74,12 +74,13 @@ class Event < ApplicationRecord
   end
 
   def assign_geo_point
-    location = %w[village_id commune_id district_id province_id].map do |code|
+    location_code = %w[village_id commune_id district_id province_id].map do |code|
       field_values.select { |fv| fv.field_code == code }.first.try(:value)
     end.reject(&:blank?).first
 
-    location = Location.find(location)
+    return if location_code.blank?
 
+    location = Location.find(location_code)
     %w[latitude longitude].each do |code|
       fv = field_values.find_or_initialize_by(field_code: code)
       fv.value = location[code]

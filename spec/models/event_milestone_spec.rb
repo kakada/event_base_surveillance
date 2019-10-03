@@ -5,5 +5,4 @@ RSpec.describe EventMilestone, type: :model do
   it { is_expected.to belong_to(:milestone) }
   it { is_expected.to belong_to(:submitter).class_name('User').optional }
   it { is_expected.to have_many(:field_values) }
-  it { is_expected.to validate_presence_of(:conducted_at) }
 end
