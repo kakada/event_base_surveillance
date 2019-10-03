@@ -49,12 +49,12 @@ class Field < ApplicationRecord
   def self.roots
     fields = [
       { code: 'number_of_case', field_type: 'integer', name: 'Number of case', required: true },
-      { code: 'number_of_death', field_type: 'integer', name: 'Number of death'},
-      { code: 'description', field_type: 'note', name: 'Description'},
+      { code: 'number_of_death', field_type: 'integer', name: 'Number of death' },
+      { code: 'description', field_type: 'note', name: 'Description' },
       { code: 'province_id', field_type: 'text', name: 'Province', required: true },
-      { code: 'district_id', field_type: 'text', name: 'District'},
-      { code: 'commune_id', field_type: 'text', name: 'Commune'},
-      { code: 'village_id', field_type: 'text', name: 'Village'},
+      { code: 'district_id', field_type: 'text', name: 'District' },
+      { code: 'commune_id', field_type: 'text', name: 'Commune' },
+      { code: 'village_id', field_type: 'text', name: 'Village' },
       { code: 'event_date', field_type: 'date', name: 'Event date', required: true },
       { code: 'report_date', field_type: 'date', name: 'Report date', required: true },
       { code: 'status', field_type: 'text', name: 'Status', entry_able: false },

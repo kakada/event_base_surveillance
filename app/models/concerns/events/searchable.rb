@@ -47,8 +47,8 @@ module Events
           program_name: program_name,
           location_name: location_name,
           location: {
-            lat: field_values.select{|fv| fv.field_code == 'latitude'}.first.value,
-            lon: field_values.select{|fv| fv.field_code == 'longitude'}.first.value
+            lat: field_values.select { |fv| fv.field_code == 'latitude' }.first.value,
+            lon: field_values.select { |fv| fv.field_code == 'longitude' }.first.value
           },
           milestone: {}
         )
@@ -61,11 +61,11 @@ module Events
           next if valueable.nil?
 
           event[:milestone][milestone_name] = valueable.attributes.except(*except_attributes).merge(
-            fields: valueable.field_values.includes(:field).map { |fv|
+            fields: valueable.field_values.includes(:field).map do |fv|
               fv.field.attributes.except(*except_date_attributes).merge(
                 value: fv.value || fv.values || fv.image_url || fv.file_url
               )
-            }
+            end
           )
         end
 

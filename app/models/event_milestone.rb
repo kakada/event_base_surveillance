@@ -26,8 +26,8 @@ class EventMilestone < ApplicationRecord
 
   # Callback
   after_create :set_event_status
-  after_save    { IndexerWorker.perform_async(:index, self.event_uuid) }
-  after_destroy { IndexerWorker.perform_async(:delete, self.event_uuid) }
+  after_save    { IndexerWorker.perform_async(:index, event_uuid) }
+  after_destroy { IndexerWorker.perform_async(:delete, event_uuid) }
 
   # Nested attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|

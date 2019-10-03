@@ -31,14 +31,14 @@ class Event < ApplicationRecord
   delegate :name, to: :program, prefix: true
 
   # Validation
-  validate  :validate_field_values, on: %i[create update]
+  validate :validate_field_values, on: %i[create update]
 
   before_validation :set_program_id
 
   # Callback
   after_save :assign_geo_point
-  after_save    { IndexerWorker.perform_async(:index, self.uuid) }
-  after_destroy { IndexerWorker.perform_async(:delete, self.uuid) }
+  after_save    { IndexerWorker.perform_async(:index, uuid) }
+  after_destroy { IndexerWorker.perform_async(:delete, uuid) }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -62,7 +62,7 @@ class Event < ApplicationRecord
 
   def addresses
     arr = []
-    ['province_id', 'district_id', 'commune_id', 'village_id'].each do |code|
+    %w[province_id district_id commune_id village_id].each do |code|
       fv = field_values.find_by(field_code: code)
       next if fv.nil? || fv.value.blank?
 
@@ -74,13 +74,13 @@ class Event < ApplicationRecord
   end
 
   def assign_geo_point
-    location = ['village_id', 'commune_id', 'district_id', 'province_id'].map do |code|
-      field_values.select{ |fv| fv.field_code == code }.first.try(:value)
+    location = %w[village_id commune_id district_id province_id].map do |code|
+      field_values.select { |fv| fv.field_code == code }.first.try(:value)
     end.reject(&:blank?).first
 
     location = Location.find(location)
 
-    ['latitude', 'longitude'].each do |code|
+    %w[latitude longitude].each do |code|
       fv = field_values.find_or_initialize_by(field_code: code)
       fv.value = location[code]
       fv.field_id = Milestone.root.first.fields.find_by(code: code).id

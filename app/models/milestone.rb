@@ -35,7 +35,7 @@ class Milestone < ApplicationRecord
 
   # Class methods
   def self.create_root
-    self.create({ name: 'New', is_default: true, fields_attributes: Field.roots })
+    create(name: 'New', is_default: true, fields_attributes: Field.roots)
   end
 
   private

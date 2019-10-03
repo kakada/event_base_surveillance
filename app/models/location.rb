@@ -15,7 +15,6 @@
 #  updated_at :datetime         not null
 #
 
-
 class Location < ApplicationRecord
   validates :code, :name_en, :name_km, :kind, presence: true
   validates_inclusion_of :kind, in: %w[province district commune village], message: 'type %{value} is invalid'
