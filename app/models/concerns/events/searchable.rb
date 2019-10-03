@@ -6,7 +6,7 @@ module Events
 
     included do
       include Elasticsearch::Model
-      include Elasticsearch::Model::Callbacks
+      # include Elasticsearch::Model::Callbacks
 
       mapping date_detection: false do
         indexes :location_name, type: :text
@@ -39,7 +39,6 @@ module Events
             indexes :updated_at, type: 'date'
           end
         end
-
       end
 
       def as_indexed_json(_options = {})
@@ -76,7 +75,7 @@ module Events
       private
 
       def except_attributes
-        %w[program_id creator_id event_type_id]
+        %w[program_id creator_id event_type_id event_uuid]
       end
 
       def except_date_attributes

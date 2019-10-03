@@ -26,11 +26,17 @@ class EventMilestone < ApplicationRecord
 
   # Callback
   after_create :set_event_status
+  after_save    { IndexerWorker.perform_async(:index, self.event_uuid) }
+  after_destroy { IndexerWorker.perform_async(:delete, self.event_uuid) }
 
   # Nested attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
     attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank? && attributes['file'].blank?
   }
+
+  def conducted_at
+    field_values.find_by(field_code: 'conducted_at').value
+  end
 
   private
 

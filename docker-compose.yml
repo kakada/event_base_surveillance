@@ -39,7 +39,7 @@ services:
     depends_on:
       - redis
     env_file: docker-env
-    command: bundle exec sidekiq
+    command: bundle exec sidekiq --environment development
 
   redis:
     container_name: redis

@@ -34,7 +34,11 @@ class Event < ApplicationRecord
   validate  :validate_field_values, on: %i[create update]
 
   before_validation :set_program_id
+
+  # Callback
   after_save :assign_geo_point
+  after_save    { IndexerWorker.perform_async(:index, self.uuid) }
+  after_destroy { IndexerWorker.perform_async(:delete, self.uuid) }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -42,9 +46,9 @@ class Event < ApplicationRecord
   }
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
-  # def conducted_at
-  #   report_date
-  # end
+  def conducted_at
+    field_values.find_by(field_code: 'report_date').value
+  end
 
   def location_name(reverse = false, delimeter = ',')
     (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
