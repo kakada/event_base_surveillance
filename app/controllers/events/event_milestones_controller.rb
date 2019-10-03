@@ -14,7 +14,6 @@ module Events
       if @event_milestone.save
         redirect_to event_url(@event)
       else
-        flash.now[:alert] = @event_milestone.errors.full_messages
         render :new
       end
     end

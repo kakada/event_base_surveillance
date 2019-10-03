@@ -13,7 +13,7 @@
 #
 
 class Event < ApplicationRecord
-  # include Events::Searchable
+  include Events::Searchable
 
   before_create :set_uuid
 
@@ -21,7 +21,7 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
-  has_many   :field_values, as: :valueable
+  has_many   :field_values, as: :valueable, dependent: :destroy
 
   # History
   has_associated_audits
@@ -60,7 +60,7 @@ class Event < ApplicationRecord
     arr = []
     ['province_id', 'district_id', 'commune_id', 'village_id'].each do |code|
       fv = field_values.find_by(field_code: code)
-      next if fv.nil?
+      next if fv.nil? || fv.value.blank?
 
       klass_name = "Pumi::#{code.split('_').first.titlecase}".constantize
       arr.push(klass_name.find_by_id(fv.value))

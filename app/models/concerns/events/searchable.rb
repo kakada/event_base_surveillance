@@ -8,40 +8,65 @@ module Events
       include Elasticsearch::Model
       include Elasticsearch::Model::Callbacks
 
-      mapping do
+      mapping date_detection: false do
         indexes :location_name, type: :text
         indexes :location, type: :geo_point
+        indexes :created_at, type: 'date'
+        indexes :updated_at, type: 'date'
+        indexes :milestone do
+          indexes :new do
+            indexes :created_at, type: 'date'
+            indexes :updated_at, type: 'date'
+            indexes :event_date, type: 'date'
+            indexes :report_date, type: 'date'
+          end
+
+          indexes :risk_assessment do
+            indexes :conducted_at, type: 'date'
+            indexes :created_at, type: 'date'
+            indexes :updated_at, type: 'date'
+          end
+
+          indexes :investigation do
+            indexes :conducted_at, type: 'date'
+            indexes :created_at, type: 'date'
+            indexes :updated_at, type: 'date'
+          end
+
+          indexes :conclusion do
+            indexes :conducted_at, type: 'date'
+            indexes :created_at, type: 'date'
+            indexes :updated_at, type: 'date'
+          end
+        end
+
       end
 
       def as_indexed_json(_options = {})
-        event = attributes.except(*initial_milestone_attributes).as_json.merge(
+        event = attributes.except(*except_attributes).merge(
           event_type_name: event_type_name,
           program_name: program_name,
           location_name: location_name,
-          location: { lat: latitude, lon: longitude },
+          location: {
+            lat: field_values.select{|fv| fv.field_code == 'latitude'}.first.value,
+            lon: field_values.select{|fv| fv.field_code == 'longitude'}.first.value
+          },
           milestone: {}
         )
 
-        program.milestones.each_with_index do |milestone, index|
-          if index.zero?
-            event[:milestone][:initial] = attributes.slice(*initial_milestone_attributes).as_json.merge(
-              province_name: Pumi::Province.find_by_id(province_id).name_en,
-              district_name: Pumi::District.find_by_id(district_id).try(:name_en),
-              commune_name: Pumi::Commune.find_by_id(commune_id).try(:name_en),
-              village_name: Pumi::Village.find_by_id(village_id).try(:name_en),
-              field_values: field_values.map { |fv| fv.as_json.merge(field_name: fv.field_name) }
-            )
-            next
-          end
-
-          milestone_name = milestone.name.downcase.split(' ').join('_')
+        program.milestones.each_with_index do |ms, index|
+          milestone_name = ms.name.downcase.split(' ').join('_')
           event[:milestone][milestone_name] = {}
+          valueable = index.zero? ? self : event_milestones.select { |em| em.milestone_id == ms.id }.first
 
-          event_milestone = event_milestones.select { |em| em.milestone_id == milestone.id }.first
-          next if event_milestone.nil?
+          next if valueable.nil?
 
-          event[:milestone][milestone_name] = event_milestone.as_json.merge(
-            field_values: event_milestone.field_values.map { |fv| fv.as_json.merge(field_name: fv.field_name) }
+          event[:milestone][milestone_name] = valueable.attributes.except(*except_attributes).merge(
+            fields: valueable.field_values.includes(:field).map { |fv|
+              fv.field.attributes.except(*except_date_attributes).merge(
+                value: fv.value || fv.values || fv.image_url || fv.file_url
+              )
+            }
           )
         end
 
@@ -50,8 +75,12 @@ module Events
 
       private
 
-      def initial_milestone_attributes
-        %w[number_of_case number_of_death description event_date report_date province_id district_id commune_id village_id]
+      def except_attributes
+        %w[program_id creator_id event_type_id]
+      end
+
+      def except_date_attributes
+        %w[created_at updated_at]
       end
     end
   end

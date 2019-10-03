@@ -5,6 +5,7 @@
   = f.label field_name
   = f.hidden_field :field_code, value: field.code
   = f.hidden_field :field_id, value: field.id
+  = f.hidden_field :value, value: f.object.value
   = f.select(:value, [], {:include_blank => "Please select"}, {:data => {:pumi_select_target => "district", :pumi_select_collection_url => pumi.provinces_path, :pumi_select_collection_label_method => "name_km", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: ['select-location form-control', ('is-invalid' if error_msg.present?)]})
 
   - if error_msg.present?
