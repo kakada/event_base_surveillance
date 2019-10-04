@@ -1,6 +1,5 @@
 EBS.UsersIndex = do ->
   init = ->
-
     onClickBtnCopyConfirmLink()
 
   onClickBtnCopyConfirmLink = ->
@@ -12,6 +11,5 @@ EBS.UsersIndex = do ->
 
       event.preventDefault()
       $('.toast').toast('show')
-
 
   { init: init }
