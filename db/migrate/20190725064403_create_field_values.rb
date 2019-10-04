@@ -8,7 +8,8 @@ class CreateFieldValues < ActiveRecord::Migration[5.2]
       t.text    :properties
       t.string  :image
       t.string  :file
-      t.references :valueable, polymorphic: true, index: true
+      t.string  :valueable_id
+      t.string  :valueable_type
 
       t.timestamps
     end

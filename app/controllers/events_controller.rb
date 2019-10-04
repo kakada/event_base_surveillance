@@ -55,9 +55,9 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(
       :event_type_id, properties: {},
-      field_values_attributes: [
-        :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
-      ]
+                      field_values_attributes: [
+                        :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
+                      ]
     )
   end
 end

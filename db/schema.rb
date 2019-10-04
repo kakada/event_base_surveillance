@@ -91,11 +91,10 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
     t.text "properties"
     t.string "image"
     t.string "file"
+    t.string "valueable_id"
     t.string "valueable_type"
-    t.bigint "valueable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["valueable_type", "valueable_id"], name: "index_field_values_on_valueable_type_and_valueable_id"
   end
 
   create_table "fields", force: :cascade do |t|

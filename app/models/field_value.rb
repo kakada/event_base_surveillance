@@ -12,8 +12,8 @@
 #  properties     :text
 #  image          :string
 #  file           :string
+#  valueable_id   :string
 #  valueable_type :string
-#  valueable_id   :bigint
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

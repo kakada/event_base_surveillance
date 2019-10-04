@@ -75,7 +75,7 @@ module Events
       private
 
       def except_attributes
-        %w[program_id creator_id event_type_id event_uuid]
+        %w[program_id creator_id event_type_id event_uuid uuid id]
       end
 
       def except_date_attributes
