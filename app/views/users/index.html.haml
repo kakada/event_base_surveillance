@@ -25,4 +25,23 @@
             %td= user.confirmed? ? 'Active' : 'Pending'
             %td
               - if policy(user).destroy?
-                = link_to 'Delete' , user_path(user), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this user?'}
+                .btn-group
+                  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                    %i.fas.fa-ellipsis-v
+
+                  .dropdown-menu.dropdown-menu-right
+                    - unless user.confirmed?
+                      %input.confirm-link{ value: confirmation_url(user, confirmation_token: user.confirmation_token) }
+                      = link_to '#', class: "btn dropdown-item btn-copy" do
+                        %i.far.fa-copy.drop-menu-icon
+                        %span Copy confirm link
+
+                    - if policy(user).destroy?
+                      = link_to user_path(user), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this user?'} do
+                        %i.fas.fa-trash-alt.drop-menu-icon
+                        %span Delete
+
+%div{"aria-atomic" => "true", "aria-live" => "polite", :style => "position: relative; "}
+  .toast{:style => "position: absolute; top: 0; right: 100px;"}
+    .toast-body
+      Copied!
