@@ -16,7 +16,7 @@ class EventMilestone < ApplicationRecord
   belongs_to :event, foreign_key: :event_uuid
   belongs_to :milestone
   belongs_to :submitter, class_name: 'User', optional: true
-  has_many   :field_values, as: :valueable, dependent: :delete_all
+  has_many   :field_values, as: :valueable, dependent: :destroy
 
   # History
   has_associated_audits
