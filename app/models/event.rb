@@ -17,7 +17,7 @@ class Event < ApplicationRecord
 
   before_create :set_uuid
 
-  belongs_to :event_type, optional: true
+  belongs_to :event_type
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
@@ -27,10 +27,11 @@ class Event < ApplicationRecord
   has_associated_audits
 
   # Deligation
-  delegate :name, :color, to: :event_type, prefix: :event_type, allow_nil: true
+  delegate :name, :color, to: :event_type, prefix: :event_type
   delegate :name, to: :program, prefix: true
 
   # Validation
+  validates :event_type_id, presence: true
   validate :validate_field_values, on: %i[create update]
   before_validation :set_program_id
 

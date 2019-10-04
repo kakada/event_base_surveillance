@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
+  before_action :set_event_type, only: [:new, :create, :edit, :update]
+
   def index
     @pagy, @events = pagy(policy_scope(Event.includes(:event_milestones).includes(creator: :program)))
   end
@@ -10,7 +12,6 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event_types = policy_scope(EventType.all)
     @event = Event.new(event_type_id: params[:event_type_id])
   end
 
@@ -24,7 +25,6 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event_types = policy_scope(EventType.all)
     @event = Event.find(params[:id])
   end
 
@@ -59,5 +59,9 @@ class EventsController < ApplicationController
                         :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
                       ]
     )
+  end
+
+  def set_event_type
+    @event_types = policy_scope(EventType.all)
   end
 end

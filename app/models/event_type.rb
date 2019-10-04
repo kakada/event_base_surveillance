@@ -10,6 +10,7 @@
 #  program_id :integer
 #  shared     :boolean
 #  color      :string
+#  default    :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

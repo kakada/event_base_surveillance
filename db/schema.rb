@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
     t.integer "program_id"
     t.boolean "shared"
     t.string "color"
+    t.boolean "default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
