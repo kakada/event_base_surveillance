@@ -8,20 +8,16 @@ RSpec.describe Event, type: :model do
 
   describe 'assign_geo_point' do
     before :all do
-      @province = FactoryBot.create :location
-      @district = FactoryBot.create :location, code: '0102', latitude: 0.1, longitude: 0.5
-      @commune = FactoryBot.create :location, code: '010201', latitude: 0.13, longitude: 0.51
-      @village = FactoryBot.create :location, code: '01020101', latitude: 0.132, longitude: 0.512
+      @province = Location.first || create(:location)
+      @district = create :location, code: '0102', latitude: 0.1, longitude: 0.5
+      @commune = create :location, code: '010201', latitude: 0.13, longitude: 0.51
+      @village = create :location, code: '01020101', latitude: 0.132, longitude: 0.512
 
-      @root_milestone = FactoryBot.create :milestone, :root
-      @event = FactoryBot.create :event
+      @root_milestone = create(:milestone, :root)
+      @event = create :event
     end
 
     it 'should set province geo point on create' do
-      field = @root_milestone.fields.find_by(code: 'province_id')
-      @event.field_values.create(field_id: field.id, field_code: field.code, value: @province.code)
-      @event.save
-
       expect(@event.field_values.find_by(field_code: 'latitude').value).to eq(@province.latitude.to_s)
       expect(@event.field_values.find_by(field_code: 'longitude').value).to eq(@province.longitude.to_s)
     end

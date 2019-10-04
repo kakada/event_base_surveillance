@@ -7,10 +7,26 @@ RSpec.describe Api::V1::EventsController, type: :controller do
   let! (:h5n1) { create(:event_type, program: client_app.program) }
   let! (:influenza) { create(:event_type, name: 'Influenza', program: client_app.program) }
   let  (:event_attributes) {
+    root_milestone = create(:milestone, :root)
+    field_values = {
+      province_id: province.code,
+      number_of_case: rand(1..5),
+      event_date: Date.today - rand(0..30),
+      report_date: Date.today
+    }
+
+    field_values_attributes = field_values.map do |k, v|
+      {
+        field_id: root_milestone.fields.find_by(code: k.to_s).id,
+        field_code: k,
+        value: v
+      }
+    end
+
     {
       "event":{
         "event_type_id": h5n1.id,
-        "field_values_attributes":[ {  "field_id":"1", "field_value":"Hello" } ]
+        "field_values_attributes": field_values_attributes
       }
     }
   }

@@ -32,7 +32,6 @@ class Event < ApplicationRecord
 
   # Validation
   validate :validate_field_values, on: %i[create update]
-
   before_validation :set_program_id
 
   # Scope
@@ -87,7 +86,7 @@ class Event < ApplicationRecord
     %w[latitude longitude].each do |code|
       fv = field_values.find_or_initialize_by(field_code: code)
       fv.value = location[code]
-      fv.field_id = program.milestones.root.fields.find_by(code: code).id
+      fv.field_id = Milestone.root.fields.find_by(code: code).id
       fv.save
     end
   end
@@ -97,7 +96,7 @@ class Event < ApplicationRecord
   end
 
   def validate_field_values
-    program.present? && program.milestones.first&.fields&.each do |field|
+    program.present? && Milestone.root&.fields&.each do |field|
       next unless field.required?
 
       obj = field_values.select { |value| value.field_id == field.id }.first

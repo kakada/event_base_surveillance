@@ -11,7 +11,7 @@ namespace :sample do
         communes.each do |commune|
           villages = commune.children.where.not(latitude: nil).limit(2)
           villages.each do |village|
-            creat_event(province.id, district.id, commune.id, village.id)
+            creat_event(province.code, district.code, commune.code, village.code)
           end
         end
       end

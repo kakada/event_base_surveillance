@@ -4,7 +4,6 @@ FactoryBot.define do
     program
 
     trait :root do
-      name       { 'New' }
       is_default { true }
 
       after :create do |milestone|
