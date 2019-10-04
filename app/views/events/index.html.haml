@@ -25,12 +25,16 @@
           %tr
             %td
               .flex-row-vertical-center
-                .small-color{style: "background-color: #{event.event_type_color}"}
-                  = event.event_type_name[0]
-                %span= link_to event.event_type_name, event_path(event), class: 'btn btn-link'
+                - if event.event_type_name.present?
+                  .small-color{style: "background-color: #{event.event_type_color}"}
+                    = event.event_type_name[0]
+                %span= link_to event.event_type_name || 'N/A', event_path(event), class: 'btn btn-link'
+
             %td= event.location_name
             - ['number_of_case', 'status'].each do |code|
-              %td= event.field_values.select{|fv| fv.field_code == code}.first.try(:value) || '-'
+              %td
+                %span.badge
+                  = event.field_values.select{|fv| fv.field_code == code}.first.try(:value) || '-'
 
             %td
               - risk_level = event.field_values.select{|fv| fv.field_code == 'risk_level'}.first.try(:value)

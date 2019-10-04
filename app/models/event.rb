@@ -35,6 +35,9 @@ class Event < ApplicationRecord
 
   before_validation :set_program_id
 
+  # Scope
+  default_scope { order(updated_at: :desc) }
+
   # Callback
   after_save :assign_geo_point
   after_save    { IndexerWorker.perform_async(:index, uuid) }

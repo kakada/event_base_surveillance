@@ -24,7 +24,8 @@ class EventPolicy < ApplicationPolicy
       if user.system_admin?
         scope.all
       else
-        scope.joins(:event_type).where('events.program_id = ? or event_types.shared = ?', user.program_id, true)
+        # scope.joins(:event_type).where('events.program_id = ? or event_types.shared = ?', user.program_id, true)
+        scope.where('events.program_id = ?', user.program_id)
       end
     end
   end
