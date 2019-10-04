@@ -52,7 +52,7 @@ class EventMilestone < ApplicationRecord
   def set_event_status
     fv = event.field_values.find_or_initialize_by(field_code: 'status')
     fv.value = milestone.name
-    fv.field_id ||= Milestone.root.first.fields.find_by(code: 'status').id
+    fv.field_id ||= event.program.milestones.root.fields.find_by(code: 'status').id
     fv.save
   end
 end

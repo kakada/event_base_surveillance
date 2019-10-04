@@ -84,7 +84,7 @@ class Event < ApplicationRecord
     %w[latitude longitude].each do |code|
       fv = field_values.find_or_initialize_by(field_code: code)
       fv.value = location[code]
-      fv.field_id = Milestone.root.first.fields.find_by(code: code).id
+      fv.field_id = program.milestones.root.fields.find_by(code: code).id
       fv.save
     end
   end

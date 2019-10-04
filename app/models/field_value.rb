@@ -57,14 +57,14 @@ class FieldValue < ApplicationRecord
   def assign_risk_level
     fv = valueable.event.field_values.find_or_initialize_by(field_code: 'risk_level')
     fv.value = value
-    fv.field_id ||= Milestone.root.first.fields.find_by(code: 'risk_level').id
+    fv.field_id ||= valueable.event.milestones.root.fields.find_by(code: 'risk_level').id
     fv.save
   end
 
   def assign_risk_color
     fv = valueable.event.field_values.find_or_initialize_by(field_code: 'risk_color')
     fv.value = field.field_options.find_by(value: value).color
-    fv.field_id ||= Milestone.root.first.fields.find_by(code: 'risk_color').id
+    fv.field_id ||= valueable.event.milestones.root.fields.find_by(code: 'risk_color').id
     fv.save
   end
 
