@@ -3,8 +3,7 @@
 class IndexerWorker
   include Sidekiq::Worker
 
-  logger = Sidekiq.logger.level == Logger::DEBUG ? Sidekiq.logger : nil
-  Client = Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL'], logger: logger
+  Client = Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL']
 
   def perform(operation, event_uuid)
     logger.debug [operation, "ID: #{event_uuid}"]
