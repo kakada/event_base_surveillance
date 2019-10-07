@@ -1,6 +1,6 @@
 .w-50.view-center
   = simple_form_for @event_type do |f|
-    = f.input :name
+    = f.input :name, disabled: @event_type.default?
     = f.input :color, as: :minicolors, input_html: { class: 'color', data: {minicolors: {theme: :bootstrap, position: :right}}}
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', event_types_path, class: 'btn btn-secondary'

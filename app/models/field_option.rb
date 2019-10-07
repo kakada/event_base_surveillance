@@ -16,6 +16,8 @@
 class FieldOption < ApplicationRecord
   belongs_to :field
 
+  # Validation
+  validates :value, :name, presence: true, uniqueness: { scope: [:field_id] }
   before_validation :set_option_value
 
   private

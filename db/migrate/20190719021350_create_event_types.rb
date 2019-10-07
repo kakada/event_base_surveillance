@@ -6,6 +6,7 @@ class CreateEventTypes < ActiveRecord::Migration[5.2]
       t.integer :program_id
       t.boolean :shared
       t.string  :color
+      t.boolean :default, default: false
 
       t.timestamps
     end

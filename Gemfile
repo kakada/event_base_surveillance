@@ -57,12 +57,16 @@ gem 'active_model_serializers',   '~> 0.10.10'
 gem 'rack-cors',                  '~> 1.0.3'
 gem 'pumi', github: 'dwilkie/pumi', require: 'pumi/rails'
 
+gem 'elasticsearch-model',        '~> 7.0.0'
+gem 'elasticsearch-rails',        '~> 7.0.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8.2'
   gem 'factory_bot_rails', '~> 5.0'
   gem 'ffaker', '~> 2.9.0'
+  gem 'guard-rspec', require: false
 end
 
 group :development do
@@ -82,7 +86,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  # gem 'chromedriver-helper'
 
   gem 'shoulda-matchers',       '~> 4.1.1'
   gem 'database_cleaner',       '~> 1.7.0'

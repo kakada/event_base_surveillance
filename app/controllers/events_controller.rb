@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
+  before_action :set_event_type, only: %i[new create edit update]
+
   def index
     @pagy, @events = pagy(policy_scope(Event.includes(:event_milestones).includes(creator: :program)))
   end
@@ -10,7 +12,6 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event_types = policy_scope(EventType.all)
     @event = Event.new(event_type_id: params[:event_type_id])
   end
 
@@ -19,13 +20,11 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to @event
     else
-      flash.now[:alert] = @event.errors.full_messages
       render :new
     end
   end
 
   def edit
-    @event_types = policy_scope(EventType.all)
     @event = Event.find(params[:id])
   end
 
@@ -55,12 +54,14 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(
-      :name, :event_type_id, :number_of_case, :number_of_death, :description, :event_date, :report_date,
-      :location, :province_id, :district_id, :commune_id, :village_id,
-      properties: {},
-      field_values_attributes: [
-        :id, :field_id, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
-      ]
+      :event_type_id, properties: {},
+                      field_values_attributes: [
+                        :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
+                      ]
     )
+  end
+
+  def set_event_type
+    @event_types = policy_scope(EventType.all)
   end
 end

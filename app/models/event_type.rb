@@ -10,6 +10,7 @@
 #  program_id :integer
 #  shared     :boolean
 #  color      :string
+#  default    :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -27,10 +28,6 @@ class EventType < ApplicationRecord
   validate :validate_unique_fields, on: :create
 
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
-
-  MAPPING_FIELDS = [
-    { name: 'risk_level', field_type: 'select_one' }
-  ].freeze
 
   private
 

@@ -1,0 +1,11 @@
+development: &default
+  host: 'http://elasticsearch:9200'
+  transport_options:
+    request:
+      timeout: !!integer 300
+test:
+  <<: *default
+staging:
+  <<: *default
+production:
+  <<: *default

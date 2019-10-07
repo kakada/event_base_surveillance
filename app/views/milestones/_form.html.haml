@@ -2,19 +2,19 @@
   = f.label :name
   = f.text_field :name, class: 'form-control'
 
-- if current_program.milestones.first == @milestone
+- if @milestone.is_default?
   = render 'predefined_fields'
 - else
-  = render 'predefined_fields', predefined_fields: [{type: 'date', value: 'Conducted_at'}]
+  = render 'predefined_fields', predefined_fields: Field.defaults
 
 %fieldset
   %legend Additional Fields
   %ol.fields
-    = f.fields_for :fields do |builder|
+    = f.fields_for :fields, f.object.fields.dynamic do |builder|
       = render 'field_fields', f: builder
 
     = link_to_add_fields "+ Add Field", f, :fields
 
-  .actions{style: 'margin-top: 20px'}
+  .actions
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', milestones_path, class: 'btn btn-secondary'

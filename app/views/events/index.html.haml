@@ -14,9 +14,9 @@
         %tr
           %th Event Type
           %th Location
-          %th Value
-          %th Risk Level
+          %th # of Case
           %th Status
+          %th Risk Level
           %th Open case date
           %th Owner
           %th
@@ -27,14 +27,17 @@
               .flex-row-vertical-center
                 .small-color{style: "background-color: #{event.event_type_color}"}
                   = event.event_type_name[0]
-                %span= link_to event.event_type_name, event_path(event), class: 'btn btn-link'
-            %td= event.location
-            %td= event.value
+                %span
+                  = link_to event.event_type_name, event_path(event), class: 'btn btn-link'
+            %td= event.location_name
+            %td= event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.try(:value)
             %td
-              - style = event.risk_level.present? ? "background-color: #{event.risk_color}; color: #fff" : ''
+              %span.badge= event.field_values.select{|fv| fv.field_code == 'status'}.first.try(:value) || '-'
+            %td
+              - risk_level = event.field_values.select{|fv| fv.field_code == 'risk_level'}.first
+              - style = risk_level.present? ? "background-color: #{risk_level.color}; color: #fff" : ''
               %span.badge{style: style}
-                = event.risk_level || '-'
-            %td= event.status || 'New'
+                = risk_level.try(:value) || '-'
             %td= l(event.created_at, format: :long)
             %td= event.program_name
             %td
@@ -46,5 +49,3 @@
   - if @pagy.pages > 1
     .pagy-wrapper
       != pagy_bootstrap_nav(@pagy)
-
-/ = render 'event_types_modal'

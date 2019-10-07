@@ -1,22 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::EventsController, type: :controller do
-  let! (:client_app)    { create(:client_app) }
-  let! (:event_type) { create(:event_type, program: client_app.program) }
+  let! (:client_app) { create(:client_app) }
+  let! (:province) { create(:location)}
+  let! (:commune) { create(:location, code: '110402', kind: 'commune')}
+  let! (:h5n1) { create(:event_type, program: client_app.program) }
+  let! (:influenza) { create(:event_type, name: 'Influenza', program: client_app.program) }
   let  (:event_attributes) {
+    root_milestone = create(:milestone, :root)
+    field_values = {
+      province_id: province.code,
+      number_of_case: rand(1..5),
+      event_date: Date.today - rand(0..30),
+      report_date: Date.today
+    }
+
+    field_values_attributes = field_values.map do |k, v|
+      {
+        field_id: root_milestone.fields.find_by(code: k.to_s).id,
+        field_code: k,
+        value: v
+      }
+    end
+
     {
       "event":{
-        "event_type_id": event_type.id,
-        "number_of_case": "1",
-        "number_of_death": "0",
-        "description": "Description about H5N1",
-        "event_date": "2019-08-06",
-        "report_date": "2019-08-12",
-        "province_id": "11",
-        "district_id": "1104",
-        "commune_id": "110402",
-        "village_id": "",
-        "field_values_attributes":[ {  "field_id":"1", "field_value":"Hello" } ]
+        "event_type_id": h5n1.id,
+        "field_values_attributes": field_values_attributes
       }
     }
   }
@@ -35,14 +45,14 @@ RSpec.describe Api::V1::EventsController, type: :controller do
   end
 
   describe 'PUT #update/:id' do
-    let! (:event)      { create(:event, event_type: event_type, program: client_app.program) }
+    let! (:event)      { create(:event, event_type: h5n1, program: client_app.program) }
 
     before(:each) do
       allow(controller).to receive(:current_program).and_return(event.program)
-      put :update, params: { id: event.id, event: {description: 'event description'} }
+      put :update, params: { id: event.id, event: {event_type_id: influenza.id} }
     end
 
     it { expect(response.status).to eq(200) }
-    it { expect(event.reload.description).to eq('event description') }
+    it { expect(event.reload.event_type_id).to eq(influenza.id) }
   end
 end

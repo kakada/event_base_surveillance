@@ -16,5 +16,6 @@ namespace :db do
     sh 'bin/rails db:create RAILS_ENV=development'
     sh 'bin/rails db:migrate RAILS_ENV=development'
     sh 'bin/rails db:seed RAILS_ENV=development'
+    sh 'bin/rails location_data:import RAILS_ENV=development'
   end
 end

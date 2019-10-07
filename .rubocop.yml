@@ -13,6 +13,7 @@ AllCops:
     - Gemfile
     - Rakefile
     - spec/**/*.rb
+    - Guardfile
 Documentation:
   Enabled: false
 Metrics/LineLength:

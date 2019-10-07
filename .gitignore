@@ -56,3 +56,4 @@ build-iPhoneSimulator/
 !/tmp/.keep
 
 public/uploads/
+sample/locations.csv

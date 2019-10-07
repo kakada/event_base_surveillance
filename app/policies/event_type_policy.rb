@@ -14,7 +14,7 @@ class EventTypePolicy < ApplicationPolicy
   end
 
   def destroy?
-    update?
+    user.program_admin? && !record.default?
   end
 
   class Scope < Scope

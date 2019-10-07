@@ -6,13 +6,15 @@
 #
 #  id             :bigint           not null, primary key
 #  field_id       :integer
+#  field_code     :string
 #  value          :string
+#  color          :string
 #  values         :text             is an Array
 #  properties     :text
 #  image          :string
 #  file           :string
+#  valueable_id   :string
 #  valueable_type :string
-#  valueable_id   :bigint
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -49,9 +51,11 @@ class FieldValue < ApplicationRecord
   end
 
   def handle_mapping_field
-    valueable.event[field.mapping_field] = value
-    valueable.event.risk_color = field.field_options.find_by(value: value).color
-    valueable.event.save
+    fv = valueable.event.field_values.find_or_initialize_by(field_code: field.mapping_field)
+    fv.value = value
+    fv.color = field.field_options.find_by(value: value).color if field.field_options.present?
+    fv.field_id ||= Milestone.root.fields.find_by(code: field.mapping_field).id
+    fv.save
   end
 
   def cleanup_values

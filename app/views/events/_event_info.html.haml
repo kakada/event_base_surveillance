@@ -19,7 +19,7 @@
     %span.value= @event.description || '-'
   %li
     %span.type Location:
-    %span.value= @event.location
+    %span.value= @event.location_name(reverse=true)
   %li
     %span.type Event Date:
     %span.value= @event.event_date

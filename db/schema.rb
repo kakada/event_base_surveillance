@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_074424) do
+ActiveRecord::Schema.define(version: 2019_09_11_033431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,9 +52,6 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
     t.string "event_uuid"
     t.integer "milestone_id"
     t.integer "submitter_id"
-    t.date "conducted_at"
-    t.string "priority"
-    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -65,6 +62,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
     t.integer "program_id"
     t.boolean "shared"
     t.string "color"
+    t.boolean "default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,24 +71,8 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
     t.integer "event_type_id"
     t.integer "creator_id"
     t.integer "program_id"
-    t.text "description"
-    t.string "location"
-    t.float "latitude"
-    t.float "longitude"
-    t.string "province_id"
-    t.string "district_id"
-    t.string "commune_id"
-    t.string "village_id"
-    t.date "event_date"
-    t.date "report_date"
-    t.string "status"
-    t.string "risk_level"
-    t.string "risk_color"
-    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "number_of_case"
-    t.integer "number_of_death"
   end
 
   create_table "field_options", force: :cascade do |t|
@@ -104,19 +86,21 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
 
   create_table "field_values", force: :cascade do |t|
     t.integer "field_id"
+    t.string "field_code"
     t.string "value"
+    t.string "color"
     t.text "values", array: true
     t.text "properties"
     t.string "image"
     t.string "file"
+    t.string "valueable_id"
     t.string "valueable_type"
-    t.bigint "valueable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["valueable_type", "valueable_id"], name: "index_field_values_on_valueable_type_and_valueable_id"
   end
 
   create_table "fields", force: :cascade do |t|
+    t.string "code"
     t.string "name", null: false
     t.string "field_type"
     t.boolean "required"
@@ -124,6 +108,19 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
     t.string "mapping_field_type"
     t.integer "display_order"
     t.integer "milestone_id"
+    t.boolean "is_default", default: false
+    t.boolean "entry_able", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
+    t.string "name_en", null: false
+    t.string "name_km", null: false
+    t.string "kind", null: false
+    t.string "parent_id"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -132,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_074424) do
     t.integer "program_id"
     t.string "name"
     t.integer "display_order"
+    t.boolean "is_default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

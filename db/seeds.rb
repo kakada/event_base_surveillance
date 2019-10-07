@@ -28,26 +28,36 @@ users.each do |user|
 end
 
 # Event type
-obj = {
-  name: 'Influenza',
-  user_id: User.find_by(email: 'cdc@program.org').id,
-  color: "##{SecureRandom.hex(3)}"
-}
+event_types = [
+  {
+    name: 'Unknown',
+    user_id: User.find_by(email: 'cdc@program.org').id,
+    color: "##{SecureRandom.hex(3)}",
+    default: true
+  },
+  {
+    name: 'Influenza',
+    user_id: User.find_by(email: 'cdc@program.org').id,
+    color: "##{SecureRandom.hex(3)}"
+  }
+]
 
-EventType.create(obj)
+event_types.each do |obj|
+  EventType.create(obj)
+end
 
 # Milestone
 milestones = [
-  {
-    name: 'New',
-    fields_attributes: [
-      { name: "Source of information", field_type: "select_one", field_options_attributes: [{name: "Hotline"}, {name: "RRT"}, {name: "Media monitoring"}, {name: "CamEWARN"}, {name: "CamLIS"}, {name: "NGO Partners"}, {name: "Other"}]},
-      { name: "Additional information", field_type: "text"},
-      { name: "WHO notified date", field_type: "date"},
-      { name: "Status of report", field_type: "select_one", field_options_attributes: [{ name: "For verification by RRT" }, { name: "Verfified (confirmed)" }, { name: "False report" }, { name: "Refer to other agency" }]},
-      { name: "Verification Date", field_type: "date"}
-    ]
-  },
+  # {
+  #   name: 'New',
+  #   fields_attributes: [
+  #     { name: "Source of information", field_type: "select_one", field_options_attributes: [{name: "Hotline"}, {name: "RRT"}, {name: "Media monitoring"}, {name: "CamEWARN"}, {name: "CamLIS"}, {name: "NGO Partners"}, {name: "Other"}]},
+  #     { name: "Additional information", field_type: "text"},
+  #     { name: "WHO notified date", field_type: "date"},
+  #     { name: "Status of report", field_type: "select_one", field_options_attributes: [{ name: "For verification by RRT" }, { name: "Verfified (confirmed)" }, { name: "False report" }, { name: "Refer to other agency" }]},
+  #     { name: "Verification Date", field_type: "date"}
+  #   ]
+  # },
   {
     name: "Risk Assessment",
     fields_attributes: [
@@ -82,6 +92,8 @@ milestones = [
     ]
   }
 ]
+
+program_cdc.milestones.create_root
 
 milestones.each do |milestone|
   program_cdc.milestones.create(milestone)

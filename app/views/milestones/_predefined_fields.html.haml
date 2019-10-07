@@ -1,4 +1,4 @@
-- predefined_fields ||= [{type: 'integer', value: 'Number of case'}, {type: 'integer', value: 'Number of death'}, {type: 'text', value: 'Description'}, {type: 'location', value: 'Location'}, {type: 'date', value: 'Event Date'}, {type: 'date', value: 'Report Date'}]
+- predefined_fields ||= Field.roots
 %fieldset
   %legend Primary Fields
   .fieldsets
@@ -6,5 +6,5 @@
       .field-wrapper{style: 'margin-bottom: 3px'}
         .wrapper
           %select.form-control.field-type.w-35{disabled: true}
-            %option= obj[:type]
-          %input.form-control.field-name.w-35{value: obj[:value], disabled: true}
+            %option= obj[:field_type]
+          %input.form-control.field-name.w-35{value: obj[:name], disabled: true}
