@@ -13,7 +13,7 @@ class ProgramsController < ApplicationController
     @program = authorize Program.new(program_params)
 
     if @program.save
-      @program.milestones.create_default
+      @program.milestones.create_root
 
       redirect_to programs_url
     else

@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
     t.integer "field_id"
     t.string "field_code"
     t.string "value"
+    t.string "color"
     t.text "values", array: true
     t.text "properties"
     t.string "image"

@@ -4,6 +4,7 @@ class CreateFieldValues < ActiveRecord::Migration[5.2]
       t.integer :field_id
       t.string  :field_code
       t.string  :value
+      t.string  :color
       t.text    :values, array: true
       t.text    :properties
       t.string  :image

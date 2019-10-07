@@ -42,7 +42,15 @@ module Events
       end
 
       def as_indexed_json(_options = {})
-        event = attributes.except(*except_attributes).merge(
+        event = build_basic_attributes
+        event = build_milestone(event)
+        event
+      end
+
+      private
+
+      def build_basic_attributes
+        attributes.except(*except_attributes).merge(
           event_type_name: event_type_name,
           program_name: program_name,
           location_name: location_name,
@@ -52,7 +60,9 @@ module Events
           },
           milestone: {}
         )
+      end
 
+      def build_milestone(event)
         program.milestones.each_with_index do |ms, index|
           milestone_name = ms.name.downcase.split(' ').join('_')
           event[:milestone][milestone_name] = {}
@@ -63,7 +73,8 @@ module Events
           event[:milestone][milestone_name] = valueable.attributes.except(*except_attributes).merge(
             fields: valueable.field_values.includes(:field).map do |fv|
               fv.field.attributes.except(*except_date_attributes).merge(
-                value: fv.value || fv.values || fv.image_url || fv.file_url
+                value: fv.value || fv.values || fv.image_url || fv.file_url,
+                color: fv.color
               )
             end
           )
@@ -71,8 +82,6 @@ module Events
 
         event
       end
-
-      private
 
       def except_attributes
         %w[program_id creator_id event_type_id event_uuid uuid id]

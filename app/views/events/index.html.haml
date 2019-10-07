@@ -34,11 +34,10 @@
             %td
               %span.badge= event.field_values.select{|fv| fv.field_code == 'status'}.first.try(:value) || '-'
             %td
-              - risk_level = event.field_values.select{|fv| fv.field_code == 'risk_level'}.first.try(:value)
-              - risk_color = event.field_values.select{|fv| fv.field_code == 'risk_color'}.first.try(:value)
-              - style = risk_level.present? ? "background-color: #{risk_color}; color: #fff" : ''
+              - risk_level = event.field_values.select{|fv| fv.field_code == 'risk_level'}.first
+              - style = risk_level.present? ? "background-color: #{risk_level.color}; color: #fff" : ''
               %span.badge{style: style}
-                = risk_level || '-'
+                = risk_level.try(:value) || '-'
             %td= l(event.created_at, format: :long)
             %td= event.program_name
             %td

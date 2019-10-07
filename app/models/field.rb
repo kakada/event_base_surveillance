@@ -22,13 +22,10 @@
 class Field < ApplicationRecord
   FIELD_TYPES = %w[text integer date select_one select_multiple note image location mapping_field file].freeze
 
-  MAPPING_FIELDS = [
-    { code: 'risk_level', field_type: 'select_one' }
-  ].freeze
-
   # Association
   belongs_to :milestone
   has_many   :field_options, dependent: :destroy
+  has_many   :field_values, dependent: :destroy
 
   # Validation
   validates :name, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
@@ -83,7 +80,7 @@ class Field < ApplicationRecord
   def set_mapping_field_type
     return unless field_type == 'mapping_field'
 
-    event_mapping_field = MAPPING_FIELDS.find { |obj| obj[:code] == mapping_field }
+    event_mapping_field = self.class.roots.find { |obj| obj[:code] == mapping_field }
     self.mapping_field_type = event_mapping_field.present? && event_mapping_field[:field_type]
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :set_event_type, only: [:new, :create, :edit, :update]
+  before_action :set_event_type, only: %i[new create edit update]
 
   def index
     @pagy, @events = pagy(policy_scope(Event.includes(:event_milestones).includes(creator: :program)))
