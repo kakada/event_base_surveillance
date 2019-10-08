@@ -4,6 +4,7 @@ class CreateEventMilestones < ActiveRecord::Migration[5.2]
       t.string  :event_uuid
       t.integer :milestone_id
       t.integer :submitter_id
+      t.integer :program_id
 
       t.timestamps
     end

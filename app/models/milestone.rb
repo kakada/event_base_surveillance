@@ -20,7 +20,7 @@ class Milestone < ApplicationRecord
   has_many   :fields, dependent: :destroy
 
   # Validation
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: [:program_id] }
   validate :validate_unique_field_name
   validate :validate_unique_field_type_location
 

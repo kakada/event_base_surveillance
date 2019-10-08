@@ -14,8 +14,6 @@ EBS.Util =
       i++
     pageName = controller.join("") + action
 
-    console.log('pageName=', pageName)
-
     return pageName
 
   insertAtCaret: (areaId, text) ->

@@ -34,7 +34,7 @@ class MessageInterpretor
     default_fields = select_elements_starting_with(fields, template_code)
     default_fields.each do |field|
       field_name  = field.split(template_code)[1]
-      field_value = obj.send(field_name).to_s
+      field_value = "<b>#{obj.send(field_name).to_s}</b>"
       field_template = "{{#{field}}}"
 
       @message = @message.gsub(/#{field_template}/, field_value)
@@ -49,6 +49,7 @@ class MessageInterpretor
       field_id = field.split('_')[1].to_i
       fv       = obj.field_values.select { |field_value| field_value.field_id == field_id }.first
       field_value = fv.try(:value) || fv.try(:values) || fv.try(:image_url) || fv.try(:file_url)
+      field_value = "<b>#{field_value}</b>"
       field_template = "{{#{field}}}"
 
       @message = @message.gsub(/#{field_template}/, field_value.to_s)

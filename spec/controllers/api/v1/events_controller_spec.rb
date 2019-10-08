@@ -7,7 +7,7 @@ RSpec.describe Api::V1::EventsController, type: :controller do
   let! (:h5n1) { create(:event_type, program: client_app.program) }
   let! (:influenza) { create(:event_type, name: 'Influenza', program: client_app.program) }
   let  (:event_attributes) {
-    root_milestone = create(:milestone, :root)
+    root_milestone = client_app.program.milestones.root
     field_values = {
       province_id: province.code,
       number_of_case: rand(1..5),

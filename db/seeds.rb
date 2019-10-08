@@ -93,8 +93,6 @@ milestones = [
   }
 ]
 
-program_cdc.milestones.create_root
-
 milestones.each do |milestone|
   program_cdc.milestones.create(milestone)
 end

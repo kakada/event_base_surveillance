@@ -5,8 +5,10 @@ FactoryBot.define do
     creator
 
     before :create do |event|
+      event.program_id ||= create(:program).id
       province = Location.first || create(:location)
-      root_milestone = Milestone.root.presence || create(:milestone, :root)
+      root_milestone = event.program.milestones.root.presence || create(:milestone, :root, program_id: event.program_id)
+
       field_values = {
         province_id: province.code,
         number_of_case: rand(1..5),

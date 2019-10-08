@@ -18,4 +18,12 @@ class Program < ApplicationRecord
   has_many  :milestones
 
   validates :name, presence: true
+
+  after_create :create_root_milestone
+
+  private
+
+  def create_root_milestone
+    milestones.create_root
+  end
 end

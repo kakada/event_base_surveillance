@@ -56,16 +56,11 @@ class Event < ApplicationRecord
       { code: 'event_type_name', label: 'Event Type' },
       { code: 'creator_email', label: 'Creator' },
       { code: 'program_name', label: 'Program' },
-      { code: 'value', label: 'Value' },
-      { code: 'description', label: 'Description' },
-      { code: 'location', label: 'Location' },
-      { code: 'event_date', label: 'Event Date' },
-      { code: 'report_date', label: 'Report Date' },
-      { code: 'status', label: 'Status' },
-      { code: 'risk_level', label: 'Risk Level' }
+      { code: 'location_name', label: 'Location Name' },
+
     ]
     fields.each { |field| field[:code] = "#{default_template_code}#{field[:code]}" }
-    fields += Milestone.root.fields.map { |field| { code: "#{dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}", label: field.name } } if Milestone.first.present?
+    fields += Milestone.root.fields.map { |field| { code: "#{dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}", label: field.name } }
     fields
   end
 

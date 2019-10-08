@@ -15,6 +15,7 @@
 class EventMilestone < ApplicationRecord
   belongs_to :event, foreign_key: :event_uuid
   belongs_to :milestone
+  belongs_to :program
   belongs_to :submitter, class_name: 'User', optional: true
   has_many   :field_values, as: :valueable, dependent: :destroy
 
@@ -68,7 +69,7 @@ class EventMilestone < ApplicationRecord
   def set_event_status
     fv = event.field_values.find_or_initialize_by(field_code: 'status')
     fv.value = milestone.name
-    fv.field_id ||= event.program.milestones.root.fields.find_by(code: 'status').id
+    fv.field_id ||= program.milestones.root.fields.find_by(code: 'status').id
     fv.save
   end
 end
