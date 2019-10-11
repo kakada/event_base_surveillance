@@ -12,3 +12,7 @@ KIBANA_PORT=5601
 
 # Shell with unicode support
 LANG=C.UTF-8
+
+# Telegram bot
+TELEGRAM_TOKEN=toekn
+TELEGRAM_USERNAME=bot_name

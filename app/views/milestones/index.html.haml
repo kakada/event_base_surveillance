@@ -28,11 +28,11 @@
                   %i.fas.fa-ellipsis-v
 
                 .dropdown-menu.dropdown-menu-right
-                  - if policy(Milestone).update?
-                    = link_to milestone_telegram_path(milestone), class: "btn dropdown-item" do
-                      %i.fab.fa-telegram.drop-menu-icon
-                      %span Telegram Notification
+                  = link_to milestone_telegram_path(milestone), class: ["btn dropdown-item", ('disabled' unless current_program.enable_telegram?)] do
+                    %i.fab.fa-telegram.drop-menu-icon
+                    %span Telegram Notification
 
+                  - if policy(Milestone).update?
                     = link_to edit_milestone_path(milestone), class: "btn dropdown-item" do
                       %i.fas.fa-pen.drop-menu-icon
                       %span Edit

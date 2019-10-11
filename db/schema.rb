@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_092346) do
 
   create_table "programs", force: :cascade do |t|
     t.string "name"
+    t.boolean "enable_telegram", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -38,4 +38,5 @@ en:
     events: 'Events'
     about: 'About'
     logout: 'Logout'
-    milestones: 'Milestones'
+    milestones: 'Milestones',
+    settings: 'Settings'

@@ -4,8 +4,8 @@ class EventMilestoneWorker
   include Sidekiq::Worker
 
   def perform(event_milestone_id)
-    event_milestone = EventMilestone.find(event_milestone_id)
-    return if event_milestone.nil?
+    event_milestone = EventMilestone.find_by(id: event_milestone_id)
+    return if event_milestone.nil? || !event_milestone.program.enable_telegram?
 
     telegram = event_milestone.milestone.telegram
     return if telegram.nil?

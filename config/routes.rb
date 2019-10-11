@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   end
 
   resources :programs
+
+  scope module: :programs do
+    resource :setting, only: [:show, :update]
+  end
+
   resources :users
   resources :events do
     scope module: :events do
