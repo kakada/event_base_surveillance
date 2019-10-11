@@ -21,6 +21,7 @@ class Program < ApplicationRecord
   validates :name, presence: true
 
   after_create :create_root_milestone
+  after_create { ProgramWorker.perform_async(id) }
 
   private
 
