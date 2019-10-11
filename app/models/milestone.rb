@@ -43,13 +43,12 @@ class Milestone < ApplicationRecord
   def template_fields
     return [] if self == Milestone.first
 
-    EventMilestone.template_fields +
-    fields.map { |field|
+    fields.map do |field|
       {
         code: "#{EventMilestone.dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}",
         label: field.name
       }
-    }
+    end
   end
 
   private

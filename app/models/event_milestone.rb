@@ -8,6 +8,7 @@
 #  event_uuid   :string
 #  milestone_id :integer
 #  submitter_id :integer
+#  program_id   :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -40,13 +41,6 @@ class EventMilestone < ApplicationRecord
   end
 
   # Class Methods
-  def self.template_fields
-    fields = [
-      { code: "#{default_template_code}conducted_at", label: 'Conducted at' },
-      { code: "#{default_template_code}source", label: 'Source' }
-    ]
-  end
-
   def self.default_template_code
     'emde_'
   end

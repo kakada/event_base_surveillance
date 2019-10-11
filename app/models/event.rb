@@ -56,7 +56,7 @@ class Event < ApplicationRecord
       { code: 'event_type_name', label: 'Event Type' },
       { code: 'creator_email', label: 'Creator' },
       { code: 'program_name', label: 'Program' },
-      { code: 'location_name', label: 'Location Name' },
+      { code: 'location_name', label: 'Location Name' }
 
     ]
     fields.each { |field| field[:code] = "#{default_template_code}#{field[:code]}" }

@@ -34,7 +34,7 @@ class MessageInterpretor
     default_fields = select_elements_starting_with(fields, template_code)
     default_fields.each do |field|
       field_name  = field.split(template_code)[1]
-      field_value = "<b>#{obj.send(field_name).to_s}</b>"
+      field_value = "<b>#{obj.send(field_name)}</b>"
       field_template = "{{#{field}}}"
 
       @message = @message.gsub(/#{field_template}/, field_value)
