@@ -9,7 +9,7 @@
         - if ['province_id', 'district_id', 'commune_id', 'village_id'].include?(field.code)
           = render "events/fields/#{field.code}", field: field, f: builder, main_object: @event
         - else
-          = render "events/fields/#{field.field_type}", field: field, f: builder, main_object: @event
+          = render "events/fields/#{field.kind}", field: field, f: builder, main_object: @event
 
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', events_path, class: 'btn btn-secondary'

@@ -40,7 +40,7 @@ EBS.MilestonesNew = do ->
 
   initBtnMove = (dom)->
     parentDom = $(dom).parents('.fieldset')
-    icon = parentDom.find('[data-field_type=' + dom.value + '] .icon').clone()
+    icon = parentDom.find("[data-field_type='" + dom.value + "'] .icon").clone()
     btnMove = parentDom.find('.move')
     btnMove.empty()
     btnMove.append(icon)

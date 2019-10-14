@@ -20,7 +20,9 @@
 #
 
 class Field < ApplicationRecord
-  FIELD_TYPES = %w[text integer date select_one select_multiple note image location mapping_field file].freeze
+  self.inheritance_column = :field_type
+
+  FIELD_TYPES = %w(Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField).freeze
 
   # Association
   belongs_to :milestone
@@ -42,31 +44,35 @@ class Field < ApplicationRecord
   # Nested attributes
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
+  def kind
+    raise 'you have to implement in subclass'
+  end
+
   # Class methods
   def self.roots
     fields = [
-      { code: 'number_of_case', field_type: 'integer', name: 'Number of case', required: true },
-      { code: 'number_of_death', field_type: 'integer', name: 'Number of death' },
-      { code: 'description', field_type: 'note', name: 'Description' },
-      { code: 'province_id', field_type: 'text', name: 'Province id', required: true },
-      { code: 'district_id', field_type: 'text', name: 'District id' },
-      { code: 'commune_id', field_type: 'text', name: 'Commune id' },
-      { code: 'village_id', field_type: 'text', name: 'Village id' },
-      { code: 'event_date', field_type: 'date', name: 'Event date', required: true },
-      { code: 'report_date', field_type: 'date', name: 'Report date', required: true },
-      { code: 'status', field_type: 'text', name: 'Status', entry_able: false },
-      { code: 'risk_level', field_type: 'select_one', name: 'Risk level', entry_able: false },
-      { code: 'source', field_type: 'text', name: 'Source', entry_able: false },
-      { code: 'latitude', field_type: 'text', name: 'Latitude', entry_able: false },
-      { code: 'longitude', field_type: 'text', name: 'Longitude', entry_able: false }
+      { code: 'number_of_case', field_type: 'Fields::IntegerField', name: 'Number of case', required: true },
+      { code: 'number_of_death', field_type: 'Fields::IntegerField', name: 'Number of death' },
+      { code: 'description', field_type: 'Fields::NoteField', name: 'Description' },
+      { code: 'province_id', field_type: 'Fields::TextField', name: 'Province', required: true },
+      { code: 'district_id', field_type: 'Fields::TextField', name: 'District' },
+      { code: 'commune_id', field_type: 'Fields::TextField', name: 'Commune' },
+      { code: 'village_id', field_type: 'Fields::TextField', name: 'Village' },
+      { code: 'event_date', field_type: 'Fields::DateField', name: 'Event date', required: true },
+      { code: 'report_date', field_type: 'Fields::DateField', name: 'Report date', required: true },
+      { code: 'status', field_type: 'Fields::TextField', name: 'Status', entry_able: false },
+      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false },
+      { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false },
+      { code: 'latitude', field_type: 'Fields::TextField', name: 'Latitude', entry_able: false },
+      { code: 'longitude', field_type: 'Fields::TextField', name: 'Longitude', entry_able: false }
     ]
     fields.each { |field| field[:is_default] = true }
   end
 
   def self.defaults
     [
-      { code: 'conducted_at', field_type: 'date', name: 'Conducted at', is_default: true, required: true },
-      { code: 'source', field_type: 'text', name: 'Source', is_default: true, entry_able: false }
+      { code: 'conducted_at', field_type: 'Fields::DateField', name: 'Conducted at', is_default: true, required: true },
+      { code: 'source', field_type: 'Fields::TextField', name: 'Source', is_default: true, entry_able: false }
     ]
   end
 
