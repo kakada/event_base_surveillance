@@ -6,39 +6,32 @@ module Events
 
     included do
       include Elasticsearch::Model
-      # include Elasticsearch::Model::Callbacks
 
       mapping date_detection: false do
         indexes :location_name, type: :text
         indexes :location, type: :geo_point
-        indexes :created_at, type: 'date'
-        indexes :updated_at, type: 'date'
-        indexes :milestone do
-          indexes :new do
-            indexes :created_at, type: 'date'
-            indexes :updated_at, type: 'date'
-            indexes :event_date, type: 'date'
-            indexes :report_date, type: 'date'
-          end
+        indexes :created_at, type: :date
+        indexes :updated_at, type: :date
+        indexes :milestone, type: :object
+      end
 
-          indexes :risk_assessment do
-            indexes :conducted_at, type: 'date'
-            indexes :created_at, type: 'date'
-            indexes :updated_at, type: 'date'
-          end
+      def self.mappings_hash(program)
+        properties = {}
+        program.milestones.each do |milestone|
+          milestone_name = milestone.name.downcase.split(' ').join('_')
+          properties[milestone_name] = { type: 'object', properties: { created_at: { type: 'date' }, updated_at: { type: 'date' } } }
 
-          indexes :investigation do
-            indexes :conducted_at, type: 'date'
-            indexes :created_at, type: 'date'
-            indexes :updated_at, type: 'date'
+          unless milestone.is_default?
+            properties[milestone_name][:properties][:conducted_at] = { type: 'date' }
+            next
           end
-
-          indexes :conclusion do
-            indexes :conducted_at, type: 'date'
-            indexes :created_at, type: 'date'
-            indexes :updated_at, type: 'date'
-          end
+          properties[milestone_name][:properties][:event_date] = { type: 'date' }
+          properties[milestone_name][:properties][:report_date] = { type: 'date' }
         end
+
+        structure = mappings.to_hash
+        structure[:properties][:milestone][:properties] = properties
+        structure
       end
 
       def as_indexed_json(_options = {})

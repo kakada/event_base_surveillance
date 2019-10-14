@@ -41,8 +41,8 @@ class Event < ApplicationRecord
 
   # Callback
   after_save :assign_geo_point
-  after_save    { IndexerWorker.perform_async(:index, uuid) }
-  after_destroy { IndexerWorker.perform_async(:delete, uuid) }
+  after_save    { IndexerWorker.perform_async(:index, uuid, program_id) }
+  after_destroy { IndexerWorker.perform_async(:delete, uuid, program_id) }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -111,7 +111,7 @@ class Event < ApplicationRecord
     %w[latitude longitude].each do |code|
       fv = field_values.find_or_initialize_by(field_code: code)
       fv.value = location[code]
-      fv.field_id = Milestone.root.fields.find_by(code: code).id
+      fv.field_id = program.milestones.root.fields.find_by(code: code).id
       fv.save
     end
   end
@@ -121,7 +121,7 @@ class Event < ApplicationRecord
   end
 
   def validate_field_values
-    program.present? && Milestone.root&.fields&.each do |field|
+    program.present? && program.milestones.root&.fields&.each do |field|
       next unless field.required?
 
       obj = field_values.select { |value| value.field_id == field.id }.first
