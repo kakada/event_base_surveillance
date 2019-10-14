@@ -5,9 +5,8 @@ class UserWorker
 
   def perform(user_id)
     user = User.find(user_id)
-
     return if user.nil?
 
-    user.send_confirmation_instructions
+    UserMailer.confirmation_instructions(user).deliver_now
   end
 end

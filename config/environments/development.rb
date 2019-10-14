@@ -12,7 +12,21 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: ENV.fetch('SETTINGS__SMTP__HOST') { 'localhost:3000' } }
+
+  smtp_settings = {}.tap do |settings|
+    settings[:address]              = ENV['SETTINGS__SMTP__ADDRESS']
+    settings[:port]                 = 587
+    settings[:domain]               = ENV['SETTINGS__SMTP__DOMAIN'] if ENV['SETTINGS__SMTP__DOMAIN'].present?
+    settings[:user_name]            = ENV['SETTINGS__SMTP__USER_NAME']
+    settings[:password]             = ENV['SETTINGS__SMTP__PASSWORD']
+    settings[:authentication]       = :plain
+  end
+
+  config.action_mailer.smtp_settings = smtp_settings
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
