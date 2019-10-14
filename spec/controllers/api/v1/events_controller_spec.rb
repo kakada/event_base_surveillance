@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::EventsController, type: :controller do
   let! (:client_app) { create(:client_app) }
+  let! (:program) { client_app.program }
   let! (:province) { create(:location)}
   let! (:commune) { create(:location, code: '110402', kind: 'commune')}
-  let! (:h5n1) { create(:event_type, program: client_app.program) }
-  let! (:influenza) { create(:event_type, name: 'Influenza', program: client_app.program) }
+  let! (:h5n1) { create(:event_type, program: program) }
+  let! (:influenza) { create(:event_type, name: 'Influenza', program: program) }
   let  (:event_attributes) {
-    root_milestone = client_app.program.milestones.root
     field_values = {
       province_id: province.code,
       number_of_case: rand(1..5),
@@ -17,7 +17,7 @@ RSpec.describe Api::V1::EventsController, type: :controller do
 
     field_values_attributes = field_values.map do |k, v|
       {
-        field_id: root_milestone.fields.find_by(code: k.to_s).id,
+        field_id: program.milestones.root.fields.find_by(code: k.to_s).id,
         field_code: k,
         value: v
       }

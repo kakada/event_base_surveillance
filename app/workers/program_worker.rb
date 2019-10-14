@@ -9,8 +9,10 @@ class ProgramWorker
     program = Program.find_by(id: program_id)
     return if program.nil?
 
-    Client.indices.create \
+    result = Client.indices.create \
       index: "#{Event.index_name}_#{program.name.downcase.split(' ').join('_')}",
       body: { settings: Event.settings.to_hash, mappings: Event.mappings_hash(program) }
+
+    logger.info "=================Create Index: #{result}"
   end
 end

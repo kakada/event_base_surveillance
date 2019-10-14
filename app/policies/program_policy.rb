@@ -9,6 +9,10 @@ class ProgramPolicy < ApplicationPolicy
     user.system_admin? || user.program_admin?
   end
 
+  def destroy?
+    user.system_admin?
+  end
+
   class Scope < Scope
     def resolve
       if user.system_admin?

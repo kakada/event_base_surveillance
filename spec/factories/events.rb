@@ -1,13 +1,14 @@
 FactoryBot.define do
   factory :event do
-    program
     event_type
     creator
 
     before :create do |event|
       event.program_id ||= create(:program).id
+      event.event_type.program_id = event.program_id
+      event.creator.program_id = event.program_id
       province = Location.first || create(:location)
-      root_milestone = event.program.milestones.root.presence || create(:milestone, :root, program_id: event.program_id)
+      root_milestone = event.program.milestones.root
 
       field_values = {
         province_id: province.code,
