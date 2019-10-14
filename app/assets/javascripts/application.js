@@ -23,6 +23,7 @@
 //= require jquery-sortable
 //= require jquery.minicolors
 //= require bootstrap-select.min
+//= require bootstrap-toggle.min
 
 //= require application/namespace
 //= require application/util
@@ -40,10 +41,13 @@
 //= require users/new
 //= require client_apps/index
 //= require client_apps/new
+//= require telegrams/new
+//= require programs/settings
 
 
 document.addEventListener('turbolinks:load', function() {
   EBS.Common.Sidebar.init();
+  $('[data-toggle="tooltip"]').tooltip();
 
   let currentPage = EBS.Util.getCurrentPage();
   !!EBS[currentPage] && EBS[currentPage].init();

@@ -16,10 +16,11 @@
 class Milestone < ApplicationRecord
   # Association
   belongs_to :program
+  has_one    :telegram, class_name: 'Notifications::Telegram'
   has_many   :fields, dependent: :destroy
 
   # Validation
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: [:program_id] }
   validate :validate_unique_field_name
   validate :validate_unique_field_type_location
 
@@ -36,6 +37,18 @@ class Milestone < ApplicationRecord
   # Class methods
   def self.create_root
     create(name: 'New', is_default: true, fields_attributes: Field.roots)
+  end
+
+  # Instand methods
+  def template_fields
+    return [] if self == Milestone.first
+
+    fields.map do |field|
+      {
+        code: "#{EventMilestone.dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}",
+        label: field.name
+      }
+    end
   end
 
   private

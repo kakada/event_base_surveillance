@@ -23,9 +23,21 @@
               = milestone.name
 
             %td
-              - if policy(Milestone).update?
-                = link_to 'Edit', edit_milestone_path(milestone), class: "badge badge-info"
+              .btn-group
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
 
-              - if policy(milestone).delete?
-                = ' / '
-                = link_to 'Delete', milestone_path(milestone), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this milestone?'}
+                .dropdown-menu.dropdown-menu-right
+                  = link_to milestone_telegram_path(milestone), class: ["btn dropdown-item", ('disabled' unless current_program.enable_telegram?)] do
+                    %i.fab.fa-telegram.drop-menu-icon
+                    %span Telegram Notification
+
+                  - if policy(Milestone).update?
+                    = link_to edit_milestone_path(milestone), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span Edit
+
+                  - if policy(milestone).delete?
+                    = link_to milestone_path(milestone), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this milestone?'} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span Delete

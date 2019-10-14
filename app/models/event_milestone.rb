@@ -8,6 +8,7 @@
 #  event_uuid   :string
 #  milestone_id :integer
 #  submitter_id :integer
+#  program_id   :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -15,6 +16,7 @@
 class EventMilestone < ApplicationRecord
   belongs_to :event, foreign_key: :event_uuid
   belongs_to :milestone
+  belongs_to :program
   belongs_to :submitter, class_name: 'User', optional: true
   has_many   :field_values, as: :valueable, dependent: :destroy
 
@@ -38,6 +40,15 @@ class EventMilestone < ApplicationRecord
     field_values.find_by(field_code: 'conducted_at').value
   end
 
+  # Class Methods
+  def self.default_template_code
+    'emde_'
+  end
+
+  def self.dynamic_template_code
+    'emdy_'
+  end
+
   private
 
   def validate_field_values
@@ -52,7 +63,7 @@ class EventMilestone < ApplicationRecord
   def set_event_status
     fv = event.field_values.find_or_initialize_by(field_code: 'status')
     fv.value = milestone.name
-    fv.field_id ||= event.program.milestones.root.fields.find_by(code: 'status').id
+    fv.field_id ||= program.milestones.root.fields.find_by(code: 'status').id
     fv.save
   end
 end

@@ -57,3 +57,7 @@ build-iPhoneSimulator/
 
 public/uploads/
 sample/locations.csv
+# Ignore master key for decrypting credentials and more.
+config/master.key
+
+docker-env

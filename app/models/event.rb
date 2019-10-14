@@ -29,6 +29,7 @@ class Event < ApplicationRecord
   # Deligation
   delegate :name, :color, to: :event_type, prefix: :event_type
   delegate :name, to: :program, prefix: true
+  delegate :email, to: :creator, prefix: true
 
   # Validation
   validates :event_type_id, presence: true
@@ -49,6 +50,29 @@ class Event < ApplicationRecord
   }
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
+  # Class Methods
+  def self.template_fields
+    fields = [
+      { code: 'event_type_name', label: 'Event Type' },
+      { code: 'creator_email', label: 'Creator' },
+      { code: 'program_name', label: 'Program' },
+      { code: 'location_name', label: 'Location Name' }
+
+    ]
+    fields.each { |field| field[:code] = "#{default_template_code}#{field[:code]}" }
+    fields += Milestone.root.fields.map { |field| { code: "#{dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}", label: field.name } }
+    fields
+  end
+
+  def self.default_template_code
+    'de_'
+  end
+
+  def self.dynamic_template_code
+    'dy_'
+  end
+
+  # Instant Methods
   def conducted_at
     field_values.find_by(field_code: 'report_date').value
   end

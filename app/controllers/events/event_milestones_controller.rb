@@ -12,6 +12,7 @@ module Events
       @event_milestone = @event.event_milestones.new(event_milestone_params)
 
       if @event_milestone.save
+        EventMilestoneWorker.perform_async(@event_milestone.id)
         redirect_to event_url(@event)
       else
         render :new
@@ -41,7 +42,10 @@ module Events
         field_values_attributes: [
           :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
         ]
-      ).merge(submitter_id: current_user.id)
+      ).merge(
+        submitter_id: current_user.id,
+        program_id: current_program.id
+      )
     end
 
     def assign_event

@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   end
 
   resources :programs
+
+  scope module: :programs do
+    resource :setting, only: [:show, :update]
+  end
+
   resources :users
   resources :events do
     scope module: :events do
@@ -27,7 +32,11 @@ Rails.application.routes.draw do
     get :unshared, on: :member
   end
 
-  resources :milestones
+  resources :milestones do
+    scope module: :milestones do
+      resource :telegram
+    end
+  end
 
   resources :client_apps do
     get :activate, on: :member
@@ -44,4 +53,6 @@ Rails.application.routes.draw do
 
   mount Pumi::Engine => '/pumi'
   mount Sidekiq::Web => '/sidekiq'
+
+  telegram_webhook TelegramWebhooksController
 end

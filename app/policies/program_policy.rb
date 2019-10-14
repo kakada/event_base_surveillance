@@ -5,6 +5,10 @@ class ProgramPolicy < ApplicationPolicy
     user.system_admin?
   end
 
+  def update?
+    user.system_admin? || user.program_admin?
+  end
+
   class Scope < Scope
     def resolve
       if user.system_admin?

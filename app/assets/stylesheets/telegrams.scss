@@ -1,0 +1,77 @@
+#milestones-telegrams-show {
+  .label {
+    min-width: 106px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  strike {
+    color: #dc3545;
+    cursor: pointer;
+  }
+}
+
+#milestones-telegrams-edit,
+#milestones-telegrams-new,
+#milestones-telegrams-update,
+#milestones-telegrams-create {
+
+  .template-fields-wrapper {
+    min-height: 20px;
+  }
+
+  .template-fields {
+    display: none;
+  }
+
+  .active .template-fields {
+    display: block;
+  }
+
+  // override Stepper
+  .content-element{
+    margin:50px 0 0 70px;
+  }
+
+  .circles-list {
+    .milestone-name {
+      position: absolute;
+      right: 115%;
+      text-align: right;
+      min-width: 44%;
+    }
+
+    span.number {
+      position: absolute;
+      left: -3.7em;
+      width: 2.25em;
+      height: 2.25em;
+      line-height: 2em;
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    ol > li.active::before {
+      background-color: #00c4cc;
+      color: #fff;
+    }
+
+    ol > li.inactive {
+      &::before {
+        background-color: #e9ecef;
+        color: #6c757d;
+        border-color: #ced4da;
+      }
+
+      span.number {
+        cursor: auto;
+      }
+    }
+
+    ol > li {
+      margin-bottom: 2em;
+    }
+  }
+}

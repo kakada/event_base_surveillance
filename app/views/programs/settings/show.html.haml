@@ -1,0 +1,10 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Program Settings
+
+  .w-50.view-center
+    = form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
+      .flex-row{style: 'padding-bottom: 10px; border-bottom: 1px dotted'}
+        .flex1 Telegram notification
+        = f.check_box :enable_telegram, id: 'toggle-telegram'

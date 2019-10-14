@@ -13,7 +13,7 @@
         %i.fas.fa-tachometer-alt
         = t('sidebar.dashboard')
 
-    - if policy(Program).update?
+    - if policy(Program).create?
       %li{class: get_css_active_class('programs') }
         = link_to programs_path do
           %i.fas.fa-tasks
@@ -43,16 +43,17 @@
           %i.fas.fa-calendar-alt
           = t('sidebar.events')
 
-    / %li{class: get_css_active_class('abouts') }
-    /   %a{:href => "#"}
-    /     %i.fas.fa-info-circle
-    /     = t('sidebar.about')
-
     - if policy(ClientApp).index?
       %li{class: get_css_active_class('client_apps') }
         %a{:href => client_apps_path}
           %i.fas API
           APIs & Services
+
+    - if policy(Program).update?
+      %li{class: get_css_active_class('events') }
+        = link_to setting_path do
+          %i.fas.fa-wrench
+          = t('sidebar.settings')
 
     %li
       = link_to destroy_user_session_path, method: :delete do

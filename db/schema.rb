@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_11_033431) do
+ActiveRecord::Schema.define(version: 2019_09_19_092346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
+  create_table "chat_groups", force: :cascade do |t|
+    t.string "title"
+    t.integer "chat_id"
+    t.boolean "is_active", default: true
+    t.text "reason"
+    t.string "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "client_apps", force: :cascade do |t|
     t.string "name"
     t.string "access_token"
@@ -52,6 +62,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
     t.string "event_uuid"
     t.integer "milestone_id"
     t.integer "submitter_id"
+    t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -134,8 +145,24 @@ ActiveRecord::Schema.define(version: 2019_09_11_033431) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notification_chat_groups", force: :cascade do |t|
+    t.integer "notification_id"
+    t.integer "chat_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "milestone_id"
+    t.text "message"
+    t.string "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string "name"
+    t.boolean "enable_telegram", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

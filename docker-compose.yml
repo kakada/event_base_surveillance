@@ -59,3 +59,10 @@ services:
       - elasticsearch
     ports:
       - "5601:5601"
+
+  ngrok:
+    image: wernight/ngrok
+    ports:
+      - 4040:4040
+    environment:
+      NGROK_PORT: 'web:3000'
