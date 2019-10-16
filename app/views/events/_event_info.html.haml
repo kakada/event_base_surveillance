@@ -6,15 +6,21 @@
     %span.type Location:
     %span.value= @event.location_name(reverse=true)
 
-  - @event.field_values.each do |fv|
+  - current_program.milestones.root.fields.entry_able.each do |field|
     %li
-      %span.type= fv.field_name
+      %span.type= field.name
       %span.value
-        - if fv.field_type == 'file'
-          = link_to fv.file_url.split('/').last, download_events_path(file: fv.file_url), target: "_blank", style:'color: #007bff'
-        - elsif fv.field_code == 'risk_level'
-          - style = fv.value.present? ? "background-color: #{fv.color}; color: #fff" : ''
-          %span.badge{style: style}
-            = fv.value || '-'
+        - if fvs = @event.field_values.select{ |fv| fv.field_id == field.id }.presence
+          - if fvs[0].field_type == 'file'
+            - fvs.each do |fv|
+              %div
+                = link_to fv.file_url.split('/').last, download_events_path(file: fv.file_url), target: "_blank", style:'color: #007bff'
+          - elsif fvs[0].field_code == 'risk_level'
+            - style = fvs[0].value.present? ? "background-color: #{fvs[0].color}; color: #fff" : ''
+            %span.badge{style: style}
+              = fvs[0].value || '-'
+          - else
+            = fvs[0].value || fvs[0].values
+
         - else
-          = fv.value || fv.values
+          = '-'

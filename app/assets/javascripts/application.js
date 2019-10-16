@@ -34,7 +34,6 @@
 // All Pages
 //= require milestones/new
 //= require event_milestones/new
-//= require event_milestones/edit
 //= require events/new
 //= require event_types/new
 //= require users/index
