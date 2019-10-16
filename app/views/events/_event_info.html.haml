@@ -11,7 +11,7 @@
       %span.type= field.name
       %span.value
         - if fvs = @event.field_values.select{ |fv| fv.field_id == field.id }.presence
-          - if fvs[0].field_type == 'file'
+          - if fvs[0].field_type == 'Fields::FileField'
             - fvs.each do |fv|
               %div
                 = link_to fv.file_url.split('/').last, download_events_path(file: fv.file_url), target: "_blank", style:'color: #007bff'
