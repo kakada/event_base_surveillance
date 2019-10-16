@@ -16,8 +16,7 @@ module Notifications
   class Telegram < ::Notification
     def notify_groups(sms)
       chat_groups.actives.each do |group|
-        bot = ::Telegram::Bot::Client.new(ENV['TELEGRAM_TOKEN'], ENV['TELEGRAM_USERNAME'])
-        bot.send_message(chat_id: group.chat_id, text: sms, parse_mode: :HTML)
+        ::Telegram.bot.send_message(chat_id: group.chat_id, text: sms, parse_mode: :HTML)
       rescue ::Telegram::Bot::Forbidden => e
         group.update_attributes(is_active: false, reason: e)
       end
