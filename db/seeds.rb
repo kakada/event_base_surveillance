@@ -61,34 +61,34 @@ milestones = [
   {
     name: "Risk Assessment",
     fields_attributes: [
-      { name: "# of Male", field_type: "integer" },
-      { name: "# of Female", field_type: "integer" },
-      { name: "# of Hospitalized", field_type: "integer" },
-      { name: "# of Recovered", field_type: "integer" },
-      { name: "# of Death", field_type: "integer" },
-      { name: "Summary", field_type: "note" },
-      { name: "Risk Assessment conducted", field_type: "select_one", field_options_attributes: [{ name: "Yes" }, { name: "No" }] },
-      { name: "Risk Level", field_type: "mapping_field", mapping_field: 'risk_level', mapping_field_type: "select_one", field_options_attributes: [{ name: "Low", color: '#51b8b8' }, { name: "Moderate", color: '#51b865' }, { name: "High", color: '#d68bb2' }, { name: "Very High", color: '#e81c2a' }] },
-      { name: "Risk assessment date", field_type: "date" },
+      { name: "# of Male", field_type: "Fields::IntegerField" },
+      { name: "# of Female", field_type: "Fields::IntegerField" },
+      { name: "# of Hospitalized", field_type: "Fields::IntegerField" },
+      { name: "# of Recovered", field_type: "Fields::IntegerField" },
+      { name: "# of Death", field_type: "Fields::IntegerField" },
+      { name: "Summary", field_type: "Fields::NoteField" },
+      { name: "Risk Assessment conducted", field_type: "Fields::SelectOneField", field_options_attributes: [{ name: "Yes" }, { name: "No" }] },
+      { name: "Risk Level", field_type: "Fields::MappingField", mapping_field: 'risk_level', mapping_field_type: "select_one", field_options_attributes: [{ name: "Low", color: '#51b8b8' }, { name: "Moderate", color: '#51b865' }, { name: "High", color: '#d68bb2' }, { name: "Very High", color: '#e81c2a' }] },
+      { name: "Risk assessment date", field_type: "Fields::DateField" },
     ]
   },
   {
     name: "Investigation",
     fields_attributes: [
-      { name: "Investigation conducted", field_type: "select_one", field_options_attributes: [{ name: "Yes" }, { name: "No" }] },
-      { name: "Investigation date", field_type: "date" },
-      { name: "Action Taken", field_type: "note" },
-      { name: "Samples collected", field_type: "text" },
-      { name: "Sample collected date", field_type: "date" },
-      { name: "Laboratory Results", field_type: "text" },
-      { name: "Status of event", field_type: "select_one", field_options_attributes: [{ name: "Follow up" }, { name: "Closed" }] }
+      { name: "Investigation conducted", field_type: "Fields::SelectOneField", field_options_attributes: [{ name: "Yes" }, { name: "No" }] },
+      { name: "Investigation date", field_type: "Fields::DateField" },
+      { name: "Action Taken", field_type: "Fields::NoteField" },
+      { name: "Samples collected", field_type: "Fields::TextField" },
+      { name: "Sample collected date", field_type: "Fields::DateField" },
+      { name: "Laboratory Results", field_type: "Fields::TextField" },
+      { name: "Status of event", field_type: "Fields::SelectOneField", field_options_attributes: [{ name: "Follow up" }, { name: "Closed" }] }
     ]
   },
   {
     name: "Conclusion",
     fields_attributes: [
-      { name: "Conclusion", field_type: "select_one", field_options_attributes: [{ name: "Methanol poisoning" }, { name: "H5N1" }, { name: "Khmer Noodle poisoning" }, { name: "H3N2 cluster" }, { name: "Parasite" }, { name: "Bread with meal" }, { name: "Water borne" }, { name: "Food borne" }, { name: "Zoonoic" }, { name: "Polultry death" }, { name: "Dog bites" }, { name: "Snake bites" }, { name: "Fever with rash" }, { name: "Acute diarrhea" }, { name: "Acute flaccid paralysis" }, { name: "Environmental pollution" }, { name: "uspected nosocomial" }, { name: "Skin" }, { name: "Meniningoencephalitis syndrome" }, { name: "Acute jaundice" }, { name: "Meningitis or encephalitis" }, { name: "Acute hemorrhagic fever" }, { name: "Acute respiratory infection" }]},
-      { name: "Close Date", field_type: "date"}
+      { name: "Conclusion", field_type: "Fields::SelectOneField", field_options_attributes: [{ name: "Methanol poisoning" }, { name: "H5N1" }, { name: "Khmer Noodle poisoning" }, { name: "H3N2 cluster" }, { name: "Parasite" }, { name: "Bread with meal" }, { name: "Water borne" }, { name: "Food borne" }, { name: "Zoonoic" }, { name: "Polultry death" }, { name: "Dog bites" }, { name: "Snake bites" }, { name: "Fever with rash" }, { name: "Acute diarrhea" }, { name: "Acute flaccid paralysis" }, { name: "Environmental pollution" }, { name: "uspected nosocomial" }, { name: "Skin" }, { name: "Meniningoencephalitis syndrome" }, { name: "Acute jaundice" }, { name: "Meningitis or encephalitis" }, { name: "Acute hemorrhagic fever" }, { name: "Acute respiratory infection" }]},
+      { name: "Close Date", field_type: "Fields::DateField"}
     ]
   }
 ]

@@ -15,7 +15,7 @@
         - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id }.first || @event_milestone.field_values.new
 
         = f.fields_for :field_values, obj do |builder|
-          = render "events/fields/#{field.field_type}", field: field, f: builder, main_object: @event_milestone
+          = render "events/fields/#{field.kind}", field: field, f: builder, main_object: @event_milestone
 
       = f.button :submit, class: 'btn btn-primary'
       = link_to 'Cancel', event_path(@event), class: 'btn btn-secondary'

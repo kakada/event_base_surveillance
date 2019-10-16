@@ -1,44 +1,44 @@
 .field-type-wrapper
   .flex-row
     .flex1
-      .field-type-list{'data-field_type' => 'select_one'}
+      .field-type-list{'data-field_type' => 'Fields::SelectOneField'}
         %i.far.fa-dot-circle.icon
         Select one
 
-      .field-type-list{'data-field_type' => 'select_multiple'}
+      .field-type-list{'data-field_type' => 'Fields::SelectMultipleField'}
         %i.fas.fa-list-ul.icon
         Select Multiple
 
-      .field-type-list{'data-field_type' => 'date'}
+      .field-type-list{'data-field_type' => 'Fields::DateField'}
         %i.fas.fa-calendar-alt.icon
         Date
 
-      .field-type-list{'data-field_type' => 'integer'}
+      .field-type-list{'data-field_type' => 'Fields::IntegerField'}
         %strong.icon 123
         Integer
 
-      .field-type-list{'data-field_type' => 'note'}
+      .field-type-list{'data-field_type' => 'Fields::NoteField'}
         %i.fas.fa-bars.icon
         Note
 
     .flex1
-      .field-type-list{'data-field_type' => 'text'}
+      .field-type-list{'data-field_type' => 'Fields::TextField'}
         %strong.icon abc
         Text
 
-      .field-type-list{'data-field_type' => 'image'}
+      .field-type-list{'data-field_type' => 'Fields::ImageField'}
         %i.fas.fa-image.icon
         Image
 
-      .field-type-list{'data-field_type' => 'location'}
+      .field-type-list{'data-field_type' => 'Fields::LocationField'}
         %i.fas.fa-map-marker-alt.icon
         Location
 
-      .field-type-list{'data-field_type' => 'file'}
+      .field-type-list{'data-field_type' => 'Fields::FileField'}
         %i.fas.fa-paperclip.icon
         File
 
       - if current_program.milestones.first != @milestone
-        .field-type-list{'data-field_type' => 'mapping_field'}
+        .field-type-list{'data-field_type' => 'Fields::MappingField'}
           %i.fas.fa-exchange-alt.icon
           Mapping field
