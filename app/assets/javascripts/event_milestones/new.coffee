@@ -6,6 +6,11 @@ EBS.EventsEvent_milestonesNew = do ->
     onChangeFile()
     onClickRemoveFile()
     onClickAddFieldValueFile()
+    initFirstFieldValueFile()
+
+  initFirstFieldValueFile = ->
+    if !!$('form .add_field_values').length
+      $('form .add_field_values').click()
 
   onClickAddFieldValueFile = ->
     $('form .add_field_values').off('click')

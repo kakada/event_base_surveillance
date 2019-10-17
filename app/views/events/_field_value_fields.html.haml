@@ -4,7 +4,7 @@
 .form-group{ class: ('form-group-invalid' if error_msg.present?) }
   = f.hidden_field :field_code, value: option[:field].try(:code)
   = f.hidden_field :field_id, value: option[:field].try(:id)
-  = f.file_field :file, class: 'form-control file-input'
+  = f.file_field :file, class: ['form-control file-input', ('hidden' if f.object.file.present?)]
 
   - if f.object.file.present?
     .flex-row
@@ -12,7 +12,8 @@
       = link_to '#', class: "remove-file", style: f.object.file? ? '' : 'display: none' do
         %i.far.fa-trash-alt{style: 'color: red; margin-right: 5px'}
 
-      %small.form-text.text-muted= f.object.file_url.split('/').last
+      %small.form-text.text-muted
+        = link_to f.object.file_url.split('/').last, download_events_path(file: f.object.file_url), target: "_blank", style:'color: #007bff'
 
   - if error_msg.present?
     .invalid-feedback= error_msg.join('; ')

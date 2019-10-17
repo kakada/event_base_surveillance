@@ -15,7 +15,7 @@ RSpec.describe Event, type: :model do
       @village = create :location, code: '01020101', latitude: 0.132, longitude: 0.512
 
       @event = create(:event)
-      @root_milestone = @event.program.milestones.root
+      @root_fields = @event.program.milestones.root.fields
     end
 
     it 'should set province geo point on create' do
