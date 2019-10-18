@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_092346) do
     t.integer "event_type_id"
     t.integer "creator_id"
     t.integer "program_id"
+    t.string "location_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

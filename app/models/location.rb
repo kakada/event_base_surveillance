@@ -25,6 +25,10 @@ class Location < ApplicationRecord
   has_many :children, class_name: 'Location', foreign_key: :parent_id
   belongs_to :parent, class_name: 'Location', optional: true
 
+  def latlng
+    [latitude, longitude]
+  end
+
   private
 
   def presence_of_lat_lng

@@ -1,5 +1,6 @@
 #map-wrapper
-  #map
-  - unless @event_data.present?
+  #map{ data: { latlng: @event.location_latlng, event_type: @event.event_type_name, number_of_case: @event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.value }}
+
+  - unless @event.present?
     .no-data
       %span No result found!

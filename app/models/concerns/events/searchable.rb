@@ -48,8 +48,8 @@ module Events
           program_name: program_name,
           location_name: location_name,
           location: {
-            lat: field_values.select { |fv| fv.field_code == 'latitude' }.first.value,
-            lon: field_values.select { |fv| fv.field_code == 'longitude' }.first.value
+            lat: location_latlng[0],
+            lon: location_latlng[1]
           },
           milestone: {}
         )
