@@ -8,10 +8,11 @@
     %i.fas.fa-align-left
 
   %ul.list-unstyled.components
-    %li{class: get_css_active_class('home') }
-      = link_to root_path do
-        %i.fas.fa-tachometer-alt
-        = t('sidebar.dashboard')
+    - if current_user.system_admin? || current_user.program_admin?
+      %li{class: get_css_active_class('dashboards') }
+        = link_to dashboard_path do
+          %i.fas.fa-tachometer-alt
+          = t('sidebar.dashboard')
 
     - if policy(Program).create?
       %li{class: get_css_active_class('programs') }

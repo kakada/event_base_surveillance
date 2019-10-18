@@ -4,7 +4,7 @@ require 'sidekiq-scheduler/web'
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: 'home#index'
+  root to: 'events#index'
   devise_for :users, path: '/', :controllers => { :confirmations => 'confirmations' }
 
   # https://github.com/plataformatec/devise/wiki/How-To:-Override-confirmations-so-users-can-pick-their-own-passwords-as-part-of-confirmation-activation
@@ -57,12 +57,18 @@ Rails.application.routes.draw do
   # Telegram
   telegram_webhook TelegramWebhooksController
 
-  # Sidekiq
   if Rails.env.production?
+    # Sidekiq
     authenticate :user, lambda { |u| u.system_admin? } do
       mount Sidekiq::Web => '/sidekiq'
     end
+
+    # Dashboard
+    authenticate :user, lambda { |u| u.system_admin? || u.program_admin?} do
+      resource :dashboard, only: :show
+    end
   else
     mount Sidekiq::Web => '/sidekiq'
+    resource :dashboard, only: :show
   end
 end
