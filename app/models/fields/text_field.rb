@@ -1,5 +1,9 @@
-class Fields::TextField < Field
-  def kind
-    :text
+# frozen_string_literal: true
+
+module Fields
+  class TextField < ::Field
+    def kind
+      :text
+    end
   end
 end

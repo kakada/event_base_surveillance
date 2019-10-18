@@ -32,9 +32,9 @@ class FieldValue < ApplicationRecord
   delegate :name, to: :field, prefix: :field, allow_nil: true
 
   # Validation
-  before_validation :set_location_value, if: -> { field_type == 'location' }
+  before_validation :set_location_value, if: -> { field_type == 'Fields::LocationField' }
   before_validation :cleanup_values
-  after_save :handle_mapping_field, if: -> { field.field_type == 'mapping_field' }
+  after_save :handle_mapping_field, if: -> { field_type == 'Fields::MappingField' }
 
   # History
   audited associated_with: :valueable
@@ -54,7 +54,7 @@ class FieldValue < ApplicationRecord
     fv = valueable.event.field_values.find_or_initialize_by(field_code: field.mapping_field)
     fv.value = value
     fv.color = field.field_options.find_by(value: value).color if field.field_options.present?
-    fv.field_id ||= Milestone.root.fields.find_by(code: field.mapping_field).id
+    fv.field_id ||= valueable.program.milestones.root.fields.find_by(code: field.mapping_field).id
     fv.save
   end
 

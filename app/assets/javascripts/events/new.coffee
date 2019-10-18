@@ -1,4 +1,4 @@
-EBS.EventsNew = EBS.EventsFormsNew
-EBS.EventsCreate = EBS.EventsFormsNew
-EBS.EventsEdit = EBS.EventsFormsNew
-EBS.EventsUpdate = EBS.EventsFormsNew
+EBS.EventsNew = EBS.EventsEvent_milestonesNew
+EBS.EventsCreate = EBS.EventsNew
+EBS.EventsEdit = EBS.EventsNew
+EBS.EventsUpdate = EBS.EventsNew

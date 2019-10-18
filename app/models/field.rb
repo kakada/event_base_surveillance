@@ -22,7 +22,7 @@
 class Field < ApplicationRecord
   self.inheritance_column = :field_type
 
-  FIELD_TYPES = %w(Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField).freeze
+  FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze
 
   # Association
   belongs_to :milestone
@@ -66,7 +66,10 @@ class Field < ApplicationRecord
       { code: 'latitude', field_type: 'Fields::TextField', name: 'Latitude', entry_able: false },
       { code: 'longitude', field_type: 'Fields::TextField', name: 'Longitude', entry_able: false }
     ]
-    fields.each { |field| field[:is_default] = true }
+    fields.each_with_index do |field, index|
+      field[:display_order] = index + 1
+      field[:is_default] = true
+    end
   end
 
   def self.defaults
@@ -79,7 +82,7 @@ class Field < ApplicationRecord
   private
 
   def set_display_order
-    self.display_order = self.class.maximum(:display_order).to_i + 1
+    self.display_order ||= self.class.maximum(:display_order).to_i + 1
   end
 
   def set_mapping_field_type

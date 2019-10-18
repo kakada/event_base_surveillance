@@ -5,15 +5,4 @@
 
   .w-50.view-center
     = simple_form_for @event_milestone, url: event_event_milestone_path(@event, @event_milestone), method: :put do |f|
-      .form-group
-        %label Event Type
-        %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
-
-      - @event_milestone.milestone.fields.entry_able.each do |field|
-        - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id }.first || @event_milestone.field_values.find_or_initialize_by(field_id: field.id)
-
-        = f.fields_for :field_values, obj do |builder|
-          = render "events/fields/#{field.kind}", field: field, f: builder, main_object: @event_milestone
-
-      = f.button :submit, class: 'btn btn-primary'
-      = link_to 'Cancel', event_path(@event), class: 'btn btn-secondary'
+      = render 'form', f: f

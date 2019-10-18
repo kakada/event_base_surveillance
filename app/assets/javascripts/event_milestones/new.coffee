@@ -5,6 +5,23 @@ EBS.EventsEvent_milestonesNew = do ->
     onClickRemoveImage()
     onChangeFile()
     onClickRemoveFile()
+    onClickAddFieldValueFile()
+    initFirstFieldValueFile()
+
+  initFirstFieldValueFile = ->
+    if !!$('form .add_field_values').length
+      $('form .add_field_values').click()
+
+  onClickAddFieldValueFile = ->
+    $('form .add_field_values').off('click')
+    $('form .add_field_values').on 'click', (event) ->
+      appendField(this)
+      event.preventDefault()
+
+  appendField = (dom) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(dom).data('id'), 'g')
+    $(dom).before($(dom).data('fields').replace(regexp, time))
 
   onClickRemoveFile = ->
     $('.remove-file').off('click')
@@ -73,3 +90,7 @@ EBS.EventsEvent_milestonesNew = do ->
       event.preventDefault()
 
   { init: init }
+
+EBS.EventsEvent_milestonesEdit = EBS.EventsEvent_milestonesNew
+EBS.EventsEvent_milestonesUpdate = EBS.EventsEvent_milestonesNew
+EBS.EventsEvent_milestonesCreate = EBS.EventsEvent_milestonesNew

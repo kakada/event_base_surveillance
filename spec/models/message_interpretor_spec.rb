@@ -15,7 +15,7 @@ RSpec.describe MessageInterpretor, type: :model do
       let!(:male) { event_milestone.milestone.fields.find_by(name: '# of Male') }
       let!(:female) { event_milestone.milestone.fields.find_by(name: '# of Female') }
       let!(:conducted_at) { event_milestone.milestone.fields.find_by(code: 'conducted_at') }
-      let!(:risk_level) { Milestone.root.fields.find_by(code: 'risk_level') }
+      let!(:risk_level) { event_milestone.program.milestones.root.fields.find_by(code: 'risk_level') }
       let!(:template) { "It's risk level is {{dy_#{risk_level.id}_risk_level}}, and it was conducted the assessment at {{emdy_#{conducted_at.id}_conducted_at}}, so there are {{emdy_#{female.id}_#_of_female}} women die, and {{emdy_#{male.id}_#_of_male}} men die." }
       let!(:interpretor) { MessageInterpretor.new(template, event_milestone.event.uuid, event_milestone.id) }
 
