@@ -51,8 +51,18 @@ Rails.application.routes.draw do
     end
   end
 
+  # Pumi
   mount Pumi::Engine => '/pumi'
-  mount Sidekiq::Web => '/sidekiq'
 
+  # Telegram
   telegram_webhook TelegramWebhooksController
+
+  # Sidekiq
+  if Rails.env.production?
+    authenticate :user, lambda { |u| u.system_admin? } do
+      mount Sidekiq::Web => '/sidekiq'
+    end
+  else
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
