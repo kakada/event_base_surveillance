@@ -43,11 +43,17 @@
           %i.fas.fa-calendar-alt
           = t('sidebar.events')
 
+    - if policy(Webhook).index?
+      %li{class: get_css_active_class('webhooks') }
+        %a{:href => webhooks_path}
+          %i.fas.fa-check-double
+          = t('sidebar.webhooks')
+
     - if policy(ClientApp).index?
       %li{class: get_css_active_class('client_apps') }
         %a{:href => client_apps_path}
           %i.fas API
-          APIs & Services
+          = t('sidebar.api_and_services')
 
     - if policy(Program).update?
       %li{class: get_css_active_class('programs/settings') }

@@ -17,6 +17,7 @@ class Program < ApplicationRecord
   has_many  :events
   has_many  :event_types
   has_many  :milestones
+  has_many  :webhooks
 
   validates :name, presence: true
 

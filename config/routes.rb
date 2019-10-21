@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     get :deactivate, on: :member
   end
 
+  resources :webhooks, except: [:show]
+
   # API
   namespace :api do
     namespace :v1 do

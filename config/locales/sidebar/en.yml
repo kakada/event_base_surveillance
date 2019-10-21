@@ -39,4 +39,6 @@ en:
     about: 'About'
     logout: 'Logout'
     milestones: 'Milestones',
-    settings: 'Settings'
+    settings: 'Settings',
+    webhooks: 'Webhooks',
+    api_and_services: 'APIs & Services'
