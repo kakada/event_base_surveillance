@@ -44,8 +44,11 @@ class Event < ApplicationRecord
   default_scope { order(updated_at: :desc) }
 
   # Callback
-  after_save    { IndexerWorker.perform_async(:index, uuid, program_id) }
-  after_destroy { IndexerWorker.perform_async(:delete, uuid, program_id) }
+  after_save :assign_geo_point
+
+  after_create  :notify_third_party, if: :enable_worker?
+  after_save    { IndexerWorker.perform_async(:index, uuid, program_id) if enable_worker? }
+  after_destroy { IndexerWorker.perform_async(:delete, uuid, program_id) if enable_worker? }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -122,6 +125,18 @@ class Event < ApplicationRecord
 
       obj = field_values.select { |value| value.field_id == field.id }.first
       errors.add field.name.downcase, 'cannot be blank' if !obj || obj[:value].blank?
+    end
+  end
+
+  def enable_worker?
+    ENV['ENABLE_EVENT_WORKER'] == 'true'
+  end
+
+  def notify_third_party
+    TelegramWorker.perform_async(uuid)
+
+    program.webhooks.each do |webhook|
+      WebhookWorker.perform_async(webhook.id, uuid)
     end
   end
 end

@@ -60,6 +60,8 @@ gem 'elasticsearch-model',        '~> 7.0.0'
 gem 'elasticsearch-rails',        '~> 7.0.0'
 gem 'telegram-bot',   '~> 0.14.3'
 
+gem 'rest-client',                '~> 2.1.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EventWorker
+class TelegramWorker
   include Sidekiq::Worker
 
   def perform(event_uuid)
@@ -10,6 +10,7 @@ class EventWorker
     telegram = Milestone.root.try(:telegram)
     return if telegram.nil?
 
+    # Notify to telegram
     message = MessageInterpretor.new(telegram.message, event_uuid).message
     telegram.notify_groups(message)
   end
