@@ -15,6 +15,7 @@
 
 class Event < ApplicationRecord
   include Events::Searchable
+  include Events::Callback
 
   before_create :set_uuid
 
@@ -31,6 +32,7 @@ class Event < ApplicationRecord
   # Deligation
   delegate :name, :color, to: :event_type, prefix: :event_type
   delegate :name, to: :program, prefix: true
+  delegate :enable_telegram?, to: :program, prefix: false
   delegate :email, to: :creator, prefix: true
   delegate :latlng, to: :location, prefix: true, allow_nil: true
 
@@ -45,10 +47,6 @@ class Event < ApplicationRecord
 
   # Callback
   after_save :assign_geo_point
-
-  after_create  :notify_third_party, if: :enable_worker?
-  after_save    { IndexerWorker.perform_async(:index, uuid, program_id) if enable_worker? }
-  after_destroy { IndexerWorker.perform_async(:delete, uuid, program_id) if enable_worker? }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -85,6 +83,14 @@ class Event < ApplicationRecord
 
   def location_name(reverse = false, delimeter = ',')
     (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
+  end
+
+  def milestone
+    program.milestones.root
+  end
+
+  def telegram_message
+    MessageInterpretor.new(milestone.telegram_message, uuid).message
   end
 
   private
@@ -125,18 +131,6 @@ class Event < ApplicationRecord
 
       obj = field_values.select { |value| value.field_id == field.id }.first
       errors.add field.name.downcase, 'cannot be blank' if !obj || obj[:value].blank?
-    end
-  end
-
-  def enable_worker?
-    ENV['ENABLE_EVENT_WORKER'] == 'true'
-  end
-
-  def notify_third_party
-    TelegramWorker.perform_async(uuid)
-
-    program.webhooks.each do |webhook|
-      WebhookWorker.perform_async(webhook.id, uuid)
     end
   end
 end

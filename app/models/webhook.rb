@@ -17,5 +17,5 @@ class Webhook < ApplicationRecord
   belongs_to :program
 
   validates :name, :api_key, presence: true
-  validates :url, format: { with: /\A^(https?\:\/\/)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,6}((\/|\?)\S*)?$\z/ }, allow_blank: true
+  validates :url, format: { with: %r{\A^(https?\://)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,6}((/|\?)\S*)?$\z} }, allow_blank: true
 end

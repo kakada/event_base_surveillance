@@ -3,15 +3,14 @@
 class TelegramWorker
   include Sidekiq::Worker
 
-  def perform(event_uuid)
-    event = Event.find_by(uuid: event_uuid)
-    return if event.nil? || !event.program.enable_telegram?
+  def perform(id, class_name)
+    klass = class_name.constantize
+    condition = {}
+    condition[klass.primary_key] = id
+    obj = klass.find_by(condition)
 
-    telegram = Milestone.root.try(:telegram)
-    return if telegram.nil?
+    return if obj.nil? || !obj.enable_telegram? || obj.milestone.telegram.nil?
 
-    # Notify to telegram
-    message = MessageInterpretor.new(telegram.message, event_uuid).message
-    telegram.notify_groups(message)
+    obj.milestone.telegram.notify_groups(obj.telegram_message)
   end
 end
