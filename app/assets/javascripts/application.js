@@ -25,6 +25,9 @@
 //= require bootstrap-select.min
 //= require bootstrap-toggle.min
 
+//= require leaflet
+//= require moment.min
+
 //= require application/namespace
 //= require application/util
 
@@ -35,6 +38,7 @@
 //= require milestones/new
 //= require event_milestones/new
 //= require events/new
+//= require events/show
 //= require event_types/new
 //= require users/index
 //= require users/new

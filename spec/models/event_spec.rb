@@ -7,7 +7,7 @@ RSpec.describe Event, type: :model do
   it { is_expected.to have_many(:field_values).dependent(:destroy) }
   it { is_expected.to validate_presence_of(:event_type_id) }
 
-  describe 'assign_geo_point' do
+  describe 'assign_location' do
     before :each do
       @province = Location.first || create(:location)
       @district = create :location, code: '0102', latitude: 0.1, longitude: 0.5
@@ -19,8 +19,7 @@ RSpec.describe Event, type: :model do
     end
 
     it 'should set province geo point on create' do
-      expect(@event.field_values.find_by(field_code: 'latitude').value).to eq(@province.latitude.to_s)
-      expect(@event.field_values.find_by(field_code: 'longitude').value).to eq(@province.longitude.to_s)
+      expect(@event.location_code).to eq(@province.code)
     end
 
     it 'should set district geo point on update' do
@@ -28,8 +27,7 @@ RSpec.describe Event, type: :model do
       @event.field_values.create(field_id: field.id, field_code: field.code, value: @district.code)
       @event.save
 
-      expect(@event.field_values.find_by(field_code: 'latitude').value).to eq(@district.latitude.to_s)
-      expect(@event.field_values.find_by(field_code: 'longitude').value).to eq(@district.longitude.to_s)
+      expect(@event.location_code).to eq(@district.code)
     end
 
     it 'should set commune geo point on update' do
@@ -37,8 +35,7 @@ RSpec.describe Event, type: :model do
       @event.field_values.create(field_id: field.id, field_code: field.code, value: @commune.code)
       @event.save
 
-      expect(@event.field_values.find_by(field_code: 'latitude').value).to eq(@commune.latitude.to_s)
-      expect(@event.field_values.find_by(field_code: 'longitude').value).to eq(@commune.longitude.to_s)
+      expect(@event.location_code).to eq(@commune.code)
     end
 
     it 'should set village geo point on update' do
@@ -46,8 +43,7 @@ RSpec.describe Event, type: :model do
       @event.field_values.create(field_id: field.id, field_code: field.code, value: @village.code)
       @event.save
 
-      expect(@event.field_values.find_by(field_code: 'latitude').value).to eq(@village.latitude.to_s)
-      expect(@event.field_values.find_by(field_code: 'longitude').value).to eq(@village.longitude.to_s)
+      expect(@event.location_code).to eq(@village.code)
     end
   end
 end

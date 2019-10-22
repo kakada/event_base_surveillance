@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.integer :event_type_id
       t.integer :creator_id
       t.integer :program_id
+      t.string  :location_code
 
       t.timestamps
     end

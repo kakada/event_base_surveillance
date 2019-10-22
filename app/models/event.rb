@@ -8,6 +8,7 @@
 #  event_type_id :integer
 #  creator_id    :integer
 #  program_id    :integer
+#  location_code :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -20,6 +21,7 @@ class Event < ApplicationRecord
   belongs_to :event_type
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
+  belongs_to :location, foreign_key: :location_code
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
   has_many   :field_values, as: :valueable, dependent: :destroy
 
@@ -30,17 +32,18 @@ class Event < ApplicationRecord
   delegate :name, :color, to: :event_type, prefix: :event_type
   delegate :name, to: :program, prefix: true
   delegate :email, to: :creator, prefix: true
+  delegate :latlng, to: :location, prefix: true, allow_nil: true
 
   # Validation
   validates :event_type_id, presence: true
   validate :validate_field_values, on: %i[create update]
   before_validation :set_program_id
+  before_validation :assign_location
 
   # Scope
   default_scope { order(updated_at: :desc) }
 
   # Callback
-  after_save :assign_geo_point
   after_save    { IndexerWorker.perform_async(:index, uuid, program_id) }
   after_destroy { IndexerWorker.perform_async(:delete, uuid, program_id) }
 
@@ -100,20 +103,13 @@ class Event < ApplicationRecord
     arr
   end
 
-  def assign_geo_point
-    location_code = %w[village_id commune_id district_id province_id].map do |code|
+  def assign_location
+    code = %w[village_id commune_id district_id province_id].map do |code|
       field_values.select { |fv| fv.field_code == code }.first.try(:value)
     end.reject(&:blank?).first
 
-    return if location_code.blank?
-
-    location = Location.find(location_code)
-    %w[latitude longitude].each do |code|
-      fv = field_values.find_or_initialize_by(field_code: code)
-      fv.value = location[code]
-      fv.field_id = program.milestones.root.fields.find_by(code: code).id
-      fv.save
-    end
+    return if code.blank?
+    self.location_code = code
   end
 
   def set_program_id

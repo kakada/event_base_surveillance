@@ -63,8 +63,6 @@ class Field < ApplicationRecord
       { code: 'status', field_type: 'Fields::TextField', name: 'Status', entry_able: false },
       { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false },
-      { code: 'latitude', field_type: 'Fields::TextField', name: 'Latitude', entry_able: false },
-      { code: 'longitude', field_type: 'Fields::TextField', name: 'Longitude', entry_able: false }
     ]
     fields.each_with_index do |field, index|
       field[:display_order] = index + 1
