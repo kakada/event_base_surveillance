@@ -21,6 +21,8 @@ class Notification < ApplicationRecord
 
   scope :telegrams, -> { where(provider: 'Telegram') }
 
+  validates :message, presence: true
+
   def notify_groups(_message)
     raise 'Abstract Method'
   end

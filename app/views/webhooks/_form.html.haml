@@ -1,17 +1,13 @@
 .w-50.view-center
-  = simple_form_for @webhook do |f|
+  = simple_form_for @webhook.becomes(Webhook) do |f|
     = f.input :name
     = f.input :url
-
-    .form-row
-      .form-group.col-md-9
-        = f.input :api_key,  input_html: {class: 'api-key'}
-
-      .form-group.col-md-3
-        %label
-        %button.btn.btn-light.btn-regenerate-token{type: 'button'}
-          %i.fas.fa-redo-alt
-          Regenerate Api Key
+    = f.input :type, collection: Webhook.types, input_html: { class: 'type' }, label: 'Authentication type'
+    .types{'data-type' => 'Webhooks::TokenAuth'}
+      = f.input :token
+    .types{'data-type' => 'Webhooks::BasicAuth'}
+      = f.input :username
+      = f.input :password
 
     = f.button :submit, class: 'btn btn-primary'
     = link_to 'Cancel', webhooks_path, class: 'btn btn-secondary'

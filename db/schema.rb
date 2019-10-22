@@ -189,8 +189,11 @@ ActiveRecord::Schema.define(version: 2019_10_21_024812) do
 
   create_table "webhooks", force: :cascade do |t|
     t.string "name"
-    t.string "api_key"
+    t.string "token"
+    t.string "username"
+    t.string "password"
     t.string "url"
+    t.string "type"
     t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

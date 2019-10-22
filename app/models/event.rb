@@ -45,9 +45,6 @@ class Event < ApplicationRecord
   # Scope
   default_scope { order(updated_at: :desc) }
 
-  # Callback
-  after_save :assign_geo_point
-
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
     attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank? && attributes['file'].blank?
