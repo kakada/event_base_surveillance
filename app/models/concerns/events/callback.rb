@@ -28,7 +28,7 @@ module Events
       end
 
       def notify_third_party
-        TelegramWorker.perform_async(id, self.class.to_s)
+        TelegramWorker.perform_async(id, self.class.to_s) if enable_telegram?
 
         event_type.webhooks.each do |webhook|
           next unless webhook.active?

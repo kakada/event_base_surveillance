@@ -9,7 +9,7 @@ class TelegramWorker
     condition[klass.primary_key] = id
     obj = klass.find_by(condition)
 
-    return if obj.nil? || !obj.enable_telegram? || obj.milestone.telegram.nil?
+    return if obj.nil? || obj.milestone.telegram.nil?
 
     obj.milestone.telegram.notify_groups(obj.telegram_message)
   end
