@@ -15,6 +15,7 @@
           %th Name
           %th Authentication Type
           %th Url
+          %th Status
           %th
 
       %tbody
@@ -23,6 +24,8 @@
             %td= webhook.name
             %td= webhook.type
             %td= webhook.url || '-'
+            %td{ class: ['status', ('active' if webhook.active?)] }
+              = webhook.active? ? 'Active' : 'Inactive'
             %td
               .btn-group
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
@@ -33,6 +36,15 @@
                     = link_to edit_webhook_path(webhook), class: "btn dropdown-item" do
                       %i.fas.fa-pen.drop-menu-icon
                       %span Edit
+
+                    - unless webhook.active?
+                      = link_to activate_webhook_path(webhook), class: "btn dropdown-item" do
+                        %i.fas.fa-check.drop-menu-icon
+                        %span Activate
+                    - if webhook.active?
+                      = link_to deactivate_webhook_path(webhook), class: "btn dropdown-item" do
+                        %i.fas.fa-ban.drop-menu-icon
+                        %span Deactivate
 
                   - if policy(webhook).destroy?
                     = link_to webhook_path(webhook), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this webhook?'} do

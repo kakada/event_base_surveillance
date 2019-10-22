@@ -31,6 +31,8 @@ module Events
         TelegramWorker.perform_async(id, self.class.to_s)
 
         event_type.webhooks.each do |webhook|
+          next unless webhook.active?
+
           WebhookWorker.perform_async(webhook.id, event_id)
         end
       end

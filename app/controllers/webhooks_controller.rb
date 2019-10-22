@@ -42,6 +42,24 @@ class WebhooksController < ApplicationController
     redirect_to webhooks_url
   end
 
+  def deactivate
+    @webhook = Webhook.find(params[:id])
+    authorize @webhook, :update?
+
+    @webhook.update_attributes(active: false)
+    flash[:notice] = 'deactivate successfully'
+    redirect_to webhooks_url
+  end
+
+  def activate
+    @webhook = Webhook.find(params[:id])
+    authorize @webhook, :update?
+
+    @webhook.update_attributes(active: true)
+    flash[:notice] = 'activate successfully'
+    redirect_to webhooks_url
+  end
+
   private
 
   def webhook_params
