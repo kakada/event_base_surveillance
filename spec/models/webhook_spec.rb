@@ -4,6 +4,8 @@ RSpec.describe Webhook, type: :model do
   it { is_expected.to belong_to(:program) }
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:type) }
+  it { is_expected.to have_many(:event_type_webhooks) }
+  it { is_expected.to have_many(:event_types).through(:event_type_webhooks) }
 
   describe '#username, #password' do
     context 'is basic auth' do

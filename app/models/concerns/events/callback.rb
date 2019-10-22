@@ -30,7 +30,7 @@ module Events
       def notify_third_party
         TelegramWorker.perform_async(id, self.class.to_s)
 
-        program.webhooks.each do |webhook|
+        event_type.webhooks.each do |webhook|
           WebhookWorker.perform_async(webhook.id, event_id)
         end
       end

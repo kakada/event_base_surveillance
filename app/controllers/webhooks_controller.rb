@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WebhooksController < ApplicationController
+  before_action :set_event_types, only: %i[new create edit update]
+
   def index
     @pagy, @webhooks = pagy(policy_scope(Webhook.all))
   end
@@ -43,6 +45,10 @@ class WebhooksController < ApplicationController
   private
 
   def webhook_params
-    params.require(:webhook).permit(:name, :token, :username, :password, :type, :url)
+    params.require(:webhook).permit(:name, :token, :username, :password, :type, :url, event_type_ids: [])
+  end
+
+  def set_event_types
+    @event_types = current_program.event_types
   end
 end

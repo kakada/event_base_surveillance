@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_024812) do
+ActiveRecord::Schema.define(version: 2019_10_22_092527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,13 @@ ActiveRecord::Schema.define(version: 2019_10_21_024812) do
     t.integer "milestone_id"
     t.integer "submitter_id"
     t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_type_webhooks", force: :cascade do |t|
+    t.integer "event_type_id"
+    t.integer "webhook_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -195,6 +202,7 @@ ActiveRecord::Schema.define(version: 2019_10_21_024812) do
     t.string "url"
     t.string "type"
     t.integer "program_id"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

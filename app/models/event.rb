@@ -115,6 +115,7 @@ class Event < ApplicationRecord
     end.reject(&:blank?).first
 
     return if code.blank?
+
     self.location_code = code
   end
 

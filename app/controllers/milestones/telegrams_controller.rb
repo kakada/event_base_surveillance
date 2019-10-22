@@ -3,7 +3,7 @@
 module Milestones
   class TelegramsController < ::ApplicationController
     before_action :set_milestone
-    before_action :set_chat_group, only: %i[new edit]
+    before_action :set_chat_group, only: %i[new create edit update]
 
     def show
       @telegram = @milestone.telegram

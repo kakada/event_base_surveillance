@@ -12,6 +12,7 @@
 #  url        :string
 #  type       :string
 #  program_id :integer
+#  active     :boolean          default(TRUE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -19,7 +20,7 @@
 module Webhooks
   class BasicAuth < ::Webhook
     def notify(params = {})
-      RestClient::Request.execute method: :post, payload: params, url: url, user: username, password: password
+      RestClient::Request.execute method: :post, payload: params, url: url, timeout: 30, user: username, password: password
     end
   end
 end

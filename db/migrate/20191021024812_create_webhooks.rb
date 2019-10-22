@@ -8,6 +8,7 @@ class CreateWebhooks < ActiveRecord::Migration[5.2]
       t.string   :url
       t.string   :type
       t.integer  :program_id
+      t.boolean  :active, default: true
 
       t.timestamps
     end

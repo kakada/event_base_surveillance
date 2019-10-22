@@ -38,6 +38,7 @@ class EventMilestone < ApplicationRecord
 
   # Deligation
   delegate :enable_telegram?, to: :program, prefix: false
+  delegate :event_type, to: :event, prefix: false
 
   # Class Methods
   def self.default_template_code
