@@ -12,6 +12,7 @@ require 'webdrivers/chromedriver'
 require 'capybara/rspec'
 require 'database_cleaner'
 require 'support/factory_bot'
+require 'sidekiq/testing'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -83,8 +84,21 @@ RSpec.configure do |config|
     end
   end
 
-  config.before(:each) do
+  config.before(:each) do |example|
     DatabaseCleaner.start
+
+    # Clears out the jobs for tests using the fake testing
+    Sidekiq::Worker.clear_all
+
+    if example.metadata[:sidekiq] == :fake
+      Sidekiq::Testing.fake!
+    elsif example.metadata[:sidekiq] == :inline
+      Sidekiq::Testing.inline!
+    elsif example.metadata[:sidekiq] == :disabled
+      Sidekiq::Testing.disable!
+    else
+      Sidekiq::Testing.fake!
+    end
   end
 
   config.append_after(:each) do

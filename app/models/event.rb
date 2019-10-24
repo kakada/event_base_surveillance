@@ -110,13 +110,13 @@ class Event < ApplicationRecord
   end
 
   def assign_location
-    code = %w[village_id commune_id district_id province_id].map do |code|
+    loc_code = %w[village_id commune_id district_id province_id].map do |code|
       field_values.select { |fv| fv.field_code == code }.first.try(:value)
     end.reject(&:blank?).first
 
-    return if code.blank?
+    return if loc_code.blank?
 
-    self.location_code = code
+    self.location_code = loc_code
   end
 
   def set_program_id
