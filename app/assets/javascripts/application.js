@@ -46,6 +46,7 @@
 //= require client_apps/new
 //= require telegrams/new
 //= require programs/settings
+//= require webhooks/new
 
 
 document.addEventListener('turbolinks:load', function() {

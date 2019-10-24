@@ -12,7 +12,6 @@ module Events
       @event_milestone = @event.event_milestones.new(event_milestone_params)
 
       if @event_milestone.save
-        EventMilestoneWorker.perform_async(@event_milestone.id)
         redirect_to event_url(@event)
       else
         render :new

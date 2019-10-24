@@ -20,6 +20,8 @@ class EventType < ApplicationRecord
   belongs_to :program
   has_many :events, dependent: :destroy
   has_many :fields, as: :fieldable
+  has_many :event_type_webhooks
+  has_many :webhooks, through: :event_type_webhooks
 
   validates :name, presence: true
   validates :color, presence: true, uniqueness: { scope: [:program_id] }

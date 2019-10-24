@@ -1,0 +1,56 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Webhook
+      - if policy(Webhook).create?
+        = link_to new_webhook_path, class: 'btn btn-primary' do
+          %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @webhooks }
+
+  - if @webhooks.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th Name
+          %th Authentication Type
+          %th Url
+          %th Status
+          %th
+
+      %tbody
+        - @webhooks.each do |webhook|
+          %tr
+            %td= webhook.name
+            %td= webhook.type
+            %td= webhook.url || '-'
+            %td{ class: ['status', ('active' if webhook.active?)] }
+              = webhook.active? ? 'Active' : 'Inactive'
+            %td
+              .btn-group
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
+
+                .dropdown-menu.dropdown-menu-right
+                  - if policy(webhook).update?
+                    = link_to edit_webhook_path(webhook), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span Edit
+
+                    - unless webhook.active?
+                      = link_to activate_webhook_path(webhook), class: "btn dropdown-item" do
+                        %i.fas.fa-check.drop-menu-icon
+                        %span Activate
+                    - if webhook.active?
+                      = link_to deactivate_webhook_path(webhook), class: "btn dropdown-item" do
+                        %i.fas.fa-ban.drop-menu-icon
+                        %span Deactivate
+
+                  - if policy(webhook).destroy?
+                    = link_to webhook_path(webhook), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this webhook?'} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span Delete
+
+  - if @pagy.pages > 1
+    .pagy-wrapper
+      != pagy_bootstrap_nav(@pagy)

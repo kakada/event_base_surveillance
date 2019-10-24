@@ -31,6 +31,9 @@ class Milestone < ApplicationRecord
   default_scope { order(display_order: :asc) }
   scope :root, -> { where(is_default: true).first }
 
+  # Deligation
+  delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
+
   # Nested attribute
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 

@@ -15,6 +15,7 @@
 
 class Event < ApplicationRecord
   include Events::Searchable
+  include Events::Callback
 
   before_create :set_uuid
 
@@ -31,6 +32,7 @@ class Event < ApplicationRecord
   # Deligation
   delegate :name, :color, to: :event_type, prefix: :event_type
   delegate :name, to: :program, prefix: true
+  delegate :enable_telegram?, to: :program, prefix: false
   delegate :email, to: :creator, prefix: true
   delegate :latlng, to: :location, prefix: true, allow_nil: true
 
@@ -42,10 +44,6 @@ class Event < ApplicationRecord
 
   # Scope
   default_scope { order(updated_at: :desc) }
-
-  # Callback
-  after_save    { IndexerWorker.perform_async(:index, uuid, program_id) }
-  after_destroy { IndexerWorker.perform_async(:delete, uuid, program_id) }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -84,6 +82,14 @@ class Event < ApplicationRecord
     (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
   end
 
+  def milestone
+    program.milestones.root
+  end
+
+  def telegram_message
+    MessageInterpretor.new(milestone.telegram_message, uuid).message
+  end
+
   private
 
   def set_uuid
@@ -104,12 +110,13 @@ class Event < ApplicationRecord
   end
 
   def assign_location
-    code = %w[village_id commune_id district_id province_id].map do |code|
+    loc_code = %w[village_id commune_id district_id province_id].map do |code|
       field_values.select { |fv| fv.field_code == code }.first.try(:value)
     end.reject(&:blank?).first
 
-    return if code.blank?
-    self.location_code = code
+    return if loc_code.blank?
+
+    self.location_code = loc_code
   end
 
   def set_program_id

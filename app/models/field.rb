@@ -62,7 +62,7 @@ class Field < ApplicationRecord
       { code: 'report_date', field_type: 'Fields::DateField', name: 'Report date', required: true },
       { code: 'status', field_type: 'Fields::TextField', name: 'Status', entry_able: false },
       { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false },
-      { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false },
+      { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false }
     ]
     fields.each_with_index do |field, index|
       field[:display_order] = index + 1

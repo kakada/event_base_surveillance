@@ -1,0 +1,22 @@
+.w-50.view-center
+  = simple_form_for @webhook.becomes(Webhook) do |f|
+    = f.input :name
+    = f.input :url
+    = f.input :type, collection: Webhook.types, input_html: { class: 'type' }, label: 'Authentication type'
+    .types{'data-type' => 'Webhooks::TokenAuth'}
+      = f.input :token
+    .types{'data-type' => 'Webhooks::BasicAuth'}
+      = f.input :username
+      = f.input :password
+
+    .form-group
+      %label Event Types
+      = hidden_field_tag "webhook[event_type_ids][]", nil
+      - @event_types.each do |event_type|
+        .form-check
+          = check_box_tag "webhook[event_type_ids][]", event_type.id, @webhook.event_type_ids.include?(event_type.id), class: 'form-check-input', id: dom_id(event_type)
+          %label.form-check-label{for: dom_id(event_type)}= event_type.name
+
+    .actions
+      = f.button :submit, class: 'btn btn-primary'
+      = link_to 'Cancel', webhooks_path, class: 'btn btn-secondary'
