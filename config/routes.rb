@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :events do
+  resources :events, except: [:destroy] do
     scope module: :events do
       resources :event_milestones
     end
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :event_types, only: [:index]
-      resources :events, except: [:new, :edit]
+      resources :events, except: [:new, :edit, :destroy]
     end
   end
 

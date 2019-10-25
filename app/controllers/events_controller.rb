@@ -40,13 +40,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def destroy
-    @event = Event.find(params[:id])
-    @event.destroy
-
-    redirect_to events_url
-  end
-
   def download
     send_file "#{Rails.root}/public/#{params[:file]}", disposition: 'attachment'
   end
