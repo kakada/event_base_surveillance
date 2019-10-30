@@ -56,7 +56,7 @@
           %i.fas API
           = t('sidebar.api_and_services')
 
-    - if policy(Program).update?
+    - if current_program.present? && policy(Program).update?
       %li{class: get_css_active_class('programs/settings') }
         = link_to setting_path do
           %i.fas.fa-wrench

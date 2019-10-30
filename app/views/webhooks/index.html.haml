@@ -27,12 +27,13 @@
             %td.status{ class: ('active' if webhook.active?)}
               = webhook.active? ? t('webhook.active') : t('webhook.inactive')
             %td
-              .btn-group
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+              - if policy(webhook).update?
+                .btn-group
+                  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                    %i.fas.fa-ellipsis-v
 
-                .dropdown-menu.dropdown-menu-right
-                  - if policy(webhook).update?
+                  .dropdown-menu.dropdown-menu-right
+
                     = link_to edit_webhook_path(webhook), class: "btn dropdown-item" do
                       %i.fas.fa-pen.drop-menu-icon
                       %span= t('shared.edit')
@@ -46,10 +47,10 @@
                         %i.fas.fa-ban.drop-menu-icon
                         %span= t('webhook.deactivate')
 
-                  - if policy(webhook).destroy?
-                    = link_to webhook_path(webhook), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('webhook.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                    - if policy(webhook).destroy?
+                      = link_to webhook_path(webhook), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('webhook.are_you_sure_to_delete')} do
+                        %i.fas.fa-trash-alt.drop-menu-icon
+                        %span= t('shared.delete')
 
   - if @pagy.pages > 1
     .pagy-wrapper
