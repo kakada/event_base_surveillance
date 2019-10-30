@@ -1,7 +1,7 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 Users
+      %h3= t('user.users')
       = link_to new_user_path, class: 'btn btn-primary' do
         %i.fas.fa-plus
 
@@ -11,10 +11,10 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
-          %th Email
-          %th Role
-          %th Program
-          %th Status
+          %th= t('user.email')
+          %th= t('user.role')
+          %th= t('user.program')
+          %th= t('user.status')
           %th
       %tbody
         - @users.each do |user|
@@ -22,7 +22,8 @@
             %td= user.email
             %td= user.role.titlecase
             %td= user.program_name
-            %td= user.confirmed? ? 'Active' : 'Pending'
+            %td.status{ class: ('active' if user.confirmed?) }
+              = user.confirmed? ? t('user.active') : t('user.pending')
             %td
               - if policy(user).destroy?
                 .btn-group
@@ -34,14 +35,14 @@
                       %input.confirm-link{ value: confirmation_url(user, confirmation_token: user.confirmation_token) }
                       = link_to '#', class: "btn dropdown-item btn-copy" do
                         %i.far.fa-copy.drop-menu-icon
-                        %span Copy confirm link
+                        %span= t('user.copy_confirm_link')
 
                     - if policy(user).destroy?
-                      = link_to user_path(user), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this user?'} do
+                      = link_to user_path(user), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('user.are_you_sure_to_delete')} do
                         %i.fas.fa-trash-alt.drop-menu-icon
-                        %span Delete
+                        %span= t('shared.delete')
 
-%div{"aria-atomic" => "true", "aria-live" => "polite", :style => "position: relative; "}
-  .toast{:style => "position: absolute; top: 0; right: 100px;"}
-    .toast-body
-      Copied!
+.toast-wrapper{"aria-atomic" => "true", "aria-live" => "polite"}
+  .toast
+    .toast-body= t('user.copied')
+

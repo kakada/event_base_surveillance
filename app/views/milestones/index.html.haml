@@ -7,7 +7,7 @@
           = link_to new_milestone_path, class: 'btn btn-primary' do
             %i.fas.fa-plus
 
-  = render partial: "shared/no_data", locals: { items: @milestone }
+  = render partial: "shared/no_data", locals: { items: @milestones }
 
   - if @milestones.present?
     %table.table.table-hover.medium-width
