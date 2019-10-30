@@ -1,4 +1,8 @@
 EBS.MilestonesNew = do ->
+  selectOne = 'Fields::SelectOneField'
+  selectMultiple = 'Fields::SelectMultipleField'
+  mappingField = 'Fields::MappingField'
+
   init = ->
     initView()
     initSortable()
@@ -23,10 +27,10 @@ EBS.MilestonesNew = do ->
     parentDom = $(dom).parents('.fieldset')
     parentDom.find('.collapse-content').hide()
 
-    if dom.value == 'select_one' || dom.value == 'select_multiple'
+    if dom.value == selectOne || dom.value == selectMultiple
       parentDom.find('.collapse-trigger').show()
       parentDom.find('.options-wrapper').show()
-    else if dom.value == 'mapping_field'
+    else if dom.value == mappingField
       parentDom.find('.collapse-trigger').show()
       parentDom.find('.mapping-field-wrapper').show()
       parentDom.find('.options-wrapper').show()
@@ -112,10 +116,10 @@ EBS.MilestonesNew = do ->
     fieldName.addClass('as-title')
 
   handleCollapseContent = (dom, field_type) ->
-    if field_type == 'select_one' || field_type == 'select_multiple'
+    if field_type == selectOne || field_type == selectMultiple
       showBtnAddSelectOption(dom)
       showArrowDownIcon(dom)
-    else if field_type == 'mapping_field'
+    else if field_type == mappingField
       showMappingField(dom)
       showArrowDownIcon(dom)
 
@@ -152,9 +156,9 @@ EBS.MilestonesNew = do ->
   setMappingFieldType = (dom)->
     field_type = $(dom).find(':selected').data('field_type')
     $(dom).next().val(field_type)
-    assignFieldType(dom, 'mapping_field')
+    assignFieldType(dom, mappingField)
 
-    if field_type == 'select_one' || field_type == 'select_multiple'
+    if field_type == selectOne || field_type == selectMultiple
       showBtnAddSelectOption(dom)
       return
 
@@ -187,7 +191,7 @@ EBS.MilestonesNew = do ->
       $(this).find('.display-order').val(index)
 
   initSortable = ->
-    $(document).find('ol.fields').sortable
+    $(document).find('ol.fields.sortable').sortable
       handle: '.move'
       onDrop: ($item, container, _super) ->
         animateListItems($item, container, _super)

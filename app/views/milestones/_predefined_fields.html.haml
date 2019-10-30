@@ -1,10 +1,15 @@
 - predefined_fields ||= Field.roots
 %fieldset
-  %legend Primary Fields
-  .fieldsets
+  %legend= t('milestone.primary_fields')
+
+  %ol.fields
     - predefined_fields.each do |obj|
-      .field-wrapper{style: 'margin-bottom: 3px'}
-        .wrapper
-          %select.form-control.field-type.w-35{disabled: true}
-            %option= obj[:field_type]
-          %input.form-control.field-name.w-35{value: obj[:name], disabled: true}
+      %li
+        %fieldset.fieldset
+          .field-wrapper
+            %button.btn.move{type: :button, style: 'cursor: auto'}
+            .wrapper.flex1
+              %input.field-type{type: :hidden, value: obj[:field_type]}
+              .form-control.field-name.as-title.flex-row-vertical-center= obj[:name]
+
+          = render 'kinds'

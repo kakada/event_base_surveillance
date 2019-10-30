@@ -6,12 +6,12 @@
     .flex-row.flex1
       .flex1
         = f.text_field :name, placeholder: "option", class: 'form-control'
-      .flex1.flex-row{style: 'align-items: center'}
-        %label{style: 'margin: 0 10px 0 20px'}
-          Value
+
+      .flex1.flex-row-vertical-center
+        %label{style: 'margin: 0 10px 0 20px'}= t('milestone.value')
         = f.text_field :value, placeholder: "option", class: 'form-control'
 
-      .field-option-color-wrapper.flex1
-        .flex-row{style: 'align-items: center; height: 100%'}
-          %label Color
+      .flex1.field-option-color-wrapper
+        .flex-row-vertical-center{style: 'height: 100%'}
+          %label= t('milestone.color')
           = f.text_field :color, class: 'field-option-color form-control'

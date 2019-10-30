@@ -1,7 +1,7 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 New Milestone
+      %h3= t('milestone.new_milestone')
 
   .w-50.view-center
     = form_for @milestone, url: milestones_path(@milestone), method: :post do |f|
