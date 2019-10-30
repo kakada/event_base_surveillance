@@ -1,7 +1,7 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 Programs
+      %h3= t('program.programs')
       = link_to new_program_path, class: 'btn btn-primary' do
         %i.fas.fa-plus
 
@@ -11,14 +11,16 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
-          %th Name
+          %th= t('program.name')
           %th
       %tbody
         - @programs.each do |program|
           %tr
             %td= program.name
             %td
-              = link_to 'Edit' , edit_program_path(program), class: "badge badge-info"
-              = "/"
-              = link_to 'Delete' , program_path(program), method: :delete, class: "badge badge-danger", :data => {:confirm => 'Are you sure to delete this program?'}
+              - if policy(program).update?
+                = link_to t('shared.edit') , edit_program_path(program), class: "badge badge-info"
+              - if policy(program).destroy?
+                = "/"
+                = link_to t('shared.delete'), program_path(program), method: :delete, class: "badge badge-danger", :data => {:confirm => t('program.are_you_sure_to_delete')}
 
