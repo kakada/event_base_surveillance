@@ -1,7 +1,7 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 Event
+      %h3= t('event.event')
       - if policy(Event).create?
         = link_to new_event_path, class: 'btn btn-primary' do
           %i.fas.fa-plus
@@ -12,13 +12,13 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
-          %th Event Type
-          %th Location
-          %th # of Case
-          %th Status
-          %th Risk Level
-          %th Open case date
-          %th Owner
+          %th= t('event.event_type')
+          %th= t('event.location')
+          %th= t('event.number_of_case')
+          %th= t('event.status')
+          %th= t('event.risk_level')
+          %th= t('event.open_case_date')
+          %th= t('event.owner')
           %th
       %tbody
         - @events.each do |event|
@@ -42,7 +42,7 @@
             %td= event.program_name
             %td
               - if policy(event).update?
-                = link_to 'Edit', edit_event_path(event), class: 'badge badge-info'
+                = link_to t('shared.edit'), edit_event_path(event), class: 'badge badge-info'
 
   - if @pagy.pages > 1
     .pagy-wrapper

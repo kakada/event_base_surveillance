@@ -4,5 +4,5 @@
     = f.input :color, label: t('event_type.color'), as: :minicolors, input_html: { class: 'color', data: {minicolors: {theme: :bootstrap, position: :right}}}
 
     .actions
-      = f.button :submit, t('shared.save'), class: 'btn btn-primary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), event_types_path, class: 'btn btn-secondary'

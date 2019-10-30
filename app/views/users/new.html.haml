@@ -11,5 +11,5 @@
       .program.hidden
         = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all)
 
-      = f.button :submit, t('shared.save'), class: 'btn btn-primary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), users_path, class: 'btn btn-secondary'

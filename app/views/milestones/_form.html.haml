@@ -16,5 +16,5 @@
     = link_to_add_fields t('milestone.add_field'), f, :fields
 
   .actions
-    = f.button :submit, label: t('shared.save'), class: 'btn btn-primary'
+    = f.submit t('shared.save'), class: 'btn btn-primary'
     = link_to t('shared.cancel'), milestones_path, class: 'btn btn-secondary'

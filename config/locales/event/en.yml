@@ -1,0 +1,15 @@
+en:
+  event:
+    event: 'Event'
+    event_type: 'Event Type'
+    location: 'Location'
+    number_of_case: '# of Case'
+    status: 'Status'
+    risk_level: 'Risk Level'
+    open_case_date: 'Open case date'
+    owner: 'Owner'
+    back: 'Back'
+    no_result_found: 'No result found!'
+    new_event: 'New Event'
+    edit_event: 'Edit Event'
+    add_file: '+ Add File'

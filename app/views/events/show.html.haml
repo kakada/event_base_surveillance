@@ -3,7 +3,7 @@
     .container-fluid
       %h3= @event.event_type_name
       %div
-        = link_to 'Back', events_path, class: 'btn btn-info'
+        = link_to t('event.back'), events_path, class: 'btn btn-info'
 
   .flex-row
     = render 'event_info'
