@@ -1,0 +1,13 @@
+en:
+  event_type:
+    event_type: 'Event Type'
+    name: 'Name'
+    last_modified: 'Last Modified'
+    status: 'Status'
+    shared: 'Shared'
+    are_you_sure_to_delete: 'Are you sure to delete this event type?'
+    shared_data: 'Shared Data'
+    unshared_data: 'Unshared Data'
+    new_event_type: 'New Event Type'
+    edit_event_type: 'Edit Event Type'
+    color: 'Color'
