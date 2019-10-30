@@ -1,0 +1,18 @@
+en:
+  client_app:
+    client_app: 'Client App'
+    app_name: 'App name'
+    creation_date: 'Creation date'
+    ip_address: 'Ip address'
+    access_token: 'Access token'
+    permissions: 'Permissions'
+    status: 'Status'
+    active: 'Active'
+    inactive: 'Inactive'
+    activate: 'Activate'
+    deactivate: Deactivate
+    are_you_sure_to_delete: 'Are you sure to delete this key?'
+    api_key: 'API key'
+    edit_api_key: 'Edit API key'
+    name: 'Name'
+    regenerate_token: 'Regenerate token'
