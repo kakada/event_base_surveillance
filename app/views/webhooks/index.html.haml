@@ -1,7 +1,7 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 Webhook
+      %h3= t('webhook.webhook')
       - if policy(Webhook).create?
         = link_to new_webhook_path, class: 'btn btn-primary' do
           %i.fas.fa-plus
@@ -12,10 +12,10 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
-          %th Name
-          %th Authentication Type
-          %th Url
-          %th Status
+          %th= t('webhook.name')
+          %th= t('webhook.authentication_type')
+          %th= t('webhook.url')
+          %th= t('webhook.status')
           %th
 
       %tbody
@@ -24,8 +24,8 @@
             %td= webhook.name
             %td= webhook.type
             %td= webhook.url || '-'
-            %td{ class: ['status', ('active' if webhook.active?)] }
-              = webhook.active? ? 'Active' : 'Inactive'
+            %td.status{ class: ('active' if webhook.active?)}
+              = webhook.active? ? t('webhook.active') : t('webhook.inactive')
             %td
               .btn-group
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
@@ -35,21 +35,21 @@
                   - if policy(webhook).update?
                     = link_to edit_webhook_path(webhook), class: "btn dropdown-item" do
                       %i.fas.fa-pen.drop-menu-icon
-                      %span Edit
+                      %span= t('shared.edit')
 
                     - unless webhook.active?
                       = link_to activate_webhook_path(webhook), class: "btn dropdown-item" do
                         %i.fas.fa-check.drop-menu-icon
-                        %span Activate
+                        %span= t('webhook.activate')
                     - if webhook.active?
                       = link_to deactivate_webhook_path(webhook), class: "btn dropdown-item" do
                         %i.fas.fa-ban.drop-menu-icon
-                        %span Deactivate
+                        %span= t('webhook.deactivate')
 
                   - if policy(webhook).destroy?
-                    = link_to webhook_path(webhook), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this webhook?'} do
+                    = link_to webhook_path(webhook), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('webhook.are_you_sure_to_delete')} do
                       %i.fas.fa-trash-alt.drop-menu-icon
-                      %span Delete
+                      %span= t('shared.delete')
 
   - if @pagy.pages > 1
     .pagy-wrapper

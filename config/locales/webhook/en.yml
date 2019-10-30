@@ -1,0 +1,18 @@
+en:
+  webhook:
+    webhook: 'Webhook'
+    name: 'Name'
+    authentication_type: 'Authentication Type'
+    url: 'Url'
+    status: 'Status'
+    active: 'Active'
+    inactive: 'Inactive'
+    activate: 'Activate'
+    deactivate: 'Deactivate'
+    are_you_sure_to_delete: 'Are you sure to delete this webhook?'
+    new_webhook: 'New Webhook'
+    edit_webhook: 'Edit Webhook'
+    token: 'Token'
+    username: 'Username'
+    password: 'Password'
+    event_types: 'Event Types'

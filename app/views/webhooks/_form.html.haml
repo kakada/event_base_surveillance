@@ -1,16 +1,16 @@
 .w-50.view-center
   = simple_form_for @webhook.becomes(Webhook) do |f|
-    = f.input :name
-    = f.input :url
-    = f.input :type, collection: Webhook.types, input_html: { class: 'type' }, label: 'Authentication type'
+    = f.input :name, label: t('webhook.name')
+    = f.input :url, label: t('webhook.url')
+    = f.input :type, collection: Webhook.types, input_html: { class: 'type' }, label: t('webhook.authentication_type')
     .types{'data-type' => 'Webhooks::TokenAuth'}
-      = f.input :token
+      = f.input :token, label: t('webhook.token')
     .types{'data-type' => 'Webhooks::BasicAuth'}
-      = f.input :username
-      = f.input :password
+      = f.input :username, label: t('webhook.username')
+      = f.input :password, label: t('webhook.password')
 
     .form-group
-      %label Event Types
+      %label= t('webhook.event_types')
       = hidden_field_tag "webhook[event_type_ids][]", nil
       - @event_types.each do |event_type|
         .form-check
@@ -18,5 +18,5 @@
           %label.form-check-label{for: dom_id(event_type)}= event_type.name
 
     .actions
-      = f.button :submit, class: 'btn btn-primary'
-      = link_to 'Cancel', webhooks_path, class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), webhooks_path, class: 'btn btn-secondary'
