@@ -16,7 +16,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def destroy?
-    update?
+    false
   end
 
   class Scope < Scope

@@ -43,8 +43,6 @@
             %td
               - if policy(event).update?
                 = link_to 'Edit', edit_event_path(event), class: 'badge badge-info'
-                = "/"
-                = link_to 'Delete', event_path(event), method: :delete, class: 'badge badge-danger', :data => {confirm: 'Are you sure to delete this event?'}
 
   - if @pagy.pages > 1
     .pagy-wrapper

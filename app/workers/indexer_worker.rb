@@ -6,24 +6,54 @@ class IndexerWorker
   Client = Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL']
 
   def perform(operation, event_uuid, program_id)
-    logger.debug [operation, "ID: #{event_uuid}"]
-
     program = Program.find(program_id)
-    index_name = "#{Event.index_name}_#{program.name.downcase.split(' ').join('_')}"
 
     case operation.to_s
     when /index/
-      event = Event.find_by(uuid: event_uuid)
-      return if event.nil?
-
-      Client.index index: index_name, id: event.uuid, body: event.__elasticsearch__.as_indexed_json
+      handle_index(event_uuid, program)
     when /delete/
-      begin
-        Client.delete index: index_name, id: event_uuid
-      rescue Elasticsearch::Transport::Transport::Errors::NotFound
-        logger.debug "Event not found, ID: #{event_uuid}"
-      end
-    else raise ArgumentError, "Unknown operation '#{operation}'"
+      handle_delete(event_uuid, program)
+    else
+      raise ArgumentError, "Unknown operation '#{operation}'"
     end
+  end
+
+  private
+
+  def handle_index(event_uuid, program)
+    event = Event.find_by(uuid: event_uuid)
+    return if event.nil?
+
+    # events_cdc
+    index_document("#{Event.index_name}_#{program.format_name}", event)
+
+    return unless event.event_type.shared?
+
+    Program.where.not(id: program.id).each do |target_program|
+      # gdaph_p#{cdc.id}_shared
+      index_name = "#{target_program.format_name}_p#{program.id}_shared"
+      index_document(index_name, event)
+    end
+  end
+
+  def handle_delete(event_uuid, program)
+    # events_cdc
+    delete_document("#{Event.index_name}_#{program.format_name}", event_uuid)
+
+    Program.where.not(id: program.id).each do |target_program|
+      # gdaph_p#{cdc.id}_shared
+      index_name = "#{target_program.format_name}_p#{program.id}_shared"
+      delete_document(index_name, event_uuid)
+    end
+  rescue Elasticsearch::Transport::Transport::Errors::NotFound
+    logger.debug "Event not found, ID: #{event_uuid}"
+  end
+
+  def index_document(index_name, event)
+    Client.index index: index_name, id: event.uuid, body: event.as_indexed_json
+  end
+
+  def delete_document(index_name, event_uuid)
+    Client.delete index: index_name, id: event_uuid
   end
 end

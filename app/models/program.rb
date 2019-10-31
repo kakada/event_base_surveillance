@@ -24,6 +24,10 @@ class Program < ApplicationRecord
   after_create :create_root_milestone
   after_create { ProgramWorker.perform_async(id) }
 
+  def format_name
+    name.downcase.split(' ').join('_')
+  end
+
   private
 
   def create_root_milestone
