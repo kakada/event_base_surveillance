@@ -3,9 +3,17 @@
     .container-fluid
       %h3= @event.event_type_name
       %div
+        - if !@event.close? && milestone = current_program.milestones.final.presence
+          = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: 'btn btn-warning'
+
         = link_to t('event.back'), events_path, class: 'btn btn-info'
 
   .flex-row
     = render 'event_info'
-    = render 'event_progress', event: @event
+
+    - if @event.close?
+      = render "close_event_progress", event: @event
+    - else
+      = render "event_progress", event: @event
+
     = render 'map'

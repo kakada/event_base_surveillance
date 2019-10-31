@@ -1,12 +1,9 @@
 .content-element.circles-list.flex1
   %ol
     %li
-      = link_to edit_event_path(event), class: 'btn btn-link' do
-        New
-        %span.badge.badge-light.btn-edit= t('shared.edit')
+      %a.btn.btn-link New
       .at= event.conducted_at
 
-    - is_next = true
     - event_milestones = event.event_milestones
     - milestone_ids = event_milestones.collect(&:milestone_id)
     - current_program.milestones[1..-1].each_with_index do |milestone, index|
@@ -15,13 +12,11 @@
           - pre_milestone = index == 0 ? event : event_milestones.select { |f| f.milestone_id == milestone_ids[index-1] }.first
           - current_milestone = event_milestones.select { |f| f.milestone_id == milestone.id }.first
 
-          = link_to edit_event_event_milestone_path(event, current_milestone), class: 'btn btn-link' do
+          = link_to event_event_milestone_path(event, current_milestone), class: 'btn btn-link' do
             %span= milestone.name
-            %span.badge.badge-light.btn-edit= t('shared.edit')
 
-          %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
+          - if pre_milestone.present?
+            %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
           .at= current_milestone.conducted_at
-
         - else
-          = link_to milestone.name, new_event_event_milestone_path(event_id: event.id, milestone_id: milestone.id), class: ['btn btn-link', ('disabled' unless is_next)]
-          - is_next = false
+          = link_to milestone.name, '#', class: 'btn btn-link disabled'

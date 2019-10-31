@@ -6,7 +6,11 @@
     %span.type= "#{t('event.location')}:"
     %span.value= @event.location_name(reverse=true)
 
-  - current_program.milestones.root.fields.entry_able.each do |field|
+  %li
+    %span.type Close status:
+    %span.value{style: 'color: red'}= @event.close? ? 'Close' : '-'
+
+  - current_program.milestones.root.fields.each do |field|
     %li
       %span.type= field.name
       %span.value

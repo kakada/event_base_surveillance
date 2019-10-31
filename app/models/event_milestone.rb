@@ -30,6 +30,7 @@ class EventMilestone < ApplicationRecord
 
   # Callback
   after_create :set_event_status
+  after_create :set_event_to_close, if: -> { milestone.final? }
 
   # Nested attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -74,5 +75,10 @@ class EventMilestone < ApplicationRecord
     fv.value = milestone.name
     fv.field_id ||= program.milestones.root.fields.find_by(code: 'status').id
     fv.save
+  end
+
+  def set_event_to_close
+    event.close = true
+    event.save
   end
 end
