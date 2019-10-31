@@ -62,7 +62,7 @@ class Milestone < ApplicationRecord
   def only_one_final_milestone
     return unless final?
 
-    matches = self.class.where(final: true).where.not(id: id)
+    matches = program.milestones.where(final: true).where.not(id: id)
 
     if matches.exists?
       errors.add(:final, 'cannot have another final milestone')
