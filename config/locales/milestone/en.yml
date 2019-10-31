@@ -2,6 +2,7 @@ en:
   milestone:
     milestones: 'Milestones'
     name: 'Name'
+    status: 'Status'
     telegram_notification: 'Telegram Notification'
     are_you_sure_to_delete: 'Are you sure to delete this milestone?'
     new_milestone: 'New Milestone'

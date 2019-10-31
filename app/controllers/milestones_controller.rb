@@ -14,7 +14,6 @@ class MilestonesController < ::ApplicationController
     if @milestone.save
       redirect_to milestones_url
     else
-      flash.now[:alert] = @milestone.errors.full_messages
       render :new
     end
   end
@@ -29,7 +28,6 @@ class MilestonesController < ::ApplicationController
     if @milestone.update_attributes(milestone_params)
       redirect_to milestones_url
     else
-      flash.now[:alert] = @milestone.errors.full_messages
       render :edit
     end
   end
@@ -45,7 +43,7 @@ class MilestonesController < ::ApplicationController
 
   def milestone_params
     params.require(:milestone).permit(
-      :name, :display_order,
+      :name, :display_order, :final,
       fields_attributes: [
         :id, :name, :field_type, :required, :display_order,
         :mapping_field, :mapping_field_type, :_destroy,

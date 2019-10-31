@@ -11,6 +11,7 @@
 #  is_default    :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  final         :boolean          default(FALSE)
 #
 
 class Milestone < ApplicationRecord
@@ -23,6 +24,7 @@ class Milestone < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: [:program_id] }
   validate :validate_unique_field_name
   validate :validate_unique_field_type_location
+  validate :only_one_final_milestone
 
   before_create :set_display_order
   before_create :set_default_fields, unless: :is_default?
@@ -30,6 +32,7 @@ class Milestone < ApplicationRecord
   # Scope
   default_scope { order(display_order: :asc) }
   scope :root, -> { where(is_default: true).first }
+  scope :final, -> { where(final: true).first }
 
   # Deligation
   delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
@@ -55,6 +58,16 @@ class Milestone < ApplicationRecord
   end
 
   private
+
+  def only_one_final_milestone
+    return unless final?
+
+    matches = self.class.where(final: true).where.not(id: id)
+
+    if matches.exists?
+      errors.add(:final, 'cannot have another final milestone')
+    end
+  end
 
   def set_display_order
     self.display_order = program.milestones.maximum(:display_order).to_i + 1

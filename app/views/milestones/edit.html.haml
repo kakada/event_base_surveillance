@@ -4,5 +4,5 @@
       %h3= t('milestone.edit_milestone')
 
   .w-50.view-center
-    = form_for @milestone, url: milestone_path(@milestone), method: :put do |f|
+    = simple_form_for @milestone, url: milestone_path(@milestone), method: :put do |f|
       = render 'form', f: f
