@@ -76,7 +76,7 @@ module Samples
     end
 
     def self.client
-      @@client ||= ::Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL']
+      @@client ||= ::Elasticsearch::Model.client
     end
   end
 end
