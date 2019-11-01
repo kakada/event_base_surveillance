@@ -3,7 +3,7 @@
 class ProgramWorker
   include Sidekiq::Worker
 
-  Client = Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL']
+  Client = Elasticsearch::Model.client
 
   def perform(program_id)
     program = Program.find_by(id: program_id)
