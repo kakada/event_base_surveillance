@@ -5,10 +5,11 @@ FactoryBot.define do
     password_confirmation { "password" }
     confirmed_at          { Date.today }
     role                  {'program_admin'}
-    program
+    program_id            { create(:program).id }
 
     trait :system_admin do
       role    {'system_admin'}
+      program_id  { nil }
     end
 
     trait :staff do

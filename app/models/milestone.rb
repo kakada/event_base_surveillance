@@ -66,9 +66,7 @@ class Milestone < ApplicationRecord
 
     matches = program.milestones.where(final: true).where.not(id: id)
 
-    if matches.exists?
-      errors.add(:final, 'cannot have another final milestone')
-    end
+    errors.add(:final, 'cannot have another final milestone') if matches.exists?
   end
 
   def set_display_order

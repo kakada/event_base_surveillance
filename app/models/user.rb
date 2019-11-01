@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
   has_many :event_types
   has_many :events, foreign_key: :creator_id
-  belongs_to :program
+  belongs_to :program, optional: true
   has_many :programs, foreign_key: :creator_id
 
   delegate :name, to: :program, prefix: :program, allow_nil: true

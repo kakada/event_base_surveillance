@@ -19,21 +19,19 @@ class EventType < ApplicationRecord
   belongs_to :user
   belongs_to :program
   has_many :events, dependent: :destroy
-  has_many :fields, as: :fieldable
   has_many :event_type_webhooks
   has_many :webhooks, through: :event_type_webhooks
 
-  validates :name, presence: true, uniqueness: { scope: [:program_id] }
+  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: [:program_id] }
   validates :color, presence: true, uniqueness: { scope: [:program_id] }
   before_validation :set_program_id
   before_validation :set_color
-  validate :validate_unique_fields, on: :create
+
+  # Scope
+  scope :root, -> { where(default: true).first }
 
   # Deligation
   delegate :name, to: :program, prefix: :program
-
-  # Nested Attributes
-  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
   # Class methods
   def self.create_root(user_id)
@@ -42,14 +40,8 @@ class EventType < ApplicationRecord
 
   private
 
-  def validate_unique_fields
-    validate_uniqueness_of_in_memory(
-      fields, %i[name fieldable_id fieldable_type], 'duplicate'
-    )
-  end
-
   def set_program_id
-    self.program_id ||= !!user_id && user.program_id
+    self.program_id ||= user.try(:program_id)
   end
 
   def set_color
