@@ -27,7 +27,7 @@ services:
     tmpfs: /app/tmp
     ports:
       - "3000:3000"
-    env_file: docker-env
+    env_file: app.env
     environment:
       - ELASTICSEARCH_URL=https://elasticsearch:9200
       - ELASTICSEARCH_REQUEST_TIMEOUT=300 #seconds
