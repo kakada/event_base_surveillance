@@ -17,7 +17,7 @@
           / = f.label :required, class: 'form-check-label required-label'
           = f.hidden_field :display_order, class: 'display-order'
 
-        %button.btn.btn-outline-primary.btn-add-field{type: 'button'} +Add Field
+        %button.btn.btn-outline-primary.btn-add-field{type: 'button'}= t('milestone.add_field')
 
       = f.hidden_field :_destroy
       = link_to '#', class: "remove_fields btn-remove-field" do
@@ -27,7 +27,7 @@
 
     .collapse-content
       .mapping-field-wrapper
-        %label Mapping to root
+        %label= t('milestone.mapping_to_root')
         .wrapper
           = f.select :mapping_field, options_for_select( Field::roots.map{ |c| [c[:name], c[:code], {'data-field_type'=>c[:field_type]}] }), {prompt: 'Select event type field'}, class: 'form-control mapping-field'
 
@@ -36,4 +36,4 @@
       .options-wrapper
         = f.fields_for :field_options do |builder|
           = render 'field_option_fields', f: builder
-        = link_to_add_fields "+ Add Option", f, :field_options
+        = link_to_add_fields t('milestone.add_option'), f, :field_options

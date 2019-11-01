@@ -1,0 +1,9 @@
+en:
+  program:
+    programs: 'Programs'
+    name: 'Name'
+    are_you_sure_to_delete: 'Are you sure to delete this program?'
+    new_program: 'New Program'
+    edit_program: 'Edit Program'
+    program_settings: 'Program Settings'
+    telegram_notification: 'Telegram notification'

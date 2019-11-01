@@ -1,7 +1,7 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 Client App
+      %h3= t('client_app.client_app')
       - if policy(ClientApp).create?
         = link_to new_client_app_path, class: 'btn btn-primary' do
           %i.fas.fa-plus
@@ -12,12 +12,12 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
-          %th App name
-          %th Creation date
-          %th Ip address
-          %th Access token
-          %th Permissions
-          %th Status
+          %th= t('client_app.app_name')
+          %th= t('client_app.creation_date')
+          %th= t('client_app.ip_address')
+          %th= t('client_app.access_token')
+          %th= t('client_app.permissions')
+          %th= t('client_app.status')
           %th
       %tbody
         - @client_apps.each do |client_app|
@@ -32,25 +32,28 @@
                 %i.far.fa-copy
             %td= client_app.permissions.join(', ')
             %td{ class: ['status', ('active' if client_app.active?)] }
-              = client_app.active? ? 'Active' : 'Inactive'
+              = client_app.active? ? t('client_app.active') : t('client_app.inactive')
             %td
               - if policy(client_app).update?
-                = link_to 'Edit', edit_client_app_path(client_app), class: 'badge badge-info'
-                = "/"
                 .btn-group
                   %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                     %i.fas.fa-ellipsis-v
 
                   .dropdown-menu.dropdown-menu-right
+                    = link_to edit_client_app_path(client_app), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span= t('shared.edit')
+
                     - unless client_app.active?
                       = link_to activate_client_app_path(client_app), class: "btn dropdown-item" do
                         %i.fas.fa-check.drop-menu-icon
-                        %span Activate
+                        %span= t('client_app.activate')
+
                     - if client_app.active?
                       = link_to deactivate_client_app_path(client_app), class: "btn dropdown-item" do
                         %i.fas.fa-ban.drop-menu-icon
-                        %span Deactivate
+                        %span= t('client_app.deactivate')
 
-                    = link_to client_app_path(client_app), method: :delete, class: 'btn dropdown-item', :data => {confirm: 'Are you sure to delete this key?'} do
+                    = link_to client_app_path(client_app), method: :delete, class: 'btn dropdown-item', :data => {confirm: t('client_app.are_you_sure_to_delete')} do
                       %i.fas.fa-trash-alt.drop-menu-icon
-                      %span Delete
+                      %span= t('shared.delete')

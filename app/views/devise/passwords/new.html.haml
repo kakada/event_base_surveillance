@@ -1,14 +1,14 @@
 .form-wrapper
-  %h2 Forgot your password?
+  %h2= t('devise.forgot_your_password')
 
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = render "devise/shared/error_messages", resource: resource
 
     .form-group
-      = f.label :email
+      = f.label :email, t('devise.email')
       = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
 
     .actions
-      = f.submit "Send me reset password instructions", class: 'btn btn-primary mb-2'
+      = f.submit t('devise.send_me_reset_pwd_instruction'), class: 'btn btn-primary mb-2'
 
   = render "devise/shared/links"

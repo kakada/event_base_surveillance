@@ -1,9 +1,9 @@
 %ul.list.flex1
   %li
-    %span.type Event Type:
+    %span.type= "#{t('event.event_type')}:"
     %span.value= @event.event_type_name
   %li
-    %span.type Location:
+    %span.type= "#{t('event.location')}:"
     %span.value= @event.location_name(reverse=true)
 
   - current_program.milestones.root.fields.entry_able.each do |field|

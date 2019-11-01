@@ -1,0 +1,15 @@
+en:
+  milestone:
+    milestones: 'Milestones'
+    name: 'Name'
+    telegram_notification: 'Telegram Notification'
+    are_you_sure_to_delete: 'Are you sure to delete this milestone?'
+    new_milestone: 'New Milestone'
+    edit_milestone: 'Edit Milestone'
+    additional_fields: 'Additional Fields'
+    add_field: '+ Add Field'
+    add_option: '+ Add Option'
+    primary_fields: 'Primary Fields'
+    mapping_to_root: 'Mapping to root'
+    value: 'Value'
+    color: 'Color'

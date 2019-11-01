@@ -1,0 +1,13 @@
+en:
+  user:
+    users: 'Users'
+    email: 'Email'
+    role: 'Role'
+    program: 'Program'
+    status: 'Status'
+    copy_confirm_link: 'Copy confirm link'
+    are_you_sure_to_delete: 'Are you sure to delete this user?'
+    copied: 'Copied!'
+    new_users: 'New Users'
+    active: 'Active'
+    pending: 'Pending'

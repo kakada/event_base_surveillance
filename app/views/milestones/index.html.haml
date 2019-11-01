@@ -1,19 +1,19 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3= "Milestones"
+      %h3= t('milestone.milestones')
       %div
         - if policy(Milestone).update?
           = link_to new_milestone_path, class: 'btn btn-primary' do
             %i.fas.fa-plus
 
-  = render partial: "shared/no_data", locals: { items: @milestone }
+  = render partial: "shared/no_data", locals: { items: @milestones }
 
   - if @milestones.present?
     %table.table.table-hover.medium-width
       %thead
         %tr
-          %th Name
+          %th= t('milestone.name')
           %th
       %tbody
         - @milestones.each do |milestone|
@@ -30,14 +30,14 @@
                 .dropdown-menu.dropdown-menu-right
                   = link_to milestone_telegram_path(milestone), class: ["btn dropdown-item", ('disabled' unless current_program.enable_telegram?)] do
                     %i.fab.fa-telegram.drop-menu-icon
-                    %span Telegram Notification
+                    %span= t('milestone.telegram_notification')
 
                   - if policy(Milestone).update?
                     = link_to edit_milestone_path(milestone), class: "btn dropdown-item" do
                       %i.fas.fa-pen.drop-menu-icon
-                      %span Edit
+                      %span= t('shared.edit')
 
                   - if policy(milestone).delete?
-                    = link_to milestone_path(milestone), method: :delete, class: "btn dropdown-item", :data => {:confirm => 'Are you sure to delete this milestone?'} do
+                    = link_to milestone_path(milestone), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('milestone.are_you_sure_to_delete')} do
                       %i.fas.fa-trash-alt.drop-menu-icon
-                      %span Delete
+                      %span= t('shared.delete')

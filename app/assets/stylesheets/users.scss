@@ -4,4 +4,22 @@
     left: -100%;
     opacity: 0;
   }
+
+  .toast-wrapper {
+    position: relative;
+
+    .toast {
+      position: absolute;
+      top: 0;
+      right: 100px;
+    }
+  }
+
+  .status {
+    color: orange;
+  }
+
+  .status.active {
+    color: green;
+  }
 }

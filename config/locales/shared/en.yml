@@ -1,0 +1,8 @@
+en:
+  shared:
+    no_data_found: 'No data found'
+    use_plus_to_add_item: 'Please use (+) button to add items!'
+    edit: 'Edit'
+    delete: 'Delete'
+    cancel: 'Cancel'
+    save: 'Save'

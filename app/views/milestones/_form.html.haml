@@ -8,13 +8,13 @@
   = render 'predefined_fields', predefined_fields: Field.defaults
 
 %fieldset
-  %legend Additional Fields
-  %ol.fields
+  %legend= t('milestone.additional_fields')
+  %ol.fields.sortable
     = f.fields_for :fields, f.object.fields.dynamic do |builder|
       = render 'field_fields', f: builder
 
-    = link_to_add_fields "+ Add Field", f, :fields
+    = link_to_add_fields t('milestone.add_field'), f, :fields
 
   .actions
-    = f.button :submit, class: 'btn btn-primary'
-    = link_to 'Cancel', milestones_path, class: 'btn btn-secondary'
+    = f.submit t('shared.save'), class: 'btn btn-primary'
+    = link_to t('shared.cancel'), milestones_path, class: 'btn btn-secondary'

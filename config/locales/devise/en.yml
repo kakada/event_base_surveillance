@@ -53,6 +53,15 @@ en:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+    ebs: 'Event Base Surveillance'
+    email: 'Email'
+    password: 'Password'
+    remember_me: 'Remember me'
+    login: 'Log in'
+    forgot_your_password: 'Forgot your password?'
+    dont_receive_unlock_instruction: "Didn't receive unlock instructions?"
+    sign_in_with: "Sign in with %{omniauth}"
+    send_me_reset_pwd_instruction: 'Send me reset password instructions'
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"

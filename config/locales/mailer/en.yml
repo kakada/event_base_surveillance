@@ -1,0 +1,6 @@
+en:
+  mailer:
+    confirmation_instruction: 'Confirmation Instruction'
+    welcome: "Welcome %{email}!"
+    confirm_your_account_through_below_link: 'You can confirm your account email through the link below:'
+    cofnirm_my_account: 'Confirm my account'
