@@ -2,7 +2,7 @@
 
 class EventTypesController < ApplicationController
   def index
-    @event_types = policy_scope(EventType.all)
+    @event_types = policy_scope(EventType.includes(:program))
   end
 
   def new

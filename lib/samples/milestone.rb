@@ -52,6 +52,7 @@ module Samples
       program_cdc = ::Program.find_by name: 'CDC'
 
       milestones.each do |milestone|
+        milestone[:creator_id] = program_cdc.creator_id
         program_cdc.milestones.create(milestone)
       end
     end

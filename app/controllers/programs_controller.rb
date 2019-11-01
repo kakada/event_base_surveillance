@@ -43,6 +43,6 @@ class ProgramsController < ApplicationController
   private
 
   def program_params
-    params.require(:program).permit(:name)
+    params.require(:program).permit(:name).merge(creator_id: current_user.id)
   end
 end

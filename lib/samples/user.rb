@@ -7,7 +7,6 @@ module Samples
       gdaph = ::Program.find_by name: 'GDAPH'
 
       users = [
-        { email: 'admin@instedd.org', role: :system_admin, program_id: nil },
         { email: 'cdc@program.org', role: :program_admin, program_id: cdc.id },
         { email: 'gdaph@program.org', role: :program_admin, program_id: gdaph.id },
         { email: 'staff@cdc.org', role: :staff, program_id: cdc.id },

@@ -12,11 +12,13 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  final         :boolean          default(FALSE)
+#  creator_id    :integer
 #
 
 class Milestone < ApplicationRecord
   # Association
   belongs_to :program
+  belongs_to :creator, class_name: 'User'
   has_one    :telegram, class_name: 'Notifications::Telegram'
   has_many   :fields, dependent: :destroy
 
@@ -41,8 +43,8 @@ class Milestone < ApplicationRecord
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
   # Class methods
-  def self.create_root
-    create(name: 'New', is_default: true, fields_attributes: Field.roots)
+  def self.create_root(creator_id)
+    create(name: 'New', is_default: true, fields_attributes: Field.roots, creator_id: creator_id)
   end
 
   # Instand methods

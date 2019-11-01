@@ -23,13 +23,22 @@ class EventType < ApplicationRecord
   has_many :event_type_webhooks
   has_many :webhooks, through: :event_type_webhooks
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: [:program_id] }
   validates :color, presence: true, uniqueness: { scope: [:program_id] }
   before_validation :set_program_id
   before_validation :set_color
   validate :validate_unique_fields, on: :create
 
+  # Deligation
+  delegate :name, to: :program, prefix: :program
+
+  # Nested Attributes
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+
+  # Class methods
+  def self.create_root(user_id)
+    create(name: 'Unknown', default: true, color: "##{SecureRandom.hex(3)}", user_id: user_id)
+  end
 
   private
 
@@ -40,7 +49,7 @@ class EventType < ApplicationRecord
   end
 
   def set_program_id
-    user && self.program_id = user.program_id
+    self.program_id ||= !!user_id && user.program_id
   end
 
   def set_color

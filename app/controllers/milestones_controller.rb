@@ -51,6 +51,6 @@ class MilestonesController < ::ApplicationController
           id name value color _destroy
         ]
       ]
-    )
+    ).merge(creator_id: current_user.id)
   end
 end
