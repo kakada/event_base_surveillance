@@ -1,8 +1,13 @@
 development: &default
-  host: 'http://elasticsearch:9200'
+  host: <%= ENV.fetch('ELASTICSEARCH_URL') { 'https://elasticsearch:9200' } %>
+  compression: <%= ENV.fetch('ELASTIC_COMPRESSION') { 'false' } %>
+  user: <%= ENV.fetch('ELASTIC_USER') { 'elastic' } %>
+  password: <%= ENV.fetch('ELASTIC_PASSWORD') { 'elastic' } %>
   transport_options:
     request:
       timeout: !!integer 300
+    ssl:
+      ca_file: <%= ENV.fetch('ELASTIC_CA_FILE') { '/certs/ca/ca.crt' } %>
 test:
   <<: *default
 staging:
