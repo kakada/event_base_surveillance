@@ -1,1 +1,13 @@
 km:
+  sidebar:
+    dashboard: 'តារាងសង្ខេប'
+    programs: 'Programs'
+    users: 'អ្នកប្រើប្រាស់'
+    event_type: 'ប្រភេទជម្ងឺ'
+    events: 'ព្រឹត្តិការណ៍'
+    about: 'អំពីយើង'
+    logout: 'ចាកចេញ'
+    milestones: 'Milestones'
+    settings: 'ការកំណត់'
+    webhooks: 'Webhooks'
+    api_and_services: 'APIs & Services'

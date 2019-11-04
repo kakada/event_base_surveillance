@@ -1,0 +1,17 @@
+en:
+  date:
+    formats:
+      default: "%d %b %Y"
+      input: "%d/%m/%Y"
+      long: "%A, %d %B %Y"
+
+  time:
+    formats:
+      short: "%d %b %Y"
+      default: "%d %b %Y"
+      long: "%I:%M%p, %A, %d %B %Y"
+      nice: "%I:%M %P, %d %b %Y"
+
+  datetime:
+    formats:
+      default: "%d %b %Y"

@@ -14,6 +14,11 @@
 
 class Program < ApplicationRecord
   belongs_to :creator, class_name: 'User'
+  LANGUAGES = [
+    ['English', 'en'],
+    ['Khmer', 'km']
+  ]
+
   has_many  :users
   has_many  :client_apps
   has_many  :events
@@ -23,6 +28,7 @@ class Program < ApplicationRecord
 
   validates :name, presence: true
 
+  before_create :set_default_language
   after_create :create_root_milestone
   after_create :create_unknown_event_type
   after_create { ProgramWorker.perform_async(id) }
@@ -32,6 +38,10 @@ class Program < ApplicationRecord
   end
 
   private
+
+  def set_default_language
+    self.language_code ||= 'en'
+  end
 
   def create_root_milestone
     milestones.create_root(creator_id)
