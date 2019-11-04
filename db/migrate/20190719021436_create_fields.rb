@@ -2,7 +2,7 @@ class CreateFields < ActiveRecord::Migration[5.2]
   def change
     create_table :fields do |t|
       t.string    :code
-      t.string    :name, null: false
+      t.string    :name
       t.string    :field_type
       t.boolean   :required
       t.string    :mapping_field

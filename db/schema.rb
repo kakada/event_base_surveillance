@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_023615) do
 
   create_table "fields", force: :cascade do |t|
     t.string "code"
-    t.string "name", null: false
+    t.string "name"
     t.string "field_type"
     t.boolean "required"
     t.string "mapping_field"

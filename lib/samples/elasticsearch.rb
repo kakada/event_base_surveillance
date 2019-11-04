@@ -76,7 +76,7 @@ module Samples
     end
 
     def self.client
-      @@client ||= ::Elasticsearch::Model.client
+      @client ||= ::Elasticsearch::Model.client
     end
   end
 end
