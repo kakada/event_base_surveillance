@@ -71,15 +71,15 @@
 #events-show {
   #map-wrapper {
     position: relative;
-    height: 250px;
+    height: 500px;
   }
 
   #map {
     display: flex;
     flex-flow: column;
-    // flex: 1 1 auto;
     overflow-y: auto;
-    height: 250px;
+    height: 500px;
+    width: 360px;
   }
 
   .no-data {

@@ -32,7 +32,11 @@
             %td= event.location_name
             %td= event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.try(:value)
             %td
-              %span.badge= event.field_values.select{|fv| fv.field_code == 'status'}.first.try(:value) || '-'
+              - if value = event.field_values.select{|fv| fv.field_code == 'status'}.first.try(:value).presence
+                %span.badge{class: (event.close? ? 'badge-success' : 'badge-warning') }= value
+              - else
+                %span.badge= '-'
+
             %td
               - risk_level = event.field_values.select{|fv| fv.field_code == 'risk_level'}.first
               - style = risk_level.present? ? "background-color: #{risk_level.color}; color: #fff" : ''

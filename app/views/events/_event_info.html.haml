@@ -6,7 +6,7 @@
     %span.type= "#{t('event.location')}:"
     %span.value= @event.location_name(reverse=true)
 
-  - current_program.milestones.root.fields.entry_able.each do |field|
+  - @event.milestone.fields.each do |field|
     %li
       %span.type= field.name
       %span.value

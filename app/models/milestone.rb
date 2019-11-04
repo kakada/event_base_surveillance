@@ -11,11 +11,14 @@
 #  is_default    :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  final         :boolean          default(FALSE)
+#  creator_id    :integer
 #
 
 class Milestone < ApplicationRecord
   # Association
   belongs_to :program
+  belongs_to :creator, class_name: 'User'
   has_one    :telegram, class_name: 'Notifications::Telegram'
   has_many   :fields, dependent: :destroy
 
@@ -23,6 +26,7 @@ class Milestone < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: [:program_id] }
   validate :validate_unique_field_name
   validate :validate_unique_field_type_location
+  validate :only_one_final_milestone
 
   before_create :set_display_order
   before_create :set_default_fields, unless: :is_default?
@@ -30,6 +34,7 @@ class Milestone < ApplicationRecord
   # Scope
   default_scope { order(display_order: :asc) }
   scope :root, -> { where(is_default: true).first }
+  scope :final, -> { where(final: true).first }
 
   # Deligation
   delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
@@ -38,8 +43,8 @@ class Milestone < ApplicationRecord
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
   # Class methods
-  def self.create_root
-    create(name: 'New', is_default: true, fields_attributes: Field.roots)
+  def self.create_root(creator_id)
+    create(name: 'New', is_default: true, fields_attributes: Field.roots, creator_id: creator_id)
   end
 
   # Instand methods
@@ -55,6 +60,14 @@ class Milestone < ApplicationRecord
   end
 
   private
+
+  def only_one_final_milestone
+    return unless final?
+
+    matches = program.milestones.where(final: true).where.not(id: id)
+
+    errors.add(:final, 'cannot have another final milestone') if matches.exists?
+  end
 
   def set_display_order
     self.display_order = program.milestones.maximum(:display_order).to_i + 1

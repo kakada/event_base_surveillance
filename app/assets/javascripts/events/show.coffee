@@ -8,7 +8,7 @@ EBS.EventsShow = do ->
     map = new (L.Map)('map')
     latlng = $('#map').data('latlng')
 
-    if latlng.length
+    if !!latlng && latlng.length
       map.setView new (L.LatLng)(latlng[0], latlng[1]), 7
       _renderMarker(latlng)
     else

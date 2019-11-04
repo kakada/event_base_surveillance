@@ -1,6 +1,6 @@
 #map-wrapper
   #map{ data: { latlng: @event.location_latlng, event_type: @event.event_type_name, number_of_case: @event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.value }}
 
-  - unless @event.present?
+  - unless @event.location.present?
     .no-data
       %span= t('event.no_result_found')

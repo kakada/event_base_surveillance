@@ -4,6 +4,10 @@ module Events
   class EventMilestonesController < ::ApplicationController
     before_action :assign_event
 
+    def show
+      @event_milestone = EventMilestone.find(params[:id])
+    end
+
     def new
       @event_milestone = @event.event_milestones.new(milestone_id: params[:milestone_id])
     end

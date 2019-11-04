@@ -3,7 +3,7 @@ en:
     webhook: 'Webhook'
     name: 'Name'
     authentication_type: 'Authentication Type'
-    url: 'Url'
+    url: 'Url (HTTP post)'
     status: 'Status'
     active: 'Active'
     inactive: 'Inactive'

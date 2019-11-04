@@ -10,7 +10,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def update?
-    return false unless user.program_admin? || user.staff?
+    return false if record.close? || !(user.program_admin? || user.staff?)
 
     record.program_id == user.program_id
   end

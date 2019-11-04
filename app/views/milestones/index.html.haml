@@ -14,6 +14,7 @@
       %thead
         %tr
           %th= t('milestone.name')
+          %th= t('milestone.status')
           %th
       %tbody
         - @milestones.each do |milestone|
@@ -21,6 +22,10 @@
             %td
               %span.badge.badge-pill.badge-info= milestone.fields.size
               = milestone.name
+
+            %td
+              = 'Root' if milestone.is_default?
+              = 'Final' if milestone.final?
 
             %td
               .btn-group

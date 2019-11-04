@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :milestone do
     name    { FFaker::Name.name }
     program
+    creator_id { program.creator_id }
 
     trait :root do
       is_default { true }

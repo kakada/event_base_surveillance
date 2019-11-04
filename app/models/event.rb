@@ -11,6 +11,7 @@
 #  location_code :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  close         :boolean          default(FALSE)
 #
 
 class Event < ApplicationRecord
@@ -22,7 +23,7 @@ class Event < ApplicationRecord
   belongs_to :event_type
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
-  belongs_to :location, foreign_key: :location_code
+  belongs_to :location, foreign_key: :location_code, optional: true
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
   has_many   :field_values, as: :valueable, dependent: :destroy
 

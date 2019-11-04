@@ -42,6 +42,7 @@ module Samples
         },
         {
           name: 'Conclusion',
+          final: true,
           fields_attributes: [
             { name: 'Conclusion', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Methanol poisoning' }, { name: 'H5N1' }, { name: 'Khmer Noodle poisoning' }, { name: 'H3N2 cluster' }, { name: 'Parasite' }, { name: 'Bread with meal' }, { name: 'Water borne' }, { name: 'Food borne' }, { name: 'Zoonoic' }, { name: 'Polultry death' }, { name: 'Dog bites' }, { name: 'Snake bites' }, { name: 'Fever with rash' }, { name: 'Acute diarrhea' }, { name: 'Acute flaccid paralysis' }, { name: 'Environmental pollution' }, { name: 'uspected nosocomial' }, { name: 'Skin' }, { name: 'Meniningoencephalitis syndrome' }, { name: 'Acute jaundice' }, { name: 'Meningitis or encephalitis' }, { name: 'Acute hemorrhagic fever' }, { name: 'Acute respiratory infection' }] },
             { name: 'Close Date', field_type: 'Fields::DateField' }
@@ -52,6 +53,7 @@ module Samples
       program_cdc = ::Program.find_by name: 'CDC'
 
       milestones.each do |milestone|
+        milestone[:creator_id] = program_cdc.creator_id
         program_cdc.milestones.create(milestone)
       end
     end

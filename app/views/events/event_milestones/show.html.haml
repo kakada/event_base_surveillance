@@ -1,0 +1,25 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
+      %div= link_to 'Back', event_path(@event), class: 'btn btn-info'
+
+  %ul.list.flex1
+    - @event_milestone.milestone.fields.each do |field|
+      %li
+        %span.type= field.name
+        %span.value
+          - if fvs = @event_milestone.field_values.select{ |fv| fv.field_id == field.id }.presence
+            - if fvs[0].field_type == 'Fields::FileField'
+              - fvs.each do |fv|
+                %div
+                  = link_to fv.file_url.split('/').last, download_events_path(file: fv.file_url), target: "_blank", style:'color: #007bff'
+            - elsif fvs[0].field_code == 'risk_level'
+              - style = fvs[0].value.present? ? "background-color: #{fvs[0].color}; color: #fff" : ''
+              %span.badge{style: style}
+                = fvs[0].value || '-'
+            - else
+              = fvs[0].value || fvs[0].values
+
+          - else
+            = '-'
