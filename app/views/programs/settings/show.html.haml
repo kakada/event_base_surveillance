@@ -4,7 +4,11 @@
       %h3= t('program.program_settings')
 
   .w-50.view-center
-    = form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
-      .flex-row{style: 'padding-bottom: 10px; border-bottom: 1px dotted'}
-        .flex1= t('program.telegram_notification')
-        = f.check_box :enable_telegram, id: 'toggle-telegram'
+    = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
+      .dotted-line.flex-row
+        %label.flex1= t('program.telegram_notification')
+        = f.input :enable_telegram, label: false, input_html: {id: 'toggle-telegram'}
+
+      .dotted-line.flex-row
+        %label.flex1= t('program.language')
+        = f.input :language_code, label: false, collection: Program::LANGUAGES

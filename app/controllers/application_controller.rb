@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   layout :set_layout
 
   def current_program
-    @current_program ||= current_user.program
+    @current_program ||= current_user.try(:program)
   end
   helper_method :current_program
 
@@ -33,6 +33,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = current_program.try(:language_code) || I18n.default_locale
   end
 end

@@ -18,7 +18,9 @@ module Ebs
     config.active_job.queue_adapter = :sidekiq
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
-    I18n.config.available_locales = [:en, :km]
+    config.i18n.fallbacks = true
+    config.i18n.fallbacks = [:en]
+    config.i18n.available_locales = [:en, :km]
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
