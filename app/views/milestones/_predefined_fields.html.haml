@@ -1,4 +1,5 @@
 - predefined_fields ||= Field.roots
+- predefined_fields = predefined_fields.select { |field| field[:code] != 'source' }
 %fieldset
   %legend= t('milestone.primary_fields')
 
