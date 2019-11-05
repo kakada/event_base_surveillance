@@ -39,6 +39,10 @@ class MilestonesController < ::ApplicationController
     redirect_to milestones_url
   end
 
+  def reorder
+    current_program.milestones.update_order!(params[:ids])
+  end
+
   private
 
   def milestone_params
