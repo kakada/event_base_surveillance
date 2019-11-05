@@ -16,18 +16,20 @@
           %th= t('milestone.name')
           %th= t('milestone.status')
           %th
-      %tbody
+
+    = form_with(url: reorder_milestones_path, method: 'put', id: 'form') do |f|
+      %ol.fields.table.table-hover.medium-width
         - @milestones.each do |milestone|
-          %tr
-            %td
+          %li.move.flex-row.list-row{'data-id' => milestone.id}
+            .name-wrapper
               %span.badge.badge-pill.badge-info= milestone.fields.size
               = milestone.name
 
-            %td
+            .status-wrapper
               = 'Root' if milestone.is_default?
               = 'Final' if milestone.final?
 
-            %td
+            .flex1
               .btn-group
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                   %i.fas.fa-ellipsis-v
