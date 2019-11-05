@@ -43,16 +43,21 @@ module Events
       private
 
       def build_basic_attributes
-        attributes.except(*except_attributes).merge(
+        obj = attributes.except(*except_attributes).merge(
           event_type_name: event_type_name,
           program_name: program_name,
           location_name: location_name,
-          location: {
-            lat: location_latlng[0],
-            lon: location_latlng[1]
-          },
           milestone: {}
         )
+
+        if location_latlng.present?
+          obj[:location] = {
+            lat: location_latlng.try(:first),
+            lon: location_latlng.try(:last)
+          }
+        end
+
+        obj
       end
 
       def build_milestone(event)
@@ -63,14 +68,14 @@ module Events
 
           next if valueable.nil?
 
-          event[:milestone][milestone_name] = valueable.attributes.except(*except_attributes).merge(
-            fields: valueable.field_values.includes(:field).map do |fv|
-              fv.field.attributes.except(*except_date_attributes).merge(
-                value: fv.value || fv.values || fv.image_url || fv.file_url,
-                color: fv.color
-              )
-            end
-          )
+          obj = {}
+          valueable.field_values.includes(:field).map do |fv|
+            obj[fv.field.code] = fv.value || fv.values || fv.image_url || fv.file_url
+
+            obj[fv.field.code] = "Pumi::#{fv.field.code.split('_').first.titlecase}".constantize.find_by_id(fv.value).name_en if %w[province_id district_id commune_id village_id].include? fv.field.code
+          end
+
+          event[:milestone][milestone_name] = valueable.attributes.except(*except_attributes).merge(obj)
         end
 
         event

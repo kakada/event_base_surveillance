@@ -30,8 +30,10 @@ class Field < ApplicationRecord
   has_many   :field_values, dependent: :destroy
 
   # Validation
+  validates :code, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
   validates :name, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
+  before_validation :set_field_code, if: -> { name.present? }
   before_validation :set_mapping_field_type
 
   before_create :set_display_order
@@ -78,6 +80,10 @@ class Field < ApplicationRecord
   end
 
   private
+
+  def set_field_code
+    self.code ||= name.downcase.split(' ').join('_')
+  end
 
   def set_display_order
     self.display_order ||= self.class.maximum(:display_order).to_i + 1

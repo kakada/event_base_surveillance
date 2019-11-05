@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :field do
     name        { FFaker::Name.name }
     field_type  { 'Fields::TextField' }
+    code        { name.downcase.split(' ').join('_') }
 
     trait :risk_level_mapping_field do
       name                {'Risk Level'}

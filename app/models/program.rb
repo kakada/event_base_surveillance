@@ -15,9 +15,9 @@
 class Program < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   LANGUAGES = [
-    ['English', 'en'],
-    ['Khmer', 'km']
-  ]
+    %w[English en],
+    %w[Khmer km]
+  ].freeze
 
   has_many  :users
   has_many  :client_apps
