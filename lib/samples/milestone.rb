@@ -24,7 +24,7 @@ module Samples
             { name: '# of Death', field_type: 'Fields::IntegerField' },
             { name: 'Summary', field_type: 'Fields::NoteField' },
             { name: 'Risk Assessment conducted', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Yes' }, { name: 'No' }] },
-            { name: 'Risk Level', field_type: 'Fields::MappingField', mapping_field: 'risk_level', mapping_field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Low', color: '#51b8b8' }, { name: 'Moderate', color: '#51b865' }, { name: 'High', color: '#d68bb2' }, { name: 'Very High', color: '#e81c2a' }] },
+            { name: 'Risk Level', field_type: 'Fields::MappingField', color_required: true, mapping_field: 'risk_level', mapping_field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Low', color: '#51b8b8' }, { name: 'Moderate', color: '#51b865' }, { name: 'High', color: '#d68bb2' }, { name: 'Very High', color: '#e81c2a' }] },
             { name: 'Risk assessment date', field_type: 'Fields::DateField' }
           ]
         },

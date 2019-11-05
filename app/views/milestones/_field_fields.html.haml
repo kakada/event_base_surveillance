@@ -9,7 +9,7 @@
           %i.fas.fa-caret-right
 
         .flex1
-          = f.hidden_field :field_type, class: 'field-type'
+          = f.hidden_field :field_type, class: 'field-type', 'data-field' => f.object.to_json
           = f.text_field :name, placeholder: "field_name", class: 'form-control field-name'
 
         .form-check
@@ -21,7 +21,7 @@
 
       = f.hidden_field :_destroy
       = link_to '#', class: "remove_fields btn-remove-field" do
-        %i.fa.fa-times-circle
+        %i.fas.fa-trash-alt
 
     = render 'kinds'
 
@@ -29,9 +29,11 @@
       .mapping-field-wrapper
         %label= t('milestone.mapping_to_root')
         .wrapper
-          = f.select :mapping_field, options_for_select( Field::roots.map{ |c| [c[:name], c[:code], {'data-field_type'=>c[:field_type]}] }), {prompt: 'Select event type field'}, class: 'form-control mapping-field'
+          = f.select :mapping_field, options_for_select( Field::roots.map{ |c| [c[:name], c[:code], {'data-field_type'=>c[:field_type], 'data-obj' => c.to_json}]}, selected: f.object.mapping_field), { prompt: 'Select event type field'}, class: 'form-control mapping-field'
 
-          = f.text_field :mapping_field_type, placeholder: "field type", class: 'form-control mapping-field-type', disabled: true
+          .mapping-field-type-wrapper
+            = f.text_field :mapping_field_type, placeholder: "field type", class: 'form-control mapping-field-type'
+            .disabled-layer
 
       .options-wrapper
         = f.fields_for :field_options do |builder|
