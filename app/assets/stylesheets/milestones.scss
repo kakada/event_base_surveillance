@@ -13,3 +13,14 @@
     width: 25%;
   }
 }
+
+#milestones-new,
+#milestones-create,
+#milestones-edit,
+#milestones-update {
+  .mapping-field-type-wrapper {
+    width: 100%;
+    margin-left: 10px;
+    position: relative;
+  }
+}

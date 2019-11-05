@@ -24,18 +24,34 @@ EBS.MilestonesNew = do ->
       initCollapseContent(dom)
 
   initCollapseContent = (dom) ->
-    parentDom = $(dom).parents('.fieldset')
-    parentDom.find('.collapse-content').hide()
+    hideCollapseContent(dom)
 
     if dom.value == selectOne || dom.value == selectMultiple
-      parentDom.find('.collapse-trigger').show()
-      parentDom.find('.options-wrapper').show()
+      showCollapseTrigger(dom)
+      showOption(dom)
     else if dom.value == mappingField
-      parentDom.find('.collapse-trigger').show()
-      parentDom.find('.mapping-field-wrapper').show()
-      parentDom.find('.options-wrapper').show()
-      visibleColorFieldOption(dom)
+      showCollapseTrigger(dom)
+      showMappingField(dom)
+      handleDisplayOption(dom)
     return
+
+  hideCollapseContent = (dom)->
+    $(dom).parents('.fieldset').find('.collapse-content').hide()
+
+  showCollapseTrigger = (dom)->
+    $(dom).parents('.fieldset').find('.collapse-trigger').show()
+
+  handleDisplayOption = (dom)->
+    data = $(dom).data('field')
+
+    if !data
+      return
+
+    if data.mapping_field_type == selectOne || data.mapping_field_type == selectMultiple
+      showOption(dom)
+
+    if data.color_required
+      visibleColorFieldOption(dom)
 
   initFieldNameStyleAsTitle = (dom) ->
     parentDom = $(dom).parents('.fieldset')
@@ -53,6 +69,9 @@ EBS.MilestonesNew = do ->
   visibleColorFieldOption = (dom)->
     $(dom).parents('.fieldset').find('.options-wrapper').addClass('visible-color')
     initMiniColorPicker()
+
+  hideColorFieldOption = (dom)->
+    $(dom).parents('.fieldset').find('.options-wrapper').removeClass('visible-color')
 
   onClickBtnAdd = ->
     $(document).off('click', '.btn-add-field')
@@ -81,6 +100,7 @@ EBS.MilestonesNew = do ->
         icon.addClass('fa-caret-right')
         icon.removeClass('fa-caret-down')
 
+  # for both remove field and remove option
   onClickRemoveField = ->
     $(document).on 'click', 'form .remove_fields', (event) ->
       $(this).prev('input[type=hidden]').val('1')
@@ -117,7 +137,8 @@ EBS.MilestonesNew = do ->
 
   handleCollapseContent = (dom, field_type) ->
     if field_type == selectOne || field_type == selectMultiple
-      showBtnAddSelectOption(dom)
+      showOption(dom)
+      initOneOption(dom)
       showArrowDownIcon(dom)
     else if field_type == mappingField
       showMappingField(dom)
@@ -138,8 +159,7 @@ EBS.MilestonesNew = do ->
     fieldTypeWrapper.hide()
 
   showMappingField = (dom) ->
-    mappingFieldWrapper = $(dom).parents('.fieldset').find('.mapping-field-wrapper')
-    mappingFieldWrapper.show()
+    $(dom).parents('.fieldset').find('.mapping-field-wrapper').show()
 
   assignBtnMove = (dom) ->
     btnMove = $(dom).parents('.fieldset').find('.move')
@@ -150,17 +170,35 @@ EBS.MilestonesNew = do ->
   onChangeMappingField = ->
     $(document).off('change', 'select.mapping-field')
     $(document).on 'change', 'select.mapping-field', (event)->
-      setMappingFieldType(event.target)
-      visibleColorFieldOption(event.currentTarget)
+      assignMappingFieldType(event.target)
+      handleToggleOption(event.target)
 
-  setMappingFieldType = (dom)->
-    field_type = $(dom).find(':selected').data('field_type')
-    $(dom).next().val(field_type)
-    assignFieldType(dom, mappingField)
+  handleToggleOption = (dom)->
+    data = $(dom).find(':selected').data('obj')
 
-    if field_type == selectOne || field_type == selectMultiple
-      showBtnAddSelectOption(dom)
-      return
+    if data.field_type == selectOne || data.field_type == selectMultiple
+      showOption(dom)
+      initOneOption(dom)
+
+      if data.color_required
+        visibleColorFieldOption(dom)
+    else
+      hideOption(dom)
+      hideColorFieldOption(dom)
+
+  showOption = (dom)->
+    $(dom).parents('.fieldset').find('.options-wrapper').show()
+
+  hideOption = (dom)->
+    $(dom).parents('.fieldset').find('.options-wrapper').hide()
+    clearAllOptions(dom)
+
+  clearAllOptions = (dom)->
+    $(dom).parents('.fieldset').find('.options-wrapper .remove_fields').click()
+
+  assignMappingFieldType = (dom)->
+    data = $(dom).find(':selected').data('obj').field_type
+    $(dom).parent('.wrapper').find('.mapping-field-type').val(data)
 
   assignFieldType = (dom, field_type)->
     fieldType = $(dom).parents('.fieldset').find('.field-type')
@@ -172,10 +210,8 @@ EBS.MilestonesNew = do ->
     $(dom).before($(dom).data('fields').replace(regexp, time))
     assignDisplayOrderToListItem()
 
-  showBtnAddSelectOption = (dom)->
-    optionsWrapper = $(dom).parents('.fieldset').find('.options-wrapper')
-    optionsWrapper.show()
-    optionsWrapper.find('.add_field_options').click()
+  initOneOption = (dom)->
+    $(dom).parents('.fieldset').find('.add_field_options').click()
 
   animateListItems = ($item, container, _super) ->
     $clonedItem = $('<li/>').css(height: 0)

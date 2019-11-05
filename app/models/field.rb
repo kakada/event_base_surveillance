@@ -63,7 +63,7 @@ class Field < ApplicationRecord
       { code: 'event_date', field_type: 'Fields::DateField', name: 'Event date', required: true },
       { code: 'report_date', field_type: 'Fields::DateField', name: 'Report date', required: true },
       { code: 'status', field_type: 'Fields::TextField', name: 'Status', entry_able: false },
-      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false },
+      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false }
     ]
     fields.each_with_index do |field, index|
@@ -94,5 +94,6 @@ class Field < ApplicationRecord
 
     event_mapping_field = self.class.roots.find { |obj| obj[:code] == mapping_field }
     self.mapping_field_type = event_mapping_field.present? && event_mapping_field[:field_type]
+    self.color_required = event_mapping_field.present? && event_mapping_field[:color_required]
   end
 end
