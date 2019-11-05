@@ -1,1 +1,1 @@
-= render "events/fields/#{field.mapping_field_type}", field: field, f: f, main_object: main_object
+= render "events/fields/#{field.mapping_field_type.constantize.new.kind}", field: field, f: f, main_object: main_object
