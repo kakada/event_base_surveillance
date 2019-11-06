@@ -18,8 +18,6 @@ class Event < ApplicationRecord
   include Events::Searchable
   include Events::Callback
 
-  before_create :set_uuid
-
   belongs_to :event_type
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
@@ -42,6 +40,9 @@ class Event < ApplicationRecord
   validate :validate_field_values, on: %i[create update]
   before_validation :set_program_id
   before_validation :assign_location
+
+  # Callback
+  before_create :secure_uuid
 
   # Scope
   default_scope { order(updated_at: :desc) }
@@ -93,8 +94,13 @@ class Event < ApplicationRecord
 
   private
 
-  def set_uuid
-    self.uuid = SecureRandom.uuid
+  def secure_uuid
+    self.uuid ||= SecureRandom.hex(4)
+
+    return unless self.class.exists?(uuid: uuid)
+
+    self.uuid = SecureRandom.hex(4)
+    secure_uuid
   end
 
   def addresses
