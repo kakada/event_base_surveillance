@@ -7,6 +7,11 @@ EBS.EventsEvent_milestonesNew = do ->
     onClickRemoveFile()
     onClickAddFieldValueFile()
     initFirstFieldValueFile()
+    initDatePicker()
+
+  initDatePicker = ->
+    $.fn.datepicker.defaults.format = "mm-dd-yyyy"
+    $('.datepicker').datepicker()
 
   initFirstFieldValueFile = ->
     if !!$('form .add_field_values').length

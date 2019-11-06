@@ -24,6 +24,7 @@
 //= require jquery.minicolors
 //= require bootstrap-select.min
 //= require bootstrap-toggle.min
+//= require bootstrap-datepicker.min
 
 //= require leaflet
 //= require moment.min

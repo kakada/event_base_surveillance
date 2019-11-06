@@ -14,3 +14,4 @@ en:
     mapping_to_root: 'Mapping to root'
     value: 'Value'
     color: 'Color'
+    required: 'Required'

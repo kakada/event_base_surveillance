@@ -1,10 +1,7 @@
 = f.input :name
 = f.input :final, label: 'Is it the close milestone?'
 
-- if @milestone.is_default?
-  = render 'predefined_fields'
-- else
-  = render 'predefined_fields', predefined_fields: Field.defaults
+= render 'predefined_fields'
 
 %fieldset
   %legend= t('milestone.additional_fields')
