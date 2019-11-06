@@ -25,8 +25,11 @@ module Events
             properties[milestone_name][:properties][:conducted_at] = { type: 'date' }
             next
           end
-          properties[milestone_name][:properties][:event_date] = { type: 'date' }
-          properties[milestone_name][:properties][:report_date] = { type: 'date' }
+
+          fields = Field.roots.select { |field| ['Fields::IntegerField', 'Fields::DateField'].include? field[:field_type] }
+          fields.each do |field|
+            properties[milestone_name][:properties][field[:code]] = { type: field[:field_type].constantize.new.kind }
+          end
         end
 
         structure = mappings.to_hash
