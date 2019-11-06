@@ -12,6 +12,7 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
+          %th= t('event.id')
           %th= t('event.event_type')
           %th= t('event.location')
           %th= t('event.number_of_case')
@@ -23,12 +24,13 @@
       %tbody
         - @events.each do |event|
           %tr
+            %td= link_to event.alias_id, event_path(event), class: 'btn btn-link'
             %td
               .flex-row-vertical-center
                 .small-color{style: "background-color: #{event.event_type_color}"}
                   = event.event_type_name[0]
-                %span
-                  = link_to event.event_type_name, event_path(event), class: 'btn btn-link'
+                %span= event.event_type_name
+
             %td= event.location_name
             %td= event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.try(:value)
             %td

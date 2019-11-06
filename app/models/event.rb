@@ -40,8 +40,12 @@ class Event < ApplicationRecord
   # Validation
   validates :event_type_id, presence: true
   validate :validate_field_values, on: %i[create update]
-  before_validation :set_program_id
+  before_validation :set_program_id, if: -> { creator_id.present? }
   before_validation :assign_location
+
+  # Callback
+  before_create :increase_event_sequence
+  before_create :set_alias_id, if: -> { alias_id.blank? }
 
   # Scope
   default_scope { order(updated_at: :desc) }
@@ -83,6 +87,10 @@ class Event < ApplicationRecord
     (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
   end
 
+  def to_param
+    alias_id
+  end
+
   def milestone
     program.milestones.root
   end
@@ -93,8 +101,20 @@ class Event < ApplicationRecord
 
   private
 
+  def increase_event_sequence
+    program.increment!(:event_sequence)
+  end
+
+  def set_alias_id
+    self.alias_id = "#{program.format_name}#{program.event_sequence}"
+  end
+
   def set_uuid
     self.uuid = SecureRandom.uuid
+  end
+
+  def set_program_id
+    self.program_id = creator.program_id
   end
 
   def addresses
@@ -118,10 +138,6 @@ class Event < ApplicationRecord
     return if loc_code.blank?
 
     self.location_code = loc_code
-  end
-
-  def set_program_id
-    creator && self.program_id = creator.program_id
   end
 
   def validate_field_values

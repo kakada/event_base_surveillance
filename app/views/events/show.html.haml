@@ -3,13 +3,13 @@
     .container-fluid
       %h3
         = "#{@event.event_type_name}: "
-        %span.badge.badge-light= @event.uuid
+        %span.badge.badge-light= @event.alias_id
         - if @event.close?
           %span.badge.badge-pill.badge-success closed
 
       %div
         - if policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence
-          = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: 'btn btn-warning'
+          = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.alias_id, milestone_id: milestone.id), class: 'btn btn-warning'
 
         = link_to t('event.back'), events_path, class: 'btn btn-info'
 

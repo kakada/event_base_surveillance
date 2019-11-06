@@ -52,7 +52,7 @@ module Events
     end
 
     def assign_event
-      @event = Event.find(params[:event_id])
+      @event = Event.find_by(alias_id: params[:event_id])
     end
   end
 end

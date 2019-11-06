@@ -48,4 +48,12 @@ RSpec.describe Event, type: :model do
       expect(@event.location_code).to eq(@village.code)
     end
   end
+
+  describe '#alias_id' do
+    let!(:program) { create(:program, name: 'cdc') }
+    let!(:event) { create(:event, program: program) }
+
+    it { expect(event.alias_id).to eq('cdc1') }
+    it { expect(program.reload.event_sequence).to eq(1) }
+  end
 end

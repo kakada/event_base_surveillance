@@ -23,5 +23,5 @@
           .at= current_milestone.conducted_at
 
         - else
-          = link_to milestone.name, new_event_event_milestone_path(event_id: event.id, milestone_id: milestone.id), class: ['btn btn-link', ('disabled' unless is_next)]
+          = link_to milestone.name, new_event_event_milestone_path(event_id: event.alias_id, milestone_id: milestone.id), class: ['btn btn-link', ('disabled' unless is_next)]
           - is_next = false
