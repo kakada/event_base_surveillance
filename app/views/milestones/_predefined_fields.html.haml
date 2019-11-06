@@ -1,5 +1,6 @@
-- predefined_fields ||= Field.roots
+- predefined_fields = @milestone.is_default? ? Field.roots : Field.defaults
 - predefined_fields = predefined_fields.select { |field| field[:code] != 'source' }
+
 %fieldset
   %legend= t('milestone.primary_fields')
 
@@ -9,8 +10,12 @@
         %fieldset.fieldset
           .field-wrapper
             %button.btn.move{type: :button, style: 'cursor: auto'}
-            .wrapper.flex1
+
+            .wrapper.flex-row-vertical-center
               %input.field-type{type: :hidden, value: obj[:field_type]}
               .form-control.field-name.as-title.flex-row-vertical-center= obj[:name]
+
+            - if obj[:required]
+              .action-wrapper.as-title= t('milestone.required')
 
           = render 'kinds'
