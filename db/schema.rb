@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 2019_11_05_043421) do
     t.string "event_uuid"
     t.integer "milestone_id"
     t.integer "submitter_id"
-    t.integer "program_id"
+    t.date "conducted_at"
+    t.string "priority"
+    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -80,7 +82,6 @@ ActiveRecord::Schema.define(version: 2019_11_05_043421) do
     t.integer "program_id"
     t.boolean "shared"
     t.string "color"
-    t.boolean "default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -89,9 +90,24 @@ ActiveRecord::Schema.define(version: 2019_11_05_043421) do
     t.integer "event_type_id"
     t.integer "creator_id"
     t.integer "program_id"
-    t.string "location_code"
+    t.text "description"
+    t.float "latitude"
+    t.float "longitude"
+    t.point "location"
+    t.string "province_id"
+    t.string "district_id"
+    t.string "commune_id"
+    t.string "village_id"
+    t.date "event_date"
+    t.date "report_date"
+    t.string "status"
+    t.string "risk_level"
+    t.string "risk_color"
+    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_of_case"
+    t.integer "number_of_death"
     t.boolean "close", default: false
   end
 
@@ -106,33 +122,48 @@ ActiveRecord::Schema.define(version: 2019_11_05_043421) do
 
   create_table "field_values", force: :cascade do |t|
     t.integer "field_id"
-    t.string "field_code"
     t.string "value"
-    t.string "color"
     t.text "values", array: true
     t.text "properties"
     t.string "image"
     t.string "file"
-    t.string "valueable_id"
     t.string "valueable_type"
+    t.bigint "valueable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["valueable_type", "valueable_id"], name: "index_field_values_on_valueable_type_and_valueable_id"
   end
 
   create_table "fields", force: :cascade do |t|
-    t.string "code"
-    t.string "name"
+    t.string "name", null: false
     t.string "field_type"
     t.boolean "required"
     t.string "mapping_field"
     t.string "mapping_field_type"
     t.integer "display_order"
     t.integer "milestone_id"
-    t.boolean "is_default", default: false
-    t.boolean "entry_able", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "color_required", default: false
+  end
+
+  create_table "form_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "event_type_id"
+    t.integer "display_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "forms", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "form_type_id"
+    t.integer "submitter_id"
+    t.date "conducted_at"
+    t.string "priority"
+    t.string "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
@@ -150,7 +181,6 @@ ActiveRecord::Schema.define(version: 2019_11_05_043421) do
     t.integer "program_id"
     t.string "name"
     t.integer "display_order"
-    t.boolean "is_default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "final", default: false
@@ -174,7 +204,6 @@ ActiveRecord::Schema.define(version: 2019_11_05_043421) do
 
   create_table "programs", force: :cascade do |t|
     t.string "name"
-    t.boolean "enable_telegram", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "creator_id"
@@ -183,7 +212,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_043421) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: ""
+    t.string "encrypted_password", default: "", null: false
     t.integer "role", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
