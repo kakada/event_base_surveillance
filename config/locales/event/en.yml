@@ -1,12 +1,13 @@
 en:
   event:
+    id: 'ID'
     event: 'Event'
     event_type: 'Event Type'
     location: 'Location'
     number_of_case: '# of Case'
     status: 'Status'
     risk_level: 'Risk Level'
-    open_case_date: 'Open case date'
+    onset_date: 'Onset date'
     owner: 'Owner'
     back: 'Back'
     no_result_found: 'No result found!'
@@ -14,3 +15,4 @@ en:
     edit_event: 'Edit Event'
     add_file: '+ Add File'
     close_event: 'Close Event'
+    progress: 'Progress'

@@ -12,27 +12,29 @@
     %table.table.table-hover.medium-width
       %thead
         %tr
+          %th= t('event.id')
           %th= t('event.event_type')
           %th= t('event.location')
           %th= t('event.number_of_case')
-          %th= t('event.status')
+          %th= t('event.progress')
           %th= t('event.risk_level')
-          %th= t('event.open_case_date')
+          %th= t('event.onset_date')
           %th= t('event.owner')
           %th
       %tbody
         - @events.each do |event|
           %tr
+            %td= link_to event.id, event_path(event), class: 'btn btn-link uuid'
             %td
               .flex-row-vertical-center
                 .small-color{style: "background-color: #{event.event_type_color}"}
                   = event.event_type_name[0]
-                %span
-                  = link_to event.event_type_name, event_path(event), class: 'btn btn-link'
+                %span= event.event_type_name
+
             %td= event.location_name
             %td= event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.try(:value)
             %td
-              - if value = event.field_values.select{|fv| fv.field_code == 'status'}.first.try(:value).presence
+              - if value = event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
                 %span.badge{class: (event.close? ? 'badge-success' : 'badge-warning') }= value
               - else
                 %span.badge= '-'
@@ -42,7 +44,7 @@
               - style = risk_level.present? ? "background-color: #{risk_level.color}; color: #fff" : ''
               %span.badge{style: style}
                 = risk_level.try(:value) || '-'
-            %td= l(event.created_at, format: :long)
+            %td= event.field_values.select{|fv| fv.field_code == 'event_date'}.first.try(:value)
             %td= event.program_name
             %td
               - if policy(event).update?

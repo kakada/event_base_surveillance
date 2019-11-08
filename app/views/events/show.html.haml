@@ -4,8 +4,9 @@
       %h3
         = "#{@event.event_type_name}: "
         %span.badge.badge-light= @event.uuid
-        - if @event.close?
-          %span.badge.badge-pill.badge-success closed
+
+        - if value = @event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
+          %span.badge{class: (@event.close? ? 'badge-success' : 'badge-warning') }= value
 
       %div
         - if policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence
@@ -16,9 +17,9 @@
   .flex-row
     = render 'event_info'
 
-    - unless policy(@event).update?
-      = render "close_event_progress", event: @event
-    - else
+    - if policy(@event).update?
       = render "event_progress", event: @event
+    - else
+      = render "close_event_progress", event: @event
 
     = render 'map'

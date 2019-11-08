@@ -9,7 +9,7 @@ EBS.EventsShow = do ->
     latlng = $('#map').data('latlng')
 
     if !!latlng && latlng.length
-      map.setView new (L.LatLng)(latlng[0], latlng[1]), 7
+      map.setView new (L.LatLng)(latlng[0], latlng[1]), 9
       _renderMarker(latlng)
     else
       map.setView new (L.LatLng)(12.33233, 104.875305), 7
