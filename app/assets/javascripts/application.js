@@ -41,6 +41,7 @@
 //= require event_milestones/new
 //= require events/new
 //= require events/show
+//= require events/index
 //= require event_types/new
 //= require users/index
 //= require users/new

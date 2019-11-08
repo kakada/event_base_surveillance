@@ -1,0 +1,14 @@
+= form_with(url: "/events", method: "get") do
+  .form-row.medium-width
+    .col-auto.form-group
+      .input-group
+        = text_field_tag(:keyword, '', class: 'form-control', placeholder: 'filter', style: 'width: 300px;', id: 'search')
+
+        %a.input-group-append#info{"data-content" => option_fields, "data-toggle" => "popover", 'data-html' => 'true', :title => "Filter results that contain: ", style: 'cursor: pointer'}
+          .input-group-text
+            %i.fas.fa-info
+
+      %small.text-muted Ex: number_of_case : 1
+
+    .col-auto
+      = submit_tag("Search", class: 'btn btn-light')
