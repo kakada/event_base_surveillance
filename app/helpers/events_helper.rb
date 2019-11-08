@@ -2,16 +2,16 @@
 
 module EventsHelper
   def option_fields
-    test =[1,2]
+    fields = Field.roots.map do |field|
+      "<li class='field-code pointer'>#{field[:code]}</li>"
+    end
 
-    arr = Field.roots.map { |field| "<li class='field-code'>#{field[:code]}</li>"}
-    dom = '<ul>'
+    dom = '<ul class="field-code-wrapper">'
 
-    arr.each do |a|
+    fields.each do |a|
       dom += a
     end
 
     dom += '</ul>'
   end
-
 end

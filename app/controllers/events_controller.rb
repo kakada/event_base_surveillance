@@ -5,11 +5,6 @@ class EventsController < ApplicationController
 
   def index
     @pagy, @events = pagy(policy_scope(Event.filter(params).includes(:event_milestones).includes(creator: :program)))
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def show

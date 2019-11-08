@@ -8,7 +8,7 @@ EBS.MilestonesTelegramsNew = do ->
     $(document).off 'click', '.template-field'
     $(document).on 'click', '.template-field', (e) ->
       value = '{{' + $(this).data('code') + '}}'
-      EBS.Util.insertAtCaret('notifications_telegram_message', value)
+      EBS.Util.insertToTextbox('notifications_telegram_message', value)
 
       e.preventDefault()
 
