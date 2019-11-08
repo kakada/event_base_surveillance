@@ -48,4 +48,12 @@ RSpec.describe Event, type: :model do
       expect(@event.location_code).to eq(@village.code)
     end
   end
+
+  describe '#secure_uuid' do
+    let!(:uuid) { SecureRandom.hex(4) }
+    let!(:event1) { create(:event, uuid: uuid) }
+    let!(:event2) { create(:event, uuid: uuid) }
+
+    it { expect(event2.uuid).not_to eq(uuid) }
+  end
 end

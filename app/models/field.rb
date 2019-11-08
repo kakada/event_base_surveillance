@@ -60,9 +60,9 @@ class Field < ApplicationRecord
       { code: 'district_id', field_type: 'Fields::TextField', name: 'District' },
       { code: 'commune_id', field_type: 'Fields::TextField', name: 'Commune' },
       { code: 'village_id', field_type: 'Fields::TextField', name: 'Village' },
-      { code: 'event_date', field_type: 'Fields::DateField', name: 'Event date', required: true },
+      { code: 'event_date', field_type: 'Fields::DateField', name: 'Onset date', required: true },
       { code: 'report_date', field_type: 'Fields::DateField', name: 'Report date', required: true },
-      { code: 'status', field_type: 'Fields::TextField', name: 'Status', entry_able: false },
+      { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
       { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false }
     ]

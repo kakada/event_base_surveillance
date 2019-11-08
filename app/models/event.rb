@@ -18,8 +18,7 @@ class Event < ApplicationRecord
   include Events::Searchable
   include Events::Callback
 
-  before_create :set_uuid
-
+  # Association
   belongs_to :event_type
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
@@ -42,6 +41,10 @@ class Event < ApplicationRecord
   validate :validate_field_values, on: %i[create update]
   before_validation :set_program_id
   before_validation :assign_location
+
+  # Callback
+  before_create :secure_uuid
+  after_create :set_event_progress
 
   # Scope
   default_scope { order(updated_at: :desc) }
@@ -76,25 +79,37 @@ class Event < ApplicationRecord
 
   # Instant Methods
   def conducted_at
-    field_values.find_by(field_code: 'report_date').value
+    @conducted_at ||= field_values.find_by(field_code: 'report_date').value
   end
 
   def location_name(reverse = false, delimeter = ',')
-    (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
+    @location_name ||= (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
   end
 
   def milestone
-    program.milestones.root
+    @milestone ||= program.milestones.root
   end
 
   def telegram_message
-    MessageInterpretor.new(milestone.telegram_message, uuid).message
+    @telegram_message ||= MessageInterpretor.new(milestone.telegram_message, uuid).message
+  end
+
+  def set_event_progress
+    fv = field_values.find_or_initialize_by(field_code: 'progress')
+    fv.value = milestone.name
+    fv.field_id ||= milestone.fields.find_by(code: 'progress').id
+    fv.save
   end
 
   private
 
-  def set_uuid
-    self.uuid = SecureRandom.uuid
+  def secure_uuid
+    self.uuid ||= SecureRandom.hex(4)
+
+    return unless self.class.exists?(uuid: uuid)
+
+    self.uuid = SecureRandom.hex(4)
+    secure_uuid
   end
 
   def addresses

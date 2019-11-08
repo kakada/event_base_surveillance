@@ -29,7 +29,7 @@ class EventMilestone < ApplicationRecord
   validate :validate_field_values, on: %i[create update]
 
   # Callback
-  after_create :set_event_status
+  after_create :set_event_progress
   after_create :set_event_to_close, if: -> { milestone.final? }
 
   # Nested attributes
@@ -70,10 +70,10 @@ class EventMilestone < ApplicationRecord
     end
   end
 
-  def set_event_status
-    fv = event.field_values.find_or_initialize_by(field_code: 'status')
+  def set_event_progress
+    fv = event.field_values.find_or_initialize_by(field_code: 'progress')
     fv.value = milestone.name
-    fv.field_id ||= program.milestones.root.fields.find_by(code: 'status').id
+    fv.field_id ||= program.milestones.root.fields.find_by(code: 'progress').id
     fv.save
   end
 
