@@ -10,7 +10,7 @@ EBS.EventsEvent_milestonesNew = do ->
     initDatePicker()
 
   initDatePicker = ->
-    $.fn.datepicker.defaults.format = "mm-dd-yyyy"
+    $.fn.datepicker.defaults.format = "yyyy-mm-dd"
     $('.datepicker').datepicker()
 
   initFirstFieldValueFile = ->
