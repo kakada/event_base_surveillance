@@ -1,0 +1,27 @@
+- @events.each do |event|
+  %tr
+    %td= link_to event.id, event_path(event), class: 'btn btn-link uuid'
+    %td
+      .flex-row-vertical-center
+        .small-color{style: "background-color: #{event.event_type_color}"}
+          = event.event_type_name[0]
+        %span= event.event_type_name
+
+    %td= event.location_name
+    %td= event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.try(:value)
+    %td
+      - if value = event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
+        %span.badge{class: (event.close? ? 'badge-success' : 'badge-warning') }= value
+      - else
+        %span.badge= '-'
+
+    %td
+      - risk_level = event.field_values.select{|fv| fv.field_code == 'risk_level'}.first
+      - style = risk_level.present? ? "background-color: #{risk_level.color}; color: #fff" : ''
+      %span.badge{style: style}
+        = risk_level.try(:value) || '-'
+    %td= event.field_values.select{|fv| fv.field_code == 'event_date'}.first.try(:value)
+    %td= event.program_name
+    %td
+      - if policy(event).update?
+        = link_to t('shared.edit'), edit_event_path(event), class: 'badge badge-info'

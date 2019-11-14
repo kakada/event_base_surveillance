@@ -16,7 +16,7 @@ EBS.Util =
 
     return pageName
 
-  insertAtCaret: (areaId, text) ->
+  insertToTextbox: (areaId, text) ->
     txtarea = document.getElementById(areaId)
     if !txtarea
       return

@@ -77,6 +77,20 @@ class Event < ApplicationRecord
     'dy_'
   end
 
+  def self.filter(params)
+    arr = keywords(params[:keyword])
+    scope = all
+    scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', arr[0], arr[1]) if arr.present?
+    scope
+  end
+
+  # "risk_level: 'high'" => ["risk_level", "high"]
+  def self.keywords(keyword)
+    return [] unless keyword.present?
+
+    keyword.gsub(/\s/, '').gsub(/"/, '').gsub(/'/, '').split(':')
+  end
+
   # Instant Methods
   def conducted_at
     @conducted_at ||= field_values.find_by(field_code: 'report_date').value
