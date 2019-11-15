@@ -45,6 +45,11 @@ gem 'sinatra', require: nil
 gem 'haml-rails',     '~> 2.0'
 gem 'jquery-rails',   '~> 4.3.5'
 gem 'bootstrap',      '~> 4.3.1'
+
+# Datetime Picker
+gem 'font-awesome-rails', '~> 4.7.0.5'
+gem 'bootstrap4-datetime-picker-rails', '~> 0.3.1'
+
 gem 'simple_form',    '~> 5.0.0'
 gem 'carrierwave',    '>= 2.0.0.rc', '< 3.0'
 gem 'pundit',         '~> 2.0.1'

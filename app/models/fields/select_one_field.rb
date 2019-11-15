@@ -24,5 +24,9 @@ module Fields
     def kind
       :select_one
     end
+
+    def self.datatype
+      :text
+    end
   end
 end

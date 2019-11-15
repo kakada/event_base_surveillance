@@ -20,13 +20,13 @@
 #
 
 module Fields
-  class TextField < ::Field
+  class DateTimeField < ::Field
     def kind
-      :text
+      :date_time
     end
 
     def self.datatype
-      :text
+      :date
     end
   end
 end

@@ -24,5 +24,9 @@ module Fields
     def kind
       :date
     end
+
+    def self.datatype
+      :date
+    end
   end
 end

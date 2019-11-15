@@ -24,5 +24,9 @@ module Fields
     def kind
       :image
     end
+
+    def self.datatype
+      :text
+    end
   end
 end

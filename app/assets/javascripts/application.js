@@ -26,6 +26,10 @@
 //= require bootstrap-toggle.min
 //= require bootstrap-datepicker.min
 
+// **DateTime picker
+//= require moment
+//= require tempusdominus-bootstrap-4.js
+
 //= require leaflet
 //= require moment.min
 

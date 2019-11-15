@@ -24,5 +24,9 @@ module Fields
     def kind
       :location
     end
+
+    def self.datatype
+      :geo_point
+    end
   end
 end

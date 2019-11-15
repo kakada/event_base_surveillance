@@ -26,9 +26,9 @@ module Events
             next
           end
 
-          fields = Field.roots.select { |field| ['Fields::IntegerField', 'Fields::DateField'].include? field[:field_type] }
+          fields = Field.roots.select { |field| ['Fields::IntegerField', 'Fields::DateField', 'Fields::DateTimeField'].include? field[:field_type] }
           fields.each do |field|
-            properties[milestone_name][:properties][field[:code]] = { type: field[:field_type].constantize.new.kind }
+            properties[milestone_name][:properties][field[:code]] = { type: field[:field_type].constantize.datatype }
           end
         end
 
@@ -74,7 +74,7 @@ module Events
           obj = {}
           valueable.field_values.includes(:field).map do |fv|
             obj[fv.field.code] = fv.value || fv.values || fv.image_url || fv.file_url
-
+            obj[fv.field.code] = Time.parse(fv.value) if %w[conducted_at event_date report_date].include? fv.field.code
             obj[fv.field.code] = "Pumi::#{fv.field.code.split('_').first.titlecase}".constantize.find_by_id(fv.value).name_en if %w[province_id district_id commune_id village_id].include? fv.field.code
           end
 

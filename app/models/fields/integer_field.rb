@@ -24,5 +24,9 @@ module Fields
     def kind
       :integer
     end
+
+    def self.datatype
+      :integer
+    end
   end
 end

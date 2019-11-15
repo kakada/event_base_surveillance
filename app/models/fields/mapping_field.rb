@@ -24,5 +24,9 @@ module Fields
     def kind
       :mapping
     end
+
+    def self.datatype
+      :text
+    end
   end
 end
