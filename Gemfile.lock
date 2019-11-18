@@ -255,7 +255,8 @@ GEM
       activesupport (>= 3.0.0)
     raabro (1.1.6)
     rack (2.0.7)
-    rack-cors (1.0.3)
+    rack-cors (1.0.5)
+      rack (>= 1.6.0)
     rack-protection (2.0.5)
       rack
     rack-test (1.1.0)
@@ -467,7 +468,7 @@ DEPENDENCIES
   puma (~> 3.11)
   pumi!
   pundit (~> 2.0.1)
-  rack-cors (~> 1.0.3)
+  rack-cors (~> 1.0.5)
   rails (~> 5.2.3)
   rest-client (~> 2.1.0)
   rspec-rails (~> 3.8.2)
