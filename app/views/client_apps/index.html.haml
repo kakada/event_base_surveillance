@@ -8,6 +8,11 @@
 
   = render partial: "shared/no_data", locals: { items: @client_apps }
 
+  - label = @client_apps.blank? ? t('client_app.learn_more') : t('client_app.need_help')
+  - align = @client_apps.blank? ? 'center' : 'right'
+  %div{style: "text-align: #{align}"}
+    = link_to label, info_client_apps_path, class: 'btn btn-link'
+
   - if @client_apps.present?
     %table.table.table-hover.medium-width
       %thead

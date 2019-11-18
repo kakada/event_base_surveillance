@@ -61,6 +61,8 @@ class ClientAppsController < ApplicationController
     redirect_to client_apps_url
   end
 
+  def info; end
+
   private
 
   def client_app_params
