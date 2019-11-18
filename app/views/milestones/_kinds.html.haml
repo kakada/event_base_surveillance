@@ -13,15 +13,18 @@
         %i.fas.fa-calendar-alt.icon
         Date
 
+      .field-type-list{'data-field_type' => 'Fields::DateTimeField'}
+        %i.far.fa-clock.icon
+        DateTime
+
       .field-type-list{'data-field_type' => 'Fields::IntegerField'}
         %strong.icon 123
         Integer
 
+    .flex1
       .field-type-list{'data-field_type' => 'Fields::NoteField'}
         %i.fas.fa-bars.icon
         Note
-
-    .flex1
       .field-type-list{'data-field_type' => 'Fields::TextField'}
         %strong.icon abc
         Text
@@ -38,7 +41,8 @@
         %i.fas.fa-paperclip.icon
         File
 
-      - if current_program.milestones.first != @milestone
+    - if current_program.milestones.first != @milestone
+      .flex1
         .field-type-list{'data-field_type' => 'Fields::MappingField'}
           %i.fas.fa-exchange-alt.icon
           Mapping field

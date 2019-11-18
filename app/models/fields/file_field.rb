@@ -24,5 +24,9 @@ module Fields
     def kind
       :file
     end
+
+    def self.es_datatype
+      :text
+    end
   end
 end

@@ -20,13 +20,13 @@
 #
 
 module Fields
-  class MappingField < ::Field
+  class DateTimeField < ::Field
     def kind
-      :mapping
+      :date_time
     end
 
     def self.es_datatype
-      :text
+      :date
     end
   end
 end

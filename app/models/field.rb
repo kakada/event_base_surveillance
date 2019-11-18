@@ -22,7 +22,7 @@
 class Field < ApplicationRecord
   self.inheritance_column = :field_type
 
-  FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze
+  FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::DateTimeField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze
 
   # Association
   belongs_to :milestone
@@ -50,6 +50,10 @@ class Field < ApplicationRecord
     raise 'you have to implement in subclass'
   end
 
+  def self.es_datatype
+    raise 'you have to implement in subclass'
+  end
+
   # Class methods
   def self.roots
     fields = [
@@ -60,8 +64,8 @@ class Field < ApplicationRecord
       { code: 'district_id', field_type: 'Fields::TextField', name: 'District' },
       { code: 'commune_id', field_type: 'Fields::TextField', name: 'Commune' },
       { code: 'village_id', field_type: 'Fields::TextField', name: 'Village' },
-      { code: 'event_date', field_type: 'Fields::DateField', name: 'Onset date', required: true },
-      { code: 'report_date', field_type: 'Fields::DateField', name: 'Report date', required: true },
+      { code: 'event_date', field_type: 'Fields::DateTimeField', name: 'Onset date', required: true },
+      { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true },
       { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
       { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false }
@@ -74,7 +78,7 @@ class Field < ApplicationRecord
 
   def self.defaults
     [
-      { code: 'conducted_at', field_type: 'Fields::DateField', name: 'Conducted at', is_default: true, required: true },
+      { code: 'conducted_at', field_type: 'Fields::DateTimeField', name: 'Conducted at', is_default: true, required: true },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', is_default: true, entry_able: false }
     ]
   end

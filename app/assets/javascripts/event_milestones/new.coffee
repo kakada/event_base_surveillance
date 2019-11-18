@@ -8,10 +8,14 @@ EBS.EventsEvent_milestonesNew = do ->
     onClickAddFieldValueFile()
     initFirstFieldValueFile()
     initDatePicker()
+    initDateTimePicker()
 
   initDatePicker = ->
     $.fn.datepicker.defaults.format = "yyyy-mm-dd"
     $('.datepicker').datepicker()
+
+  initDateTimePicker = ->
+    $('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm'})
 
   initFirstFieldValueFile = ->
     if !!$('form .add_field_values').length
