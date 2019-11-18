@@ -25,7 +25,7 @@ module Fields
       :date
     end
 
-    def self.datatype
+    def self.es_datatype
       :date
     end
   end

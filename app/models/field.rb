@@ -50,7 +50,7 @@ class Field < ApplicationRecord
     raise 'you have to implement in subclass'
   end
 
-  def self.datatype
+  def self.es_datatype
     raise 'you have to implement in subclass'
   end
 

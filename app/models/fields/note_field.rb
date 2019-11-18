@@ -25,7 +25,7 @@ module Fields
       :note
     end
 
-    def self.datatype
+    def self.es_datatype
       :text
     end
   end

@@ -25,7 +25,7 @@ module Fields
       :integer
     end
 
-    def self.datatype
+    def self.es_datatype
       :integer
     end
   end

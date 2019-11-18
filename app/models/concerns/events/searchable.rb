@@ -28,7 +28,7 @@ module Events
 
           fields = Field.roots.select { |field| ['Fields::IntegerField', 'Fields::DateField', 'Fields::DateTimeField'].include? field[:field_type] }
           fields.each do |field|
-            properties[milestone_name][:properties][field[:code]] = { type: field[:field_type].constantize.datatype }
+            properties[milestone_name][:properties][field[:code]] = { type: field[:field_type].constantize.es_datatype }
           end
         end
 

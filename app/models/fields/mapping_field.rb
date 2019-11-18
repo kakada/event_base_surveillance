@@ -25,7 +25,7 @@ module Fields
       :mapping
     end
 
-    def self.datatype
+    def self.es_datatype
       :text
     end
   end
