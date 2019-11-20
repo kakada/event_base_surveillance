@@ -50,7 +50,7 @@ class MilestonesController < ::ApplicationController
       :name, :display_order, :final,
       fields_attributes: [
         :id, :name, :field_type, :required, :display_order,
-        :mapping_field, :mapping_field_type, :_destroy,
+        :mapping_field, :mapping_field_type, :_destroy, validations: {},
         field_options_attributes: %i[
           id name value color _destroy
         ]

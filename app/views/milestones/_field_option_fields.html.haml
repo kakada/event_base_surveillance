@@ -1,8 +1,8 @@
 %fieldset
   .field-wrapper{style: 'margin-top: 10px'}
     = f.hidden_field :_destroy
-    = link_to '#', class: "remove_fields btn btn-link btn-remove-option" do
-      %i.fa.fa-trash-alt
+    = link_to '#', class: "remove_fields btn btn-link" do
+      %i.fa.fa-trash-alt.icon-delete
     .flex-row.flex1
       .flex1
         = f.text_field :name, placeholder: "option", class: 'form-control'

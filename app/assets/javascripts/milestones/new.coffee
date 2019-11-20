@@ -2,6 +2,9 @@ EBS.MilestonesNew = do ->
   selectOne = 'Fields::SelectOneField'
   selectMultiple = 'Fields::SelectMultipleField'
   mappingField = 'Fields::MappingField'
+  dateField = 'Fields::DateField'
+  dateTimeField = 'Fields::DateTimeField'
+  integerField = 'Fields::IntegerField'
 
   init = ->
     initView()
@@ -15,6 +18,7 @@ EBS.MilestonesNew = do ->
     onChangeMappingField()
     onClickCollapseTrigger()
     onClickBtnAdd()
+    onClickValidationTriger()
 
   initView = ->
     $('input.field-type').each (index, dom) ->
@@ -22,6 +26,50 @@ EBS.MilestonesNew = do ->
       initBtnMove(dom)
       initFieldNameStyleAsTitle(dom)
       initCollapseContent(dom)
+      initValidationView(dom)
+
+  # Validation-----------start
+  initValidationView = (dom)->
+    if isValidationFieldType(dom.value)
+      showValidationTrigger(dom)
+      removeNoneUseValidator(dom)
+    else
+      removeValidationContent(dom)
+
+  isValidationFieldType = (value)->
+    return [dateField, dateTimeField, integerField].includes(value)
+
+  showValidationTrigger = (dom) ->
+    $(dom).parents('.fieldset').find('.validation-trigger').show()
+
+  removeNoneUseValidator = (dom)->
+    parent = $(dom).parents('.fieldset')
+    fieldType = $(parent).find('input.field-type').val()
+    noneUseValidators = $(parent).find('.type-validation:not([data-validation_type="' + fieldType + '"])')
+    noneUseValidators.remove()
+
+  removeValidationContent = (dom) ->
+    parent = $(dom).parents('.fieldset')
+    $(parent).find('.field-validation-wrapper').remove()
+
+    #handle it when choose fieldType
+  handleValidation = (dom, field_type) ->
+    if isValidationFieldType(field_type)
+      showValidationTrigger(dom)
+      showValidationContent(dom)
+      removeNoneUseValidator(dom)
+    else
+      removeValidationContent(dom)
+
+  onClickValidationTriger = ->
+    $(document).off('click', '.validation-trigger')
+    $(document).on 'click', '.validation-trigger', (event) ->
+      showValidationContent(event.currentTarget)
+
+  showValidationContent = (dom)->
+    $(dom).parents('.fieldset').find('.field-validation-wrapper').toggle()
+
+  # Validation-----------end
 
   initCollapseContent = (dom) ->
     hideCollapseContent(dom)
@@ -130,6 +178,7 @@ EBS.MilestonesNew = do ->
       assignBtnMove(dom)
       assignFieldType(dom, field_type)
       handleCollapseContent(dom, field_type)
+      handleValidation(dom, field_type)
 
   setFieldNameInputAsTitleStyle = (dom) ->
     fieldName = $(dom).parents('.fieldset').find('.field-name')

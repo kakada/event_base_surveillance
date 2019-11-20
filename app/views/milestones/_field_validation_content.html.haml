@@ -1,0 +1,36 @@
+.field-validation-wrapper
+  .flex-column
+    %label Validation
+
+    = f.fields_for :validations, OpenStruct.new(f.object.validations) do |ff|
+      .type-validation.flex-row{'data-validation_type' => 'Fields::IntegerField'}
+        = ff.number_field :from, placeholder: "from", class: 'form-control from'
+        = ff.number_field :to, placeholder: "to", class: 'form-control to'
+
+      .type-validation.flex-row{'data-validation_type' => 'Fields::DateField'}
+        .input-group.date{'data-provide' => 'datepicker'}
+          = ff.text_field :from, placeholder: "from", class: 'form-control from'
+          .input-group-append
+            .input-group-text
+              %i.fas.fa-calendar-alt
+
+        .input-group.date{'data-provide' => 'datepicker'}
+          = ff.text_field :to, placeholder: "to", class: 'form-control to'
+          .input-group-append
+            .input-group-text
+              %i.fas.fa-calendar-alt
+
+      .type-validation.flex-row{'data-validation_type' => 'Fields::DateTimeField'}
+        .input-group{'data-target-input' => 'nearest'}
+          - id = "milestone_fields_attributes_#{f.index}1_validations_from"
+          = ff.text_field :from, class: 'form-control datetimepicker from', autocomplete: 'off', id: id, data: { target: "##{id}", toggle: 'datetimepicker'}, placeholder: 'from'
+          .input-group-append{'data-target' => "##{id}", 'data-toggle' => 'datetimepicker'}
+            .input-group-text
+              %i.far.fa-clock
+
+        .input-group{'data-target-input' => 'nearest'}
+          - id = "milestone_fields_attributes_#{f.index}2_validations_to"
+          = ff.text_field :to, class: 'form-control datetimepicker to', autocomplete: 'off', id: id, data: { target: "##{id}", toggle: 'datetimepicker'}, placeholder: 'to'
+          .input-group-append{'data-target' => "##{id}", 'data-toggle' => 'datetimepicker'}
+            .input-group-text
+              %i.far.fa-clock
