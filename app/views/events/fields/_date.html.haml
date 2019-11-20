@@ -7,7 +7,7 @@
   = f.hidden_field :field_id, value: field.id
 
   .input-group.date{'data-provide' => 'datepicker'}
-    = f.text_field :value, value: f.object.value, class: ['form-control', ('is-invalid' if error_msg.present?)], autocomplete: 'off'
+    = f.text_field :value, value: f.object.value, class: ['form-control', ('is-invalid' if error_msg.present?)], autocomplete: 'off', placeholder: 'yyyy-mm-dd'
     .input-group-append
       .input-group-text
         %i.fas.fa-calendar-alt

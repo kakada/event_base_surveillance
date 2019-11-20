@@ -17,9 +17,12 @@
 #  valueable_type :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  type           :string
 #
 
 class FieldValue < ApplicationRecord
+  self.inheritance_column = :type
+
   mount_uploader :image, ImageUploader
   mount_uploader :file, FileUploader
 
@@ -28,18 +31,29 @@ class FieldValue < ApplicationRecord
 
   serialize :properties, Hash
 
-  delegate :field_type, :name, to: :field, allow_nil: true
+  delegate :field_type, to: :field, allow_nil: true
   delegate :name, to: :field, prefix: :field, allow_nil: true
 
   # Validation
   before_validation :set_location_value, if: -> { field_type == 'Fields::LocationField' }
   before_validation :cleanup_values
+  before_validation :assign_type
+
+  # Callback
   after_save :handle_mapping_field, if: -> { field_type == 'Fields::MappingField' }
 
   # History
   audited associated_with: :valueable
 
+  def valid_value?
+    true
+  end
+
   private
+
+  def assign_type
+    self.type = "FieldValues::#{field_type.split('::').last}"
+  end
 
   def set_location_value
     province = Pumi::Province.find_by_id(properties[:province_id]) if properties[:province_id].present?
