@@ -33,6 +33,7 @@ class FieldValue < ApplicationRecord
 
   delegate :field_type, to: :field, allow_nil: true
   delegate :name, to: :field, prefix: :field, allow_nil: true
+  delegate :validations, to: :field, prefix: :field, allow_nil: true
 
   # Validation
   before_validation :set_location_value, if: -> { field_type == 'Fields::LocationField' }
@@ -46,6 +47,10 @@ class FieldValue < ApplicationRecord
   audited associated_with: :valueable
 
   def valid_value?
+    true
+  end
+
+  def valid_condition?
     true
   end
 

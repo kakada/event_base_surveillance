@@ -23,11 +23,11 @@
 
         .action.flex-column
           = f.hidden_field :_destroy
-          = link_to '#', class: "remove_fields" do
+          %a.remove_fields.pointer
             %i.fas.fa-trash-alt.icon-delete
 
-          %a.validation-trigger
-            %i.fas.fa-exclamation-triangle.icon-gray
+          %a.validation-trigger.pointer
+            %i.fas.fa-info.icon-gray
 
     = render 'kinds'
 

@@ -21,8 +21,13 @@ module Events
 
       def validate_field_value_datatype
         field_values.each do |fv|
-          klass = "FieldValues::#{fv.field_type.split('::').last}".constantize
-          errors.add fv.field_name.downcase, 'is invalid value' unless klass.new(fv.attributes).valid_value?
+          temp_fv = "FieldValues::#{fv.field_type.split('::').last}".constantize.new(fv.attributes)
+
+          if temp_fv.valid_value?
+            errors.add fv.field_name.downcase, "the value should be from #{fv.field_validations[:from]} to #{fv.field_validations[:to]}" unless temp_fv.valid_condition?
+          else
+            errors.add fv.field_name.downcase, 'is invalid value'
+          end
         end
       end
     end

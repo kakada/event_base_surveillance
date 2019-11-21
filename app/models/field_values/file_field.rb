@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: field_values
@@ -20,6 +22,5 @@
 
 module FieldValues
   class FileField < ::FieldValue
-
   end
 end
