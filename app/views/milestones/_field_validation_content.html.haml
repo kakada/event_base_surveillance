@@ -1,6 +1,6 @@
 .field-validation-wrapper
   .flex-column
-    %label= t('milestone.set_validation')
+    %label.label-header= t('milestone.set_validation')
 
     = f.fields_for :validations, OpenStruct.new(f.object.validations) do |ff|
       .type-validation.flex-row{'data-validation_type' => 'Fields::IntegerField'}
@@ -47,3 +47,6 @@
             .input-group-append{'data-target' => "##{id}", 'data-toggle' => 'datetimepicker'}
               .input-group-text
                 %i.far.fa-clock
+
+      - if error_msg = f.object.name.present? && @milestone.errors[f.object.name.downcase].presence
+        .invalid-feedback{style: 'display: block'}= error_msg.join('; ')

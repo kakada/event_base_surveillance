@@ -38,7 +38,7 @@ class FieldValue < ApplicationRecord
   # Validation
   before_validation :set_location_value, if: -> { field_type == 'Fields::LocationField' }
   before_validation :cleanup_values
-  before_validation :assign_type
+  before_validation :assign_type, if: -> { field_type.present? }
 
   # Callback
   after_save :handle_mapping_field, if: -> { field_type == 'Fields::MappingField' }
