@@ -65,6 +65,10 @@ class Milestone < ApplicationRecord
     end
   end
 
+  def extra_fields
+    is_default? ? [{code: :event_type_id, type: :integer, label: 'Event Type ID'}] : [{code: :event_uuid, type: :string, label: 'Event Uuid'}]
+  end
+
   private
 
   def only_one_final_milestone

@@ -132,8 +132,10 @@ class Event < ApplicationRecord
       fv = field_values.find_by(field_code: code)
       next if fv.nil? || fv.value.blank?
 
-      klass_name = "Pumi::#{code.split('_').first.titlecase}".constantize
-      arr.push(klass_name.find_by_id(fv.value))
+      address = "Pumi::#{code.split('_').first.titlecase}".constantize.find_by_id(fv.value)
+      next if address.nil?
+
+      arr.push(address)
     end
 
     arr

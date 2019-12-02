@@ -21,7 +21,7 @@ module Api
         if @event.save
           render json: @event
         else
-          render json: { error: @event.errors }, status: :unauthorized
+          render json: { error: @event.errors }, status: :unprocessable_entity
         end
       end
 
@@ -31,7 +31,7 @@ module Api
         if @event.update_attributes(event_params)
           render json: @event
         else
-          render json: { error: @event.errors }, status: :unauthorized
+          render json: { error: @event.errors }, status: :unprocessable_entity
         end
       end
 
