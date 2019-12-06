@@ -1,0 +1,35 @@
+#locationModal.modal.fade.location-map{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      = form_for (@event.location || Location.new), html: {class: 'location-form'} do |f|
+        .modal-header
+          %h5#exampleModalLabel.modal-title= t('event.update_location')
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+
+        .modal-body
+          .flex-row
+            .form-group.flex1{style: 'margin-right: 10px;'}
+              = f.label :latitude
+              .pos-relative
+                = f.text_field :latitude, class: 'form-control lat'
+                .disabled-layer
+
+            .form-group.flex1
+              = f.label :longitude
+              .pos-relative
+                = f.text_field :longitude, class: 'form-control lng'
+                .disabled-layer
+
+            - location = get_pumi_location(@event.location_code)
+            = f.hidden_field :code, value: location.id
+            = f.hidden_field :name_en, value: location.name_en
+            = f.hidden_field :name_km, value: location.name_km
+            = f.hidden_field :kind, value: pumi_location_type(location.id)
+
+          / render map
+          #map-wrapper
+            #locationMap
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
+          %button.btn.btn-primary.btn-submit{"data-dismiss" => "modal", :type => "button"}= t('shared.save')

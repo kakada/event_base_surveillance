@@ -50,6 +50,8 @@ Rails.application.routes.draw do
     get :deactivate, on: :member
   end
 
+  resources :locations, only: [:update, :create]
+
   # API
   namespace :api do
     namespace :v1 do

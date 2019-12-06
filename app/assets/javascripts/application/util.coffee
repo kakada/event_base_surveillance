@@ -47,3 +47,13 @@ EBS.Util =
       txtarea.focus()
     txtarea.scrollTop = scrollPos
     return
+
+  getFormData: ($form) ->
+    unindexed_array = $form.serializeArray();
+    indexed_array = {};
+
+    $.map(unindexed_array, (n, i) ->
+      indexed_array[n['name']] = n['value']
+    )
+
+    return indexed_array

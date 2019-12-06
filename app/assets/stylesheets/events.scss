@@ -74,7 +74,7 @@
     height: 500px;
   }
 
-  #map {
+  #map, #locationMap {
     display: flex;
     flex-flow: column;
     overflow-y: auto;
@@ -94,6 +94,26 @@
     z-index: 1000;
     width: 200px;
     transform: translate(-50%, -50%);
+  }
+
+  // -----------location-map
+  .location-map {
+    #map-wrapper {
+      height: 400px;
+    }
+
+    #locationMap {
+      width: 100%;
+      height: 400px;
+    }
+
+    .lat, .lng {
+      background-color: #e9ecef;
+    }
+
+    .pos-relative {
+      position: relative;
+    }
   }
 }
 
@@ -116,3 +136,4 @@
     width: 300px;
   }
 }
+

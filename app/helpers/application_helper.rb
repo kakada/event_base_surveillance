@@ -25,4 +25,22 @@ module ApplicationHelper
 
     link_to(name, '#', class: "add_#{association} btn", data: { id: id, fields: fields.gsub("\n", '') })
   end
+
+  def get_pumi_location(code)
+    kind = pumi_location_type(code)
+    return "Pumi::#{kind.titlecase}".constantize.find_by_id code
+  end
+
+  def pumi_location_type(code)
+    case code.length
+    when 2
+      return 'province'
+    when 4
+      return 'district'
+    when 6
+      return 'commune'
+    else
+      return 'village'
+    end
+  end
 end

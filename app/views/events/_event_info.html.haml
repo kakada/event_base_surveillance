@@ -4,7 +4,13 @@
     %span.value= @event.event_type_name
   %li
     %span.type= "#{t('event.location')}:"
-    %span.value= @event.location_name(reverse=true)
+    %div.value
+      %span= @event.location_name(reverse=true)
+
+      / - if user.staff? && (@event.location.nil? || @event.location.custom?)
+      - if (@event.location.nil? || @event.location.custom?)
+        %button.badge.btn.btn-link.btn-edit{"data-target" => "#locationModal", "data-toggle" => "modal"} edit
+
 
   - @event.milestone.fields.each do |field|
     %li
@@ -24,3 +30,5 @@
 
         - else
           = '-'
+
+= render 'location_modal'
