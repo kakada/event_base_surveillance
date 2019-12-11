@@ -12,3 +12,6 @@
 
     .col-auto
       = submit_tag(t('event.search'), class: 'btn btn-light')
+
+    .flex1.btn-download-csv
+      = link_to t('event.download_csv'), download_events_path(keyword: params[:keyword]), target: :_blank, class: 'btn btn-outline-info'

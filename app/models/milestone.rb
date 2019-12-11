@@ -67,7 +67,11 @@ class Milestone < ApplicationRecord
   end
 
   def extra_fields
-    is_default? ? [{code: :event_type_id, type: :integer, label: 'Event Type ID'}] : [{code: :event_uuid, type: :string, label: 'Event Uuid'}]
+    is_default? ? [{ code: :event_type_id, type: :integer, label: 'Event Type ID' }] : [{ code: :event_uuid, type: :string, label: 'Event Uuid' }]
+  end
+
+  def format_name
+    name.downcase.split(' ').join('_')
   end
 
   private
