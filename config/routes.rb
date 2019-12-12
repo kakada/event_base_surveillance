@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   resources :client_apps do
     get :activate, on: :member
     get :deactivate, on: :member
+    get :info, on: :collection
   end
 
   resources :webhooks, except: [:show] do

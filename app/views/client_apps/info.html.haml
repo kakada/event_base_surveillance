@@ -1,0 +1,71 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= t('sidebar.api_and_services')
+      = link_to t('shared.back'), client_apps_path, class: 'btn btn-primary'
+
+
+  .medium-width
+    %p= t('client_app.you_can_link_to_ebs')
+    %h5= t('client_app.api')
+    %p= t('client_app.ebs_has_only_one_api')
+
+    %p
+      = t('client_app.base_url_is')
+      %code= request.base_url
+
+    %h5= t('client_app.token')
+    %p= t('client_app.see_setup_instruction')
+    %p= t('client_app.click_plus_button')
+
+    %p
+      = t('client_app.fill_in_the_information')
+      %ul
+        %li= "#{t('client_app.name')}: #{t('client_app.your_given_name')}"
+        %li= "#{t('client_app.ip_address')}: #{t('client_app.your_ip_address')}"
+        %li= "#{t('client_app.permissions')}: #{t('client_app.choose_permissions')}"
+
+    %p
+      = t('client_app.system_build_a_token')
+      .image-wrapper= image_tag 'token.png'
+
+    %h5= t('client_app.url')
+    %p= t('client_app.stand_on_own_server_and_send_request')
+
+    %pre
+      %code
+        curl -X GET https://[Base_Url]/api/v1/event_types?format=json -H "Authorization: Token [your_token_goes_here]"
+
+    %p= t('client_app.this_is_your_request_and_result')
+
+    %pre
+      %code
+        :preserve
+          {
+            "event_types": [
+              {
+                  "id": 1,
+                  "name": "Unknown",
+                  "program": {
+                      "id": 1,
+                      ...
+                  }
+              },
+              ...
+            ],
+
+            "meta": {
+              ...
+            }
+          }
+
+    %h5= t('client_app.other_endpoints')
+    %pre
+      %code
+        :preserve
+          GET    /api/v1/event_types
+          GET    /api/v1/events
+          POST   /api/v1/events
+          GET    /api/v1/events/:id
+          PATCH  /api/v1/events/:id
+          PUT    /api/v1/events/:id
