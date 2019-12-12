@@ -52,9 +52,9 @@ class FieldValue < ApplicationRecord
 
   def handle_mapping_field
     fv = valueable.event.field_values.find_or_initialize_by(field_code: field.mapping_field)
-    fv.value = value
-    fv.color = field.field_options.find_by(value: value).color if field.field_options.present?
     fv.field_id ||= valueable.program.milestones.root.fields.find_by(code: field.mapping_field).id
+    fv.value = value.downcase.split(' ').join('_')
+    fv.color = field.field_options.find_by("LOWER(value)= ?", fv.value).try(:color) if field.field_options.present?
     fv.save
   end
 

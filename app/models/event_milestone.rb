@@ -26,7 +26,8 @@ class EventMilestone < ApplicationRecord
   has_associated_audits
 
   # Validations
-  validate :validate_field_values, on: %i[create update]
+  validate  :validate_field_values, on: %i[create update]
+  validates :milestone_id, uniqueness: { scope: [:event_uuid] }
 
   # Callback
   after_create :set_event_progress

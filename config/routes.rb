@@ -54,8 +54,12 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
+      resources :milestones do
+        resources :fields, only: [:index], module: 'milestone'
+      end
       resources :event_types, only: [:index]
       resources :events, except: [:new, :edit, :destroy]
+      resources :event_milestones, only: [:create, :update]
     end
   end
 
