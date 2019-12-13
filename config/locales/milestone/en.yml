@@ -15,3 +15,6 @@ en:
     value: 'Value'
     color: 'Color'
     required: 'Required'
+    from: 'From'
+    to: 'To'
+    set_validation: 'Set validation'

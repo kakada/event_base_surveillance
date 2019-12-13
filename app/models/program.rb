@@ -10,6 +10,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  creator_id      :integer
+#  language_code   :string
 #
 
 class Program < ApplicationRecord

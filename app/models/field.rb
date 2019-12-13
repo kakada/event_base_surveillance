@@ -6,7 +6,7 @@
 #
 #  id                 :bigint           not null, primary key
 #  code               :string
-#  name               :string           not null
+#  name               :string
 #  field_type         :string
 #  required           :boolean
 #  mapping_field      :string
@@ -17,6 +17,7 @@
 #  entry_able         :boolean          default(TRUE)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  color_required     :boolean          default(FALSE)
 #
 
 class Field < ApplicationRecord
@@ -45,6 +46,8 @@ class Field < ApplicationRecord
 
   # Nested attributes
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+
+  serialize :validations, Hash
 
   def kind
     raise 'you have to implement in subclass'

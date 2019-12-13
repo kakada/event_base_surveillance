@@ -24,22 +24,6 @@
     border-left: 1px solid #ccc;
   }
 
-  .btn-remove-field {
-    position: absolute;
-    right: 4px;
-    top: 0px;
-
-    i {
-      color: #dc3545;
-    }
-  }
-
-  .btn-remove-option {
-    i {
-      color: #dc3545;
-    }
-  }
-
   .w-35 {
     width: 35%;
     margin-right: 10px;
@@ -58,8 +42,19 @@
     margin-left: 10px;
   }
 
-  .action-wrapper {
-    margin-right: 20px;
+  .action {
+    width: 24px;
+    text-align: center;
+    justify-content: space-between;
+    border-left: 1px solid #ccc;
+
+    i {
+      font-size: 12px;
+    }
+  }
+
+  .validation-trigger {
+    display: none;
   }
 
   .icon {
@@ -133,14 +128,27 @@
   }
 }
 
-.options-wrapper.visible-color .field-option-color-wrapper{
+.options-wrapper.visible-color .field-option-color-wrapper {
   display: block;
 }
 
-.options-wrapper, .mapping-field-wrapper {
+.options-wrapper,
+.mapping-field-wrapper,
+.field-validation-wrapper {
   border-top: 1px solid #ccc;
   display: none;
   padding: 10px;
+}
+
+.field-validation-wrapper {
+  .add-margin {
+    margin-right: 10px;
+  }
+
+  .label-header {
+    color: green;
+    font-size: 14px;
+  }
 }
 
 .mapping-field-wrapper {

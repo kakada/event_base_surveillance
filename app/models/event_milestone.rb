@@ -15,6 +15,7 @@
 
 class EventMilestone < ApplicationRecord
   include Events::Callback
+  include Events::FieldValueValidation
 
   belongs_to :event, foreign_key: :event_uuid
   belongs_to :milestone
@@ -26,7 +27,6 @@ class EventMilestone < ApplicationRecord
   has_associated_audits
 
   # Validations
-  validate  :validate_field_values, on: %i[create update]
   validates :milestone_id, uniqueness: { scope: [:event_uuid] }
 
   # Callback
@@ -61,15 +61,6 @@ class EventMilestone < ApplicationRecord
   end
 
   private
-
-  def validate_field_values
-    milestone&.fields&.each do |field|
-      next unless field.required?
-
-      obj = field_values.select { |field_value| field_value.field_id == field.id }.first
-      errors.add field.name.downcase, 'cannot be blank' if !obj || obj[:value].blank?
-    end
-  end
 
   def set_event_progress
     fv = event.field_values.find_or_initialize_by(field_code: 'progress')

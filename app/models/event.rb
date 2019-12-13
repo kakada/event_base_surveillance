@@ -18,6 +18,7 @@ class Event < ApplicationRecord
   include Events::Searchable
   include Events::Callback
   include Events::TemplateField
+  include Events::FieldValueValidation
 
   # Association
   belongs_to :event_type
@@ -39,11 +40,10 @@ class Event < ApplicationRecord
 
   # Validation
   validates :event_type_id, presence: true
-  validate :validate_field_values, on: %i[create update]
-  before_validation :set_program_id
-  before_validation :assign_location
 
   # Callback
+  before_validation :set_program_id
+  before_validation :assign_location
   before_create :secure_uuid
   after_create :set_event_progress
 
@@ -133,14 +133,5 @@ class Event < ApplicationRecord
 
   def set_program_id
     creator && self.program_id = creator.program_id
-  end
-
-  def validate_field_values
-    program.present? && program.milestones.root&.fields&.each do |field|
-      next unless field.required?
-
-      obj = field_values.select { |value| value.field_id == field.id }.first
-      errors.add field.name.downcase, 'cannot be blank' if !obj || obj[:value].blank?
-    end
   end
 end

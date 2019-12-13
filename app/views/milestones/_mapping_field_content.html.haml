@@ -1,0 +1,8 @@
+.mapping-field-wrapper
+  %label= t('milestone.mapping_to_root')
+  .wrapper
+    = f.select :mapping_field, options_for_select( Field::roots.map{ |c| [c[:name], c[:code], {'data-field_type'=>c[:field_type], 'data-obj' => c.to_json}]}, selected: f.object.mapping_field), { prompt: 'Select event type field'}, class: 'form-control mapping-field'
+
+    .mapping-field-type-wrapper
+      = f.text_field :mapping_field_type, placeholder: "field type", class: 'form-control mapping-field-type'
+      .disabled-layer

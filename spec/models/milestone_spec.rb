@@ -18,6 +18,40 @@ RSpec.describe Milestone, type: :model do
     end
   end
 
+  describe '#check_field_validation' do
+    let!(:program) { create(:program) }
+
+    context 'no validations' do
+      let(:fields) { [ { name: 'my number', field_type: "Fields::IntegerField", validations: {} } ] }
+
+      it { expect(create(:milestone, program: program, fields_attributes: fields)).to be_truthy }
+    end
+
+    context 'has both from and to' do
+      let(:fields) { [ { name: 'my number', field_type: "Fields::IntegerField", validations: {from: 1, to: 2} } ] }
+
+      it { expect(create(:milestone, program: program, fields_attributes: fields)).to be_truthy }
+    end
+
+    context 'has only from' do
+      before :each do
+        fields = [ { name: 'my number', field_type: "Fields::IntegerField", validations: {from: 1} } ]
+        @milestone = build(:milestone, program: program, fields_attributes: fields)
+      end
+
+      it { expect(@milestone.save).to be_falsy }
+    end
+
+    context 'has only to' do
+      before :each do
+        fields = [ { name: 'my number', field_type: "Fields::IntegerField", validations: {to: 1} } ]
+        @milestone = build(:milestone, program: program, fields_attributes: fields)
+      end
+
+      it { expect(@milestone.save).to be_falsy }
+    end
+  end
+
   describe '#update_order' do
     let!(:program) { create(:program) }
     let!(:milestone1) { program.milestones.root }

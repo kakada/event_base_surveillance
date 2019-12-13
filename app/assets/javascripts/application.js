@@ -58,7 +58,11 @@
 
 document.addEventListener('turbolinks:load', function() {
   EBS.Common.Sidebar.init();
+
+  // Default Setup
   $('[data-toggle="tooltip"]').tooltip();
+  $.fn.datepicker.defaults.format = "yyyy-mm-dd"
+  $('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm'})
 
   let currentPage = EBS.Util.getCurrentPage();
   !!EBS[currentPage] && EBS[currentPage].init();

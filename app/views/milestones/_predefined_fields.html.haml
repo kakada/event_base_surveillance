@@ -15,7 +15,7 @@
               %input.field-type{type: :hidden, value: obj[:field_type]}
               .form-control.field-name.as-title.flex-row-vertical-center= obj[:name]
 
-            - if obj[:required]
-              .action-wrapper.as-title= t('milestone.required')
+              - if obj[:required]
+                .as-title= t('milestone.required')
 
           = render 'kinds'

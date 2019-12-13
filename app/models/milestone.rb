@@ -27,6 +27,7 @@ class Milestone < ApplicationRecord
   validate :validate_unique_field_name
   validate :validate_unique_field_type_location
   validate :only_one_final_milestone
+  validate :check_field_validation
 
   before_create :set_display_order
   before_create :set_default_fields, unless: :is_default?
@@ -70,6 +71,12 @@ class Milestone < ApplicationRecord
   end
 
   private
+
+  def check_field_validation
+    fields.each do |field|
+      errors.add field.name.downcase, 'both must be exist' if field.validations[:from].present? != field.validations[:to].present?
+    end
+  end
 
   def only_one_final_milestone
     return unless final?

@@ -1,0 +1,4 @@
+.options-wrapper
+  = f.fields_for :field_options do |builder|
+    = render 'field_option_fields', f: builder
+  = link_to_add_fields t('milestone.add_option'), f, :field_options
