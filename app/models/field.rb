@@ -18,6 +18,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  color_required     :boolean          default(FALSE)
+#  validations        :text
 #
 
 class Field < ApplicationRecord
