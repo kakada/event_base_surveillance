@@ -9,7 +9,7 @@ FactoryBot.define do
       value       { Date.today.to_s }
     end
 
-    trait :number do
+    trait :integer do
       field_id    { valueable.milestone.fields.find_by(code: :number_of_case).id }
       field_code  { field.code }
       value       { rand(1...10) }
