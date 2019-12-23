@@ -70,6 +70,10 @@ class Milestone < ApplicationRecord
     is_default? ? [{code: :event_type_id, type: :integer, label: 'Event Type ID'}] : [{code: :event_uuid, type: :string, label: 'Event Uuid'}]
   end
 
+  def format_name
+    return name.downcase.split(' ').join('_')
+  end
+
   private
 
   def check_field_validation
