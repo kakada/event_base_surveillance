@@ -26,7 +26,7 @@ module Samples
           event_type_ids = program.event_types.pluck(:id)
 
           # Change here for changing number of event
-          max_event = rand(1..5)
+          max_event = rand(1..20)
 
           (1..max_event).each do
             event = ::Event.create(
@@ -62,7 +62,9 @@ module Samples
       end
 
       def create_event_milestones(event, program)
-        program.milestones.where(is_default: false).each do |milestone|
+        milestones = program.milestones.where(is_default: false)
+        size = (1..milestones.length).to_a.sample
+        milestones.take(size).each do |milestone|
           event.event_milestones.create(
             program_id: program.id,
             milestone_id: milestone.id,
@@ -72,15 +74,30 @@ module Samples
       end
 
       def em_field_values_attr(milestone, event)
-        values_attributes = [
-          {
-            field_id: milestone.fields.where(code: 'conducted_at').first.id,
-            field_code: 'conducted_at',
-            value: event.field_values.find_by(field_code: 'report_date').value.to_date + (rand(1..5) * milestone.display_order).day
-          }
+        field_codes = milestone.fields.pluck(:code)
+        values = []
+        fvs = [
+          { code: 'conducted_at', value: event.field_values.find_by(field_code: 'report_date').value.to_date + (rand(1..5) * milestone.display_order).day },
+          { code: 'risk_level', value: '' },
+          { code: 'attendee_list', value: %w[Samnang Mealea Chenda].sample },
+          { code: 'conducted_by_(lead)', value: %w[Tola Vichheka].sample }
         ]
 
-        values_attributes
+        fvs.each do |obj|
+          next unless field_codes.include? obj[:code]
+
+          field = milestone.fields.select { |f| f.code == obj[:code] }.first
+          option = field.field_options.sample
+
+          values.push(
+            field_id: field.id,
+            field_code: obj[:code],
+            value: option.try(:value) || obj[:value],
+            color: option.try(:color)
+          )
+        end
+
+        values
       end
     end
   end

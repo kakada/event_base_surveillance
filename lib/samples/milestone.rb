@@ -11,7 +11,7 @@ module Samples
             { name: 'Summary', field_type: 'Fields::NoteField' },
             { name: 'Report Attachment', field_type: 'Fields::FileField' },
             { name: 'Conducted By (Lead)', field_type: 'Fields::TextField' },
-            { name: 'Attendee List', field_type: 'Fields::FileField' }
+            { name: 'Attendee List', field_type: 'Fields::TextField' }
           ]
         },
         {
@@ -22,7 +22,7 @@ module Samples
             { name: 'Summary', field_type: 'Fields::NoteField' },
             { name: 'Summary Report Attachment', field_type: 'Fields::FileField' },
             { name: 'Conducted By (Lead)', field_type: 'Fields::TextField' },
-            { name: 'Attendee List', field_type: 'Fields::FileField' }
+            { name: 'Attendee List', field_type: 'Fields::TextField' }
           ]
         },
         {
