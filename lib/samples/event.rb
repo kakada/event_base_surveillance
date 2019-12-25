@@ -18,10 +18,29 @@ module Samples
       end
     end
 
-    private_class_method
+    class << self
+      private
 
-    def self.creat_event(province_id, district_id, commune_id, village_id)
-      ::Program.all.each do |program|
+      def creat_event(province_id, district_id, commune_id, village_id)
+        ::Program.all.each do |program|
+          event_type_ids = program.event_types.pluck(:id)
+
+          # Change here for changing number of event
+          max_event = rand(1..5)
+
+          (1..max_event).each do
+            event = ::Event.create(
+              creator_id: program.users.first.try(:id),
+              event_type_id: event_type_ids.sample,
+              field_values_attributes: event_field_value_attr(program, province_id, district_id, commune_id, village_id)
+            )
+
+            create_event_milestones(event, program)
+          end
+        end
+      end
+
+      def event_field_value_attr(program, province_id, district_id, commune_id, village_id)
         field_values = {
           province_id: province_id,
           district_id: district_id,
@@ -33,42 +52,35 @@ module Samples
           report_date: Date.today
         }
 
-        field_values_attributes = field_values.map do |k, v|
+        field_values.map do |k, v|
           {
             field_id: program.milestones.root.fields.select { |f| f.code == k.to_s }.first.id,
             field_code: k,
             value: v
           }
         end
+      end
 
-        event_type_ids = program.event_types.pluck(:id)
-
-        # Change here for changing number of event
-        max_event = rand(1..20)
-
-        (1..max_event).each do
-          event = ::Event.create(
-            creator_id: program.users.first.try(:id),
-            event_type_id: event_type_ids.sample,
-            field_values_attributes: field_values_attributes
+      def create_event_milestones(event, program)
+        program.milestones.where(is_default: false).each do |milestone|
+          event.event_milestones.create(
+            program_id: program.id,
+            milestone_id: milestone.id,
+            field_values_attributes: em_field_values_attr(milestone, event)
           )
-
-          program.milestones.where(is_default: false).each do |milestone|
-            values_attributes = [
-              {
-                field_id: milestone.fields.where(code: 'conducted_at').first.id,
-                field_code: 'conducted_at',
-                value: event.field_values.find_by(field_code: 'report_date').value.to_date + ((rand(1..5) * milestone.display_order).day)
-              }
-            ]
-
-            event_milestone = event.event_milestones.create({
-              program_id: program.id,
-              milestone_id: milestone.id,
-              field_values_attributes: values_attributes
-            })
-          end
         end
+      end
+
+      def em_field_values_attr(milestone, event)
+        values_attributes = [
+          {
+            field_id: milestone.fields.where(code: 'conducted_at').first.id,
+            field_code: 'conducted_at',
+            value: event.field_values.find_by(field_code: 'report_date').value.to_date + (rand(1..5) * milestone.display_order).day
+          }
+        ]
+
+        values_attributes
       end
     end
   end

@@ -74,10 +74,6 @@ class Milestone < ApplicationRecord
     name.downcase.split(' ').join('_')
   end
 
-  def format_name
-    return name.downcase.split(' ').join('_')
-  end
-
   private
 
   def check_field_validation

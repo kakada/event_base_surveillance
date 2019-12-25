@@ -25,7 +25,7 @@ module Samples
           user_id: ::User.find_by(email: 'gdaph@program.org').id,
           color: "##{SecureRandom.hex(3)}",
           shared: true
-        },
+        }
       ]
 
       event_types.each do |obj|

@@ -39,13 +39,15 @@ module Samples
       end
     end
 
-    private_class_method
+    class << self
+      private
 
-    def self.location_to_csv(location, csv)
-      csv << [location.code, location.name_en, location.name_km, location.kind, location.parent_id, location.latitude, location.longitude]
-      children = location.children.order(code: :asc)
-      children.each do |child|
-        location_to_csv child, csv
+      def location_to_csv(location, csv)
+        csv << [location.code, location.name_en, location.name_km, location.kind, location.parent_id, location.latitude, location.longitude]
+        children = location.children.order(code: :asc)
+        children.each do |child|
+          location_to_csv child, csv
+        end
       end
     end
   end

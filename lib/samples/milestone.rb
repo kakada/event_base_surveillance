@@ -28,8 +28,6 @@ module Samples
         {
           name: 'Investigation',
           fields_attributes: [
-            { name: 'Investigation conducted', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Yes' }, { name: 'No' }] },
-            { name: 'Investigation date', field_type: 'Fields::DateField' },
             { name: 'Action Taken', field_type: 'Fields::NoteField' },
             { name: 'Samples collected', field_type: 'Fields::TextField' },
             { name: 'Sample collected date', field_type: 'Fields::DateField' },
