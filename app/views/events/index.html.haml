@@ -5,12 +5,10 @@
       - if policy(Event).create?
         = link_to new_event_path, class: 'btn btn-primary' do
           %i.fas.fa-plus
-
+  = render 'filter'
   = render partial: "shared/no_data", locals: { items: @events }
 
   - if @events.present?
-    = render 'filter'
-
     %table.table.table-hover.medium-width
       %thead
         %tr
