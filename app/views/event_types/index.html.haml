@@ -13,6 +13,7 @@
       %thead
         %tr
           %th= t('event_type.name')
+          %th= t('event_type.code')
           %th= t('event_type.last_modified')
           %th= t('event_type.status')
           - if current_user.system_admin?
@@ -28,6 +29,7 @@
                   = event_type.name[0]
                 %span= event_type.name
 
+            %td= event_type.code
             %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
             %td= event_type.shared ? t('event_type.shared') : '-'
             - if current_user.system_admin?
