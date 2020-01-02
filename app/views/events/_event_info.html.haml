@@ -15,6 +15,11 @@
             - fvs.each do |fv|
               %div
                 = link_to fv.file_url.split('/').last, download_path(file: fv.file_url), target: "_blank", style:'color: #007bff'
+
+          - elsif fvs[0].field_type == 'Fields::ImageField'
+            - fvs.each do |fv|
+              .image-wrapper= image_tag fv.image_url
+
           - elsif fvs[0].field_code == 'risk_level'
             - style = fvs[0].value.present? ? "background-color: #{fvs[0].color}; color: #fff" : ''
             %span.badge{style: style}
