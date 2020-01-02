@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     get :deactivate, on: :member
   end
 
+  resource :download, only: [:show]
+
   # API
   namespace :api do
     namespace :v1 do

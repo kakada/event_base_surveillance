@@ -41,7 +41,14 @@ class EventsController < ApplicationController
   end
 
   def download
-    send_file "#{Rails.root}/public/#{params[:file]}", disposition: 'attachment'
+    events = policy_scope(Event.filter(params).includes(:field_values, :event_milestones))
+
+    if events.length > ENV['MAXIMUM_DOWNLOAD_RECORDS'].to_i then
+      flash[:alert] = t('event.file_size_is_too_big')
+      redirect_to events_url
+    else
+      send_data(EventService.new(events, current_program).export_csv, filename: 'events.csv')
+    end
   end
 
   private
