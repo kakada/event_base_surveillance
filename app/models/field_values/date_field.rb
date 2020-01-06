@@ -22,6 +22,10 @@
 
 module FieldValues
   class DateField < ::FieldValue
+    # Validation
+    validate :valid_value?
+    validate :valid_condition?
+
     def valid_value?
       iso_date = decode(value)
       time = Time.iso8601(iso_date)
@@ -32,13 +36,13 @@ module FieldValues
     end
 
     def valid_condition?
-      return true if field_validations.blank?
+      return true if field_validations.blank? || (field_validations[:from].blank? && field_validations[:to].blank?)
 
       iso_date = decode(value)
-      iso_date_from = decode(field_validations[:from])
-      iso_date_to = decode(field_validations[:to])
-
-      iso_date >= iso_date_from && iso_date <= iso_date_to
+      is_valid = iso_date >= decode(field_validations[:from]) if field_validations[:from].present?
+      is_valid = iso_date <= decode(field_validations[:to]) if field_validations[:to].present?
+      is_valid = iso_date >= decode(field_validations[:from]) && iso_date <= decode(field_validations[:to]) if field_validations[:from].present? && field_validations[:to].present?
+      is_valid
     end
 
     private
