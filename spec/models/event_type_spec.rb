@@ -20,4 +20,12 @@ RSpec.describe EventType, type: :model do
     it { expect(cdc_h5n1_upcase.save).to be_falsey }
     it { expect(gdaph_h5n1.save).to be_truthy }
   end
+
+  describe 'before create, #set_code' do
+    let(:h5n1) { create(:event_type, name: 'H5N1') }
+    let(:test_name) { create(:event_type, name: 'TeST Name') }
+
+    it { expect(h5n1.code).to eq('h5n1') }
+    it { expect(test_name.code).to eq('test_name') }
+  end
 end

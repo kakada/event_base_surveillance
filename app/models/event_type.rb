@@ -13,6 +13,7 @@
 #  default    :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  code       :string
 #
 
 class EventType < ApplicationRecord
@@ -26,6 +27,7 @@ class EventType < ApplicationRecord
   validates :color, presence: true, uniqueness: { scope: [:program_id] }
   before_validation :set_program_id
   before_validation :set_color
+  before_create :set_code
 
   # Scope
   scope :root, -> { where(default: true).first }
@@ -46,5 +48,9 @@ class EventType < ApplicationRecord
 
   def set_color
     self.color ||= "##{SecureRandom.hex(3)}"
+  end
+
+  def set_code
+    self.code = name.downcase.split(' ').join('_')
   end
 end
