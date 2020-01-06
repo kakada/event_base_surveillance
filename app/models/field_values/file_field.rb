@@ -22,5 +22,8 @@
 
 module FieldValues
   class FileField < ::FieldValue
+    def instant_value
+      file_url
+    end
   end
 end

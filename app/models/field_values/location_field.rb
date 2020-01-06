@@ -22,5 +22,8 @@
 
 module FieldValues
   class LocationField < ::FieldValue
+    def instant_value
+      "Pumi::#{self.field.code.split('_').first.titlecase}".constantize.find_by_id(value).try(:name_en)
+    end
   end
 end

@@ -40,7 +40,7 @@ module Events
       private
 
       def build_basic_attributes
-        obj = attributes.except(*except_attributes).merge(
+        attrs = attributes.except(*except_attributes).merge(
           event_type_name: event_type_name,
           program_name: program_name,
           location_name: location_name,
@@ -48,13 +48,13 @@ module Events
         )
 
         if location_latlng.present?
-          obj[:location] = {
+          attrs[:location] = {
             lat: location_latlng.try(:first),
             lon: location_latlng.try(:last)
           }
         end
 
-        obj
+        attrs
       end
 
       def build_milestone(event)
@@ -69,14 +69,12 @@ module Events
         valueable = index.zero? ? self : event_milestones.select { |em| em.milestone_id == milestone.id }.first
         return { 'conducted_at': nil } if valueable.nil?
 
-        obj = {}
-        valueable.field_values.includes(:field).map do |fv|
-          obj[fv.field.code] = fv.value || fv.values || fv.image_url || fv.file_url
-          obj[fv.field.code] = Time.parse(fv.value) if %w[conducted_at event_date report_date].include? fv.field.code
-          obj[fv.field.code] = "Pumi::#{fv.field.code.split('_').first.titlecase}".constantize.find_by_id(fv.value).try(:name_en) if %w[province_id district_id commune_id village_id].include? fv.field.code
+        attrs = {}
+        valueable.field_values.each do |fv|
+          attrs[fv.field_code] = fv.instant_value
         end
 
-        valueable.attributes.except(*except_attributes).merge(obj)
+        valueable.attributes.except(*except_attributes).merge(attrs)
       end
 
       def except_attributes
