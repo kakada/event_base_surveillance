@@ -1,19 +1,10 @@
-- field_name = field.name.downcase
-- error_msg = main_object.errors["#{field_name}"]
+.fields
+  = f.label field.name do
+    = field.name.upcase_first
+    - if field.required?
+      %abbr{:title => "required"} *
 
-%div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
-  = f.label field_name
-  = f.hidden_field :field_code, value: field.code
-  = f.hidden_field :field_id, value: field.id
-  = f.file_field :file, class: 'form-control file-input'
-
-  - if f.object.file.present?
-    .flex-row
-      = f.hidden_field :_destroy, class: 'destroy'
-      = link_to '#', class: "remove-file", style: f.object.file? ? '' : 'display: none' do
-        %i.far.fa-trash-alt{style: 'color: red; margin-right: 5px'}
-
-      %small.form-text.text-muted= f.object.file_url.split('/').last
-
-  - if error_msg.present?
-    .invalid-feedback= error_msg.join('; ')
+  - obj = @event.field_values.select{ |a| a.field_id==field.id } || f.object.field_values.new
+  = f.fields_for :field_values, obj do |builder|
+    = render 'field_value_fields', f: builder, option: { field: field, main_object: @event }
+  = link_to_add_fields "+ Add File", f, :field_values, { field: field, main_object: @event }

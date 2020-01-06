@@ -10,12 +10,7 @@
           = render "events/fields/#{field.code}", field: field, f: builder, main_object: @event
 
       - elsif field.field_type == 'Fields::FileField'
-        .fields
-          = f.label field.name
-          - obj = @event.field_values.select{ |a| a.field_id==field.id } || f.object.field_values.new
-          = f.fields_for :field_values, obj do |builder|
-            = render 'field_value_fields', f: builder, option: { field: field, main_object: @event }
-          = link_to_add_fields "+ Add File", f, :field_values, { field: field, main_object: @event }
+        = render "events/fields/#{field.kind}", field: field, f: f
 
       - else
         = f.fields_for :field_values, obj do |builder|

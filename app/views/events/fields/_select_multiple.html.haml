@@ -2,9 +2,7 @@
 - error_msg = main_object.errors["#{field_name}"]
 
 %div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
-  = f.label field_name
-  = f.hidden_field :field_code, value: field.code
-  = f.hidden_field :field_id, value: field.id
+  = render 'events/fields/label_name', f: f, field_name: field_name, field: field
   = f.collection_select :values, field.field_options, :name, :name, {}, { "data-live-search" => "true", :multiple => "multiple", class: ['form-control selectpicker', ('is-invalid' if error_msg.present?)]}
 
   - if error_msg.present?
