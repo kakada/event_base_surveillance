@@ -46,6 +46,10 @@ class FieldValue < ApplicationRecord
   # History
   audited associated_with: :valueable
 
+  def instant_value
+    value
+  end
+
   def valid_value?
     true
   end
@@ -61,6 +65,8 @@ class FieldValue < ApplicationRecord
   end
 
   def set_location_value
+    return if Field.roots.pluck(:code).include? field_code
+
     province = Pumi::Province.find_by_id(properties[:province_id]) if properties[:province_id].present?
     district = Pumi::District.find_by_id(properties[:district_id]) if province && properties[:district_id].present?
     commune  = Pumi::Commune.find_by_id(properties[:commune_id]) if district && properties[:commune_id].present?

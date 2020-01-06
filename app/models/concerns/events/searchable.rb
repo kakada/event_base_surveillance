@@ -18,16 +18,10 @@ module Events
       def self.mappings_hash(program)
         properties = {}
         program.milestones.each do |milestone|
-          milestone_name = milestone.name.downcase.split(' ').join('_')
+          milestone_name = milestone.format_name
           properties[milestone_name] = { type: 'object', properties: { created_at: { type: 'date' }, updated_at: { type: 'date' } } }
 
-          unless milestone.is_default?
-            properties[milestone_name][:properties][:conducted_at] = { type: 'date' }
-            next
-          end
-
-          fields = Field.roots.select { |field| ['Fields::IntegerField', 'Fields::DateField', 'Fields::DateTimeField'].include? field[:field_type] }
-          fields.each do |field|
+          milestone.fields.each do |field|
             properties[milestone_name][:properties][field[:code]] = { type: field[:field_type].constantize.es_datatype }
           end
         end
@@ -46,7 +40,7 @@ module Events
       private
 
       def build_basic_attributes
-        obj = attributes.except(*except_attributes).merge(
+        attrs = attributes.except(*except_attributes).merge(
           event_type_name: event_type_name,
           program_name: program_name,
           location_name: location_name,
@@ -54,34 +48,33 @@ module Events
         )
 
         if location_latlng.present?
-          obj[:location] = {
+          attrs[:location] = {
             lat: location_latlng.try(:first),
             lon: location_latlng.try(:last)
           }
         end
 
-        obj
+        attrs
       end
 
       def build_milestone(event)
         program.milestones.each_with_index do |ms, index|
-          milestone_name = ms.name.downcase.split(' ').join('_')
-          event[:milestone][milestone_name] = {}
-          valueable = index.zero? ? self : event_milestones.select { |em| em.milestone_id == ms.id }.first
-
-          next if valueable.nil?
-
-          obj = {}
-          valueable.field_values.includes(:field).map do |fv|
-            obj[fv.field.code] = fv.value || fv.values || fv.image_url || fv.file_url
-            obj[fv.field.code] = Time.parse(fv.value) if %w[conducted_at event_date report_date].include? fv.field.code
-            obj[fv.field.code] = "Pumi::#{fv.field.code.split('_').first.titlecase}".constantize.find_by_id(fv.value).name_en if %w[province_id district_id commune_id village_id].include? fv.field.code
-          end
-
-          event[:milestone][milestone_name] = valueable.attributes.except(*except_attributes).merge(obj)
+          event[:milestone][ms.format_name] = build_milestone_attr(ms, index)
         end
 
         event
+      end
+
+      def build_milestone_attr(milestone, index)
+        valueable = index.zero? ? self : event_milestones.select { |em| em.milestone_id == milestone.id }.first
+        return { 'conducted_at': nil } if valueable.nil?
+
+        attrs = {}
+        valueable.field_values.each do |fv|
+          attrs[fv.field_code] = fv.instant_value
+        end
+
+        valueable.attributes.except(*except_attributes).merge(attrs)
       end
 
       def except_attributes

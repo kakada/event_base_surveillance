@@ -22,5 +22,8 @@
 
 module FieldValues
   class ImageField < ::FieldValue
+    def instant_value
+      image_url
+    end
   end
 end
