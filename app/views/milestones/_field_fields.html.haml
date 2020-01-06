@@ -23,13 +23,18 @@
 
             %button.btn.btn-outline-primary.btn-add-field{type: 'button'}= t('milestone.add_field')
 
-        .action.flex-column
+        .action.flex-column{style: ''}
           = f.hidden_field :_destroy
-          %a.remove_fields.pointer
-            %i.fas.fa-trash-alt.icon-delete
-
-          %a.validation-trigger.pointer
-            %i.fas.fa-info.icon-gray
+          .btn-group
+            %a.pointer{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", style: 'width: 100%;'}
+              %i.fas.fa-ellipsis-v.icon-gray
+            .dropdown-menu
+              %button.dropdown-item.remove_fields{type: 'button'}
+                %i.fas.fa-trash-alt.icon-delete
+                %span Remove
+              %button.dropdown-item.validation-trigger{type: 'button'}
+                %i.fas.fa-filter.icon-gray
+                %span Validation
 
     = render 'kinds'
 

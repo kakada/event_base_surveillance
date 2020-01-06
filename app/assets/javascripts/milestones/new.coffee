@@ -22,7 +22,7 @@ EBS.MilestonesNew = do ->
     onClickRequireCheckbox()
 
   onClickRequireCheckbox = ->
-    $(document).off 'click'
+    $(document).off 'click', '.field-required'
     $(document).on 'click', '.field-required', (e)->
       $(this).parents('.fieldset').find('.abbr-required').toggleClass('hidden')
 
