@@ -1,0 +1,14 @@
+.col-auto.form-group
+  #filter-date.input-group
+    %input.form-control.display-date.pointer{type: 'text', readonly: true, placeholder: t('event.filter_by_date')}
+
+    %a.input-group-append.pointer
+      .input-group-text
+        %i.far.fa-calendar
+
+  .hidden-input.hidden
+    %input.start-date-input-backup{ type: 'text', name: 'start_date', value: params[:start_date] }
+    %input.number-input-backup{ type: 'number', name: 'number', value: params[:number] }
+    %input.date-type-input-backup{ type: 'text', name: 'date_type', value: params[:date_type] }
+
+    = filter_date_popover

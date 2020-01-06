@@ -1,0 +1,32 @@
+#popover-content.flex-column
+  %ul#myTab.nav.nav-tabs{role: 'tablist'}
+    %li.nav-item
+      %a#absolute-tab.nav-link.btn.btn-link{'aria-controls' => 'absolute', 'aria-selected' => 'true', 'data-toggle' => 'tab', href: '#absolute', role: 'tab'}= t('event.absolute')
+    %li.nav-item
+      %a#relative-tab.nav-link.btn.btn-link{'aria-controls' => 'relative', 'aria-selected' => 'false', 'data-toggle' => 'tab', href: '#relative', role: 'tab'}= t('event.relative')
+
+  .tab-content
+    #absolute.tab-pane.fade{'aria-labelledby' => 'absolute-tab', role: 'tabpanel'}
+      #datepicker
+      .flex-row.action
+        %button.btn-reset.btn.btn-outline-secondary= t('shared.reset')
+
+    #relative.tab-pane.fade{"aria-labelledby" => "relative-tab", role: "tabpanel"}
+      .flex-row.inputs-wrapper
+        .flex1.form-group.number-input-wrapper
+          %input.number-input.form-control{ type: 'number' }
+          .error-message.invalid-feedback= t('event.must_be_bigger_than_zero')
+
+        .flex1.form-group
+          %select.date-type-input.form-control
+            - filter_date_options.each do |option|
+              %option{value: option[:value]}= option[:label]
+
+      .flex-row.start-date-wrapper
+        %label= t('event.start_date')
+        .flex1
+          %input.form-control.start-date-input{readonly: true}
+
+      .flex-row.action
+        %button.btn-reset.btn.btn-outline-secondary= t('shared.reset')
+        %button.btn-done.btn.btn-outline-primary= t('shared.done')

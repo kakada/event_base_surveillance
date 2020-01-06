@@ -61,6 +61,7 @@ class Event < ApplicationRecord
     arr = keywords(params[:keyword])
     scope = all
     scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', arr[0], arr[1]) if arr.present?
+    scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value >= ?', 'event_date', params[:start_date]) if params[:start_date].present?
     scope
   end
 
