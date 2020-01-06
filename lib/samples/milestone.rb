@@ -4,40 +4,42 @@ module Samples
   class Milestone
     def self.load
       milestones = [
-        # {
-        #   name: 'New',
-        #   fields_attributes: [
-        #     { name: "Source of information", field_type: "select_one", field_options_attributes: [{name: "Hotline"}, {name: "RRT"}, {name: "Media monitoring"}, {name: "CamEWARN"}, {name: "CamLIS"}, {name: "NGO Partners"}, {name: "Other"}]},
-        #     { name: "Additional information", field_type: "text"},
-        #     { name: "WHO notified date", field_type: "date"},
-        #     { name: "Status of report", field_type: "select_one", field_options_attributes: [{ name: "For verification by RRT" }, { name: "Verfified (confirmed)" }, { name: "False report" }, { name: "Refer to other agency" }]},
-        #     { name: "Verification Date", field_type: "date"}
-        #   ]
-        # },
+        {
+          name: 'Verification',
+          fields_attributes: [
+            { name: 'Status', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Positive' }, { name: 'Negative' }] },
+            { name: 'Summary', field_type: 'Fields::NoteField' },
+            { name: 'Report Attachment', field_type: 'Fields::FileField' },
+            { name: 'Conducted By (Lead)', field_type: 'Fields::TextField' },
+            { name: 'Attendee List', field_type: 'Fields::TextField' }
+          ]
+        },
         {
           name: 'Risk Assessment',
           fields_attributes: [
-            { name: '# of Male', field_type: 'Fields::IntegerField' },
-            { name: '# of Female', field_type: 'Fields::IntegerField' },
-            { name: '# of Hospitalized', field_type: 'Fields::IntegerField' },
-            { name: '# of Recovered', field_type: 'Fields::IntegerField' },
-            { name: '# of Death', field_type: 'Fields::IntegerField' },
-            { name: 'Summary', field_type: 'Fields::NoteField' },
-            { name: 'Risk Assessment conducted', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Yes' }, { name: 'No' }] },
             { name: 'Risk Level', field_type: 'Fields::MappingField', color_required: true, mapping_field: 'risk_level', mapping_field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Low', color: '#51b8b8' }, { name: 'Moderate', color: '#51b865' }, { name: 'High', color: '#d68bb2' }, { name: 'Very High', color: '#e81c2a' }] },
-            { name: 'Risk assessment date', field_type: 'Fields::DateField' }
+            { name: 'Risk Assessment conducted', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Yes' }, { name: 'No' }] },
+            { name: 'Summary', field_type: 'Fields::NoteField' },
+            { name: 'Summary Report Attachment', field_type: 'Fields::FileField' },
+            { name: 'Conducted By (Lead)', field_type: 'Fields::TextField' },
+            { name: 'Attendee List', field_type: 'Fields::TextField' }
           ]
         },
         {
           name: 'Investigation',
           fields_attributes: [
-            { name: 'Investigation conducted', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Yes' }, { name: 'No' }] },
-            { name: 'Investigation date', field_type: 'Fields::DateField' },
             { name: 'Action Taken', field_type: 'Fields::NoteField' },
             { name: 'Samples collected', field_type: 'Fields::TextField' },
             { name: 'Sample collected date', field_type: 'Fields::DateField' },
             { name: 'Laboratory Results', field_type: 'Fields::TextField' },
             { name: 'Status of event', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Follow up' }, { name: 'Closed' }] }
+          ]
+        },
+        {
+          name: 'Public Communication',
+          fields_attributes: [
+            { name: 'Risk Assessment conducted', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Press Release' }, { name: 'Web site' }, { name: 'Social Media' }, { name: 'News' }, { name: 'TV/Radio' }, { name: 'Other' }] },
+            { name: 'Conducted By (Lead)', field_type: 'Fields::TextField' }
           ]
         },
         {
@@ -50,11 +52,11 @@ module Samples
         }
       ]
 
-      program_cdc = ::Program.find_by name: 'CDC'
-
-      milestones.each do |milestone|
-        milestone[:creator_id] = program_cdc.creator_id
-        program_cdc.milestones.create(milestone)
+      ::Program.all.each do |program|
+        milestones.each do |milestone|
+          milestone[:creator_id] = program.creator_id
+          program.milestones.create(milestone)
+        end
       end
     end
   end

@@ -19,6 +19,12 @@ module Samples
           name: 'ប៉េសជ្រូកអាហ្រ្វិក',
           user_id: ::User.find_by(email: 'gdaph@program.org').id,
           color: "##{SecureRandom.hex(3)}"
+        },
+        {
+          name: 'H1N1',
+          user_id: ::User.find_by(email: 'gdaph@program.org').id,
+          color: "##{SecureRandom.hex(3)}",
+          shared: true
         }
       ]
 
