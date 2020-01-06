@@ -95,6 +95,14 @@
     width: 200px;
     transform: translate(-50%, -50%);
   }
+
+  .image-wrapper {
+    width: 200px;
+
+    img {
+      max-width: 100%;
+    }
+  }
 }
 
 #events-index {
