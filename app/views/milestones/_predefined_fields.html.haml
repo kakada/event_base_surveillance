@@ -12,6 +12,7 @@
             %button.btn.move{type: :button, style: 'cursor: auto'}
 
             .wrapper.flex-row-vertical-center
+              %abbr{:title => "required", class: ('hidden' if !obj[:required])} *
               %input.field-type{type: :hidden, value: obj[:field_type]}
               .form-control.field-name.as-title.flex-row-vertical-center= obj[:name]
 

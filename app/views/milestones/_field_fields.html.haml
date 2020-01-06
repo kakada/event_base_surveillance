@@ -9,7 +9,9 @@
           %button.btn.collapse-trigger{type: :button}
             %i.fas.fa-caret-right
 
-          .flex1
+          .flex1.flex-row
+            %abbr.abbr-required{:title => "required", class: ('hidden' if !f.object.required?)} *
+
             = f.hidden_field :field_type, class: 'field-type', 'data-field' => f.object.to_json
             = f.text_field :name, placeholder: "field_name", class: 'form-control field-name'
 
