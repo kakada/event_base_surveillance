@@ -13,8 +13,9 @@
     = f.hidden_field :image_cache
 
     = f.hidden_field :_destroy
-    = link_to '#', class: "remove-image", style: f.object.image? ? '' : 'display: none' do
-      %i.fa.fa-times-circle
+    - if !field.required?
+      = link_to '#', class: "remove-image", style: f.object.image? ? '' : 'display: none' do
+        %i.fa.fa-times-circle
 
   - if error_msg.present?
     .invalid-feedback= error_msg.join('; ')

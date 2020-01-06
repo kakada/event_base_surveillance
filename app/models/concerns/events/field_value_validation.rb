@@ -15,7 +15,13 @@ module Events
           next unless field.required?
 
           fv = field_values.select { |field_value| field_value.field_id == field.id }.first
-          errors.add field.name.downcase, 'cannot be blank' if !fv || (fv.value.blank? && fv.values.blank?)
+
+          if field.field_type == 'Fields::ImageField'
+            ff = self.field_values.find_by(field_id: field.id)
+            next if (ff.present? && ff.persisted?) || (fv.present? && fv.image_url.present?)
+          end
+
+          errors.add field.name.downcase, 'cannot be blank' if !fv || fv.instant_value.blank?
         end
       end
 
