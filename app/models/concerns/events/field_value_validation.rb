@@ -16,12 +16,12 @@ module Events
 
           fv = field_values.select { |field_value| field_value.field_id == field.id }.first
 
-          if field.field_type == 'Fields::ImageField'
-            ff = self.field_values.find_by(field_id: field.id)
-            next if (ff.present? && ff.persisted?) || (fv.present? && fv.image_url.present?)
+          if %w[Fields::ImageField Fields::FileField].include? field.field_type
+            db_fv = field_values.find_by(field_id: field.id)
+            next if db_fv.present? || (fv && (fv.file_url.present? || fv.image_url.present?))
           end
 
-          errors.add field.name.downcase, 'cannot be blank' if !fv || fv.instant_value.blank?
+          errors.add field.name.downcase, 'cannot be blank' if !fv || (fv.value.blank? && fv.values.blank?)
         end
       end
 

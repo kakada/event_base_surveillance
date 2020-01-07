@@ -23,6 +23,8 @@
 module FieldValues
   class DateTimeField < DateField
     def instant_value
+      return unless value
+
       Time.parse(value)
     end
   end

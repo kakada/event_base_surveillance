@@ -43,7 +43,7 @@ class EventsController < ApplicationController
   def download
     events = policy_scope(Event.filter(params).includes(:field_values, :event_milestones))
 
-    if events.length > ENV['MAXIMUM_DOWNLOAD_RECORDS'].to_i then
+    if events.length > ENV['MAXIMUM_DOWNLOAD_RECORDS'].to_i
       flash[:alert] = t('event.file_size_is_too_big')
       redirect_to events_url
     else

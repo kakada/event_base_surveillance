@@ -22,8 +22,5 @@
 
 module FieldValues
   class NoteField < ::FieldValue
-    def instant_value
-      values
-    end
   end
 end

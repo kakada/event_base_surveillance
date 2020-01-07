@@ -9,6 +9,7 @@ EBS.EventsEvent_milestonesNew = do ->
     initFirstFieldValueFile()
     initDatePicker()
     initDateTimePicker()
+    handleDisplayBtnRemoveFile()
 
   initDatePicker = ->
     $.fn.datepicker.defaults.format = "yyyy-mm-dd"
@@ -32,10 +33,16 @@ EBS.EventsEvent_milestonesNew = do ->
     regexp = new RegExp($(dom).data('id'), 'g')
     $(dom).before($(dom).data('fields').replace(regexp, time))
 
+  handleDisplayBtnRemoveFile = ->
+    parent = $('.fields[data-field-required]')
+    if parent.find('.remove-file:visible').length <= 1
+      parent.find('.remove-file').hide()
+
   onClickRemoveFile = ->
     $('.remove-file').off('click')
     $('.remove-file').on 'click', (event)->
       removeFile(event)
+      handleDisplayBtnRemoveFile()
       event.preventDefault()
 
   removeFile = (event)->
