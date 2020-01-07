@@ -75,16 +75,6 @@ services:
     ports:
       - 9200:9200
 
-  kibana:
-    image: kibana:7.4.1
-    depends_on:
-      - elasticsearch
-    ports:
-      - 5601:5601
-    volumes:
-      - ./elastic/kibana.yml:/usr/share/kibana/config/kibana.yml:ro # this file is a pair with elasticsearch and create-certs compose
-      - certs:$CERTS_DIR
-
   ngrok:
     image: wernight/ngrok
     ports:
