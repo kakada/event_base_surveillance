@@ -22,5 +22,10 @@
 
 module FieldValues
   class SelectMultipleField < ::FieldValue
+    def instant_value
+      return if values.blank?
+
+      values.join(', ')
+    end
   end
 end

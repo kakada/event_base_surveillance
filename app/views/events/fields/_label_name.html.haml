@@ -1,0 +1,7 @@
+= f.label field_name do
+  = field_name.upcase_first
+  - if field.required?
+    %abbr{:title => "required"} *
+
+= f.hidden_field :field_code, value: field.code
+= f.hidden_field :field_id, value: field.id

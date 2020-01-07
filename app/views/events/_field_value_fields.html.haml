@@ -10,10 +10,10 @@
     .flex-row
       = f.hidden_field :_destroy, class: 'destroy'
       = link_to '#', class: "remove-file", style: f.object.file? ? '' : 'display: none' do
-        %i.far.fa-trash-alt{style: 'color: red; margin-right: 5px'}
+        %i.far.fa-trash-alt
 
       %small.form-text.text-muted
-        = link_to f.object.file_url.split('/').last, download_events_path(file: f.object.file_url), target: "_blank", style:'color: #007bff'
+        = link_to f.object.file_url.split('/').last, download_path(file: f.object.file_url), target: "_blank", style:'color: #007bff'
 
   - if error_msg.present?
     .invalid-feedback= error_msg.join('; ')

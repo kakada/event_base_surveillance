@@ -19,6 +19,12 @@ EBS.MilestonesNew = do ->
     onClickCollapseTrigger()
     onClickBtnAdd()
     onClickValidationTriger()
+    onClickRequireCheckbox()
+
+  onClickRequireCheckbox = ->
+    $(document).off 'click', '.field-required'
+    $(document).on 'click', '.field-required', (e)->
+      $(this).parents('.fieldset').find('.abbr-required').toggleClass('hidden')
 
   initView = ->
     $('input.field-type').each (index, dom) ->

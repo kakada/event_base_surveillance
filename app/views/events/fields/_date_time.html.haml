@@ -2,9 +2,7 @@
 - error_msg = main_object.errors["#{field_name}"]
 
 .form-group{ class: ('form-group-invalid' if error_msg.present?) }
-  = f.label field_name
-  = f.hidden_field :field_code, value: field.code
-  = f.hidden_field :field_id, value: field.id
+  = render 'events/fields/label_name', f: f, field_name: field_name, field: field
 
   .input-group{"data-target-input" => "nearest"}
     - id = "event_field_values_attributes_#{f.index}_value"

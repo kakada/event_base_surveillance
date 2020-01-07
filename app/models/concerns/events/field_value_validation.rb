@@ -14,8 +14,14 @@ module Events
         program.present? && milestone&.fields&.each do |field|
           next unless field.required?
 
-          obj = field_values.select { |fv| fv.field_id == field.id }.first
-          errors.add field.name.downcase, 'cannot be blank' if !obj || obj[:value].blank?
+          fv = field_values.select { |field_value| field_value.field_id == field.id }.first
+
+          if %w[Fields::ImageField Fields::FileField].include? field.field_type
+            db_fv = field_values.find_by(field_id: field.id)
+            next if db_fv.present? || (fv && (fv.file_url.present? || fv.image_url.present?))
+          end
+
+          errors.add field.name.downcase, 'cannot be blank' if !fv || (fv.value.blank? && fv.values.blank?)
         end
       end
 
