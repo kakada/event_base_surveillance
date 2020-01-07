@@ -1,0 +1,60 @@
+%pre
+  %code
+    :preserve
+      PUT    /api/v1/event_milestones/:id
+
+%p= t('client_app.request')
+%pre
+  %code
+    :preserve
+      ACTION PUT or PATCH
+      URL    https://[Base_Url]/api/v1/event_milestones/:id
+      HEADER Authorization: Token=[your_token_goes_here]
+             Content-Type: application/json
+      BODY
+          { event_milestone:
+              {
+                  milestone_id: 1
+                  event_uuid: 'ba233755',
+                  field_values_attributes: [
+                      {
+                          field_id: 30,
+                          field_code: 'conducted_at',
+                          value: "2020-01-07 15:29"
+                      },
+                      ...
+                  ]
+              }
+          }
+
+
+%p= t('client_app.response')
+%pre
+  %code
+    :preserve
+      {
+          id: 163,
+          event_id: "ba233755",
+          submitter_id: 2,
+          conducted_at: "2020-01-07 15:29",
+          created_at: "2020-01-07T08:30:10.574Z",
+          updated_at: "2020-01-07T08:30:10.574Z",
+          milestone: {
+              id: 3,
+              name: "Verification"
+          },
+          field_values: [
+              {
+                  id: 1023,
+                  field_id: 30,
+                  value: "2020-01-07 15:29",
+                  values: null,
+                  properties: {},
+                  image: {url: null},
+                  file: {url: null},
+                  field: {id: 30, name: "Conducted at"}
+              },
+              ...
+          ]
+      }
+%br

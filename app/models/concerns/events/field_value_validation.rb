@@ -21,7 +21,7 @@ module Events
             next if db_fv.present? || (fv && (fv.file_url.present? || fv.image_url.present?))
           end
 
-          errors.add field.name.downcase, 'cannot be blank' if !fv || (fv.value.blank? && fv.values.blank?)
+          errors.add field.name.downcase, I18n.t('shared.cannot_be_blank') if !fv || (fv.value.blank? && fv.values.blank?)
         end
       end
 
@@ -30,9 +30,9 @@ module Events
           field_value = "FieldValues::#{fv.field_type.split('::').last}".constantize.new(fv.attributes)
 
           if field_value.valid_value?
-            errors.add fv.field_name.downcase, "the value should be from #{fv.field_validations[:from]} to #{fv.field_validations[:to]}" unless field_value.valid_condition?
+            errors.add fv.field_name.downcase, I18n.t('shared.value_should_be_from_to', from: fv.field_validations[:from], to: fv.field_validations[:to]) unless field_value.valid_condition?
           else
-            errors.add fv.field_name.downcase, 'is invalid value'
+            errors.add fv.field_name.downcase, I18n.t('shared.is_invalid_value')
           end
         end
       end

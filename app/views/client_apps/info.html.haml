@@ -4,7 +4,6 @@
       %h3= t('sidebar.api_and_services')
       = link_to t('shared.back'), client_apps_path, class: 'btn btn-primary'
 
-
   .medium-width
     %p= t('client_app.you_can_link_to_ebs')
     %h5= t('client_app.api')
@@ -60,12 +59,16 @@
           }
 
     %h5= t('client_app.other_endpoints')
-    %pre
-      %code
-        :preserve
-          GET    /api/v1/event_types
-          GET    /api/v1/events
-          POST   /api/v1/events
-          GET    /api/v1/events/:id
-          PATCH  /api/v1/events/:id
-          PUT    /api/v1/events/:id
+
+    %h6= t('client_app.milestones')
+    = render 'guideline_milestones'
+
+    %h6= t('client_app.events')
+    = render 'guideline_events'
+    = render 'guideline_event'
+    = render 'guideline_post_event'
+    = render 'guideline_put_event'
+
+    %h6= t('client_app.event_milestone')
+    = render 'guideline_post_event_milestone'
+    = render 'guideline_put_event_milestone'

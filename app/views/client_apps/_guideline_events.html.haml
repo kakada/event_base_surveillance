@@ -1,0 +1,68 @@
+%pre
+  %code
+    :preserve
+      GET    /api/v1/events
+
+%p= t('client_app.request')
+%pre
+  %code
+    curl -X GET https://[Base_Url]/api/v1/events?format=json -H "Authorization: Token [your_token_goes_here]"
+
+%p= t('client_app.response')
+%pre
+  %code
+    :preserve
+      {
+          "events": [
+              {
+                  "id": "ba233755",
+                  "location_name": "កំពង់ឆ្នាំង",
+                  "event_milestones": [],
+                  "event_type": {
+                      "id": 3,
+                      "name": "Influenza"
+                  },
+                  "program": {
+                      "id": 1,
+                      "name": "CDC"
+                  },
+                  "field_values": [
+                      {
+                          "id": 1012,
+                          "field_id": 1,
+                          "value": "1",
+                          "values": null,
+                          "properties": {},
+                          "image": {
+                              "url": null
+                          },
+                          "file": {
+                              "url": null
+                          },
+                          "field": {
+                              "id": 1,
+                              "name": "Number of case"
+                          }
+                      },
+                      ...
+                  ]
+              },
+              ...
+          ],
+          "meta": {
+              "vars": {...},
+              "count": 25,
+              "items": 20,
+              "outset": 0,
+              "page": 1,
+              "last": 2,
+              "pages": 2,
+              "offset": 0,
+              "from": 1,
+              "to": 20,
+              "prev": null,
+              "next": 2
+          }
+      }
+
+%br

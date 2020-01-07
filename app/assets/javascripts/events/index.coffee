@@ -75,10 +75,13 @@ EBS.EventsIndex = do ->
 
   formatDate = (date)->
     d = new Date(date)
-    day = d.getDate()
-    month = d.toLocaleDateString("en-US", { month: 'numeric' })
+    day = format2Digit(d.getDate())
+    month = format2Digit(d.toLocaleDateString("en-US", { month: 'numeric' }))
     year = d.getFullYear()
     return year + '-' + month + '-' + day
+
+  format2Digit = (num) ->
+    ('0' + num).slice(-2)
 
   assignBackupValue = (num)->
     dateType = $('.date-type-input').val()

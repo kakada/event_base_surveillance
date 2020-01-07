@@ -1,0 +1,30 @@
+%pre
+  %code
+    :preserve
+      GET    /api/v1/milestones
+
+%p= t('client_app.request')
+%pre
+  %code
+    curl -X GET https://[Base_Url]/api/v1/milestones?format=json -H "Authorization: Token [your_token_goes_here]"
+
+%p= t('client_app.response')
+%pre
+  %code
+    :preserve
+      [
+          {
+              "id": 1,
+              "program_id": 1,
+              "name": "New",
+              "display_order": 1,
+              "is_default": true,
+              "created_at": "2020-01-06T08:25:13.303Z",
+              "updated_at": "2020-01-06T08:28:13.479Z",
+              "final": false,
+              "creator_id": 2
+          },
+          ...
+      ]
+
+%br
