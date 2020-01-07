@@ -1,0 +1,67 @@
+%pre
+  %code
+    :preserve
+      POST    /api/v1/events
+
+%p= t('client_app.request')
+%pre
+  %code
+    :preserve
+      ACTION POST
+      URL    https://[Base_Url]/api/v1/events
+      HEADER Authorization: Token=[your_token_goes_here]
+             Content-Type: application/json
+      BODY
+          { event:
+              {
+                  event_type_id: 1,
+                  field_values_attributes: [
+                      {
+                          field_id: 1,
+                          field_code: 'number_of_case',
+                          value: '1'
+                      },
+                      ...
+                  ]
+              }
+          }
+
+
+%p= t('client_app.response')
+%pre
+  %code
+    :preserve
+      {
+          "id": "ba233755",
+          "location_name": "កំពង់ឆ្នាំង",
+          "event_milestones": [],
+          "event_type": {
+              "id": 3,
+              "name": "Influenza"
+          },
+          "program": {
+              "id": 1,
+              "name": "CDC"
+          },
+          "field_values": [
+              {
+                  "id": 1012,
+                  "field_id": 1,
+                  "value": "1",
+                  "values": null,
+                  "properties": {},
+                  "image": {
+                      "url": null
+                  },
+                  "file": {
+                      "url": null
+                  },
+                  "field": {
+                      "id": 1,
+                      "name": "Number of case"
+                  }
+              },
+              ...
+          ]
+      }
+%br

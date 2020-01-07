@@ -34,3 +34,5 @@ en:
     stand_on_own_server_and_send_request: 'By standing on your server, to test it use this command'
     this_is_your_request_and_result: 'In this example, there is a request from client server to EBS server in order to get event types data. And it turns the following result'
     other_endpoints: 'Other Endpoints'
+    request: 'Request'
+    response: 'Response'
