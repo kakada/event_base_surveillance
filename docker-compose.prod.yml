@@ -1,6 +1,7 @@
 version: '3'
 
 volumes:
+  db:
   bundle:
   elastic:
   certs:
@@ -9,26 +10,32 @@ services:
   db:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
 
-  web: &rails
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
     volumes:
-      - .:/app
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    depends_on:
+      - app
+
+  app: &rails
+    image: ilabsea/event_base_surveillance:0.1
+    restart: unless-stopped
+    volumes:
       - bundle:/usr/local/bundle
       - certs:$CERTS_DIR
     depends_on:
       - db
       - redis
       - elasticsearch
-    tmpfs: /app/tmp
-    ports:
-      - "3000:3000"
-    env_file: app.env
     environment:
+      - LANG=C.UTF-8
+      - DATABASE_URL=postgres://postgres@db/ebs_production
+      - RAILS_SERVE_STATIC_FILES=true
+      - REDIS_URL=redis://redis:6379
       - ELASTICSEARCH_URL=https://elasticsearch:9200
       - ELASTICSEARCH_REQUEST_TIMEOUT=300 #seconds
       - ELASTIC_USER=elastic
@@ -36,8 +43,26 @@ services:
       - ELASTIC_COMPRESSION=true
       - ELASTIC_CA_FILE=$CERTS_DIR/ca/ca.crt
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    tty: true
-    stdin_open: true
+      - SETTINGS__SMTP__ADDRESS=smtp.mandrillapp.com
+      - SETTINGS__SMTP__DOMAIN=domain
+      - SETTINGS__SMTP__USER_NAME=email
+      - SETTINGS__SMTP__PASSWORD=api-key
+      - SETTINGS__SMTP__HOST=localhost:3000
+      - SETTINGS__SMTP__DEFAULT_FROM=notifications@example.com
+      - TELEGRAM_TOKEN=your_token
+      - TELEGRAM_USERNAME=your_bot_name
+      - ENABLE_EVENT_WORKER=true
+      - VIRTUAL_HOST=example.com
+      - VIRTUAL_PORT=80
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '5'
+    command:
+    - /bin/sh
+    - -c
+    - bundle exec puma -e production -b tcp://0.0.0.0:80
 
   sidekiq:
     <<: *rails
@@ -74,10 +99,3 @@ services:
       retries: 5
     ports:
       - 9200:9200
-
-  ngrok:
-    image: wernight/ngrok
-    ports:
-      - 4040:4040
-    environment:
-      NGROK_PORT: 'web:3000'
