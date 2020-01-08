@@ -1,1 +1,14 @@
 km:
+  shared:
+    no_data_found: 'រកមិនឃើញទិន្នន័យ'
+    use_plus_to_add_item: 'សូមប្រើប៊ូតុង (+) ដើម្បីបង្កើតទិន្ន័យ!'
+    edit: 'កែសម្រួល'
+    delete: 'លុប'
+    cancel: 'បោះបង់'
+    save: 'រក្សាទុក'
+    back: 'ថយក្រោយ'
+    done: 'រួចរាល់'
+    reset: 'កំណត់ឡើងវិញ'
+    cannot_be_blank: 'មិនអាចទទេ'
+    is_invalid_value: 'គឺជាតម្លៃមិនត្រឹមត្រូវ'
+    value_should_be_from_to: "តម្លៃគួរតែចាប់បី %{from} ដល់ %{to}"

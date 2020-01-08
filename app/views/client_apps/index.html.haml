@@ -23,6 +23,8 @@
           %th= t('client_app.access_token')
           %th= t('client_app.permissions')
           %th= t('client_app.status')
+          - if current_user.system_admin?
+            %th= t('client_app.program')
           %th
       %tbody
         - @client_apps.each do |client_app|
@@ -38,6 +40,8 @@
             %td= client_app.permissions.join(', ')
             %td{ class: ['status', ('active' if client_app.active?)] }
               = client_app.active? ? t('client_app.active') : t('client_app.inactive')
+            - if current_user.system_admin?
+              %td= client_app.program_name
             %td
               - if policy(client_app).update?
                 .btn-group

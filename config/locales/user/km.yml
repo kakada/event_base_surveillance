@@ -1,1 +1,13 @@
 km:
+  user:
+    users: 'អ្នកប្រើប្រាស់'
+    email: 'អ៊ីមែល'
+    role: 'តួនាទី'
+    program: 'Program'
+    status: 'ស្ថានភាព'
+    copy_confirm_link: 'ចម្លងតំណបញ្ជាក់'
+    are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
+    copied: 'បានចំលង!'
+    new_users: 'អ្នកប្រើប្រាស់ថ្មី'
+    active: 'សកម្ម'
+    pending: 'រង់ចាំ'

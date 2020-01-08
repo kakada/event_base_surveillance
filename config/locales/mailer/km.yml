@@ -1,1 +1,6 @@
 km:
+  mailer:
+    confirmation_instruction: 'សេចក្តីណែនាំបញ្ជាក់'
+    welcome: "សូមស្វាគមន៍ %{email}!"
+    confirm_your_account_through_below_link: 'អ្នកអាចបញ្ជាក់អ៊ីមែលគណនីរបស់អ្នកតាមរយៈតំណភ្ជាប់ខាងក្រោម៖'
+    cofnirm_my_account: 'បញ្ជាក់គណនីរបស់ខ្ញុំ'

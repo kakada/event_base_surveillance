@@ -34,6 +34,9 @@ class ClientApp < ApplicationRecord
 
   default_scope { order(created_at: :asc) }
 
+  # Deligation
+  delegate :name, to: :program, prefix: :program
+
   def authorize?(action)
     return false unless active?
 

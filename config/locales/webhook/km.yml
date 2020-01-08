@@ -1,1 +1,18 @@
 km:
+  webhook:
+    webhook: 'Webhook'
+    name: 'ឈ្មោះ'
+    authentication_type: 'ប្រភេទ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ'
+    url: 'Url (HTTP post)'
+    status: 'ស្ថានភាព'
+    active: 'សកម្ម'
+    inactive: 'អសកម្ម'
+    activate: 'ធ្វើឱ្យសកម្ម'
+    deactivate: 'ធ្វើឱ្យអសកម្ម'
+    are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
+    new_webhook: 'Webhook ថ្មី'
+    edit_webhook: 'កែសម្រួល Webhook'
+    token: 'Token'
+    username: 'ឈ្មោះ​អ្នកប្រើប្រាស់'
+    password: 'ពាក្យសម្ងាត់'
+    event_types: 'ប្រភេទព្រឹត្តិការណ៍'

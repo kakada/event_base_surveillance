@@ -1,1 +1,10 @@
 km:
+  program:
+    programs: 'Programs'
+    name: 'ឈ្មោះ'
+    are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
+    new_program: 'Program ថ្មី'
+    edit_program: 'កែសម្រួល Program'
+    program_settings: 'ការកំណត់ Program'
+    telegram_notification: 'សេចក្តីជូនដំណឹងតាម Telegram'
+    language: 'ភាសា'
