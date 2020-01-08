@@ -1,1 +1,14 @@
 km:
+  event_type:
+    event_type: 'ប្រភេទព្រឹត្តិការណ៍'
+    name: 'ឈ្មោះ'
+    last_modified: 'កែប្រែចុងក្រោយ'
+    status: 'ស្ថានភាព'
+    shared: 'ចែករំលែក'
+    are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
+    shared_data: 'ចែករំលែកទិន្នន័យ'
+    unshared_data: 'មិនចែករំលែកទិន្នន័យ'
+    new_event_type: 'ប្រភេទព្រឹត្តិការណ៍ថ្មី'
+    edit_event_type: 'កែសម្រួលប្រភេទព្រឹត្តិការណ៍'
+    color: 'ពណ៌'
+    program: 'Program'

@@ -3,7 +3,7 @@ km:
     dashboard: 'តារាងសង្ខេប'
     programs: 'Programs'
     users: 'អ្នកប្រើប្រាស់'
-    event_type: 'ប្រភេទជម្ងឺ'
+    event_types: 'ប្រភេទព្រឹត្តិការណ៍'
     events: 'ព្រឹត្តិការណ៍'
     about: 'អំពីយើង'
     logout: 'ចាកចេញ'

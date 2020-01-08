@@ -16,4 +16,4 @@
       %button.btn.btn-light{type: :submit}= t('event.search')
 
     .flex1.btn-download-csv
-      = link_to t('event.download_csv'), download_events_path(keyword: params[:keyword]), target: :_blank, class: 'btn btn-outline-info'
+      = link_to t('event.download_csv'), download_events_path(keyword: params[:keyword], start_date: params[:start_date]), target: :_blank, class: 'btn btn-outline-info'
