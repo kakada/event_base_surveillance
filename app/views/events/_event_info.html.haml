@@ -6,6 +6,11 @@
     %span.type= "#{t('event.location')}:"
     %span.value= @event.location_name(reverse=true)
 
+  %li
+    %span.type= 'Event Log:'
+    %span.value
+      = render 'event_log_modal'
+
   - @event.milestone.fields.each do |field|
     %li
       %span.type= field.name

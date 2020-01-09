@@ -34,7 +34,6 @@ module Samples
               event_type_id: event_type_ids.sample,
               field_values_attributes: event_field_value_attr(program, province_id, district_id, commune_id, village_id)
             )
-
             create_event_milestones(event, program)
           end
         end
@@ -51,6 +50,10 @@ module Samples
           event_date: Date.today - rand(0..30),
           report_date: Date.today
         }
+
+        if program.name == 'CDC'
+          field_values[:number_of_hospitalized] = rand(1..4)
+        end
 
         field_values.map do |k, v|
           {

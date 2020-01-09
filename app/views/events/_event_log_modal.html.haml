@@ -1,0 +1,12 @@
+%a.pointer{'data-target' => '#event-log', 'data-toggle' => 'modal'}
+  %i.far.fa-chart-bar
+
+#event-log.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'exampleModalLabel', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title Event Log
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
+          %span{'aria-hidden' => 'true'} ×
+      .modal-body
+        test

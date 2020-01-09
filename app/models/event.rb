@@ -27,6 +27,7 @@ class Event < ApplicationRecord
   belongs_to :location, foreign_key: :location_code, optional: true
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
   has_many   :field_values, as: :valueable, dependent: :destroy
+  has_many   :event_logs, foreign_key: :event_uuid, dependent: :destroy
 
   # History
   has_associated_audits
@@ -45,7 +46,9 @@ class Event < ApplicationRecord
   before_validation :set_program_id
   before_validation :assign_location
   before_create :secure_uuid
+
   after_create :set_event_progress
+  before_save  :build_event_log
 
   # Scope
   default_scope { order(updated_at: :desc) }
@@ -97,6 +100,24 @@ class Event < ApplicationRecord
   end
 
   private
+
+  def build_event_log
+    there_is_change = false
+    tracking_field_codes = milestone.fields.tracking.pluck(:code)
+    fvs = field_values.select { |fv| tracking_field_codes.include? fv.field_code }
+    fvs.each do |fv|
+      return if there_is_change
+      there_is_change = fv.value_changed?
+    end
+
+    fvs = fvs.pluck(:field_code, :value).to_h
+    props = {}
+    tracking_field_codes.each do |code|
+      props[code] = fvs[code] || 0
+    end
+
+    event_logs.build({properties: props}) if there_is_change
+  end
 
   def secure_uuid
     self.uuid ||= SecureRandom.hex(4)

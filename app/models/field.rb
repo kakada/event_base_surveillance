@@ -19,6 +19,7 @@
 #  updated_at         :datetime         not null
 #  color_required     :boolean          default(FALSE)
 #  validations        :text
+#  tracking           :boolean          default(FALSE)
 #
 
 class Field < ApplicationRecord
@@ -44,6 +45,7 @@ class Field < ApplicationRecord
   default_scope { order(is_default: :desc).order(display_order: :asc) }
   scope :dynamic, -> { where(is_default: false) }
   scope :entry_able, -> { where(entry_able: true) }
+  scope :tracking, -> { where(tracking: true) }
 
   # Nested attributes
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
@@ -61,8 +63,8 @@ class Field < ApplicationRecord
   # Class methods
   def self.roots
     fields = [
-      { code: 'number_of_case', field_type: 'Fields::IntegerField', name: 'Number of case', required: true },
-      { code: 'number_of_death', field_type: 'Fields::IntegerField', name: 'Number of death' },
+      { code: 'number_of_case', field_type: 'Fields::IntegerField', name: 'Number of case', required: true, tracking: true },
+      { code: 'number_of_death', field_type: 'Fields::IntegerField', name: 'Number of death', tracking: true },
       { code: 'description', field_type: 'Fields::NoteField', name: 'Description' },
       { code: 'province_id', field_type: 'Fields::LocationField', name: 'Province', required: true },
       { code: 'district_id', field_type: 'Fields::LocationField', name: 'District' },
