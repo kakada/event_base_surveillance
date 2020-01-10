@@ -1,4 +1,4 @@
-FROM ruby:2.6
+FROM ruby:2.6.3
 
 LABEL maintainer="Kakada Chheang <kakada@instedd.org>"
 
@@ -11,13 +11,15 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN mkdir /app
 WORKDIR /app
 
 # Install gem bundle
-COPY Gemfile /app/
-COPY Gemfile.lock /app/
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 
-RUN bundle install --jobs 3 --deployment --without development test
+RUN gem install bundler:2.0.2 && \
+  bundle install --jobs 20 --deployment --without development test
 
 # Install the application
 COPY . /app
@@ -26,7 +28,7 @@ COPY . /app
 RUN if [ -d .git ]; then git describe --always > VERSION; fi
 
 # Precompile assets
-RUN bundle exec rake assets:precompile RAILS_ENV=production RAILS_MASTER_KEY=changeme
+RUN bundle exec rake assets:precompile RAILS_ENV=production
 
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RACK_ENV=production
@@ -34,6 +36,7 @@ ENV RAILS_ENV=production
 EXPOSE 80
 
 # Add scripts
+RUN rm -rf /app/config/master.key
 COPY docker/database.yml /app/config/database.yml
 
 CMD ["puma", "-e", "production", "-b", "tcp://0.0.0.0:80"]

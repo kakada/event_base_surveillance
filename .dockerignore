@@ -52,3 +52,6 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+public/uploads
+docker-compose.prod.yml
