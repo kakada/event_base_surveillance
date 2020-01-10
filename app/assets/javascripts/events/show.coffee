@@ -3,6 +3,58 @@ EBS.EventsShow = do ->
 
   init = ->
     _renderMap()
+    _onOpenEventLogModal()
+
+  _onOpenEventLogModal = ->
+    $('#event-log').on 'shown.bs.modal', ->
+      _initChart()
+
+  _initChart = ->
+    myBar = new Chart($('#myChart'),
+      type: 'bar'
+      data: _getBarChartData()
+      options:
+        title:
+          display: true
+          text: 'Time Detection'
+        tooltips:
+          mode: 'index'
+          intersect: false
+        responsive: true
+        scales:
+          xAxes: [ { stacked: true } ]
+          yAxes: [ { stacked: true } ])
+
+  _getBarChartData = ->
+    data = $('#myChart').data('event-logs')
+    labels = (x.created_at for x in data)
+    fields = $('#myChart').data('tracking-fields')
+    datasets = []
+
+    for field in fields
+      dd = data.map((x) ->
+        x.properties[field]
+      )
+
+      datasets.push({
+        label: field,
+        backgroundColor: _getRandomColor(),
+        data: dd
+      })
+
+    barChartData = {
+      labels: labels,
+      datasets: datasets
+    }
+
+  _getRandomColor = ->
+    letters = '0123456789ABCDEF'
+    color = '#'
+    i = 0
+    while i < 6
+      color += letters[Math.floor(Math.random() * 16)]
+      i++
+    color
 
   _renderMap = ->
     map = new (L.Map)('map')

@@ -33,6 +33,10 @@
 //= require leaflet
 //= require moment.min
 
+// **Bar Chart
+//= require chart
+
+// ** Main js
 //= require application/namespace
 //= require application/util
 

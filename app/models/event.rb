@@ -48,7 +48,8 @@ class Event < ApplicationRecord
   before_create :secure_uuid
 
   after_create :set_event_progress
-  before_save  :build_event_log
+  before_create  :build_event_log
+  before_update  :build_event_log
 
   # Scope
   default_scope { order(updated_at: :desc) }
