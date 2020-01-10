@@ -15,7 +15,8 @@ RUN mkdir /app
 WORKDIR /app
 
 # Install gem bundle
-COPY Gemfile* /app/
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 
 RUN gem install bundler:2.0.2 && \
   bundle install --jobs 20 --deployment --without development test
@@ -27,7 +28,7 @@ COPY . /app
 RUN if [ -d .git ]; then git describe --always > VERSION; fi
 
 # Precompile assets
-RUN bash assets_precompile.sh
+RUN bundle exec rake assets:precompile RAILS_ENV=production
 
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RACK_ENV=production
@@ -35,6 +36,7 @@ ENV RAILS_ENV=production
 EXPOSE 80
 
 # Add scripts
+RUN rm -rf /app/config/master.key
 COPY docker/database.yml /app/config/database.yml
 
 CMD ["puma", "-e", "production", "-b", "tcp://0.0.0.0:80"]
