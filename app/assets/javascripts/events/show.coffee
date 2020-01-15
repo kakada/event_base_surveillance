@@ -3,11 +3,7 @@ EBS.EventsShow = do ->
 
   init = ->
     _renderMap()
-    _onOpenEventLogModal()
-
-  _onOpenEventLogModal = ->
-    $('#event-log').on 'shown.bs.modal', ->
-      _initChart()
+    _initChart()
 
   _initChart = ->
     myBar = new Chart($('#myChart'),

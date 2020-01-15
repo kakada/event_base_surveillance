@@ -27,6 +27,7 @@ class Event < ApplicationRecord
   belongs_to :location, foreign_key: :location_code, optional: true
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
   has_many   :field_values, as: :valueable, dependent: :destroy
+  has_many   :logs, as: :logable, dependent: :destroy
   has_many   :event_logs, foreign_key: :event_uuid, dependent: :destroy
 
   # History
