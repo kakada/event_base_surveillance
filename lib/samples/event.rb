@@ -22,11 +22,11 @@ module Samples
       private
 
       def creat_event(province_id, district_id, commune_id, village_id)
-        ::Program.all.each do |program|
+        ::Program.where(name: 'CDC').each do |program|
           event_type_ids = program.event_types.pluck(:id)
 
           # Change here for changing number of event
-          max_event = rand(1..20)
+          max_event = rand(1..5)
 
           (1..max_event).each do
             event = ::Event.create(
