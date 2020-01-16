@@ -24,7 +24,7 @@ EBS.EventsShow = do ->
   _getBarChartData = ->
     data = $('#myChart').data('event-logs')
     labels = (x.created_at for x in data)
-    fields = $('#myChart').data('tracking-fields')
+    fields = $('#myChart').data('tracking-number-fields')
     datasets = []
 
     for field in fields

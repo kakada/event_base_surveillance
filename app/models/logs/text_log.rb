@@ -15,7 +15,7 @@
 #  updated_at   :datetime         not null
 #
 
-class Log < ApplicationRecord
-  belongs_to :logable, polymorphic: true
-  serialize :properties, Hash
+module Logs
+  class TextLog < ::Log
+  end
 end

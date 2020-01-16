@@ -27,7 +27,6 @@ module Samples
 
           # Change here for changing number of event
           max_event = rand(1..5)
-
           (1..max_event).each do
             event = ::Event.create(
               creator_id: program.users.first.try(:id),
@@ -51,9 +50,7 @@ module Samples
           report_date: Date.today
         }
 
-        if program.name == 'CDC'
-          field_values[:number_of_hospitalized] = rand(1..4)
-        end
+        field_values[:number_of_hospitalized] = rand(1..4) if program.name == 'CDC'
 
         field_values.map do |k, v|
           {

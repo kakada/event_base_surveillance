@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_08_085249) do
+ActiveRecord::Schema.define(version: 2020_01_15_084145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,14 +54,6 @@ ActiveRecord::Schema.define(version: 2020_01_08_085249) do
     t.boolean "active", default: true
     t.string "permissions", array: true
     t.integer "program_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "event_logs", force: :cascade do |t|
-    t.string "event_uuid"
-    t.string "risk_level"
-    t.text "properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -154,6 +146,17 @@ ActiveRecord::Schema.define(version: 2020_01_08_085249) do
     t.string "parent_id"
     t.float "latitude"
     t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.integer "field_id"
+    t.string "field_value"
+    t.text "properties"
+    t.string "logable_id"
+    t.string "logable_type"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

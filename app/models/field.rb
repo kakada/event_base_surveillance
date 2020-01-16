@@ -46,6 +46,8 @@ class Field < ApplicationRecord
   scope :dynamic, -> { where(is_default: false) }
   scope :entry_able, -> { where(entry_able: true) }
   scope :tracking, -> { where(tracking: true) }
+  scope :number, -> { where(field_type: 'Fields::IntegerField') }
+  scope :text, -> { where.not(field_type: 'Fields::IntegerField') }
 
   # Nested attributes
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }

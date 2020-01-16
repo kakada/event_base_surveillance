@@ -9,4 +9,4 @@
         %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
           %span{'aria-hidden' => 'true'} ×
       .modal-body
-        %canvas#myChart{'data-event-logs' => @event.event_logs.to_json, 'data-tracking-fields' => @event.milestone.fields.tracking.pluck(:code)}
+        %canvas#myChart{'data-event-logs' => @event.logs.to_json, 'data-tracking-number-fields' => @event.milestone.fields.tracking.number.pluck(:code), 'data-tracking-text-fields' => @event.milestone.fields.tracking.text.pluck(:code)}
