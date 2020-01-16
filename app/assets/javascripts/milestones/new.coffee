@@ -157,7 +157,7 @@ EBS.MilestonesNew = do ->
   # for both remove field and remove option
   onClickRemoveField = ->
     $(document).on 'click', 'form .remove_fields', (event) ->
-      $(this).prev('input[type=hidden]').val('1')
+      $(this).parents('.action').find('input[type=hidden]').val('1')
       $(this).closest('fieldset').hide()
       event.preventDefault()
 
