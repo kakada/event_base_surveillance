@@ -67,7 +67,7 @@ module Events
 
       def build_milestone_attr(milestone, index)
         valueable = index.zero? ? self : event_milestones.select { |em| em.milestone_id == milestone.id }.first
-        return { 'conducted_at': nil } if valueable.nil?
+        return {} if valueable.nil?
 
         attrs = {}
         valueable.field_values.each do |fv|

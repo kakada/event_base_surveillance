@@ -28,7 +28,7 @@ module Fields
     end
 
     def self.es_datatype
-      :text
+      :keyword
     end
   end
 end
