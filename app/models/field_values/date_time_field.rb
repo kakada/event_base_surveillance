@@ -22,10 +22,12 @@
 
 module FieldValues
   class DateTimeField < DateField
-    def instant_value
-      return unless value
+    def es_value
+      Time.parse(value) if value.present?
+    end
 
-      Time.parse(value)
+    def html_tag
+      "#{value}"
     end
   end
 end

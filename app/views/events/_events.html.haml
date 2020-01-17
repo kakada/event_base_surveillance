@@ -8,19 +8,11 @@
         %span= event.event_type_name
 
     %td= event.location_name
-    %td= event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.try(:value)
-    %td
-      - if value = event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
-        %span.badge{class: (event.close? ? 'badge-success' : 'badge-warning') }= value
-      - else
-        %span.badge= '-'
+    - %w(number_of_case progress risk_level event_date).each do |code|
+      %td
+        - fv = event.field_values.select{ |fv| fv.field_code == code }.first
+        = fv.try(:html_tag).try(:html_safe) || '-'
 
-    %td
-      - risk_level = event.field_values.select{|fv| fv.field_code == 'risk_level'}.first
-      - style = risk_level.present? ? "background-color: #{risk_level.color}; color: #fff" : ''
-      %span.badge{style: style}
-        = risk_level.try(:value) || '-'
-    %td= event.field_values.select{|fv| fv.field_code == 'event_date'}.first.try(:value)
     %td= event.program_name
     %td
       - if policy(event).update?

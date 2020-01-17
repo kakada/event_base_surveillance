@@ -22,5 +22,10 @@
 
 module FieldValues
   class TextField < ::FieldValue
+    def html_tag
+      return "#{value}" unless field_code == 'progress'
+
+      "<span class='badge #{valueable.close? ? 'badge-success' : 'badge-warning'}'>#{value}</span>"
+    end
   end
 end

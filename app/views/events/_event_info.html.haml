@@ -16,21 +16,7 @@
       %span.type= field.name
       %span.value
         - if fvs = @event.field_values.select{ |fv| fv.field_id == field.id }.presence
-          - if fvs[0].field_type == 'Fields::FileField'
-            - fvs.each do |fv|
-              %div
-                = link_to fv.file_url.split('/').last, download_path(file: fv.file_url), target: "_blank", style:'color: #007bff'
-
-          - elsif fvs[0].field_type == 'Fields::ImageField'
-            - fvs.each do |fv|
-              .image-wrapper= image_tag fv.instant_value
-
-          - elsif fvs[0].field_code == 'risk_level'
-            - style = fvs[0].instant_value.present? ? "background-color: #{fvs[0].color}; color: #fff" : ''
-            %span.badge{style: style}
-              = fvs[0].instant_value || '-'
-          - else
-            = fvs[0].instant_value || '-'
-
+          - fvs.each do |fv|
+            = fv.html_tag.html_safe
         - else
           = '-'

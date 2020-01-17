@@ -46,12 +46,8 @@ class FieldValue < ApplicationRecord
   # History
   audited associated_with: :valueable
 
-  def instant_value
-    value
-  end
-
   def es_value
-    instant_value
+    value
   end
 
   def valid_value?
@@ -60,6 +56,10 @@ class FieldValue < ApplicationRecord
 
   def valid_condition?
     true
+  end
+
+  def html_tag
+    "#{value}"
   end
 
   private
@@ -85,6 +85,33 @@ class FieldValue < ApplicationRecord
     fv.value = value.downcase.split(' ').join('_')
     fv.color = field.field_options.find_by('LOWER(value)= ?', fv.value).try(:color) if field.field_options.present?
     fv.save
+
+    handle_tracking(fv)
+  end
+
+  def handle_tracking(fv)
+    return unless fv.field.tracking?
+
+    event = valueable.event
+    if fv.field_type == 'Fields::IntegerField'
+      tracking_codes = event.milestone.fields.tracking.number.pluck(:code)
+      return if tracking_codes.blank?
+
+      fvs = event.field_values.select { |fv| tracking_codes.include? fv.field_code }
+      return if fvs.blank?
+
+      fvs = fvs.pluck(:field_code, :value).to_h
+      props = {}
+      tracking_codes.each do |code|
+        props[code] = fvs[code] || 0
+      end
+
+      event.logs.create(properties: props, type: 'Logs::NumberLog')
+
+      return
+    end
+
+    event.logs.create(field_id: fv.field_id, field_value: fv.value, type: 'Logs::TextLog')
   end
 
   def cleanup_values

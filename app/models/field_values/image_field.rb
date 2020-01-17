@@ -22,8 +22,12 @@
 
 module FieldValues
   class ImageField < ::FieldValue
-    def instant_value
-      image_url
+    def html_tag
+      "
+        <div class='image-wrapper'>
+          <img src='#{image_url}'/>
+        </div>
+      "
     end
   end
 end

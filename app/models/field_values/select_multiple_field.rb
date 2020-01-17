@@ -22,10 +22,14 @@
 
 module FieldValues
   class SelectMultipleField < ::FieldValue
-    def instant_value
+    def es_value
       return if values.blank?
 
       values.join(', ')
+    end
+
+    def html_tag
+      "#{values.join(', ')}"
     end
   end
 end
