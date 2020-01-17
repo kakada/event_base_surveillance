@@ -46,7 +46,7 @@ module Events
         return if fvs.blank?
 
         fvs.each do |fv|
-          logs.build(field_id: fv.field_id, field_value: fv.field_value, type: 'Logs::TextLog') if fv.value_changed?
+          logs.build(field_id: fv.field_id, field_value: fv.value, type: 'Logs::TextLog') if fv.value_changed?
         end
       end
     end

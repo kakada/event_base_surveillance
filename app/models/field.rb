@@ -75,7 +75,7 @@ class Field < ApplicationRecord
       { code: 'event_date', field_type: 'Fields::DateTimeField', name: 'Onset date', required: true },
       { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true },
       { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
-      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true },
+      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true, tracking: true },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false }
     ]
     fields.each_with_index do |field, index|
