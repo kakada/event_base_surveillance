@@ -71,7 +71,7 @@ module Events
 
         attrs = {}
         valueable.field_values.each do |fv|
-          attrs[fv.field_code] = fv.instant_value
+          attrs[fv.field_code] = fv.es_value
         end
 
         valueable.attributes.except(*except_attributes).merge(attrs)

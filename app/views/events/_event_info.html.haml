@@ -6,7 +6,7 @@
     %span.type= "#{t('event.location')}:"
     %span.value= @event.location_name(reverse=true)
 
-  - @event.milestone.fields.where.not(code: 'source').each do |field|
+  - @event.milestone.fields.each do |field|
     %li
       %span.type= field.name
       %span.value

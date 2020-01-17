@@ -50,6 +50,10 @@ class FieldValue < ApplicationRecord
     value
   end
 
+  def es_value
+    instant_value
+  end
+
   def valid_value?
     true
   end
