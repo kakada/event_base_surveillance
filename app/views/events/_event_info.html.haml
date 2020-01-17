@@ -9,7 +9,7 @@
   %li
     %span.type= 'Event Log:'
     %span.value
-      = render 'log_modal'
+      = render 'log_number_field_modal'
 
   - @event.milestone.fields.each do |field|
     %li
@@ -17,6 +17,15 @@
       %span.value
         - if fvs = @event.field_values.select{ |fv| fv.field_id == field.id }.presence
           - fvs.each do |fv|
-            = fv.html_tag.html_safe
+            - if fv.field.tracking? && fv.field_type != 'Fields::IntegerField'
+              = fv.html_tag.html_safe
+              - logs = @event.logs.text.where(field_id: fv.field_id).to_json
+              %a.log-text-modal-trigger.pointer{'data-target' => '#log-text-field', 'data-toggle' => 'modal', 'data-logs' => logs }
+                %i.far.fa-chart-bar
+
+            - else
+              = fv.html_tag.html_safe
         - else
           = '-'
+
+= render 'log_text_field_modal'

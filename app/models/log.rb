@@ -18,4 +18,7 @@
 class Log < ApplicationRecord
   belongs_to :logable, polymorphic: true
   serialize :properties, Hash
+
+  scope :number, -> { where(type: 'Logs::NumberLog') }
+  scope :text, -> { where(type: 'Logs::TextLog') }
 end
