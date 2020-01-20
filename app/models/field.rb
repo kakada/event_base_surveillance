@@ -44,6 +44,7 @@ class Field < ApplicationRecord
   # Scope
   default_scope { order(is_default: :desc).order(display_order: :asc) }
   scope :dynamic, -> { where(is_default: false) }
+  scope :default, -> { where(is_default: true) }
   scope :entry_able, -> { where(entry_able: true) }
   scope :tracking, -> { where(tracking: true) }
   scope :number, -> { where(field_type: 'Fields::IntegerField') }
