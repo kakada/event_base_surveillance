@@ -4,9 +4,9 @@ EBS.EventsShow = do ->
   init = ->
     _renderMap()
     _initChart()
-    _onOpenLogTextModal()
+    onClickLogTextModalTrigger()
 
-  _onOpenLogTextModal = ->
+  onClickLogTextModalTrigger = ->
     $('.log-text-modal-trigger').on 'click', ->
       data = $(this).data('logs')
       dom = ''
@@ -102,4 +102,7 @@ EBS.EventsShow = do ->
       attribution: osmAttrib)
     map.addLayer osm
 
-  { init: init }
+  {
+    init: init
+    onClickLogTextModalTrigger: onClickLogTextModalTrigger
+  }

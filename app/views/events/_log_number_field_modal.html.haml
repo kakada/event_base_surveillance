@@ -1,12 +1,13 @@
-%a.pointer{'data-target' => '#event-log', 'data-toggle' => 'modal'}
-  %i.far.fa-chart-bar.chart
+- if codes = logable.milestone.fields.tracking.number.pluck(:code).presence
+  %a.pointer{'data-target' => '#event-log', 'data-toggle' => 'modal'}
+    %i.far.fa-chart-bar.chart
 
-#event-log.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'exampleModalLabel', :role => 'dialog', :tabindex => '-1'}
-  .modal-dialog{:role => 'document'}
-    .modal-content
-      .modal-header
-        %h5#exampleModalLabel.modal-title Event Log
-        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
-          %span{'aria-hidden' => 'true'} ×
-      .modal-body
-        %canvas#myChart{'data-event-logs' => @event.logs.number.to_json, 'data-tracking-number-fields' => @event.milestone.fields.tracking.number.pluck(:code)}
+  #event-log.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'exampleModalLabel', :role => 'dialog', :tabindex => '-1'}
+    .modal-dialog{:role => 'document'}
+      .modal-content
+        .modal-header
+          %h5#exampleModalLabel.modal-title Log
+          %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', :type => 'button'}
+            %span{'aria-hidden' => 'true'} ×
+        .modal-body
+          %canvas#myChart{'data-event-logs' => logable.logs.number.to_json, 'data-tracking-number-fields' => codes}

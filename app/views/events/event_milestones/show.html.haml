@@ -1,7 +1,9 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
+      %h3
+        ="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
+        = render 'events/log_number_field_modal', logable: @event_milestone
       %div= link_to 'Back', event_path(@event), class: 'btn btn-info'
 
   %ul.list.flex1
@@ -10,16 +12,13 @@
         %span.type= field.name
         %span.value
           - if fvs = @event_milestone.field_values.select{ |fv| fv.field_id == field.id }.presence
-            - if fvs[0].field_type == 'Fields::FileField'
-              - fvs.each do |fv|
-                %div
-                  = link_to fv.file_url.split('/').last, download_events_path(file: fv.file_url), target: "_blank", style:'color: #007bff'
-            - elsif fvs[0].field_code == 'risk_level'
-              - style = fvs[0].value.present? ? "background-color: #{fvs[0].color}; color: #fff" : ''
-              %span.badge{style: style}
-                = fvs[0].value || '-'
-            - else
-              = fvs[0].value || fvs[0].values
+            - fvs.each do |fv|
+              = fv.html_tag.html_safe
 
+              - if fv.field.tracking? && fv.field_type != 'Fields::IntegerField'
+                %a.log-text-modal-trigger.pointer{'data-target' => '#log-text-field', 'data-toggle' => 'modal', 'data-logs' => @event_milestone.logs.text.where(field_id: fv.field_id).to_json, 'data-title' => fv.field_name}
+                  %i.far.fa-chart-bar.chart
           - else
             = '-'
+
+= render 'events/log_text_field_modal'
