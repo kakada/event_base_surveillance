@@ -59,7 +59,7 @@ class FieldValue < ApplicationRecord
   end
 
   def html_tag
-    "#{value}"
+    value.to_s
   end
 
   private
@@ -89,29 +89,20 @@ class FieldValue < ApplicationRecord
     handle_tracking(fv)
   end
 
-  def handle_tracking(fv)
-    return unless fv.field.tracking?
+  def handle_tracking(field_value)
+    return unless field_value.field.tracking?
 
     event = valueable.event
-    if fv.field_type == 'Fields::IntegerField'
-      tracking_codes = event.milestone.fields.tracking.number.pluck(:code)
-      return if tracking_codes.blank?
+    return event.logs.create(field_id: field_value.field_id, field_value: field_value.value, type: 'Logs::TextLog') if field_value.field_type != 'Fields::IntegerField'
 
-      fvs = event.field_values.select { |fv| tracking_codes.include? fv.field_code }
-      return if fvs.blank?
-
-      fvs = fvs.pluck(:field_code, :value).to_h
-      props = {}
-      tracking_codes.each do |code|
-        props[code] = fvs[code] || 0
-      end
-
-      event.logs.create(properties: props, type: 'Logs::NumberLog')
-
-      return
+    tracking_codes = event.milestone.fields.tracking.number.pluck(:code)
+    fvs = event.field_values.select { |field_v| tracking_codes.include? field_v.field_code }.pluck(:field_code, :value).to_h
+    props = {}
+    tracking_codes.each do |code|
+      props[code] = fvs[code] || 0
     end
 
-    event.logs.create(field_id: fv.field_id, field_value: fv.value, type: 'Logs::TextLog')
+    event.logs.create(properties: props, type: 'Logs::NumberLog')
   end
 
   def cleanup_values

@@ -11,43 +11,53 @@ module Events
       private
 
       def build_log
-        handle_number_field
-        handle_text_field
+        build_number_field
+        build_text_field
       end
 
-      def handle_number_field
-        tracking_codes = milestone.fields.tracking.number.pluck(:code)
-        return if tracking_codes.blank?
+      def build_text_field
+        fvs = tracking_fvs(text_tracking_codes)
+        fvs.each do |fv|
+          logs.build(field_id: fv.field_id, field_value: fv.value, type: 'Logs::TextLog') if fv.value_changed?
+        end
+      end
 
-        fvs = field_values.select { |fv| tracking_codes.include? fv.field_code }
-        return if fvs.blank?
+      def build_number_field
+        logs.build(properties: build_number_props, type: 'Logs::NumberLog') if number_field_change?
+      end
 
+      def number_field_change?
         there_is_change = false
+        fvs = tracking_fvs(number_tracking_codes)
         fvs.each do |fv|
           break if there_is_change
 
           there_is_change = fv.value_changed?
         end
 
-        fvs = fvs.pluck(:field_code, :value).to_h
+        there_is_change
+      end
+
+      def build_number_props
+        fvs = tracking_fvs(number_tracking_codes).pluck(:field_code, :value).to_h
         props = {}
-        tracking_codes.each do |code|
+        number_tracking_codes.each do |code|
           props[code] = fvs[code] || 0
         end
 
-        logs.build(properties: props, type: 'Logs::NumberLog') if there_is_change
+        props
       end
 
-      def handle_text_field
-        tracking_codes = milestone.fields.tracking.text.pluck(:code)
-        return if tracking_codes.blank?
+      def tracking_fvs(tracking_codes)
+        field_values.select { |fv| tracking_codes.include? fv.field_code }
+      end
 
-        fvs = field_values.select { |fv| tracking_codes.include? fv.field_code }
-        return if fvs.blank?
+      def number_tracking_codes
+        @number_tracking_codes ||= milestone.fields.tracking.number.pluck(:code)
+      end
 
-        fvs.each do |fv|
-          logs.build(field_id: fv.field_id, field_value: fv.value, type: 'Logs::TextLog') if fv.value_changed?
-        end
+      def text_tracking_codes
+        @text_tracking_codes ||= milestone.fields.tracking.text.pluck(:code)
       end
     end
   end

@@ -29,7 +29,7 @@ module FieldValues
     end
 
     def html_tag
-      "#{values.join(', ')}"
+      values.join(', ').to_s
     end
   end
 end

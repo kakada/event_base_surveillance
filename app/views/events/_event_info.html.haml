@@ -6,11 +6,6 @@
     %span.type= "#{t('event.location')}:"
     %span.value= @event.location_name(reverse=true)
 
-  %li
-    %span.type= 'Event Log:'
-    %span.value
-      = render 'log_number_field_modal'
-
   - @event.milestone.fields.each do |field|
     %li
       %span.type= field.name
@@ -21,7 +16,7 @@
               = fv.html_tag.html_safe
               - logs = @event.logs.text.where(field_id: fv.field_id).to_json
               %a.log-text-modal-trigger.pointer{'data-target' => '#log-text-field', 'data-toggle' => 'modal', 'data-logs' => logs, 'data-title' => fv.field_name}
-                %i.far.fa-chart-bar
+                %i.far.fa-chart-bar.chart
 
             - else
               = fv.html_tag.html_safe

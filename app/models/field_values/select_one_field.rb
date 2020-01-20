@@ -23,7 +23,7 @@
 module FieldValues
   class SelectOneField < ::FieldValue
     def html_tag
-      return "#{value}" unless field_code == 'risk_level'
+      return value.to_s unless field_code == 'risk_level'
 
       "<span class='badge' style='background-color: #{color}; color: #fff'>#{value}</span>"
     end

@@ -27,7 +27,7 @@ module FieldValues
     end
 
     def html_tag
-      "#{location.try(:name_km)}"
+      location.try(:name_km).to_s
     end
 
     private

@@ -27,7 +27,7 @@ module FieldValues
     end
 
     def html_tag
-      "#{value}"
+      value.to_s
     end
   end
 end
