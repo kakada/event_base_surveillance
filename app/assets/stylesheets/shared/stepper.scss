@@ -28,7 +28,7 @@
     color: #00c4cc;
     border: 2px solid #00c4cc;
     border-radius: 50%;
-    content: counter(li-counter);
+    content: "•";
     background-color: #ebeced;
     counter-increment: li-counter;
   }
