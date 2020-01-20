@@ -20,7 +20,7 @@
             - if fv.field.tracking? && fv.field_type != 'Fields::IntegerField'
               = fv.html_tag.html_safe
               - logs = @event.logs.text.where(field_id: fv.field_id).to_json
-              %a.log-text-modal-trigger.pointer{'data-target' => '#log-text-field', 'data-toggle' => 'modal', 'data-logs' => logs }
+              %a.log-text-modal-trigger.pointer{'data-target' => '#log-text-field', 'data-toggle' => 'modal', 'data-logs' => logs, 'data-title' => fv.field_name}
                 %i.far.fa-chart-bar
 
             - else

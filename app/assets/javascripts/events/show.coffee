@@ -4,6 +4,24 @@ EBS.EventsShow = do ->
   init = ->
     _renderMap()
     _initChart()
+    _onOpenLogTextModal()
+
+  _onOpenLogTextModal = ->
+    $('.log-text-modal-trigger').on 'click', ->
+      data = $(this).data('logs')
+      dom = ''
+      i = 0
+
+      while i < data.length
+        d = new Date(data[i].created_at)
+        dom += '<li class="li complete">'
+        dom += '<div class="status"><span>'+data[i].field_value+'</span></div>'
+        dom += '<div class="timestamp"><div class="date">'+d.toLocaleString()+'</div></div>'
+        dom += '</li>'
+        i++
+
+      $('#modal-label').html($(this).data('title'))
+      $('#timeline').html(dom)
 
   _initChart = ->
     myBar = new Chart($('#myChart'),
