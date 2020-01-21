@@ -9,6 +9,8 @@
 
     .fields
       = f.label field.name
+      - if field.description.present?
+        %i.fa.fa-question-circle{ data: { toggle: "tooltip", html: "true" }, title: field.description }
       = f.fields_for :field_values, obj do |builder|
         = render 'field_value_fields', f: builder, option: { field: field, main_object: @event_milestone }
       = link_to_add_fields t('event.add_file'), f, :field_values, { field: field, main_object: @event_milestone }

@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2020_01_20_092533) do
     t.boolean "color_required", default: false
     t.text "validations"
     t.boolean "tracking", default: false
+    t.text "description"
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
