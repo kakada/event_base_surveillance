@@ -51,14 +51,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def search
+    @pagy, @events = pagy(policy_scope(Event.filter(params)), link_extra: 'data-remote="true"')
+  end
+
   private
 
   def event_params
     params.require(:event).permit(
-      :event_type_id, properties: {},
-                      field_values_attributes: [
-                        :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
-                      ]
+      :event_type_id, :link_uuid,
+      properties: {},
+      field_values_attributes: [
+        :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
+      ]
     )
   end
 

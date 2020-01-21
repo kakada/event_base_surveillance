@@ -29,6 +29,8 @@ class Event < ApplicationRecord
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
   has_many   :field_values, as: :valueable, dependent: :destroy
   has_many   :tracings, as: :traceable, dependent: :destroy
+  belongs_to :link_parent, class_name: 'Event', foreign_key: :link_uuid, optional: true
+  has_many   :link_children, class_name: 'Event', foreign_key: :link_uuid
 
   # History
   has_associated_audits
@@ -65,6 +67,7 @@ class Event < ApplicationRecord
     scope = all
     scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', arr[0], arr[1]) if arr.present?
     scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value >= ?', 'event_date', params[:start_date]) if params[:start_date].present?
+    scope = scope.joins(:event_type).where('events.uuid LIKE ? OR event_types.name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
     scope
   end
 
