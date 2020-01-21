@@ -67,7 +67,7 @@ class Event < ApplicationRecord
     scope = all
     scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', arr[0], arr[1]) if arr.present?
     scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value >= ?', 'event_date', params[:start_date]) if params[:start_date].present?
-    scope = scope.joins(:event_type).where('events.uuid LIKE ? OR event_types.name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
+    scope = scope.joins(:event_type).where('events.uuid LIKE ? OR LOWER(event_types.name) LIKE ?', "%#{params[:search]}%", "%#{params[:search].downcase}%") if params[:search].present?
     scope
   end
 

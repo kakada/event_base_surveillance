@@ -6,6 +6,12 @@ EBS.EventsNew = do ->
     onScrollEventList()
     onClickEventItem()
     onHideLinkEventModal()
+    onClickBtnReset()
+
+  onClickBtnReset = ->
+    $('.btn-reset').off 'click'
+    $('.btn-reset').on 'click', ->
+      $('#event_link_uuid').val('')
 
   onClickLinkEvent = ->
     $('#event_link_uuid').off 'click'
