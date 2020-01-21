@@ -1,5 +1,5 @@
 .form-group.row.border-top.mx-0.p-2.mb-1
   %label.col-sm-2.col-form-label{ for: :description }
-    Description
+    = t('milestone.description') + ":"
   .col-sm-10
     = f.text_area :description, class: "form-control"

@@ -12,6 +12,7 @@ class MilestonesController < ::ApplicationController
 
   def create
     @milestone = current_program.milestones.new(milestone_params)
+
     if @milestone.save
       redirect_to milestones_url
     else

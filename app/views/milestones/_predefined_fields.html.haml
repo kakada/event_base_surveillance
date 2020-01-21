@@ -25,3 +25,5 @@
                 = form.label :tracking, t('milestone.tracking'), class: 'form-check-label'
 
           = render 'kinds'
+          .collapse-content
+            = render "field_description", f: form

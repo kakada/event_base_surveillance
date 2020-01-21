@@ -10,4 +10,12 @@ RSpec.describe Field, type: :model do
   it { is_expected.to validate_uniqueness_of(:code).scoped_to(:milestone_id).with_message('already exist') }
   it { is_expected.to validate_presence_of(:field_type) }
   it { is_expected.to validate_inclusion_of(:field_type).in_array(Field::FIELD_TYPES) }
+
+  describe '#predefined' do
+    let!(:program) { create(:program) }
+
+    it 'should return predefined field' do
+      expect(Field.predefined.count).to eq(11)
+    end
+  end
 end

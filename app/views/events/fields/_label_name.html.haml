@@ -3,7 +3,7 @@
   - if field.required?
     %abbr{:title => "required"} *
   - if field.description.present?
-    %i.fa.fa-question-circle{ data: { toggle: "tooltip", html: "true" }, title: field.description }
+    %i.fa.fa-question-circle{ data: { toggle: "tooltip", html: "true" }, title: description_html(field.description).html_safe }
 
 = f.hidden_field :field_code, value: field.code
 = f.hidden_field :field_id, value: field.id

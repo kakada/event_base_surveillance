@@ -51,6 +51,12 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
 
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
   config.before(:suite) do
     if config.use_transactional_fixtures?
       raise(<<-MSG)
