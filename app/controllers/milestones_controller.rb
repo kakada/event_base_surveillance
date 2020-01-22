@@ -51,8 +51,14 @@ class MilestonesController < ::ApplicationController
     params.require(:milestone).permit(
       :name, :display_order, :final,
       fields_attributes: [
+<<<<<<< HEAD
         :id, :name, :field_type, :required, :display_order, :is_default,
         :mapping_field, :mapping_field_type, :_destroy, :tracking, :description,
+=======
+        :id, :name, :field_type, :required, :display_order,
+        :mapping_field, :mapping_field_type, :_destroy, :description,
+        :is_default,
+>>>>>>> update predefined field description
         validations: {},
         field_options_attributes: %i[
           id name value color _destroy
