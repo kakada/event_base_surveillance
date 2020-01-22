@@ -2,22 +2,25 @@
   %legend= t('milestone.primary_fields')
 
   %ol.fields
-    = f.fields_for :fields, f.object.fields.default.where.not(code: 'source') do |form|
-      %li
+    - fields = f.object.fields.select{ |f| f.is_default? }
+    = f.fields_for :fields, fields do |form|
+      %li{ class: ('hidden' if form.object.code == 'source') }
         %fieldset.fieldset
           .field-wrapper
             %button.btn.move{type: :button, style: 'cursor: auto'}
 
             .wrapper.flex-row-vertical-center
               %abbr{:title => "required", class: ('hidden' if !form.object.required)} *
-              %input.field-type{ type: :hidden, value: form.object.field_type }
-              .form-control.field-name.as-title.flex-row-vertical-center= form.object.name
+
+              = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.field_type
+              = form.hidden_field :required
+              = form.hidden_field :is_default, value: true
+              = form.text_field :name, placeholder: 'field_name', class: 'form-control field-name'
 
               - if form.object.required
                 .as-title= t('milestone.required')
 
               .form-check
-                = form.hidden_field :name
                 = form.check_box :tracking, { class: 'form-check-input' }
                 = form.label :tracking, t('milestone.tracking'), class: 'form-check-label'
 

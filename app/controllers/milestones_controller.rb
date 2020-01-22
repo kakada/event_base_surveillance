@@ -7,6 +7,7 @@ class MilestonesController < ::ApplicationController
 
   def new
     @milestone = current_program.milestones.new
+    @milestone.build_default_fields
   end
 
   def create
@@ -49,7 +50,7 @@ class MilestonesController < ::ApplicationController
     params.require(:milestone).permit(
       :name, :display_order, :final,
       fields_attributes: [
-        :id, :name, :field_type, :required, :display_order,
+        :id, :name, :field_type, :required, :display_order, :is_default,
         :mapping_field, :mapping_field_type, :_destroy, :tracking,
         validations: {},
         field_options_attributes: %i[
