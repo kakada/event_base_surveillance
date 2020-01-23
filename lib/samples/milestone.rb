@@ -24,7 +24,6 @@ module Samples
 
       def create_milestone(program_name, milestones)
         program = ::Program.find_by name: program_name
-
         milestones.each do |milestone|
           milestone[:creator_id] = program.creator_id
           program.milestones.create(milestone)
