@@ -18,7 +18,7 @@ module Programs
 
     def program_params
       params.require(:program).permit(
-        :enable_telegram, :language_code
+        :enable_telegram, :enable_email_notification, :language_code
       )
     end
   end

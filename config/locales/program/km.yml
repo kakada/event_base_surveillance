@@ -7,4 +7,5 @@ km:
     edit_program: 'កែសម្រួល Program'
     program_settings: 'ការកំណត់ Program'
     telegram_notification: 'សេចក្តីជូនដំណឹងតាម Telegram'
+    email_notification: 'សេចក្តីជូនដំណឹងតាមអុីម៉ែល'
     language: 'ភាសា'

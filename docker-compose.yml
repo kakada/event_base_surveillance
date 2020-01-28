@@ -3,12 +3,13 @@ version: '3'
 volumes:
   bundle:
   elastic:
+  db:
 
 services:
   db:
-    image: postgres:11.6
+    image: postgres:12.0
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
 
   web: &rails
     build:
@@ -42,8 +43,7 @@ services:
     ports: []
 
   redis:
-    container_name: redis
-    image: redis
+    image: redis:5.0.6
 
   elasticsearch:
     image: elasticsearch:7.4.1
@@ -52,7 +52,7 @@ services:
       - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - xpack.security.enabled=true
-    volumes: 
+    volumes:
       - elastic:/usr/share/elasticsearch/data
     healthcheck:
       test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi

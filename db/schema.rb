@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 2020_01_20_092533) do
     t.datetime "updated_at", null: false
     t.integer "creator_id"
     t.string "language_code"
+    t.boolean "enable_email_notification", default: false
   end
 
   create_table "tracings", force: :cascade do |t|

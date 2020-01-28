@@ -1,7 +1,9 @@
 EBS.ProgramsSettingsShow = do ->
   init = ->
     initToggle()
+    initEmailToggle()
     onChangeTelegramToggle()
+    onChangeEmailToggle()
     onChangeLanguage()
 
   onChangeLanguage = ->
@@ -17,6 +19,14 @@ EBS.ProgramsSettingsShow = do ->
       off: 'Off',
       size: 'small'
     });
+
+  initEmailToggle = ->
+    $('#program_enable_email_notification').bootstrapToggle();
+
+  onChangeEmailToggle = ->
+    $(document).off 'change', '#program_enable_email_notification'
+    $(document).on 'change', '#program_enable_email_notification', (event)->
+      _updateProgram({ enable_email_notification: $(event.target).prop('checked') })
 
   onChangeTelegramToggle = ->
     $(document).off 'change', '#toggle-telegram'
