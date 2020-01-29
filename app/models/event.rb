@@ -19,7 +19,7 @@ class Event < ApplicationRecord
   include Events::Callback
   include Events::TemplateField
   include Events::FieldValueValidation
-  include Events::LogCallback
+  include Events::TraceableField
 
   # Association
   belongs_to :event_type
@@ -28,7 +28,7 @@ class Event < ApplicationRecord
   belongs_to :location, foreign_key: :location_code, optional: true
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
   has_many   :field_values, as: :valueable, dependent: :destroy
-  has_many   :logs, as: :logable, dependent: :destroy
+  has_many   :tracings, as: :traceable, dependent: :destroy
 
   # History
   has_associated_audits

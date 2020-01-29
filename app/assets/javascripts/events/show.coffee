@@ -4,11 +4,11 @@ EBS.EventsShow = do ->
   init = ->
     _renderMap()
     _initChart()
-    onClickLogTextModalTrigger()
+    onClickTracingTextModalTrigger()
 
-  onClickLogTextModalTrigger = ->
-    $('.log-text-modal-trigger').on 'click', ->
-      data = $(this).data('logs')
+  onClickTracingTextModalTrigger = ->
+    $('.tracing-text-modal-trigger').on 'click', ->
+      data = $(this).data('tracings')
       dom = ''
       i = 0
 
@@ -40,9 +40,9 @@ EBS.EventsShow = do ->
           yAxes: [ { stacked: true } ])
 
   _getBarChartData = ->
-    data = $('#myChart').data('event-logs')
+    data = $('#myChart').data('eventTracings')
     labels = (x.created_at for x in data)
-    fields = $('#myChart').data('tracking-number-fields')
+    fields = $('#myChart').data('trackingNumberFields')
     datasets = []
 
     for field in fields
@@ -104,5 +104,5 @@ EBS.EventsShow = do ->
 
   {
     init: init
-    onClickLogTextModalTrigger: onClickLogTextModalTrigger
+    onClickTracingTextModalTrigger: onClickTracingTextModalTrigger
   }

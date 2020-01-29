@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :log do
-    
+  factory :tracing do
+
   end
 end

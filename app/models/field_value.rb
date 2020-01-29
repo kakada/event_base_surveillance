@@ -93,7 +93,7 @@ class FieldValue < ApplicationRecord
     return unless field_value.field.tracking?
 
     event = valueable.event
-    return event.logs.create(field_id: field_value.field_id, field_value: field_value.value, type: 'Logs::TextLog') if field_value.field_type != 'Fields::IntegerField'
+    return event.tracings.create(field_id: field_value.field_id, field_value: field_value.value, type: 'Tracings::TextTracing') if field_value.field_type != 'Fields::IntegerField'
 
     tracking_codes = event.milestone.fields.tracking.number.pluck(:code)
     fvs = event.field_values.select { |field_v| tracking_codes.include? field_v.field_code }.pluck(:field_code, :value).to_h
@@ -102,7 +102,7 @@ class FieldValue < ApplicationRecord
       props[code] = fvs[code] || 0
     end
 
-    event.logs.create(properties: props, type: 'Logs::NumberLog')
+    event.tracings.create(properties: props, type: 'Tracings::NumberTracing')
   end
 
   def cleanup_values

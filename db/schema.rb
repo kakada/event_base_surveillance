@@ -150,17 +150,6 @@ ActiveRecord::Schema.define(version: 2020_01_15_084145) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "logs", force: :cascade do |t|
-    t.integer "field_id"
-    t.string "field_value"
-    t.text "properties"
-    t.string "logable_id"
-    t.string "logable_type"
-    t.string "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "milestones", force: :cascade do |t|
     t.integer "program_id"
     t.string "name"
@@ -194,6 +183,17 @@ ActiveRecord::Schema.define(version: 2020_01_15_084145) do
     t.datetime "updated_at", null: false
     t.integer "creator_id"
     t.string "language_code"
+  end
+
+  create_table "tracings", force: :cascade do |t|
+    t.integer "field_id"
+    t.string "field_value"
+    t.text "properties"
+    t.string "traceable_id"
+    t.string "traceable_type"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
