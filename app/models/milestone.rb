@@ -20,6 +20,7 @@ class Milestone < ApplicationRecord
   belongs_to :program
   belongs_to :creator, class_name: 'User'
   has_one    :telegram, class_name: 'Notifications::Telegram'
+  has_one    :message
   has_many   :fields, dependent: :destroy
 
   # Validation
