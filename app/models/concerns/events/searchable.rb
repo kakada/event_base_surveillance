@@ -67,11 +67,11 @@ module Events
 
       def build_milestone_attr(milestone, index)
         valueable = index.zero? ? self : event_milestones.select { |em| em.milestone_id == milestone.id }.first
-        return { 'conducted_at': nil } if valueable.nil?
+        return {} if valueable.nil?
 
         attrs = {}
         valueable.field_values.each do |fv|
-          attrs[fv.field_code] = fv.instant_value
+          attrs[fv.field_code] = fv.es_value
         end
 
         valueable.attributes.except(*except_attributes).merge(attrs)

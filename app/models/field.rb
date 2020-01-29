@@ -94,7 +94,7 @@ class Field < ApplicationRecord
   end
 
   def set_display_order
-    self.display_order ||= self.class.maximum(:display_order).to_i + 1
+    self.display_order ||= milestone.present? && milestone.fields.maximum(:display_order).to_i + 1
   end
 
   def set_mapping_field_type

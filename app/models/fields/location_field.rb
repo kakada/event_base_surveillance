@@ -28,7 +28,7 @@ module Fields
     end
 
     def self.es_datatype
-      :geo_point
+      :keyword
     end
   end
 end

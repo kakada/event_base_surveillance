@@ -1,0 +1,294 @@
+[
+  {
+    "name": "Verification",
+    "fields_attributes": [
+      {
+        "name": "Verify outbreak confirm",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "Replication of the case",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "Animal death",
+        "field_type": "Fields::TextField"
+      }
+    ]
+  },
+  {
+    "name": "Investigation",
+    "fields_attributes": [
+      {
+        "name": "Primary case?",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "Conducted person",
+        "field_type": "Fields::TextField"
+      },
+      {
+        "name": "Attendent list",
+        "field_type": "Fields::FileField"
+      },
+      {
+        "name": "Control measures implemented",
+        "field_type": "Fields::TextField"
+      },
+      {
+        "name": "Summary report",
+        "field_type": "Fields::FileField"
+      },
+      {
+        "name": "CAVET",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "Additional info",
+        "field_type": "Fields::TextField",
+        "field_options_attributes": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "Sampling",
+        "field_type": "Fields::FileField"
+      },
+      {
+        "name": "Type of communication activity",
+        "field_type": "Fields::TextField"
+      }
+    ]
+  },
+  {
+    "name": "Risk Assessment",
+    "fields_attributes": [
+      {
+        "name": "Lab Name",
+        "field_type": "Fields::TextField"
+      },
+      {
+        "name": "Date submitted sample",
+        "field_type": "Fields::DateField"
+      },
+      {
+        "name": "Date for result",
+        "field_type": "Fields::DateField"
+      },
+      {
+        "name": "Lab result",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Food poisoning"
+          },
+          {
+            "name": "Influenza"
+          }
+        ]
+      },
+      {
+        "name": "Lab result attachment",
+        "field_type": "Fields::FileField"
+      },
+      {
+        "name": "Is it severe disease?",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "Retest Lab Name",
+        "field_type": "Fields::TextField"
+      },
+      {
+        "name": "Retest Date submitted to Lab",
+        "field_type": "Fields::DateField"
+      },
+      {
+        "name": "Retest Date for result",
+        "field_type": "Fields::DateField"
+      },
+      {
+        "name": "Retest Lab result",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Food poisoning"
+          },
+          {
+            "name": "Influenza"
+          }
+        ]
+      },
+      {
+        "name": "Retest Lab result attachment",
+        "field_type": "Fields::FileField"
+      }
+    ]
+  },
+  {
+    "name": "Intervention/Response",
+    "fields_attributes": [
+      {
+        "name": "Prakas attachment",
+        "field_type": "Fields::FileField"
+      },
+      {
+        "name": "Control method",
+        "field_type": "Fields::SelectMultipleField",
+        "field_options_attributes": [
+          {
+            "name": "Deaths"
+          },
+          {
+            "name": "Destroyed"
+          },
+          {
+            "name": "Culling"
+          },
+          {
+            "name": "Disinfection"
+          },
+          {
+            "name": "Bio security"
+          },
+          {
+            "name": "Movement control"
+          },
+          {
+            "name": "Surveliance"
+          }
+        ]
+      },
+      {
+        "name": "Awareness",
+        "field_type": "Fields::TextField"
+      },
+      {
+        "name": "Deaths",
+        "field_type": "Fields::IntegerField"
+      },
+      {
+        "name": "Destroyed",
+        "field_type": "Fields::IntegerField"
+      },
+      {
+        "name": "Culling",
+        "field_type": "Fields::IntegerField"
+      },
+      {
+        "name": "Slaughter",
+        "field_type": "Fields::IntegerField"
+      }
+    ]
+  },
+  {
+    "name": "Case Close",
+    "final": true,
+    "fields_attributes": [
+      {
+        "name": "Collect surrounding sample",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "Conducted person",
+        "field_type": "Fields::TextField",
+        "field_options_attributes": [
+          {
+            "name": "Deaths"
+          },
+          {
+            "name": "Destroyed"
+          },
+          {
+            "name": "Culling"
+          },
+          {
+            "name": "Disinfection"
+          },
+          {
+            "name": "Bio security"
+          },
+          {
+            "name": "Movement control"
+          },
+          {
+            "name": "Surveliance"
+          }
+        ]
+      },
+      {
+        "name": "Summary report",
+        "field_type": "Fields::FileField"
+      },
+      {
+        "name": "Sample testing and confirm from lab",
+        "field_type": "Fields::SelectOneField",
+        "field_options_attributes": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "Attachment of Prakas from MAFF to close case",
+        "field_type": "Fields::FileField"
+      }
+    ]
+  }
+]
