@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :milestones do
     scope module: :milestones do
       resource :telegram
+      resource :message
     end
 
     put :reorder, on: :collection

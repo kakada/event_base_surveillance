@@ -37,6 +37,8 @@
 //= require chart
 
 // ** Main js
+//= require tagify.min
+
 //= require application/namespace
 //= require application/util
 
@@ -57,6 +59,7 @@
 //= require client_apps/index
 //= require client_apps/new
 //= require telegrams/new
+//= require messages/message
 //= require programs/settings
 //= require webhooks/new
 

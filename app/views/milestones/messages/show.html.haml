@@ -1,0 +1,37 @@
+#content.flex-column
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "#{@milestone.name}: Notification"
+      = link_to 'Done', milestones_path, class: 'btn btn-light'
+
+  - if @message.present?
+    .w-50.view-center
+      .flex1
+        .flex-row
+          .label Message:
+          .flex1= @message.message
+
+        - if @message.telegram.present?
+          .flex-row
+            .label Chat Groups:
+            .flex1
+              - @message.telegram.chat_groups.each do |group|
+                - if group.is_active?
+                  %span= group.title
+                - else
+                  %strike{'data-toggle'=>"tooltip", 'data-placement' => "top", title: group.reason}= group.title
+        - if @message.email_notification.present?
+          .flex-row
+            .label Email:
+            .flex1
+              %span= @message.email_notification.emails
+
+      .actions
+        = link_to 'Change', edit_milestone_message_path(@milestone), class: 'btn btn-primary'
+
+  - else
+    .w-50.view-center.flex1.flex-row-vertical-center
+      .flex1.text-center
+        %div Please setup your notification
+        .actions
+          = link_to 'Setup', new_milestone_message_path(@milestone), class: 'btn btn-primary'

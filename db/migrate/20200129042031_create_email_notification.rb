@@ -5,7 +5,7 @@ class CreateEmailNotification < ActiveRecord::Migration[5.2]
     create_table :email_notifications do |t|
       t.integer :milestone_id
       t.integer :message_id
-      t.text :emails
+      t.text :emails, array: true, default: []
 
       t.timestamps
     end

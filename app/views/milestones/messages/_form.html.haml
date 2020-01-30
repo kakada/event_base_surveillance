@@ -1,0 +1,20 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "#{@milestone.name}: Message Notification"
+
+  .w-50.view-center
+    = simple_form_for @message, url: milestone_message_path(@milestone), html: { id: 'message-form' } do |f|
+      = f.input :message
+      = render 'stepper_template_fields'
+
+      = f.simple_fields_for :telegram do |tf|
+        = tf.hidden_field :milestone_id, value: @milestone.id
+        = tf.association :notification_chat_groups, as: :check_boxes, collection: @chat_groups, include_hidden: false, checked: @message.telegram.notification_chat_groups.collect(&:chat_group_id)
+
+      = f.simple_fields_for :email_notification do |ef|
+        = ef.input :emails, input_html: { id: 'notification-emails' }
+
+      .actions
+        = f.button :submit, class: 'btn btn-primary'
+        = link_to 'Cancel', milestone_telegram_path, class: 'btn btn-secondary'
