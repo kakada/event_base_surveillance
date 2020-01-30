@@ -6,7 +6,7 @@
 
   .input-group{"data-target-input" => "nearest"}
     - id = "event_field_values_attributes_#{f.index}_value"
-    = f.text_field :value, value: f.object.value, class: ['form-control datetimepicker', ('is-invlid' if error_msg.present?)], autocomplete: 'off', id: id, data: { target: "##{id}", toggle: 'datetimepicker'}, placeholder: 'yyyy-mm-dd hh:mm'
+    = f.text_field :value, value: f.object.value, class: ['form-control datetimepicker', ('is-invalid' if error_msg.present?)], autocomplete: 'off', id: id, data: { target: "##{id}", toggle: 'datetimepicker'}, placeholder: 'yyyy-mm-dd hh:mm'
     .input-group-append{"data-target" => "##{id}", "data-toggle" => "datetimepicker"}
       .input-group-text
         %i.far.fa-clock

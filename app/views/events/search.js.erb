@@ -1,0 +1,7 @@
+<% if @pagy.page == 1 %>
+  $(".event-list").html("<%= escape_javascript(render('link_events')) %>");
+<% else %>
+  $(".event-list").append("<%= escape_javascript(render('link_events')) %>");
+<% end %>
+
+$('#div_next_link').html("<%= escape_javascript(render('next_link')) %>");

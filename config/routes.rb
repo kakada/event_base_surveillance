@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     end
 
     get :download, on: :collection
+    get :search, on: :collection
   end
 
   resources :event_types do

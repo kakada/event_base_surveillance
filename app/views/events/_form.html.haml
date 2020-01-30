@@ -1,6 +1,7 @@
 .w-50.view-center
   = simple_form_for @event do |f|
     = f.input :event_type_id, label: t('event.event_type'), collection: @event_types
+    = f.input :link_uuid, label: t('event.link_uuid')
 
     - current_program.milestones.root.fields.entry_able.each do |field|
       - obj = @event.field_values.select{ |a| a.field_id==field.id }.first || f.object.field_values.new
@@ -19,3 +20,5 @@
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), events_path, class: 'btn btn-secondary'
+
+= render 'link_event_modal'

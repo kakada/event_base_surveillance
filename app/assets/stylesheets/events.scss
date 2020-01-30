@@ -59,11 +59,6 @@
     }
   }
 
-  .mx-1 {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
   .fields {
     border: 1px solid #ccc;
     padding: 10px;
@@ -72,6 +67,16 @@
 
   .hidden {
     display: none;
+  }
+
+  .event-wrapper {
+    min-height: 100px;
+    max-height: 400px;
+    overflow-y: scroll;
+
+    .event-item:hover {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
   }
 }
 

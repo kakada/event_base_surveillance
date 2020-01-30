@@ -27,3 +27,6 @@ en:
     absolute: 'Absolute'
     start_date: 'Start date'
     filter_by_date: 'Filter by date'
+    link_uuid: 'Link Event Uuid'
+    search_link_event: 'Search event by uuid or event type'
+    link_to: 'Link to'
