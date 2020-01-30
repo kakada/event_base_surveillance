@@ -12,6 +12,7 @@ module Samples
 
       def load_cdc
         milestones = JSON.parse(File.read('lib/samples/db/cdc_milestone.json'))
+        update_cdc_root_milestone
         create_milestone('CDC', milestones)
       end
 
@@ -43,6 +44,20 @@ module Samples
             { name: 'Population at risk', field_type: 'Fields::IntegerField' },
             { name: 'New or on-going', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Yes' }, { name: 'No' }] },
             { name: 'Clinical signs', field_type: 'Fields::NoteField' }
+          ]
+        )
+      end
+
+      def update_cdc_root_milestone
+        milestone = ::Program.find_by(name: 'CDC').milestones.root
+        milestone.update_attributes(
+          fields_attributes: [
+            {
+              name: 'Number of hospitalized',
+              code: 'number_of_hospitalized',
+              field_type: 'Fields::IntegerField',
+              tracking: true
+            }
           ]
         )
       end

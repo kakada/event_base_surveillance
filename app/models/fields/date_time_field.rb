@@ -19,6 +19,7 @@
 #  updated_at         :datetime         not null
 #  color_required     :boolean          default(FALSE)
 #  validations        :text
+#  tracking           :boolean          default(FALSE)
 #
 
 module Fields

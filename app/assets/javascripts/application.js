@@ -33,6 +33,10 @@
 //= require leaflet
 //= require moment.min
 
+// **Bar Chart
+//= require chart
+
+// ** Main js
 //= require application/namespace
 //= require application/util
 
@@ -45,6 +49,7 @@
 //= require event_milestones/new
 //= require events/new
 //= require events/show
+//= require event_milestones/show
 //= require events/index
 //= require event_types/new
 //= require users/index

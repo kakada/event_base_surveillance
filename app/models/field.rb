@@ -19,6 +19,7 @@
 #  updated_at         :datetime         not null
 #  color_required     :boolean          default(FALSE)
 #  validations        :text
+#  tracking           :boolean          default(FALSE)
 #
 
 class Field < ApplicationRecord
@@ -43,7 +44,11 @@ class Field < ApplicationRecord
   # Scope
   default_scope { order(is_default: :desc).order(display_order: :asc) }
   scope :dynamic, -> { where(is_default: false) }
+  scope :default, -> { where(is_default: true) }
   scope :entry_able, -> { where(entry_able: true) }
+  scope :tracking, -> { where(tracking: true) }
+  scope :number, -> { where(field_type: 'Fields::IntegerField') }
+  scope :text, -> { where.not(field_type: 'Fields::IntegerField') }
 
   # Nested attributes
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
@@ -61,8 +66,8 @@ class Field < ApplicationRecord
   # Class methods
   def self.roots
     fields = [
-      { code: 'number_of_case', field_type: 'Fields::IntegerField', name: 'Number of case', required: true },
-      { code: 'number_of_death', field_type: 'Fields::IntegerField', name: 'Number of death' },
+      { code: 'number_of_case', field_type: 'Fields::IntegerField', name: 'Number of case', required: true, tracking: true },
+      { code: 'number_of_death', field_type: 'Fields::IntegerField', name: 'Number of death', tracking: true },
       { code: 'description', field_type: 'Fields::NoteField', name: 'Description' },
       { code: 'province_id', field_type: 'Fields::LocationField', name: 'Province', required: true },
       { code: 'district_id', field_type: 'Fields::LocationField', name: 'District' },
@@ -71,7 +76,7 @@ class Field < ApplicationRecord
       { code: 'event_date', field_type: 'Fields::DateTimeField', name: 'Onset date', required: true },
       { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true },
       { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
-      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true },
+      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true, tracking: true },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false }
     ]
     fields.each_with_index do |field, index|

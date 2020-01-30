@@ -1,7 +1,7 @@
 = f.input :name
 = f.input :final, label: 'Is it the close milestone?'
 
-= render 'predefined_fields'
+= render 'predefined_fields', f: f
 
 %fieldset
   %legend= t('milestone.additional_fields')

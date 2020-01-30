@@ -27,14 +27,12 @@ module Samples
 
           # Change here for changing number of event
           max_event = rand(1..5)
-
           (1..max_event).each do
             event = ::Event.create(
               creator_id: program.users.first.try(:id),
               event_type_id: event_type_ids.sample,
               field_values_attributes: event_field_value_attr(program, province_id, district_id, commune_id, village_id)
             )
-
             create_event_milestones(event, program)
           end
         end
@@ -51,6 +49,8 @@ module Samples
           event_date: Date.today - rand(0..30),
           report_date: Date.today
         }
+
+        field_values[:number_of_hospitalized] = rand(1..4) if program.name == 'CDC'
 
         field_values.map do |k, v|
           {

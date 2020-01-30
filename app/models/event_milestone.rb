@@ -16,12 +16,14 @@
 class EventMilestone < ApplicationRecord
   include Events::Callback
   include Events::FieldValueValidation
+  include Events::TraceableField
 
   belongs_to :event, foreign_key: :event_uuid
   belongs_to :milestone
   belongs_to :program
   belongs_to :submitter, class_name: 'User', optional: true
   has_many   :field_values, as: :valueable, dependent: :destroy
+  has_many   :tracings, as: :traceable, dependent: :destroy
 
   # History
   has_associated_audits

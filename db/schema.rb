@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_27_095301) do
+ActiveRecord::Schema.define(version: 2020_01_15_084145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 2019_12_27_095301) do
     t.datetime "updated_at", null: false
     t.boolean "color_required", default: false
     t.text "validations"
+    t.boolean "tracking", default: false
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
@@ -182,6 +183,17 @@ ActiveRecord::Schema.define(version: 2019_12_27_095301) do
     t.datetime "updated_at", null: false
     t.integer "creator_id"
     t.string "language_code"
+  end
+
+  create_table "tracings", force: :cascade do |t|
+    t.integer "field_id"
+    t.string "field_value"
+    t.text "properties"
+    t.string "traceable_id"
+    t.string "traceable_type"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

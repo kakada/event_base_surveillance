@@ -27,7 +27,6 @@ EBS.Location = do ->
       true
 
   setLocationValue = (event) ->
-    console.log('event===', event.target.value)
     $('.location').val(event.target.value)
 
   { init: init }

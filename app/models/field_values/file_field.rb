@@ -22,8 +22,14 @@
 
 module FieldValues
   class FileField < ::FieldValue
-    def instant_value
-      file_url
+    def html_tag
+      "
+        <div>
+          <a href='#{Rails.application.routes.url_helpers.download_path(file: file_url)}' target='_blank' style='color: #007bff'>
+            #{file_url.split('/').last}
+          </a>
+        </div>
+      "
     end
   end
 end

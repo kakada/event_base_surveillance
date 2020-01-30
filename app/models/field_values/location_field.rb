@@ -22,12 +22,12 @@
 
 module FieldValues
   class LocationField < ::FieldValue
-    def instant_value
-      location.name_km if location.present?
-    end
-
     def es_value
       location.name_en.split(' ').join('_') if location.present?
+    end
+
+    def html_tag
+      location.try(:name_km).to_s
     end
 
     private
