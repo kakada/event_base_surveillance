@@ -1,12 +1,13 @@
 .content-element.circles-list.flex1
   %ol
-    - Milestone.all.each do |milestone|
-      %li{ class: ('inactive' unless milestone == Milestone.first || milestone == @milestone) }
+    - milestones = current_program.milestones
+    - milestones.each do |milestone|
+      %li{ class: ('inactive' unless milestone == milestones.root || milestone == @milestone) }
         %span.number
         .milestone-name= milestone.name
         .template-fields-wrapper
           .template-fields
-            - if milestone == Milestone.first
+            - if milestone == milestones.root
               - Event.template_fields.each do |field|
                 = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}
             - elsif milestone == @milestone
