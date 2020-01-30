@@ -16,11 +16,11 @@
         = link_to t('event.back'), events_path, class: 'btn btn-info'
 
   .flex-row
-    = render 'event_info'
-
     - if policy(@event).update?
       = render "event_progress", event: @event
     - else
       = render "close_event_progress", event: @event
+
+    = render 'event_info'
 
     = render 'map'
