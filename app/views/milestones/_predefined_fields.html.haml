@@ -10,8 +10,9 @@
             %button.btn.move{type: :button, style: 'cursor: auto'}
 
             .wrapper.flex-row-vertical-center
-              %abbr{:title => "required", class: ('hidden' if !form.object.required)} *
-
+              %button.btn.collapse-trigger.mr-1{ type: :button }
+                %i.fas.fa-caret-right
+              %abbr.ml-3{ :title => "required", class: ('hidden' if !form.object.required) } *
               = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.field_type
               = form.hidden_field :required
               = form.hidden_field :is_default, value: true
