@@ -88,7 +88,15 @@
         ]
       },
       {
-        "name": "Sampling",
+        "name": "How many sample collected?",
+        "field_type": "Fields::IntegerField"
+      },
+      {
+        "name": "Sample description",
+        "field_type": "Fields::TextField"
+      },
+      {
+        "name": "Symtomps attachment",
         "field_type": "Fields::FileField"
       },
       {
@@ -117,10 +125,28 @@
         "field_type": "Fields::SelectOneField",
         "field_options_attributes": [
           {
-            "name": "Food poisoning"
+            "name": "ផ្តាសាយបក្សី"
           },
           {
-            "name": "Influenza"
+            "name": "អុតក្តាម"
+          },
+          {
+            "name": "សារទឹក"
+          },
+          {
+            "name": "បុស្សខ្យល់"
+          },
+          {
+            "name": "បេស្តជ្រូក"
+          },
+          {
+            "name": "បេស្តជ្រូកអាហ្វ្រិក"
+          },
+          {
+            "name": "ត្រចៀកខៀវ"
+          },
+          {
+            "name": "ឆ្កែឆ្កួត"
           }
         ]
       },
@@ -157,10 +183,28 @@
         "field_type": "Fields::SelectOneField",
         "field_options_attributes": [
           {
-            "name": "Food poisoning"
+            "name": "ផ្តាសាយបក្សី"
           },
           {
-            "name": "Influenza"
+            "name": "អុតក្តាម"
+          },
+          {
+            "name": "សារទឹក"
+          },
+          {
+            "name": "បុស្សខ្យល់"
+          },
+          {
+            "name": "បេស្តជ្រូក"
+          },
+          {
+            "name": "បេស្តជ្រូកអាហ្វ្រិក"
+          },
+          {
+            "name": "ត្រចៀកខៀវ"
+          },
+          {
+            "name": "ឆ្កែឆ្កួត"
           }
         ]
       },
