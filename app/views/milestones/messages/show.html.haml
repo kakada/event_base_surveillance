@@ -24,7 +24,8 @@
           .flex-row
             .label Email:
             .flex1
-              %span= @message.email_notification.emails
+              - @message.email_notification.emails.each do |email|
+                %span= email
 
       .actions
         = link_to 'Change', edit_milestone_message_path(@milestone), class: 'btn btn-primary'

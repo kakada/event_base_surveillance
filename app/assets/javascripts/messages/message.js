@@ -38,7 +38,7 @@ EBS.MilestonesMessagesNew = (() => {
       const emails = $('#notification-emails').val();
       if (emails.length) {
         const transformValue = JSON.parse(emails).map(x => x.value);
-        $('#notification-emails').val(transformValue.join(','));
+        $('#notification-emails').val(`{${transformValue.join(',')}}`);
       }
     });
   }

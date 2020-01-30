@@ -52,7 +52,12 @@ module Milestones
     private
 
     def message_params
-      params.require(:message).permit(:message, telegram_attributes: [:milestone_id, notification_chat_groups_attributes: [:id, chat_group_id: []]], email_notification_attributes: [:id, :emails])
+      params.require(:message)
+        .permit(:message,
+                telegram_attributes:
+                [
+                  :milestone_id,
+                  notification_chat_groups_attributes: [:id, :chat_group_id]], email_notification_attributes: [:id, :emails])
     end
 
     def set_milestone

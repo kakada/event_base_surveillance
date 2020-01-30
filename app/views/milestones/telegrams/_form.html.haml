@@ -16,9 +16,6 @@
             = check_box_tag "notifications_telegram[chat_group_ids][]", group.id, @telegram.chat_group_ids.include?(group.id), class: 'form-check-input', id: dom_id(group)
             %label.form-check-label{for: dom_id(group)}= group.title
 
-      .form-group
-        %label Email Group
-
       .actions
         = f.button :submit, class: 'btn btn-primary'
         = link_to 'Cancel', milestone_telegram_path, class: 'btn btn-secondary'

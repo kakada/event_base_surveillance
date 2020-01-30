@@ -15,7 +15,7 @@
 class Notification < ApplicationRecord
   self.inheritance_column = :provider
 
-  belongs_to :milestone
+  # belongs_to :milestone
   belongs_to :message
   has_many :notification_chat_groups
   has_many :chat_groups, through: :notification_chat_groups

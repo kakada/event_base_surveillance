@@ -19,7 +19,7 @@ class Milestone < ApplicationRecord
   # Association
   belongs_to :program
   belongs_to :creator, class_name: 'User'
-  has_one    :telegram, class_name: 'Notifications::Telegram'
+  # has_one    :telegram, class_name: 'Notifications::Telegram'
   has_one    :message
   has_many   :fields, dependent: :destroy
 
@@ -39,7 +39,7 @@ class Milestone < ApplicationRecord
   scope :final, -> { where(final: true).first }
 
   # Deligation
-  delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
+  # delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
 
   # Nested attribute
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
