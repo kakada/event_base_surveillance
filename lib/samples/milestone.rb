@@ -52,12 +52,7 @@ module Samples
         milestone = ::Program.find_by(name: 'CDC').milestones.root
         milestone.update_attributes(
           fields_attributes: [
-            {
-              name: 'Number of hospitalized',
-              code: 'number_of_hospitalized',
-              field_type: 'Fields::IntegerField',
-              tracking: true
-            }
+            { name: 'Number of hospitalized', code: 'number_of_hospitalized', field_type: 'Fields::IntegerField', tracking: true }
           ]
         )
       end

@@ -51,7 +51,7 @@ class MilestonesController < ::ApplicationController
     params.require(:milestone).permit(
       :name, :display_order, :final,
       fields_attributes: [
-        :id, :name, :field_type, :required, :display_order, :is_default,
+        :id, :name, :field_type, :required, :display_order, :is_default, :code,
         :mapping_field, :mapping_field_type, :_destroy, :tracking, :description,
         validations: {},
         field_options_attributes: %i[

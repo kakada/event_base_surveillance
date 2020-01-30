@@ -7,7 +7,6 @@ RSpec.describe Events::FieldValueValidation do
     let!(:program) { create(:program) }
     let!(:event) { create(:event, program: program) }
     let!(:milestone) { create(:milestone, program: program) }
-    let!(:default_field) { create(:field, :conducted_at_field, milestone: milestone) }
 
     context 'valid' do
       let!(:conducted_at) {

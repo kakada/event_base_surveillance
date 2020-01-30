@@ -9,7 +9,6 @@ FactoryBot.define do
 
     trait :risk_assessment_with_field_values do
       milestone { create(:milestone, :risk_assessment, program: program) }
-      field { create(:field, :conducted_at_field, milestone: milestone) }
 
       field_values_attributes {
         [
