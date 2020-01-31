@@ -4,13 +4,6 @@ FactoryBot.define do
     program
     creator_id { program.creator_id }
 
-    after :create do |milestone|
-      return if milestone.is_default
-
-      milestone.fields_attributes = Field.defaults
-      milestone.save
-    end
-
     trait :root do
       is_default { true }
 

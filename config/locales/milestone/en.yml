@@ -18,3 +18,4 @@ en:
     from: 'From'
     to: 'To'
     set_validation: 'Set validation'
+    description: Description

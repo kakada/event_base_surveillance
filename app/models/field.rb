@@ -20,6 +20,7 @@
 #  color_required     :boolean          default(FALSE)
 #  validations        :text
 #  tracking           :boolean          default(FALSE)
+#  description        :text
 #
 
 class Field < ApplicationRecord

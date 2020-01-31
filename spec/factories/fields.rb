@@ -4,6 +4,14 @@ FactoryBot.define do
     field_type  { 'Fields::TextField' }
     code        { name.downcase.split(' ').join('_') }
 
+    trait :conducted_at_field do
+      name        { 'Conducted at' }
+      field_type  { 'Fields::DateTimeField' }
+      code        { 'conducted_at' }
+      is_default  { true }
+      required    { true }
+    end
+
     trait :risk_level_mapping_field do
       name                {'Risk Level'}
       field_type          {'Fields::MappingField'}

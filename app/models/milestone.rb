@@ -30,6 +30,7 @@ class Milestone < ApplicationRecord
   validate :check_field_validation
 
   before_create :set_display_order
+  before_create :set_default_fields, unless: :is_default?
 
   # Scope
   default_scope { order(display_order: :asc) }
@@ -95,6 +96,10 @@ class Milestone < ApplicationRecord
 
   def set_display_order
     self.display_order = program.milestones.maximum(:display_order).to_i + 1
+  end
+
+  def set_default_fields
+    self.fields_attributes = Field.defaults.select{ |f| fields.collect(&:code).exclude? f[:code] }
   end
 
   def validate_unique_field_name

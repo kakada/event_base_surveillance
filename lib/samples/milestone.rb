@@ -24,7 +24,6 @@ module Samples
 
       def create_milestone(program_name, milestones)
         program = ::Program.find_by name: program_name
-
         milestones.each do |milestone|
           milestone[:creator_id] = program.creator_id
           program.milestones.create(milestone)
@@ -53,12 +52,7 @@ module Samples
         milestone = ::Program.find_by(name: 'CDC').milestones.root
         milestone.update_attributes(
           fields_attributes: [
-            {
-              name: 'Number of hospitalized',
-              code: 'number_of_hospitalized',
-              field_type: 'Fields::IntegerField',
-              tracking: true
-            }
+            { name: 'Number of hospitalized', code: 'number_of_hospitalized', field_type: 'Fields::IntegerField', tracking: true }
           ]
         )
       end

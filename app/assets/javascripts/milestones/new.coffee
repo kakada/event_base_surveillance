@@ -79,12 +79,12 @@ EBS.MilestonesNew = do ->
 
   initCollapseContent = (dom) ->
     hideCollapseContent(dom)
+    showCollapseTrigger(dom)
 
     if dom.value == selectOne || dom.value == selectMultiple
-      showCollapseTrigger(dom)
+      # showCollapseTrigger(dom)
       showOption(dom)
     else if dom.value == mappingField
-      showCollapseTrigger(dom)
       showMappingField(dom)
       handleDisplayOption(dom)
     return

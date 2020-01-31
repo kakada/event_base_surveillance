@@ -12,6 +12,7 @@ class MilestonesController < ::ApplicationController
 
   def create
     @milestone = current_program.milestones.new(milestone_params)
+
     if @milestone.save
       redirect_to milestones_url
     else
@@ -50,8 +51,8 @@ class MilestonesController < ::ApplicationController
     params.require(:milestone).permit(
       :name, :display_order, :final,
       fields_attributes: [
-        :id, :name, :field_type, :required, :display_order, :is_default,
-        :mapping_field, :mapping_field_type, :_destroy, :tracking,
+        :id, :name, :field_type, :required, :display_order, :is_default, :code,
+        :mapping_field, :mapping_field_type, :_destroy, :tracking, :description,
         validations: {},
         field_options_attributes: %i[
           id name value color _destroy
