@@ -77,12 +77,11 @@ class Milestone < ApplicationRecord
   end
 
   private
-
-  def check_field_validation
-    fields.each do |field|
-      errors.add field.name.downcase, 'both must be exist' if field.validations[:from].present? != field.validations[:to].present?
+    def check_field_validation
+      fields.each do |field|
+        errors.add field.name.downcase, 'both must be exist' if field.validations[:from].present? != field.validations[:to].present?
+      end
     end
-  end
 
   def only_one_final_milestone
     return unless final?

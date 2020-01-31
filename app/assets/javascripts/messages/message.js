@@ -19,9 +19,9 @@ EBS.MilestonesMessagesNew = (() => {
 
   let onClickSteper = () => {
     $('ol > li:not(.inactive)').off('click', 'span.number');
-    $('ol > li:not(.inactive)').on('click', 'span.number', () => {
+    $('ol > li:not(.inactive)').on('click', 'span.number', (event) => {
       $('ol > li').removeClass('active');
-      $(this).parent('li').addClass('active');
+      $(event.currentTarget).parent('li').addClass('active');
     });
   };
 
