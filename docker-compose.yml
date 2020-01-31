@@ -52,7 +52,7 @@ services:
       - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - xpack.security.enabled=true
-    volumes: 
+    volumes:
       - elastic:/usr/share/elasticsearch/data
     healthcheck:
       test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
