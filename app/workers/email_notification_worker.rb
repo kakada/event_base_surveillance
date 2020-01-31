@@ -11,6 +11,7 @@ class EmailNotificationWorker
 
     return if obj.nil? || obj.milestone.message.try(:email_notification).nil?
 
-    obj.milestone.message.email_notification.notify(obj.milestone.telegram_message)
+    NotificationMailer.notify(obj.milestone.message.email_notification.emails.join(','), obj.telegram_message).deliver_now
   end
 end
+

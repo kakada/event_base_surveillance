@@ -93,7 +93,7 @@ class Event < ApplicationRecord
   end
 
   def telegram_message
-    @telegram_message ||= MessageInterpretor.new(milestone.telegram_message, uuid).message
+    @telegram_message ||= MessageInterpretor.new(milestone.message.message, uuid).message
   end
 
   def set_event_progress
