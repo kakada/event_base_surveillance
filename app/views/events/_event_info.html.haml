@@ -1,0 +1,36 @@
+%ul.list.flex1.pt-0.px-3.event-bubble
+  %li
+    %span.type= "#{t('event.event_type')}:"
+    %span.value= @event.event_type_name
+  %li
+    %span.type= "#{t('event.location')}:"
+    %span.value= @event.location_name(reverse=true)
+
+  %li
+    %span.type= "#{t('event.link_to')}:"
+    %span.value
+      - if @event.link_uuid.present?
+        = link_to @event.link_uuid, event_path(@event.link_uuid), style: 'color: #007bff'
+      - else
+        = '-'
+
+  - @event.milestone.sections.each do |section|
+    %fieldset.section
+      %legend= section.name
+
+      - section.fields.each do |field|
+        %li
+          %span.type= field.name
+          %span.value
+            - if fvs = @event.field_values.select{ |fv| fv.field_id == field.id }.presence
+              - fvs.each do |fv|
+                = fv.html_tag.html_safe
+
+                - if fv.field.tracking? && fv.field_type != 'Fields::IntegerField'
+                  %a.tracing-text-modal-trigger.pointer{'data-target' => '#log-text-field', 'data-toggle' => 'modal', 'data-tracings' => @event.tracings.text.where(field_id: fv.field_id).to_json, 'data-title' => fv.field_name}
+                    %i.far.fa-chart-bar.chart
+
+            - else
+              = '-'
+
+= render 'tracing_text_field_modal'
