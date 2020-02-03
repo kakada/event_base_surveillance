@@ -217,6 +217,15 @@ ActiveRecord::Schema.define(version: 2020_02_06_075745) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.integer "milestone_id"
+    t.integer "display_order"
+    t.boolean "default", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tracings", force: :cascade do |t|
     t.integer "field_id"
     t.string "field_value"
