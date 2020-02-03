@@ -3,22 +3,26 @@
   %input.form-control{type: :text, readonly: true, value: @event.event_type_name}
   = f.input :milestone_id, input_html: { value: @event_milestone.milestone_id }, as: :hidden
 
-- @event_milestone.milestone.fields.entry_able.each do |field|
-  - if field.field_type == 'Fields::FileField'
-    - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id } || f.object.field_values.new
+- @event_milestone.milestone.sections.each do |section|
+  %fieldset.section
+    %legend= section.name
 
-    .fields
-      = f.label field.name
-      - if field.description.present?
-        %i.fa.fa-question-circle{ data: { toggle: "tooltip", html: "true" }, title: description_html(field.description).html_safe }
-      = f.fields_for :field_values, obj do |builder|
-        = render 'field_value_fields', f: builder, option: { field: field, main_object: @event_milestone }
-      = link_to_add_fields t('event.add_file'), f, :field_values, { field: field, main_object: @event_milestone }
+    - section.fields.entry_able.each do |field|
+      - if field.field_type == 'Fields::FileField'
+        - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id } || f.object.field_values.new
 
-  - else
-    - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id }.first || @event_milestone.field_values.find_or_initialize_by(field_id: field.id)
-    = f.fields_for :field_values, obj do |builder|
-      = render "events/fields/#{field.kind}", field: field, f: builder, main_object: @event_milestone
+        .fields
+          = f.label field.name
+          - if field.description.present?
+            %i.fa.fa-question-circle{ data: { toggle: "tooltip", html: "true" }, title: description_html(field.description).html_safe }
+          = f.fields_for :field_values, obj do |builder|
+            = render 'field_value_fields', f: builder, option: { field: field, main_object: @event_milestone }
+          = link_to_add_fields t('event.add_file'), f, :field_values, { field: field, main_object: @event_milestone }
+
+      - else
+        - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id }.first || @event_milestone.field_values.find_or_initialize_by(field_id: field.id)
+        = f.fields_for :field_values, obj do |builder|
+          = render "events/fields/#{field.kind}", field: field, f: builder, main_object: @event_milestone
 
 .actions
   = f.submit t('shared.save'), class: 'btn btn-primary'

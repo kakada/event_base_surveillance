@@ -145,3 +145,13 @@ pre {
 .chart {
   width: 24px;
 }
+
+.section {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+
+  legend {
+    width: auto;
+  }
+}
