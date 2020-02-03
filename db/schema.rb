@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_29_084156) do
+ActiveRecord::Schema.define(version: 2020_02_03_023119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,9 @@ ActiveRecord::Schema.define(version: 2020_01_29_084156) do
     t.text "validations"
     t.boolean "tracking", default: false
     t.text "description"
+    t.integer "section_id"
+    t.index ["milestone_id", "code"], name: "index_fields_on_milestone_id_and_code", unique: true
+    t.index ["milestone_id", "name"], name: "index_fields_on_milestone_id_and_name", unique: true
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
@@ -202,6 +205,15 @@ ActiveRecord::Schema.define(version: 2020_01_29_084156) do
     t.integer "creator_id"
     t.string "language_code"
     t.boolean "enable_email_notification", default: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.integer "milestone_id"
+    t.integer "display_order"
+    t.boolean "default", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tracings", force: :cascade do |t|

@@ -3,19 +3,19 @@
 module Samples
   class Event
     def self.load
-      provinces = ::Location.where(kind: 'province')
-      provinces.each do |province|
-        districts = province.children.order('random()').limit(3)
-        districts.each do |district|
-          communes = district.children.order('random()').limit(5)
-          communes.each do |commune|
-            villages = commune.children.where.not(latitude: nil).limit(2)
-            villages.each do |village|
-              creat_event(province.code, district.code, commune.code, village.code)
-            end
-          end
-        end
-      end
+      # provinces = ::Location.where(kind: 'province')
+      # provinces.each do |province|
+      #   districts = province.children.order('random()').limit(3)
+      #   districts.each do |district|
+      #     communes = district.children.order('random()').limit(5)
+      #     communes.each do |commune|
+      #       villages = commune.children.where.not(latitude: nil).limit(2)
+      #       villages.each do |village|
+      #         creat_event(province.code, district.code, commune.code, village.code)
+      #       end
+      #     end
+      #   end
+      # end
     end
 
     class << self

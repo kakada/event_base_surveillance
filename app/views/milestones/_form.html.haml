@@ -1,16 +1,15 @@
 = f.input :name
-= f.input :final, label: 'Is it the close milestone?'
+
+- unless @milestone.is_default?
+  = f.input :final, label: 'Is it the close milestone?'
 
 = render 'predefined_fields', f: f
 
-%fieldset
-  %legend= t('milestone.additional_fields')
-  %ol.fields.sortable
-    = f.fields_for :fields, f.object.fields.dynamic do |builder|
-      = render 'field_fields', f: builder
+= f.fields_for :sections, f.object.sections.dynamic do |sf|
+  = render 'section_fields', f: sf
 
-    = link_to_add_fields t('milestone.add_field'), f, :fields
+= link_to_add_fields t('milestone.add_section'), f, :sections
 
-  .actions
-    = f.submit t('shared.save'), class: 'btn btn-primary'
-    = link_to t('shared.cancel'), milestones_path, class: 'btn btn-secondary'
+.actions
+  = f.submit t('shared.save'), class: 'btn btn-primary'
+  = link_to t('shared.cancel'), milestones_path, class: 'btn btn-secondary'

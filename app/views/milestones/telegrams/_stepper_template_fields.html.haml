@@ -7,9 +7,6 @@
         .milestone-name= milestone.name
         .template-fields-wrapper
           .template-fields
-            - if milestone == milestones.root
-              - Event.template_fields.each do |field|
-                = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}
-            - elsif milestone == @milestone
-              - @milestone.template_fields.each do |field|
+            - if milestone.is_default? || milestone == @milestone
+              - milestone.template_fields.each do |field|
                 = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}

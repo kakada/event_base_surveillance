@@ -11,6 +11,7 @@ EBS.MilestonesNew = do ->
     initSortable()
     initMiniColorPicker()
 
+    onClickAddSection()
     onClickAddField()
     onClickRemoveField()
     onClickAddFieldOption()
@@ -161,9 +162,15 @@ EBS.MilestonesNew = do ->
       $(this).closest('fieldset').hide()
       event.preventDefault()
 
+  onClickAddSection = ->
+    $('form .add_sections').off('click')
+    $('form .add_sections').on 'click', (event) ->
+      appendField(this)
+      event.preventDefault()
+
   onClickAddField = ->
-    $('form .add_fields').off('click')
-    $('form .add_fields').on 'click', (event) ->
+    $(document).off('click', 'form .add_fields')
+    $(document).on 'click', 'form .add_fields', (event) ->
       appendField(this)
       event.preventDefault()
 

@@ -26,3 +26,4 @@ en:
     setup_message_instruction: Please setup your notification
     setup: Setup
     both_must_exist: both must be exist
+    add_section: '+ Add Section'

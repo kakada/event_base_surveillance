@@ -29,17 +29,18 @@ class Field < ApplicationRecord
   FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::DateTimeField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze
 
   # Association
+  belongs_to :section
   belongs_to :milestone
   has_many   :field_options, dependent: :destroy
   has_many   :field_values, dependent: :destroy
 
   # Validation
-  validates :code, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
-  validates :name, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
+  validates :code, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
+  validates :name, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
   before_validation :set_field_code, if: -> { name.present? }
   before_validation :set_mapping_field_type
-
+  before_validation :set_milestone
   before_create :set_display_order
 
   # Scope
@@ -93,13 +94,21 @@ class Field < ApplicationRecord
     ]
   end
 
+  def format_name
+    name.downcase.split(' ').join('_')
+  end
+
   private
     def set_field_code
-      self.code ||= name.downcase.split(' ').join('_')
+      self.code ||= format_name
     end
 
     def set_display_order
-      self.display_order ||= milestone.present? && milestone.fields.maximum(:display_order).to_i + 1
+      self.display_order ||= section.present? && section.fields.maximum(:display_order).to_i + 1
+    end
+
+    def set_milestone
+      self.milestone = section.milestone if section
     end
 
     def set_mapping_field_type

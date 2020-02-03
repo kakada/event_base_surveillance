@@ -3,8 +3,8 @@
 module Samples
   class Milestone
     def self.load
-      load_cdc
-      load_gdaph
+      # load_cdc
+      # load_gdaph
     end
 
     class << self

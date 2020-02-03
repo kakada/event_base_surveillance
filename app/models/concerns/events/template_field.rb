@@ -5,7 +5,7 @@ module Events
     extend ActiveSupport::Concern
 
     included do
-      def self.template_fields
+      def self.template_fields(program)
         fields = [
           { code: 'event_type_name', label: 'Event Type' },
           { code: 'creator_email', label: 'Creator' },
@@ -14,7 +14,7 @@ module Events
 
         ]
         fields.each { |field| field[:code] = "#{default_template_code}#{field[:code]}" }
-        fields += Milestone.root.fields.map { |field| { code: "#{dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}", label: field.name } }
+        fields += program.milestones.root.fields.map { |field| { code: "#{dynamic_template_code}#{field.id}_#{field.format_name}", label: field.name } }
         fields
       end
 
