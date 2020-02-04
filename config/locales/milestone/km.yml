@@ -19,3 +19,8 @@ km:
     from: 'ចាប់ពី'
     to: 'ដល់'
     set_validation: 'កំណត់សុពលភាព'
+    chat_group: ក្រុមជជែក
+    message: សារ
+    email: អ៊ីមែល
+    setup_message_instruction: សូមដំឡើងសារជូនដំណឹង
+    setup: ដំឡើង

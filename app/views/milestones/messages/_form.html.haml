@@ -1,7 +1,7 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3= "#{@milestone.name}: Notification"
+      %h3= "#{@milestone.name}: #{t('milestone.notification')}"
 
   .w-50.view-center
     = simple_form_for @message, url: milestone_message_path(@milestone), html: { id: 'message-form' } do |f|
@@ -12,7 +12,7 @@
         = tf.hidden_field :milestone_id, value: @milestone.id
 
         .form-group
-          %label Chat Group
+          %label= t('milestone.chat_group')
           - @chat_groups.each_with_index do |chat_group, index|
             .form-check
               = check_box_tag "message[telegram_attributes][notification_chat_groups_attributes][#{index}][chat_group_id]", chat_group.id, @message.telegram.chat_group_ids.include?(chat_group.id), class: 'form-check-input', id: dom_id(chat_group)
@@ -23,4 +23,4 @@
 
       .actions
         = f.button :submit, class: 'btn btn-primary'
-        = link_to 'Cancel', milestone_message_path, class: 'btn btn-secondary'
+        = link_to t('shared.cancel'), milestone_message_path, class: 'btn btn-secondary'

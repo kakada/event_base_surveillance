@@ -20,3 +20,8 @@ en:
     to: 'To'
     set_validation: 'Set validation'
     description: Description
+    chat_group: Chat group
+    message: Message
+    email: Email
+    setup_message_instruction: Please setup your notification
+    setup: Setup
