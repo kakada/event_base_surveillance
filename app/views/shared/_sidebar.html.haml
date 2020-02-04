@@ -10,7 +10,7 @@
   %ul.list-unstyled.components
     - if current_user.system_admin? || current_user.program_admin?
       %li{class: get_css_active_class('dashboards') }
-        = link_to dashboard_path do
+        = link_to ENV['DASHBOARD_URL'], target: '_blank' do
           %i.fas.fa-tachometer-alt
           = t('sidebar.dashboard')
 
@@ -69,17 +69,3 @@
 
   .copyright
     © 2019 InSTEDD
-
-    / %li
-    /   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#pageSubmenu"}
-    /     %i.fas.fa-copy
-    /     Pages
-    /   %ul#pageSubmenu.collapse.list-unstyled
-    /     %li
-    /       %a{:href => "#"} Page 1
-    /     %li
-    /       %a{:href => "#"} Page 2
-    /     %li
-    /       %a{:href => "#"} Page 3
-
-
