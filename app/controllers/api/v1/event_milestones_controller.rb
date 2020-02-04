@@ -24,18 +24,17 @@ module Api
       end
 
       private
-
-      def event_milestone_params
-        params.require(:event_milestone).permit(
-          :milestone_id,
-          :event_uuid,
-          field_values_attributes: [
-            :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
-          ]
-        ).merge(
-          program_id: current_program.id
-        )
-      end
+        def event_milestone_params
+          params.require(:event_milestone).permit(
+            :milestone_id,
+            :event_uuid,
+            field_values_attributes: [
+              :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
+            ]
+          ).merge(
+            program_id: current_program.id
+          )
+        end
     end
   end
 end

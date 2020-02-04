@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Events::TraceableField do
@@ -19,7 +21,7 @@ RSpec.describe Events::TraceableField do
     context 'number field' do
       it { expect(event.tracings.length).to eq(1) }
       it { expect(event.tracings.first.type).to eq('Tracings::NumberTracing') }
-      it { expect(event.tracings.first.properties).to eq({'number_of_case' => number_of_case.value, 'number_of_death' => number_of_death.try(:value) || 0 }) }
+      it { expect(event.tracings.first.properties).to eq({ 'number_of_case' => number_of_case.value, 'number_of_death' => number_of_death.try(:value) || 0 }) }
     end
 
     context 'text field' do

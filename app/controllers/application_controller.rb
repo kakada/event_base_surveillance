@@ -20,19 +20,17 @@ class ApplicationController < ActionController::Base
   helper_method :current_program
 
   protected
-
-  def set_layout
-    devise_controller? ? 'layouts/minimal' : 'layouts/application'
-  end
+    def set_layout
+      devise_controller? ? 'layouts/minimal' : 'layouts/application'
+    end
 
   private
+    def user_not_authorized
+      flash[:alert] = 'You are not authorized to perform this action.'
+      redirect_to(request.referrer || root_path)
+    end
 
-  def user_not_authorized
-    flash[:alert] = 'You are not authorized to perform this action.'
-    redirect_to(request.referrer || root_path)
-  end
-
-  def set_locale
-    I18n.locale = current_program.try(:language_code) || I18n.default_locale
-  end
+    def set_locale
+      I18n.locale = current_program.try(:language_code) || I18n.default_locale
+    end
 end

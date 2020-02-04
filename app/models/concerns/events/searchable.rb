@@ -38,52 +38,51 @@ module Events
       end
 
       private
+        def build_basic_attributes
+          attrs = attributes.except(*except_attributes).merge(
+            event_type_name: event_type_name,
+            program_name: program_name,
+            location_name: location_name,
+            milestone: {}
+          )
 
-      def build_basic_attributes
-        attrs = attributes.except(*except_attributes).merge(
-          event_type_name: event_type_name,
-          program_name: program_name,
-          location_name: location_name,
-          milestone: {}
-        )
+          if location_latlng.present?
+            attrs[:location] = {
+              lat: location_latlng.try(:first),
+              lon: location_latlng.try(:last)
+            }
+          end
 
-        if location_latlng.present?
-          attrs[:location] = {
-            lat: location_latlng.try(:first),
-            lon: location_latlng.try(:last)
-          }
+          attrs
         end
 
-        attrs
-      end
+        def build_milestone(event)
+          program.milestones.each_with_index do |ms, index|
+            event[:milestone][ms.format_name] = build_milestone_attr(ms, index)
+          end
 
-      def build_milestone(event)
-        program.milestones.each_with_index do |ms, index|
-          event[:milestone][ms.format_name] = build_milestone_attr(ms, index)
+          event
         end
 
-        event
-      end
+        def build_milestone_attr(milestone, index)
+          valueable = index.zero? ? self : event_milestones.select { |em| em.milestone_id == milestone.id }.first
+          return {} if valueable.nil?
 
-      def build_milestone_attr(milestone, index)
-        valueable = index.zero? ? self : event_milestones.select { |em| em.milestone_id == milestone.id }.first
-        return {} if valueable.nil?
+          attrs = {}
+          valueable.field_values.each do |fv|
+            attrs[fv.field_code] = fv.es_value
+          end
 
-        attrs = {}
-        valueable.field_values.each do |fv|
-          attrs[fv.field_code] = fv.es_value
+          valueable.attributes.except(*except_attributes).merge(attrs)
         end
 
-        valueable.attributes.except(*except_attributes).merge(attrs)
-      end
+        def except_attributes
+          %w[program_id creator_id event_type_id event_uuid uuid id]
+        end
 
-      def except_attributes
-        %w[program_id creator_id event_type_id event_uuid uuid id]
-      end
-
-      def except_date_attributes
-        %w[created_at updated_at]
-      end
+        def except_date_attributes
+          %w[created_at updated_at]
+        end
     end
   end
 end

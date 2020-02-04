@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class String
   # Does this string represent an integer?
   def integer?

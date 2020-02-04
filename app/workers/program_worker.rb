@@ -15,21 +15,20 @@ class ProgramWorker
   end
 
   private
-
-  def create_shared_indices(program)
-    Program.where.not(id: program.id).each do |target_program|
-      # gdaph_p#{cdc.id}_shared
-      create_indice("#{program.format_name}_p#{target_program.id}_shared", target_program)
-      # cdc_p#{gdaph.id}_shared
-      create_indice("#{target_program.format_name}_p#{program.id}_shared", program)
+    def create_shared_indices(program)
+      Program.where.not(id: program.id).each do |target_program|
+        # gdaph_p#{cdc.id}_shared
+        create_indice("#{program.format_name}_p#{target_program.id}_shared", target_program)
+        # cdc_p#{gdaph.id}_shared
+        create_indice("#{target_program.format_name}_p#{program.id}_shared", program)
+      end
     end
-  end
 
-  def create_indice(index_name, program)
-    return if Client.indices.exists(index: index_name)
+    def create_indice(index_name, program)
+      return if Client.indices.exists(index: index_name)
 
-    Client.indices.create \
-      index: index_name,
-      body: { settings: Event.settings.to_hash, mappings: Event.mappings_hash(program) }
-  end
+      Client.indices.create \
+        index: index_name,
+        body: { settings: Event.settings.to_hash, mappings: Event.mappings_hash(program) }
+    end
 end

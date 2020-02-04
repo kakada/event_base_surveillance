@@ -94,20 +94,19 @@ class Field < ApplicationRecord
   end
 
   private
+    def set_field_code
+      self.code ||= name.downcase.split(' ').join('_')
+    end
 
-  def set_field_code
-    self.code ||= name.downcase.split(' ').join('_')
-  end
+    def set_display_order
+      self.display_order ||= milestone.present? && milestone.fields.maximum(:display_order).to_i + 1
+    end
 
-  def set_display_order
-    self.display_order ||= milestone.present? && milestone.fields.maximum(:display_order).to_i + 1
-  end
+    def set_mapping_field_type
+      return unless field_type == 'mapping_field'
 
-  def set_mapping_field_type
-    return unless field_type == 'mapping_field'
-
-    event_mapping_field = self.class.roots.find { |obj| obj[:code] == mapping_field }
-    self.mapping_field_type = event_mapping_field.present? && event_mapping_field[:field_type]
-    self.color_required = event_mapping_field.present? && event_mapping_field[:color_required]
-  end
+      event_mapping_field = self.class.roots.find { |obj| obj[:code] == mapping_field }
+      self.mapping_field_type = event_mapping_field.present? && event_mapping_field[:field_type]
+      self.color_required = event_mapping_field.present? && event_mapping_field[:color_required]
+    end
 end

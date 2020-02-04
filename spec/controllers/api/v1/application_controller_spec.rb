@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 class ApplicationController < Api::V1::ApplicationController; end
@@ -15,7 +17,7 @@ RSpec.describe ApplicationController, type: :controller do
 
   describe '#restrict_access' do
     before :each do
-      request.env["HTTP_ACCEPT"] = 'application/json'
+      request.env['HTTP_ACCEPT'] = 'application/json'
     end
 
     context 'when no client_app' do

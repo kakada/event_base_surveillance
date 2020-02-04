@@ -19,33 +19,32 @@ class EventService
   end
 
   private
-
-  def build_csv_record(event)
-    arr = default_columns.map { |col| event.send(col) }
-    objs = [event].concat(event.event_milestones.includes(:milestone, :field_values))
-    objs.each do |em|
-      em.milestone.fields.each do |field|
-        fv = em.field_values.find_by field_code: field.code
-        arr.push fv.try(:es_value)
+    def build_csv_record(event)
+      arr = default_columns.map { |col| event.send(col) }
+      objs = [event].concat(event.event_milestones.includes(:milestone, :field_values))
+      objs.each do |em|
+        em.milestone.fields.each do |field|
+          fv = em.field_values.find_by field_code: field.code
+          arr.push fv.try(:es_value)
+        end
       end
+
+      arr
     end
 
-    arr
-  end
-
-  def default_columns
-    @default_columns ||= %w[uuid event_type_name program_name location_name created_at updated_at close]
-  end
-
-  def build_columns
-    columns = default_columns.dup
-
-    @program.milestones.each do |milestone|
-      milestone.fields.each do |field|
-        columns.push("#{milestone.format_name}.#{field.code}")
-      end
+    def default_columns
+      @default_columns ||= %w[uuid event_type_name program_name location_name created_at updated_at close]
     end
 
-    columns
-  end
+    def build_columns
+      columns = default_columns.dup
+
+      @program.milestones.each do |milestone|
+        milestone.fields.each do |field|
+          columns.push("#{milestone.format_name}.#{field.code}")
+        end
+      end
+
+      columns
+    end
 end

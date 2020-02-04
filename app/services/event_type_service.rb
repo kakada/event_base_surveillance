@@ -18,28 +18,27 @@ class EventTypeService
   end
 
   private
-
-  def build_event_type_fields
-    @event_type.fields.each do |field|
-      @new_event_type.fields.new(clean_attributes(field))
-    end
-  end
-
-  def build_form_types_and_fields
-    @event_type.form_types.each do |form_type|
-      new_form_type = @new_event_type.form_types.new(clean_attributes(form_type))
-
-      form_type.fields.each do |field|
-        new_form_type.fields.new(clean_attributes(field))
+    def build_event_type_fields
+      @event_type.fields.each do |field|
+        @new_event_type.fields.new(clean_attributes(field))
       end
     end
-  end
 
-  def clean_attributes(object)
-    object.attributes.except(*except_attributes)
-  end
+    def build_form_types_and_fields
+      @event_type.form_types.each do |form_type|
+        new_form_type = @new_event_type.form_types.new(clean_attributes(form_type))
 
-  def except_attributes
-    %w[id created_at updated_at color]
-  end
+        form_type.fields.each do |field|
+          new_form_type.fields.new(clean_attributes(field))
+        end
+      end
+    end
+
+    def clean_attributes(object)
+      object.attributes.except(*except_attributes)
+    end
+
+    def except_attributes
+      %w[id created_at updated_at color]
+    end
 end

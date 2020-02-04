@@ -44,14 +44,13 @@ class ClientApp < ApplicationRecord
   end
 
   private
+    def generate_access_token
+      self.access_token = SecureRandom.hex
+    end
 
-  def generate_access_token
-    self.access_token = SecureRandom.hex
-  end
+    def cleanup_permissions
+      return if permissions.blank?
 
-  def cleanup_permissions
-    return if permissions.blank?
-
-    self.permissions = permissions.reject(&:blank?)
-  end
+      self.permissions = permissions.reject(&:blank?)
+    end
 end

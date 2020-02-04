@@ -61,12 +61,11 @@ class WebhooksController < ApplicationController
   end
 
   private
+    def webhook_params
+      params.require(:webhook).permit(:name, :token, :username, :password, :type, :url, event_type_ids: [])
+    end
 
-  def webhook_params
-    params.require(:webhook).permit(:name, :token, :username, :password, :type, :url, event_type_ids: [])
-  end
-
-  def set_event_types
-    @event_types = current_program.event_types
-  end
+    def set_event_types
+      @event_types = current_program.event_types
+    end
 end

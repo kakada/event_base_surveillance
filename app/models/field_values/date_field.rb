@@ -46,27 +46,26 @@ module FieldValues
     end
 
     private
+      def decode(y_m_d_value)
+        y_m_d_value.present? ? convert_to_iso8601_string(y_m_d_value) : nil
+      rescue StandardError
+        raise invalid_field_message
+      end
 
-    def decode(y_m_d_value)
-      y_m_d_value.present? ? convert_to_iso8601_string(y_m_d_value) : nil
-    rescue StandardError
-      raise invalid_field_message
-    end
+      def invalid_field_message
+        'Invalid date value'
+      end
 
-    def invalid_field_message
-      'Invalid date value'
-    end
+      def convert_to_iso8601_string(y_m_d_value)
+        format_date_iso_string(parse_date(y_m_d_value))
+      end
 
-    def convert_to_iso8601_string(y_m_d_value)
-      format_date_iso_string(parse_date(y_m_d_value))
-    end
+      def format_date_iso_string(time)
+        time.strftime '%Y-%m-%dT00:00:00Z'
+      end
 
-    def format_date_iso_string(time)
-      time.strftime '%Y-%m-%dT00:00:00Z'
-    end
-
-    def parse_date(y_m_d_value)
-      Time.strptime y_m_d_value, '%Y-%m-%d'
-    end
+      def parse_date(y_m_d_value)
+        Time.strptime y_m_d_value, '%Y-%m-%d'
+      end
   end
 end

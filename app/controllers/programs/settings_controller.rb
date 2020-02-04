@@ -16,10 +16,10 @@ module Programs
 
     private
 
-    def program_params
-      params.require(:program).permit(
-        :enable_telegram, :enable_email_notification, :language_code
-      )
-    end
+      def program_params
+        params.require(:program).permit(
+          :enable_telegram, :enable_email_notification, :language_code
+        )
+      end
   end
 end
