@@ -12,6 +12,7 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  close         :boolean          default(FALSE)
+#  link_uuid     :string
 #
 
 class Event < ApplicationRecord

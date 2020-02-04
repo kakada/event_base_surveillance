@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: messages
+#
+#  id           :bigint           not null, primary key
+#  message      :text
+#  milestone_id :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+
 class Message < ApplicationRecord
   belongs_to :milestone
   has_one :telegram, class_name: 'Notifications::Telegram', dependent: :destroy
