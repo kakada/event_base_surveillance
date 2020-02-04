@@ -1,0 +1,13 @@
+.content
+  .row
+    .col-md-12
+      %h1.text-center= t('about.title')
+
+
+  .d-flex.justify-content-center.align-items-center
+    %h6= t('about.funded_by')
+
+    .about-logo
+      = image_tag 'ending-pandemics.png', class: 'footer-logo mr-2', alt: 'Ending Pandemics'
+  %div
+    %h6= t('about.developed_by')

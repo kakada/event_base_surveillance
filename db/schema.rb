@@ -145,8 +145,8 @@ ActiveRecord::Schema.define(version: 2020_02_06_075745) do
     t.datetime "updated_at", null: false
     t.boolean "color_required", default: false
     t.text "validations"
-    t.boolean "tracking", default: false
     t.text "description"
+    t.boolean "tracking", default: false
     t.integer "section_id"
     t.index ["milestone_id", "code"], name: "index_fields_on_milestone_id_and_code", unique: true
     t.index ["milestone_id", "name"], name: "index_fields_on_milestone_id_and_name", unique: true

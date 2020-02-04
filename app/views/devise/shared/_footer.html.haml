@@ -1,3 +1,15 @@
-.footer
-  = link_to '© 2018 InSTEDD', 'http://instedd.org', target: '_blank'
-  %div Version 1.0.0
+.footer.p-4
+  .d-flex.justify-content-center.align-items-center
+    .d-inline-block.mr-4
+      %span= "#{t('about.funded_by')}"
+      %span.font-weight-bold Ending Pandemics
+      %br
+      %span= "#{t('about.developed_by')}"
+      %span.font-weight-bold InSTEDD iLab Southeast Asia
+
+    = link_to 'https://endingpandemics.org/', title: 'Ending Pandemics' do
+      = image_tag 'ending-pandemics.png', class: 'footer-logo mr-2', alt: 'Ending Pandemics'
+    = link_to 'http://ilabsoutheastasia.org/', title: 'InSTEDD iLab Southeast Asia' do
+      = image_tag 'instedd-ilabsea.png', class: 'footer-logo mr-2', alt: 'InSTEDD iLab Southeast Asia'
+  -# = link_to '© 2018 InSTEDD', 'http://instedd.org', target: '_blank'
+  -# %div Version 1.0.0
