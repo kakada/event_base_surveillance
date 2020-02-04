@@ -15,7 +15,7 @@
         = '-'
 
   - @event.milestone.sections.each do |section|
-    %fieldset.section
+    %fieldset.section{class: ('not-section' unless section.display?)}
       %legend= section.name
 
       - section.fields.each do |field|
