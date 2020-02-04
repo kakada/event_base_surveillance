@@ -14,4 +14,3 @@ class EmailNotificationWorker
     NotificationMailer.notify(obj.milestone.message.email_notification.emails.join(','), obj.telegram_message).deliver_now
   end
 end
-

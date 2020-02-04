@@ -60,7 +60,7 @@ class EventMilestone < ApplicationRecord
   end
 
   def telegram_message
-    MessageInterpretor.new(milestone.message.message, event_uuid, id).message
+    MessageInterpretor.new(milestone.message.try(:message), event_uuid, id).message
   end
 
   private
