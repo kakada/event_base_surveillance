@@ -20,9 +20,9 @@ class Section < ApplicationRecord
 
   # Validation
   validates :name, presence: true, uniqueness: { scope: [:milestone_id] }
-  # validate :validate_unique_field_name
-  # validate :validate_unique_field_type_location
-  validate :check_field_validation
+  validate :validate_unique_field_name
+  validate :validate_unique_field_type_location, unless: -> { milestone.present? && milestone.is_default? }
+  validate :validate_field_from_to
 
   # Scope
   default_scope { order(default: :desc).order(display_order: :asc) }
@@ -46,7 +46,7 @@ class Section < ApplicationRecord
     self.fields_attributes = Field.defaults.select{ |f| fields.collect(&:code).exclude? f[:code] }
   end
 
-  def check_field_validation
+  def validate_field_from_to
     fields.each do |field|
       errors.add field.name.downcase, I18n.t('milestone.both_must_exist') if field.validations[:from].present? != field.validations[:to].present?
     end
@@ -57,7 +57,7 @@ class Section < ApplicationRecord
   end
 
   def validate_unique_field_type_location
-    return if fields.select { |field| field.field_type == 'location' }.length < 2
+    return if fields.select { |field| field.field_type == 'Fields::LocationField' }.length < 2
 
     errors.add :field_type, 'location cannot be more than one'
   end

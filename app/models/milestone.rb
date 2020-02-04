@@ -22,7 +22,7 @@ class Milestone < ApplicationRecord
   has_one    :message
   has_one    :telegram, class_name: 'Notifications::Telegram'
   has_many   :sections, dependent: :destroy
-  has_many   :fields
+  has_many   :fields, dependent: :destroy
 
   # Validation
   validates :name, presence: true, uniqueness: { scope: [:program_id] }
