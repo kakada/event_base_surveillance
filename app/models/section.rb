@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: sections
+#
+#  id            :bigint           not null, primary key
+#  name          :string
+#  milestone_id  :integer
+#  display_order :integer
+#  default       :boolean          default(FALSE)
+#  display       :boolean          default(TRUE)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class Section < ApplicationRecord
   belongs_to :milestone
   has_many :fields

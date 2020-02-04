@@ -2,9 +2,13 @@
 
 = f.fields_for :sections, sections do |sf|
   %fieldset.section
-    %legend
-      = sf.input :name, label: false, placeholder: 'Section Name'
-      = sf.hidden_field :default
+    %legend.flex-row-vertical-center
+      .flex1
+        = sf.input :name, label: false, placeholder: 'Section Name'
+        = sf.hidden_field :default
+
+      .form-check.form-check-inline
+        = sf.input :display, label: 'Display name?', input_html: {class: 'form-check-inline'}
 
     %ol.fields.sortable
       = sf.fields_for :fields, sf.object.fields do |form|

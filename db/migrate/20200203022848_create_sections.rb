@@ -5,6 +5,7 @@ class CreateSections < ActiveRecord::Migration[5.2]
       t.integer  :milestone_id
       t.integer  :display_order
       t.boolean  :default, default: false
+      t.boolean  :display, default: true
 
       t.timestamps
     end

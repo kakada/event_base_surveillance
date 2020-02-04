@@ -21,6 +21,7 @@
 #  validations        :text
 #  tracking           :boolean          default(FALSE)
 #  description        :text
+#  section_id         :integer
 #
 
 module Fields
