@@ -7,9 +7,13 @@
       %div= link_to 'Back', event_path(@event), class: 'btn btn-info'
 
   %ul.list.flex1
-    - @event_milestone.milestone.fields.each do |field|
-      %li
-        %span.type= field.name
-        = render 'events/show/field_value', field: field, main_object: @event_milestone
+    - @event_milestone.milestone.sections.each do |section|
+      %fieldset.section{class: ('not-section' unless section.display?)}
+        %legend= section.name
+
+        - section.fields.each do |field|
+          %li
+            %span.type= field.name
+            = render 'events/show/field_value', field: field, main_object: @event_milestone
 
 = render 'events/show/tracing_text_field_modal'

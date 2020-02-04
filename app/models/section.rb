@@ -14,7 +14,7 @@
 
 class Section < ApplicationRecord
   belongs_to :milestone
-  has_many :fields
+  has_many :fields, dependent: :destroy
 
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
 
@@ -29,7 +29,7 @@ class Section < ApplicationRecord
   scope :dynamic, -> { where(default: false) }
   scope :default, -> { where(default: true) }
 
-  before_create :set_default_fields, if: :default?
+  before_create :set_default_fields, if: -> { !milestone.is_default? && default? }
 
   # Class methods
   def self.roots

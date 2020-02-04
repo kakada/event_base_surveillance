@@ -4,7 +4,7 @@
   = f.input :milestone_id, input_html: { value: @event_milestone.milestone_id }, as: :hidden
 
 - @event_milestone.milestone.sections.each do |section|
-  %fieldset.section
+  %fieldset.section{class: ('not-section' unless section.display?)}
     %legend= section.name
 
     - section.fields.entry_able.each do |field|
