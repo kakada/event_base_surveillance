@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(version: 2020_02_06_075745) do
     t.integer "milestone_id"
     t.integer "display_order"
     t.boolean "default", default: false
+    t.boolean "display", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
