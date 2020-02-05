@@ -1,7 +1,7 @@
 .content-element.circles-list.flex1
   %ol
     %li
-      %a.btn.btn-link New
+      %a.btn.btn-link= event.milestone.name
       .at= event.conducted_at
 
     - event_milestones = event.event_milestones
