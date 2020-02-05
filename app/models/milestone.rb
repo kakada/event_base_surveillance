@@ -77,7 +77,6 @@ class Milestone < ApplicationRecord
   end
 
   private
-
     def validate_unique_section_name
       validate_uniqueness_of_in_memory(sections, %i[name], 'duplicate')
     end
