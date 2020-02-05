@@ -6,10 +6,6 @@ FactoryBot.define do
     program
     creator_id { program.creator_id }
 
-    before :create do |milestone|
-      milestone.sections_attributes = Section.defaults if !milestone.is_default?
-    end
-
     trait :risk_assessment do
       name       {'Risk Assessment'}
       is_default { false }

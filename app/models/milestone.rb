@@ -29,6 +29,7 @@ class Milestone < ApplicationRecord
   validate :only_one_final_milestone
   validate :validate_unique_section_name
 
+  before_validation :set_default_section, unless: :is_default
   before_create :set_display_order
 
   # Scope
@@ -38,9 +39,7 @@ class Milestone < ApplicationRecord
 
 
   # Nested attribute
-  accepts_nested_attributes_for :sections, allow_destroy: true, reject_if: ->(attributes) {
-    attributes['name'].blank? && attributes['fields_attributes'].length.zero?
-  }
+  accepts_nested_attributes_for :sections, allow_destroy: true
 
   # Class methods
   def self.create_root(creator_id)
@@ -93,5 +92,9 @@ class Milestone < ApplicationRecord
 
     def set_display_order
       self.display_order = program.milestones.maximum(:display_order).to_i + 1
+    end
+
+    def set_default_section
+      self.sections_attributes = Section.defaults if sections.select{|section| section.default}.length == 0
     end
 end

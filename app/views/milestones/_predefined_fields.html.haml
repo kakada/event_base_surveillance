@@ -12,7 +12,7 @@
 
     %ol.fields.sortable
       = sf.fields_for :fields, sf.object.fields do |form|
-        %li
+        %li{class: ('hidden' if form.object.code=='source')}
           %fieldset.fieldset
             .field-wrapper
               %button.btn.move{type: :button}

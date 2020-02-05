@@ -5,7 +5,8 @@
 
 = render 'predefined_fields', f: f
 
-= f.fields_for :sections, f.object.sections.dynamic do |sf|
+- sections = f.object.sections.select{ |section| !section.default }
+= f.fields_for :sections, sections do |sf|
   = render 'section_fields', f: sf
 
 = link_to_add_fields t('milestone.add_section'), f, :sections
