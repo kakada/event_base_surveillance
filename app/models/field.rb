@@ -80,7 +80,7 @@ class Field < ApplicationRecord
       { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true },
       { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
       { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true, tracking: true },
-      { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false }
+      { code: 'source_of_information', field_type: 'Fields::SelectOneField', name: 'Source of information', field_options_attributes: [{ name: 'Hotline' }, { name: 'Facebook' }, { name: 'Website' }, { name: 'Newspaper' }] }
     ]
     fields.each_with_index do |field, index|
       field[:display_order] = index + 1
@@ -91,7 +91,7 @@ class Field < ApplicationRecord
   def self.defaults
     [
       { code: 'conducted_at', field_type: 'Fields::DateTimeField', name: 'Conducted at', is_default: true, required: true },
-      { code: 'source', field_type: 'Fields::TextField', name: 'Source', is_default: true, entry_able: false }
+      { code: 'source_of_information', field_type: 'Fields::SelectOneField', name: 'Source of information', is_default: true, entry_able: false }
     ]
   end
 
