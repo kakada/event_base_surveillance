@@ -91,7 +91,7 @@ class Field < ApplicationRecord
   def self.defaults
     [
       { code: 'conducted_at', field_type: 'Fields::DateTimeField', name: 'Conducted at', is_default: true, required: true },
-      { code: 'source', field_type: 'Fields::TextField', name: 'Source', is_default: true, entry_able: false }
+      { code: 'source_of_information', field_type: 'Fields::SelectOneField', name: 'Source of information', is_default: true, entry_able: false }
     ]
   end
 
