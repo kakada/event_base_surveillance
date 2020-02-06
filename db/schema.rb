@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_06_075745) do
+ActiveRecord::Schema.define(version: 2020_02_06_112610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,9 +145,10 @@ ActiveRecord::Schema.define(version: 2020_02_06_075745) do
     t.datetime "updated_at", null: false
     t.boolean "color_required", default: false
     t.text "validations"
-    t.boolean "tracking", default: false
     t.text "description"
+    t.boolean "tracking", default: false
     t.integer "section_id"
+    t.string "relevant"
     t.index ["milestone_id", "code"], name: "index_fields_on_milestone_id_and_code", unique: true
     t.index ["milestone_id", "name"], name: "index_fields_on_milestone_id_and_name", unique: true
   end
