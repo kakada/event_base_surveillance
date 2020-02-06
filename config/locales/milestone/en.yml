@@ -34,3 +34,7 @@ en:
     displayed: 'Displayed?'
     section_name: 'Section Name'
     add_section: '+ Add Section'
+    setting: 'Setting'
+    validation_criteria: 'Validaton Criteria'
+    field_hint: 'Field hint'
+    field_name: 'Field name'
