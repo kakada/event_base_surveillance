@@ -1,4 +1,7 @@
-.content
+#content
+  -# .d-flex.justify-content-center
+  - unless user_signed_in?
+    = link_to 'Back', new_user_session_path, class: 'btn btn-link'
   .row
     .col-md-12
       %h1.text-center= t('about.title')
@@ -7,12 +10,13 @@
   .d-flex.justify-content-center.my-4
     It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
 
-  .d-flex.justify-content-center.align-items-center.my-4
-    %h3= t('about.funded_by')
-
+  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
+    %h5= t('about.funded_by')
   .d-flex.justify-content-center.align-items-center
-    = image_tag 'ending-pandemics.png', class: 'about-logo mr-2', alt: 'Ending Pandemics'
-  .d-flex.justify-content-center.align-items-center.my-4
-    %h3= t('about.developed_by')
+    = link_to 'https://endingpandemics.org' do
+      = image_tag 'ending-pandemics.png', class: 'about-logo mr-2', alt: 'Ending Pandemics'
+  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
+    %h5= t('about.developed_by')
   .d-flex.justify-content-center.align-items-center
-    = image_tag 'instedd-ilabsea.png', class: 'about-logo mr-2', alt: 'InSTEDD iLab Southeast Asia'
+    = link_to 'http://ilabsoutheastasia.org' do
+      = image_tag 'instedd-ilabsea.png', class: 'about-logo mr-2', alt: 'InSTEDD iLab Southeast Asia'

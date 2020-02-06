@@ -9,6 +9,6 @@ class AboutController < ApplicationController
 
   private
     def set_layout
-      signed_in? ? 'layouts/application' : 'layouts/minimal'
+      signed_in? ? 'layouts/application' : 'layouts/footer-less'
     end
 end

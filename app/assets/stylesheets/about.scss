@@ -1,5 +1,20 @@
 #about-index {
   .about-logo {
-    height: 90px;
+    height: 80px;
+  }
+
+  .column {
+    height: auto;
+  }
+
+  .wrapper {
+    width: auto;
+  }
+
+  &.devise-form {
+    .wrapper {
+      max-width: 1024px;
+      padding-top: 20px;
+    }
   }
 }

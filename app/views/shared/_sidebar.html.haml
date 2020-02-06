@@ -63,9 +63,38 @@
           = t('sidebar.settings')
 
     %li
+      = link_to about_index_path do
+        %i.fas.fa-info
+        = t('sidebar.about_us')
+    %li
       = link_to destroy_user_session_path, method: :delete do
         %i.fas.fa-key
         = t('sidebar.logout')
 
   .copyright
-    © 2019 InSTEDD
+    .copyright-large
+      .d-flex.justify-content-center.align-items-center
+        .d-inline-block.mx-2
+          .d-flex.justify-content-center.align-items-center
+            %span.text-center.mb-2= "#{t('about.funded_by')}"
+          .d-flex.justify-content-center.align-items-center
+            = link_to 'https://endingpandemics.org/', title: 'Ending Pandemics' do
+              = image_tag 'ending-pandemics.png', class: 'copyright-logo', alt: 'Ending Pandemics'
+        .d-inline-block.mx-2
+          .d-flex.justify-content-center.align-items-center
+            %span.text-center.mb-2= "#{t('about.developed_by')}"
+          .d-flex.justify-content-center.align-items-center
+            = link_to 'http://ilabsoutheastasia.org/', title: 'InSTEDD iLab Southeast Asia' do
+              = image_tag 'instedd-ilabsea.png', class: 'copyright-logo', alt: 'InSTEDD iLab Southeast Asia'
+
+    .copyright-small
+      .d-block
+        %span.text-center.mb-2= "#{t('about.funded_by')}"
+      .d-block.my-1
+        = link_to 'https://endingpandemics.org/', title: 'Ending Pandemics' do
+          = image_tag 'ending-pandemics.png', class: 'copyright-logo', alt: 'Ending Pandemics'
+      .d-block
+        %span.text-center.mb-2= "#{t('about.developed_by')}"
+      .d-block.my-1
+        = link_to 'http://ilabsoutheastasia.org/', title: 'InSTEDD iLab Southeast Asia' do
+          = image_tag 'instedd-ilabsea.png', class: 'copyright-logo', alt: 'InSTEDD iLab Southeast Asia'
