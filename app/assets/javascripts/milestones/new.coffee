@@ -10,6 +10,7 @@ EBS.MilestonesNew = do ->
     initView()
     initSortable()
     initMiniColorPicker()
+    initSetting()
 
     onClickAddSection()
     onClickAddField()
@@ -19,8 +20,35 @@ EBS.MilestonesNew = do ->
     onChangeMappingField()
     onClickCollapseTrigger()
     onClickBtnAdd()
-    onClickValidationTriger()
     onClickRequireCheckbox()
+    onClickSettingItem()
+    onClickBtnSetting()
+
+  onClickBtnSetting = ->
+    $(document).off 'click', '.btn-setting'
+    $(document).on 'click', '.btn-setting', ->
+      toggleSettingContent(this)
+      hideCollapseContent(this)
+
+  toggleSettingContent = (dom)->
+    $(dom).parents('.fieldset').find('.btn-setting').toggleClass('active')
+    $(dom).parents('.fieldset').find('.setting-wrapper').toggle()
+
+  hideSettingContent = (dom)->
+    $(dom).parents('.fieldset').find('.btn-setting').removeClass('active')
+    $(dom).parents('.fieldset').find('.setting-wrapper').hide()
+
+  initSetting = ->
+    $('.item-setting').addClass('active')
+    $('.setting-content').show()
+
+  onClickSettingItem = ->
+    $(document).off 'click', '.setting-wrapper .item'
+    $(document).on 'click', '.setting-wrapper .item', ->
+      $(this).parents('.setting-wrapper').find('.content').hide()
+      $(this).parents('.setting-wrapper').find('.item').removeClass('active')
+      $(this).parents('.setting-wrapper').find($(this).data('target')).show()
+      $(this).addClass('active')
 
   onClickRequireCheckbox = ->
     $(document).off 'click', '.field-required'
@@ -38,16 +66,16 @@ EBS.MilestonesNew = do ->
   # Validation-----------start
   initValidationView = (dom)->
     if isValidationFieldType(dom.value)
-      showValidationTrigger(dom)
       removeNoneUseValidator(dom)
     else
+      hideValidationTrigger(dom)
       removeValidationContent(dom)
 
   isValidationFieldType = (value)->
     return [dateField, dateTimeField, integerField].includes(value)
 
-  showValidationTrigger = (dom) ->
-    $(dom).parents('.fieldset').find('.validation-trigger').show()
+  hideValidationTrigger = (dom) ->
+    $(dom).parents('.fieldset').find('.validation-trigger').hide()
 
   removeNoneUseValidator = (dom)->
     parent = $(dom).parents('.fieldset')
@@ -62,28 +90,18 @@ EBS.MilestonesNew = do ->
     #handle it when choose fieldType
   handleValidation = (dom, field_type) ->
     if isValidationFieldType(field_type)
-      showValidationTrigger(dom)
-      showValidationContent(dom)
       removeNoneUseValidator(dom)
     else
+      hideValidationTrigger(dom)
       removeValidationContent(dom)
-
-  onClickValidationTriger = ->
-    $(document).off('click', '.validation-trigger')
-    $(document).on 'click', '.validation-trigger', (event) ->
-      showValidationContent(event.currentTarget)
-
-  showValidationContent = (dom)->
-    $(dom).parents('.fieldset').find('.field-validation-wrapper').toggle()
 
   # Validation-----------end
 
   initCollapseContent = (dom) ->
     hideCollapseContent(dom)
-    showCollapseTrigger(dom)
 
     if dom.value == selectOne || dom.value == selectMultiple
-      # showCollapseTrigger(dom)
+      showCollapseTrigger(dom)
       showOption(dom)
     else if dom.value == mappingField
       showMappingField(dom)
@@ -133,11 +151,8 @@ EBS.MilestonesNew = do ->
     $(document).on 'click', '.btn-add-field', (event) ->
       $(this).hide()
       parent = $(event.currentTarget).parents('.fieldset')
-      fieldTypeWrapper = parent.find('.field-type-wrapper')
-      fieldTypeWrapper.show()
-
-      fieldName = parent.find('.field-name')
-      fieldName.addClass('no-style')
+      parent.find('.field-type-wrapper').show()
+      parent.find('.field-name').addClass('no-style')
 
   onClickCollapseTrigger = ->
     $(document).off('click', '.collapse-trigger')
@@ -151,9 +166,16 @@ EBS.MilestonesNew = do ->
       if $(content).is(":visible")
         icon.removeClass('fa-caret-right')
         icon.addClass('fa-caret-down')
+        hideSettingContent(this)
       else
         icon.addClass('fa-caret-right')
         icon.removeClass('fa-caret-down')
+
+  hideCollapseContent = (dom)->
+    icon = $(dom).parents('.fieldset').find('.collapse-trigger i')
+    icon.addClass('fa-caret-right')
+    icon.removeClass('fa-caret-down')
+    $(dom).parents('.fieldset').find('.collapse-content').hide()
 
   # for both remove field and remove option
   onClickRemoveField = ->
@@ -192,6 +214,11 @@ EBS.MilestonesNew = do ->
       assignFieldType(dom, field_type)
       handleCollapseContent(dom, field_type)
       handleValidation(dom, field_type)
+      showBtnSetting(dom)
+
+  showBtnSetting = (dom)->
+    $(dom).parents('.fieldset').find('.btn-setting').removeClass('hidden')
+    $(dom).parents('.fieldset').find('.item-setting').click()
 
   setFieldNameInputAsTitleStyle = (dom) ->
     fieldName = $(dom).parents('.fieldset').find('.field-name')
@@ -269,7 +296,10 @@ EBS.MilestonesNew = do ->
   appendField = (dom) ->
     time = new Date().getTime()
     regexp = new RegExp($(dom).data('id'), 'g')
-    $(dom).before($(dom).data('fields').replace(regexp, time))
+    field = $($(dom).data('fields').replace(regexp, time))
+    field.find('.btn-setting').addClass('hidden')
+
+    $(dom).before(field)
     assignDisplayOrderToListItem()
 
   initOneOption = (dom)->

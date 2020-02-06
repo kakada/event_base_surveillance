@@ -21,3 +21,9 @@
   flex-direction: row;
   align-items: center;
 }
+
+.flex-column-horizontal-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

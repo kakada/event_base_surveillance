@@ -9,41 +9,28 @@
           %button.btn.collapse-trigger{type: :button}
             %i.fas.fa-caret-right
 
-          .flex1.flex-row-vertical-center
-            %abbr.ml-3.abbr-required{:title => "required", class: ('hidden' if !f.object.required?)} *
+          %abbr.abbr-required{:title => "required", class: ('hidden' if !f.object.required?)} *
 
+          .flex1
             = f.hidden_field :field_type, class: 'field-type', 'data-field' => f.object.to_json
-            = f.text_field :name, placeholder: "field_name", class: 'form-control field-name'
+            = f.hidden_field :display_order, class: 'display-order'
+            = f.text_field :name, placeholder: t('milestone.field_name'), class: 'form-control field-name'
+            = f.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
 
-          .flex-row-vertical-center
-            .form-check
-              = f.check_box :required, { class: 'form-check-input field-required' }
-              = f.label :required, t('milestone.required'), class: 'form-check-label required-label'
-              = f.hidden_field :display_order, class: 'display-order'
-            .form-check
-              = f.check_box :tracking, { class: 'form-check-input' }
-              = f.label :tracking, t('milestone.tracking'), class: 'form-check-label'
-
-            %button.btn.btn-outline-primary.btn-add-field{type: 'button'}= t('milestone.add_field')
+          %button.btn.btn-outline-primary.btn-add-field{type: 'button'}= t('milestone.add_field')
 
         .action.flex-column
           = f.hidden_field :_destroy
-          .btn-group
-            %a.pointer{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", style: 'width: 100%;'}
-              %i.fas.fa-ellipsis-v.icon-gray
-            .dropdown-menu
-              %button.dropdown-item.remove_fields{type: 'button'}
-                %i.fas.fa-trash-alt.icon-delete
-                %span Remove
-              %button.dropdown-item.validation-trigger{type: 'button'}
-                %i.fas.fa-filter.icon-gray
-                %span Validation
+          .btn-setting.pointer.flex1.flex-column-horizontal-center
+            %i.fas.fa-cog.icon-gray
+          .remove_fields.pointer.flex1.flex-column-horizontal-center
+            %i.fas.fa-trash-alt.icon-delete
 
     = render 'kinds'
 
     .collapse-content
-      = render "field_description", f: f
       = render 'mapping_field_content', f: f
       = render 'field_option_content', f: f
 
-    = render 'field_validation_content', f: f
+    .setting-wrapper
+      = render 'setting', f: f

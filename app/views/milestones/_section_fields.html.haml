@@ -7,7 +7,7 @@
     .form-check.form-check-inline
       = f.input :display, label: 'Display name?', input_html: {class: 'form-check-inline'}
 
-    .action
+    .action.remove-section
       = f.hidden_field :_destroy
       = link_to '#', class: "remove_fields btn btn-link" do
         %i.fa.fa-trash-alt.icon-delete

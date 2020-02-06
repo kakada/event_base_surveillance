@@ -20,17 +20,21 @@
               .wrapper.flex-row-vertical-center
                 %button.btn.collapse-trigger.mr-1{ type: :button }
                   %i.fas.fa-caret-right
-                %abbr.ml-3{ :title => "required", class: ('hidden' if !form.object.required) } *
-                = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.field_type
-                = form.hidden_field :code
-                = form.hidden_field :required
-                = form.hidden_field :is_default
-                = form.hidden_field :entry_able
-                = form.hidden_field :display_order, class: 'display-order'
-                = form.text_field :name, placeholder: 'field_name', class: 'form-control field-name'
+
+                %abbr.abbr-required{ :title => 'required', class: ('hidden' if !form.object.required) } *
+
+                .flex-column.flex1
+                  = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.field_type
+                  = form.hidden_field :code
+                  = form.hidden_field :required
+                  = form.hidden_field :is_default
+                  = form.hidden_field :entry_able
+                  = form.hidden_field :display_order, class: 'display-order'
+                  = form.text_field :name, placeholder: t('milestone.field_name'), class: 'form-control field-name'
+                  = form.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
 
                 - if form.object.required
-                  .as-title= t('milestone.required')
+                  .as-title{style: 'font-weight: normal'}= t('milestone.required')
 
                 .form-check
                   = form.check_box :tracking, { class: 'form-check-input' }
@@ -38,5 +42,4 @@
 
             = render 'kinds'
             .collapse-content
-              = render "field_description", f: form
               = render 'field_option_content', f: form
