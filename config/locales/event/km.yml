@@ -27,6 +27,7 @@ km:
     absolute: 'Absolute'
     start_date: 'ថ្ងៃ​ចាប់ផ្តើម'
     filter_by_date: 'ច្រោះតាមកាលបរិច្ឆេទ'
+    link_to_index_case: 'ភ្ជាប់ទៅ index case'
     search_link_event: 'ស្វែងរកព្រឹត្តិការណ៍តាមរយៈ uuid ឬប្រភេទព្រឹត្តិការណ៍'
     displaying_events: 'បង្ហាញព្រឹត្តិការណ៍'
     of: 'នៃ'

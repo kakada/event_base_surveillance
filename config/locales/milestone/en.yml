@@ -31,3 +31,5 @@ en:
     validation_criteria: 'Validaton Criteria'
     field_hint: 'Field hint'
     field_name: 'Field name'
+    displayed: 'Displayed?'
+    section_name: 'Section Name'

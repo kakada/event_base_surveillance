@@ -1,11 +1,11 @@
 %fieldset.section
   %legend.flex-row-vertical-center
     .flex1
-      = f.input :name, label: false, placeholder: 'Section Name'
+      = f.input :name, label: false, placeholder: t('milestone.section_name')
       = f.hidden_field :default
 
     .form-check.form-check-inline
-      = f.input :display, label: 'Display name?', input_html: {class: 'form-check-inline'}
+      = f.input :display, label: t('milestone.displayed'), input_html: {class: 'form-check-inline'}
 
     .action.remove-section
       = f.hidden_field :_destroy
