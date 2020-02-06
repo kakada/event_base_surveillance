@@ -33,7 +33,7 @@ class Field < ApplicationRecord
   belongs_to :section
   belongs_to :milestone
   has_many   :field_options, dependent: :destroy
-  has_many   :field_values, dependent: :destroy
+  has_many   :field_values
 
   # Validation
   validates :code, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
