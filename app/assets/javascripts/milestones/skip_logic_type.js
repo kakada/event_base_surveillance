@@ -5,10 +5,11 @@ EBS.SkipLogic = ( () => {
   }
 
   function template() {
-    return {
-      selectOne: selectOne,
-      selectMultiple: selectMultiple
-    }
+    let templateOject = {};
+    templateOject[EBS.MilestoneFieldType.selectOne] = selectOne();
+    templateOject[EBS.MilestoneFieldType.selectMultiple] = selectMultiple();
+
+    return templateOject;
   }
 
   function labelValue(label, value) {
@@ -20,7 +21,6 @@ EBS.SkipLogic = ( () => {
 
   function selectOne() {
     return {
-      type: EBS.MilestoneFieldType.selectOne,
       operators: [
         labelValue('(=)', '='),
         labelValue('any of', 'in'),
@@ -31,7 +31,6 @@ EBS.SkipLogic = ( () => {
 
   function selectMultiple() {
     return {
-      type: EBS.MilestoneFieldType.selectMultiple,
       operators: [
         labelValue('(=)', '='),
         labelValue('any of', 'in'),
@@ -44,6 +43,11 @@ EBS.SkipLogic = ( () => {
     let fields = getCodeList();
     let options = buildOptions(fields);
     codeControl = $(skipLogicForm).find('#relevant-code');
+
+    codeControl.change((event) => {
+      operators = buildOperator(event.target);
+    });
+
     codeControl.html(options);
   }
 
@@ -69,5 +73,16 @@ EBS.SkipLogic = ( () => {
     });
 
     return options;
+  }
+
+  function buildOperator(codeControl) {
+    let options = [];
+    type = $(codeControl).find('option:selected').attr('type');
+    selectedTemplate = template();
+    selectedTemplate[type].operators.forEach( (operator) => {
+      options.push($(`<option value=${operator.value}>${operator.label}</option>`));
+    });
+    relevantOperator = $(codeControl).siblings('#relevant-operator');
+    relevantOperator.html(options);
   }
 })();
