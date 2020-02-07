@@ -3,7 +3,7 @@
     .container-fluid
       %h3
         = "#{@event.event_type_name}: "
-        = render 'tracing_number_field_modal', traceable: @event
+        = render 'events/show/tracing_number_field_modal', traceable: @event
         %span.badge.badge-light= @event.uuid
 
         - if value = @event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
@@ -17,10 +17,10 @@
 
   .flex-row
     - if policy(@event).update?
-      = render "event_progress", event: @event
+      = render "events/show/event_progress", event: @event
     - else
-      = render "close_event_progress", event: @event
+      = render "events/show/close_event_progress", event: @event
 
-    = render 'event_info'
+    = render 'events/show/event_info'
 
-    = render 'map'
+    = render 'events/show/map'
