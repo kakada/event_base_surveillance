@@ -26,7 +26,7 @@
 //= require bootstrap-toggle.min
 //= require bootstrap-datepicker.min
 
-// **DateTime picker
+// **DateTime picker: Usage: https://tempusdominus.github.io/bootstrap-4/Usage/
 //= require moment
 //= require tempusdominus-bootstrap-4.js
 
