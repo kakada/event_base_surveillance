@@ -48,6 +48,8 @@
 // All Pages
 //= require milestones/new
 //= require milestones/index
+//= require milestones/field_type
+//= require milestones/skip_logic_type
 //= require event_milestones/new
 //= require events/new
 //= require events/show

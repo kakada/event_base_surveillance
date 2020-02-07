@@ -44,11 +44,14 @@ EBS.MilestonesNew = do ->
 
   onClickSettingItem = ->
     $(document).off 'click', '.setting-wrapper .item'
-    $(document).on 'click', '.setting-wrapper .item', ->
+    $(document).on 'click', '.setting-wrapper .item', (event) ->
       $(this).parents('.setting-wrapper').find('.content').hide()
       $(this).parents('.setting-wrapper').find('.item').removeClass('active')
       $(this).parents('.setting-wrapper').find($(this).data('target')).show()
       $(this).addClass('active')
+      if $(event.target).data('target') == '.skip-logic-content'
+        skipLogicForm = $(event.target).parents('.setting-wrapper')[0]
+        EBS.SkipLogic.build(skipLogicForm)
 
   onClickRequireCheckbox = ->
     $(document).off 'click', '.field-required'
