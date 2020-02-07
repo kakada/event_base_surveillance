@@ -30,3 +30,6 @@ en:
     link_uuid: 'Link Event Uuid'
     search_link_event: 'Search event by uuid or event type'
     link_to: 'Link to'
+    displaying_events: 'Displaying events'
+    of: 'of'
+    in_total: 'in total'

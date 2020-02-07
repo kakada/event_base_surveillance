@@ -12,7 +12,7 @@
     .pagy-wrapper
       .flex-row.flex1
         .flex1.flex-row-vertical-center
-          = "Displaying events <b>&nbsp;#{@pagy.from} - #{@pagy.to}&nbsp;</b> of <b>&nbsp;#{@pagy.count}&nbsp;</b> in total".html_safe
+          = "#{t('event.displaying_events')} <b>&nbsp;#{@pagy.from} - #{@pagy.to}&nbsp;</b> #{t('event.of')} <b>&nbsp;#{@pagy.count}&nbsp;</b> #{t('event.in_total')}".html_safe
 
         - if @pagy.pages > 1
           != pagy_bootstrap_nav(@pagy)
