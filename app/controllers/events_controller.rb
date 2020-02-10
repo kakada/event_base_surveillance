@@ -9,6 +9,18 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "event",
+              layout: "pdf.html",
+              margin:  {  top:     20,
+                          bottom:  20,
+                          left:    20,
+                          right:   20 }
+      end
+    end
   end
 
   def new

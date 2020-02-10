@@ -69,6 +69,9 @@ gem 'telegram-bot',   '~> 0.14.3'
 
 gem 'rest-client',                '~> 2.1.0'
 
+gem 'wicked_pdf',                 '~> 1.4.0'
+gem 'wkhtmltopdf-binary',         '~> 0.12.5.4'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
