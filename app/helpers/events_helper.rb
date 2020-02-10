@@ -32,6 +32,10 @@ module EventsHelper
   def skip_logic_data(field)
     return unless field.relevant.present?
     code, operator, value = field.relevant.split('||')
-    { code: code, operator: operator, value: value.downcase } if field.present?
+    { code: field_code(code), operator: operator, value: value.downcase } if field.present?
+  end
+
+  def field_code(code)
+    code.gsub(/[^0-9_A-Za-z]/, '')
   end
 end

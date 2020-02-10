@@ -1,7 +1,8 @@
 EBS.EventsSkipLogic = ( () => {
   let operatorMethods = {
     '=': 'equalValidator',
-    'match_any': 'matchAnyValidator',
+    '!=': 'notValidator',
+    'in': 'matchAnyValidator',
     'match_all': 'matchAllValidator'
   }
 
@@ -9,33 +10,74 @@ EBS.EventsSkipLogic = ( () => {
     init,
     equalValidator,
     matchAllValidator,
-    matchAnyValidator
+    matchAnyValidator,
+    notValidator
   }
 
   function init() {
-    triggerReleventField();
+    renderSkipLogicField();
+    addEventToRelevantField();
   }
 
-  function triggerReleventField() {
+  function renderSkipLogicField() {
+    $('[data-relevant]').each( (_i, field) => {
+      togglerFields(field);
+    });
+  }
+
+  function togglerFields(field) {
+    let fieldCode = $(field).data('relevant');
+    let triggerValue;
+
+    if (typeof $(event.target).val() == 'string') {
+      triggerValue = $(event.target).val().toLowerCase();
+    }  else {
+      triggerValue = $(event.target).val().join(',').toLowerCase();
+    }
+
+    $(`[data-code=${fieldCode}]`).each( (_i, field) => {
+      operator = $(field).data('operator');
+      EBS.EventsSkipLogic[operatorMethods[operator]](field, triggerValue);
+    });
+  }
+
+  function addEventToRelevantField() {
     $(document).on('change', '[data-relevant]', (event) => {
-      let fieldCode = $(event.target).data('relevant');
-      let triggerValue = $(event.target).val().toLowerCase();
-      $(`[data-code=${fieldCode}]`).each( (_i, field) => {
-        operator = $(field).data('operator');
-        EBS.EventsSkipLogic[operatorMethods[operator]](field, triggerValue);
-      });
+      togglerFields(event.target);
     });
   }
 
   function matchAnyValidator(field, triggerValue) {
     let values = $(field).data('value').split(',');
-    const isMatch = values.includes(triggerValue);
+    let isMatch = false;
+    const triggerValues = triggerValue.split(',');
+    for(let i = 0; i < triggerValues.length; i++) {
+      if (values.includes(triggerValues[i])) {
+        isMatch = true;
+        break;
+      }
+    }
+
     toggleField(field, isMatch);
   }
 
   function equalValidator(field, triggerValue) {
     let values = $(field).data('value').split(',');
     const isMatch = values == triggerValue;
+    toggleField(field, isMatch);
+  }
+
+  function notValidator(field, triggerValue) {
+    let values = $(field).data('value').split(',');
+    let isMatch = true;
+    const triggerValues = triggerValue.split(',');
+    for(let i = 0; i < triggerValues.length; i++) {
+      if (values.includes(triggerValues[i])) {
+        isMatch = false;
+        break;
+      }
+    }
+
     toggleField(field, isMatch);
   }
 
