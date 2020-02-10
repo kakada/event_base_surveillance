@@ -1,7 +1,35 @@
 EBS.SkipLogic = ( () => {
   return {
+    init,
     template,
     build
+  }
+
+  function init() {
+    onClickSkipLogic();
+    onFormSubmit();
+  }
+
+  function onClickSkipLogic() {
+    $(document).on('click', '.setting-wrapper .item.skip-logic', (event) => {
+      skipLogicForm = $(event.target).parents('.setting-wrapper')[0];
+      let codeControl = build(skipLogicForm);
+      buildOperator(codeControl);
+    });
+  }
+
+  function onFormSubmit() {
+    $('.milestone-form form').on('submit', () => {
+      $('.skip-logic-content').each( (_i, skipLogic) => {
+        let value = $(skipLogic).find('#relevant-value').val()
+        if (!!value) {
+          let code = $(skipLogic).find('#relevant-code').val();
+          let operator = $(skipLogic).find('#relevant-operator').val();
+          let skiLogicField = $(skipLogic).find('input.skip-logic-field').first();
+          skiLogicField.val(`\${${code}} ${operator} ${value}`);
+        }
+      });
+    });
   }
 
   function template() {
@@ -49,6 +77,7 @@ EBS.SkipLogic = ( () => {
     });
 
     codeControl.html(options);
+    return codeControl;
   }
 
   function getCodeList() {
