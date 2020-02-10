@@ -18,6 +18,7 @@ services:
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
+      - ./vendor/assets/fonts:/usr/share/fonts
     depends_on:
       - db
       - redis

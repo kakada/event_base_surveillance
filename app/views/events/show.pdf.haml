@@ -1,0 +1,60 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3
+        = "#{@event.event_type_name}: "
+        %span.badge.badge-light= @event.uuid
+
+        - if value = @event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
+          %span.badge{class: (@event.close? ? 'badge-success' : 'badge-warning') }= value
+
+  %ul.list.flex1.pt-0.px-3.event-bubble
+    %li
+      %span.type= "#{t('event.event_type')}:"
+      %span.value= @event.event_type_name
+    %li
+      %span.type= "#{t('event.location')}:"
+      %span.value= @event.location_name(reverse=true)
+
+    %li
+      %span.type= "#{t('event.link_to')}:"
+      %span.value
+        - if @event.link_uuid.present?
+          = link_to @event.link_uuid, event_path(@event.link_uuid), style: 'color: #007bff'
+        - else
+          = '-'
+
+    - @event.milestone.fields.each do |field|
+      %li
+        %span.type= "#{field.name}:"
+        %span.value
+          - if fvs = @event.field_values.select{ |fv| fv.field_id == field.id }.presence
+            - fvs.each do |fv|
+              - if fv.field_type == 'Fields::ImageField'
+                .image-wrapper
+                  = wicked_pdf_image_tag fv.image_url
+              - else
+                = fv.html_tag.html_safe
+
+          - else
+            = '-'
+
+  - @event.event_milestones.each do |event_milestone|
+    %h4="#{event_milestone.milestone.name}"
+
+    %ul.list.flex1
+      - event_milestone.milestone.fields.each do |field|
+        %li
+          %span.type= "#{field.name}:"
+          %span.value
+            - if fvs = event_milestone.field_values.select{ |fv| fv.field_id == field.id }.presence
+              - fvs.each do |fv|
+                - if fv.field_type == 'Fields::ImageField'
+                  .image-wrapper
+                    = wicked_pdf_image_tag fv.image_url
+                - else
+                  = fv.html_tag.html_safe
+
+            - else
+              = '-'
+
