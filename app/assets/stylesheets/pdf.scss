@@ -19,7 +19,7 @@ body#pdf {
 
     .type {
       display: block;
-      min-width: 200px;
+      width: 200px;
       padding-right: 5px;
     }
     .value {
@@ -41,6 +41,10 @@ body#pdf {
     }
   }
 
+  .link {
+    color: #007bff;
+  }
+
   .badge {
     display: inline-block;
     padding: 0.25em 0.4em;
@@ -58,5 +62,26 @@ body#pdf {
   .badge-warning {
     color: #212529;
     background-color: #ffc107;
+  }
+
+  .badge-success {
+    color: #fff;
+    background-color: #28a745;
+  }
+
+  .alwaysbreak {
+    page-break-before: always;
+  }
+
+  .nobreak:before {
+    clear:both;
+  }
+
+  .nobreak{
+    page-break-inside: avoid;
+  }
+
+  .flex1 {
+    flex-grow: 1;
   }
 }
