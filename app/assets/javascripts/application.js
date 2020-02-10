@@ -51,6 +51,7 @@
 //= require milestones/field_type
 //= require milestones/skip_logic_type
 //= require event_milestones/new
+//= require events/skip_logic
 //= require events/new
 //= require events/show
 //= require event_milestones/show

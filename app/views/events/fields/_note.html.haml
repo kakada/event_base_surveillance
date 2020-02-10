@@ -1,7 +1,7 @@
 - field_name = field.name.downcase
 - error_msg = main_object.errors["#{field_name}"]
 
-%div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
+%div.hidden{ class: [(error_msg.present? ? 'form-group form-group-invalid' : 'form-group'), ('hidden' if field.relevant.present?)], data: skip_logic_data(field) }
   = render 'events/fields/label_name', f: f, field_name: field_name, field: field
 
   = f.text_area :value, class: (error_msg.present? ? 'form-control is-invalid' : 'form-control'), rows: 8

@@ -3,7 +3,7 @@
 
 %div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
   = render 'events/fields/label_name', f: f, field_name: field_name, field: field
-  = f.collection_select :values, field.field_options, :name, :name, {}, { "data-live-search" => "true", :multiple => "multiple", class: ['form-control selectpicker', ('is-invalid' if error_msg.present?)]}
+  = f.collection_select :values, field.field_options, :name, :name, {}, { "data-live-search" => "true", :multiple => "multiple", class: [ 'form-control selectpicker', ('is-invalid' if error_msg.present?) ], 'data-relevant' => field.code }
 
   - if error_msg.present?
     .invalid-feedback= error_msg.join('; ')

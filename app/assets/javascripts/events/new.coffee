@@ -7,6 +7,7 @@ EBS.EventsNew = do ->
     onClickEventItem()
     onHideLinkEventModal()
     onClickBtnReset()
+    EBS.EventsSkipLogic.init()
 
   onClickBtnReset = ->
     $('.btn-reset').off 'click'

@@ -26,7 +26,7 @@ EBS.SkipLogic = ( () => {
           let code = $(skipLogic).find('#relevant-code').val();
           let operator = $(skipLogic).find('#relevant-operator').val();
           let skiLogicField = $(skipLogic).find('input.skip-logic-field').first();
-          skiLogicField.val(`\${${code}} ${operator} ${value}`);
+          skiLogicField.val(`${code}||${operator}||${value}`);
         }
       });
     });
