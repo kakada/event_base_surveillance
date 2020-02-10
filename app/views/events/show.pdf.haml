@@ -8,7 +8,7 @@
         - if value = @event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
           %span.badge{class: (@event.close? ? 'badge-success' : 'badge-warning') }= value
 
-  %ul.list.flex1.pt-0.px-3.event-bubble
+  %ul.list.flex1
     %li
       %span.type= "#{t('event.event_type')}:"
       %span.value= @event.event_type_name
@@ -25,36 +25,11 @@
           = '-'
 
     - @event.milestone.fields.each do |field|
-      %li
-        %span.type= "#{field.name}:"
-        %span.value
-          - if fvs = @event.field_values.select{ |fv| fv.field_id == field.id }.presence
-            - fvs.each do |fv|
-              - if fv.field_type == 'Fields::ImageField'
-                .image-wrapper
-                  = wicked_pdf_image_tag fv.image_url
-              - else
-                = fv.html_tag.html_safe
-
-          - else
-            = '-'
+      = render 'events/show/field_value', field_values: @event.field_values, field: field
 
   - @event.event_milestones.each do |event_milestone|
     %h4="#{event_milestone.milestone.name}"
 
     %ul.list.flex1
       - event_milestone.milestone.fields.each do |field|
-        %li
-          %span.type= "#{field.name}:"
-          %span.value
-            - if fvs = event_milestone.field_values.select{ |fv| fv.field_id == field.id }.presence
-              - fvs.each do |fv|
-                - if fv.field_type == 'Fields::ImageField'
-                  .image-wrapper
-                    = wicked_pdf_image_tag fv.image_url
-                - else
-                  = fv.html_tag.html_safe
-
-            - else
-              = '-'
-
+        = render 'events/show/field_value', field_values: event_milestone.field_values, field: field
