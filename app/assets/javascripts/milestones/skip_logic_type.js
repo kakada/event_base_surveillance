@@ -6,15 +6,30 @@ EBS.SkipLogic = ( () => {
   }
 
   function init() {
+    buildAllRelevantFields();
     onClickSkipLogic();
     onFormSubmit();
   }
 
+  function buildAllRelevantFields() {
+    $('.setting-wrapper').each( (_i, skipLogicForm) => {
+      let codeControl = build(skipLogicForm);
+      setDefaultValue(skipLogicForm);
+      buildOperator(codeControl);
+      setDefaultValue(skipLogicForm);
+    });
+  }
+
   function onClickSkipLogic() {
     $(document).on('click', '.setting-wrapper .item.skip-logic', (event) => {
-      skipLogicForm = $(event.target).parents('.setting-wrapper')[0];
+      let skipLogicForm = $(event.target).parents('.setting-wrapper')[0];
+      if ($(skipLogicForm).find('#relevant-value').val()) {
+        return;
+      }
       let codeControl = build(skipLogicForm);
+      setDefaultValue(skipLogicForm);
       buildOperator(codeControl);
+      setDefaultValue(skipLogicForm);
     });
   }
 
@@ -114,5 +129,15 @@ EBS.SkipLogic = ( () => {
     });
     relevantOperator = $(codeControl).siblings('#relevant-operator');
     relevantOperator.html(options);
+  }
+
+  function setDefaultValue(skipLogicForm) {
+    let relevantValue = $(skipLogicForm).find('.skip-logic-field').val();
+    if (relevantValue) {
+      let [code, operator, value] = relevantValue.split('||');
+      $(skipLogicForm).find('#relevant-code').val(code);
+      $(skipLogicForm).find('#relevant-operator').val(operator);
+      $(skipLogicForm).find('#relevant-value').val(value);
+    }
   }
 })();
