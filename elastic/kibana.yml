@@ -6,13 +6,13 @@
 server.name: kibana
 server.host: "0"
 
-server.ssl.enabled: true
-server.ssl.key: /usr/share/elasticsearch/config/certificates/es01/es01.key
-server.ssl.certificate: /usr/share/elasticsearch/config/certificates/es01/es01.crt
+# server.ssl.enabled: true
+# server.ssl.key: /usr/share/elasticsearch/config/certificates/es01/es01.key
+# server.ssl.certificate: /usr/share/elasticsearch/config/certificates/es01/es01.crt
 
 xpack.security.enabled: true
-elasticsearch.hosts: ["https://elasticsearch:9200"]
+elasticsearch.hosts: ["http://elasticsearch:9200"]
 elasticsearch.username: elastic
 elasticsearch.password: elastic # your elastic user password from elasticsearch see detail here https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-passwords.html
-elasticsearch.ssl.certificateAuthorities: /usr/share/elasticsearch/config/certificates/ca/ca.crt
-elasticsearch.ssl.verificationMode: certificate
+# elasticsearch.ssl.certificateAuthorities: /usr/share/elasticsearch/config/certificates/ca/ca.crt
+# elasticsearch.ssl.verificationMode: certificate

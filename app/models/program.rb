@@ -39,6 +39,10 @@ class Program < ApplicationRecord
     name.downcase.split(' ').join('_')
   end
 
+  def reindex_documents
+    Elastic.new(self).reindex_documents
+  end
+
   private
     def set_default_language
       self.language_code ||= 'en'
