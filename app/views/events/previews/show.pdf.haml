@@ -17,7 +17,7 @@
       %span.value= @event.location_name(reverse=true)
 
     %li
-      %span.type= "#{t('event.link_to')}:"
+      %span.type= "#{t('event.link_to_index_case')}:"
       %span.value
         - if @event.link_uuid.present?
           = link_to @event.link_uuid, event_path(@event.link_uuid), style: 'color: #007bff'
@@ -25,11 +25,11 @@
           = '-'
 
     - @event.milestone.fields.each do |field|
-      = render 'events/show/field_value', field_values: @event.field_values, field: field
+      = render 'field_value', field_values: @event.field_values, field: field
 
   - @event.event_milestones.each do |event_milestone|
     %h4="#{event_milestone.milestone.name}"
 
     %ul.list.flex1
       - event_milestone.milestone.fields.each do |field|
-        = render 'events/show/field_value', field_values: event_milestone.field_values, field: field
+        = render 'field_value', field_values: event_milestone.field_values, field: field
