@@ -17,6 +17,15 @@ EBS.EventsSkipLogic = ( () => {
   function init() {
     renderSkipLogicField();
     addEventToRelevantField();
+    onFormSubmit();
+  }
+
+  function onFormSubmit() {
+    $('.event-form-wrapper form').submit( () => {
+      $('[data-code].hidden').each( (_i, field) => {
+        $(field).find('.skip-logic-field').val('');
+      })
+    });
   }
 
   function renderSkipLogicField() {
@@ -97,9 +106,9 @@ EBS.EventsSkipLogic = ( () => {
 
   function toggleField(field, condition) {
     if (condition) {
-      $(field).show();
+      $(field).removeClass('hidden');
     } else {
-      $(field).hide();
+      $(field).addClass('hidden');
     }
   }
 })();
