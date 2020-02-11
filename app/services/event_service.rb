@@ -26,7 +26,7 @@ class EventService
     objs.each do |em|
       em.milestone.fields.each do |field|
         fv = em.field_values.find_by field_code: field.code
-        arr.push fv.try(:value)
+        arr.push fv.try(:es_value)
       end
     end
 
