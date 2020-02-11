@@ -62,7 +62,8 @@ EBS.SkipLogic = ( () => {
       operators: [
         labelValue('(=)', '='),
         labelValue('any of', 'in'),
-        labelValue('match all of', 'match_all')
+        labelValue('match all of', 'match_all'),
+        labelValue('not (!=)', '!=')
       ]
     }
   }

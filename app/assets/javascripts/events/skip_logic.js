@@ -29,10 +29,10 @@ EBS.EventsSkipLogic = ( () => {
     let fieldCode = $(field).data('relevant');
     let triggerValue;
 
-    if (typeof $(event.target).val() == 'string') {
-      triggerValue = $(event.target).val().toLowerCase();
+    if (typeof $(field).val() == 'string') {
+      triggerValue = $(field).val().toLowerCase();
     }  else {
-      triggerValue = $(event.target).val().join(',').toLowerCase();
+      triggerValue = $(field).val().join(',').toLowerCase();
     }
 
     $(`[data-code=${fieldCode}]`).each( (_i, field) => {
@@ -70,7 +70,7 @@ EBS.EventsSkipLogic = ( () => {
   function notValidator(field, triggerValue) {
     let values = $(field).data('value').split(',');
     let isMatch = true;
-    const triggerValues = triggerValue.split(',');
+    let triggerValues = triggerValue.split(',');
     for(let i = 0; i < triggerValues.length; i++) {
       if (values.includes(triggerValues[i])) {
         isMatch = false;
@@ -83,7 +83,15 @@ EBS.EventsSkipLogic = ( () => {
 
   function matchAllValidator(field, triggerValue) {
     let values = $(field).data('value').split(',');
-    const isMatch = triggerValue.every(val => values.includes(val));
+    let triggerValues = triggerValue.split(',');
+    let isMatch = true;
+    for(let i = 0; i < values.length; i++) {
+      if (!triggerValues.includes(values[i])) {
+        isMatch = false;
+        break;
+      }
+    }
+
     toggleField(field, isMatch);
   }
 
