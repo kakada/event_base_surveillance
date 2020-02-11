@@ -30,5 +30,8 @@ module Ebs
         resource '*', headers: :any, methods: [:get, :post, :options]
       end
     end
+
+    config.time_zone = 'Bangkok'
+    config.active_record.default_timezone = :local
   end
 end
