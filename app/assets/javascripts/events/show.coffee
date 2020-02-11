@@ -25,15 +25,22 @@ EBS.EventsShow = do ->
       i = 0
 
       while i < data.length
-        d = new Date(data[i].created_at)
         dom += '<li class="li complete">'
         dom += '<div class="status"><span>'+data[i].field_value+'</span></div>'
-        dom += '<div class="timestamp"><div class="date">'+d.toLocaleString()+'</div></div>'
+        dom += '<div class="timestamp"><div class="date">'+_formatDateTime(data[i].created_at)+'</div></div>'
         dom += '</li>'
         i++
 
       $('#modal-label').html($(this).data('title'))
       $('#timeline').html(dom)
+
+  _formatDateTime = (datetime)->
+    d = new Date(datetime)
+    year = d.getFullYear()
+    month = ("0" + (d.getMonth() + 1)).slice(-2)
+    date = ("0" + d.getDate()).slice(-2)
+
+    return year + '-' + month + '-' + date + ' ' + d.getHours() + ':' + d.getMinutes()
 
   _initChart = ->
     myBar = new Chart($('#myChart'),
@@ -53,7 +60,7 @@ EBS.EventsShow = do ->
 
   _getBarChartData = ->
     data = $('#myChart').data('eventTracings')
-    labels = (x.created_at for x in data)
+    labels = (_formatDateTime(x.created_at) for x in data)
     fields = $('#myChart').data('trackingNumberFields')
     datasets = []
 
