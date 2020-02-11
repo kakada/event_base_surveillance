@@ -1,17 +1,18 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3
-        = "#{@event.event_type_name}: "
-        = render 'events/show/tracing_number_field_modal', traceable: @event
-        %span.badge.badge-light= @event.uuid
+      .flex-row-vertical-center
+        %h3
+          = "#{@event.event_type_name}: "
+          = render 'events/show/tracing_number_field_modal', traceable: @event
+          %span.badge.badge-light= @event.uuid
 
         - if value = @event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
           %span.badge{class: (@event.close? ? 'badge-success' : 'badge-warning') }= value
 
       %div
         - if policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence
-          = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: 'btn btn-warning'
+          = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: 'btn btn-danger'
 
         = link_to t('event.back'), events_path, class: 'btn btn-info'
 
