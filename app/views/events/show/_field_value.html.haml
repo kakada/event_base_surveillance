@@ -5,8 +5,10 @@
         = fv.html_tag.html_safe
 
         - if fv.field.tracking? && fv.field_type != 'Fields::IntegerField'
-          %a.tracing-text-modal-trigger.pointer{'data-target' => '#log-text-field', 'data-toggle' => 'modal', 'data-tracings' => main_object.tracings.text.where(field_id: fv.field_id).to_json, 'data-title' => fv.field_name}
-            %i.far.fa-chart-bar.chart
+          - tracings = main_object.tracings.select{ |tracing| tracing.field_id == fv.field_id }
+          - if tracings.length > 1
+            %a.tracing-text-modal-trigger.pointer{'data-target' => '#log-text-field', 'data-toggle' => 'modal', 'data-tracings' => tracings.to_json, 'data-title' => fv.field_name}
+              = image_tag 'chart.png', class: 'chart'
 
     - else
       = '-'
