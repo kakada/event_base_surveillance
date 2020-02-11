@@ -10,6 +10,7 @@ EBS.EventsEvent_milestonesNew = do ->
     initDatePicker()
     initDateTimePicker()
     handleDisplayBtnRemoveFile()
+    EBS.EventsSkipLogic.init()
 
   initDatePicker = ->
     $.fn.datepicker.defaults.format = "yyyy-mm-dd"

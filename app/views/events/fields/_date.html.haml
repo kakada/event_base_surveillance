@@ -1,11 +1,11 @@
 - field_name = field.name.downcase
 - error_msg = main_object.errors["#{field_name}"]
 
-.form-group{ class: ('form-group-invalid' if error_msg.present?) }
+%div{ class: form_field_class(field, error_msg), data: skip_logic_data(field) }
   = render 'events/fields/label_name', f: f, field_name: field_name, field: field
 
   .input-group.date{'data-provide' => 'datepicker'}
-    = f.text_field :value, value: f.object.value, class: ['form-control', ('is-invalid' if error_msg.present?)], autocomplete: 'off', placeholder: 'yyyy-mm-dd'
+    = f.text_field :value, value: f.object.value, class: ['form-control skip-logic-field', ('is-invalid' if error_msg.present?)], autocomplete: 'off', placeholder: 'yyyy-mm-dd'
     .input-group-append
       .input-group-text
         %i.fas.fa-calendar-alt

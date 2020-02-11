@@ -1,4 +1,4 @@
-.fields{'data-field-required' => field.required?}
+.fields{'data-field-required' => field.required?, data: skip_logic_data(field)}
   = f.label field.name do
     = field.name
     - if field.required?

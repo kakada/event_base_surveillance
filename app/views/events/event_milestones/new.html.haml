@@ -3,6 +3,6 @@
     .container-fluid
       %h3="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
 
-  .w-50.view-center
+  .w-50.view-center.event-form-wrapper
     = simple_form_for @event_milestone, url: event_event_milestones_path(@event), method: :post do |f|
       = render 'form', f: f

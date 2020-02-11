@@ -38,4 +38,11 @@ module EventsHelper
   def field_code(code)
     code.gsub(/[^0-9_A-Za-z]/, '')
   end
+
+  def form_field_class(field, error_msg)
+    css_class = []
+    css_class << error_msg.present? ? 'form-group form-group-invalid' : 'form-group'
+    css_class << 'hidden' if field.relevant.present?
+    css_class.join(' ')
+  end
 end
