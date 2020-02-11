@@ -4,7 +4,19 @@ EBS.EventsShow = do ->
   init = ->
     _renderMap()
     _initChart()
+    initTruncate()
     onClickTracingTextModalTrigger()
+
+  initTruncate = ->
+    $('.fv-body-wrapper').each (index, dom)->
+      if dom.scrollHeight > 120
+        $(dom).parents('.value').addClass('overflow-content')
+
+    onClickBtnTruncate()
+
+  onClickBtnTruncate = ->
+    $('.btn-truncate').on 'click', ->
+      $(this).parents('.value').toggleClass('detail-on')
 
   onClickTracingTextModalTrigger = ->
     $('.tracing-text-modal-trigger').on 'click', ->
@@ -105,4 +117,5 @@ EBS.EventsShow = do ->
   {
     init: init
     onClickTracingTextModalTrigger: onClickTracingTextModalTrigger
+    initTruncate: initTruncate
   }
