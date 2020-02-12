@@ -29,6 +29,7 @@ class Program < ApplicationRecord
   has_many  :event_types
   has_many  :milestones
   has_many  :webhooks
+  has_many  :chat_groups
 
   validates :name, presence: true
 

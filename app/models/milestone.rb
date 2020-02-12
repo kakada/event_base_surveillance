@@ -37,6 +37,9 @@ class Milestone < ApplicationRecord
   scope :root, -> { where(is_default: true).first }
   scope :final, -> { where(final: true).first }
 
+  # Deligation
+  delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
+  delegate :format_name, to: :program, prefix: :program, allow_nil: true
 
   # Nested attribute
   accepts_nested_attributes_for :sections, allow_destroy: true
