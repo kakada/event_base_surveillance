@@ -9,6 +9,13 @@ RSpec.describe FieldValues::DateField do
 
     it { expect(field_value.valid_value?).to be_truthy }
 
+    context 'blank value' do
+      it 'is valid' do
+        field_value.value = ''
+        expect(field_value.valid_value?).to be_truthy
+      end
+    end
+
     it 'is invalid' do
       field_value.value = 'invalid date'
       expect(field_value.valid_value?).to be_falsey

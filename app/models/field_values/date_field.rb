@@ -27,6 +27,8 @@ module FieldValues
     validate :valid_condition?
 
     def valid_value?
+      return true if value.blank?
+
       iso_date = decode(value)
       time = Time.iso8601(iso_date)
       iso_value = format_date_iso_string(time)
@@ -36,7 +38,7 @@ module FieldValues
     end
 
     def valid_condition?
-      return true if field_validations.blank? || (field_validations[:from].blank? && field_validations[:to].blank?)
+      return true if value.blank? || field_validations.blank? || (field_validations[:from].blank? && field_validations[:to].blank?)
 
       iso_date = decode(value)
       is_valid = iso_date >= decode(field_validations[:from]) if field_validations[:from].present?

@@ -27,11 +27,13 @@ module FieldValues
     validate :valid_condition?
 
     def valid_value?
+      return true if value.blank?
+
       value.integer?
     end
 
     def valid_condition?
-      return true if field_validations.blank? || (field_validations[:from].blank? && field_validations[:to].blank?)
+      return true if value.blank? || field_validations.blank? || (field_validations[:from].blank? && field_validations[:to].blank?)
 
       num = value.to_i
       num_from = field_validations[:from].to_i
