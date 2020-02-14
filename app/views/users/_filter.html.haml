@@ -1,0 +1,8 @@
+%form{ action: '/users', method: 'get' }
+  .form-row.medium-width
+    .form-group
+      .input-group
+        = text_field_tag(:email, params[:email], class: 'form-control search-email', placeholder: t('user.email'), id: 'email')
+        .input-group-append
+          .input-group-text
+            %i.fas.fa-search

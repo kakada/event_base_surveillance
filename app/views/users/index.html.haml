@@ -5,20 +5,23 @@
       = link_to new_user_path, class: 'btn btn-primary' do
         %i.fas.fa-plus
 
+  = render 'filter'
   = render partial: "shared/no_data", locals: { items: @users }
 
   - if @users.present?
     %table.table.table-hover.medium-width
       %thead
         %tr
+          %th= t('user.number')
           %th= t('user.email')
           %th= t('user.role')
           %th= t('user.program')
           %th= t('user.status')
           %th
       %tbody
-        - @users.each do |user|
+        - @users.each_with_index do |user, index|
           %tr
+            %td= index + 1
             %td= user.email
             %td= user.role.titlecase
             %td= user.program_name
@@ -41,6 +44,10 @@
                       = link_to user_path(user), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('user.are_you_sure_to_delete')} do
                         %i.fas.fa-trash-alt.drop-menu-icon
                         %span= t('shared.delete')
+
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)
 
 .toast-wrapper{"aria-atomic" => "true", "aria-live" => "polite"}
   .toast
