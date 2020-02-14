@@ -7,10 +7,14 @@ module Programs
     def update
       @program = authorize current_program
 
-      if @program.update_attributes(program_params)
-        render json: @program
-      else
-        render json: { errors: @program.errors }
+      respond_to do |format|
+        if @program.update_attributes(program_params)
+          format.html { redirect_to setting_path }
+          format.json { render json: @program }
+        else
+          format.html { redirect_to setting_path, alert: @program.errors.full_messages }
+          format.json { render json: { errors: @program.errors } }
+        end
       end
     end
 

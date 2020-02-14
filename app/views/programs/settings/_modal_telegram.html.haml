@@ -1,0 +1,19 @@
+#telegram.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'exampleModalLabel', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title= t('program.telegram')
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+      .modal-body
+        .flex-row
+          %label.flex1= t('program.telegram_notification')
+          = f.input :enable_telegram, label: false, input_html: {id: 'toggle-telegram'}
+
+        .tokens{class: ('hidden' unless current_program.enable_telegram)}
+          = f.input :telegram_token
+          = f.input :telegram_username
+
+      .modal-footer
+        = f.submit t('shared.save'), class: 'btn btn-primary'
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')

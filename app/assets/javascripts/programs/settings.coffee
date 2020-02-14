@@ -31,7 +31,10 @@ EBS.ProgramsSettingsShow = do ->
   onChangeTelegramToggle = ->
     $(document).off 'change', '#toggle-telegram'
     $(document).on 'change', '#toggle-telegram', (event)->
-      _updateProgram({ enable_telegram: $(this).prop('checked') })
+      if $(this).prop('checked')
+        $('.tokens').removeClass('hidden')
+      else
+        $('.tokens').addClass('hidden')
 
   _updateProgram = (params={}, callback)->
     $.ajax({
