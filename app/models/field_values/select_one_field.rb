@@ -23,9 +23,12 @@
 module FieldValues
   class SelectOneField < ::FieldValue
     def html_tag
-      return value.to_s unless field_code == 'risk_level'
+      opt_value = field.field_options.find_by(value: value).try(:name)
+      opt_value ||= value
 
-      "<span class='badge' style='background-color: #{color}; color: #fff'>#{value}</span>"
+      return opt_value.to_s unless field_code == 'risk_level'
+
+      "<span class='badge' style='background-color: #{color}; color: #fff'>#{opt_value}</span>"
     end
   end
 end
