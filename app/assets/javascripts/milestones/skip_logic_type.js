@@ -131,12 +131,17 @@ EBS.SkipLogic = (() => {
     selectedTemplate[type].operators.forEach( (operator) => {
       options.push($(`<option value=${operator.value}>${operator.label}</option>`));
     });
-    let relevantOperator = $(codeControl).siblings('#relevant-operator');
+
+    let skipLogicForm = getSkipLogicForm(codeControl);
+    let relevantOperator = $(skipLogicForm).find('#relevant-operator');
+
     relevantOperator.html(options);
+    $(relevantOperator).change();
 
     relevantOperator.change( (event) => {
       reBuildValue(event.target);
     });
+
 
     return options;
   }
@@ -157,7 +162,7 @@ EBS.SkipLogic = (() => {
       operator = $(operatorControl).find('option:selected').val();
     }
 
-    let relevantValue = $(operatorControl).siblings('#relevant-value');
+    let relevantValue = $(skipLogicForm).find('#relevant-value');
     let tagOption = {};
     if (operator == EBS.SkipLogicConstant.EQUAL_OPERATOR) {
       tagOption.maxTags = 1;
@@ -166,10 +171,15 @@ EBS.SkipLogic = (() => {
   }
 
   function reBuildValue(operatorControl) {
-    let tags = $(operatorControl).siblings('tags.relevant-value');
+    let skipLogicForm = getSkipLogicForm(operatorControl);
+    let tags = $(skipLogicForm).find('tags.relevant-value');
     tags.remove();
-    let relevantValue = $(operatorControl).siblings('#relevant-value');
+    let relevantValue = $(skipLogicForm).find('#relevant-value');
     $(relevantValue).val('');
-    buildValue($(operatorControl).parents('.setting-wrapper'));
+    buildValue(skipLogicForm);
+  }
+
+  function getSkipLogicForm(control) {
+    return $(control).parents('.skip-logic-content');
   }
 })();

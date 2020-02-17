@@ -18,9 +18,13 @@
       = render 'field_validation_content', f: f
 
     .content.skip-logic-content
-      .form-inline.container
-        .form-group.row
-          = f.hidden_field :relevant, class: 'skip-logic-field'
-          %select.col-md-4.form-control#relevant-code
-          %select#relevant-operator.form-control
-          %input#relevant-value.form-control.relevant-value
+      = f.hidden_field :relevant, class: 'skip-logic-field'
+      .form-group.row
+        %label.col-3 Question
+        %select#relevant-code.form-control.col-9
+      .form-group.row
+        %label.col-3 Condition
+        %select#relevant-operator.form-control.col-9
+      .form-group.row
+        %label.col-3 Value
+        %textarea#relevant-value.form-control.relevant-value.col-9
