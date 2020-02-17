@@ -15,21 +15,24 @@ EBS.SkipLogic = ( () => {
     $('.setting-wrapper').each( (_i, skipLogicForm) => {
       let codeControl = build(skipLogicForm);
       setDefaultValue(skipLogicForm);
-      buildOperator(codeControl);
+      let operatorControl = buildOperator(codeControl);
       setDefaultValue(skipLogicForm);
+      buildValue(operatorControl);
     });
   }
 
   function onClickSkipLogic() {
     $(document).on('click', '.setting-wrapper .item.skip-logic', (event) => {
       let skipLogicForm = $(event.target).parents('.setting-wrapper')[0];
-      if ($(skipLogicForm).find('#relevant-value').val()) {
+      if ($(skipLogicForm).find('#relevant-operator option').length > 0) {
         return;
       }
       let codeControl = build(skipLogicForm);
       setDefaultValue(skipLogicForm);
-      buildOperator(codeControl);
+      let operatorControl = buildOperator(codeControl);
       setDefaultValue(skipLogicForm);
+      let operator = $(skipLogicForm).find('.skip-logic-field').val().split('||')[1];
+      buildValue(operatorControl, operator);
     });
   }
 
@@ -38,10 +41,11 @@ EBS.SkipLogic = ( () => {
       $('.skip-logic-content').each( (_i, skipLogic) => {
         let value = $(skipLogic).find('#relevant-value').val()
         if (!!value) {
+          let transformValue = JSON.parse(value).map(x => x.value).join(',')
           let code = $(skipLogic).find('#relevant-code').val();
           let operator = $(skipLogic).find('#relevant-operator').val();
           let skiLogicField = $(skipLogic).find('input.skip-logic-field').first();
-          skiLogicField.val(`${code}||${operator}||${value}`);
+          skiLogicField.val(`${code}||${operator}||${transformValue}`);
         }
       });
     });
@@ -65,9 +69,9 @@ EBS.SkipLogic = ( () => {
   function selectOne() {
     return {
       operators: [
-        labelValue('(=)', '='),
-        labelValue('any of', 'in'),
-        labelValue('not (!=)', '!=')
+        labelValue('(=)', EBS.SkipLogicConstant.EQUAL_OPERATOR),
+        labelValue('any of', EBS.SkipLogicConstant.MATCH_ANY_OPERATOR),
+        labelValue('not (!=)', EBS.SkipLogicConstant.NOT_OPERATOR)
       ]
     }
   }
@@ -75,10 +79,10 @@ EBS.SkipLogic = ( () => {
   function selectMultiple() {
     return {
       operators: [
-        labelValue('(=)', '='),
-        labelValue('any of', 'in'),
-        labelValue('match all of', 'match_all'),
-        labelValue('not (!=)', '!=')
+        labelValue('(=)', EBS.SkipLogicConstant.EQUAL_OPERATOR),
+        labelValue('any of', EBS.SkipLogicConstant.MATCH_ANY_OPERATOR),
+        labelValue('match all of', EBS.SkipLogicConstant.MATCH_ALL_OPERATOR),
+        labelValue('not (!=)', EBS.SkipLogicConstant.NOT_OPERATOR)
       ]
     }
   }
@@ -122,13 +126,19 @@ EBS.SkipLogic = ( () => {
 
   function buildOperator(codeControl) {
     let options = [];
-    type = $(codeControl).find('option:selected').attr('type');
-    selectedTemplate = template();
+    let type = $(codeControl).find('option:selected').attr('type');
+    let selectedTemplate = template();
     selectedTemplate[type].operators.forEach( (operator) => {
       options.push($(`<option value=${operator.value}>${operator.label}</option>`));
     });
-    relevantOperator = $(codeControl).siblings('#relevant-operator');
+    let relevantOperator = $(codeControl).siblings('#relevant-operator');
     relevantOperator.html(options);
+
+    relevantOperator.change( (event) => {
+      reBuildValue(event.target);
+    });
+
+    return options;
   }
 
   function setDefaultValue(skipLogicForm) {
@@ -139,5 +149,23 @@ EBS.SkipLogic = ( () => {
       $(skipLogicForm).find('#relevant-operator').val(operator);
       $(skipLogicForm).find('#relevant-value').val(value);
     }
+  }
+
+  function buildValue(operatorControl, operator) {
+    const selectedOperator = operator ? operator : $(operatorControl).find('option:selected').val();
+    let relevantValue = $(codeControl).siblings('#relevant-value');
+    let tagOption = {};
+    if (selectedOperator == EBS.SkipLogicConstant.EQUAL_OPERATOR) {
+      tagOption.maxTags = 1;
+    }
+    new Tagify(relevantValue[0], tagOption);
+  }
+
+  function reBuildValue(operatorControl) {
+    let tags = $(codeControl).siblings('tags.relevant-value');
+    tags.remove();
+    let relevantValue = $(codeControl).siblings('#relevant-value');
+    $(relevantValue).val('');
+    buildValue(operatorControl);
   }
 })();
