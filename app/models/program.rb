@@ -30,9 +30,9 @@ class Program < ApplicationRecord
   has_many  :milestones
   has_many  :webhooks
   has_many  :chat_groups
+  has_one   :telegram_bot
 
   validates :name, presence: true
-  validates :telegram_token, :telegram_username, presence: true, :if => :enable_telegram?
 
   before_create :set_default_language
   after_create :create_root_milestone

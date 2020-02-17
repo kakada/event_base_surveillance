@@ -1,0 +1,7 @@
+km:
+  telegram_bot:
+    telegram_bot: 'Telegram Bot'
+    token: 'Token'
+    username: 'ឈ្មោះអ្នកប្រើប្រាស់'
+    actived: 'Actived'
+    setup_instruction: 'Please setup your telegram bot'

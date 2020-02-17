@@ -37,3 +37,8 @@
                     = link_to es_reindex_program_path(program), class: "btn dropdown-item", :data => {:confirm => t('program.are_you_sure_to_reindex_elasticsearch_document')} do
                       %i.fas.fa-recycle.drop-menu-icon
                       %span= t('program.es_reindex')
+
+                  - if policy(program).update?
+                    = link_to program_telegram_bot_path(program), class: "btn dropdown-item" do
+                      %i.fab.fa-telegram.drop-menu-icon
+                      %span= t('program.telegram_bot')

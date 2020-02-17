@@ -13,3 +13,4 @@ en:
     es_reindex: 'Reindex Document'
     reindex_successfully: 'Reindex document successfully'
     telegram: 'Telegram'
+    telegram_bot: 'Telegram bot'

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :programs do
     get :es_reindex, on: :member
+    resource :telegram_bot
   end
 
   scope module: :programs do

@@ -16,3 +16,5 @@ en:
     please_select: please select
     status_on: 'On'
     status_off: 'Off'
+    setup: 'Setup'
+    change: 'Change'

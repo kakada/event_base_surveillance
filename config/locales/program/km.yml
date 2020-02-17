@@ -13,3 +13,4 @@ km:
     es_reindex: 'Reindex Document'
     reindex_successfully: 'Reindex document ដោយជោគជ័យ'
     telegram: 'Telegram'
+    telegram_bot: 'Telegram bot'

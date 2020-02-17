@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_12_071734) do
+ActiveRecord::Schema.define(version: 2020_02_18_085034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -215,6 +215,14 @@ ActiveRecord::Schema.define(version: 2020_02_12_071734) do
     t.integer "display_order"
     t.boolean "default", default: false
     t.boolean "display", default: true
+  end
+
+  create_table "telegram_bots", force: :cascade do |t|
+    t.string "token"
+    t.string "username"
+    t.boolean "actived", default: false
+    t.boolean "boolean", default: false
+    t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

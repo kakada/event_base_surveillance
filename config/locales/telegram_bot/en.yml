@@ -1,0 +1,7 @@
+en:
+  telegram_bot:
+    telegram_bot: 'Telegram Bot'
+    token: 'Token'
+    username: 'User name'
+    actived: 'Actived'
+    setup_instruction: 'Please setup your telegram bot'
