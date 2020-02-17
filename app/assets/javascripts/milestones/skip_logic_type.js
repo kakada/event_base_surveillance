@@ -39,14 +39,17 @@ EBS.SkipLogic = (() => {
   function onFormSubmit() {
     $('.milestone-form form').on('submit', () => {
       $('.skip-logic-content').each( (_i, skipLogic) => {
-        let value = $(skipLogic).find('#relevant-value').val()
-        if (!!value) {
+        let value = $(skipLogic).find('#relevant-value').val();
+        let submitValue = '';
+        if (value) {
           let transformValue = JSON.parse(value).map(x => x.value).join(',')
           let code = $(skipLogic).find('#relevant-code').val();
           let operator = $(skipLogic).find('#relevant-operator').val();
-          let skiLogicField = $(skipLogic).find('input.skip-logic-field').first();
-          skiLogicField.val(`${code}||${operator}||${transformValue}`);
+          submitValue = `${code}||${operator}||${transformValue}`;
         }
+
+        let skiLogicField = $(skipLogic).find('input.skip-logic-field').first();
+        skiLogicField.val(submitValue);
       });
     });
   }
@@ -69,6 +72,7 @@ EBS.SkipLogic = (() => {
   function selectOne() {
     return {
       operators: [
+        labelValue('please select', ''),
         labelValue('(=)', EBS.SkipLogicConstant.EQUAL_OPERATOR),
         labelValue('any of', EBS.SkipLogicConstant.MATCH_ANY_OPERATOR),
         labelValue('not (!=)', EBS.SkipLogicConstant.NOT_OPERATOR)
@@ -79,6 +83,7 @@ EBS.SkipLogic = (() => {
   function selectMultiple() {
     return {
       operators: [
+        labelValue('please select', ''),
         labelValue('(=)', EBS.SkipLogicConstant.EQUAL_OPERATOR),
         labelValue('any of', EBS.SkipLogicConstant.MATCH_ANY_OPERATOR),
         labelValue('match all of', EBS.SkipLogicConstant.MATCH_ALL_OPERATOR),
@@ -116,6 +121,8 @@ EBS.SkipLogic = (() => {
 
   function buildOptions(fields) {
     let options = [];
+    fields.unshift({code: '', type: '', name: 'Please select'});
+
     fields.forEach( (field) => {
       option = $(`<option value='${field.code}' type='${field.type}'>${field.name}</option>`);
       options.push(option);
@@ -127,14 +134,16 @@ EBS.SkipLogic = (() => {
   function buildOperator(codeControl) {
     let options = [];
     let type = $(codeControl).find('option:selected').attr('type');
-    let selectedTemplate = template();
-    selectedTemplate[type].operators.forEach( (operator) => {
-      options.push($(`<option value=${operator.value}>${operator.label}</option>`));
-    });
+    let selectedTemplate = template()[type];
+
+    if (selectedTemplate) {
+      selectedTemplate.operators.forEach( (operator) => {
+        options.push($(`<option value=${operator.value}>${operator.label}</option>`));
+      });
+    }
 
     let skipLogicForm = getSkipLogicForm(codeControl);
     let relevantOperator = $(skipLogicForm).find('#relevant-operator');
-
     relevantOperator.html(options);
     $(relevantOperator).change();
 
@@ -142,8 +151,7 @@ EBS.SkipLogic = (() => {
       reBuildValue(event.target);
     });
 
-
-    return options;
+    return relevantOperator;
   }
 
   function setDefaultValue(skipLogicForm) {
