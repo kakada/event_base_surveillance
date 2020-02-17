@@ -1,9 +1,9 @@
-EBS.SkipLogic = ( () => {
+EBS.SkipLogic = (() => {
   return {
     init,
     template,
     build
-  }
+  };
 
   function init() {
     buildAllRelevantFields();
@@ -15,9 +15,9 @@ EBS.SkipLogic = ( () => {
     $('.setting-wrapper').each( (_i, skipLogicForm) => {
       let codeControl = build(skipLogicForm);
       setDefaultValue(skipLogicForm);
-      let operatorControl = buildOperator(codeControl);
+      buildOperator(codeControl);
       setDefaultValue(skipLogicForm);
-      buildValue(operatorControl);
+      buildValue(skipLogicForm);
     });
   }
 
@@ -29,10 +29,10 @@ EBS.SkipLogic = ( () => {
       }
       let codeControl = build(skipLogicForm);
       setDefaultValue(skipLogicForm);
-      let operatorControl = buildOperator(codeControl);
+      buildOperator(codeControl);
       setDefaultValue(skipLogicForm);
       let operator = $(skipLogicForm).find('.skip-logic-field').val().split('||')[1];
-      buildValue(operatorControl, operator);
+      buildValue(skipLogicForm, operator);
     });
   }
 
@@ -90,7 +90,7 @@ EBS.SkipLogic = ( () => {
   function build(skipLogicForm) {
     let fields = getCodeList();
     let options = buildOptions(fields);
-    codeControl = $(skipLogicForm).find('#relevant-code');
+    let codeControl = $(skipLogicForm).find('#relevant-code');
 
     codeControl.change((event) => {
       operators = buildOperator(event.target);
@@ -151,21 +151,25 @@ EBS.SkipLogic = ( () => {
     }
   }
 
-  function buildValue(operatorControl, operator) {
-    const selectedOperator = operator ? operator : $(operatorControl).find('option:selected').val();
-    let relevantValue = $(codeControl).siblings('#relevant-value');
+  function buildValue(skipLogicForm, operator) {
+    let operatorControl = $(skipLogicForm).find('#relevant-operator');
+    if (!operator) {
+      operator = $(operatorControl).find('option:selected').val();
+    }
+
+    let relevantValue = $(operatorControl).siblings('#relevant-value');
     let tagOption = {};
-    if (selectedOperator == EBS.SkipLogicConstant.EQUAL_OPERATOR) {
+    if (operator == EBS.SkipLogicConstant.EQUAL_OPERATOR) {
       tagOption.maxTags = 1;
     }
     new Tagify(relevantValue[0], tagOption);
   }
 
   function reBuildValue(operatorControl) {
-    let tags = $(codeControl).siblings('tags.relevant-value');
+    let tags = $(operatorControl).siblings('tags.relevant-value');
     tags.remove();
-    let relevantValue = $(codeControl).siblings('#relevant-value');
+    let relevantValue = $(operatorControl).siblings('#relevant-value');
     $(relevantValue).val('');
-    buildValue(operatorControl);
+    buildValue($(operatorControl).parents('.setting-wrapper'));
   }
 })();
