@@ -9,14 +9,17 @@ EBS.SkipLogic = (() => {
     buildAllRelevantFields();
     onClickSkipLogic();
     onFormSubmit();
+    addEventToCodeField();
+    addEventToOperatorField();
   }
 
   function buildAllRelevantFields() {
     $('.setting-wrapper').each( (_i, skipLogicForm) => {
-      let codeControl = build(skipLogicForm);
-      setDefaultValue(skipLogicForm);
-      buildOperator(codeControl);
-      setDefaultValue(skipLogicForm);
+      let relevantValue = $(skipLogicForm).find('.skip-logic-field').val();
+      let [code, operator, value] = relevantValue.split('||');
+      let codeControl = build(skipLogicForm, code);
+      buildOperator(codeControl, operator);
+      $(skipLogicForm).find("#relevant-value").val(value);
       buildValue(skipLogicForm);
     });
   }
@@ -51,6 +54,18 @@ EBS.SkipLogic = (() => {
         let skiLogicField = $(skipLogic).find('input.skip-logic-field').first();
         skiLogicField.val(submitValue);
       });
+    });
+  }
+
+  function addEventToCodeField() {
+    $(document).on('change', '.skip-logic-content #relevant-code', (event) => {
+      buildOperator(event.target);
+    });
+  }
+
+  function addEventToOperatorField() {
+    $(document).on('change', '.skip-logic-content #relevant-operator', (event) => {
+      reBuildValue(event.target);
     });
   }
 
@@ -92,16 +107,15 @@ EBS.SkipLogic = (() => {
     }
   }
 
-  function build(skipLogicForm) {
+  function build(skipLogicForm, code) {
     let fields = getCodeList();
     let options = buildOptions(fields);
     let codeControl = $(skipLogicForm).find('#relevant-code');
-
-    codeControl.change((event) => {
-      operators = buildOperator(event.target);
-    });
-
     codeControl.html(options);
+
+    if (code) {
+      codeControl.val(code);
+    }
     return codeControl;
   }
 
@@ -131,25 +145,23 @@ EBS.SkipLogic = (() => {
     return options;
   }
 
-  function buildOperator(codeControl) {
-    let options = [];
+  function buildOperator(codeControl, operator) {
     let type = $(codeControl).find('option:selected').attr('type');
     let selectedTemplate = template()[type];
 
+    let skipLogicForm = getSkipLogicForm(codeControl);
+    let relevantOperator = $(skipLogicForm).find('#relevant-operator');
+
     if (selectedTemplate) {
+      let options = [];
       selectedTemplate.operators.forEach( (operator) => {
         options.push($(`<option value=${operator.value}>${operator.label}</option>`));
       });
+      relevantOperator.html(options);
+      relevantOperator.val(operator);
+
+      $(relevantOperator).change();
     }
-
-    let skipLogicForm = getSkipLogicForm(codeControl);
-    let relevantOperator = $(skipLogicForm).find('#relevant-operator');
-    relevantOperator.html(options);
-    $(relevantOperator).change();
-
-    relevantOperator.change( (event) => {
-      reBuildValue(event.target);
-    });
 
     return relevantOperator;
   }
@@ -175,6 +187,9 @@ EBS.SkipLogic = (() => {
     if (operator == EBS.SkipLogicConstant.EQUAL_OPERATOR) {
       tagOption.maxTags = 1;
     }
+
+    let tags = $(skipLogicForm).find('tags.relevant-value');
+    tags.remove();
     new Tagify(relevantValue[0], tagOption);
   }
 
