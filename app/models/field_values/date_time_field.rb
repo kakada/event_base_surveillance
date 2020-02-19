@@ -23,7 +23,7 @@
 module FieldValues
   class DateTimeField < DateField
     def es_value
-      Time.parse(value) if value.present?
+      Time.zone.parse(value) if value.present?
     end
 
     def html_tag
