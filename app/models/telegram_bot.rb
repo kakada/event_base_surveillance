@@ -1,7 +1,7 @@
 class TelegramBot < ApplicationRecord
   belongs_to :program
 
-  validates :token, :username, presence: true
+  validates :token, :username, presence: true, :if => :enabled?
 
   before_create :post_webhook_to_telegram
   before_update :post_webhook_to_telegram

@@ -30,7 +30,7 @@ class Program < ApplicationRecord
   has_many  :milestones
   has_many  :webhooks
   has_many  :chat_groups
-  has_one   :telegram_bot
+  has_one   :telegram_bot, :dependent => :destroy
 
   validates :name, presence: true
 
@@ -39,8 +39,16 @@ class Program < ApplicationRecord
   after_create :create_unknown_event_type
   after_create { ProgramWorker.perform_async(id) }
 
+  accepts_nested_attributes_for :telegram_bot, allow_destroy: true
+
+  delegate :enabled, to: :telegram_bot, prefix: :telegram_bot, allow_nil: true
+
   def format_name
     name.downcase.split(' ').join('_')
+  end
+
+  def enable_telegram?
+    self.telegram_bot_enabled
   end
 
   private

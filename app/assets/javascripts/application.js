@@ -66,6 +66,7 @@
 //= require client_apps/new
 //= require telegrams/new
 //= require messages/message
+//= require telegram_bots/new
 //= require programs/settings
 //= require webhooks/new
 

@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     resource :telegram_bot
   end
 
+  resource :telegram_bot, only: [] do
+    get :info, on: :collection
+  end
+
   scope module: :programs do
     resource :setting, only: [:show, :update]
   end

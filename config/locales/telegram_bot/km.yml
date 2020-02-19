@@ -4,4 +4,7 @@ km:
     token: 'Token'
     username: 'ឈ្មោះអ្នកប្រើប្រាស់'
     actived: 'Actived'
-    setup_instruction: 'Please setup your telegram bot'
+    setup_instruction: 'សូមរៀបចំ Telegram bot របស់អ្នក'
+    valid_bot: 'Bot ត្រឹមត្រូវ'
+    invalid_bot: 'Bot មិនត្រឹមត្រូវ'
+    enabled_notification: 'Enabled notification'

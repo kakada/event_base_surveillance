@@ -201,7 +201,6 @@ ActiveRecord::Schema.define(version: 2020_02_18_085034) do
 
   create_table "programs", force: :cascade do |t|
     t.string "name"
-    t.boolean "enable_telegram", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "creator_id"
@@ -220,8 +219,8 @@ ActiveRecord::Schema.define(version: 2020_02_18_085034) do
   create_table "telegram_bots", force: :cascade do |t|
     t.string "token"
     t.string "username"
+    t.boolean "enabled", default: false
     t.boolean "actived", default: false
-    t.boolean "boolean", default: false
     t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

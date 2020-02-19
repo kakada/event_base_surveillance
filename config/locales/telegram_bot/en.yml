@@ -5,3 +5,6 @@ en:
     username: 'User name'
     actived: 'Actived'
     setup_instruction: 'Please setup your telegram bot'
+    valid_bot: 'Valid bot'
+    invalid_bot: 'Invalid bot'
+    enabled_notification: 'Enabled notification'

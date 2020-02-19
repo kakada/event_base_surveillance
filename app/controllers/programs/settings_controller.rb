@@ -18,11 +18,15 @@ module Programs
       end
     end
 
-    private
+    def telegram_bot_info; end
 
+    private
       def program_params
         params.require(:program).permit(
-          :enable_telegram, :enable_email_notification, :language_code
+          :enable_email_notification, :language_code
+          telegram_bot_attributes: [
+            :token, :username, :enabled
+          ]
         )
       end
   end
