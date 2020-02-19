@@ -26,9 +26,16 @@ km:
     setup: ដំឡើង
     both_must_exist: ត្រូវតែមានទាំងពីរ
     add_section: '+ Add Section'
+    setting: 'ការកំណត់'
+    validation_criteria: 'ការកំណត់លក្ខខណ្ឌ'
+    field_hint: 'ព័ត៌មានជំនួយ'
+    field_name: 'ឈ្មោះ Field'
+    displayed: 'Displayed?'
+    section_name: 'ឈ្មោះផ្នែក'
     skip_logic: Skip logic
     question: សំណួរ
     condition: លក្ខខណ្ឌ
     skip_logic_not: ខុសពី
     any_of: មួយក្នុងចំណោម
     match_all_of: ផ្គូរផ្គងទាំងអស់
+    field_type: 'ប្រភេទ Field'

@@ -13,4 +13,10 @@ RSpec.describe Field, type: :model do
   it { is_expected.to validate_uniqueness_of(:code).scoped_to(:section_id).with_message('already exist') }
   it { is_expected.to validate_presence_of(:field_type) }
   it { is_expected.to validate_inclusion_of(:field_type).in_array(Field::FIELD_TYPES) }
+
+  context 'field_type is Fields::MappingField' do
+    before { allow(subject).to receive(:field_type).and_return('Fields::MappingField') }
+
+    it { is_expected.to validate_presence_of(:mapping_field_id) }
+  end
 end

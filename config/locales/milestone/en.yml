@@ -19,7 +19,6 @@ en:
     from: 'From'
     to: 'To'
     set_validation: 'Set validation'
-    description: Description
     chat_group: Chat group
     message: Message
     email: Email
@@ -39,3 +38,4 @@ en:
     skip_logic_not: not
     any_of: any of
     match_all_of: match all of
+    field_type: 'Field type'

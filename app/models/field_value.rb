@@ -79,10 +79,10 @@ class FieldValue < ApplicationRecord
     end
 
     def handle_mapping_field
-      fv = valueable.event.field_values.find_or_initialize_by(field_code: field.mapping_field)
-      fv.field_id ||= valueable.program.milestones.root.fields.find_by(code: field.mapping_field).id
+      fv = valueable.event.field_values.find_or_initialize_by(field_id: field.parent.id)
+      fv.field_code ||= field.parent.code
       fv.value = value.downcase.split(' ').join('_')
-      fv.color = field.field_options.find_by('LOWER(value)= ?', fv.value).try(:color) if field.field_options.present?
+      fv.color = field.parent.field_options.find_by('LOWER(value)= ?', fv.value).try(:color) if field.parent.field_options.present?
       fv.save
 
       handle_tracking(fv)
