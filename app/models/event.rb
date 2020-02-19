@@ -12,6 +12,7 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  close         :boolean          default(FALSE)
+#  link_uuid     :string
 #
 
 class Event < ApplicationRecord
@@ -39,6 +40,7 @@ class Event < ApplicationRecord
   delegate :name, :color, to: :event_type, prefix: :event_type
   delegate :name, to: :program, prefix: true
   delegate :enable_telegram?, to: :program, prefix: false
+  delegate :enable_email_notification?, to: :program, prefix: false
   delegate :email, to: :creator, prefix: true
   delegate :latlng, to: :location, prefix: true, allow_nil: true
 
@@ -92,7 +94,7 @@ class Event < ApplicationRecord
   end
 
   def telegram_message
-    @telegram_message ||= MessageInterpretor.new(milestone.telegram_message, uuid).message
+    @telegram_message ||= MessageInterpretor.new(milestone.message.message, uuid).message
   end
 
   def set_event_progress

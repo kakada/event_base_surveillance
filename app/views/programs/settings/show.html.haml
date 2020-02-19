@@ -10,5 +10,9 @@
         = f.input :enable_telegram, label: false, input_html: {id: 'toggle-telegram'}
 
       .dotted-line.flex-row
+        %label.flex1= t('program.email_notification')
+        = f.input :enable_email_notification, label: false, input_html: { 'data-size' => 'small' }
+
+      .dotted-line.flex-row
         %label.flex1= t('program.language')
         = f.input :language_code, label: false, collection: Program::LANGUAGES, include_blank: false

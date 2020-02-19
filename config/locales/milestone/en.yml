@@ -4,6 +4,7 @@ en:
     name: 'Name'
     status: 'Status'
     telegram_notification: 'Telegram Notification'
+    notification: 'Notification'
     are_you_sure_to_delete: 'Are you sure to delete this milestone?'
     new_milestone: 'New Milestone'
     edit_milestone: 'Edit Milestone'
@@ -19,3 +20,9 @@ en:
     to: 'To'
     set_validation: 'Set validation'
     description: Description
+    chat_group: Chat group
+    message: Message
+    email: Email
+    setup_message_instruction: Please setup your notification
+    setup: Setup
+    both_must_exist: both must be exist

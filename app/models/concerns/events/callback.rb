@@ -29,6 +29,7 @@ module Events
 
       def notify_third_party
         TelegramWorker.perform_async(id, self.class.to_s) if enable_telegram?
+        EmailNotificationWorker.perform_async(id, self.class.to_s) if enable_email_notification?
 
         event_type.webhooks.each do |webhook|
           next unless webhook.active?

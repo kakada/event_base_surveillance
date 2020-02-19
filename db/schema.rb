@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_20_092533) do
+ActiveRecord::Schema.define(version: 2020_01_29_084156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 2020_01_20_092533) do
     t.boolean "active", default: true
     t.string "permissions", array: true
     t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "email_notifications", force: :cascade do |t|
+    t.integer "milestone_id"
+    t.integer "message_id"
+    t.text "emails", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -152,6 +160,13 @@ ActiveRecord::Schema.define(version: 2020_01_20_092533) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "message"
+    t.integer "milestone_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "milestones", force: :cascade do |t|
     t.integer "program_id"
     t.string "name"
@@ -176,6 +191,7 @@ ActiveRecord::Schema.define(version: 2020_01_20_092533) do
     t.string "provider"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "message_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -185,6 +201,7 @@ ActiveRecord::Schema.define(version: 2020_01_20_092533) do
     t.datetime "updated_at", null: false
     t.integer "creator_id"
     t.string "language_code"
+    t.boolean "enable_email_notification", default: false
   end
 
   create_table "tracings", force: :cascade do |t|

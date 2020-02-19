@@ -42,6 +42,7 @@ class EventMilestone < ApplicationRecord
 
   # Deligation
   delegate :enable_telegram?, to: :program, prefix: false
+  delegate :enable_email_notification?, to: :program, prefix: false
   delegate :event_type, to: :event, prefix: false
 
   # Class Methods
@@ -59,7 +60,7 @@ class EventMilestone < ApplicationRecord
   end
 
   def telegram_message
-    MessageInterpretor.new(milestone.telegram_message, event_uuid, id).message
+    MessageInterpretor.new(milestone.message.try(:message), event_uuid, id).message
   end
 
   private

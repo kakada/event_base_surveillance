@@ -4,6 +4,7 @@ km:
     name: 'ឈ្មោះ'
     status: 'ស្ថានភាព'
     telegram_notification: 'សេចក្តីជូនដំណឹងតាម Telegram'
+    notification: 'សេចក្តីជូនដំណឹង'
     are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
     new_milestone: 'Milestone ថ្មី'
     edit_milestone: 'កែសម្រួល Milestone'
@@ -18,3 +19,9 @@ km:
     from: 'ចាប់ពី'
     to: 'ដល់'
     set_validation: 'កំណត់សុពលភាព'
+    chat_group: ក្រុមជជែក
+    message: សារ
+    email: អ៊ីមែល
+    setup_message_instruction: សូមដំឡើងសារជូនដំណឹង
+    setup: ដំឡើង
+    both_must_exist: ត្រូវតែមានទាំងពីរ

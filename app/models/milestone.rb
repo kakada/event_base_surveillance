@@ -19,7 +19,7 @@ class Milestone < ApplicationRecord
   # Association
   belongs_to :program
   belongs_to :creator, class_name: 'User'
-  has_one    :telegram, class_name: 'Notifications::Telegram'
+  has_one    :message
   has_many   :fields, dependent: :destroy
 
   # Validation
@@ -37,8 +37,6 @@ class Milestone < ApplicationRecord
   scope :root, -> { where(is_default: true).first }
   scope :final, -> { where(final: true).first }
 
-  # Deligation
-  delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
 
   # Nested attribute
   accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
@@ -79,12 +77,11 @@ class Milestone < ApplicationRecord
   end
 
   private
-
-  def check_field_validation
-    fields.each do |field|
-      errors.add field.name.downcase, 'both must be exist' if field.validations[:from].present? != field.validations[:to].present?
+    def check_field_validation
+      fields.each do |field|
+        errors.add field.name.downcase, I18n.t('milestone.both_must_exist') if field.validations[:from].present? != field.validations[:to].present?
+      end
     end
-  end
 
   def only_one_final_milestone
     return unless final?

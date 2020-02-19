@@ -10,14 +10,18 @@
 #  provider     :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  message_id   :integer
 #
 
 class Notification < ApplicationRecord
   self.inheritance_column = :provider
 
-  belongs_to :milestone
+  # belongs_to :milestone
+  belongs_to :message
   has_many :notification_chat_groups
   has_many :chat_groups, through: :notification_chat_groups
+
+  accepts_nested_attributes_for :notification_chat_groups, allow_destroy: true
 
   scope :telegrams, -> { where(provider: 'Telegram') }
 

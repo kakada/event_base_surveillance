@@ -7,4 +7,5 @@ en:
     edit_program: 'Edit Program'
     program_settings: 'Program Settings'
     telegram_notification: 'Telegram notification'
+    email_notification: 'Email notification'
     language: 'Language'

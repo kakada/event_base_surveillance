@@ -1,0 +1,38 @@
+#content.flex-column
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "#{@milestone.name}: #{t('milestone.notification')}"
+      = link_to t('shared.done'), milestones_path, class: 'btn btn-light'
+
+  - if @message.present?
+    .w-50.view-center
+      .flex1
+        .flex-row
+          .label= t('milestone.message') + ': '
+          .flex1= @message.message
+
+        - if @message.telegram.present?
+          .flex-row
+            .label= t('milestone.chat_group') + ':'
+            .flex1
+              - @message.telegram.chat_groups.each do |group|
+                - if group.is_active?
+                  %span= group.title
+                - else
+                  %strike{'data-toggle'=>"tooltip", 'data-placement' => "top", title: group.reason}= group.title
+        - if @message.email_notification.present?
+          .flex-row
+            .label= "#{t('milestone.email')}:"
+            .flex1
+              - @message.email_notification.emails.each do |email|
+                %span= email
+
+      .actions
+        = link_to t('shared.edit'), edit_milestone_message_path(@milestone), class: 'btn btn-primary'
+
+  - else
+    .w-50.view-center.flex1.flex-row-vertical-center
+      .flex1.text-center
+        %div= t('milestone.setup_message_instruction')
+        .actions
+          = link_to t('milestone.setup'), new_milestone_message_path(@milestone), class: 'btn btn-primary'
