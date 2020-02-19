@@ -9,6 +9,10 @@ class ProgramPolicy < ApplicationPolicy
     user.system_admin? || user.program_admin?
   end
 
+  def es_reindex?
+    user.system_admin?
+  end
+
   def destroy?
     user.system_admin?
   end

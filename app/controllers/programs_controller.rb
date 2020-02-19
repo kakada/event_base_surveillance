@@ -41,7 +41,7 @@ class ProgramsController < ApplicationController
   end
 
   def es_reindex
-    @program = Program.find(params[:id])
+    @program = authorize Program.find(params[:id])
     @program.reindex_documents
 
     redirect_to programs_url, notice: t('program.reindex_successfully')
