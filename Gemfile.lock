@@ -466,7 +466,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.10)
-  annotate
+  annotate (~> 3)
   audited (~> 4.9)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)

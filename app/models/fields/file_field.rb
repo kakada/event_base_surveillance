@@ -19,9 +19,10 @@
 #  updated_at         :datetime         not null
 #  color_required     :boolean          default(FALSE)
 #  validations        :text
-#  tracking           :boolean          default(FALSE)
 #  description        :text
+#  tracking           :boolean          default(FALSE)
 #  section_id         :integer
+#  relevant           :string
 #
 
 module Fields
