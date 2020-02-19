@@ -7,10 +7,10 @@ class EmailNotificationWorker
     klass = class_name.constantize
     condition = {}
     condition[klass.primary_key] = id
-    obj = klass.find_by(condition)
+    event = klass.find_by(condition)
 
-    return if obj.nil? || obj.milestone.message.try(:email_notification).nil?
+    return if event.nil? || event.milestone.message.try(:email_notification).nil?
 
-    NotificationMailer.notify(obj.milestone.message.email_notification.emails.join(','), obj.telegram_message).deliver_now
+    NotificationMailer.notify(event.milestone.message.email_notification.emails.join(','), event.telegram_message).deliver_now
   end
 end

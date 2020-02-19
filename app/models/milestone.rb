@@ -79,7 +79,7 @@ class Milestone < ApplicationRecord
   private
     def check_field_validation
       fields.each do |field|
-        errors.add field.name.downcase, 'both must be exist' if field.validations[:from].present? != field.validations[:to].present?
+        errors.add field.name.downcase, I18n.t('milestone.both_must_exist') if field.validations[:from].present? != field.validations[:to].present?
       end
     end
 
