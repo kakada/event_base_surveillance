@@ -6,49 +6,41 @@
       = link_to t('shared.done'), done_url, class: 'btn btn-light'
 
   .medium-width
-    %p You can configure your bot to communicate with people using the Telegram notification.
+    %p= t('telegram_bot.you_can_configure_your_bot')
 
     %div
-      %h5 Visit the Bot Father to create a new Telegram bot
+      %h5= t('telegram_bot.visit_bot_father_to_create_newbot')
       %div
-        = link_to 'Create a new Telegram bot', 'https://telegram.me/botfather', class: 'btn btn-link'
-        using the Bot Father.
-
+        = link_to t('telegram_bot.create_new_bot'), 'https://telegram.me/botfather', class: 'btn btn-link'
+        %span= t('telegram_bot.using_the_bot_father')
       = image_tag 'telegram_bot/bot_father', class: 'image'
 
     %div
-      %h5 Create a new Telegram bot
-      %div= "To create a new Telegram bot, send command <code>\/newbot</code>.".html_safe
-
+      %h5= t('telegram_bot.create_new_bot')
+      %div= "#{t('telegram_bot.to_create_a_newbot')}, #{t('telegram_bot.send_command')} <code>\/newbot</code>.".html_safe
       = image_tag 'telegram_bot/newbot', class: 'image'
 
     %div
-      %h5 Specify a friendly name
-      %div Give the Telegram bot a friendly name for displaying in contact details and elsewhere.
-
+      %h5= t('telegram_bot.specify_a_friendly_name')
+      %div= t('telegram_bot.give_the_bot_a_friendly_name')
       = image_tag 'telegram_bot/bot_name', class: 'image'
 
     %div
-      %h5 Specify a username
-      %div Give the Telegram bot a unique username.
-      %div Note: The Username is a short name, to be used in mentions and t.me links. Usernames are 5-32 characters long and are case insensitive, but may only include Latin characters, numbers, and underscores. Your bot's username must end in 'bot', e.g. 'tetris_bot' or 'TetrisBot'.
-
+      %h5= t('telegram_bot.specify_a_username')
+      %div= t('telegram_bot.give_the_bot_a_unique_username')
+      %div= t('telegram_bot.username_note')
       = image_tag 'telegram_bot/bot_username', class: 'image'
 
     %div
-      %h5 Copy the access token
-      %div Copy the Telegram bot's access token.
-      %div= "Note The token is a string along the lines of <code>110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALD</code> saw that is required to authorize the bot and send requests to the Bot API. Keep your token secure and store it safely, it can be used by anyone to control your bot.".html_safe
-
+      %h5= t('telegram_bot.copy_the_access_token')
+      %div= t('telegram_bot.copy_the_bot_access_token')
+      %div= t('telegram_bot.token_note').html_safe
       = image_tag 'telegram_bot/bot_token', class: 'image'
 
     %div
-      %h5 Enter the Telegram bot's access token
-      %div= "Go to <b>Setting</b> menu and click the <b class='badge badge-info'>Edit</b> button.".html_safe
-
+      %h5= t('telegram_bot.enter_the_bot_token')
+      %div= t('telegram_bot.go_to_setting').html_safe
       = image_tag 'telegram_bot/setting', class: 'image'
-
-      %div= "Enable telegram notification and fill in token and username information then click button <button class='btn btn-primary btn-sm'>save</button>".html_safe
-
+      %div= t('telegram_bot.enable_telegram_notification').html_safe
       = image_tag 'telegram_bot/telegram_off', class: 'image'
       = image_tag 'telegram_bot/telegram_on', class: 'image'
