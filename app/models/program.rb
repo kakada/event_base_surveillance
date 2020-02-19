@@ -15,6 +15,8 @@
 #
 
 class Program < ApplicationRecord
+  include Programs::ElasticsearchConcern
+
   belongs_to :creator, class_name: 'User'
   LANGUAGES = [
     %w[English en],

@@ -2,6 +2,7 @@
 
 class IndexerWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'indexers'
 
   Client = Elasticsearch::Model.client
 

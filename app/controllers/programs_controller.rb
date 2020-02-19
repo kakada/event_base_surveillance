@@ -40,6 +40,13 @@ class ProgramsController < ApplicationController
     redirect_to programs_url
   end
 
+  def es_reindex
+    @program = authorize Program.find(params[:id])
+    @program.reindex_documents
+
+    redirect_to programs_url, notice: t('program.reindex_successfully')
+  end
+
   private
     def program_params
       params.require(:program).permit(:name).merge(creator_id: current_user.id)

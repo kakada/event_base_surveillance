@@ -23,9 +23,16 @@
           %th= t('event.id')
           %th= t('event.event_type')
           %th= t('event.location')
+
           - codes = %w(number_of_case progress risk_level event_date)
-          - current_program.milestones.root.fields.where(code: codes).each do |field|
-            %th= field.name
+          - if current_user.system_admin?
+            %th= t('event.number_of_case')
+            %th= t('event.progress')
+            %th= t('event.risk_level')
+            %th= t('event.onset_date')
+          - else
+            - current_program.milestones.root.fields.where(code: codes).each do |field|
+              %th= field.name
 
           %th= t('event.owner')
           %th
