@@ -1,7 +1,9 @@
 %ul.list.flex1.pt-0.px-3.event-bubble
   %li
     %span.type= "#{t('event.event_type')}:"
-    %span.value= @event.event_type_name
+    %span.value
+      = @event.event_type_name
+      = link_to t('event.preview_pdf'), event_preview_path(@event, format: 'pdf'), class: 'btn btn-link', target: '_blank'
   %li
     %span.type= "#{t('event.location')}:"
     %span.value= @event.location_name(reverse=true)

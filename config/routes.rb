@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :events, except: [:destroy] do
     scope module: :events do
       resources :event_milestones
+      resource :preview, only: [:show]
     end
 
     get :download, on: :collection

@@ -27,6 +27,7 @@ services:
     volumes:
       - bundle:/usr/local/bundle
       - certs:$CERTS_DIR
+      - ./vendor/assets/fonts:/usr/share/fonts
     depends_on:
       - db
       - redis
@@ -85,11 +86,11 @@ services:
       - xpack.security.http.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
       - xpack.security.http.ssl.certificate=$CERTS_DIR/es01/es01.crt
       - xpack.security.transport.ssl.enabled=true
-      - xpack.security.transport.ssl.verification_mode=certificate 
+      - xpack.security.transport.ssl.verification_mode=certificate
       - xpack.security.transport.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
       - xpack.security.transport.ssl.certificate=$CERTS_DIR/es01/es01.crt
       - xpack.security.transport.ssl.key=$CERTS_DIR/es01/es01.key
-    volumes: 
+    volumes:
       - elastic:/usr/share/elasticsearch/data
       - certs:$CERTS_DIR
     healthcheck:

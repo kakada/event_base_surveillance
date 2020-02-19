@@ -1,0 +1,18 @@
+%li.nobreak
+  %span.type= "#{field.name}:"
+  %span.value
+    - if fvs = field_values.select{ |fv| fv.field_id == field.id }.presence
+      - fvs.each do |fv|
+        - if fv.field_type == 'Fields::ImageField'
+          .image-wrapper
+            = wicked_pdf_image_tag fv.image_url
+
+        - elsif fv.field_type == 'Fields::FileField'
+          %div
+            %a.link{href: "#{ENV['HOST_URL']}#{URI.decode(download_path(file: fv.file_url))}"}= fv.file_url.split('/').last
+
+        - else
+          = fv.html_tag.html_safe
+
+    - else
+      = '-'
