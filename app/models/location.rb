@@ -30,11 +30,10 @@ class Location < ApplicationRecord
   end
 
   private
+    def presence_of_lat_lng
+      return unless latitude.present? != longitude.present?
 
-  def presence_of_lat_lng
-    return unless latitude.present? != longitude.present?
-
-    errors.add(:longitude, "can't be blank") if latitude.present?
-    errors.add(:latitude, "can't be blank") if longitude.present?
-  end
+      errors.add(:longitude, "can't be blank") if latitude.present?
+      errors.add(:latitude, "can't be blank") if longitude.present?
+    end
 end

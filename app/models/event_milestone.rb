@@ -64,16 +64,15 @@ class EventMilestone < ApplicationRecord
   end
 
   private
+    def set_event_progress
+      fv = event.field_values.find_or_initialize_by(field_code: 'progress')
+      fv.value = milestone.name
+      fv.field_id ||= program.milestones.root.fields.find_by(code: 'progress').id
+      fv.save
+    end
 
-  def set_event_progress
-    fv = event.field_values.find_or_initialize_by(field_code: 'progress')
-    fv.value = milestone.name
-    fv.field_id ||= program.milestones.root.fields.find_by(code: 'progress').id
-    fv.save
-  end
-
-  def set_event_to_close
-    event.close = true
-    event.save
-  end
+    def set_event_to_close
+      event.close = true
+      event.save
+    end
 end

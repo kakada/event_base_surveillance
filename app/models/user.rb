@@ -73,8 +73,7 @@ class User < ApplicationRecord
   end
 
   protected
-
-  def password_required?
-    confirmed? ? super : false
-  end
+    def password_required?
+      confirmed? ? super : false
+    end
 end

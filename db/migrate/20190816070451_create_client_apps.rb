@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateClientApps < ActiveRecord::Migration[5.2]
   def change
     create_table :client_apps do |t|

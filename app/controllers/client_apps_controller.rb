@@ -64,8 +64,7 @@ class ClientAppsController < ApplicationController
   def info; end
 
   private
-
-  def client_app_params
-    params.require(:client_app).permit(:ip_address, :name, :access_token, permissions: [])
-  end
+    def client_app_params
+      params.require(:client_app).permit(:ip_address, :name, :access_token, permissions: [])
+    end
 end

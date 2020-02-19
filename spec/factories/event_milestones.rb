@@ -4,8 +4,8 @@ FactoryBot.define do
   factory :event_milestone do
     program
     event     { create(:event, program: program) }
-    submitter { create(:submitter, program: program)}
-    milestone { create(:milestone, program: program)}
+    submitter { create(:submitter, program: program) }
+    milestone { create(:milestone, program: program) }
 
     trait :risk_assessment_with_field_values do
       milestone { create(:milestone, :risk_assessment, program: program) }

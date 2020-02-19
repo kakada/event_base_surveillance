@@ -41,16 +41,15 @@ class EventType < ApplicationRecord
   end
 
   private
+    def set_program_id
+      self.program_id ||= user.try(:program_id)
+    end
 
-  def set_program_id
-    self.program_id ||= user.try(:program_id)
-  end
+    def set_color
+      self.color ||= "##{SecureRandom.hex(3)}"
+    end
 
-  def set_color
-    self.color ||= "##{SecureRandom.hex(3)}"
-  end
-
-  def set_code
-    self.code = name.downcase.split(' ').join('_')
-  end
+    def set_code
+      self.code = name.downcase.split(' ').join('_')
+    end
 end

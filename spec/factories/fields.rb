@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :field do
     name        { FFaker::Name.name }
@@ -13,10 +15,10 @@ FactoryBot.define do
     end
 
     trait :risk_level_mapping_field do
-      name                {'Risk Level'}
-      field_type          {'Fields::MappingField'}
-      mapping_field       {'risk_level'}
-      mapping_field_type  {'Fields::SelectOneField'}
+      name                { 'Risk Level' }
+      field_type          { 'Fields::MappingField' }
+      mapping_field       { 'risk_level' }
+      mapping_field_type  { 'Fields::SelectOneField' }
 
       after :create do |field|
         create(:field_option, name: 'Low', color: '#514c2a', field: field)

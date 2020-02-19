@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe MessageInterpretor, type: :model do
   describe '#message' do
     context 'milestone new and create new event' do
       let!(:event) { create(:event) }
-      let!(:source_field) { event.milestone.fields.create({ name: "Source of information", field_type: "Fields::SelectOneField", field_options_attributes: [{name: "Hotline"}, {name: "RRT"}]}) }
+      let!(:source_field) { event.milestone.fields.create({ name: 'Source of information', field_type: 'Fields::SelectOneField', field_options_attributes: [{ name: 'Hotline' }, { name: 'RRT' }] }) }
       let!(:template) { "Hi all! There is {{de_event_type_name}} happen in {{de_location_name}}, so please consider it. The source is from {{dy_#{source_field.id}_source_of_information}}" }
       let!(:interpretor) { MessageInterpretor.new(template, event.uuid) }
 

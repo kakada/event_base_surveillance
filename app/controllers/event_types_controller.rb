@@ -59,17 +59,16 @@ class EventTypesController < ApplicationController
   end
 
   private
-
-  def event_type_params
-    params.require(:event_type).permit(
-      :name, :color,
-      fields_attributes: [
-        :id, :name, :field_type, :required, :display_order,
-        :mapping_field, :mapping_field_type, :_destroy,
-        field_options_attributes: %i[
-          id name value color _destroy
+    def event_type_params
+      params.require(:event_type).permit(
+        :name, :color,
+        fields_attributes: [
+          :id, :name, :field_type, :required, :display_order,
+          :mapping_field, :mapping_field_type, :_destroy,
+          field_options_attributes: %i[
+            id name value color _destroy
+          ]
         ]
-      ]
-    )
-  end
+      )
+    end
 end

@@ -40,16 +40,15 @@ class Program < ApplicationRecord
   end
 
   private
+    def set_default_language
+      self.language_code ||= 'en'
+    end
 
-  def set_default_language
-    self.language_code ||= 'en'
-  end
+    def create_root_milestone
+      milestones.create_root(creator_id)
+    end
 
-  def create_root_milestone
-    milestones.create_root(creator_id)
-  end
-
-  def create_unknown_event_type
-    event_types.create_root(creator_id)
-  end
+    def create_unknown_event_type
+      event_types.create_root(creator_id)
+    end
 end

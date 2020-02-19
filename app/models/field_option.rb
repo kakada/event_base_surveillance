@@ -21,8 +21,7 @@ class FieldOption < ApplicationRecord
   before_validation :set_option_value, if: -> { name.present? }
 
   private
-
-  def set_option_value
-    self.value = (value.presence || name).downcase.split(' ').join('_')
-  end
+    def set_option_value
+      self.value = (value.presence || name).downcase.split(' ').join('_')
+    end
 end

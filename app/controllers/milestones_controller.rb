@@ -46,18 +46,17 @@ class MilestonesController < ::ApplicationController
   end
 
   private
-
-  def milestone_params
-    params.require(:milestone).permit(
-      :name, :display_order, :final,
-      fields_attributes: [
-        :id, :name, :field_type, :required, :display_order, :is_default, :code,
-        :mapping_field, :mapping_field_type, :_destroy, :tracking, :description,
-        validations: {},
-        field_options_attributes: %i[
-          id name value color _destroy
+    def milestone_params
+      params.require(:milestone).permit(
+        :name, :display_order, :final,
+        fields_attributes: [
+          :id, :name, :field_type, :required, :display_order, :is_default, :code,
+          :mapping_field, :mapping_field_type, :_destroy, :tracking, :description,
+          validations: {},
+          field_options_attributes: %i[
+            id name value color _destroy
+          ]
         ]
-      ]
-    ).merge(creator_id: current_user.id)
-  end
+      ).merge(creator_id: current_user.id)
+    end
 end

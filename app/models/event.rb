@@ -105,42 +105,41 @@ class Event < ApplicationRecord
   end
 
   private
+    def secure_uuid
+      self.uuid ||= SecureRandom.hex(4)
 
-  def secure_uuid
-    self.uuid ||= SecureRandom.hex(4)
+      return unless self.class.exists?(uuid: uuid)
 
-    return unless self.class.exists?(uuid: uuid)
-
-    self.uuid = SecureRandom.hex(4)
-    secure_uuid
-  end
-
-  def addresses
-    arr = []
-    %w[province_id district_id commune_id village_id].each do |code|
-      fv = field_values.find_by(field_code: code)
-      next if fv.nil? || fv.value.blank?
-
-      address = "Pumi::#{code.split('_').first.titlecase}".constantize.find_by_id(fv.value)
-      next if address.nil?
-
-      arr.push(address)
+      self.uuid = SecureRandom.hex(4)
+      secure_uuid
     end
 
-    arr
-  end
+    def addresses
+      arr = []
+      %w[province_id district_id commune_id village_id].each do |code|
+        fv = field_values.find_by(field_code: code)
+        next if fv.nil? || fv.value.blank?
 
-  def assign_location
-    loc_code = %w[village_id commune_id district_id province_id].map do |code|
-      field_values.select { |fv| fv.field_code == code }.first.try(:value)
-    end.reject(&:blank?).first
+        address = "Pumi::#{code.split('_').first.titlecase}".constantize.find_by_id(fv.value)
+        next if address.nil?
 
-    return if loc_code.blank?
+        arr.push(address)
+      end
 
-    self.location_code = loc_code
-  end
+      arr
+    end
 
-  def set_program_id
-    creator && self.program_id = creator.program_id
-  end
+    def assign_location
+      loc_code = %w[village_id commune_id district_id province_id].map do |code|
+        field_values.select { |fv| fv.field_code == code }.first.try(:value)
+      end.reject(&:blank?).first
+
+      return if loc_code.blank?
+
+      self.location_code = loc_code
+    end
+
+    def set_program_id
+      creator && self.program_id = creator.program_id
+    end
 end

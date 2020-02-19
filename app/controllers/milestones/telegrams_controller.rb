@@ -40,19 +40,18 @@ module Milestones
     end
 
     private
+      def telegram_params
+        params.require(:notifications_telegram).permit(
+          :message, chat_group_ids: []
+        )
+      end
 
-    def telegram_params
-      params.require(:notifications_telegram).permit(
-        :message, chat_group_ids: []
-      )
-    end
+      def set_milestone
+        @milestone = Milestone.find(params[:milestone_id])
+      end
 
-    def set_milestone
-      @milestone = Milestone.find(params[:milestone_id])
-    end
-
-    def set_chat_group
-      @groups = ChatGroup.telegrams
-    end
+      def set_chat_group
+        @groups = ChatGroup.telegrams
+      end
   end
 end

@@ -36,7 +36,7 @@ RSpec.describe Events::FieldValueValidation do
   describe '#validate_field_value_datatype' do
     let!(:program) { create(:program) }
     let!(:event) { create(:event, program: program) }
-    let!(:my_number_field) { { name: 'my_number', field_type: 'Fields::IntegerField', validations: {from: 1, to: 3} } }
+    let!(:my_number_field) { { name: 'my_number', field_type: 'Fields::IntegerField', validations: { from: 1, to: 3 } } }
     let!(:milestone) { create(:milestone, program: program, fields_attributes: [my_number_field]) }
     let!(:conducted_at) {
       {

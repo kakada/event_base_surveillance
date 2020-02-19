@@ -31,9 +31,8 @@ module FieldValues
     end
 
     private
-
-    def location
-      @location ||= "Pumi::#{field_code.split('_').first.titlecase}".constantize.find_by_id(value)
-    end
+      def location
+        @location ||= "Pumi::#{field_code.split('_').first.titlecase}".constantize.find_by_id(value)
+      end
   end
 end

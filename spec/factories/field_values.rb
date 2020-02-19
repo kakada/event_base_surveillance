@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :field_value do
     valueable_id    { create(:event).id }

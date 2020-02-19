@@ -83,29 +83,29 @@ class Milestone < ApplicationRecord
       end
     end
 
-  def only_one_final_milestone
-    return unless final?
+    def only_one_final_milestone
+      return unless final?
 
-    matches = program.milestones.where(final: true).where.not(id: id)
+      matches = program.milestones.where(final: true).where.not(id: id)
 
-    errors.add(:final, 'cannot have another final milestone') if matches.exists?
-  end
+      errors.add(:final, 'cannot have another final milestone') if matches.exists?
+    end
 
-  def set_display_order
-    self.display_order = program.milestones.maximum(:display_order).to_i + 1
-  end
+    def set_display_order
+      self.display_order = program.milestones.maximum(:display_order).to_i + 1
+    end
 
-  def set_default_fields
-    self.fields_attributes = Field.defaults.select{ |f| fields.collect(&:code).exclude? f[:code] }
-  end
+    def set_default_fields
+      self.fields_attributes = Field.defaults.select { |f| fields.collect(&:code).exclude? f[:code] }
+    end
 
-  def validate_unique_field_name
-    validate_uniqueness_of_in_memory(fields, %i[name], 'duplicate')
-  end
+    def validate_unique_field_name
+      validate_uniqueness_of_in_memory(fields, %i[name], 'duplicate')
+    end
 
-  def validate_unique_field_type_location
-    return if fields.select { |field| field.field_type == 'location' }.length < 2
+    def validate_unique_field_type_location
+      return if fields.select { |field| field.field_type == 'location' }.length < 2
 
-    errors.add :field_type, 'location cannot be more than one'
-  end
+      errors.add :field_type, 'location cannot be more than one'
+    end
 end

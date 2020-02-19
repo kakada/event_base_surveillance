@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Milestone, type: :model do
@@ -22,20 +24,20 @@ RSpec.describe Milestone, type: :model do
     let!(:program) { create(:program) }
 
     context 'no validations' do
-      let(:fields) { [ { name: 'my number', field_type: "Fields::IntegerField", validations: {} } ] }
+      let(:fields) { [ { name: 'my number', field_type: 'Fields::IntegerField', validations: {} } ] }
 
       it { expect(create(:milestone, program: program, fields_attributes: fields)).to be_truthy }
     end
 
     context 'has both from and to' do
-      let(:fields) { [ { name: 'my number', field_type: "Fields::IntegerField", validations: {from: 1, to: 2} } ] }
+      let(:fields) { [ { name: 'my number', field_type: 'Fields::IntegerField', validations: { from: 1, to: 2 } } ] }
 
       it { expect(create(:milestone, program: program, fields_attributes: fields)).to be_truthy }
     end
 
     context 'has only from' do
       before :each do
-        fields = [ { name: 'my number', field_type: "Fields::IntegerField", validations: {from: 1} } ]
+        fields = [ { name: 'my number', field_type: 'Fields::IntegerField', validations: { from: 1 } } ]
         @milestone = build(:milestone, program: program, fields_attributes: fields)
       end
 
@@ -44,7 +46,7 @@ RSpec.describe Milestone, type: :model do
 
     context 'has only to' do
       before :each do
-        fields = [ { name: 'my number', field_type: "Fields::IntegerField", validations: {to: 1} } ]
+        fields = [ { name: 'my number', field_type: 'Fields::IntegerField', validations: { to: 1 } } ]
         @milestone = build(:milestone, program: program, fields_attributes: fields)
       end
 
