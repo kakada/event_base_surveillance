@@ -1,7 +1,9 @@
 = f.label field_name do
-  = field_name.upcase_first
+  = field.name
+
   - if field.required?
     %abbr{:title => "required"} *
+
   - if field.description.present?
     %i.fa.fa-question-circle{ data: { toggle: "tooltip", html: "true" }, title: description_html(field.description).html_safe }
 

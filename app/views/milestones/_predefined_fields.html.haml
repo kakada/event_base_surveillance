@@ -1,32 +1,45 @@
-%fieldset
-  %legend= t('milestone.primary_fields')
+- sections = @milestone.sections.select{ |section| section.default? }
 
-  %ol.fields
-    - fields = f.object.fields.select{ |f| f.is_default? }
-    = f.fields_for :fields, fields do |form|
-      %li{ class: ('hidden' if form.object.code == 'source') }
-        %fieldset.fieldset
-          .field-wrapper
-            %button.btn.move{type: :button, style: 'cursor: auto'}
+= f.fields_for :sections, sections do |sf|
+  %fieldset.section
+    %legend.flex-row-vertical-center
+      .flex1
+        = sf.input :name, label: false, placeholder: t('milestone.section_name')
+        = sf.hidden_field :default
 
-            .wrapper.flex-row-vertical-center
-              %button.btn.collapse-trigger.mr-1{ type: :button }
-                %i.fas.fa-caret-right
-              %abbr.ml-3{ :title => "required", class: ('hidden' if !form.object.required) } *
-              = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.field_type
-              = form.hidden_field :code
-              = form.hidden_field :required
-              = form.hidden_field :is_default, value: true
-              = form.text_field :name, placeholder: 'field_name', class: 'form-control field-name'
+      .form-check.form-check-inline
+        = sf.input :display, label: t('milestone.displayed'), input_html: {class: 'form-check-inline'}
 
-              - if form.object.required
-                .as-title= t('milestone.required')
+    %ol.fields.sortable
+      = sf.fields_for :fields, sf.object.fields do |form|
+        %li{class: ('hidden' if form.object.code=='source')}
+          %fieldset.fieldset
+            .field-wrapper
+              %button.btn.move{type: :button}
 
-              .form-check
-                = form.check_box :tracking, { class: 'form-check-input' }
-                = form.label :tracking, t('milestone.tracking'), class: 'form-check-label'
+              .wrapper.flex-row-vertical-center
+                %button.btn.collapse-trigger.mr-1{ type: :button }
+                  %i.fas.fa-caret-right
 
-          = render 'kinds'
-          .collapse-content
-            = render "field_description", f: form
-            = render 'field_option_content', f: form
+                %abbr.abbr-required{ :title => 'required', class: ('hidden' if !form.object.required) } *
+
+                .flex-column.flex1
+                  = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.field_type
+                  = form.hidden_field :code
+                  = form.hidden_field :required
+                  = form.hidden_field :is_default
+                  = form.hidden_field :entry_able
+                  = form.hidden_field :display_order, class: 'display-order'
+                  = form.text_field :name, placeholder: t('milestone.field_name'), class: 'form-control field-name'
+                  = form.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
+
+                - if form.object.required
+                  .as-title{style: 'font-weight: normal'}= t('milestone.required')
+
+                .form-check
+                  = form.check_box :tracking, { class: 'form-check-input' }
+                  = form.label :tracking, t('milestone.tracking'), class: 'form-check-label'
+
+            = render 'kinds'
+            .collapse-content
+              = render 'field_option_content', f: form

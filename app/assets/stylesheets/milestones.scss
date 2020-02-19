@@ -23,4 +23,16 @@
     margin-left: 10px;
     position: relative;
   }
+
+  .section {
+    border-color: #111;
+
+    legend {
+      font-size: 16px;
+    }
+
+    .remove-section {
+      margin-bottom: 10px;
+    }
+  }
 }

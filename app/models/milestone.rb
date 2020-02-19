@@ -20,17 +20,17 @@ class Milestone < ApplicationRecord
   belongs_to :program
   belongs_to :creator, class_name: 'User'
   has_one    :message
+  has_one    :telegram, class_name: 'Notifications::Telegram'
+  has_many   :sections, dependent: :destroy
   has_many   :fields, dependent: :destroy
 
   # Validation
   validates :name, presence: true, uniqueness: { scope: [:program_id] }
-  validate :validate_unique_field_name
-  validate :validate_unique_field_type_location
   validate :only_one_final_milestone
-  validate :check_field_validation
+  validate :validate_unique_section_name
 
+  before_validation :set_default_section, unless: :is_default
   before_create :set_display_order
-  before_create :set_default_fields, unless: :is_default?
 
   # Scope
   default_scope { order(display_order: :asc) }
@@ -39,11 +39,11 @@ class Milestone < ApplicationRecord
 
 
   # Nested attribute
-  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+  accepts_nested_attributes_for :sections, allow_destroy: true
 
   # Class methods
   def self.create_root(creator_id)
-    create(name: 'New', is_default: true, fields_attributes: Field.roots, creator_id: creator_id)
+    create(name: 'New', is_default: true, sections_attributes: Section.roots, creator_id: creator_id)
   end
 
   def self.update_order!(ids)
@@ -54,11 +54,11 @@ class Milestone < ApplicationRecord
 
   # Instand methods
   def template_fields
-    return [] if self == Milestone.first
+    return Event.template_fields(program) if self.is_default?
 
     fields.map do |field|
       {
-        code: "#{EventMilestone.dynamic_template_code}#{field.id}_#{field.name.downcase.split(' ').join('_')}",
+        code: "#{EventMilestone.dynamic_template_code}#{field.id}_#{field.format_name}",
         label: field.name
       }
     end
@@ -72,15 +72,14 @@ class Milestone < ApplicationRecord
     name.downcase.split(' ').join('_')
   end
 
-  def build_default_fields
-    self.fields_attributes = Field.defaults
+  def build_default_section
+    self.sections_attributes = Section.defaults
   end
 
   private
-    def check_field_validation
-      fields.each do |field|
-        errors.add field.name.downcase, I18n.t('milestone.both_must_exist') if field.validations[:from].present? != field.validations[:to].present?
-      end
+
+    def validate_unique_section_name
+      validate_uniqueness_of_in_memory(sections, %i[name], 'duplicate')
     end
 
     def only_one_final_milestone
@@ -95,17 +94,7 @@ class Milestone < ApplicationRecord
       self.display_order = program.milestones.maximum(:display_order).to_i + 1
     end
 
-    def set_default_fields
-      self.fields_attributes = Field.defaults.select { |f| fields.collect(&:code).exclude? f[:code] }
-    end
-
-    def validate_unique_field_name
-      validate_uniqueness_of_in_memory(fields, %i[name], 'duplicate')
-    end
-
-    def validate_unique_field_type_location
-      return if fields.select { |field| field.field_type == 'location' }.length < 2
-
-      errors.add :field_type, 'location cannot be more than one'
+    def set_default_section
+      self.sections_attributes = Section.defaults if sections.select{|section| section.default}.length == 0
     end
 end

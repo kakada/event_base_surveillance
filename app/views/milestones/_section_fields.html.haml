@@ -1,0 +1,19 @@
+%fieldset.section
+  %legend.flex-row-vertical-center
+    .flex1
+      = f.input :name, label: false, placeholder: t('milestone.section_name')
+      = f.hidden_field :default
+
+    .form-check.form-check-inline
+      = f.input :display, label: t('milestone.displayed'), input_html: {class: 'form-check-inline'}
+
+    .action.remove-section
+      = f.hidden_field :_destroy
+      = link_to '#', class: "remove_fields btn btn-link" do
+        %i.fa.fa-trash-alt.icon-delete
+
+  %ol.fields.sortable
+    = f.fields_for :fields, f.object.fields do |builder|
+      = render 'field_fields', f: builder
+
+    = link_to_add_fields t('milestone.add_field'), f, :fields

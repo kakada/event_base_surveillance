@@ -1,337 +1,362 @@
 [
   {
     "name": "Verification",
-    "fields_attributes": [
+    "sections_attributes": [
       {
-        "name": "Verify outbreak confirm",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
+        "name": "Additional Fields",
+        "fields_attributes": [
           {
-            "name": "Yes"
+            "name": "Verify outbreak confirm",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "Yes"
+              },
+              {
+                "name": "No"
+              }
+            ]
           },
           {
-            "name": "No"
-          }
-        ]
-      },
-      {
-        "name": "Replication of the case",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
-          {
-            "name": "Yes"
+            "name": "Replication of the case",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "Yes"
+              },
+              {
+                "name": "No"
+              }
+            ]
           },
           {
-            "name": "No"
+            "name": "Animal death",
+            "field_type": "Fields::TextField"
           }
         ]
-      },
-      {
-        "name": "Animal death",
-        "field_type": "Fields::TextField"
       }
     ]
   },
   {
     "name": "Investigation",
-    "fields_attributes": [
+    "sections_attributes": [
       {
-        "name": "Primary case?",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
+        "name": "Additional Fields",
+        "fields_attributes": [
           {
-            "name": "Yes"
+            "name": "Primary case?",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "Yes"
+              },
+              {
+                "name": "No"
+              }
+            ]
           },
           {
-            "name": "No"
-          }
-        ]
-      },
-      {
-        "name": "Conducted person",
-        "field_type": "Fields::TextField"
-      },
-      {
-        "name": "Attendent list",
-        "field_type": "Fields::FileField"
-      },
-      {
-        "name": "Control measures implemented",
-        "field_type": "Fields::TextField"
-      },
-      {
-        "name": "Summary report",
-        "field_type": "Fields::FileField"
-      },
-      {
-        "name": "CAVET",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
-          {
-            "name": "Yes"
+            "name": "Conducted person",
+            "field_type": "Fields::TextField"
           },
           {
-            "name": "No"
-          }
-        ]
-      },
-      {
-        "name": "Additional info",
-        "field_type": "Fields::TextField",
-        "field_options_attributes": [
-          {
-            "name": "Yes"
+            "name": "Attendent list",
+            "field_type": "Fields::FileField"
           },
           {
-            "name": "No"
+            "name": "Control measures implemented",
+            "field_type": "Fields::TextField"
+          },
+          {
+            "name": "Summary report",
+            "field_type": "Fields::FileField"
+          },
+          {
+            "name": "CAVET",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "Yes"
+              },
+              {
+                "name": "No"
+              }
+            ]
+          },
+          {
+            "name": "Additional info",
+            "field_type": "Fields::TextField",
+            "field_options_attributes": [
+              {
+                "name": "Yes"
+              },
+              {
+                "name": "No"
+              }
+            ]
+          },
+          {
+            "name": "How many sample collected?",
+            "field_type": "Fields::IntegerField"
+          },
+          {
+            "name": "Sample description",
+            "field_type": "Fields::TextField"
+          },
+          {
+            "name": "Symtomps attachment",
+            "field_type": "Fields::FileField"
+          },
+          {
+            "name": "Type of communication activity",
+            "field_type": "Fields::TextField"
           }
         ]
-      },
-      {
-        "name": "How many sample collected?",
-        "field_type": "Fields::IntegerField"
-      },
-      {
-        "name": "Sample description",
-        "field_type": "Fields::TextField"
-      },
-      {
-        "name": "Symtomps attachment",
-        "field_type": "Fields::FileField"
-      },
-      {
-        "name": "Type of communication activity",
-        "field_type": "Fields::TextField"
       }
     ]
   },
   {
     "name": "Risk Assessment",
-    "fields_attributes": [
+    "sections_attributes": [
       {
-        "name": "Lab Name",
-        "field_type": "Fields::TextField"
-      },
-      {
-        "name": "Date submitted sample",
-        "field_type": "Fields::DateField"
-      },
-      {
-        "name": "Date for result",
-        "field_type": "Fields::DateField"
-      },
-      {
-        "name": "Lab result",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
+        "name": "Additional Fields",
+        "fields_attributes": [
           {
-            "name": "ផ្តាសាយបក្សី"
+            "name": "Lab Name",
+            "field_type": "Fields::TextField"
           },
           {
-            "name": "អុតក្តាម"
+            "name": "Date submitted sample",
+            "field_type": "Fields::DateField"
           },
           {
-            "name": "សារទឹក"
+            "name": "Date for result",
+            "field_type": "Fields::DateField"
           },
           {
-            "name": "បុស្សខ្យល់"
+            "name": "Lab result",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "ផ្តាសាយបក្សី"
+              },
+              {
+                "name": "អុតក្តាម"
+              },
+              {
+                "name": "សារទឹក"
+              },
+              {
+                "name": "បុស្សខ្យល់"
+              },
+              {
+                "name": "បេស្តជ្រូក"
+              },
+              {
+                "name": "បេស្តជ្រូកអាហ្វ្រិក"
+              },
+              {
+                "name": "ត្រចៀកខៀវ"
+              },
+              {
+                "name": "ឆ្កែឆ្កួត"
+              }
+            ]
           },
           {
-            "name": "បេស្តជ្រូក"
+            "name": "Lab result attachment",
+            "field_type": "Fields::FileField"
           },
           {
-            "name": "បេស្តជ្រូកអាហ្វ្រិក"
+            "name": "Is it severe disease?",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "Yes"
+              },
+              {
+                "name": "No"
+              }
+            ]
           },
           {
-            "name": "ត្រចៀកខៀវ"
+            "name": "Retest Lab Name",
+            "field_type": "Fields::TextField"
           },
           {
-            "name": "ឆ្កែឆ្កួត"
+            "name": "Retest Date submitted to Lab",
+            "field_type": "Fields::DateField"
+          },
+          {
+            "name": "Retest Date for result",
+            "field_type": "Fields::DateField"
+          },
+          {
+            "name": "Retest Lab result",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "ផ្តាសាយបក្សី"
+              },
+              {
+                "name": "អុតក្តាម"
+              },
+              {
+                "name": "សារទឹក"
+              },
+              {
+                "name": "បុស្សខ្យល់"
+              },
+              {
+                "name": "បេស្តជ្រូក"
+              },
+              {
+                "name": "បេស្តជ្រូកអាហ្វ្រិក"
+              },
+              {
+                "name": "ត្រចៀកខៀវ"
+              },
+              {
+                "name": "ឆ្កែឆ្កួត"
+              }
+            ]
+          },
+          {
+            "name": "Retest Lab result attachment",
+            "field_type": "Fields::FileField"
           }
         ]
-      },
-      {
-        "name": "Lab result attachment",
-        "field_type": "Fields::FileField"
-      },
-      {
-        "name": "Is it severe disease?",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
-          {
-            "name": "Yes"
-          },
-          {
-            "name": "No"
-          }
-        ]
-      },
-      {
-        "name": "Retest Lab Name",
-        "field_type": "Fields::TextField"
-      },
-      {
-        "name": "Retest Date submitted to Lab",
-        "field_type": "Fields::DateField"
-      },
-      {
-        "name": "Retest Date for result",
-        "field_type": "Fields::DateField"
-      },
-      {
-        "name": "Retest Lab result",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
-          {
-            "name": "ផ្តាសាយបក្សី"
-          },
-          {
-            "name": "អុតក្តាម"
-          },
-          {
-            "name": "សារទឹក"
-          },
-          {
-            "name": "បុស្សខ្យល់"
-          },
-          {
-            "name": "បេស្តជ្រូក"
-          },
-          {
-            "name": "បេស្តជ្រូកអាហ្វ្រិក"
-          },
-          {
-            "name": "ត្រចៀកខៀវ"
-          },
-          {
-            "name": "ឆ្កែឆ្កួត"
-          }
-        ]
-      },
-      {
-        "name": "Retest Lab result attachment",
-        "field_type": "Fields::FileField"
       }
     ]
   },
   {
     "name": "Intervention/Response",
-    "fields_attributes": [
+    "sections_attributes": [
       {
-        "name": "Prakas attachment",
-        "field_type": "Fields::FileField"
-      },
-      {
-        "name": "Control method",
-        "field_type": "Fields::SelectMultipleField",
-        "field_options_attributes": [
+        "name": "Additional Fields",
+        "fields_attributes": [
           {
-            "name": "Deaths"
+            "name": "Prakas attachment",
+            "field_type": "Fields::FileField"
           },
           {
-            "name": "Destroyed"
+            "name": "Control method",
+            "field_type": "Fields::SelectMultipleField",
+            "field_options_attributes": [
+              {
+                "name": "Deaths"
+              },
+              {
+                "name": "Destroyed"
+              },
+              {
+                "name": "Culling"
+              },
+              {
+                "name": "Disinfection"
+              },
+              {
+                "name": "Bio security"
+              },
+              {
+                "name": "Movement control"
+              },
+              {
+                "name": "Surveliance"
+              }
+            ]
           },
           {
-            "name": "Culling"
+            "name": "Awareness",
+            "field_type": "Fields::TextField"
           },
           {
-            "name": "Disinfection"
+            "name": "Deaths",
+            "field_type": "Fields::IntegerField"
           },
           {
-            "name": "Bio security"
+            "name": "Destroyed",
+            "field_type": "Fields::IntegerField"
           },
           {
-            "name": "Movement control"
+            "name": "Culling",
+            "field_type": "Fields::IntegerField"
           },
           {
-            "name": "Surveliance"
+            "name": "Slaughter",
+            "field_type": "Fields::IntegerField"
           }
         ]
-      },
-      {
-        "name": "Awareness",
-        "field_type": "Fields::TextField"
-      },
-      {
-        "name": "Deaths",
-        "field_type": "Fields::IntegerField"
-      },
-      {
-        "name": "Destroyed",
-        "field_type": "Fields::IntegerField"
-      },
-      {
-        "name": "Culling",
-        "field_type": "Fields::IntegerField"
-      },
-      {
-        "name": "Slaughter",
-        "field_type": "Fields::IntegerField"
       }
     ]
   },
   {
     "name": "Case Close",
     "final": true,
-    "fields_attributes": [
+    "sections_attributes": [
       {
-        "name": "Collect surrounding sample",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
+        "name": "Additional Fields",
+        "fields_attributes": [
           {
-            "name": "Yes"
+            "name": "Collect surrounding sample",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "Yes"
+              },
+              {
+                "name": "No"
+              }
+            ]
           },
           {
-            "name": "No"
+            "name": "Conducted person",
+            "field_type": "Fields::TextField",
+            "field_options_attributes": [
+              {
+                "name": "Deaths"
+              },
+              {
+                "name": "Destroyed"
+              },
+              {
+                "name": "Culling"
+              },
+              {
+                "name": "Disinfection"
+              },
+              {
+                "name": "Bio security"
+              },
+              {
+                "name": "Movement control"
+              },
+              {
+                "name": "Surveliance"
+              }
+            ]
+          },
+          {
+            "name": "Summary report",
+            "field_type": "Fields::FileField"
+          },
+          {
+            "name": "Sample testing and confirm from lab",
+            "field_type": "Fields::SelectOneField",
+            "field_options_attributes": [
+              {
+                "name": "Yes"
+              },
+              {
+                "name": "No"
+              }
+            ]
+          },
+          {
+            "name": "Attachment of Prakas from MAFF to close case",
+            "field_type": "Fields::FileField"
           }
         ]
-      },
-      {
-        "name": "Conducted person",
-        "field_type": "Fields::TextField",
-        "field_options_attributes": [
-          {
-            "name": "Deaths"
-          },
-          {
-            "name": "Destroyed"
-          },
-          {
-            "name": "Culling"
-          },
-          {
-            "name": "Disinfection"
-          },
-          {
-            "name": "Bio security"
-          },
-          {
-            "name": "Movement control"
-          },
-          {
-            "name": "Surveliance"
-          }
-        ]
-      },
-      {
-        "name": "Summary report",
-        "field_type": "Fields::FileField"
-      },
-      {
-        "name": "Sample testing and confirm from lab",
-        "field_type": "Fields::SelectOneField",
-        "field_options_attributes": [
-          {
-            "name": "Yes"
-          },
-          {
-            "name": "No"
-          }
-        ]
-      },
-      {
-        "name": "Attachment of Prakas from MAFF to close case",
-        "field_type": "Fields::FileField"
       }
     ]
   }

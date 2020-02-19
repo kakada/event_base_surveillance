@@ -1,0 +1,17 @@
+.flex-row
+  %ul.flex-column.items
+    %li.item.item-setting{'data-target' => '.setting-content'}= t('milestone.setting')
+    %li.item.validation-trigger{'data-target' => '.validation-criteria-content'}= t('milestone.validation_criteria')
+
+  .contents
+    .content.setting-content
+      .form-check
+        = f.check_box :required, { class: 'form-check-input field-required' }
+        = f.label :required, t('milestone.required'), class: 'form-check-label required-label'
+
+      .form-check
+        = f.check_box :tracking, { class: 'form-check-input' }
+        = f.label :tracking, t('milestone.tracking'), class: 'form-check-label'
+
+    .content.validation-criteria-content
+      = render 'field_validation_content', f: f

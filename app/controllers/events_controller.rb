@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new(event_type_id: params[:event_type_id])
+    @event = current_program.events.new(event_type_id: params[:event_type_id])
   end
 
   def create

@@ -140,6 +140,6 @@ class Event < ApplicationRecord
     end
 
     def set_program_id
-      creator && self.program_id = creator.program_id
+      self.program_id = creator.present? && creator.program_id
     end
 end

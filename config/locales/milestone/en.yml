@@ -26,3 +26,10 @@ en:
     setup_message_instruction: Please setup your notification
     setup: Setup
     both_must_exist: both must be exist
+    add_section: '+ Add Section'
+    setting: 'Setting'
+    validation_criteria: 'Validaton Criteria'
+    field_hint: 'Field hint'
+    field_name: 'Field name'
+    displayed: 'Displayed?'
+    section_name: 'Section Name'

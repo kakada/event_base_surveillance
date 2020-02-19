@@ -21,6 +21,7 @@
 #  validations        :text
 #  tracking           :boolean          default(FALSE)
 #  description        :text
+#  section_id         :integer
 #
 
 class Field < ApplicationRecord
@@ -29,17 +30,18 @@ class Field < ApplicationRecord
   FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::DateTimeField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze
 
   # Association
+  belongs_to :section
   belongs_to :milestone
   has_many   :field_options, dependent: :destroy
-  has_many   :field_values, dependent: :destroy
+  has_many   :field_values
 
   # Validation
-  validates :code, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
-  validates :name, presence: true, uniqueness: { scope: :milestone_id, message: 'already exist' }
+  validates :code, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
+  validates :name, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
   before_validation :set_field_code, if: -> { name.present? }
   before_validation :set_mapping_field_type
-
+  before_validation :set_milestone
   before_create :set_display_order
 
   # Scope
@@ -78,7 +80,7 @@ class Field < ApplicationRecord
       { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true },
       { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
       { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true, tracking: true },
-      { code: 'source', field_type: 'Fields::TextField', name: 'Source', entry_able: false }
+      { code: 'source_of_information', field_type: 'Fields::SelectOneField', name: 'Source of information', field_options_attributes: [{ name: 'Hotline' }, { name: 'Facebook' }, { name: 'Website' }, { name: 'Newspaper' }] }
     ]
     fields.each_with_index do |field, index|
       field[:display_order] = index + 1
@@ -93,13 +95,21 @@ class Field < ApplicationRecord
     ]
   end
 
+  def format_name
+    name.downcase.split(' ').join('_')
+  end
+
   private
     def set_field_code
-      self.code ||= name.downcase.split(' ').join('_')
+      self.code ||= format_name
     end
 
     def set_display_order
-      self.display_order ||= milestone.present? && milestone.fields.maximum(:display_order).to_i + 1
+      self.display_order ||= section.present? && section.fields.maximum(:display_order).to_i + 1
+    end
+
+    def set_milestone
+      self.milestone = section.milestone if section
     end
 
     def set_mapping_field_type
