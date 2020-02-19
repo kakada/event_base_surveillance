@@ -72,6 +72,13 @@ class User < ApplicationRecord
     pending_any_confirmation { yield }
   end
 
+  # class methods
+  def self.filter(params)
+    scope = all
+    scope = scope.where('email LIKE ?', "%#{params[:email]}%") if params[:email].present?
+    scope
+  end
+
   protected
     def password_required?
       confirmed? ? super : false

@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @users = policy_scope(User.includes(:program))
+    @pagy, @users = pagy(policy_scope(User.filter(params).includes(:program)))
   end
 
   def new
