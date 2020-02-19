@@ -6,6 +6,6 @@ namespace :elastic do
     program = Program.find_by(name: args.program_name)
     return if program.nil?
 
-    Elastic.new(program).reindex_documents
+    program.reindex_documents
   end
 end

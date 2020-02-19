@@ -46,7 +46,8 @@ module Samples
             number_of_case: rand(1..20),
             number_of_death: rand(1..5),
             event_date: Date.today - rand(0..30),
-            report_date: Date.today
+            report_date: Date.today,
+            source_of_information: ['hotline', 'Facebook', 'Website'].sample
           }
 
           field_values[:number_of_hospitalized] = rand(1..4) if program.name == 'CDC'

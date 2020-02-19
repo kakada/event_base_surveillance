@@ -15,6 +15,8 @@
 #
 
 class Program < ApplicationRecord
+  include Programs::ElasticsearchConcern
+
   belongs_to :creator, class_name: 'User'
   LANGUAGES = [
     %w[English en],
@@ -37,10 +39,6 @@ class Program < ApplicationRecord
 
   def format_name
     name.downcase.split(' ').join('_')
-  end
-
-  def reindex_documents
-    Elastic.new(self).reindex_documents
   end
 
   private
