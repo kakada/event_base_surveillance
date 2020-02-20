@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
   resource :download, only: [:show]
 
-  resources :about, only: [:index]
+  resources :about_us, only: [:index]
 
   # API
   namespace :api do
