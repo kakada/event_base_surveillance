@@ -38,12 +38,11 @@ class TelegramBotsController < ApplicationController
   def help; end
 
   private
+    def set_program
+      @program = Program.find(params[:program_id])
+    end
 
-  def set_program
-    @program = Program.find(params[:program_id])
-  end
-
-  def bot_params
-    params.require(:telegram_bot).permit(:token, :username, :actived, :enabled)
-  end
+    def bot_params
+      params.require(:telegram_bot).permit(:token, :username, :actived, :enabled)
+    end
 end

@@ -30,7 +30,7 @@ class Program < ApplicationRecord
   has_many  :milestones
   has_many  :webhooks
   has_many  :chat_groups
-  has_one   :telegram_bot, :dependent => :destroy
+  has_one   :telegram_bot, dependent: :destroy
 
   validates :name, presence: true
 

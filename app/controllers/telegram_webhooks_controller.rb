@@ -6,7 +6,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def message(message)
     # {"id"=>952424355, "is_bot"=>true, "first_name"=>"ebs_bot", "username"=>"ebs_system_bot"}
     member = message['left_chat_member'] || message['new_chat_member']
-    return unless (member.present? && member['is_bot'])
+    return unless member.present? && member['is_bot']
 
     # "chat"=>{"id"=>-369435878, "title"=>"ebs-group-chat", "type"=>"group", "all_members_are_administrators"=>true}
     chat = message['chat']

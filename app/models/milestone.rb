@@ -97,6 +97,6 @@ class Milestone < ApplicationRecord
     end
 
     def set_default_section
-      self.sections_attributes = Section.defaults if sections.select{|section| section.default}.length == 0
+      self.sections_attributes = Section.defaults if sections.select { |section| section.default }.length == 0
     end
 end

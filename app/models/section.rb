@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sections
@@ -41,24 +43,23 @@ class Section < ApplicationRecord
   end
 
   private
-
-  def set_default_fields
-    self.fields_attributes = Field.defaults.select{ |f| fields.collect(&:code).exclude? f[:code] }
-  end
-
-  def validate_field_from_to
-    fields.each do |field|
-      errors.add field.name.downcase, I18n.t('milestone.both_must_exist') if field.validations[:from].present? != field.validations[:to].present?
+    def set_default_fields
+      self.fields_attributes = Field.defaults.select { |f| fields.collect(&:code).exclude? f[:code] }
     end
-  end
 
-  def validate_unique_field_name
-    validate_uniqueness_of_in_memory(fields, %i[name], 'duplicate')
-  end
+    def validate_field_from_to
+      fields.each do |field|
+        errors.add field.name.downcase, I18n.t('milestone.both_must_exist') if field.validations[:from].present? != field.validations[:to].present?
+      end
+    end
 
-  def validate_unique_field_type_location
-    return if fields.select { |field| field.field_type == 'Fields::LocationField' }.length < 2
+    def validate_unique_field_name
+      validate_uniqueness_of_in_memory(fields, %i[name], 'duplicate')
+    end
 
-    errors.add :field_type, 'location cannot be more than one'
-  end
+    def validate_unique_field_type_location
+      return if fields.select { |field| field.field_type == 'Fields::LocationField' }.length < 2
+
+      errors.add :field_type, 'location cannot be more than one'
+    end
 end

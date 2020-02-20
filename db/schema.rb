@@ -146,8 +146,8 @@ ActiveRecord::Schema.define(version: 2020_02_18_085034) do
     t.datetime "updated_at", null: false
     t.boolean "color_required", default: false
     t.text "validations"
-    t.text "description"
     t.boolean "tracking", default: false
+    t.text "description"
     t.integer "section_id"
     t.string "relevant"
     t.index ["milestone_id", "code"], name: "index_fields_on_milestone_id_and_code", unique: true
@@ -224,16 +224,6 @@ ActiveRecord::Schema.define(version: 2020_02_18_085034) do
     t.boolean "enabled", default: false
     t.boolean "actived", default: false
     t.integer "program_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sections", force: :cascade do |t|
-    t.string "name"
-    t.integer "milestone_id"
-    t.integer "display_order"
-    t.boolean "default", default: false
-    t.boolean "display", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
