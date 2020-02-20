@@ -23,7 +23,7 @@ module Programs
     private
       def program_params
         params.require(:program).permit(
-          :enable_email_notification, :language_code
+          :enable_email_notification, :language_code,
           telegram_bot_attributes: [
             :token, :username, :enabled
           ]

@@ -214,6 +214,8 @@ ActiveRecord::Schema.define(version: 2020_02_18_085034) do
     t.integer "display_order"
     t.boolean "default", default: false
     t.boolean "display", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "telegram_bots", force: :cascade do |t|
