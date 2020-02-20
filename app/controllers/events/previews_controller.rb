@@ -9,9 +9,8 @@ module Events
     end
 
     private
-
-    def assign_event
-      @event = current_program.events.find(params[:event_id])
-    end
+      def assign_event
+        @event = current_program.events.find(params[:event_id])
+      end
   end
 end

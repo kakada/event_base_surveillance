@@ -14,3 +14,9 @@ km:
     value_should_be_from_to: "តម្លៃគួរតែចាប់បី %{from} ដល់ %{to}"
     search: 'ស្វែងរក'
     please_select: សូមជ្រើសរើស
+    status_on: 'បើក'
+    status_off: 'បិទ'
+    setup: 'Setup'
+    change: 'Change'
+    learn_more: 'ស្វែង​យល់​បន្ថែម'
+    need_help: 'ត្រូវការជំនួយ?'

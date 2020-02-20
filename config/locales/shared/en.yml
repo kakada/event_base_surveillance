@@ -14,3 +14,9 @@ en:
     value_should_be_from_to: "the value should be from %{from} to %{to}"
     search: 'Search'
     please_select: please select
+    status_on: 'On'
+    status_off: 'Off'
+    setup: 'Setup'
+    change: 'Change'
+    learn_more: 'Learn more'
+    need_help: 'Need help?'

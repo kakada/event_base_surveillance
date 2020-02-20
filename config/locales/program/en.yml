@@ -12,3 +12,5 @@ en:
     are_you_sure_to_reindex_elasticsearch_document: 'Are you sure to reindex elasticsearch document for this program?'
     es_reindex: 'Reindex Document'
     reindex_successfully: 'Reindex document successfully'
+    telegram: 'Telegram'
+    telegram_bot: 'Telegram bot'

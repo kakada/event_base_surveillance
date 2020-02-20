@@ -35,7 +35,7 @@
                   %i.fas.fa-ellipsis-v
 
                 .dropdown-menu.dropdown-menu-right
-                  = link_to milestone_message_path(milestone), class: ["btn dropdown-item", ('disabled' unless current_program.enable_telegram?)] do
+                  = link_to milestone_message_path(milestone), class: "btn dropdown-item" do
                     %i.fas.fa-bell.drop-menu-icon
                     %span= t('milestone.notification')
 

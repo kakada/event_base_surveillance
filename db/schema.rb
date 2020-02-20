@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_06_112610) do
+ActiveRecord::Schema.define(version: 2020_02_18_085034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_02_06_112610) do
     t.string "provider"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "program_id"
   end
 
   create_table "client_apps", force: :cascade do |t|
@@ -145,8 +146,8 @@ ActiveRecord::Schema.define(version: 2020_02_06_112610) do
     t.datetime "updated_at", null: false
     t.boolean "color_required", default: false
     t.text "validations"
-    t.text "description"
     t.boolean "tracking", default: false
+    t.text "description"
     t.integer "section_id"
     t.string "relevant"
     t.index ["milestone_id", "code"], name: "index_fields_on_milestone_id_and_code", unique: true
@@ -200,7 +201,6 @@ ActiveRecord::Schema.define(version: 2020_02_06_112610) do
 
   create_table "programs", force: :cascade do |t|
     t.string "name"
-    t.boolean "enable_telegram", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "creator_id"
@@ -218,12 +218,12 @@ ActiveRecord::Schema.define(version: 2020_02_06_112610) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "sections", force: :cascade do |t|
-    t.string "name"
-    t.integer "milestone_id"
-    t.integer "display_order"
-    t.boolean "default", default: false
-    t.boolean "display", default: true
+  create_table "telegram_bots", force: :cascade do |t|
+    t.string "token"
+    t.string "username"
+    t.boolean "enabled", default: false
+    t.boolean "actived", default: false
+    t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -16,6 +16,11 @@ Rails.application.routes.draw do
 
   resources :programs do
     get :es_reindex, on: :member
+    resource :telegram_bot
+  end
+
+  resource :telegram_bot, only: [] do
+    get :help, on: :collection
   end
 
   scope module: :programs do

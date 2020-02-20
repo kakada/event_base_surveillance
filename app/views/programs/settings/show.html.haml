@@ -5,9 +5,22 @@
 
   .w-50.view-center
     = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
-      .dotted-line.flex-row
-        %label.flex1= t('program.telegram_notification')
-        = f.input :enable_telegram, label: false, input_html: {id: 'toggle-telegram'}
+
+      - bot = current_program.telegram_bot || current_program.build_telegram_bot
+      = f.fields_for :telegram_bot, bot do |ff|
+        .dotted-line.flex-row
+          %label.flex1
+            = t('program.telegram_notification')
+
+            - if bot.enabled? && bot.actived?
+              %i.far.fa-check-circle.icon-green{'data-toggle'=> 'tooltip', title: t('telegram_bot.valid_bot')}
+            - else
+              %i.far.fa-times-circle.icon-red{'data-toggle'=> 'tooltip', title: t('telegram_bot.invalid_bot')}
+
+          %div
+            %a.pointer.badge.badge-info.text-white{'data-target' => '#telegram', 'data-toggle' => 'modal'}= t('shared.edit')
+
+            = render 'modal_telegram', f: ff
 
       .dotted-line.flex-row
         %label.flex1= t('program.email_notification')

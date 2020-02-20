@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-class ApplicationController < Api::V1::ApplicationController; end
+class BaseController < Api::V1::ApplicationController; end
 
-RSpec.describe ApplicationController, type: :controller do
-  controller do
+RSpec.describe BaseController, type: :controller do
+  controller(BaseController) do
     def index
       render json: {}, status: 200
     end

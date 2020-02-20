@@ -1,0 +1,17 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "#{@program.name}: Telegram Bot"
+
+  .w-50.view-center
+    = simple_form_for @bot, url: program_telegram_bot_path(@program) do |f|
+      .flex-row
+        %label.flex1= t('program.telegram_notification')
+        = f.input :enabled, label: false, input_html: {id: 'toggle-telegram'}
+
+      = f.input :token
+      = f.input :username
+
+      .actions
+        = f.submit t('shared.save') , class: 'btn btn-primary'
+        = link_to t('shared.cancel'), program_telegram_bot_path(@program), class: 'btn btn-secondary'

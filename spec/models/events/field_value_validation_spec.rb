@@ -37,7 +37,7 @@ RSpec.describe Events::FieldValueValidation do
     let!(:program) { create(:program) }
     let!(:event) { create(:event, program: program) }
     let!(:my_number_field) { { name: 'my_number', field_type: 'Fields::IntegerField', validations: { from: 1, to: 3 } } }
-    let!(:milestone) { create(:milestone, program: program, sections_attributes: [{name: 'section', fields_attributes: [my_number_field]}]) }
+    let!(:milestone) { create(:milestone, program: program, sections_attributes: [{ name: 'section', fields_attributes: [my_number_field] }]) }
     let!(:conducted_at) {
       {
         field_id: milestone.fields.find_by(code: 'conducted_at').id,
