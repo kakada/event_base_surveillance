@@ -11,14 +11,13 @@
         .dotted-line.flex-row
           %label.flex1
             = t('program.telegram_notification')
-            - if bot.enabled?
-              - if bot.actived?
-                %i.far.fa-check-circle.icon-green{'data-toggle'=> 'tooltip', title: t('telegram_bot.valid_bot')}
-              - else
-                %i.far.fa-times-circle.icon-red{'data-toggle'=> 'tooltip', title: t('telegram_bot.invalid_bot')}
+
+            - if bot.enabled? && bot.actived?
+              %i.far.fa-check-circle.icon-green{'data-toggle'=> 'tooltip', title: t('telegram_bot.valid_bot')}
+            - else
+              %i.far.fa-times-circle.icon-red{'data-toggle'=> 'tooltip', title: t('telegram_bot.invalid_bot')}
 
           %div
-            = bot.enabled ? t('shared.status_on') : t('shared.status_off')
             %a.pointer.badge.badge-info.text-white{'data-target' => '#telegram', 'data-toggle' => 'modal'}= t('shared.edit')
 
             = render 'modal_telegram', f: ff
