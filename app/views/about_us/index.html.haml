@@ -1,0 +1,19 @@
+#content
+  - unless user_signed_in?
+    = link_to 'Back', new_user_session_path, class: 'btn btn-link'
+  .row
+    .col-md-12
+      %h1.text-center= t('about.title')
+  .d-flex.justify-content-center.my-4.mx-auto.introduction
+    = t('about.introduction')
+
+  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
+    %h5= t('about.funded_by')
+  .d-flex.justify-content-center.align-items-center
+    = link_to 'https://endingpandemics.org', target: '_blank' do
+      = image_tag 'ending-pandemics.png', class: 'about-logo mr-2', alt: 'Ending Pandemics'
+  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
+    %h5= t('about.developed_by')
+  .d-flex.justify-content-center.align-items-center
+    = link_to 'http://ilabsoutheastasia.org', target: '_blank' do
+      = image_tag 'instedd-ilabsea.png', class: 'about-logo mr-2', alt: 'InSTEDD iLab Southeast Asia'

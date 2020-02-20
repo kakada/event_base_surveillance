@@ -92,7 +92,20 @@ a:focus {
   .copyright {
     text-decoration: none;
     font-size: 12px;
-    padding: 10px;
+    margin-bottom: 10px;
+
+    .copyright-logo {
+      height: 24px;
+      width: auto;
+    }
+
+    .copyright-large {
+      display: block;
+    }
+
+    .copyright-small {
+      display: none;
+    }
   }
 
   .dropdown-toggle::after {
@@ -146,6 +159,19 @@ a:focus {
     -webkit-transform: translateX(50%);
     -ms-transform: translateX(50%);
     transform: translateX(50%);
+  }
+
+  .copyright-large {
+    display: none;
+  }
+
+  .copyright-small {
+    display: block;
+  }
+
+  .copyright-logo {
+    height: auto;
+    width: 70px;
   }
 }
 

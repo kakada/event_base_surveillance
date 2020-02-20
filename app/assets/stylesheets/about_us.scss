@@ -1,0 +1,26 @@
+#about_us-index {
+  .introduction {
+    max-width: 900px;
+    // margin: 0 auto;
+    text-align: justify;
+  }
+
+  .about-logo {
+    height: 80px;
+  }
+
+  .column {
+    height: auto;
+  }
+
+  .wrapper {
+    width: auto;
+  }
+
+  &.devise-form {
+    .wrapper {
+      max-width: 1024px;
+      padding-top: 20px;
+    }
+  }
+}

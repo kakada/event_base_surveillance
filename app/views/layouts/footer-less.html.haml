@@ -10,8 +10,6 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body.devise-form{ id: css_class_name }
-    = render 'shared/notify_message'
     .column
       .wrapper
         = yield
-    = render 'devise/shared/footer'
