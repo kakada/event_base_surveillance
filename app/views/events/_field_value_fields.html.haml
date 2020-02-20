@@ -1,8 +1,6 @@
 - field_name = option[:field].try(:name).downcase
 - error_msg = option[:main_object].errors["#{field_name}"]
 
--# -byebug
--# %div{ class: form_field_class(option[:field], error_msg), data: skip_logic_data(option[:field]) }
 .form-group{ class: ('form-group-invalid' if error_msg.present?) }
   = f.hidden_field :field_code, value: option[:field].try(:code)
   = f.hidden_field :field_id, value: option[:field].try(:id)
