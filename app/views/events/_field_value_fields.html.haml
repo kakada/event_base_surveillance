@@ -4,7 +4,7 @@
 .form-group{ class: ('form-group-invalid' if error_msg.present?) }
   = f.hidden_field :field_code, value: option[:field].try(:code)
   = f.hidden_field :field_id, value: option[:field].try(:id)
-  = f.file_field :file, class: ['form-control file-input', ('hidden' if f.object.file.present?)]
+  = f.file_field :file, class: ['form-control file-input skip-logic-field', ('hidden' if f.object.file.present?)]
 
   - if f.object.file.present?
     .flex-row

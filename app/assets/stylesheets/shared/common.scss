@@ -165,3 +165,23 @@ pre {
     display: none;
   }
 }
+
+.section {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+
+  legend {
+    width: auto;
+  }
+}
+
+.section.not-section {
+  padding: 0px;
+  border: none;
+  margin-bottom: 0px;
+
+  legend {
+    display: none;
+  }
+}

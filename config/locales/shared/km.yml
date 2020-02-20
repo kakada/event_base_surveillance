@@ -13,3 +13,4 @@ km:
     is_invalid_value: 'គឺជាតម្លៃមិនត្រឹមត្រូវ'
     value_should_be_from_to: "តម្លៃគួរតែចាប់បី %{from} ដល់ %{to}"
     search: 'ស្វែងរក'
+    please_select: សូមជ្រើសរើស

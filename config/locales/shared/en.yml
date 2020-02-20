@@ -13,3 +13,4 @@ en:
     is_invalid_value: 'is invalid value'
     value_should_be_from_to: "the value should be from %{from} to %{to}"
     search: 'Search'
+    please_select: please select

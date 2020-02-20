@@ -2,6 +2,7 @@
   %ul.flex-column.items
     %li.item.item-setting{'data-target' => '.setting-content'}= t('milestone.setting')
     %li.item.validation-trigger{'data-target' => '.validation-criteria-content'}= t('milestone.validation_criteria')
+    %li.item.skip-logic{'data-target' => '.skip-logic-content'}= t('milestone.skip_logic')
 
   .contents
     .content.setting-content
@@ -15,3 +16,15 @@
 
     .content.validation-criteria-content
       = render 'field_validation_content', f: f
+
+    .content.skip-logic-content
+      = f.hidden_field :relevant, class: 'skip-logic-field'
+      .form-group.row
+        %label.col-3=t('milestone.question')
+        %select#relevant-code.form-control.col-9
+      .form-group.row
+        %label.col-3=t('milestone.condition')
+        %select#relevant-operator.form-control.col-9
+      .form-group.row
+        %label.col-3=t('milestone.value')
+        %textarea#relevant-value.form-control.relevant-value.col-9

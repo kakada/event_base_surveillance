@@ -14,3 +14,11 @@
 .actions
   = f.submit t('shared.save'), class: 'btn btn-primary'
   = link_to t('shared.cancel'), milestones_path, class: 'btn btn-secondary'
+
+:javascript
+  let locale = {
+    please_select: "#{t('shared.please_select')}",
+    skip_logic_not: "#{t('milestone.skip_logic_not')}",
+    any_of: "#{t('milestone.any_of')}",
+    match_all_of: "#{t('milestone.match_all_of')}"
+  }

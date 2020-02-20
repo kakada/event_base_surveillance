@@ -33,3 +33,9 @@ en:
     field_name: 'Field name'
     displayed: 'Displayed?'
     section_name: 'Section Name'
+    skip_logic: Skip logic
+    question: Question
+    condition: Condition
+    skip_logic_not: not
+    any_of: any of
+    match_all_of: match all of

@@ -23,6 +23,7 @@ EBS.MilestonesNew = do ->
     onClickRequireCheckbox()
     onClickSettingItem()
     onClickBtnSetting()
+    EBS.SkipLogic.init()
 
   onClickBtnSetting = ->
     $(document).off 'click', '.btn-setting'
@@ -44,7 +45,7 @@ EBS.MilestonesNew = do ->
 
   onClickSettingItem = ->
     $(document).off 'click', '.setting-wrapper .item'
-    $(document).on 'click', '.setting-wrapper .item', ->
+    $(document).on 'click', '.setting-wrapper .item', (event) ->
       $(this).parents('.setting-wrapper').find('.content').hide()
       $(this).parents('.setting-wrapper').find('.item').removeClass('active')
       $(this).parents('.setting-wrapper').find($(this).data('target')).show()

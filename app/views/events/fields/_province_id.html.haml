@@ -1,7 +1,7 @@
 - field_name = field.name.downcase
 - error_msg = main_object.errors["#{field_name}"]
 
-%div{ class: error_msg.present? ? 'form-group form-group-invalid' : 'form-group' }
+%div{ class: form_field_class(field, error_msg), data: skip_logic_data(field) }
   = render 'events/fields/label_name', f: f, field_name: field_name, field: field
 
   = f.hidden_field :value, value: f.object.value

@@ -1,10 +1,10 @@
 - field_name = field.name.downcase
 - error_msg = main_object.errors["#{field_name}"]
 
-.form-group{ class: ('form-group-invalid' if error_msg.present?) }
+%div{ class: form_field_class(field, error_msg), data: skip_logic_data(field) }
   = render 'events/fields/label_name', f: f, field_name: field_name, field: field
 
-  = f.text_field :value, class: ['form-control', ('is-invalid' if error_msg.present?)]
+  = f.text_field :value, class: ['form-control skip-logic-field', ('is-invalid' if error_msg.present?)]
 
   - if error_msg.present?
     .invalid-feedback= error_msg.join('; ')

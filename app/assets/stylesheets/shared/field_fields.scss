@@ -164,13 +164,16 @@
   .content {
     display: none;
   }
+
+  .skip-logic-content {
+    min-width: 350px;
+  }
 }
 
 .field-type-wrapper {
   border-top: 1px solid #3fa2ee;
   padding: 0 20px;
   position: relative;
-
   display: none;
 
   .field-type-list {

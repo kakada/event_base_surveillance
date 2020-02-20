@@ -36,6 +36,8 @@
 // **Bar Chart
 //= require chart
 
+//= require tagify.min
+
 // ** Main js
 //= require tagify.min
 
@@ -48,7 +50,11 @@
 // All Pages
 //= require milestones/new
 //= require milestones/index
+//= require milestones/field_type
+//= require milestones/skip_logic_constant
+//= require milestones/skip_logic
 //= require event_milestones/new
+//= require events/skip_logic
 //= require events/new
 //= require events/show
 //= require event_milestones/show
