@@ -87,10 +87,10 @@ EBS.SkipLogic = (() => {
   function selectOne() {
     return {
       operators: [
-        labelValue('please select', ''),
+        labelValue(locale.please_select, ''),
         labelValue('(=)', EBS.SkipLogicConstant.EQUAL_OPERATOR),
-        labelValue('any of', EBS.SkipLogicConstant.MATCH_ANY_OPERATOR),
-        labelValue('not (!=)', EBS.SkipLogicConstant.NOT_OPERATOR)
+        labelValue(locale.any_of, EBS.SkipLogicConstant.MATCH_ANY_OPERATOR),
+        labelValue(`${locale.skip_logic_not} (!=)`, EBS.SkipLogicConstant.NOT_OPERATOR)
       ]
     }
   }
@@ -98,11 +98,11 @@ EBS.SkipLogic = (() => {
   function selectMultiple() {
     return {
       operators: [
-        labelValue('please select', ''),
+        labelValue(locale.please_select, ''),
         labelValue('(=)', EBS.SkipLogicConstant.EQUAL_OPERATOR),
-        labelValue('any of', EBS.SkipLogicConstant.MATCH_ANY_OPERATOR),
-        labelValue('match all of', EBS.SkipLogicConstant.MATCH_ALL_OPERATOR),
-        labelValue('not (!=)', EBS.SkipLogicConstant.NOT_OPERATOR)
+        labelValue(locale.any_of, EBS.SkipLogicConstant.MATCH_ANY_OPERATOR),
+        labelValue(locale.match_all_of, EBS.SkipLogicConstant.MATCH_ALL_OPERATOR),
+        labelValue(`${locale.skip_logic_not} (!=)`, EBS.SkipLogicConstant.NOT_OPERATOR)
       ]
     }
   }

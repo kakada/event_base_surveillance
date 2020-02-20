@@ -26,3 +26,9 @@ km:
     setup: ដំឡើង
     both_must_exist: ត្រូវតែមានទាំងពីរ
     add_section: '+ Add Section'
+    skip_logic: Skip logic
+    question: សំណួរ
+    condition: លក្ខខណ្ឌ
+    skip_logic_not: ខុសពី
+    any_of: មួយក្នុងចំណោម
+    match_all_of: ផ្គូរផ្គងទាំងអស់

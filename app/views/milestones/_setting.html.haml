@@ -20,11 +20,11 @@
     .content.skip-logic-content
       = f.hidden_field :relevant, class: 'skip-logic-field'
       .form-group.row
-        %label.col-3 Question
+        %label.col-3=t('milestone.question')
         %select#relevant-code.form-control.col-9
       .form-group.row
-        %label.col-3 Condition
+        %label.col-3=t('milestone.condition')
         %select#relevant-operator.form-control.col-9
       .form-group.row
-        %label.col-3 Value
+        %label.col-3=t('milestone.value')
         %textarea#relevant-value.form-control.relevant-value.col-9
