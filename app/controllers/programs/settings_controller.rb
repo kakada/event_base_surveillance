@@ -18,8 +18,6 @@ module Programs
       end
     end
 
-    def telegram_bot_info; end
-
     private
       def program_params
         params.require(:program).permit(

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resource :telegram_bot, only: [] do
-    get :info, on: :collection
+    get :help, on: :collection
   end
 
   scope module: :programs do

@@ -35,7 +35,7 @@ class TelegramBotsController < ApplicationController
     end
   end
 
-  def info; end
+  def help; end
 
   private
 
