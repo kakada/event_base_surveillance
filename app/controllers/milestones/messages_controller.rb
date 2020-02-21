@@ -62,7 +62,7 @@ module Milestones
       end
 
       def set_chat_group
-        @chat_groups = ChatGroup.telegrams
+        @chat_groups = current_program.chat_groups.telegrams
       end
   end
 end

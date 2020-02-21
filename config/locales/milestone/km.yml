@@ -19,7 +19,9 @@ km:
     from: 'ចាប់ពី'
     to: 'ដល់'
     set_validation: 'កំណត់សុពលភាព'
+    description: បរិយាយ
     chat_group: ក្រុមជជែក
+    telegram_chat_group: ក្រុមជជែកក្នុង Telegram
     message: សារ
     email: អ៊ីមែល
     setup_message_instruction: សូមដំឡើងសារជូនដំណឹង

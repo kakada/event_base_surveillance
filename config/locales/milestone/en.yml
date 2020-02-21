@@ -20,6 +20,7 @@ en:
     to: 'To'
     set_validation: 'Set validation'
     chat_group: Chat group
+    telegram_chat_group: Telegram chat group
     message: Message
     email: Email
     setup_message_instruction: Please setup your notification
