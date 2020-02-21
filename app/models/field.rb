@@ -28,6 +28,8 @@
 class Field < ApplicationRecord
   self.inheritance_column = :field_type
 
+  attr_accessor :skip_validation
+
   FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::DateTimeField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze
 
   # Association
@@ -41,7 +43,7 @@ class Field < ApplicationRecord
   validates :code, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
   validates :name, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
-  validates :mapping_field_id, presence: true, if: -> { field_type == 'Fields::MappingField' }
+  validates :mapping_field_id, presence: true, if: -> { field_type == 'Fields::MappingField' && !skip_validation }
 
   before_validation :set_field_code, if: -> { name.present? }
   before_validation :set_mapping_field_type

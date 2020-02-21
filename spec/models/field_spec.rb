@@ -17,6 +17,16 @@ RSpec.describe Field, type: :model do
   context 'field_type is Fields::MappingField' do
     before { allow(subject).to receive(:field_type).and_return('Fields::MappingField') }
 
-    it { is_expected.to validate_presence_of(:mapping_field_id) }
+    context 'is not skip validation' do
+      before { allow(subject).to receive(:skip_validation).and_return(false) }
+
+      it { is_expected.to validate_presence_of(:mapping_field_id) }
+    end
+
+    context 'is skip validation' do
+      before { allow(subject).to receive(:skip_validation).and_return(true) }
+
+      it { is_expected.not_to validate_presence_of(:mapping_field_id) }
+    end
   end
 end
