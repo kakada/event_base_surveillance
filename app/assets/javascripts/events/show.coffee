@@ -43,9 +43,14 @@ EBS.EventsShow = do ->
     return year + '-' + month + '-' + date + ' ' + d.getHours() + ':' + d.getMinutes()
 
   _initChart = ->
+    data = _getBarChartData()
+
+    if !data
+      return
+
     myBar = new Chart($('#myChart'),
       type: 'bar'
-      data: _getBarChartData()
+      data: data
       options:
         title:
           display: true
@@ -60,6 +65,10 @@ EBS.EventsShow = do ->
 
   _getBarChartData = ->
     data = $('#myChart').data('eventTracings')
+
+    if !data
+      return
+
     labels = (_formatDateTime(x.created_at) for x in data)
     fields = $('#myChart').data('trackingNumberFields')
     datasets = []
