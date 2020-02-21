@@ -16,6 +16,8 @@ class AddMappingFieldIdToFields < ActiveRecord::Migration[5.2]
         root_field = field.milestone.program.milestones.root.fields.find_by(code: field.mapping_field)
         field.mapping_field_id = root_field.id
         field.save
+
+        root_field.field_options = field.field_options if field.field_options.present?
       end
     end
 end

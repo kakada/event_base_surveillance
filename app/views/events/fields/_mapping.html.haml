@@ -1,1 +1,1 @@
-= render "events/fields/#{field.mapping_field_type.constantize.new.kind}", field: field, f: f, main_object: main_object, options: field.parent.present? && field.parent.field_options
+= render "events/fields/#{field.parent.field_type.constantize.new.kind}", field: field, f: f, main_object: main_object, options: field.parent.present? && field.parent.field_options

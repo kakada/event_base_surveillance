@@ -258,20 +258,6 @@ EBS.MilestonesNew = do ->
     $(document).off('change', 'select.mapping-field')
     $(document).on 'change', 'select.mapping-field', (event)->
       assignMappingFieldType(event.target)
-      # handleToggleOption(event.target)
-
-  handleToggleOption = (dom)->
-    data = $(dom).find(':selected').data('obj')
-
-    if data.field_type == selectOne || data.field_type == selectMultiple
-      showOption(dom)
-      initOneOption(dom)
-
-      if data.color_required
-        visibleColorFieldOption(dom)
-    else
-      hideOption(dom)
-      hideColorFieldOption(dom)
 
   showOption = (dom)->
     $(dom).parents('.fieldset').find('.options-wrapper').show()
