@@ -28,6 +28,7 @@
             .status-wrapper
               = 'Root' if milestone.is_default?
               = 'Final' if milestone.final?
+              = 'Verified' if milestone.verified?
 
             .flex1
               .btn-group

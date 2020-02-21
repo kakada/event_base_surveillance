@@ -12,13 +12,15 @@
 
       %div
         - if policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence
-          = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: 'btn btn-danger'
+
+          - is_reach_verified = @event.event_milestones.collect(&:milestone_id).include? @event.program.milestones.verified.id
+          = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: ['btn btn-danger', ('disabled' unless is_reach_verified)]
 
         = link_to t('event.back'), events_path, class: 'btn btn-info'
 
   .flex-row
     - if policy(@event).update?
-      = render "events/show/event_progress", event: @event
+      = render "events/show/event_progress", event: @event, is_reach_verified: is_reach_verified
     - else
       = render "events/show/close_event_progress", event: @event
 
