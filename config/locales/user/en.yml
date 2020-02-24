@@ -12,3 +12,4 @@ en:
     active: 'Active'
     pending: 'Pending'
     number: 'No'
+    province_code: 'Province code'

@@ -8,8 +8,14 @@
       = f.input :email, label: t('user.email')
       = f.input :role, label: t('user.role'), collection: policy(User).roles, input_html: { class: 'role' }
 
-      .program.hidden
-        = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all)
+      .province-code.hidden
+        = f.input :province_code, label: t('user.province_code'), collection: [['គ្រប់ខេត្ត', 'all']].concat(Pumi::Province.all.map{ |p| [p.name_km, p.id] })
 
-      = f.submit t('shared.save'), class: 'btn btn-primary'
-      = link_to t('shared.cancel'), users_path, class: 'btn btn-secondary'
+      .program.hidden
+        - if current_program.present?
+          = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all), selected: current_program.id, input_html: { readonly: true }
+        - else
+          = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all)
+      .actions
+        = f.submit t('shared.save'), class: 'btn btn-primary'
+        = link_to t('shared.cancel'), users_path, class: 'btn btn-secondary'

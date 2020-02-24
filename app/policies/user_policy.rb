@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
+  def index?
+    user.system_admin? || user.program_admin?
+  end
+
   def create?
     user.system_admin? || user.program_admin?
   end

@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @pagy, @users = pagy(policy_scope(User.filter(params).includes(:program)))
+    @pagy, @users = pagy(policy_scope(authorize User.filter(params).includes(:program, :location)))
   end
 
   def new
@@ -30,6 +30,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :role, :program_id)
+      params.require(:user).permit(:email, :role, :program_id, :province_code)
     end
 end

@@ -7,9 +7,9 @@ volumes:
 
 services:
   db:
-    image: postgres:12.0
+    image: postgres:11.6
     volumes:
-      - db:/var/lib/postgresql/data
+      - ./tmp/db:/var/lib/postgresql/data
 
   web: &rails
     build:

@@ -17,4 +17,35 @@ RSpec.describe User, type: :model do
     it { expect(system_admin.save).to be_truthy }
     it { expect(program_admin.save).to be_falsey }
   end
+
+  describe 'presence of province_code' do
+    context 'staff and guest' do
+      let(:staff1) { build(:user, :staff, province_code: nil) }
+      let(:staff2) { build(:user, :staff, province_code: '01') }
+      let(:guest1) { build(:user, :staff, province_code: nil) }
+      let(:guest2) { build(:user, :staff, province_code: '01') }
+
+      it { expect(staff1.save).to be_falsey }
+      it { expect(staff2.save).to be_truthy }
+      it { expect(guest1.save).to be_falsey }
+      it { expect(guest2.save).to be_truthy }
+    end
+  end
+
+  describe 'location' do
+    context 'db location exist' do
+      let(:province) { create(:location) }
+      let(:user)  { create(:user, province_code: province.id) }
+
+      it { expect(user.location.class.name).to eq('Location') }
+      it { expect(user.location.kind).to eq('province') }
+    end
+
+    context 'db location does not exist' do
+      let(:user)  { create(:user, province_code: '02') }
+
+      it { expect(user.location.class.name).to eq('Pumi::Province') }
+      it { expect(user.location.name_en).to eq('Battambang') }
+    end
+  end
 end

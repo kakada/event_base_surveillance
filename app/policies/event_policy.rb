@@ -23,8 +23,12 @@ class EventPolicy < ApplicationPolicy
     def resolve
       if user.system_admin?
         scope.all
-      else
+      elsif user.program_admin? || user.province_code == 'all'
         scope.joins(:event_type).where('events.program_id = ? or event_types.shared = ?', user.program_id, true)
+      else
+        scope.joins(:field_values)
+          .where(program_id: user.program_id)
+          .where('field_values.field_code = ? and field_values.value = ?', 'province_id', user.province_code)
       end
     end
   end

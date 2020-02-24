@@ -35,15 +35,17 @@ class User < ApplicationRecord
 
   ROLES = roles.keys.map { |r| [r.titlecase, r] }
 
-  has_many :event_types
-  has_many :events, foreign_key: :creator_id
+  belongs_to :location, foreign_key: :province_code, optional: true
   belongs_to :program, optional: true
   has_many :programs, foreign_key: :creator_id
+  has_many :event_types
+  has_many :events, foreign_key: :creator_id
 
   delegate :name, to: :program, prefix: :program, allow_nil: true
 
   validates :role, presence: true
   validates :program_id, presence: true, unless: -> { role == 'system_admin' }
+  validates :province_code, presence: true, if: -> { %(staff guest).include?(role.to_s) }
 
   def password_match?
     errors[:password] << I18n.t('errors.messages.blank') if password.blank?
@@ -70,6 +72,16 @@ class User < ApplicationRecord
   # Instead you should use `pending_any_confirmation`.
   def only_if_unconfirmed
     pending_any_confirmation { yield }
+  end
+
+  def location
+    return unless province_code.present?
+
+    if province_code == 'all'
+      Pumi::Province.new(name_km: 'គ្រប់ខេត្ត/ក្រុង', name_en: 'All')
+    else
+      super || Pumi::Province.find_by_id(province_code)
+    end
   end
 
   # class methods

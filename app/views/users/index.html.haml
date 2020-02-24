@@ -16,6 +16,7 @@
           %th= t('user.email')
           %th= t('user.role')
           %th= t('user.program')
+          %th= t('user.province_code')
           %th= t('user.status')
           %th
       %tbody
@@ -25,6 +26,8 @@
             %td= user.email
             %td= user.role.titlecase
             %td= user.program_name
+            %td= user.location.try(:name_km)
+
             %td.status{ class: ('active' if user.confirmed?) }
               = user.confirmed? ? t('user.active') : t('user.pending')
             %td
