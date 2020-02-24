@@ -1,0 +1,84 @@
+// Place all the styles related to the maps controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#maps-index {
+  #content {
+    display: flex;
+    flex-flow: column;
+    position: relative;
+  }
+
+  #map {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+    overflow-y: auto;
+  }
+
+  .legend {
+    padding: 6px 8px;
+    font: 12px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    line-height: 24px;
+    color: #555;
+
+    span {
+      position: relative;
+      bottom: 5px;
+    }
+
+    i {
+      width: 14px;
+      height: 14px;
+      border-radius: 8px;
+      float: left;
+      margin: 0 6px 0 0;
+      opacity: 0.7;
+    }
+  }
+
+  .location-group {
+    position: relative;
+  }
+
+  #filter-location {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    top: 31px;
+    left: 60px;
+    width: 300px;
+    padding: 10px;
+  }
+
+  .show {display: block;}
+
+  .daterange-picker {
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 14px;
+    color: #495057;
+  }
+
+  .no-data {
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    background: #fff;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+    border-radius: 4px;
+    padding: 40px;
+    z-index: 1000;
+    width: 200px;
+  }
+}

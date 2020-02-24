@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :set_event_type, only: %i[new create edit update]
 
   def index
-    @pagy, @events = pagy(policy_scope(Event.filter(params).includes(:event_milestones).includes(creator: :program)))
+    @pagy, @events = pagy(policy_scope(Event.filter(params).order_desc.includes(:field_values, :event_type, :program)))
   end
 
   def show

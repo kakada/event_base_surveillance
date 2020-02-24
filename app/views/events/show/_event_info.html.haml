@@ -6,7 +6,7 @@
       = link_to t('event.preview_pdf'), event_preview_path(@event, format: 'pdf'), class: 'btn btn-link', target: '_blank'
   %li
     %span.type= "#{t('event.location')}:"
-    %span.value= @event.location_name(reverse=true)
+    %span.value= @event.location_name
 
   %li
     %span.type= "#{t('event.link_to_index_case')}:"

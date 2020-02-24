@@ -49,13 +49,15 @@ class Event < ApplicationRecord
 
   # Callback
   before_validation :set_program_id
-  before_validation :assign_location
+  before_validation :assign_nil_locations
+  before_validation :set_location_code
   before_create :secure_uuid
 
   after_create :set_event_progress
 
+
   # Scope
-  default_scope { order(updated_at: :desc) }
+  scope :order_desc, -> { order(updated_at: :desc) }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -64,17 +66,18 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
   # Class Methods
-  def self.filter(params)
-    arr = keywords(params[:keyword])
+  def self.filter(params={})
+    keywords = get_keywords(params[:keyword])
     scope = all
-    scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', arr[0], arr[1]) if arr.present?
+    scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', keywords[0], keywords[1]) if keywords.present?
     scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value >= ?', 'event_date', params[:start_date]) if params[:start_date].present?
+    scope = scope.where(event_type_id: params[:event_type_id]) if params[:event_type_id].present?
     scope = scope.joins(:event_type).where('events.uuid LIKE ? OR LOWER(event_types.name) LIKE ?', "%#{params[:search]}%", "%#{params[:search].downcase}%") if params[:search].present?
     scope
   end
 
   # "risk_level: 'high'" => ["risk_level", "high"]
-  def self.keywords(keyword)
+  def self.get_keywords(keyword)
     return [] unless keyword.present?
 
     keyword.gsub(/\s/, '').gsub(/"/, '').gsub(/'/, '').split(':')
@@ -85,8 +88,10 @@ class Event < ApplicationRecord
     @conducted_at ||= field_values.find_by(field_code: 'report_date').value
   end
 
-  def location_name(reverse = false, delimeter = ',')
-    @location_name ||= (reverse ? addresses.reverse : addresses).map(&:name_km).join(delimeter)
+  def location_name(address='address_km')
+    return if location_code.blank?
+
+    "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).send(address)
   end
 
   def milestone
@@ -114,29 +119,26 @@ class Event < ApplicationRecord
       secure_uuid
     end
 
-    def addresses
-      arr = []
-      %w[province_id district_id commune_id village_id].each do |code|
-        fv = field_values.find_by(field_code: code)
-        next if fv.nil? || fv.value.blank?
-
-        address = "Pumi::#{code.split('_').first.titlecase}".constantize.find_by_id(fv.value)
-        next if address.nil?
-
-        arr.push(address)
+    def assign_nil_locations
+      fvs = %w[province_id district_id commune_id village_id].map do |code|
+        field_values.select { |fv| fv.field_code == code }.first
       end
 
-      arr
+      clear_next = false
+      fvs.each do |fv|
+        next if fv.nil?
+
+        fv.value = nil if clear_next == true
+        clear_next = fv.value.blank?
+      end
     end
 
-    def assign_location
-      loc_code = %w[village_id commune_id district_id province_id].map do |code|
-        field_values.select { |fv| fv.field_code == code }.first.try(:value)
-      end.reject(&:blank?).first
+    def set_location_code
+      codes = %w[province_id district_id commune_id village_id].map do |code|
+        field_values.select { |fv| fv.field_code == code }.first.try(:value).to_s
+      end
 
-      return if loc_code.blank?
-
-      self.location_code = loc_code
+      self.location_code = codes[codes.find_index('').to_i - 1]
     end
 
     def set_program_id

@@ -44,6 +44,12 @@
           %i.fas.fa-calendar-alt
           = t('sidebar.events')
 
+    - if policy(Event).index?
+      %li{class: get_css_active_class('maps') }
+        = link_to maps_path do
+          %i.fas.fa-map-marked
+          = t('sidebar.map')
+
     - if policy(Webhook).index?
       %li{class: get_css_active_class('webhooks') }
         %a{:href => webhooks_path}

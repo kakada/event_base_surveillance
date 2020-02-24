@@ -12,43 +12,74 @@ RSpec.describe Event, type: :model do
   it { is_expected.to have_many(:tracings).dependent(:destroy) }
   it { is_expected.to validate_presence_of(:event_type_id) }
 
-  describe 'assign_location' do
-    before :each do
-      @province = Location.first || create(:location)
-      @district = create :location, code: '0102', latitude: 0.1, longitude: 0.5
-      @commune = create :location, code: '010201', latitude: 0.13, longitude: 0.51
-      @village = create :location, code: '01020101', latitude: 0.132, longitude: 0.512
+  describe 'before_validation: #set_location and #assign_nil_locations' do
+    let!(:province) { create(:location) }
+    let!(:district) { create(:location, code: '0102', kind: 'district') }
+    let!(:commune)  { create(:location, code: '010201', kind: 'commune') }
+    let!(:village)  { create(:location, code: '01020101', kind: 'village') }
+    let!(:event)    { create(:event) }
+    let!(:root_fields) { event.milestone.fields }
 
-      @event = create(:event)
-      @root_fields = @event.program.milestones.root.fields
+    context 'province' do
+      it { expect(event.location_code).to eq(province.code) }
     end
 
-    it 'should set province geo point on create' do
-      expect(@event.location_code).to eq(@province.code)
+    context 'district' do
+      before { create_field_value(event, 'district_id', district.code) }
+
+      it { expect(event.location_code).to eq(district.code) }
     end
 
-    it 'should set district geo point on update' do
-      field = @root_fields.find_by(code: 'district_id')
-      @event.field_values.create(field_id: field.id, field_code: field.code, value: @district.code)
-      @event.save
+    context 'commune' do
+      before do
+        create_field_value(event, 'district_id', district.code)
+        create_field_value(event, 'commune_id', commune.code)
+      end
 
-      expect(@event.location_code).to eq(@district.code)
+      it { expect(event.location_code).to eq(commune.code) }
     end
 
-    it 'should set commune geo point on update' do
-      field = @root_fields.find_by(code: 'commune_id')
-      @event.field_values.create(field_id: field.id, field_code: field.code, value: @commune.code)
-      @event.save
+    context 'village' do
+      before do
+        create_field_value(event, 'district_id', district.code)
+        create_field_value(event, 'commune_id', commune.code)
+        create_field_value(event, 'village_id', village.code)
+      end
 
-      expect(@event.location_code).to eq(@commune.code)
+      it { expect(event.location_code).to eq(village.code) }
     end
 
-    it 'should set village geo point on update' do
-      field = @root_fields.find_by(code: 'village_id')
-      @event.field_values.create(field_id: field.id, field_code: field.code, value: @village.code)
-      @event.save
+    context 'district nil' do
+      before do
+        create_field_value(event, 'commune_id', commune.code)
+        create_field_value(event, 'village_id', village.code)
+        create_field_value(event, 'district_id', nil)
+      end
 
-      expect(@event.location_code).to eq(@village.code)
+      it { expect(event.location_code).to eq(province.code) }
+      it { expect(get_fv(event, 'commune_id').value).to be_nil}
+      it { expect(get_fv(event, 'village_id').value).to be_nil}
+    end
+
+    context 'commune nil' do
+      before do
+        create_field_value(event, 'district_id', district.code)
+        create_field_value(event, 'village_id', village.code)
+        create_field_value(event, 'commune_id', nil)
+      end
+
+      it { expect(event.location_code).to eq(district.code) }
+      it { expect(get_fv(event, 'village_id').value).to be_nil}
+    end
+
+    context 'village nil' do
+      before do
+        create_field_value(event, 'district_id', district.code)
+        create_field_value(event, 'commune_id', commune.code)
+        create_field_value(event, 'village_id', nil)
+      end
+
+      it { expect(event.location_code).to eq(commune.code) }
     end
   end
 
@@ -59,4 +90,22 @@ RSpec.describe Event, type: :model do
 
     it { expect(event2.uuid).not_to eq(uuid) }
   end
+
+  describe '#location_name' do
+    let!(:event) { create(:event) }
+
+    it { expect(event.location_name).to eq('ខេត្តបន្ទាយមានជ័យ') }
+    it { expect(event.location_name('address_latin')).to eq('Khaet Banteay Meanchey') }
+  end
+
+  private
+    def create_field_value(event, code, value)
+      root_fields = event.milestone.fields
+      event.field_values.build(field_id: root_fields.find_by(code: code).id, field_code: code, value: value)
+      event.save
+    end
+
+    def get_fv(event, code)
+      event.field_values.find_by(field_code: code)
+    end
 end

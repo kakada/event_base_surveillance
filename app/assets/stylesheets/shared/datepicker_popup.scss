@@ -1,0 +1,64 @@
+// ---------Filter Date
+#datepicker-popup {
+  .display-date {
+    background-color: #fff;
+    width: 300px;
+  }
+}
+
+#popover-content {
+  .date-type-input {
+    width: 120px;
+  }
+
+  #datepicker {
+    margin-right: -24px;
+  }
+
+  .start-date-wrapper {
+    cursor: default;
+    background: rgba(211, 218, 230, 0.12);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding: 0;
+    background-color: transparent;
+
+    label {
+      white-space: nowrap;
+      margin-bottom: 0;
+      padding: 12px;
+      border: none;
+      background-color: #eef2f7;
+      line-height: 16px;
+    }
+
+    .start-date-input {
+      cursor: default;
+      background: rgba(211, 218, 230, 0.12);
+      border-color: transparent;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+
+  .action {
+    justify-content: flex-end;
+    margin-top: 12px;
+  }
+
+  .number-input-wrapper {
+    margin-right: 10px;
+  }
+
+  .inputs-wrapper {
+    padding-top: 16px;
+  }
+
+  .error-message {
+    display: none;
+  }
+
+  .btn-done {
+    margin-left: 10px;
+  }
+}

@@ -39,6 +39,21 @@ class Location < ApplicationRecord
     @@pumi_all_provinces ||= [Pumi::Province.new(id: 'all', name_km: 'គ្រប់ខេត្ត/ក្រុង', name_en: 'All')].concat(Pumi::Province.all)
   end
 
+  def self.location_kind(code)
+    return if code.blank?
+
+    case code.to_s.length
+    when 2
+      'province'
+    when 4
+      'district'
+    when 6
+      'commune'
+    else
+      'village'
+    end
+  end
+
   private
     def presence_of_lat_lng
       return unless latitude.present? != longitude.present?
