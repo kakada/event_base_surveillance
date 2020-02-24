@@ -75,13 +75,7 @@ class User < ApplicationRecord
   end
 
   def location
-    return unless province_code.present?
-
-    if province_code == 'all'
-      Pumi::Province.new(name_km: 'គ្រប់ខេត្ត/ក្រុង', name_en: 'All')
-    else
-      super || Pumi::Province.find_by_id(province_code)
-    end
+    super || Location.pumi_all_provinces.select { |p| p.id == province_code }.first
   end
 
   # class methods
