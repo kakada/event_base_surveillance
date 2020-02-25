@@ -28,11 +28,14 @@
 class Field < ApplicationRecord
   self.inheritance_column = :field_type
 
+  attr_accessor :skip_validation
+
   FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::DateTimeField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze
 
   # Association
   belongs_to :section
   belongs_to :milestone
+  belongs_to :parent, foreign_key: :mapping_field_id, class_name: 'Field', optional: true
   has_many   :field_options, dependent: :destroy
   has_many   :field_values
 
@@ -40,6 +43,8 @@ class Field < ApplicationRecord
   validates :code, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
   validates :name, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
+  validates :mapping_field_id, presence: true, if: -> { field_type == 'Fields::MappingField' && !skip_validation }
+
   before_validation :set_field_code, if: -> { name.present? }
   before_validation :set_mapping_field_type
   before_validation :set_milestone
@@ -80,7 +85,7 @@ class Field < ApplicationRecord
       { code: 'event_date', field_type: 'Fields::DateTimeField', name: 'Onset date', required: true },
       { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true },
       { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
-      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true, tracking: true },
+      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true, tracking: true, field_options_attributes: [{ name: 'Low', color: '#51b8b8' }, { name: 'Moderate', color: '#51b865' }, { name: 'High', color: '#d68bb2' }, { name: 'Very high', color: '#e81c2a' }] },
       { code: 'source_of_information', field_type: 'Fields::SelectOneField', name: 'Source of information', field_options_attributes: [{ name: 'Hotline' }, { name: 'Facebook' }, { name: 'Website' }, { name: 'Newspaper' }] }
     ]
     fields.each_with_index do |field, index|

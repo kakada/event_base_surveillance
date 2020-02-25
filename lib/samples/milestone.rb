@@ -5,6 +5,7 @@ module Samples
     def self.load
       load_cdc
       load_gdaph
+      migrate_mapping_fields
     end
 
     class << self
@@ -65,6 +66,15 @@ module Samples
               ]
             }]
           )
+        end
+
+        def migrate_mapping_fields
+          Field.where(field_type: 'Fields::MappingField').each do |field|
+            next if field.milestone.nil?
+
+            field.parent = field.milestone.program.milestones.root.fields.find_by(code: field.mapping_field)
+            field.save
+          end
         end
     end
   end

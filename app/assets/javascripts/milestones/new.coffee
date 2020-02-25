@@ -106,7 +106,7 @@ EBS.MilestonesNew = do ->
       showOption(dom)
     else if dom.value == mappingField
       showMappingField(dom)
-      handleDisplayOption(dom)
+      showCollapseTrigger(dom)
     return
 
   hideCollapseContent = (dom)->
@@ -115,14 +115,11 @@ EBS.MilestonesNew = do ->
   showCollapseTrigger = (dom)->
     $(dom).parents('.fieldset').find('.collapse-trigger').show()
 
-  handleDisplayOption = (dom)->
+  handleDisplayOptionColor = (dom)->
     data = $(dom).data('field')
 
     if !data
       return
-
-    if data.mapping_field_type == selectOne || data.mapping_field_type == selectMultiple
-      showOption(dom)
 
     if data.color_required
       visibleColorFieldOption(dom)
@@ -261,23 +258,10 @@ EBS.MilestonesNew = do ->
     $(document).off('change', 'select.mapping-field')
     $(document).on 'change', 'select.mapping-field', (event)->
       assignMappingFieldType(event.target)
-      handleToggleOption(event.target)
-
-  handleToggleOption = (dom)->
-    data = $(dom).find(':selected').data('obj')
-
-    if data.field_type == selectOne || data.field_type == selectMultiple
-      showOption(dom)
-      initOneOption(dom)
-
-      if data.color_required
-        visibleColorFieldOption(dom)
-    else
-      hideOption(dom)
-      hideColorFieldOption(dom)
 
   showOption = (dom)->
     $(dom).parents('.fieldset').find('.options-wrapper').show()
+    handleDisplayOptionColor(dom)
 
   hideOption = (dom)->
     $(dom).parents('.fieldset').find('.options-wrapper').hide()
@@ -288,7 +272,7 @@ EBS.MilestonesNew = do ->
 
   assignMappingFieldType = (dom)->
     data = $(dom).find(':selected').data('obj').field_type
-    $(dom).parent('.wrapper').find('.mapping-field-type').val(data)
+    $(dom).parent('.wrapper').find('.mapping-field-type').html(data)
 
   assignFieldType = (dom, field_type)->
     fieldType = $(dom).parents('.fieldset').find('.field-type')
