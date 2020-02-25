@@ -2,7 +2,7 @@
   %ol
     - milestones = current_program.milestones
     - milestones.each do |milestone|
-      %li{ class: ('inactive' unless milestone == milestones.root || milestone == @milestone) }
+      %li{ class: ('inactive' unless milestone.is_default? || milestone == @milestone) }
         %span.number
         .milestone-name= milestone.name
         .template-fields-wrapper
