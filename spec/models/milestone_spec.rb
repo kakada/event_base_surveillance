@@ -13,12 +13,25 @@ RSpec.describe Milestone, type: :model do
 
   describe 'validation' do
     let!(:program) { create(:program) }
-    let!(:milestone1) { create(:milestone, program: program, final: true) }
-    let!(:milestone2) { build(:milestone, program: program, final: true) }
 
-    it '#only_one_final_milestone' do
-      milestone2.save
-      expect(milestone2.errors).to include(:final)
+    context 'only_one_final_milestone' do
+      let!(:milestone1) { create(:milestone, program: program, final: true) }
+      let!(:milestone2) { build(:milestone, program: program, final: true) }
+
+      it 'raises error include final' do
+        milestone2.save
+        expect(milestone2.errors).to include(:final)
+      end
+    end
+
+    context '#only_one_verified_milestone' do
+      let!(:milestone1) { create(:milestone, program: program, verified: true) }
+      let!(:milestone2) { build(:milestone, program: program, verified: true) }
+
+      it 'raises error include verified' do
+        milestone2.save
+        expect(milestone2.errors).to include(:verified)
+      end
     end
   end
 

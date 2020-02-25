@@ -27,6 +27,7 @@ class Milestone < ApplicationRecord
   # Validation
   validates :name, presence: true, uniqueness: { scope: [:program_id] }
   validate :only_one_final_milestone
+  validate :only_one_verified_milestone
   validate :validate_unique_section_name
 
   before_validation :set_default_section, unless: :is_default
@@ -36,6 +37,7 @@ class Milestone < ApplicationRecord
   default_scope { order(display_order: :asc) }
   scope :root, -> { where(is_default: true).first }
   scope :final, -> { where(final: true).first }
+  scope :verified, -> { where(verified: true).first }
 
   # Deligation
   delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
@@ -90,6 +92,14 @@ class Milestone < ApplicationRecord
       matches = program.milestones.where(final: true).where.not(id: id)
 
       errors.add(:final, 'cannot have another final milestone') if matches.exists?
+    end
+
+    def only_one_verified_milestone
+      return unless verified?
+
+      matches = program.milestones.where(verified: true).where.not(id: id)
+
+      errors.add(:verified, 'cannot have another verified milestone') if matches.exists?
     end
 
     def set_display_order

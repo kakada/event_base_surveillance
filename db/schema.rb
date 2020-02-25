@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_085031) do
     t.datetime "updated_at", null: false
     t.boolean "final", default: false
     t.integer "creator_id"
+    t.boolean "verified", default: false
   end
 
   create_table "notification_chat_groups", force: :cascade do |t|

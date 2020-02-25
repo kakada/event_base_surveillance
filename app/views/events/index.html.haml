@@ -31,8 +31,9 @@
             %th= t('event.risk_level')
             %th= t('event.onset_date')
           - else
-            - current_program.milestones.root.fields.where(code: codes).each do |field|
-              %th= field.name
+            - fields = current_program.milestones.root.fields.where(code: codes)
+            - codes.each do |code|
+              %th= fields.select{ |f| f.code == code }.first.try(:name) || code
 
           %th= t('event.owner')
           %th
