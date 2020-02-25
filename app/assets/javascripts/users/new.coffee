@@ -1,4 +1,4 @@
-EBS.UsersCreate = EBS.UsersNew = do ->
+EBS.UsersNew = do ->
   init = ->
     handleDisplayProgram()
     onChangeRole()
@@ -16,4 +16,14 @@ EBS.UsersCreate = EBS.UsersNew = do ->
       else
         $('.program').show()
 
+      if event.target.value == 'staff' || event.target.value == 'guest'
+        $('.province-code').show()
+      else
+        $('.province-code').hide()
+        $('.province-code select').val('')
+
   { init: init }
+
+EBS.UsersCreate = EBS.UsersNew
+EBS.UsersEdit = EBS.UsersNew
+EBS.UsersUpdate = EBS.UsersNew

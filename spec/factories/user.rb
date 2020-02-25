@@ -15,7 +15,13 @@ FactoryBot.define do
     end
 
     trait :staff do
-      role    { 'staff' }
+      role          { 'staff' }
+      province_code { Pumi::Province.all.pluck(:id).sample }
+    end
+
+    trait :guest do
+      role          { 'staff' }
+      province_code { Pumi::Province.all.pluck(:id).sample }
     end
   end
 end

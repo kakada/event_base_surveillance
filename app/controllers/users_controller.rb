@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @pagy, @users = pagy(policy_scope(User.filter(params).includes(:program)))
+    @pagy, @users = pagy(policy_scope(authorize User.filter(params).includes(:program, :location)))
   end
 
   def new
@@ -21,6 +21,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = authorize User.find(params[:id])
+  end
+
+  def update
+    @user = authorize User.find(params[:id])
+
+    if @user.update_attributes(user_params)
+      redirect_to users_url
+    else
+      flash.now[:alert] = @user.errors.full_messages
+      render :edit
+    end
+  end
+
   def destroy
     @user = authorize User.find(params[:id])
     @user.destroy
@@ -30,6 +45,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :role, :program_id)
+      params.require(:user).permit(:email, :role, :program_id, :province_code)
     end
 end

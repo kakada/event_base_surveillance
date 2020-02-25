@@ -11,3 +11,6 @@ km:
     new_users: 'អ្នកប្រើប្រាស់ថ្មី'
     active: 'សកម្ម'
     pending: 'រង់ចាំ'
+    number: 'លេខរៀង'
+    province_code: 'លេខកូដខេត្ត'
+    edit_user: 'កែសម្រួល User'

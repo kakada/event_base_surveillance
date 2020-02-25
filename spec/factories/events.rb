@@ -2,11 +2,15 @@
 
 FactoryBot.define do
   factory :event do
+    transient do
+      location { Location.first || create(:location) }
+    end
+
     program
     event_type { create(:event_type, program: program) }
     creator    { create(:creator, program: program) }
     field_values_attributes {
-                              province = Location.first || create(:location)
+                              province = location
 
                               field_values = {
                                 province_id: province.code,

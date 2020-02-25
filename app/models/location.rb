@@ -29,6 +29,16 @@ class Location < ApplicationRecord
     [latitude, longitude]
   end
 
+  def self.pumi_provinces(user)
+    return ::Pumi::Province.all if user.province_code.blank? || user.province_code == 'all'
+
+    ::Pumi::Province.where(id: user.province_code)
+  end
+
+  def self.pumi_all_provinces
+    @@pumi_all_provinces ||= [Pumi::Province.new(id: 'all', name_km: 'គ្រប់ខេត្ត/ក្រុង', name_en: 'All')].concat(Pumi::Province.all)
+  end
+
   private
     def presence_of_lat_lng
       return unless latitude.present? != longitude.present?

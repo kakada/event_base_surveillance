@@ -16,6 +16,7 @@
           %th= t('user.email')
           %th= t('user.role')
           %th= t('user.program')
+          %th= t('user.province_code')
           %th= t('user.status')
           %th
       %tbody
@@ -25,6 +26,8 @@
             %td= user.email
             %td= user.role.titlecase
             %td= user.program_name
+            %td= user.location.try(:name_km)
+
             %td.status{ class: ('active' if user.confirmed?) }
               = user.confirmed? ? t('user.active') : t('user.pending')
             %td
@@ -39,6 +42,11 @@
                       = link_to '#', class: "btn dropdown-item btn-copy" do
                         %i.far.fa-copy.drop-menu-icon
                         %span= t('user.copy_confirm_link')
+
+                    - if policy(user).update?
+                      = link_to edit_user_path(user), class: "btn dropdown-item" do
+                        %i.fas.fa-pen.drop-menu-icon
+                        %span= t('shared.edit')
 
                     - if policy(user).destroy?
                       = link_to user_path(user), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('user.are_you_sure_to_delete')} do

@@ -1,0 +1,16 @@
+.w-50.view-center
+  = simple_form_for @user do |f|
+    = f.input :email, label: t('user.email'), input_html: { readonly: @user.persisted? }
+    = f.input :role, label: t('user.role'), collection: policy(User).roles, input_html: { class: 'role' }
+
+    .province-code{class: ('hidden' if %w(staff guest).exclude? @user.role.to_s)}
+      = f.input :province_code, label: t('user.province_code'), collection: Location.pumi_all_provinces.map{ |p| [p.name_km, p.id] }
+
+    .program.hidden
+      - if current_program.present?
+        = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all), selected: current_program.id, input_html: { readonly: true }
+      - else
+        = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all)
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), users_path, class: 'btn btn-secondary'
