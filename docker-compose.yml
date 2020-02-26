@@ -31,8 +31,8 @@ services:
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - ELASTICSEARCH_REQUEST_TIMEOUT=300 #seconds
-      - ELASTIC_USER=elastic
-      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=elastic
       - ELASTIC_COMPRESSION=true
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     tty: true
@@ -50,10 +50,10 @@ services:
     image: elasticsearch:7.4.1
     environment:
       - discovery.type=single-node
-      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+      - ELASTIC_PASSWORD=elastic
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - xpack.security.enabled=true
-    volumes:
+    volumes: 
       - elastic:/usr/share/elasticsearch/data
     healthcheck:
       test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
