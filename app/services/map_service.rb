@@ -18,7 +18,7 @@ class MapService
         event_type_id: event_type.id,
         event_type_name: event_type.name,
         color: event_type.color,
-        count: value,
+        total_count: value,
         lat: data[0],
         lng: data[1],
         location: data[3],
@@ -30,6 +30,7 @@ class MapService
   end
 
   private
+    # https://stackoverflow.com/questions/20926615/postgresql-aggregate-sum-with-condition
     def query_group_by_field_code
       sql= "SELECT event_type_id, location_code, field_code,
         SUM(value::decimal) AS total

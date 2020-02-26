@@ -19,9 +19,9 @@ EBS.MapsIndex = (() => {
     if (eventData.length) {
       _renderMarker();
       _renderLegend();
-    } else {
-      map.setView(new L.LatLng(12.33233, 104.875305), 7);
     }
+
+    map.setView(new L.LatLng(12.33233, 104.875305), 7);
 
     _renderOSM();
   }
@@ -49,7 +49,7 @@ EBS.MapsIndex = (() => {
         variant = 0;
       }
 
-      const extraRadius = Math.floor(data.count / 10) + 0.5;
+      const extraRadius = Math.floor(data.total_count / 10) + 0.5;
       const latlng = [ data.lat + variant, data.lng + variant];
 
       const marker = L.circleMarker(latlng, {
@@ -63,15 +63,15 @@ EBS.MapsIndex = (() => {
 
       markers.push(latlng);
 
-      marker.bindPopup(`Event type (suspected): ${data.event_type_name}<br>Location: ${data.location}<br>Event count: ${data.count}<br>Total case: ${data.number_of_case || 0}<br>Total hospitalized: ${data.number_of_hospitalized || 0}<br>Total death: ${data.number_of_death || 0}`);
+      marker.bindPopup(`Event(suspected): ${data.event_type_name}<br>Location: ${data.location}<br>Reported count: ${data.total_count}<br>Total case: ${data.number_of_case || 0}<br>Total hospitalized: ${data.number_of_hospitalized || 0}<br>Total death: ${data.number_of_death || 0}`);
     });
 
-    const locationCount = [...new Set(eventData.map(x => x.lat))].length;
-    if (locationCount == 1) {
-      map.setView(new L.LatLng(markers[0][0], markers[0][1]), 15);
-    } else {
-      map.fitBounds(markers);
-    }
+    // const locationCount = [...new Set(eventData.map(x => x.lat))].length;
+    // if (locationCount == 1) {
+    //   map.setView(new L.LatLng(markers[0][0], markers[0][1]), 15);
+    // } else {
+    //   map.fitBounds(markers);
+    // }
   }
 
   function _renderLegend() {

@@ -44,7 +44,7 @@
           %i.fas.fa-calendar-alt
           = t('sidebar.events')
 
-    - if policy(Event).index?
+    - if current_user.program_id.present?
       %li{class: get_css_active_class('maps') }
         = link_to maps_path do
           %i.fas.fa-map-marked
