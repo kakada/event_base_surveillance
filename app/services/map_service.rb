@@ -6,7 +6,7 @@ class MapService
     @event_types = EventType.with_shared(user.program_id)
   end
 
-  def get_event_data(params={})
+  def get_event_data(params = {})
     all_cases = query_group_by_field_code
     events_hash = Pundit.policy_scope(@user, Event.filter(params).joins(:event_type, :location).group('locations.latitude', 'locations.longitude', 'events.event_type_id', 'locations.name_km', 'events.location_code')).count
 
@@ -21,9 +21,9 @@ class MapService
         lat: data[0],
         lng: data[1],
         location: data[3],
-        number_of_case: all_cases.select{ |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_case' }.first.try(:[], 'total'),
-        number_of_death: all_cases.select{ |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_death' }.first.try(:[], 'total'),
-        number_of_hospitalized: all_cases.select{ |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_hospitalized' }.first.try(:[], 'total')
+        number_of_case: all_cases.select { |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_case' }.first.try(:[], 'total'),
+        number_of_death: all_cases.select { |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_death' }.first.try(:[], 'total'),
+        number_of_hospitalized: all_cases.select { |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_hospitalized' }.first.try(:[], 'total')
       }
     end
   end
@@ -37,7 +37,7 @@ class MapService
              INNER JOIN event_types et ON (ev.event_type_id = et.id)
         WHERE fv.field_code in ('number_of_case', 'number_of_hospitalized', 'number_of_death')
               AND (ev.program_id=#{@user.program_id} OR et.shared=true)
-        GROUP BY event_type_id, location_code, field_code";
+        GROUP BY event_type_id, location_code, field_code"
 
       ActiveRecord::Base.connection.execute(sql).to_a
     end

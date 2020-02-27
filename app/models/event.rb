@@ -66,7 +66,7 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
   # Class Methods
-  def self.filter(params={})
+  def self.filter(params = {})
     keywords = get_keywords(params[:keyword])
     scope = all
     scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', keywords[0], keywords[1]) if keywords.present?
@@ -88,7 +88,7 @@ class Event < ApplicationRecord
     @conducted_at ||= field_values.find_by(field_code: 'report_date').value
   end
 
-  def location_name(address='address_km')
+  def location_name(address = 'address_km')
     return if location_code.blank?
 
     "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).send(address)

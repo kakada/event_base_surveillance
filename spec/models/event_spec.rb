@@ -57,8 +57,8 @@ RSpec.describe Event, type: :model do
       end
 
       it { expect(event.location_code).to eq(province.code) }
-      it { expect(get_fv(event, 'commune_id').value).to be_nil}
-      it { expect(get_fv(event, 'village_id').value).to be_nil}
+      it { expect(get_fv(event, 'commune_id').value).to be_nil }
+      it { expect(get_fv(event, 'village_id').value).to be_nil }
     end
 
     context 'commune nil' do
@@ -69,7 +69,7 @@ RSpec.describe Event, type: :model do
       end
 
       it { expect(event.location_code).to eq(district.code) }
-      it { expect(get_fv(event, 'village_id').value).to be_nil}
+      it { expect(get_fv(event, 'village_id').value).to be_nil }
     end
 
     context 'village nil' do

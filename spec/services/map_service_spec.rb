@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe MapService do
@@ -23,9 +25,9 @@ RSpec.describe MapService do
 
     context 'admin_a' do
       let!(:data) { MapService.new(admin_a).get_event_data }
-      let!(:influenza_a_fv) { data.select{ |d| d[:event_type_id] == influenza_a.id }.first }
-      let!(:h5n1_a_shared_fv) { data.select{ |d| d[:event_type_id] == h5n1_a_shared.id }.first }
-      let!(:h1n1_b_shared_fv) { data.select{ |d| d[:event_type_id] == h1n1_b_shared.id }.first }
+      let!(:influenza_a_fv) { data.select { |d| d[:event_type_id] == influenza_a.id }.first }
+      let!(:h5n1_a_shared_fv) { data.select { |d| d[:event_type_id] == h5n1_a_shared.id }.first }
+      let!(:h1n1_b_shared_fv) { data.select { |d| d[:event_type_id] == h1n1_b_shared.id }.first }
 
       it { expect(data.length).to eq(3) }
 
@@ -44,9 +46,9 @@ RSpec.describe MapService do
 
     context 'admin_b' do
       let!(:data) { MapService.new(admin_b).get_event_data }
-      let!(:pes_jruk_b_fv) { data.select{ |d| d[:event_type_id] == pes_jruk_b.id }.first }
-      let!(:h1n1_b_shared_fv) { data.select{ |d| d[:event_type_id] == h1n1_b_shared.id }.first }
-      let!(:h5n1_a_shared_fv) { data.select{ |d| d[:event_type_id] == h5n1_a_shared.id }.first }
+      let!(:pes_jruk_b_fv) { data.select { |d| d[:event_type_id] == pes_jruk_b.id }.first }
+      let!(:h1n1_b_shared_fv) { data.select { |d| d[:event_type_id] == h1n1_b_shared.id }.first }
+      let!(:h5n1_a_shared_fv) { data.select { |d| d[:event_type_id] == h5n1_a_shared.id }.first }
       let!(:number_of_case_event_pes_jruk) { event_pes_jruk_b.field_values.find_by(field_code: 'number_of_case').value.to_i + event_pes_jruk2_b.field_values.find_by(field_code: 'number_of_case').value.to_i }
 
       it { expect(data.length).to eq(3) }
