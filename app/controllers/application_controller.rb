@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   # after_action :verify_authorized, except: :index
   # after_action :verify_policy_scoped, only: :index
 
+  before_action :set_raven_context
+
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout :set_layout
@@ -32,5 +34,10 @@ class ApplicationController < ActionController::Base
 
     def set_locale
       I18n.locale = current_program.try(:language_code) || I18n.default_locale
+    end
+
+    def set_raven_context
+      Raven.user_context(id: session[:current_user_id]) # or anything else in session
+      Raven.extra_context(params: params.to_unsafe_h, url: request.url)
     end
 end

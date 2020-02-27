@@ -33,5 +33,9 @@ module Ebs
 
     config.time_zone = 'Bangkok'
     config.active_record.default_timezone = :local
+
+    Raven.configure do |conf|
+      conf.dsn = ENV['SENTRY_LOGGER_DSN']
+    end
   end
 end
