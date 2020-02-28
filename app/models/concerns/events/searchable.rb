@@ -12,22 +12,21 @@ module Events
         indexes :location, type: :geo_point
         indexes :created_at, type: :date
         indexes :updated_at, type: :date
-        indexes :milestone, type: :object
       end
 
       def self.mappings_hash(program)
-        properties = {}
+        structure = mappings.to_hash
+
         program.milestones.each do |milestone|
-          milestone_name = milestone.format_name
-          properties[milestone_name] = { type: 'object', properties: { created_at: { type: 'date' }, updated_at: { type: 'date' } } }
+          es_milestone = { type: 'object', properties: { created_at: { type: 'date' }, updated_at: { type: 'date' } } }
 
           milestone.fields.each do |field|
-            properties[milestone_name][:properties][field[:code]] = { type: field[:field_type].constantize.es_datatype }
+            es_milestone[:properties][field[:code]] = { type: field[:field_type].constantize.es_datatype }
           end
+
+          structure[:properties][milestone.format_name] = es_milestone
         end
 
-        structure = mappings.to_hash
-        structure[:properties][:milestone][:properties] = properties
         structure
       end
 
@@ -58,7 +57,7 @@ module Events
 
         def build_milestone(event)
           program.milestones.each_with_index do |ms, index|
-            event[:milestone][ms.format_name] = build_milestone_attr(ms, index)
+            event[ms.format_name] = build_milestone_attr(ms, index)
           end
 
           event
