@@ -4,11 +4,10 @@ volumes:
   db:
   bundle:
   elastic:
-  certs:
 
 services:
   db:
-    image: postgres
+    image: postgres:12.0
     volumes:
       - db:/var/lib/postgresql/data
 
@@ -26,8 +25,6 @@ services:
     restart: unless-stopped
     volumes:
       - bundle:/usr/local/bundle
-      - certs:$CERTS_DIR
-      - ./vendor/assets/fonts:/usr/share/fonts
     depends_on:
       - db
       - redis
@@ -37,12 +34,11 @@ services:
       - DATABASE_URL=postgres://postgres@db/ebs_production
       - RAILS_SERVE_STATIC_FILES=true
       - REDIS_URL=redis://redis:6379
-      - ELASTICSEARCH_URL=https://elasticsearch:9200
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
       - ELASTICSEARCH_REQUEST_TIMEOUT=300 #seconds
-      - ELASTIC_USER=elastic
-      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=elastic
       - ELASTIC_COMPRESSION=true
-      - ELASTIC_CA_FILE=$CERTS_DIR/ca/ca.crt
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - SETTINGS__SMTP__ADDRESS=smtp.mandrillapp.com
       - SETTINGS__SMTP__DOMAIN=domain
@@ -71,32 +67,19 @@ services:
     ports: []
 
   redis:
-    container_name: redis
-    image: redis
+    image: redis:5.0.6
 
   elasticsearch:
     image: elasticsearch:7.4.1
     environment:
       - discovery.type=single-node
-      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+      - ELASTIC_PASSWORD=elastic
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - xpack.security.enabled=true
-      - xpack.security.http.ssl.enabled=true
-      - xpack.security.http.ssl.key=$CERTS_DIR/es01/es01.key
-      - xpack.security.http.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
-      - xpack.security.http.ssl.certificate=$CERTS_DIR/es01/es01.crt
-      - xpack.security.transport.ssl.enabled=true
-      - xpack.security.transport.ssl.verification_mode=certificate
-      - xpack.security.transport.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
-      - xpack.security.transport.ssl.certificate=$CERTS_DIR/es01/es01.crt
-      - xpack.security.transport.ssl.key=$CERTS_DIR/es01/es01.key
     volumes:
       - elastic:/usr/share/elasticsearch/data
-      - certs:$CERTS_DIR
     healthcheck:
-      test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
       interval: 30s
       timeout: 10s
       retries: 5
-    ports:
-      - 9200:9200
