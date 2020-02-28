@@ -1,5 +1,10 @@
 EBS.MapsIndex = (() => {
   let map = null;
+  const osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+  const osm = new L.TileLayer(osmUrl, { minZoom: 6, maxZoom: 15, attribution: osmAttrib });
+  const cambodiaLat = 12.33233
+  const cambodiaLng = 104.875305
 
   const publicApi = {
     init: init
@@ -21,16 +26,12 @@ EBS.MapsIndex = (() => {
       _renderLegend();
     }
 
-    map.setView(new L.LatLng(12.33233, 104.875305), 7);
+    map.setView(new L.LatLng(cambodiaLat, cambodiaLng), 7);
 
     _renderOSM();
   }
 
   function _renderOSM() {
-    const osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    const osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-    const osm = new L.TileLayer(osmUrl, { minZoom: 6, maxZoom: 15, attribution: osmAttrib });
-
     map.addLayer(osm);
   }
 
@@ -62,16 +63,25 @@ EBS.MapsIndex = (() => {
       }).addTo(map);
 
       markers.push(latlng);
-
-      marker.bindPopup(`Event(suspected): ${data.event_type_name}<br>Location: ${data.location}<br>Reported count: ${data.total_count}<br>Total case: ${data.number_of_case || 0}<br>Total hospitalized: ${data.number_of_hospitalized || 0}<br>Total death: ${data.number_of_death || 0}`);
+      marker.bindPopup(_buildMarkerPopupContent(data));
     });
+  }
 
-    // const locationCount = [...new Set(eventData.map(x => x.lat))].length;
-    // if (locationCount == 1) {
-    //   map.setView(new L.LatLng(markers[0][0], markers[0][1]), 15);
-    // } else {
-    //   map.fitBounds(markers);
-    // }
+  function _buildMarkerPopupContent(data) {
+    let content = `<ul class='popup-content-wrapper'>`;
+    content += `<li><span class='type'>Event(suspected):</span> <span class='value'>${data.event_type_name}</span></li>`;
+    content += `<li><span class='type'>Location:</span> <span class='value'>${data.location}</span></li>`;
+    content += `<li><span class='type'>Reported count:</span> <span class='value'>${data.total_count}</span></li>`;
+    content += `<li><span class='type'>Total case:</span> <span class='value'>${data.number_of_case || 0}</span></li>`;
+
+    if(data.hasOwnProperty('number_of_hospitalized')) {
+      content += `<li><span class='type'>Total hospitalized:</span> <span class='value'>${data.number_of_hospitalized || 0}</span></li>`;
+    }
+
+    content += `<li><span class='type'>Total death:</span> <span class='value'>${data.number_of_death || 0}</span></li>`;
+    content += `</ul>`;
+
+    return content;
   }
 
   function _renderLegend() {

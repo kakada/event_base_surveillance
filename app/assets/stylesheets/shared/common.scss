@@ -185,3 +185,25 @@ pre {
     display: none;
   }
 }
+
+// Map
+
+.popup-content-wrapper {
+  padding-left: 0;
+
+  li {
+    display: flex;
+    padding: 2px 0;
+    flex-wrap: nowrap;
+
+    .type {
+      display: block;
+      min-width: 110px;
+      padding-right: 5px;
+    }
+
+    .value {
+      display: block;
+    }
+  }
+}

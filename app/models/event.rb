@@ -109,6 +109,16 @@ class Event < ApplicationRecord
     fv.save
   end
 
+  def with_field_value
+    data = {}
+
+    milestone.fields.pluck(:code).each do |code|
+      data[code] = field_values.select { |fv| fv.field_code == code }.first.try(:value)
+    end
+
+    data
+  end
+
   private
     def secure_uuid
       self.uuid ||= SecureRandom.hex(4)

@@ -16,7 +16,7 @@
       - else
         = '-'
 
-  - @event.milestone.fields.each do |field|
+  - @event.milestone.fields.except_locations.each do |field|
     %li
       %span.type= field.name
       = render 'events/show/field_value', field: field, main_object: @event

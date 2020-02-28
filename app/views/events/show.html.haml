@@ -13,7 +13,7 @@
       %div
         - if policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence
 
-          - is_reach_verified = @event.event_milestones.collect(&:milestone_id).include? @event.program.milestones.verified.id
+          - is_reach_verified = @event.event_milestones.collect(&:milestone_id).include? @event.program.milestones.verified.try(:id)
           = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: ['btn btn-danger', ('disabled' unless is_reach_verified)]
 
         = link_to t('event.back'), events_path, class: 'btn btn-info'

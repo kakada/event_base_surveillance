@@ -112,14 +112,27 @@ EBS.EventsShow = do ->
 
   _renderMarker = ->
     data = $('#map').data()
-    msg = 'Event type: <b>' + data.eventType + '</b><br>Number of case: <b>' + data.numberOfCase + '</b>'
 
     L.circleMarker(data.latlng, {
       fillOpacity: 0.8,
       weight: 1,
       opacity: 1,
       radius: 5
-    }).addTo(map).bindPopup(msg).openPopup()
+    }).addTo(map).bindPopup(_buildMarkerPopupContent(data)).openPopup()
+
+  _buildMarkerPopupContent = (data)->
+    fvs = data.eventFvs
+    content = "<ul class='popup-content-wrapper'>"
+    content += "<li><span class='type'>Event(suspected):</span> <span class='value'>" + data.eventType + "</span></li>"
+    content += "<li><span class='type'>Total case:</span> <span class='value'>" + fvs.number_of_case + "</span></li>"
+
+    if fvs.hasOwnProperty('number_of_hospitalized')
+      content += "<li><span class='type'>Total hospitalized:</span> <span class='value'>" + fvs.number_of_hospitalized + "</span></li>"
+
+    content += "<li><span class='type'>Total death:</span> <span class='value'>" + fvs.number_of_death + "</span></li>"
+    content += "</ul>"
+
+    return content;
 
   _renderOSM = ->
     osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

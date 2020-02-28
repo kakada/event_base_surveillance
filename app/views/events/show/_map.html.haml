@@ -1,5 +1,5 @@
 #map-wrapper
-  #map{ data: { latlng: @event.location_latlng, event_type: @event.event_type_name, number_of_case: @event.field_values.select{|fv| fv.field_code == 'number_of_case'}.first.value }}
+  #map{ data: { latlng: @event.location_latlng, event_type: @event.event_type_name, event_fvs: @event.with_field_value.to_json}}
 
   - unless @event.location.present?
     .no-data

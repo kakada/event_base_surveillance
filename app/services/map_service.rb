@@ -7,13 +7,11 @@ class MapService
   end
 
   def get_event_data(params = {})
-    all_cases = query_group_by_field_code
     events_hash = Pundit.policy_scope(@user, Event.filter(params).joins(:event_type, :location).group('locations.latitude', 'locations.longitude', 'events.event_type_id', 'locations.name_km', 'events.location_code')).count
-
     events_hash.map do |data, value|
       event_type = @event_types.select { |t| t.id == data[2] }.first
 
-      {
+      data = {
         event_type_id: event_type.id,
         event_type_name: event_type.name,
         color: event_type.color,
@@ -21,16 +19,21 @@ class MapService
         lat: data[0],
         lng: data[1],
         location: data[3],
-        number_of_case: all_cases.select { |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_case' }.first.try(:[], 'total'),
-        number_of_death: all_cases.select { |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_death' }.first.try(:[], 'total'),
-        number_of_hospitalized: all_cases.select { |obj| obj['event_type_id'] == event_type.id && obj['location_code'] == data[4] && obj['field_code'] == 'number_of_hospitalized' }.first.try(:[], 'total')
+        number_of_case: get_total_by('number_of_case', event_type.id, data[4]),
+        number_of_death: get_total_by('number_of_death', event_type.id, data[4]),
       }
+
+      data['number_of_hospitalized'] = get_total_by('number_of_hospitalized', event_type.id, data[4]) if event_type.program.milestones.root.fields.pluck(:code).include? 'number_of_hospitalized'
+      data
     end
   end
 
   private
-    # https://stackoverflow.com/questions/20926615/postgresql-aggregate-sum-with-condition
-    def query_group_by_field_code
+    def get_total_by(case_name, event_type_id, location_code)
+      all_cases.select { |obj| obj['event_type_id'] == event_type_id && obj['location_code'] == location_code && obj['field_code'] == case_name }.first.try(:[], 'total')
+    end
+
+    def all_cases
       sql = "SELECT event_type_id, location_code, field_code, SUM(value::decimal) AS total
         FROM field_values fv
              INNER JOIN events ev ON (ev.uuid = valueable_id AND fv.valueable_type='Event')
@@ -39,6 +42,6 @@ class MapService
               AND (ev.program_id=#{@user.program_id} OR et.shared=true)
         GROUP BY event_type_id, location_code, field_code"
 
-      ActiveRecord::Base.connection.execute(sql).to_a
+      @all_cases ||= ActiveRecord::Base.connection.execute(sql).to_a
     end
 end
