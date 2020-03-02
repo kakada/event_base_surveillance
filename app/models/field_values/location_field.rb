@@ -31,7 +31,7 @@ module FieldValues
     def html_tag
       return value if %w(province_id district_id commune_id village_id).exclude? field_code
 
-      location.try(:name_km).to_s
+      (location.try(:name_km) || '-').to_s
     end
 
     private

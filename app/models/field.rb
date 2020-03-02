@@ -58,6 +58,7 @@ class Field < ApplicationRecord
   scope :tracking, -> { where(tracking: true) }
   scope :number, -> { where(field_type: 'Fields::IntegerField') }
   scope :text, -> { where.not(field_type: 'Fields::IntegerField') }
+  scope :except_locations, -> { where.not(code: %w(province_id district_id commune_id village_id)) }
 
   # Nested attributes
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }

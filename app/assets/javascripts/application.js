@@ -55,6 +55,7 @@
 //= require milestones/skip_logic
 //= require event_milestones/new
 //= require events/skip_logic
+//= require events/datepicker_popup
 //= require events/new
 //= require events/show
 //= require event_milestones/show
@@ -69,6 +70,7 @@
 //= require telegram_bots/new
 //= require programs/settings
 //= require webhooks/new
+//= require maps/index
 
 
 document.addEventListener('turbolinks:load', function() {

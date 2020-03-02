@@ -66,6 +66,8 @@ Rails.application.routes.draw do
   resources :about_us, only: [:index]
   resources :locations, only: [:index]
 
+  resources :maps
+
   # API
   namespace :api do
     namespace :v1 do

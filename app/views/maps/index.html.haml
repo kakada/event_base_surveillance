@@ -1,0 +1,23 @@
+#content
+  .flex-row-vertical-center
+    .flex1
+      %span= "Total reported event is <b>#{@event_data.inject(0){|sum,e| sum + e[:total_count] }}</b>, happend in <b>#{@event_data.size}</b> locations".html_safe
+    %form#event-form.form-inline{ method: :get }
+      .form-group.mb-2
+        %label{ for: :event_event_type } Event:&nbsp;
+        = select_tag 'event_type_id', options_from_collection_for_select(@event_types, 'id', 'name', params[:event_type_id]), include_blank: "All", class: 'form-control'
+
+      .form-group.mb-2
+        = render 'events/filter_date'
+
+      %button.btn.btn-primary.mb-2{ type: 'submit' } Apply
+
+  #map
+
+  - unless @event_data.present?
+    .no-data
+      %span No result found!
+
+:javascript
+  const eventData = #{ raw @event_data.to_json };
+  const startDate = "#{ @start_date.strftime('%m/%d/%Y') }";

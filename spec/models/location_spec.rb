@@ -61,4 +61,36 @@ RSpec.describe Location, type: :model do
       it { expect(Location.pumi_provinces(user).size).to eq(1) }
     end
   end
+
+  describe '.location_kind' do
+    context 'code is blank' do
+      let(:code) { nil }
+
+      it { expect(Location.location_kind(code)).to eq(nil) }
+    end
+
+    context 'code length is 2' do
+      let(:code) { '01' }
+
+      it { expect(Location.location_kind(code)).to eq('province') }
+    end
+
+    context 'code length is 4' do
+      let(:code) { '0101' }
+
+      it { expect(Location.location_kind(code)).to eq('district') }
+    end
+
+    context 'code length is 6' do
+      let(:code) { '010101' }
+
+      it { expect(Location.location_kind(code)).to eq('commune') }
+    end
+
+    context 'code length is 8' do
+      let(:code) { '01010101' }
+
+      it { expect(Location.location_kind(code)).to eq('village') }
+    end
+  end
 end

@@ -31,6 +31,7 @@ class EventType < ApplicationRecord
 
   # Scope
   scope :root, -> { where(default: true).first }
+  scope :with_shared, -> (program_id) { where('program_id = ? OR shared = ?', program_id, true) }
 
   # Deligation
   delegate :name, to: :program, prefix: :program
