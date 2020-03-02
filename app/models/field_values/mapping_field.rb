@@ -23,7 +23,7 @@
 module FieldValues
   class MappingField < ::FieldValue
     def html_tag
-      return value.to_s if field.parent.nil? || ['Fields::SelectOneField'].exclude?(field.parent.field_type)
+      return value.to_s if field.parent.nil? || ['Fields::SelectOneField', 'Fields::SelectMultipleField'].exclude?(field.parent.field_type)
 
       opt_value = field.parent.field_options.find_by(value: value).try(:name)
       opt_value ||= value

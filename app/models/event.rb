@@ -119,6 +119,10 @@ class Event < ApplicationRecord
     data
   end
 
+  def verified?
+    @verified ||= event_milestones.collect(&:milestone_id).include? program.milestones.verified.try(:id)
+  end
+
   private
     def secure_uuid
       self.uuid ||= SecureRandom.hex(4)
