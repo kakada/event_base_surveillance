@@ -1,0 +1,23 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+env:
+  COMPOSE_VERSION: 1.25.4
+
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin/
+  - mv app.env.example app.env
+
+install:
+  - docker-compose pull
+
+before_script:
+  - bash dev-setup.sh
+
+script:
+  - docker-compose run --rm web rspec
