@@ -1,6 +1,10 @@
 - @events.each do |event|
   %tr
-    %td= link_to event.id, event_path(event), class: 'btn btn-link uuid'
+    %td
+      .flex-row-vertical-center
+        = link_to event.id, event_path(event), class: 'btn btn-link uuid'
+        %span{ 'data-toggle' => 'tooltip', title: "#{t('event.creator')}: #{event.creator_email}" }
+          %i.far.fa-user
     %td
       .flex-row-vertical-center
         .small-color{style: "background-color: #{event.event_type_color}"}

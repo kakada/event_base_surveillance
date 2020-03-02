@@ -29,7 +29,7 @@ module FieldValues
     end
 
     def html_tag
-      opt_values = values.map { |v| field.field_options.select{ |opt| opt.value == v }.first.try(:name) || v }
+      opt_values = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }
       opt_values.join(', ').to_s
     end
   end
