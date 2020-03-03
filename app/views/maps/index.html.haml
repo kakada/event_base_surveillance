@@ -12,12 +12,8 @@
 
       %button.btn.btn-primary.mb-2{ type: 'submit' } Apply
 
-  #map
+  #map{'data-event-data' => @event_data.to_json}
 
   - unless @event_data.present?
-    .no-data
-      %span No result found!
-
-:javascript
-  const eventData = #{ raw @event_data.to_json };
-  const startDate = "#{ @start_date.strftime('%m/%d/%Y') }";
+    .no-data.text-center
+      %span= t('shared.no_result_found')

@@ -1,10 +1,11 @@
 EBS.MapsIndex = (() => {
   let map = null;
+  let eventData = [];
   const osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   const osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
   const osm = new L.TileLayer(osmUrl, { minZoom: 6, maxZoom: 15, attribution: osmAttrib });
-  const cambodiaLat = 12.33233
-  const cambodiaLng = 104.875305
+  const cambodiaLat = 12.33233;
+  const cambodiaLng = 104.875305;
 
   const publicApi = {
     init: init
@@ -13,7 +14,7 @@ EBS.MapsIndex = (() => {
   return publicApi;
 
   function init() {
-    const start = moment(new Date(startDate));
+    eventData = $('#map').data('event-data');
 
     _renderMap();
     EBS.DatepickerPopup.init();
