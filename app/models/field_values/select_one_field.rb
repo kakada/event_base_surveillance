@@ -23,12 +23,11 @@
 module FieldValues
   class SelectOneField < ::FieldValue
     def html_tag
-      opt_value = field.field_options.find_by(value: value).try(:name)
-      opt_value ||= value
+      opt_value = field.field_options.find_by(value: value).try(:name) || value
 
-      return opt_value.to_s unless field_code == 'risk_level'
+      return "<span data-relevant=#{field_code} value=#{value}>#{opt_value}</span>" unless field_code == 'risk_level'
 
-      "<span class='badge' style='background-color: #{color}; color: #fff'>#{opt_value}</span>"
+      "<span data-relevant=#{field_code} value=#{value} class='badge' style='background-color: #{color}; color: #fff'>#{opt_value}</span>"
     end
   end
 end

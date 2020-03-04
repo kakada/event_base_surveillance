@@ -4,5 +4,6 @@ EBS.EventsEvent_milestonesShow = do ->
   init = ->
     EBS.EventsShow.initTruncate()
     EBS.EventsShow.onClickTracingTextModalTrigger()
+    EBS.EventsSkipLogic.renderSkipLogicField()
 
   { init: init }

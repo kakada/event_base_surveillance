@@ -30,7 +30,8 @@ module FieldValues
 
     def html_tag
       opt_values = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }
-      opt_values.join(', ').to_s
+
+      "<span data-relevant=#{field_code} value=#{value}>#{opt_values.join(', ')}</span>"
     end
   end
 end

@@ -1,4 +1,4 @@
-%li.nobreak
+%li.nobreak{data: skip_logic_data(field)}
   %span.type= "#{field.name}:"
   %span.value
     - if fvs = field_values.select{ |fv| fv.field_id == field.id }.presence
