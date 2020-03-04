@@ -12,5 +12,5 @@ en:
     active: 'Active'
     pending: 'Pending'
     number: 'No'
-    province_code: 'Province code'
+    province: 'Province'
     edit_user: 'Edit user'

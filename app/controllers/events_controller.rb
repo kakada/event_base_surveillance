@@ -8,15 +8,15 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = authorize Event.find(params[:id])
   end
 
   def new
-    @event = current_program.events.new(event_type_id: params[:event_type_id])
+    @event = authorize current_program.events.new(event_type_id: params[:event_type_id])
   end
 
   def create
-    @event = current_user.events.new(event_params)
+    @event = authorize current_user.events.new(event_params)
 
     if @event.save
       redirect_to @event
@@ -26,11 +26,11 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
+    @event = authorize Event.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
+    @event = authorize Event.find(params[:id])
 
     if @event.update_attributes(event_params)
       redirect_to @event

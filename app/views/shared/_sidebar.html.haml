@@ -59,7 +59,7 @@
     - if policy(ClientApp).index?
       %li{class: get_css_active_class('client_apps') }
         %a{:href => client_apps_path}
-          %i.fas API
+          %i.api-icon API
           = t('sidebar.api_and_services')
 
     - if current_program.present? && policy(Program).update?

@@ -12,5 +12,5 @@ km:
     active: 'សកម្ម'
     pending: 'រង់ចាំ'
     number: 'លេខរៀង'
-    province_code: 'លេខកូដខេត្ត'
+    province_code: 'ខេត្ត'
     edit_user: 'កែសម្រួល User'

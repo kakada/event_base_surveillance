@@ -5,6 +5,10 @@ class EventPolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    user.system_admin? || user.program_admin? || user.province_code == 'all' || user.province_code == record.location_code
+  end
+
   def create?
     user.program_admin? || user.staff?
   end
