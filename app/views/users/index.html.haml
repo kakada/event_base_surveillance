@@ -30,7 +30,7 @@
 
             %td.status{ class: ('active' if user.confirmed?) }
               = user.confirmed? ? t('user.active') : t('user.pending')
-            %td
+            %td.text-right
               - if policy(user).destroy?
                 .btn-group
                   %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

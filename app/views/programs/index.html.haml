@@ -17,28 +17,27 @@
         - @programs.each do |program|
           %tr
             %td= program.name
-            %td
-              .btn-group
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+            %td.text-right
+              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                %i.fas.fa-ellipsis-v
 
-                .dropdown-menu.dropdown-menu-right
-                  - if policy(program).update?
-                    = link_to edit_program_path(program), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
+              .dropdown-menu.dropdown-menu-right
+                - if policy(program).update?
+                  = link_to edit_program_path(program), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
 
-                  - if policy(program).destroy?
-                    = link_to program_path(program), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('program.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                - if policy(program).destroy?
+                  = link_to program_path(program), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('program.are_you_sure_to_delete')} do
+                    %i.fas.fa-trash-alt.drop-menu-icon
+                    %span= t('shared.delete')
 
-                  - if policy(program).update?
-                    = link_to es_reindex_program_path(program), class: "btn dropdown-item", :data => {:confirm => t('program.are_you_sure_to_reindex_elasticsearch_document')} do
-                      %i.fas.fa-recycle.drop-menu-icon
-                      %span= t('program.es_reindex')
+                - if policy(program).update?
+                  = link_to es_reindex_program_path(program), class: "btn dropdown-item", :data => {:confirm => t('program.are_you_sure_to_reindex_elasticsearch_document')} do
+                    %i.fas.fa-recycle.drop-menu-icon
+                    %span= t('program.es_reindex')
 
-                  - if policy(program).update?
-                    = link_to program_telegram_bot_path(program), class: "btn dropdown-item" do
-                      %i.fab.fa-telegram.drop-menu-icon
-                      %span= t('program.telegram_bot')
+                - if policy(program).update?
+                  = link_to program_telegram_bot_path(program), class: "btn dropdown-item" do
+                    %i.fab.fa-telegram.drop-menu-icon
+                    %span= t('program.telegram_bot')

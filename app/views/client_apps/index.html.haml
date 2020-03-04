@@ -42,27 +42,26 @@
               = client_app.active? ? t('client_app.active') : t('client_app.inactive')
             - if current_user.system_admin?
               %td= client_app.program_name
-            %td
+            %td.text-right
               - if policy(client_app).update?
-                .btn-group
-                  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                    %i.fas.fa-ellipsis-v
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
 
-                  .dropdown-menu.dropdown-menu-right
-                    = link_to edit_client_app_path(client_app), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
+                .dropdown-menu.dropdown-menu-right
+                  = link_to edit_client_app_path(client_app), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
 
-                    - unless client_app.active?
-                      = link_to activate_client_app_path(client_app), class: "btn dropdown-item" do
-                        %i.fas.fa-check.drop-menu-icon
-                        %span= t('client_app.activate')
+                  - unless client_app.active?
+                    = link_to activate_client_app_path(client_app), class: "btn dropdown-item" do
+                      %i.fas.fa-check.drop-menu-icon
+                      %span= t('client_app.activate')
 
-                    - if client_app.active?
-                      = link_to deactivate_client_app_path(client_app), class: "btn dropdown-item" do
-                        %i.fas.fa-ban.drop-menu-icon
-                        %span= t('client_app.deactivate')
+                  - if client_app.active?
+                    = link_to deactivate_client_app_path(client_app), class: "btn dropdown-item" do
+                      %i.fas.fa-ban.drop-menu-icon
+                      %span= t('client_app.deactivate')
 
-                    = link_to client_app_path(client_app), method: :delete, class: 'btn dropdown-item', :data => {confirm: t('client_app.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                  = link_to client_app_path(client_app), method: :delete, class: 'btn dropdown-item', :data => {confirm: t('client_app.are_you_sure_to_delete')} do
+                    %i.fas.fa-trash-alt.drop-menu-icon
+                    %span= t('shared.delete')
