@@ -3,10 +3,8 @@ EBS.MapsIndex = (() => {
   let eventData = [];
   const osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   const osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-  const osm = new L.TileLayer(osmUrl, { minZoom: 6, maxZoom: 15, attribution: osmAttrib });
   const cambodiaLat = 12.33233;
   const cambodiaLng = 104.875305;
-
   const publicApi = {
     init: init
   };
@@ -33,6 +31,7 @@ EBS.MapsIndex = (() => {
   }
 
   function _renderOSM() {
+    let osm = new L.TileLayer(osmUrl, { minZoom: 6, maxZoom: 15, attribution: osmAttrib });
     map.addLayer(osm);
   }
 
