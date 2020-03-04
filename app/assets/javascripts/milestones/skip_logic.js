@@ -42,12 +42,13 @@ EBS.SkipLogic = (() => {
   function onFormSubmit() {
     $('.milestone-form form').on('submit', () => {
       $('.skip-logic-content').each( (_i, skipLogic) => {
-        let value = $(skipLogic).find('#relevant-value').val();
         let submitValue = '';
-        if (value) {
-          let transformValue = JSON.parse(value).map(x => x.value).join(',')
-          let code = $(skipLogic).find('#relevant-code').val();
-          let operator = $(skipLogic).find('#relevant-operator').val();
+        let value = $(skipLogic).find('#relevant-value').val();
+        let code = $(skipLogic).find('#relevant-code').val();
+        let operator = $(skipLogic).find('#relevant-operator').val();
+
+        if (value && code && operator) {
+          let transformValue = JSON.parse(value).map(x => x.value).join(',');
           submitValue = `${code}||${operator}||${transformValue}`;
         }
 
