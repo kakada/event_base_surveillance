@@ -81,7 +81,12 @@
 }
 
 // --------------map
+#events-event_milestones-show,
 #events-show {
+  .hidden {
+    display: none !important;
+  }
+
   .circles-list {
     min-width: 245px;
   }
