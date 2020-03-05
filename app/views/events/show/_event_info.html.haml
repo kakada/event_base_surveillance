@@ -8,13 +8,10 @@
     %span.type= "#{t('event.location')}:"
     %span.value= @event.location_name
 
-  %li
-    %span.type= "#{t('event.link_to_event')}:"
-    %span.value.flex1
-      - if @event.link_uuid.present?
-        = link_to @event.link_uuid, event_path(@event.link_uuid), class: 'text-primary'
-      - else
-        = '-'
+  - if @event.link_uuid.present?
+    %li
+      %span.type= "#{t('event.link_to_event')}:"
+      %span.value= link_to @event.link_uuid, event_path(@event.link_uuid), class: 'text-primary'
 
   - @event.milestone.fields.except_locations.each do |field|
     %li{data: skip_logic_data(field)}
