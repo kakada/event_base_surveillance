@@ -2,6 +2,7 @@ en:
   about:
     title: Event Base Surveillance
     developed_by: Developed by
-    funded_by: Supported by
+    funded_by: Funded by
     about_us: About us
-    introduction: Event-Based Surveillance is a One Health System created with the support from the Communicable Disease Control Department CDC of Ministry of Health, General Department of Animal Health and Production (GDAHP) of Ministry of Agriculture Forestry and Fisheries under technology support by InSTEDD iLab Southeast Asia and Financial funding from Ending Pandemic. The project has received technical advisory support from the World Health Organization (WHO) and the US CDC.  The purpose of the surveillance system is to be able to early detect and share information between the Ministry of Health and the Ministry of Agriculture Forestry and Fisheries to effectively prevent disease outbreak from taking place. Besides information sharing, the system also enables the government to obtain real-time analytic data that assist in report making, decision making, or related policy.
+    introduction: Event-Based Surveillance is a One Health System created with the support from the Communicable Disease Control Department (CDC) of Ministry of Health, General Department of Animal Health and Production (GDAHP) of Ministry of Agriculture Forestry and Fisheries under technology support by InSTEDD iLab Southeast Asia and Financial funding from Ending Pandemic. The project has received technical advisory support from the World Health Organization (WHO) and the US CDC.  The purpose of the surveillance system is to be able to early detect and share information between the Ministry of Health and the Ministry of Agriculture Forestry and Fisheries to effectively prevent disease outbreak from taking place. Besides information sharing, the system also enables the government to obtain real-time analytic data that assist in report making, decision making, or related policy.
+    implemented_by: 'Implemented by'

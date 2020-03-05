@@ -1,10 +1,10 @@
 %nav#sidebar
   #sidebarCollapse.sidebar-header
     %h3
-      Event Base Surveillance
+      = ENV['APP_NAME']
       %span{style: 'font-size: 12px'}= current_user.email
 
-    %strong EBS
+    %strong= ENV['APP_SHORTCUT_NAME']
     %i.fas.fa-align-left
 
   %ul.list-unstyled.components
