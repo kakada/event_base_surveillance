@@ -12,7 +12,7 @@
         %legend= section.name
 
         - section.fields.each do |field|
-          %li
+          %li{data: skip_logic_data(field)}
             %span.type= field.name
             = render 'events/show/field_value', field: field, main_object: @event_milestone
 

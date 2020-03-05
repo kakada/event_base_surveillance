@@ -2,5 +2,5 @@
   #map{ data: { latlng: @event.location_latlng, event_type: @event.event_type_name, event_fvs: @event.with_field_value.to_json}}
 
   - unless @event.location.present?
-    .no-data
-      %span= t('event.no_result_found')
+    .no-data.text-center
+      %span= t('shared.no_result_found')

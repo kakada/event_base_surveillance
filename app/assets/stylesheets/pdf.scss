@@ -84,4 +84,8 @@ body#pdf {
   .flex1 {
     flex-grow: 1;
   }
+
+  .hidden {
+    display: none !important;
+  }
 }

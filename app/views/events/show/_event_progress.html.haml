@@ -1,7 +1,7 @@
-.content-element.circles-list.flex1
+.content-element.circles-list
   %ol
     %li
-      = link_to edit_event_path(event), class: 'btn btn-link' do
+      = link_to edit_event_path(event), class: 'btn btn-link text-left pl-0' do
         = event.milestone.name
         %span.badge.badge-light.btn-edit= t('shared.edit')
       .at= event.conducted_at
@@ -16,7 +16,7 @@
           - pre_milestone = index == 0 ? event : event_milestones.select { |f| f.milestone_id == milestone_ids[index-1] }.first
           - current_milestone = event_milestones.select { |f| f.milestone_id == milestone.id }.first
 
-          = link_to edit_event_event_milestone_path(event, current_milestone), class: 'btn btn-link' do
+          = link_to edit_event_event_milestone_path(event, current_milestone), class: 'btn btn-link text-left pl-0' do
             %span= milestone.name
             %span.badge.badge-light.btn-edit= t('shared.edit')
 
@@ -25,8 +25,8 @@
 
         - else
           - if event.verified?
-            = link_to milestone.name, new_event_event_milestone_path(event_id: event.id, milestone_id: milestone.id), class: ['btn btn-link']
+            = link_to milestone.name, new_event_event_milestone_path(event_id: event.id, milestone_id: milestone.id), class: ['btn btn-link text-left pl-0']
 
           - else
-            = link_to milestone.name, new_event_event_milestone_path(event_id: event.id, milestone_id: milestone.id), class: ['btn btn-link', ('disabled' unless is_next)]
+            = link_to milestone.name, new_event_event_milestone_path(event_id: event.id, milestone_id: milestone.id), class: ['btn btn-link text-left pl-0', ('disabled' unless is_next)]
             - is_next = false

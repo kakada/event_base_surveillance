@@ -34,28 +34,27 @@
             %td= event_type.shared ? t('event_type.shared') : '-'
             - if current_user.system_admin?
               %td= event_type.program_name
-            %td
+            %td.text-right
               - if policy(event_type).update?
-                .btn-group
-                  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                    %i.fas.fa-ellipsis-v
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
 
-                  .dropdown-menu.dropdown-menu-right
-                    = link_to edit_event_type_path(event_type), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
+                .dropdown-menu.dropdown-menu-right
+                  = link_to edit_event_type_path(event_type), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
 
-                    - unless event_type.shared?
-                      = link_to shared_event_type_path(event_type), class: "btn dropdown-item" do
-                        %i.fas.fa-share-alt.drop-menu-icon
-                        %span= t('event_type.shared_data')
+                  - unless event_type.shared?
+                    = link_to shared_event_type_path(event_type), class: "btn dropdown-item" do
+                      %i.fas.fa-share-alt.drop-menu-icon
+                      %span= t('event_type.shared_data')
 
-                    - if event_type.shared?
-                      = link_to unshared_event_type_path(event_type), class: "btn dropdown-item" do
-                        %i.fas.fa-share-alt.drop-menu-icon
-                        %span= t('event_type.unshared_data')
+                  - if event_type.shared?
+                    = link_to unshared_event_type_path(event_type), class: "btn dropdown-item" do
+                      %i.fas.fa-share-alt.drop-menu-icon
+                      %span= t('event_type.unshared_data')
 
-                    - if policy(event_type).destroy?
-                      = link_to event_type_path(event_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('event_type.are_you_sure_to_delete')} do
-                        %i.fas.fa-trash-alt.drop-menu-icon
-                        %span= t('shared.delete')
+                  - if policy(event_type).destroy?
+                    = link_to event_type_path(event_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('event_type.are_you_sure_to_delete')} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span= t('shared.delete')

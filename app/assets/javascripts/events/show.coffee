@@ -6,6 +6,7 @@ EBS.EventsShow = do ->
     _initChart()
     initTruncate()
     onClickTracingTextModalTrigger()
+    EBS.EventsSkipLogic.renderSkipLogicField()
 
   initTruncate = ->
     $('.fv-body-wrapper').each (index, dom)->

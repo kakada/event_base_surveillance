@@ -6,7 +6,9 @@
     %title Event Base Surveillance
 
     = wicked_pdf_stylesheet_link_tag "pdf"
+    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    = wicked_pdf_javascript_include_tag "pdf.js"
 
-  %body#pdf
+  %body#pdf{:onload => "EBS.EventsSkipLogic.init()"}
     .wrapper
       = yield

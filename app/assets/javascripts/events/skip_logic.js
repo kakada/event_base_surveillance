@@ -11,7 +11,8 @@ EBS.EventsSkipLogic = ( () => {
     equalValidator,
     matchAllValidator,
     matchAnyValidator,
-    notValidator
+    notValidator,
+    renderSkipLogicField
   }
 
   function init() {
@@ -37,11 +38,16 @@ EBS.EventsSkipLogic = ( () => {
   function togglerFields(field) {
     let fieldCode = $(field).data('relevant');
     let triggerValue;
+    let fieldValue = $(field).val() || $(field).attr('value');
 
-    if (typeof $(field).val() == 'string') {
-      triggerValue = $(field).val().toLowerCase();
+    if (!fieldValue) {
+      return
+    }
+
+    if (typeof fieldValue == 'string') {
+      triggerValue = fieldValue.toLowerCase();
     }  else {
-      triggerValue = $(field).val().join(',').toLowerCase();
+      triggerValue = fieldValue.join(',').toLowerCase();
     }
 
     $(`[data-code=${fieldCode}]`).each( (_i, field) => {

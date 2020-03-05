@@ -1,7 +1,7 @@
-.content-element.circles-list.flex1
+.content-element.circles-list
   %ol
     %li
-      %a.btn.btn-link= event.milestone.name
+      %a.btn.btn-link.pl-0.text-left= event.milestone.name
       .at= event.conducted_at
 
     - event_milestones = event.event_milestones
@@ -12,11 +12,11 @@
           - pre_milestone = index == 0 ? event : event_milestones.select { |f| f.milestone_id == milestone_ids[index-1] }.first
           - current_milestone = event_milestones.select { |f| f.milestone_id == milestone.id }.first
 
-          = link_to event_event_milestone_path(event, current_milestone), class: 'btn btn-link' do
+          = link_to event_event_milestone_path(event, current_milestone), class: 'btn btn-link text-left pl-0' do
             %span= milestone.name
 
           - if pre_milestone.present?
             %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
           .at= current_milestone.conducted_at
         - else
-          = link_to milestone.name, '#', class: 'btn btn-link disabled'
+          = link_to milestone.name, '#', class: 'btn btn-link text-left pl-0 disabled'

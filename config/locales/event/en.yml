@@ -28,7 +28,7 @@ en:
     start_date: 'Start date'
     filter_by_date: 'Filter by date'
     search_link_event: 'Search event by uuid or event type'
-    link_to_index_case: 'Link to index case'
+    link_to_event: 'Link to event'
     displaying_events: 'Displaying events'
     of: 'of'
     in_total: 'in total'
@@ -36,3 +36,4 @@ en:
     show_less: 'Show less'
     preview_pdf: 'Preview PDF'
     suspected_event_type: 'Suspected event'
+    creator: 'Creator'

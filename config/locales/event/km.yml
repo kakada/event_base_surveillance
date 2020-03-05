@@ -29,7 +29,7 @@ km:
     filter_by_date: 'ច្រោះតាមកាលបរិច្ឆេទ'
     link_to_index_case: 'ភ្ជាប់ទៅ index case'
     search_link_event: 'ស្វែងរកព្រឹត្តិការណ៍តាមរយៈ uuid ឬប្រភេទព្រឹត្តិការណ៍'
-    link_to_index_case: 'ភ្ជាប់ទៅ index case'
+    link_to_event: 'ភ្ជាប់ទៅព្រឹត្តិការណ៍'
     displaying_events: 'បង្ហាញព្រឹត្តិការណ៍'
     of: 'នៃ'
     in_total: 'សរុប'
@@ -37,3 +37,4 @@ km:
     show_less: 'បង្ហាញតិច'
     preview_pdf: 'មើលជា PDF'
     suspected_event_type: 'ព្រឹត្តិការណ៍សង្ស័យ'
+    creator: 'អ្នកបញ្ចូល'

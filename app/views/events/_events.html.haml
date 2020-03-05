@@ -1,6 +1,10 @@
 - @events.each do |event|
   %tr
-    %td= link_to event.id, event_path(event), class: 'btn btn-link uuid'
+    %td
+      .flex-row-vertical-center
+        = link_to event.id, event_path(event), class: 'btn btn-link pt-0 pb-0 uuid'
+        %span{ 'data-toggle' => 'tooltip', title: "#{t('event.creator')}: #{event.creator_email}" }
+          %i.far.fa-user
     %td
       .flex-row-vertical-center
         .small-color{style: "background-color: #{event.event_type_color}"}
@@ -15,17 +19,16 @@
         = fv.try(:html_tag).try(:html_safe) || '-'
 
     %td= event.program_name
-    %td
+    %td.text-right
       - if policy(event).update?
-        .btn-group
-          %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-            %i.fas.fa-ellipsis-v
+        %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fas.fa-ellipsis-v
 
-          .dropdown-menu.dropdown-menu-right
-            = link_to edit_event_path(event), class: ['btn dropdown-item', ('disabled' unless policy(event).update?)] do
-              %i.fas.fa-pen.drop-menu-icon
-              %span= t('shared.edit')
+        .dropdown-menu.dropdown-menu-right
+          = link_to edit_event_path(event), class: ['btn dropdown-item', ('disabled' unless policy(event).update?)] do
+            %i.fas.fa-pen.drop-menu-icon
+            %span= t('shared.edit')
 
-            = link_to event_preview_path(event, format: 'pdf'), class: 'btn dropdown-item', target: '_blank' do
-              %i.fas.fa-eye.drop-menu-icon
-              %span= t('event.preview_pdf')
+          = link_to event_preview_path(event, format: 'pdf'), class: 'btn dropdown-item', target: '_blank' do
+            %i.fas.fa-eye.drop-menu-icon
+            %span= t('event.preview_pdf')
