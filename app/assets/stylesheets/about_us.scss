@@ -1,7 +1,6 @@
 #about_us-index {
   .introduction {
     max-width: 900px;
-    // margin: 0 auto;
     text-align: justify;
   }
 
@@ -21,6 +20,13 @@
     .wrapper {
       max-width: 1024px;
       padding-top: 20px;
+    }
+  }
+
+  .program-logo {
+    img {
+      height: 140px;
+      border-radius: 50%;
     }
   }
 }
