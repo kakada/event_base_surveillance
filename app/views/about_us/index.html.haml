@@ -3,7 +3,7 @@
     = link_to 'Back', new_user_session_path, class: 'btn btn-link'
   .row
     .col-md-12
-      %h1.text-center= t('about.title')
+      %h1.text-center= ENV['APP_NAME']
   .d-flex.justify-content-center.my-4.mx-auto.introduction
     = t('about.introduction')
 
