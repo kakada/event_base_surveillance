@@ -82,6 +82,10 @@
 
 // --------------map
 #events-show {
+  .circles-list {
+    min-width: 245px;
+  }
+
   #map-wrapper {
     position: relative;
     height: 500px;
