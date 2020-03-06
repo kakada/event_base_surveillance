@@ -63,7 +63,7 @@ a:focus {
   .sidebar-header strong {
     margin-left: -15px;
     display: none;
-    font-size: 1.8em;
+    font-size: 1.25rem;
   }
 
   ul.components {
@@ -125,11 +125,15 @@ a:focus {
   a[data-toggle="collapse"] {
     position: relative;
   }
+
+  h3 {
+    font-size: 1.25rem;
+  }
 }
 
 #sidebar.active {
-  min-width: 80px;
-  max-width: 80px;
+  min-width: 114px;
+  max-width: 114px;
   text-align: center;
 
   .sidebar-header h3,

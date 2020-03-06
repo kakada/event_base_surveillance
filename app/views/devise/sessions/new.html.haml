@@ -1,7 +1,7 @@
 = render 'devise/shared/logo'
 
 .form-wrapper.pr-1
-  %h2= ENV['APP_NAME']
+  %h3= "#{ENV['APP_NAME']} (#{ENV['APP_SHORTCUT_NAME']})"
 
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .form-group
