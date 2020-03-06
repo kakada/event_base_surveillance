@@ -37,3 +37,5 @@ en:
     preview_pdf: 'Preview PDF'
     suspected_event_type: 'Suspected event'
     creator: 'Creator'
+    tracing: 'Tracing'
+    time_detection: 'Time Detection'

@@ -55,7 +55,7 @@ EBS.EventsShow = do ->
       options:
         title:
           display: true
-          text: 'Time Detection'
+          text: $('#myChart').data('title')
         tooltips:
           mode: 'index'
           intersect: false
@@ -76,11 +76,11 @@ EBS.EventsShow = do ->
 
     for field in fields
       dd = data.map((x) ->
-        x.properties[field]
+        x.properties[field[0]]
       )
 
       datasets.push({
-        label: field,
+        label: field[1],
         backgroundColor: _getRandomColor(),
         data: dd
       })
