@@ -21,10 +21,10 @@ EBS.MapsIndex = (() => {
 
   function _initLegendSliding() {
     $('.btn-slide').on('click', function() {
-      posRight = $(this).parents('.slide-wrapper').width() - $(this).width();
+      posRight = $(this).parents('.slide-wrapper').width() - $(this).parent().width();
       right = '-=' + posRight;
 
-      if(parseInt($('.slide-wrapper').css('right')) != 10) {
+      if(parseInt($('.slide-wrapper').css('right')) != 0) {
         right = '+=' + posRight;
       }
 

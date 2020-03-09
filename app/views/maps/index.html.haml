@@ -16,8 +16,9 @@
 
   .slide-wrapper.flex-row
     .flex-row.align-items-end
-      .btn-slide
-        %i.btn.pointer.fas.fa-angle-double-left.fa-angle-double-right
+      .btn-slide.flex-column.pointer.align-items-center
+        %i.fas.fa-angle-double-left.fa-angle-double-right
+        .vericaltext Legend
 
     .legend.flex-column
       %strong= t('event.suspected_event_type')
@@ -26,7 +27,7 @@
         - @event_data.uniq{ |ed| ed[:event_type_name] }.each do |data|
           .flex-row-vertical-center
             %i{style:"background: #{data[:color]}"}
-            = data[:event_type_name]
+            .ellipsis= data[:event_type_name]
 
   - unless @event_data.present?
     .no-data.text-center
