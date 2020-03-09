@@ -25,10 +25,8 @@
               %span.badge.badge-pill.badge-info.mr-1= milestone.fields.size
               = milestone.name
 
-            .status-wrapper.flex1
-              = 'Root' if milestone.is_default?
-              = 'Final' if milestone.final?
-              = 'Verified' if milestone.verified?
+            .status-wrapper.text-capitalize.flex1
+              = milestone.status
 
             .text-right
               .btn-group

@@ -24,20 +24,27 @@ class Milestone < ApplicationRecord
   has_many   :sections, dependent: :destroy
   has_many   :fields, dependent: :destroy
 
+  enum status: {
+    root: 1,
+    verified: 2,
+    final: 3
+  }
+
+  STATUSES = statuses.keys.map { |r| [r.titlecase, r] }
+
   # Validation
   validates :name, presence: true, uniqueness: { scope: [:program_id] }
-  validate :only_one_final_milestone
-  validate :only_one_verified_milestone
+  validates :status, uniqueness: { scope: :program_id }, allow_nil: true
   validate :validate_unique_section_name
 
-  before_validation :set_default_section, unless: :is_default
+  before_validation :set_default_section, unless: :root?
   before_create :set_display_order
 
   # Scope
   default_scope { order(display_order: :asc) }
-  scope :root, -> { where(is_default: true).first }
-  scope :final, -> { where(final: true).first }
-  scope :verified, -> { where(verified: true).first }
+  scope :root, -> { where(status: :root).first }
+  scope :final, -> { where(status: :final).first }
+  scope :verified, -> { where(status: :verified).first }
 
   # Deligation
   delegate :message, to: :telegram, prefix: :telegram, allow_nil: true
@@ -48,7 +55,7 @@ class Milestone < ApplicationRecord
 
   # Class methods
   def self.create_root(creator_id)
-    create(name: 'New', is_default: true, sections_attributes: Section.roots, creator_id: creator_id)
+    create(name: 'New', status: :root, sections_attributes: Section.roots, creator_id: creator_id)
   end
 
   def self.update_order!(ids)
@@ -59,7 +66,7 @@ class Milestone < ApplicationRecord
 
   # Instand methods
   def template_fields
-    return Event.template_fields(program) if self.is_default?
+    return Event.template_fields(program) if self.root?
 
     fields.map do |field|
       {
@@ -70,7 +77,7 @@ class Milestone < ApplicationRecord
   end
 
   def extra_fields
-    is_default? ? [{ code: :event_type_id, type: :integer, label: 'Event Type ID' }] : [{ code: :event_uuid, type: :string, label: 'Event Uuid' }]
+    root? ? [{ code: :event_type_id, type: :integer, label: 'Event Type ID' }] : [{ code: :event_uuid, type: :string, label: 'Event Uuid' }]
   end
 
   def format_name
@@ -84,22 +91,6 @@ class Milestone < ApplicationRecord
   private
     def validate_unique_section_name
       validate_uniqueness_of_in_memory(sections, %i[name], 'duplicate')
-    end
-
-    def only_one_final_milestone
-      return unless final?
-
-      matches = program.milestones.where(final: true).where.not(id: id)
-
-      errors.add(:final, 'cannot have another final milestone') if matches.exists?
-    end
-
-    def only_one_verified_milestone
-      return unless verified?
-
-      matches = program.milestones.where(verified: true).where.not(id: id)
-
-      errors.add(:verified, 'cannot have another verified milestone') if matches.exists?
     end
 
     def set_display_order

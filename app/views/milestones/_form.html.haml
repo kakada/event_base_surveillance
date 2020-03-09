@@ -1,8 +1,7 @@
 = f.input :name
 
-- unless @milestone.is_default?
-  = f.input :verified, label: 'Is it the verified milestone?'
-  = f.input :final, label: 'Is it the close milestone?'
+- unless @milestone.root?
+  = f.input :status, collection: Milestone::STATUSES.drop(1)
 
 = render 'predefined_fields', f: f
 

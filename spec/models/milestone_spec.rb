@@ -15,22 +15,22 @@ RSpec.describe Milestone, type: :model do
     let!(:program) { create(:program) }
 
     context 'only_one_final_milestone' do
-      let!(:milestone1) { create(:milestone, program: program, final: true) }
-      let!(:milestone2) { build(:milestone, program: program, final: true) }
+      let!(:milestone1) { create(:milestone, program: program, status: :final) }
+      let!(:milestone2) { build(:milestone, program: program, status: :final) }
 
       it 'raises error include final' do
         milestone2.save
-        expect(milestone2.errors).to include(:final)
+        expect(milestone2.errors).to include(:status)
       end
     end
 
-    context '#only_one_verified_milestone' do
-      let!(:milestone1) { create(:milestone, program: program, verified: true) }
-      let!(:milestone2) { build(:milestone, program: program, verified: true) }
+    context 'only_one_verified_milestone' do
+      let!(:milestone1) { create(:milestone, program: program, status: :verified) }
+      let!(:milestone2) { build(:milestone, program: program, status: :verified) }
 
       it 'raises error include verified' do
         milestone2.save
-        expect(milestone2.errors).to include(:verified)
+        expect(milestone2.errors).to include(:status)
       end
     end
   end
