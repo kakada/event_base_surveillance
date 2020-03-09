@@ -178,9 +178,23 @@ EBS.MilestonesNew = do ->
   # for both remove field and remove option
   onClickRemoveField = ->
     $(document).on 'click', 'form .remove_fields', (event) ->
-      $(this).parent().find('input[type=hidden]').val('1')
-      $(this).closest('fieldset').hide()
       event.preventDefault()
+
+      if !isRemoveSection(this)
+        return removeField(this)
+
+      confirmMessage = $(this).parent('.remove-section').data('confirm')
+      result = confirm(confirmMessage)
+
+      if result
+        removeField(this)
+
+  isRemoveSection = (dom) ->
+    !!$(dom).parent('.remove-section').length
+
+  removeField = (dom)->
+    $(dom).parent().find('input[type=hidden]').val('1')
+    $(dom).closest('fieldset').hide()
 
   onClickAddSection = ->
     $('form .add_sections').off('click')

@@ -6,6 +6,7 @@ en:
     telegram_notification: 'Telegram Notification'
     notification: 'Notification'
     are_you_sure_to_delete: 'Are you sure to delete this milestone?'
+    are_you_sure_to_delete_section: 'Are you sure to delete this section?'
     new_milestone: 'New Milestone'
     edit_milestone: 'Edit Milestone'
     additional_fields: 'Additional Fields'
