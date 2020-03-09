@@ -4,15 +4,29 @@
       %span= "Total reported event is <b>#{@event_data.inject(0){|sum,e| sum + e[:total_count] }}</b>, happend in <b>#{@event_data.size}</b> locations".html_safe
     %form#event-form.form-inline{ method: :get }
       .form-group.mb-2
-        %label{ for: :event_event_type } Event:&nbsp;
+        %label.mr-1{ for: :event_event_type } Event:
         = select_tag 'event_type_id', options_from_collection_for_select(@event_types, 'id', 'name', params[:event_type_id]), include_blank: "All", class: 'form-control'
 
       .form-group.mb-2
         = render 'events/filter_date'
 
-      %button.btn.btn-primary.mb-2{ type: 'submit' } Apply
+      %button.btn.btn-primary.mb-2{ type: 'submit' }= t('shared.apply')
 
   #map{'data-event-data' => @event_data.to_json}
+
+  .slide-wrapper.flex-row
+    .flex-row.align-items-end
+      .btn-slide
+        %i.btn.pointer.fas.fa-angle-double-left.fa-angle-double-right
+
+    .legend.flex-column
+      %strong= t('event.suspected_event_type')
+
+      .flex1.overflow-auto
+        - @event_data.uniq{ |ed| ed[:event_type_name] }.each do |data|
+          .flex-row-vertical-center
+            %i{style:"background: #{data[:color]}"}
+            = data[:event_type_name]
 
   - unless @event_data.present?
     .no-data.text-center

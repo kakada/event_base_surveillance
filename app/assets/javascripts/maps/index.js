@@ -14,15 +14,29 @@ EBS.MapsIndex = (() => {
   function init() {
     eventData = $('#map').data('event-data');
 
-    _renderMap();
     EBS.DatepickerPopup.init();
+    _renderMap();
+    _initLegendSliding();
+  }
+
+  function _initLegendSliding() {
+    $('.btn-slide').on('click', function() {
+      posRight = $(this).parents('.slide-wrapper').width() - $(this).width();
+      right = '-=' + posRight;
+
+      if(parseInt($('.slide-wrapper').css('right')) != 10) {
+        right = '+=' + posRight;
+      }
+
+      $('.slide-wrapper').animate({'right': right});
+      $(this).find('i').toggleClass('fa-angle-double-right');
+    });
   }
 
   function _renderMap() {
     map = new L.Map('map');
     if (eventData.length) {
       _renderMarker();
-      _renderLegend();
     }
 
     map.setView(new L.LatLng(cambodiaLat, cambodiaLng), 7);
@@ -83,37 +97,4 @@ EBS.MapsIndex = (() => {
 
     return content;
   }
-
-  function _renderLegend() {
-    const legend = L.control({ position: "bottomright" });
-    const div = L.DomUtil.create("div", "legend");
-    const mapLegend = _getLegendData();
-
-    mapLegend.forEach( (data) => {
-      div.innerHTML += `<div class='flex-row-vertical-center'><i style="background: ${data.color}"></i><div>${data.name}</div></div>`;
-    });
-
-    legend.onAdd = function(map) {
-      return div;
-    };
-
-    legend.addTo(map);
-  }
-
-  function _getLegendData() {
-    const result = [];
-    const mapLegend = new Map();
-    for (const item of eventData) {
-      if(!mapLegend.has(item.event_type_id)){
-        mapLegend.set(item.event_type_id, true);
-        result.push({
-          name: item.event_type_name,
-          color: item.color
-        });
-      }
-    }
-
-    return result;
-  }
-
 })();
