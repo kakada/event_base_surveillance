@@ -16,7 +16,7 @@ module Samples
       ]
 
       users.each do |user|
-        u = ::User.new(email: user[:email], role: user[:role], password: '123456', program_id: user[:program_id])
+        u = ::User.new(user.merge({password: '123456'}))
         u.confirm
       end
     end

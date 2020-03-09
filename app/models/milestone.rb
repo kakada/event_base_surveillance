@@ -58,12 +58,6 @@ class Milestone < ApplicationRecord
     create(name: 'New', status: :root, sections_attributes: Section.roots, creator_id: creator_id)
   end
 
-  def self.update_order!(ids)
-    ids.each_with_index do |id, index|
-      where(id: id).update_all(display_order: index + 1)
-    end
-  end
-
   # Instand methods
   def template_fields
     return Event.template_fields(program) if self.root?
