@@ -1,19 +1,19 @@
-EBS.EventsSkipLogic = ( () => {
-  let operatorMethods = {
+EBS.EventsSkipLogic = function () {
+  var operatorMethods = {
     '=': 'equalValidator',
     '!=': 'notValidator',
     'in': 'matchAnyValidator',
     'match_all': 'matchAllValidator'
-  }
+  };
 
   return {
-    init,
-    equalValidator,
-    matchAllValidator,
-    matchAnyValidator,
-    notValidator,
-    renderSkipLogicField
-  }
+    init: init,
+    equalValidator: equalValidator,
+    matchAllValidator: matchAllValidator,
+    matchAnyValidator: matchAnyValidator,
+    notValidator: notValidator,
+    renderSkipLogicField: renderSkipLogicField
+  };
 
   function init() {
     renderSkipLogicField();
@@ -22,51 +22,52 @@ EBS.EventsSkipLogic = ( () => {
   }
 
   function onFormSubmit() {
-    $('.event-form-wrapper form').submit( () => {
-      $('[data-code].hidden').each( (_i, field) => {
+    $('.event-form-wrapper form').submit(function () {
+      $('[data-code].hidden').each(function (_i, field) {
         $(field).find('.skip-logic-field').val('');
-      })
+      });
     });
   }
 
   function renderSkipLogicField() {
-    $('[data-relevant]').each( (_i, field) => {
+    $('[data-relevant]').each(function (_i, field) {
       togglerFields(field);
     });
   }
 
   function togglerFields(field) {
-    let fieldCode = $(field).data('relevant');
-    let triggerValue;
-    let fieldValue = $(field).val() || $(field).attr('value');
+    var fieldCode = $(field).data('relevant');
+    var triggerValue;
+    var fieldValue = $(field).val() || $(field).attr('value');
 
     if (!fieldValue) {
-      return
+      return;
     }
 
     if (typeof fieldValue == 'string') {
       triggerValue = fieldValue.toLowerCase();
-    }  else {
+    } else {
       triggerValue = fieldValue.join(',').toLowerCase();
     }
 
-    $(`[data-code=${fieldCode}]`).each( (_i, field) => {
+    $("[data-code=".concat(fieldCode, "]")).each(function (_i, field) {
       operator = $(field).data('operator');
       EBS.EventsSkipLogic[operatorMethods[operator]](field, triggerValue);
     });
   }
 
   function addEventToRelevantField() {
-    $(document).on('change', '[data-relevant]', (event) => {
+    $(document).on('change', '[data-relevant]', function (event) {
       togglerFields(event.target);
     });
   }
 
   function matchAnyValidator(field, triggerValue) {
-    let values = $(field).data('value').split(',');
-    let isMatch = false;
-    const triggerValues = triggerValue.split(',');
-    for(let i = 0; i < triggerValues.length; i++) {
+    var values = $(field).data('value').split(',');
+    var isMatch = false;
+    var triggerValues = triggerValue.split(',');
+
+    for (var i = 0; i < triggerValues.length; i++) {
       if (values.includes(triggerValues[i])) {
         isMatch = true;
         break;
@@ -77,16 +78,17 @@ EBS.EventsSkipLogic = ( () => {
   }
 
   function equalValidator(field, triggerValue) {
-    let values = $(field).data('value').split(',');
-    const isMatch = values == triggerValue;
+    var values = $(field).data('value').split(',');
+    var isMatch = values == triggerValue;
     toggleField(field, isMatch);
   }
 
   function notValidator(field, triggerValue) {
-    let values = $(field).data('value').split(',');
-    let isMatch = true;
-    let triggerValues = triggerValue.split(',');
-    for(let i = 0; i < triggerValues.length; i++) {
+    var values = $(field).data('value').split(',');
+    var isMatch = true;
+    var triggerValues = triggerValue.split(',');
+
+    for (var i = 0; i < triggerValues.length; i++) {
       if (values.includes(triggerValues[i])) {
         isMatch = false;
         break;
@@ -97,10 +99,11 @@ EBS.EventsSkipLogic = ( () => {
   }
 
   function matchAllValidator(field, triggerValue) {
-    let values = $(field).data('value').split(',');
-    let triggerValues = triggerValue.split(',');
-    let isMatch = true;
-    for(let i = 0; i < values.length; i++) {
+    var values = $(field).data('value').split(',');
+    var triggerValues = triggerValue.split(',');
+    var isMatch = true;
+
+    for (var i = 0; i < values.length; i++) {
       if (!triggerValues.includes(values[i])) {
         isMatch = false;
         break;
@@ -117,4 +120,4 @@ EBS.EventsSkipLogic = ( () => {
       $(field).addClass('hidden');
     }
   }
-})();
+}();
