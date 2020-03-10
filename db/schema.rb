@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_09_043447) do
+ActiveRecord::Schema.define(version: 2020_03_10_095140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2020_03_09_043447) do
     t.datetime "updated_at", null: false
     t.boolean "close", default: false
     t.string "link_uuid"
+    t.datetime "event_date"
   end
 
   create_table "field_options", force: :cascade do |t|
