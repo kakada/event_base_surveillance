@@ -35,7 +35,9 @@
             - codes.each do |code|
               %th= fields.select{ |f| f.code == code }.first.try(:name) || code
 
-          %th= t('event.owner')
+          - if current_user.system_admin?
+            %th= t('event.owner')
+
           %th
 
       %tbody#body-content

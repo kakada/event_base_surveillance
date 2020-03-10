@@ -45,4 +45,8 @@ module EventsHelper
     css_class << 'hidden' if field.relevant.present?
     css_class.join(' ')
   end
+
+  def shared_event?(user, event)
+    !user.system_admin? && event.event_type_shared? && event.program_id != user.program_id
+  end
 end

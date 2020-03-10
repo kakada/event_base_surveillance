@@ -11,6 +11,10 @@
           = event.event_type_name[0]
         %span= event.event_type_name
 
+        - if shared_event?(current_user, event)
+          %span.ml-2{ 'data-toggle' => 'tooltip', title: "#{t('event.shared_from')}: #{event.program_name}" }
+            %i.far.fa-share-square.text-info
+
     %td= event.location_name
 
     - codes.each do |code|
@@ -18,7 +22,9 @@
         - fv = event.field_values.select{ |fv| fv.field_code == code }.first
         = fv.try(:html_tag).try(:html_safe) || '-'
 
-    %td= event.program_name
+    - if current_user.system_admin?
+      %td= event.program_name
+
     %td.text-right
       - if policy(event).update?
         %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

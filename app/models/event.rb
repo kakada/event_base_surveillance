@@ -37,7 +37,7 @@ class Event < ApplicationRecord
   has_associated_audits
 
   # Deligation
-  delegate :name, :color, to: :event_type, prefix: :event_type
+  delegate :name, :color, :shared?, to: :event_type, prefix: :event_type
   delegate :name, to: :program, prefix: true
   delegate :enable_telegram?, to: :program, prefix: false
   delegate :enable_email_notification?, to: :program, prefix: false
