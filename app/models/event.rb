@@ -92,7 +92,7 @@ class Event < ApplicationRecord
   def location_name(address = 'address_km')
     return if location_code.blank?
 
-    "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).send(address)
+    "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
   end
 
   def milestone
