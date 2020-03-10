@@ -112,6 +112,7 @@
     max-height: 120px;
     overflow: hidden;
     position: relative;
+    word-break: break-all;
   }
 
   .fv-body-blur {
@@ -209,4 +210,10 @@ pre {
       display: block;
     }
   }
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

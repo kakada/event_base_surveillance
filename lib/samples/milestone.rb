@@ -53,8 +53,9 @@ module Samples
         def update_cdc_root_milestone
           milestone = ::Program.find_by(name: 'CDC').milestones.root
           root_section = milestone.sections.default.first
-          root_section.fields.create(name: 'Number of hospitalized', code: 'number_of_hospitalized', is_default: true,  field_type: 'Fields::IntegerField', tracking: true, display_order: 1)
+          root_section.fields.create(name: 'Number of hospitalized', code: 'number_of_hospitalized', is_default: true,  field_type: 'Fields::IntegerField', tracking: true)
           root_section.fields.find_by(code: 'source_of_information').update_attributes(required: true)
+          update_hospitalized_field_order(root_section)
 
           milestone.update_attributes(
             sections_attributes: [{
@@ -66,6 +67,13 @@ module Samples
               ]
             }]
           )
+        end
+
+        def update_hospitalized_field_order(section)
+          field = section.fields.find_by code: 'number_of_hospitalized'
+          ids = section.fields.pluck(:id).insert(1, field.id)
+          ids.delete_if { |id| id == field.id }
+          section.fields.update_order!(ids)
         end
 
         def migrate_mapping_fields

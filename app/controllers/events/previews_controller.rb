@@ -2,15 +2,10 @@
 
 module Events
   class PreviewsController < ::ApplicationController
-    before_action :assign_event
-
     def show
+      @event = authorize Event.find(params[:event_id])
+
       render pdf: "event_#{@event.id}"
     end
-
-    private
-      def assign_event
-        @event = current_program.events.find(params[:event_id])
-      end
   end
 end

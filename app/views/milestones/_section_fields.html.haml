@@ -7,7 +7,7 @@
     .form-check.form-check-inline
       = f.input :display, label: t('milestone.displayed'), input_html: {class: 'form-check-inline'}
 
-    .action.remove-section
+    .action.remove-section{'data-confirm' => t('milestone.are_you_sure_to_delete_section')}
       = f.hidden_field :_destroy
       = link_to '#', class: "remove_fields btn btn-link" do
         %i.fa.fa-trash-alt.icon-delete

@@ -2,11 +2,11 @@
   %ol
     - milestones = current_program.milestones
     - milestones.each do |milestone|
-      %li{ class: ('inactive' unless milestone.is_default? || milestone == @milestone) }
+      %li{ class: ('inactive' unless milestone.root? || milestone == @milestone) }
         %span.number
         .milestone-name= milestone.name
         .template-fields-wrapper
           .template-fields
-            - if milestone.is_default? || milestone == @milestone
+            - if milestone.root? || milestone == @milestone
               - milestone.template_fields.each do |field|
                 = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}

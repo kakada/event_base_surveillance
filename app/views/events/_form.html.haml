@@ -1,6 +1,6 @@
 .w-50.view-center.event-form-wrapper
   = simple_form_for @event, class: 'event-form' do |f|
-    = f.input :event_type_id, label: t('event.event_type'), collection: @event_types
+    = f.input :event_type_id, label: t('event.suspected_event_type'), collection: @event_types
     = f.input :link_uuid, label: t('event.link_to_event')
 
     - @event.milestone.sections.each do |section|

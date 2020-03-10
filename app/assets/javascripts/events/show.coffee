@@ -55,7 +55,7 @@ EBS.EventsShow = do ->
       options:
         title:
           display: true
-          text: 'Time Detection'
+          text: $('#myChart').data('title')
         tooltips:
           mode: 'index'
           intersect: false
@@ -76,11 +76,11 @@ EBS.EventsShow = do ->
 
     for field in fields
       dd = data.map((x) ->
-        x.properties[field]
+        x.properties[field[0]]
       )
 
       datasets.push({
-        label: field,
+        label: field[1],
         backgroundColor: _getRandomColor(),
         data: dd
       })
@@ -125,12 +125,12 @@ EBS.EventsShow = do ->
     fvs = data.eventFvs
     content = "<ul class='popup-content-wrapper'>"
     content += "<li><span class='type'>Event(suspected):</span> <span class='value'>" + data.eventType + "</span></li>"
-    content += "<li><span class='type'>Total case:</span> <span class='value'>" + fvs.number_of_case + "</span></li>"
+    content += "<li><span class='type'># of case:</span> <span class='value'>" + fvs.number_of_case + "</span></li>"
 
     if fvs.hasOwnProperty('number_of_hospitalized')
-      content += "<li><span class='type'>Total hospitalized:</span> <span class='value'>" + fvs.number_of_hospitalized + "</span></li>"
+      content += "<li><span class='type'># of hospitalized:</span> <span class='value'>" + (fvs.number_of_hospitalized || '-') + "</span></li>"
 
-    content += "<li><span class='type'>Total death:</span> <span class='value'>" + fvs.number_of_death + "</span></li>"
+    content += "<li><span class='type'># of death:</span> <span class='value'>" + (fvs.number_of_death || '-') + "</span></li>"
     content += "</ul>"
 
     return content;

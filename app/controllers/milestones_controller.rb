@@ -48,11 +48,11 @@ class MilestonesController < ::ApplicationController
   private
     def milestone_params
       params.require(:milestone).permit(
-        :name, :display_order, :final, :verified,
+        :name, :display_order, :status,
         sections_attributes: [
           :id, :name, :default, :_destroy, :display,
           fields_attributes: [
-            :id, :name, :field_type, :required, :display_order, :is_default, :code, :entry_able,
+            :id, :name, :field_type, :required, :display_order, :code, :entry_able,
             :mapping_field_id, :_destroy, :tracking, :description, :relevant,
             validations: {},
             field_options_attributes: %i[id name value color _destroy]

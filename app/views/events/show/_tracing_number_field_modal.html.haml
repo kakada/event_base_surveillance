@@ -1,4 +1,4 @@
-- if codes = traceable.milestone.fields.tracking.number.pluck(:code).presence
+- if codes = traceable.milestone.fields.tracking.number.pluck(:code, :name).presence
   - tracings = traceable.tracings.number
   - if !!tracings && tracings.length > 1
     %a.pointer{'data-target' => '#event-log', 'data-toggle' => 'modal'}
@@ -8,8 +8,8 @@
       .modal-dialog{:role => 'document'}
         .modal-content
           .modal-header
-            %h5#exampleModalLabel.modal-title Tracing
+            %h5#exampleModalLabel.modal-title= t('event.tracing')
             %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
               %span{'aria-hidden' => 'true'} ×
           .modal-body
-            %canvas#myChart{'data-event-tracings' => tracings.to_json, 'data-tracking-number-fields' => codes}
+            %canvas#myChart{'data-event-tracings' => tracings.to_json, 'data-tracking-number-fields' => codes, 'data-title' => t('event.time_detection')}

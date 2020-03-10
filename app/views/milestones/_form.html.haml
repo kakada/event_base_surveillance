@@ -1,8 +1,7 @@
 = f.input :name
 
-- unless @milestone.is_default?
-  = f.input :verified, label: 'Is it the verified milestone?'
-  = f.input :final, label: 'Is it the close milestone?'
+- unless @milestone.root?
+  = f.input :status, collection: Milestone::STATUSES.drop(1)
 
 = render 'predefined_fields', f: f
 
@@ -17,7 +16,7 @@
   = link_to t('shared.cancel'), milestones_path, class: 'btn btn-secondary'
 
 :javascript
-  let locale = {
+  locale = {
     please_select: "#{t('shared.please_select')}",
     skip_logic_not: "#{t('milestone.skip_logic_not')}",
     any_of: "#{t('milestone.any_of')}",

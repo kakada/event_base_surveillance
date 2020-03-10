@@ -1,6 +1,7 @@
 [
   {
     "name": "Verification",
+    "status": "verified",
     "sections_attributes": [
       {
         "name": "Additional Fields",
@@ -226,7 +227,7 @@
   },
   {
     "name": "Conclusion",
-    "final": true,
+    "status": "final",
     "sections_attributes": [
       {
         "name": "Additional Fields",

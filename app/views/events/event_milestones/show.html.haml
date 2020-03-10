@@ -4,7 +4,7 @@
       %h3
         ="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
         = render 'events/show/tracing_number_field_modal', traceable: @event_milestone
-      %div= link_to 'Back', event_path(@event), class: 'btn btn-info'
+      %div= link_to t('shared.back'), event_path(@event), class: 'btn btn-info'
 
   %ul.list.flex1
     - @event_milestone.milestone.sections.each do |section|

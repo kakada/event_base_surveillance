@@ -135,7 +135,7 @@ EBS.SkipLogic = (function () {
     fields.unshift({
       code: '',
       type: '',
-      name: 'Please select'
+      name: locale.please_select
     });
     fields.forEach(function (field) {
       option = $("<option value='".concat(field.code, "' type='").concat(field.type, "'>").concat(field.name, "</option>"));

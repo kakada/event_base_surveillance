@@ -23,7 +23,7 @@ class Section < ApplicationRecord
   # Validation
   validates :name, presence: true, uniqueness: { scope: [:milestone_id] }
   validate :validate_unique_field_name
-  validate :validate_unique_field_type_location, unless: -> { milestone.present? && milestone.is_default? }
+  validate :validate_unique_field_type_location, unless: -> { milestone.present? && milestone.root? }
   validate :validate_field_from_to
 
   # Scope
@@ -31,7 +31,7 @@ class Section < ApplicationRecord
   scope :dynamic, -> { where(default: false) }
   scope :default, -> { where(default: true) }
 
-  before_create :set_default_fields, if: -> { !milestone.is_default? && default? }
+  before_create :set_default_fields, if: -> { !milestone.root? && default? }
 
   # Class methods
   def self.roots

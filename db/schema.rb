@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_085031) do
+ActiveRecord::Schema.define(version: 2020_03_09_043447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_085031) do
     t.boolean "final", default: false
     t.integer "creator_id"
     t.boolean "verified", default: false
+    t.integer "status"
   end
 
   create_table "notification_chat_groups", force: :cascade do |t|
