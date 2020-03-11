@@ -57,7 +57,7 @@ class Event < ApplicationRecord
 
 
   # Scope
-  scope :order_desc, -> { order(updated_at: :desc) }
+  scope :order_desc, -> { order(event_date: :desc) }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|

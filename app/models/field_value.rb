@@ -42,6 +42,7 @@ class FieldValue < ApplicationRecord
 
   # Callback
   after_save :handle_mapping_field, if: -> { field_type == 'Fields::MappingField' }
+  after_save :assign_event_date,    if: -> { field_code == 'event_date' && valueable_type == 'Event' }
 
   # History
   audited associated_with: :valueable
@@ -63,6 +64,10 @@ class FieldValue < ApplicationRecord
   end
 
   private
+    def assign_event_date
+      valueable.update_attributes(event_date: es_value)
+    end
+
     def assign_type
       self.type = "FieldValues::#{field_type.split('::').last}"
     end
