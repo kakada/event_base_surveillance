@@ -24,6 +24,12 @@ EBS.MilestonesNew = do ->
     onClickSettingItem()
     onClickBtnSetting()
     EBS.SkipLogic.init()
+    onClickResetFlag()
+
+  onClickResetFlag = ->
+    $(document).off 'click', '.reset-flag'
+    $(document).on 'click', '.reset-flag', ->
+      $('[name="milestone[status]"]').attr('checked', false)
 
   onClickBtnSetting = ->
     $(document).off 'click', '.btn-setting'
