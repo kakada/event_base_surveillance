@@ -3,3 +3,5 @@ en:
     title: "Total reported event is <b>%{total_count}</b>, happend in <b>%{location_count}</b> locations"
     legend: Legend
     event: Event
+    shared_from: 'Shared from'
+    all: 'All'

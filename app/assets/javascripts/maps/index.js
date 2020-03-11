@@ -68,8 +68,8 @@ EBS.MapsIndex = (() => {
       const latlng = [ data.lat + variant, data.lng + variant];
 
       const marker = L.circleMarker(latlng, {
-        color: data.color,
-        fillColor: data.color,
+        color: data.event_type.color,
+        fillColor: data.event_type.color,
         fillOpacity: 0.8,
         weight: 1,
         opacity: 1,
@@ -83,7 +83,7 @@ EBS.MapsIndex = (() => {
 
   function _buildMarkerPopupContent(data) {
     let content = `<ul class='popup-content-wrapper'>`;
-    content += `<li><span class='type'>Event(suspected):</span> <span class='value'>${data.event_type_name}</span></li>`;
+    content += `<li><span class='type'>Event(suspected):</span> <span class='value'>${data.event_type.name}</span></li>`;
     content += `<li><span class='type'>Location:</span> <span class='value'>${data.location}</span></li>`;
     content += `<li><span class='type'>Reported count:</span> <span class='value'>${data.total_count}</span></li>`;
     content += `<li><span class='type'>Total case:</span> <span class='value'>${data.number_of_case || 0}</span></li>`;

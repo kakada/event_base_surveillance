@@ -6,7 +6,7 @@
     %form#event-form.form-inline{ method: :get }
       .form-group.mb-2
         %label.mr-1{ for: :event_event_type }= "#{t('map.event')}:"
-        = select_tag 'event_type_id', options_from_collection_for_select(@event_types, 'id', 'name', params[:event_type_id]), include_blank: "All", class: 'form-control'
+        = select_tag 'event_type_id', options_for_select(select_options(current_user, @event_types), params[:event_type_id]), include_blank: t('map.all'), class: 'form-control'
 
       .form-group.mb-2
         = render 'events/filter_date'
@@ -25,10 +25,14 @@
       %strong= t('event.suspected_event_type')
 
       .flex1.overflow-auto
-        - @event_data.uniq{ |ed| ed[:event_type_name] }.each do |data|
-          .flex-row-vertical-center
-            %i{style:"background: #{data[:color]}"}
-            .ellipsis= data[:event_type_name]
+        - @event_data.uniq{ |ed| ed[:event_type] }.each do |data|
+          .flex-row-vertical-center.pt-1.pb-1
+            %i{style:"background: #{data[:event_type].color}"}
+            .ellipsis= data[:event_type].name
+
+            - if shared_event?(current_user, data[:event_type])
+              .p-1{ 'data-toggle' => 'tooltip', title: "#{t('map.shared_from')}: #{data[:event_type].program_name}"}
+                %i.far.fa-share-square.text-info
 
   - unless @event_data.present?
     .no-data.text-center
