@@ -8,7 +8,7 @@
         = sf.hidden_field :default
 
       .form-check.form-check-inline
-        = sf.input :display, label: t('milestone.displayed'), input_html: {class: 'form-check-inline'}
+        = sf.input :display, label: t('milestone.display_as_section'), input_html: {class: 'form-check-inline'}
 
     %ol.fields.sortable
       = sf.fields_for :fields, sf.object.fields do |form|
