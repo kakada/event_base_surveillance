@@ -1,7 +1,17 @@
 = f.input :name
 
-- unless @milestone.root?
-  = f.input :status, collection: Milestone::STATUSES.drop(1)
+- error_msg = f.object.errors[:status]
+.milestone-status.form-group{ class: ('form-group-invalid' if error_msg.present?) }
+  %span= t('milestone.flag_as')
+
+  = f.collection_radio_buttons :status, @milestone.status_collection, :last, :first
+
+  - unless @milestone.root?
+    %span.reset-flag.pointer{ 'data-toggle' => 'tooltip', title: 'Reset flag' }
+      %i.fas.fa-redo
+
+  - if error_msg.present?
+    .invalid-feedback= error_msg.join('; ')
 
 = render 'predefined_fields', f: f
 

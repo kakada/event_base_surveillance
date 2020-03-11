@@ -82,6 +82,12 @@ class Milestone < ApplicationRecord
     self.sections_attributes = Section.defaults
   end
 
+  def status_collection
+    return [['Root', 'root']] if root?
+
+    Milestone::STATUSES.drop(1)
+  end
+
   private
     def validate_unique_section_name
       validate_uniqueness_of_in_memory(sections, %i[name], 'duplicate')

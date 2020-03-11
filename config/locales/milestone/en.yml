@@ -41,3 +41,5 @@ en:
     any_of: any of
     match_all_of: match all of
     field_type: 'Field type'
+    flag_as: 'Flag as'
+    flag: 'Flag'

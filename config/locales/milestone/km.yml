@@ -42,3 +42,5 @@ km:
     any_of: មួយក្នុងចំណោម
     match_all_of: ផ្គូរផ្គងទាំងអស់
     field_type: 'ប្រភេទ Field'
+    flag_as: 'Flag as'
+    flag: 'Flag'
