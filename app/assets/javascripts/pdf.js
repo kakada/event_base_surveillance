@@ -17,6 +17,17 @@ EBS.EventsSkipLogic = ( function() {
 
   function init() {
     renderSkipLogicField();
+    handleSectionSkipLogic();
+  }
+
+  function handleSectionSkipLogic() {
+    $('.section').each (function() {
+      if ($(this).find('li.hidden').length == $(this).find('li').length) {
+        $(this).addClass('hidden');
+      } else {
+        $(this).removeClass('hidden');
+      }
+    });
   }
 
   function renderSkipLogicField() {

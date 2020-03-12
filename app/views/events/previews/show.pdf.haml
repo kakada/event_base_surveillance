@@ -9,7 +9,7 @@
 
   %ul.list.flex1
     %li
-      %span.type= "#{t('event.event_type')}:"
+      %span.type= "#{t('event.suspected_event_type')}:"
       %span.value= @event.event_type_name
     %li
       %span.type= "#{t('event.location')}:"
@@ -20,12 +20,20 @@
         %span.type= "#{t('event.link_to_event')}:"
         %span.value= link_to @event.link_uuid, "#{ENV['HOST_URL']}#{event_path(@event.link_uuid)}", style: 'color: #007bff'
 
-    - @event.milestone.fields.except_locations.each do |field|
-      = render 'field_value', field_values: @event.field_values, field: field
+    - @event.milestone.sections.each do |section|
+      %fieldset.section{class: ('not-section' unless section.display?)}
+        %legend= section.name
+
+        - section.fields.except_locations.each do |field|
+          = render 'field_value', field_values: @event.field_values, field: field
 
   - @event.event_milestones.each do |event_milestone|
     %h4="#{event_milestone.milestone.name}"
 
     %ul.list.flex1
-      - event_milestone.milestone.fields.each do |field|
-        = render 'field_value', field_values: event_milestone.field_values, field: field
+      - event_milestone.milestone.sections.each do |section|
+        %fieldset.section{class: ('not-section' unless section.display?)}
+          %legend= section.name
+
+          - section.fields.except_locations.each do |field|
+            = render 'field_value', field_values: event_milestone.field_values, field: field

@@ -7,6 +7,14 @@ EBS.EventsShow = do ->
     initTruncate()
     onClickTracingTextModalTrigger()
     EBS.EventsSkipLogic.renderSkipLogicField()
+    handleSectionSkipLogic()
+
+  handleSectionSkipLogic = ->
+    $('.section').each ->
+      if $(this).find('li.hidden').length == $(this).find('li').length
+        $(this).addClass('hidden')
+      else
+        $(this).removeClass('hidden')
 
   initTruncate = ->
     $('.fv-body-wrapper').each (index, dom)->

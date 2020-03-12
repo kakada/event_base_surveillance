@@ -19,6 +19,17 @@ EBS.EventsSkipLogic = function () {
     renderSkipLogicField();
     addEventToRelevantField();
     onFormSubmit();
+    handleSectionSkipLogic();
+  }
+
+  function handleSectionSkipLogic() {
+    $('.section').each(function() {
+      if ($(this).find('.form-group.hidden').length == $(this).find('.form-group').length) {
+        $(this).addClass('hidden');
+      } else {
+        $(this).removeClass('hidden');
+      }
+    });
   }
 
   function onFormSubmit() {
@@ -40,14 +51,8 @@ EBS.EventsSkipLogic = function () {
     var triggerValue;
     var fieldValue = $(field).val() || $(field).attr('value');
 
-    if (!fieldValue) {
-      return;
-    }
-
-    if (typeof fieldValue == 'string') {
-      triggerValue = fieldValue.toLowerCase();
-    } else {
-      triggerValue = fieldValue.join(',').toLowerCase();
+    if (!!fieldValue) {
+      triggerValue = typeof fieldValue == 'string' ? fieldValue.toLowerCase() : fieldValue.join(',').toLowerCase();
     }
 
     $("[data-code=".concat(fieldCode, "]")).each(function (_i, field) {
@@ -59,6 +64,7 @@ EBS.EventsSkipLogic = function () {
   function addEventToRelevantField() {
     $(document).on('change', '[data-relevant]', function (event) {
       togglerFields(event.target);
+      handleSectionSkipLogic();
     });
   }
 
