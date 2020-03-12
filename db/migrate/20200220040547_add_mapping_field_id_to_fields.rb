@@ -1,23 +1,15 @@
 # frozen_string_literal: true
 
+require 'rake'
+
 class AddMappingFieldIdToFields < ActiveRecord::Migration[5.2]
   def up
     add_column :fields, :mapping_field_id, :integer
-    migrate_mapping_field
+
+    Rake::Task['field:migrate_mapping_field'].invoke
   end
 
   def down
     remove_column :fields, :mapping_field_id
   end
-
-  private
-    def migrate_mapping_field
-      Field.where(field_type: 'Fields::MappingField').each do |field|
-        root_field = field.milestone.program.milestones.root.fields.find_by(code: field.mapping_field)
-        field.mapping_field_id = root_field.id
-        field.save
-
-        root_field.field_options = field.field_options if field.field_options.present?
-      end
-    end
 end

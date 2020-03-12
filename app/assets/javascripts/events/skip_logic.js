@@ -40,14 +40,8 @@ EBS.EventsSkipLogic = function () {
     var triggerValue;
     var fieldValue = $(field).val() || $(field).attr('value');
 
-    if (!fieldValue) {
-      return;
-    }
-
-    if (typeof fieldValue == 'string') {
-      triggerValue = fieldValue.toLowerCase();
-    } else {
-      triggerValue = fieldValue.join(',').toLowerCase();
+    if (!!fieldValue) {
+      triggerValue = typeof fieldValue == 'string' ? fieldValue.toLowerCase() : fieldValue.join(',').toLowerCase();
     }
 
     $("[data-code=".concat(fieldCode, "]")).each(function (_i, field) {
