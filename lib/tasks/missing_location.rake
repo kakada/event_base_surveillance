@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-require 'samples/location'
-
 namespace :missing_location do
   desc 'migrate missing locaiton'
   task migrate: :environment do
     locations = [
       { old: '12010801', new: '12130501' },
       { old: '120108', new: '121305' },
-      { old: '120102', new: '121301' }
+      { old: '120102', new: '121301' },
+      { old: '15010906', new:  '15070106' }
     ]
 
     locations.each do |location|
