@@ -83,16 +83,16 @@ EBS.MapsIndex = (() => {
 
   function _buildMarkerPopupContent(data) {
     let content = `<ul class='popup-content-wrapper'>`;
-    content += `<li><span class='type'>Event(suspected):</span> <span class='value'>${data.event_type.name}</span></li>`;
-    content += `<li><span class='type'>Location:</span> <span class='value'>${data.location}</span></li>`;
-    content += `<li><span class='type'>Reported count:</span> <span class='value'>${data.total_count}</span></li>`;
-    content += `<li><span class='type'>Total case:</span> <span class='value'>${data.number_of_case || 0}</span></li>`;
+    content += `<li><span class='type'>${locale.suspected_event}:</span> <span class='value'>${data.event_type.name}</span></li>`;
+    content += `<li><span class='type'>${locale.location}:</span> <span class='value'>${data.location}</span></li>`;
+    content += `<li><span class='type'>${locale.reported_count}:</span> <span class='value'>${data.total_count} (${locale.times})</span></li>`;
+    content += `<li><span class='type'>${locale.total_case}:</span> <span class='value'>${data.number_of_case || 0}</span></li>`;
 
     if(data.hasOwnProperty('number_of_hospitalized')) {
-      content += `<li><span class='type'>Total hospitalized:</span> <span class='value'>${data.number_of_hospitalized || 0}</span></li>`;
+      content += `<li><span class='type'>${locale.total_hospitalized}:</span> <span class='value'>${data.number_of_hospitalized || 0}</span></li>`;
     }
 
-    content += `<li><span class='type'>Total death:</span> <span class='value'>${data.number_of_death || 0}</span></li>`;
+    content += `<li><span class='type'>${locale.total_death}:</span> <span class='value'>${data.number_of_death || 0}</span></li>`;
     content += `</ul>`;
 
     return content;
