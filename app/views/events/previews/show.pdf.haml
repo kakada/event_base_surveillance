@@ -15,13 +15,10 @@
       %span.type= "#{t('event.location')}:"
       %span.value= @event.location_name
 
-    %li
-      %span.type= "#{t('event.link_to_event')}:"
-      %span.value
-        - if @event.link_uuid.present?
-          = link_to @event.link_uuid, "#{ENV['HOST_URL']}/#{event_path(@event.link_uuid)}", style: 'color: #007bff'
-        - else
-          = '-'
+    - if @event.link_uuid.present?
+      %li
+        %span.type= "#{t('event.link_to_event')}:"
+        %span.value= link_to @event.link_uuid, "#{ENV['HOST_URL']}#{event_path(@event.link_uuid)}", style: 'color: #007bff'
 
     - @event.milestone.fields.except_locations.each do |field|
       = render 'field_value', field_values: @event.field_values, field: field

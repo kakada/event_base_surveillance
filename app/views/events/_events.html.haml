@@ -13,7 +13,7 @@
 
         - if shared_event?(current_user, event)
           %span.ml-2{ 'data-toggle' => 'tooltip', title: "#{t('event.shared_from')}: #{event.program_name}" }
-            %i.far.fa-share-square.text-info
+            = image_tag 'share.png', class: 'icon-share'
 
     %td= event.location_name
 

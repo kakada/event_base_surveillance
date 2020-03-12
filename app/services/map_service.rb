@@ -12,9 +12,7 @@ class MapService
       event_type = @event_types.select { |t| t.id == data[2] }.first
 
       data = {
-        event_type_id: event_type.id,
-        event_type_name: event_type.name,
-        color: event_type.color,
+        event_type: event_type,
         total_count: value,
         lat: data[0],
         lng: data[1],

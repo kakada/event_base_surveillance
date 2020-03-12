@@ -4,3 +4,11 @@
   - unless @event.location.present?
     .no-data.text-center
       %span= t('shared.no_result_found')
+
+:javascript
+  locale = {
+    suspected_event: "#{t('event.suspected_event_type')}",
+    number_of_case: "#{t('event.number_of_case')}",
+    number_of_hospitalized: "#{t('event.number_of_hospitalized')}",
+    number_of_death: "#{t('event.number_of_death')}"
+  }

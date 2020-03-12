@@ -40,3 +40,6 @@ en:
     tracing: 'Tracing'
     time_detection: 'Time Detection'
     shared_from: 'Shared from'
+    number_of_case: '# of case'
+    number_of_hospitalized: '# of hospitalized'
+    number_of_death: '# of death'

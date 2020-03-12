@@ -40,3 +40,6 @@ km:
     tracing: 'ការតាមដាន'
     time_detection: 'ពេលវេលារកឃើញ'
     shared_from: 'បានចែករំលែកពី'
+    number_of_case: 'ចំនួនករណី'
+    number_of_hospitalized: 'ចំនួនស្នាក់នៅមន្ទីពេទ្យ'
+    number_of_death: 'ចំនួនស្លាប់'

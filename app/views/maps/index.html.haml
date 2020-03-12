@@ -6,7 +6,7 @@
     %form#event-form.form-inline{ method: :get }
       .form-group.mb-2
         %label.mr-1{ for: :event_event_type }= "#{t('map.event')}:"
-        = select_tag 'event_type_id', options_from_collection_for_select(@event_types, 'id', 'name', params[:event_type_id]), include_blank: "All", class: 'form-control'
+        = select_tag 'event_type_id', options_for_select(select_options(current_user, @event_types), params[:event_type_id]), include_blank: t('map.all'), class: 'form-control'
 
       .form-group.mb-2
         = render 'events/filter_date'
@@ -15,21 +15,37 @@
 
   #map{'data-event-data' => @event_data.to_json}
 
-  .slide-wrapper.flex-row
-    .flex-row.align-items-end
-      .btn-slide.flex-column.pointer.align-items-center
-        %i.fas.fa-angle-double-left.fa-angle-double-right
-        .vericaltext= t('map.legend')
+  - if @event_data.present?
+    .slide-wrapper.flex-row
+      .flex-row.align-items-end
+        .btn-slide.flex-column.pointer.align-items-center
+          %i.fas.fa-angle-double-left.fa-angle-double-right
+          .vericaltext= t('map.legend')
 
-    .legend.flex-column
-      %strong= t('event.suspected_event_type')
+      .legend.flex-column
+        %strong= t('event.suspected_event_type')
 
-      .flex1.overflow-auto
-        - @event_data.uniq{ |ed| ed[:event_type_name] }.each do |data|
-          .flex-row-vertical-center
-            %i{style:"background: #{data[:color]}"}
-            .ellipsis= data[:event_type_name]
+        .flex1.overflow-auto
+          - @event_data.uniq{ |ed| ed[:event_type] }.each do |data|
+            .flex-row-vertical-center.pt-1.pb-1
+              %i{style:"background: #{data[:event_type].color}"}
+              .ellipsis= data[:event_type].name
 
-  - unless @event_data.present?
+              - if shared_event?(current_user, data[:event_type])
+                .pl-1.pr-1{ 'data-toggle' => 'tooltip', title: "#{t('map.shared_from')}: #{data[:event_type].program_name}"}
+                  = image_tag 'share.png', class: 'icon-share'
+
+  - else
     .no-data.text-center
       %span= t('shared.no_result_found')
+
+:javascript
+  locale = {
+    suspected_event: "#{t('map.suspected_event')}",
+    location: "#{t('map.location')}",
+    reported_count: "#{t('map.reported_count')}",
+    total_case: "#{t('map.total_case')}",
+    total_hospitalized: "#{t('map.total_hospitalized')}",
+    total_death: "#{t('map.total_death')}",
+    times: "#{t('map.times')}"
+  }

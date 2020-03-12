@@ -124,16 +124,16 @@ EBS.EventsShow = do ->
   _buildMarkerPopupContent = (data)->
     fvs = data.eventFvs
     content = "<ul class='popup-content-wrapper'>"
-    content += "<li><span class='type'>Event(suspected):</span> <span class='value'>" + data.eventType + "</span></li>"
-    content += "<li><span class='type'># of case:</span> <span class='value'>" + fvs.number_of_case + "</span></li>"
+    content += "<li><span class='type'>" + locale.suspected_event + ":</span> <span class='value'>" + data.eventType + "</span></li>"
+    content += "<li><span class='type'>" + locale.number_of_case + ":</span> <span class='value'>" + fvs.number_of_case + "</span></li>"
 
     if fvs.hasOwnProperty('number_of_hospitalized')
-      content += "<li><span class='type'># of hospitalized:</span> <span class='value'>" + (fvs.number_of_hospitalized || '-') + "</span></li>"
+      content += "<li><span class='type'>" + locale.number_of_hospitalized + ":</span> <span class='value'>" + (fvs.number_of_hospitalized || '-') + "</span></li>"
 
-    content += "<li><span class='type'># of death:</span> <span class='value'>" + (fvs.number_of_death || '-') + "</span></li>"
+    content += "<li><span class='type'>" + locale.number_of_death + ":</span> <span class='value'>" + (fvs.number_of_death || '-') + "</span></li>"
     content += "</ul>"
 
-    return content;
+    return content
 
   _renderOSM = ->
     osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
