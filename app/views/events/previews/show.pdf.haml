@@ -1,12 +1,11 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
+    .flex-row-vertical-center
       %h3
         = "#{@event.event_type_name}: "
         %span.badge.badge-light= @event.uuid
 
-        - if value = @event.field_values.select{|fv| fv.field_code == 'progress'}.first.try(:value).presence
-          %span.badge{class: (@event.close? ? 'badge-success' : 'badge-warning') }= value
+      = @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
 
   %ul.list.flex1
     %li
@@ -24,7 +23,7 @@
         - else
           = '-'
 
-    - @event.milestone.fields.each do |field|
+    - @event.milestone.fields.except_locations.each do |field|
       = render 'field_value', field_values: @event.field_values, field: field
 
   - @event.event_milestones.each do |event_milestone|

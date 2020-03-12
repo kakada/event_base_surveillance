@@ -88,4 +88,10 @@ body#pdf {
   .hidden {
     display: none !important;
   }
+
+  .flex-row-vertical-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }

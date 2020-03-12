@@ -4,7 +4,7 @@ module Samples
   class Milestone
     def self.load
       load_cdc
-      load_gdaph
+      load_gdahp
       migrate_mapping_fields
     end
 
@@ -16,10 +16,10 @@ module Samples
           create_milestone('CDC', milestones)
         end
 
-        def load_gdaph
-          milestones = JSON.parse(File.read('lib/samples/db/gdaph_milestone.json'))
-          update_gdaph_root_milestone
-          create_milestone('GDAPH', milestones)
+        def load_gdahp
+          milestones = JSON.parse(File.read('lib/samples/db/gdahp_milestone.json'))
+          update_gdahp_root_milestone
+          create_milestone('GDAHP', milestones)
         end
 
         def create_milestone(program_name, milestones)
@@ -30,8 +30,8 @@ module Samples
           end
         end
 
-        def update_gdaph_root_milestone
-          mileston = ::Program.find_by(name: 'GDAPH').milestones.root
+        def update_gdahp_root_milestone
+          mileston = ::Program.find_by(name: 'GDAHP').milestones.root
           mileston.update_attributes(
             sections_attributes: [{
               name: 'Additional Fields',

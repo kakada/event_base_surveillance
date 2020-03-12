@@ -44,3 +44,4 @@ km:
     field_type: 'ប្រភេទ Field'
     flag_as: 'Flag as'
     flag: 'Flag'
+    display_as_section: 'Display as section?'
