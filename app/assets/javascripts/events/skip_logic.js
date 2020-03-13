@@ -19,6 +19,17 @@ EBS.EventsSkipLogic = function () {
     renderSkipLogicField();
     addEventToRelevantField();
     onFormSubmit();
+    handleSectionSkipLogic();
+  }
+
+  function handleSectionSkipLogic() {
+    $('.section').each(function() {
+      if ($(this).find('.form-group.hidden').length == $(this).find('.form-group').length) {
+        $(this).addClass('hidden');
+      } else {
+        $(this).removeClass('hidden');
+      }
+    });
   }
 
   function onFormSubmit() {
@@ -53,6 +64,7 @@ EBS.EventsSkipLogic = function () {
   function addEventToRelevantField() {
     $(document).on('change', '[data-relevant]', function (event) {
       togglerFields(event.target);
+      handleSectionSkipLogic();
     });
   }
 
