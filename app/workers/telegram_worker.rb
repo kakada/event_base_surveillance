@@ -4,13 +4,13 @@ class TelegramWorker
   include Sidekiq::Worker
 
   def perform(id, class_name)
+    return unless %(Event EventMilestone).include? class_name
+
     klass = class_name.constantize
-    condition = {}
-    condition[klass.primary_key] = id
-    obj = klass.find_by(condition)
+    event_or_em = klass.where("#{klass.primary_key} = ?", id).first
 
-    return if obj.nil? || obj.milestone.message.try(:telegram).nil?
+    return if event_or_em.nil? || event_or_em.milestone.message.try(:telegram_notification).nil?
 
-    obj.milestone.message.telegram.notify_groups(obj.telegram_message)
+    event_or_em.milestone.message.telegram_notification.notify_groups(event_or_em.telegram_message)
   end
 end

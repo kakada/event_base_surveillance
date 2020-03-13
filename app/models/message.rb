@@ -14,12 +14,12 @@
 
 class Message < ApplicationRecord
   belongs_to :milestone
-  has_one :telegram, class_name: 'Notifications::Telegram', dependent: :destroy
+  has_one :telegram_notification, class_name: 'Notifications::TelegramNotification', dependent: :destroy
   has_one :email_notification, dependent: :destroy
 
   # Nested attribute
   accepts_nested_attributes_for :email_notification, allow_destroy: true
-  accepts_nested_attributes_for :telegram, allow_destroy: true
+  accepts_nested_attributes_for :telegram_notification, allow_destroy: true
 
   validates :message, presence: true
 
