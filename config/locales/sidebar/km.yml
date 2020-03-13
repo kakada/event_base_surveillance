@@ -5,11 +5,12 @@ km:
     users: 'អ្នកប្រើប្រាស់'
     event_types: 'ប្រភេទព្រឹត្តិការណ៍'
     events: 'ព្រឹត្តិការណ៍'
-    about: 'អំពីយើង'
+    about: 'អំពីកម្មវិធី'
     logout: 'ចាកចេញ'
     milestones: 'Milestones'
     settings: 'ការកំណត់'
     webhooks: 'Webhooks'
     api_and_services: 'APIs & Services'
-    about_us: អំពីយើង
+    about_us: អំពីកម្មវិធី
     map: 'ផែនទី'
+    version: 'ជំនាន់'

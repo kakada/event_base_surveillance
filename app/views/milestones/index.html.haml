@@ -10,12 +10,9 @@
   = render partial: "shared/no_data", locals: { items: @milestones }
 
   - if @milestones.present?
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th= t('milestone.name')
-          %th= t('milestone.flag')
-          %th
+    .table-header.medium-width.flex-row
+      %strong.name-wrapper= t('milestone.name')
+      %strong= t('milestone.flag_as')
 
     = form_with(url: reorder_milestones_path, method: 'put', id: 'form') do |f|
       %ol.fields.table.table-hover.medium-width
