@@ -221,3 +221,11 @@ pre {
 .icon-share {
   width: 20px;
 }
+
+.tagify {
+  height: auto;
+
+  .form-control {
+    display: inline-flex;
+  }
+}
