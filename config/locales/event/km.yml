@@ -7,7 +7,7 @@ km:
     number_of_case: 'ចំនួនករណី'
     status: 'ស្ថានភាព'
     risk_level: 'កំរិតហានិភ័យ'
-    onset_date: 'Onset date'
+    onset_date: 'កាលបរិច្ឆេទព្រឹត្តិការណ៍'
     owner: 'ម្ចាស់'
     back: 'ថយក្រោយ'
     no_result_found: 'រកមិនឃើញលទ្ធផល!'
@@ -29,9 +29,6 @@ km:
     filter_by_date: 'ច្រោះតាមកាលបរិច្ឆេទ'
     search_link_event: 'ស្វែងរកព្រឹត្តិការណ៍តាមរយៈ uuid ឬប្រភេទព្រឹត្តិការណ៍'
     link_to_event: 'ភ្ជាប់ទៅព្រឹត្តិការណ៍'
-    displaying_events: 'បង្ហាញព្រឹត្តិការណ៍'
-    of: 'នៃ'
-    in_total: 'សរុប'
     show_more: 'បង្ហាញថែម'
     show_less: 'បង្ហាញតិច'
     preview_pdf: 'មើលជា PDF'
@@ -43,3 +40,4 @@ km:
     number_of_case: 'ចំនួនករណី'
     number_of_hospitalized: 'ចំនួនស្នាក់នៅមន្ទីពេទ្យ'
     number_of_death: 'ចំនួនស្លាប់'
+    pagination_title: "បង្ហាញព្រឹត្តិការណ៍ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"

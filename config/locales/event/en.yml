@@ -29,9 +29,6 @@ en:
     filter_by_date: 'Filter by date'
     search_link_event: 'Search event by uuid or event type'
     link_to_event: 'Link to event'
-    displaying_events: 'Displaying events'
-    of: 'of'
-    in_total: 'in total'
     show_more: 'Show more'
     show_less: 'Show less'
     preview_pdf: 'Preview PDF'
@@ -43,3 +40,4 @@ en:
     number_of_case: '# of case'
     number_of_hospitalized: '# of hospitalized'
     number_of_death: '# of death'
+    pagination_title: "Displaying events <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"
