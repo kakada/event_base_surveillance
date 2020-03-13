@@ -5,14 +5,16 @@
 # Table name: milestones
 #
 #  id            :bigint           not null, primary key
-#  program_id    :integer
-#  name          :string
 #  display_order :integer
+#  final         :boolean          default(FALSE)
 #  is_default    :boolean          default(FALSE)
+#  name          :string
+#  status        :integer
+#  verified      :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  final         :boolean          default(FALSE)
 #  creator_id    :integer
+#  program_id    :integer
 #
 
 class Milestone < ApplicationRecord

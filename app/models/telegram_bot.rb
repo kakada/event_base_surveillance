@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: telegram_bots
+#
+#  id         :bigint           not null, primary key
+#  actived    :boolean          default(FALSE)
+#  enabled    :boolean          default(FALSE)
+#  token      :string
+#  username   :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  program_id :integer
+#
+
+
 class TelegramBot < ApplicationRecord
   belongs_to :program
 

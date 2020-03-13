@@ -6,23 +6,29 @@
 #
 #  id                 :bigint           not null, primary key
 #  code               :string
-#  name               :string
+#  color_required     :boolean          default(FALSE)
+#  description        :text
+#  display_order      :integer
+#  entry_able         :boolean          default(TRUE)
 #  field_type         :string
-#  required           :boolean
+#  is_default         :boolean          default(FALSE)
 #  mapping_field      :string
 #  mapping_field_type :string
-#  display_order      :integer
-#  milestone_id       :integer
-#  is_default         :boolean          default(FALSE)
-#  entry_able         :boolean          default(TRUE)
+#  name               :string
+#  relevant           :string
+#  required           :boolean
+#  tracking           :boolean          default(FALSE)
+#  validations        :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  color_required     :boolean          default(FALSE)
-#  validations        :text
-#  description        :text
-#  tracking           :boolean          default(FALSE)
+#  mapping_field_id   :integer
+#  milestone_id       :integer
 #  section_id         :integer
-#  relevant           :string
+#
+# Indexes
+#
+#  index_fields_on_milestone_id_and_code  (milestone_id,code) UNIQUE
+#  index_fields_on_milestone_id_and_name  (milestone_id,name) UNIQUE
 #
 
 class Field < ApplicationRecord

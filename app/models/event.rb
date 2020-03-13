@@ -4,15 +4,16 @@
 #
 # Table name: events
 #
-#  uuid          :string(36)       not null, primary key
-#  event_type_id :integer
-#  creator_id    :integer
-#  program_id    :integer
+#  close         :boolean          default(FALSE)
+#  event_date    :datetime
+#  link_uuid     :string
 #  location_code :string
+#  uuid          :string(36)       not null, primary key
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  close         :boolean          default(FALSE)
-#  link_uuid     :string
+#  creator_id    :integer
+#  event_type_id :integer
+#  program_id    :integer
 #
 
 class Event < ApplicationRecord
