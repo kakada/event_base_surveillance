@@ -9,7 +9,13 @@ class TelegramBot < ApplicationRecord
   before_update :post_webhook_to_telegram
 
   def post_webhook_to_telegram
-    request = RestClient::Request.new(method: :post, url: "https://api.telegram.org/bot#{token}/setWebhook?url=#{ENV['TELEGRAM_CALLBACK_URL']}")
-    request.execute { |response| self.actived = response.code == 200 }
+    bot = Telegram::Bot::Client.new(token: token, username: username)
+
+    begin
+      request = bot.set_webhook(url: ENV['TELEGRAM_CALLBACK_URL'])
+      self.actived = request["ok"]
+    rescue
+      self.actived = false
+    end
   end
 end
