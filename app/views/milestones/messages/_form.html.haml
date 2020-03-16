@@ -22,7 +22,11 @@
               - @chat_groups.each_with_index do |chat_group, index|
                 .form-check
                   = check_box_tag "message[telegram_notification_attributes][notification_chat_groups_attributes][#{index}][chat_group_id]", chat_group.id, @message.telegram_notification.chat_group_ids.include?(chat_group.id), class: 'form-check-input', id: dom_id(chat_group)
-                  %label.form-check-label{for: dom_id(chat_group)}= chat_group.title
+                  %label.form-check-label{for: dom_id(chat_group)}
+                    - if chat_group.is_active?
+                      %span= chat_group.title
+                    - else
+                      %strike{'data-toggle'=>"tooltip", 'data-placement' => "top", title: chat_group.reason}= chat_group.title
 
       .actions
         = f.submit t('shared.save'), class: 'btn btn-primary'

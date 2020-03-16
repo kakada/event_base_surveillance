@@ -24,6 +24,6 @@ class Message < ApplicationRecord
   validates :message, presence: true
 
   def self.channels
-    %i(telegram email_notification)
+    %i(telegram_notification email_notification)
   end
 end
