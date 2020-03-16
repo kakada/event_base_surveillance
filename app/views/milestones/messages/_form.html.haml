@@ -3,24 +3,31 @@
     .container-fluid
       %h3= "#{@milestone.name}: #{t('milestone.notification')}"
 
-  .w-50.view-center
-    = simple_form_for @message, url: milestone_message_path(@milestone), html: { id: 'message-form' } do |f|
-      = f.input :message
-      = render 'stepper_template_fields'
+  = simple_form_for @message, url: milestone_message_path(@milestone), html: { id: 'message-form' } do |f|
+    .content-wrapper
+      .flex-row
+        .col-left
+          = f.input :message, label: t('milestone.message')
+          = render 'stepper_template_fields'
 
-      = f.simple_fields_for :telegram do |tf|
-        = tf.hidden_field :milestone_id, value: @milestone.id
+        .col-right
+          = f.simple_fields_for :email_notification do |ef|
+            = ef.input :emails, label: t('milestone.email_to'), input_html: { id: 'notification-emails' }
 
-        .form-group
-          %label= t('milestone.chat_group')
-          - @chat_groups.each_with_index do |chat_group, index|
-            .form-check
-              = check_box_tag "message[telegram_attributes][notification_chat_groups_attributes][#{index}][chat_group_id]", chat_group.id, @message.telegram.chat_group_ids.include?(chat_group.id), class: 'form-check-input', id: dom_id(chat_group)
-              %label.form-check-label{for: dom_id(chat_group)}= chat_group.title
+          = f.simple_fields_for :telegram_notification do |tf|
+            = tf.hidden_field :milestone_id, value: @milestone.id
 
-      = f.simple_fields_for :email_notification do |ef|
-        = ef.input :emails, input_html: { id: 'notification-emails' }
+            .form-group
+              %label= t('milestone.telegram_chat_group')
+              - @chat_groups.each_with_index do |chat_group, index|
+                .form-check
+                  = check_box_tag "message[telegram_notification_attributes][notification_chat_groups_attributes][#{index}][chat_group_id]", chat_group.id, @message.telegram_notification.chat_group_ids.include?(chat_group.id), class: 'form-check-input', id: dom_id(chat_group)
+                  %label.form-check-label{for: dom_id(chat_group)}
+                    - if chat_group.is_active?
+                      %span= chat_group.title
+                    - else
+                      %strike{'data-toggle'=>"tooltip", 'data-placement' => "top", title: chat_group.reason}= chat_group.title
 
       .actions
-        = f.button :submit, class: 'btn btn-primary'
+        = f.submit t('shared.save'), class: 'btn btn-primary'
         = link_to t('shared.cancel'), milestone_message_path, class: 'btn btn-secondary'

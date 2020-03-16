@@ -12,10 +12,10 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     chat = message['chat']
     return unless chat['type'] == 'group'
 
-    program = Program.where('telegram_token LIKE ?', "%#{member['id']}%").first
-    return if program.nil?
+    telegram_bot = TelegramBot.where('token LIKE ?', "#{member['id']}%").first
+    return if telegram_bot.nil?
 
-    group = program.chat_groups.find_or_initialize_by(chat_id: chat['id'], provider: 'Telegram')
+    group = telegram_bot.program.chat_groups.find_or_initialize_by(chat_id: chat['id'], provider: 'Telegram')
     group.update_attributes(title: chat['title'], is_active: message['new_chat_member'].present?)
   end
 end

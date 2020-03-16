@@ -12,7 +12,7 @@
     .pagy-wrapper
       .flex-row.flex1
         .flex1.flex-row-vertical-center
-          = "#{t('event.displaying_events')} <b>&nbsp;#{@pagy.from} - #{@pagy.to}&nbsp;</b> #{t('event.of')} <b>&nbsp;#{@pagy.count}&nbsp;</b> #{t('event.in_total')}".html_safe
+          %span= t('event.pagination_title', from: @pagy.from, to: @pagy.to, total: @pagy.count).html_safe
 
         - if @pagy.pages > 1
           != pagy_bootstrap_nav(@pagy)
@@ -23,17 +23,10 @@
           %th= t('event.id')
           %th= t('event.suspected_event_type')
           %th= t('event.location')
-
-          - codes = %w(number_of_case progress risk_level event_date)
-          - if current_user.system_admin?
-            %th= t('event.number_of_case')
-            %th= t('event.progress')
-            %th= t('event.risk_level')
-            %th= t('event.onset_date')
-          - else
-            - fields = current_program.milestones.root.fields.where(code: codes)
-            - codes.each do |code|
-              %th= fields.select{ |f| f.code == code }.first.try(:name) || code
+          %th= t('event.number_of_case')
+          %th= t('event.progress')
+          %th= t('event.risk_level')
+          %th= t('event.onset_date')
 
           - if current_user.system_admin?
             %th= t('event.owner')
@@ -41,7 +34,7 @@
           %th
 
       %tbody#body-content
-        = render 'events', codes: codes
+        = render 'events'
 
     - if @pagy.pages > 1
       .pagy-wrapper

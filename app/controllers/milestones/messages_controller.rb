@@ -11,8 +11,8 @@ module Milestones
 
     def new
       @message = @milestone.build_message
-      @message.build_telegram
-      @message.build_telegram.notification_chat_groups.build
+      @message.build_telegram_notification
+      @message.build_telegram_notification.notification_chat_groups.build
       @message.build_email_notification
     end
 
@@ -29,8 +29,8 @@ module Milestones
 
     def edit
       @message = @milestone.message
-      @message.build_telegram if @message.telegram.nil?
-      @message.build_telegram.notification_chat_groups.build if @message.telegram.notification_chat_groups.empty?
+      @message.build_telegram_notification if @message.telegram_notification.nil?
+      @message.build_telegram_notification.notification_chat_groups.build if @message.telegram_notification.notification_chat_groups.empty?
       @message.build_email_notification if @message.email_notification.nil?
     end
 
@@ -48,7 +48,7 @@ module Milestones
     private
       def message_params
         params.require(:message).permit(:message,
-          telegram_attributes:
+          telegram_notification_attributes:
           [
             :milestone_id,
             notification_chat_groups_attributes: [:id, :chat_group_id]

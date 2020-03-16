@@ -4,9 +4,9 @@
     - milestones.each do |milestone|
       %li{ class: ('inactive' unless milestone.root? || milestone == @milestone) }
         %span.number
-        .milestone-name= milestone.name
+          .milestone-name= milestone.name
         .template-fields-wrapper
           .template-fields
             - if milestone.root? || milestone == @milestone
               - milestone.template_fields.each do |field|
-                = link_to "{{#{field[:label]}}}", '#', class: 'btn btn-link template-field', data: {code: field[:code]}
+                = link_to "{{#{field[:label]}}}", '#', class: 'template-field text-primary mr-2', data: {code: field[:code]}

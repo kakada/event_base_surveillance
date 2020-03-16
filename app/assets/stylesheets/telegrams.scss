@@ -22,6 +22,21 @@
 #milestones-telegrams-update,
 #milestones-telegrams-create {
 
+  .content-wrapper {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .col-left {
+    width: 60%;
+    padding-right: 10px;
+  }
+
+  .col-right {
+    width: 40%;
+    padding-left: 10px;
+  }
+
   .template-fields-wrapper {
     min-height: 20px;
   }
@@ -42,9 +57,9 @@
   .circles-list {
     .milestone-name {
       position: absolute;
-      right: 115%;
+      right: 42px;
       text-align: right;
-      min-width: 44%;
+      min-width: 170px;
     }
 
     span.number {

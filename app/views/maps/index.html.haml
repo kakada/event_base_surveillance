@@ -11,7 +11,9 @@
       .form-group.mb-2
         = render 'events/filter_date'
 
-      %button.btn.btn-primary.mb-2{ type: 'submit' }= t('shared.apply')
+      %button.btn.btn-primary.mb-2{ type: 'submit' }
+        %i.fas.fa-search
+        = t('shared.apply')
 
   #map{'data-event-data' => @event_data.to_json}
 

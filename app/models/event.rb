@@ -4,15 +4,16 @@
 #
 # Table name: events
 #
-#  uuid          :string(36)       not null, primary key
-#  event_type_id :integer
-#  creator_id    :integer
-#  program_id    :integer
+#  close         :boolean          default(FALSE)
+#  event_date    :datetime
+#  link_uuid     :string
 #  location_code :string
+#  uuid          :string(36)       not null, primary key
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  close         :boolean          default(FALSE)
-#  link_uuid     :string
+#  creator_id    :integer
+#  event_type_id :integer
+#  program_id    :integer
 #
 
 class Event < ApplicationRecord
@@ -72,7 +73,7 @@ class Event < ApplicationRecord
     scope = all
     scope = scope.joins(:event_type).where('LOWER(event_types.name) LIKE ?', "%#{keywords[1].downcase}%") if keywords.present? && keywords[0] == 'suspected_event'
     scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', keywords[0], keywords[1]) if keywords.present? && keywords[0] != 'suspected_event'
-    scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value >= ?', 'event_date', params[:start_date]) if params[:start_date].present?
+    scope = scope.where('event_date >= ?', params[:start_date]) if params[:start_date].present?
     scope = scope.where(event_type_id: params[:event_type_id]) if params[:event_type_id].present?
     scope = scope.joins(:event_type).where('events.uuid LIKE ? OR LOWER(event_types.name) LIKE ?', "%#{params[:search]}%", "%#{params[:search].downcase}%") if params[:search].present?
     scope

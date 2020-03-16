@@ -5,14 +5,16 @@
 # Table name: milestones
 #
 #  id            :bigint           not null, primary key
-#  program_id    :integer
-#  name          :string
 #  display_order :integer
+#  final         :boolean          default(FALSE)
 #  is_default    :boolean          default(FALSE)
+#  name          :string
+#  status        :integer
+#  verified      :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  final         :boolean          default(FALSE)
 #  creator_id    :integer
+#  program_id    :integer
 #
 
 class Milestone < ApplicationRecord
@@ -20,7 +22,7 @@ class Milestone < ApplicationRecord
   belongs_to :program
   belongs_to :creator, class_name: 'User'
   has_one    :message
-  has_one    :telegram, class_name: 'Notifications::Telegram'
+  has_one    :telegram_notification, class_name: 'Notifications::TelegramNotification'
   has_many   :sections, dependent: :destroy
   has_many   :fields, dependent: :destroy
 

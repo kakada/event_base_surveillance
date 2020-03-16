@@ -12,9 +12,19 @@
           %span.value= @message.message
 
         %li
+          %span.type= "#{t('milestone.email')}:"
+          %span.value
+            - if emails = @message.email_notification.present? && @message.email_notification.emails.presence
+              - emails.each do |email|
+                %span= email
+
+            - else
+              = '_'
+
+        %li
           %span.type= t('milestone.telegram_chat_group') + ':'
           %span.value
-            - if chat_groups = @message.telegram.present? && @message.telegram.chat_groups.presence
+            - if chat_groups = @message.telegram_notification.present? && @message.telegram_notification.chat_groups.presence
               - chat_groups.each do |group|
                 - if group.is_active?
                   %span= group.title
@@ -24,15 +34,6 @@
             - else
               = '_'
 
-        %li
-          %span.type= "#{t('milestone.email')}:"
-          %span.value
-            - if emails = @message.email_notification.present? && @message.email_notification.emails.presence
-              - emails.each do |email|
-                %span= email
-
-            - else
-              = '_'
 
       .actions
         = link_to t('shared.edit'), edit_milestone_message_path(@milestone), class: 'btn btn-primary'

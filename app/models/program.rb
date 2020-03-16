@@ -5,13 +5,12 @@
 # Table name: programs
 #
 #  id                        :bigint           not null, primary key
+#  enable_email_notification :boolean          default(FALSE)
+#  language_code             :string
 #  name                      :string
-#  enable_telegram           :boolean          default(FALSE)
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  creator_id                :integer
-#  language_code             :string
-#  enable_email_notification :boolean          default(FALSE)
 #
 
 class Program < ApplicationRecord
