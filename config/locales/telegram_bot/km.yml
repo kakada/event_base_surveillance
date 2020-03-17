@@ -25,3 +25,13 @@ km:
     enter_the_bot_token: "បញ្ចូល the Telegram bot's access token"
     go_to_setting: "ចូលទៅកាន់ <b>Setting</b> ហើយចុចប៊ូតុង <b class='badge badge-info'>Edit</b>។"
     enable_telegram_notification: "ចុចបើក telegram notification ហើយបញ្ចូលព័ត៌មាន token និង username ហើយចុចប៊ូតុង <button class='btn btn-primary btn-sm'>save</button>"
+    telegram_chat_group: 'ក្រុមជជែកក្នុង Telegram'
+    to_add_group_chat: 'ដើម្បីបញ្ចូល Telegram bot ទៅក្នុងក្រុមជជែក Telegram, ដំបូងចូលទៅកាន់កម្មវិធី Telegram ហើយរើសក្រុមដែលអ្នកចង់បាន'
+    add_member: 'បន្ថែមសមាជិក'
+    to_add_member: 'ចុចលើប៊ូតុង ចុចបី ហើយជ្រើសរើស Add Memebers'
+    search_bot_name: 'ស្វែងរកឈ្មោះរបស់ Bot'
+    to_search_bot_name: 'ស្វែងរកឈ្មោះរបស់ Bot ហើយចុចលើលទ្ធផលដែលរកឃើញ និងចុចលើប៊ូតុង "ADD"'
+    added_to_the_group: 'បានបញ្ចូលទៅក្នុងក្រុម'
+    successfully_added_to_group: 'bot ត្រូវបានបញ្ចូលក្នុងក្រុមដោយជោគជ័យ'
+    added_group_to_system: 'បានបញ្ចូលទៅក្នុងប្រព័ន្ធ'
+    successfully_added_to_system: 'ឈ្មោះក្រុមត្រូវបានបញ្ចូលក្នុងប្រព័ន្ធដោយខ្លួនឯង'

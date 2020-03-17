@@ -7,7 +7,7 @@
     .content-wrapper
       .flex-row
         .col-left
-          = f.input :message, label: t('milestone.message')
+          = f.input :message, label: t('milestone.message'), input_html: { rows: 3 }
           = render 'stepper_template_fields'
 
         .col-right
@@ -18,7 +18,10 @@
             = tf.hidden_field :milestone_id, value: @milestone.id
 
             .form-group
-              %label= t('milestone.telegram_chat_group')
+              %label
+                = t('milestone.telegram_chat_group')
+                = link_to t('shared.need_help'), help_telegram_bot_path(anchor: 'group'), class: 'btn btn-link btn-sm pt-0'
+
               - @chat_groups.each_with_index do |chat_group, index|
                 .form-check
                   = check_box_tag "message[telegram_notification_attributes][notification_chat_groups_attributes][#{index}][chat_group_id]", chat_group.id, @message.telegram_notification.chat_group_ids.include?(chat_group.id), class: 'form-check-input', id: dom_id(chat_group)
@@ -27,6 +30,10 @@
                       %span= chat_group.title
                     - else
                       %strike{'data-toggle'=>"tooltip", 'data-placement' => "top", title: chat_group.reason}= chat_group.title
+
+              - unless @chat_groups.present?
+                %div
+                  %span.small.ml-4= t('milestone.learn_more_to_add_bot_to_group', url: help_telegram_bot_path(anchor: 'group')).html_safe
 
       .actions
         = f.submit t('shared.save'), class: 'btn btn-primary'

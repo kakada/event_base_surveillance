@@ -25,3 +25,13 @@ en:
     enter_the_bot_token: "Enter the Telegram bot's access token"
     go_to_setting: "Go to <b>Setting</b> menu and click the <b class='badge badge-info'>Edit</b> button."
     enable_telegram_notification: "Enable telegram notification and fill in token and username information then click button <button class='btn btn-primary btn-sm'>save</button>"
+    telegram_chat_group: 'Telegram Chat Group'
+    to_add_group_chat: 'To add telegram bot to Telegram chat group, first go to Telegram app and focus on your group'
+    add_member: 'Add memeber'
+    to_add_member: 'Click on vertical 3 dots button to list drop down menu, and choose Add Memebers'
+    search_bot_name: 'Search bot name'
+    to_search_bot_name: 'Search your bot name, click on the found item, and click on button "ADD"'
+    added_to_the_group: 'Added to the group'
+    successfully_added_to_group: 'The bot is successfully added to the group'
+    added_group_to_system: 'Added group to the system'
+    successfully_added_to_system: 'The group is automatically added to the system'
