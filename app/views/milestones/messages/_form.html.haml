@@ -20,7 +20,9 @@
             .form-group
               %label
                 = t('milestone.telegram_chat_group')
-                = link_to t('shared.need_help'), help_telegram_bot_path(anchor: 'group'), class: 'btn btn-link btn-sm pt-0'
+
+                - if @chat_groups.present?
+                  = link_to t('shared.need_help'), help_telegram_bot_path(anchor: 'group'), class: 'btn btn-link btn-sm pt-0'
 
               - @chat_groups.each_with_index do |chat_group, index|
                 .form-check

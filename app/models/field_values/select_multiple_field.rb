@@ -29,9 +29,10 @@ module FieldValues
     end
 
     def html_tag
-      opt_values = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }
+      label = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }.join(', ')
+      opt_values = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:value) || v }.join(',')
 
-      "<span data-relevant=#{field_code} value=#{value}>#{opt_values.join(', ')}</span>"
+      "<span data-relevant=#{field_code} value=#{opt_values}>#{label.presence || '-'}</span>"
     end
   end
 end

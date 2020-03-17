@@ -49,4 +49,10 @@ module EventsHelper
   def shared_event?(user, event)
     !user.system_admin? && event.shared? && event.program_id != user.program_id
   end
+
+  def no_value(field)
+    return '-' unless %w(Fields::SelectOneField Fields::SelectMultipleField).include? field.field_type
+
+    "<span data-relevant='#{field_code(field.code)}'>-</span>"
+  end
 end

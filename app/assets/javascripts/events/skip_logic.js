@@ -56,7 +56,11 @@ EBS.EventsSkipLogic = function () {
     }
 
     $("[data-code=".concat(fieldCode, "]")).each(function (_i, field) {
-      operator = $(field).data('operator');
+      if (!triggerValue) {
+        return toggleField(field, false);
+      }
+
+      var operator = $(field).data('operator');
       EBS.EventsSkipLogic[operatorMethods[operator]](field, triggerValue);
     });
   }
