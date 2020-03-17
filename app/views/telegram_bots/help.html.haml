@@ -44,3 +44,29 @@
       %div= t('telegram_bot.enable_telegram_notification').html_safe
       = image_tag 'telegram_bot/telegram_off.png', class: 'image'
       = image_tag 'telegram_bot/telegram_on.png', class: 'image'
+
+    #group
+      %div
+        %h2= t('telegram_bot.telegram_chat_group')
+        %div= t('telegram_bot.to_add_group_chat')
+        = image_tag 'telegram_bot/group_step1.png', class: 'image'
+
+      %div
+        %h5= t('telegram_bot.add_member')
+        %div= t('telegram_bot.to_add_member')
+        = image_tag 'telegram_bot/group_step2.png', class: 'image'
+
+      %div
+        %h5= t('telegram_bot.search_bot_name')
+        %div= t('telegram_bot.to_search_bot_name')
+        = image_tag 'telegram_bot/group_step3.png', class: 'image'
+
+      %div
+        %h5= t('telegram_bot.added_to_the_group')
+        %div= t('telegram_bot.successfully_added_to_group')
+        = image_tag 'telegram_bot/group_step4.png', class: 'image'
+
+      %div
+        %h5= t('telegram_bot.added_group_to_system')
+        %div= t('telegram_bot.successfully_added_to_system')
+        = image_tag 'telegram_bot/group_step5.png', class: 'image'

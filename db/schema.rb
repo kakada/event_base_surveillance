@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_095140) do
+ActiveRecord::Schema.define(version: 2020_03_17_042146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,8 +152,6 @@ ActiveRecord::Schema.define(version: 2020_03_10_095140) do
     t.integer "section_id"
     t.string "relevant"
     t.integer "mapping_field_id"
-    t.index ["milestone_id", "code"], name: "index_fields_on_milestone_id_and_code", unique: true
-    t.index ["milestone_id", "name"], name: "index_fields_on_milestone_id_and_name", unique: true
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|

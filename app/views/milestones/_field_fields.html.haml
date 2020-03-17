@@ -15,6 +15,10 @@
             = f.hidden_field :field_type, class: 'field-type', 'data-field' => f.object.to_json
             = f.hidden_field :display_order, class: 'display-order'
             = f.text_field :name, placeholder: t('milestone.field_name'), class: 'form-control field-name'
+
+            - if error_msg = f.object.errors[:name].presence
+              .error-message.text-danger.small= error_msg.join('; ')
+
             = f.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
 
           %button.btn.btn-outline-primary.btn-add-field{type: 'button'}= t('milestone.add_field')

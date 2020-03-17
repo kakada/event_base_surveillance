@@ -41,18 +41,15 @@ EBS.EventsSkipLogic = ( function() {
     var triggerValue;
     var fieldValue = $(field).val() || $(field).attr('value');
 
-
-    if (!fieldValue) {
-      return
+    if (!!fieldValue) {
+      triggerValue = (typeof fieldValue == 'string') ? fieldValue.toLowerCase() : fieldValue.join(',').toLowerCase();
     }
 
-    if (typeof(fieldValue) == 'string') {
-      triggerValue = fieldValue.toLowerCase();
-    }  else {
-      triggerValue = fieldValue.join(',').toLowerCase();
-    }
+    $('[data-code=' + fieldCode + ']').each( function(_i, field) {
+      if (!triggerValue) {
+        return toggleField(field, false);
+      }
 
-    $('[data-code=' + fieldCode+ ']').each( function(_i, field) {
       var operator = $(field).data('operator');
       EBS.EventsSkipLogic[operatorMethods[operator]](field, triggerValue);
     });
@@ -62,8 +59,9 @@ EBS.EventsSkipLogic = ( function() {
     var values = $(field).data('value').split(',');
     var isMatch = false;
     var triggerValues = triggerValue.split(',');
+
     for(var i = 0; i < triggerValues.length; i++) {
-      if (values.includes(triggerValues[i])) {
+      if (values.indexOf(triggerValues[i]) > -1) {
         isMatch = true;
         break;
       }
@@ -83,7 +81,7 @@ EBS.EventsSkipLogic = ( function() {
     var isMatch = true;
     var triggerValues = triggerValue.split(',');
     for(var i = 0; i < triggerValues.length; i++) {
-      if (values.includes(triggerValues[i])) {
+      if (values.indexOf(triggerValues[i]) > -1) {
         isMatch = false;
         break;
       }
@@ -97,7 +95,7 @@ EBS.EventsSkipLogic = ( function() {
     var triggerValues = triggerValue.split(',');
     var isMatch = true;
     for(var i = 0; i < values.length; i++) {
-      if (!triggerValues.includes(values[i])) {
+      if (!(triggerValues.indexOf(values[i]) > -1)) {
         isMatch = false;
         break;
       }

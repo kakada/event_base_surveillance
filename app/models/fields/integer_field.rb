@@ -25,11 +25,6 @@
 #  milestone_id       :integer
 #  section_id         :integer
 #
-# Indexes
-#
-#  index_fields_on_milestone_id_and_code  (milestone_id,code) UNIQUE
-#  index_fields_on_milestone_id_and_name  (milestone_id,name) UNIQUE
-#
 
 module Fields
   class IntegerField < ::Field

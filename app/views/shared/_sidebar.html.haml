@@ -78,7 +78,7 @@
         = t('sidebar.logout')
 
   .copyright
-    - version = "#{t('sidebar.version')}: #{ENV.fetch('VERSION') { 'development' }}"
+    - version = "#{t('sidebar.version')}: #{ENV.fetch('APP_VERSION') { 'development' }}"
 
     .copyright-large
       .d-block.pl-2= version

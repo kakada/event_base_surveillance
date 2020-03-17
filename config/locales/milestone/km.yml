@@ -46,3 +46,4 @@ km:
     flag: 'Flag'
     display_as_section: 'Display as section?'
     email_to: 'ផ្ញើរទៅកាន់អ៊ីមែល'
+    learn_more_to_add_bot_to_group: "មិនទាន់មានក្រុមនៅឡើយទេ, <a href=%{url} class='text-primary'>ស្វែង​យល់​បន្ថែម</a> អំពីរបៀបប្រើប្រាស់"
