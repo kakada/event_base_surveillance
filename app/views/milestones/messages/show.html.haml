@@ -4,43 +4,17 @@
       %h3= "#{@milestone.name}: #{t('milestone.notification')}"
       = link_to t('shared.done'), milestones_path, class: 'btn btn-light'
 
-  - if @message.present?
-    .w-75.view-center
-      %ul.list.flex1.pt-0.px-1
-        %li
-          %span.type= t('milestone.message') + ': '
-          %span.value= @message.message
-
-        %li
-          %span.type= "#{t('milestone.email')}:"
-          %span.value
-            - if emails = @message.email_notification.present? && @message.email_notification.emails.presence
-              - emails.each do |email|
-                %span= email
-
-            - else
-              = '_'
-
-        %li
-          %span.type= t('milestone.telegram_chat_group') + ':'
-          %span.value
-            - if chat_groups = @message.telegram_notification.present? && @message.telegram_notification.chat_groups.presence
-              - chat_groups.each do |group|
-                - if group.is_active?
-                  %span= group.title
-                - else
-                  %strike{'data-toggle'=>"tooltip", 'data-placement' => "top", title: group.reason}= group.title
-
-            - else
-              = '_'
-
-
-      .actions
-        = link_to t('shared.edit'), edit_milestone_message_path(@milestone), class: 'btn btn-primary'
+  - if !current_program.enable_email_notification? && !current_program.enable_telegram?
+    .w-50.view-center.flex1.flex-row-vertical-center
+      .flex1.text-center= t('milestone.go_to_setting', url: setting_path).html_safe
 
   - else
-    .w-50.view-center.flex1.flex-row-vertical-center
-      .flex1.text-center
-        %div= t('milestone.setup_message_instruction')
-        .actions
-          = link_to t('milestone.setup'), new_milestone_message_path(@milestone), class: 'btn btn-primary'
+    - if @message.present?
+      = render 'message'
+
+    - else
+      .w-50.view-center.flex1.flex-row-vertical-center
+        .flex1.text-center
+          %div= t('milestone.setup_message_instruction')
+          .actions
+            = link_to t('milestone.setup'), new_milestone_message_path(@milestone), class: 'btn btn-primary'

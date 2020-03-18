@@ -1,0 +1,31 @@
+.w-75.view-center
+  %ul.list.flex1.pt-0.px-1
+    %li
+      %span.type= "#{t('milestone.message')}:"
+      %span.value= @message.message
+
+    %li
+      %span.type= "#{t('milestone.email')}:"
+      %span.value
+        - if emails = @message.email_notification.present? && @message.email_notification.emails.presence
+          - emails.each do |email|
+            %span= email
+
+        - else
+          = '_'
+
+    %li
+      %span.type= "#{t('milestone.telegram_chat_group')}:"
+      %span.value
+        - if chat_groups = @message.telegram_notification.present? && @message.telegram_notification.chat_groups.presence
+          - chat_groups.each do |group|
+            - if group.is_active?
+              %span= group.title
+            - else
+              %strike{'data-toggle'=>"tooltip", 'data-placement' => "top", title: group.reason}= group.title
+
+        - else
+          = '_'
+
+  .actions
+    = link_to t('shared.edit'), edit_milestone_message_path(@milestone), class: 'btn btn-primary'
