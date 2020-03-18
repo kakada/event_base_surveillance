@@ -1,9 +1,9 @@
 #content
   .flex-row-vertical-center
-    .flex1
+    .flex1.mb-2
       %span= t('map.title', total_count: @event_data.inject(0){|sum,e| sum + e[:total_count] }, location_count: @event_data.size).html_safe
 
-    %form#event-form.form-inline{ method: :get }
+    %form#event-form.form-inline.justify-content-end{ method: :get }
       .form-group.mb-2
         %label.mr-1{ for: :event_event_type }= "#{t('map.event')}:"
         = select_tag 'event_type_id', options_for_select(select_options(current_user, @event_types), params[:event_type_id]), include_blank: t('map.all'), class: 'form-control'
