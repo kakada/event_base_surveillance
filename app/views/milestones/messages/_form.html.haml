@@ -18,7 +18,7 @@
                 = t('milestone.email_to')
 
               - if !current_program.enable_email_notification?
-                .small.pb-1= t('milestone.to_enable_email', url: setting_path).html_safe
+                .small.ml-4= t('milestone.to_enable_email', url: setting_path).html_safe
               - else
                 = ef.input :emails, label: false, input_html: { id: 'notification-emails' }
 
@@ -29,10 +29,10 @@
               %label
                 = t('milestone.telegram_chat_group')
                 - if current_program.enable_telegram? && @chat_groups.present?
-                  = link_to t('shared.need_help'), help_telegram_bot_path(anchor: 'group'), class: 'small text-primary'
+                  = link_to t('shared.need_help'), help_telegram_bot_path(anchor: 'group'), class: 'small text-primary', 'data-turbolinks': false
 
               - if !current_program.enable_telegram?
-                .small.pb-1= t('milestone.to_enable_telegram', url: setting_path).html_safe
+                .small.ml-4= t('milestone.to_enable_telegram', url: setting_path).html_safe
 
               - else
                 - @chat_groups.each_with_index do |chat_group, index|
