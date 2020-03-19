@@ -26,21 +26,20 @@
               = milestone.status
 
             .text-right
-              .btn-group
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                %i.fas.fa-ellipsis-v
 
-                .dropdown-menu.dropdown-menu-right
-                  = link_to milestone_message_path(milestone), class: "btn dropdown-item" do
-                    %i.fas.fa-bell.drop-menu-icon
-                    %span= t('milestone.notification')
+              .dropdown-menu.dropdown-menu-right
+                = link_to milestone_message_path(milestone), class: "btn dropdown-item" do
+                  %i.fas.fa-bell.drop-menu-icon
+                  %span= t('milestone.notification')
 
-                  - if policy(Milestone).update?
-                    = link_to edit_milestone_path(milestone), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
+                - if policy(Milestone).update?
+                  = link_to edit_milestone_path(milestone), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
 
-                  - if policy(milestone).delete?
-                    = link_to milestone_path(milestone), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('milestone.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                - if policy(milestone).delete?
+                  = link_to milestone_path(milestone), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('milestone.are_you_sure_to_delete')} do
+                    %i.fas.fa-trash-alt.drop-menu-icon
+                    %span= t('shared.delete')
