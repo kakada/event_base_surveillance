@@ -1,28 +1,31 @@
 .w-50.view-center
   = simple_form_for @template do |f|
     = f.input :name, label: t('template.name')
-    .form-group
-      %label= t('template.template_fields')
 
-    .form-group
-      %label= t('template.predefined_fields')
-      - ::Template.predefined_fields.each_with_index do |field, index|
-        .form-check
-          - id_dom = "template_properties_#{index}"
-          = check_box_tag "template[properties][]", field[:code], @template.properties.include?(field[:code]), class: 'form-check-input', id: id_dom
-          %label.form-check-label{for: id_dom}= field[:name]
+    %fieldset.section
+      %legend= t('template.template_fields')
 
-
-    = hidden_field_tag "template[field_ids][]", nil
-    - current_program.milestones.each_with_index do |milestone|
       .form-group
-        %label= "#{t('template.milestone')}: #{milestone.name}"
+        %label= t('template.predefined_fields')
+        .clearfix
+          - ::Template.predefined_fields.each_with_index do |field, index|
+            .form-check.w-50.float-left
+              - id_dom = "template_properties_#{index}"
+              = check_box_tag "template[properties][]", field[:code], @template.properties.include?(field[:code]), class: 'form-check-input', id: id_dom
+              %label.form-check-label{for: id_dom}= field[:name]
 
-        - milestone.fields.each_with_index do |field, index|
-          .form-check
-            = check_box_tag "template[field_ids][]", field.id, @template.field_ids.include?(field.id), class: 'form-check-input', id: dom_id(field)
-            %label.form-check-label{for: dom_id(field)}= field.name
 
-    .actions
-      = f.submit t('shared.save'), class: 'btn btn-primary'
-      = link_to t('shared.cancel'), templates_path, class: 'btn btn-secondary'
+      = hidden_field_tag "template[field_ids][]", nil
+      - current_program.milestones.each_with_index do |milestone|
+        .form-group
+          %label= "#{milestone.name}"
+
+          .clearfix
+            - milestone.fields.each_with_index do |field, index|
+              .form-check.w-50.float-left
+                = check_box_tag "template[field_ids][]", field.id, @template.field_ids.include?(field.id), class: 'form-check-input', id: dom_id(field)
+                %label.form-check-label{for: dom_id(field)}= field.name
+
+      .actions
+        = f.submit t('shared.save'), class: 'btn btn-primary'
+        = link_to t('shared.cancel'), templates_path, class: 'btn btn-secondary'
