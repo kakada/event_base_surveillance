@@ -1,0 +1,12 @@
+en:
+  template:
+    line_list_title: 'Templates'
+    status: 'Status'
+    default: 'Default'
+    are_you_sure_to_delete: 'Are you sure to delete this template?'
+    new_template: 'New Template'
+    edit_template: 'Edit Template'
+    template_fields: 'Template fields'
+    milestone: 'Milestone fields'
+    predefined_fields: 'Predefined Fields'
+    number_of_fields: '# of Field'

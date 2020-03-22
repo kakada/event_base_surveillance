@@ -68,6 +68,12 @@
           %i.fas.fa-wrench
           = t('sidebar.settings')
 
+    - if policy(::Template).index?
+      %li{class: get_css_active_class('templates') }
+        %a{:href => templates_path}
+          %i.fas.fa-table
+          = t('sidebar.line_list')
+
     %li
       = link_to about_us_path do
         %i.fas.fa-info

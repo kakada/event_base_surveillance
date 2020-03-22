@@ -1,0 +1,39 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= t('template.line_list_title')
+      - if true || policy(Template).create?
+        = link_to new_template_path, class: 'btn btn-primary' do
+          %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @templates }
+
+  - if @templates.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th= t('template.name')
+          %th= t('template.number_of_fields')
+          %th
+
+      %tbody
+        - @templates.each do |template|
+          %tr
+            %td
+              = template.name
+            %td
+              %span.badge.badge-pill.badge-info.mr-1= template.fields.size
+            %td.text-right
+              - if policy(template).update?
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
+
+                .dropdown-menu.dropdown-menu-right
+                  = link_to edit_template_path(template), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
+
+                  - if policy(template).destroy?
+                    = link_to template_path(template), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('template.are_you_sure_to_delete')} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span= t('shared.delete')

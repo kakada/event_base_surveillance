@@ -10,6 +10,7 @@ RSpec.describe Program, type: :model do
   it { is_expected.to have_many(:event_types) }
   it { is_expected.to have_many(:milestones) }
   it { is_expected.to have_many(:webhooks) }
+  it { is_expected.to have_many(:templates) }
 
   describe '#after create' do
     let!(:program) { create(:program) }

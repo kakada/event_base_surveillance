@@ -41,3 +41,5 @@ km:
     number_of_hospitalized: 'ចំនួនស្នាក់នៅមន្ទីពេទ្យ'
     number_of_death: 'ចំនួនស្លាប់'
     pagination_title: "បង្ហាញព្រឹត្តិការណ៍ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
+    download_event: 'ទាញយកព្រឹត្តិការណ៍'
+    please_select_template: 'សូមជ្រើសរើស Template'

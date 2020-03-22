@@ -41,3 +41,5 @@ en:
     number_of_hospitalized: '# of hospitalized'
     number_of_death: '# of death'
     pagination_title: "Displaying events <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"
+    download_event: 'Download Event'
+    please_select_template: 'Please select template'

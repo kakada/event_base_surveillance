@@ -4,6 +4,7 @@ EBS.EventsIndex = do ->
 
     initFilterKeywordPopover()
     onClickKeywordItem()
+    onClickBtnDownload()
 
   initFilterKeywordPopover = ->
     $('[data-toggle="popover"]').popover()
@@ -17,5 +18,15 @@ EBS.EventsIndex = do ->
       value = $(this).html() + ' : '
       EBS.Util.insertToTextbox('keyword', value)
       $('#keyword').focus()
+
+  onClickBtnDownload = ->
+    $(document).off 'click', '.btn-download'
+    $(document).on 'click', '.btn-download', (e)->
+      e.preventDefault()
+      if !$("input[name='template_id']:checked").val()
+        return alert('Please select template')
+
+      url = $(this).attr('href') + '?start_date=' + params.start_date + '&keyword=' + params.keyword + '&template_id=' + $("input[name='template_id']:checked").val()
+      window.open(url, '_blank')
 
   { init: init }
