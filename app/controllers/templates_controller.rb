@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TemplatesController < ApplicationController
   def index
     @templates = current_program.templates.includes(:fields)

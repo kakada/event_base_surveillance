@@ -23,7 +23,7 @@ class EventService
 
   private
     def build_csv_record(event)
-      arr = default_columns.map{ |f| f[:code] }.map { |col| event.send(col) }
+      arr = default_columns.map { |f| f[:code] }.map { |col| event.send(col) }
       objs = [event].concat(event.event_milestones.includes(:milestone, :field_values))
 
       objs.each do |em|
