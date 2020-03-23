@@ -23,10 +23,15 @@ EBS.EventsIndex = do ->
     $(document).off 'click', '.btn-download'
     $(document).on 'click', '.btn-download', (e)->
       e.preventDefault()
-      if !$("input[name='template_id']:checked").val()
-        return alert('Please select template')
 
-      url = $(this).attr('href') + '?start_date=' + params.start_date + '&keyword=' + params.keyword + '&template_id=' + $("input[name='template_id']:checked").val()
-      window.open(url, '_blank')
+      if !$("input[name='template_id']:checked").val()
+        return alert($('.hint').data('hint'))
+
+      $('#template-model').modal('hide')
+      downloadEvent(this)
+
+  downloadEvent = (dom)->
+    url = $(dom).attr('href') + '?start_date=' + params.start_date + '&keyword=' + params.keyword + '&template_id=' + $("input[name='template_id']:checked").val()
+    window.open(url, '_blank')
 
   { init: init }

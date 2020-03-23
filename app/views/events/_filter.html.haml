@@ -31,7 +31,7 @@
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
               %span{"aria-hidden" => "true"} ×
           .modal-body
-            %label= t('event.please_select_template')
+            %label.hint{'data-hint' => t('event.please_select_template')}= t('event.please_select_template')
             - current_program.templates.each do |template|
               - id = "template_id_#{template.id}"
               .form-check
@@ -40,7 +40,7 @@
 
           .modal-footer
             %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
-            = link_to download_events_path, target: :_blank, class: 'btn btn-primary btn-download', "data-dismiss" => "modal" do
+            = link_to download_events_path, target: :_blank, class: 'btn btn-primary btn-download' do
               %i.fas.fa-download
               = t('event.download_csv')
 
