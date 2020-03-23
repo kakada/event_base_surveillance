@@ -3,10 +3,6 @@ class Template < ApplicationRecord
   has_many :template_fields
   has_many :fields, through: :template_fields
 
-  accepts_nested_attributes_for :template_fields, allow_destroy: true
-
-  scope :defaults, -> { where(default: true) }
-
   serialize :properties, Array
 
   def self.predefined_fields

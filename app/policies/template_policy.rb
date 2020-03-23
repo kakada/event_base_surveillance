@@ -2,7 +2,7 @@
 
 class TemplatePolicy < ApplicationPolicy
   def index?
-    true
+    user.program_admin?
   end
 
   def show?

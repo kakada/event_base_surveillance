@@ -1,2 +1,9 @@
 km:
   template:
+    line_list_title: 'Templates'
+    are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
+    new_template: 'បង្កើត Template ថ្មី'
+    edit_template: 'កែតម្រូវ Template'
+    template_fields: 'Template fields'
+    predefined_fields: 'Predefined Fields'
+    number_of_fields: '# of Field'
