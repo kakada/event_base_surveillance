@@ -20,6 +20,8 @@ class Template < ApplicationRecord
   has_many :template_fields
   has_many :fields, through: :template_fields
 
+  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: [:program_id] }
+
   serialize :properties, Array
 
   def self.predefined_fields

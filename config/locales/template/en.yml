@@ -7,3 +7,4 @@ en:
     template_fields: 'Template fields'
     predefined_fields: 'Predefined Fields'
     number_of_fields: '# of Field'
+    name: 'Name'
