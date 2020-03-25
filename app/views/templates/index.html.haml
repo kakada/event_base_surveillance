@@ -22,7 +22,7 @@
             %td
               = template.name
             %td
-              %span.badge.badge-pill.badge-info.mr-1= template.fields.size
+              %span.badge.badge-pill.badge-info.mr-1= template.fields.size + template.properties.size
             %td.text-right
               - if policy(template).update?
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
