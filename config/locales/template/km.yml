@@ -1,0 +1,10 @@
+km:
+  template:
+    line_list_title: 'គំរូទាញយក'
+    are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
+    new_template: 'បង្កើតគំរូទាញយកថ្មី'
+    edit_template: 'កែតម្រូវគំរូទាញយក'
+    template_fields: 'Fields នៃ គំរូទាញយក'
+    predefined_fields: 'Fields ដែលកំណត់ទុកមុន'
+    number_of_fields: 'ចំនួននៃ Fields'
+    name: 'ឈ្មោះ'

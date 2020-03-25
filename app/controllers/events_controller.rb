@@ -47,7 +47,7 @@ class EventsController < ApplicationController
       flash[:alert] = t('event.file_size_is_too_big')
       redirect_to events_url
     else
-      send_data(EventService.new(events, current_program).export_csv, filename: 'events.csv')
+      send_data(EventService.new(events, current_program, params[:template_id]).export_csv, filename: 'events.csv')
     end
   end
 

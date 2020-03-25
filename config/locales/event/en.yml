@@ -41,3 +41,7 @@ en:
     number_of_hospitalized: '# of hospitalized'
     number_of_death: '# of death'
     pagination_title: "Displaying events <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"
+    download_event: 'Download Event'
+    please_select_template: 'Please select template'
+    require_template: 'It is required to have template before downloading events'
+    click_here_to_create_template: "Please click <a class='text-primary' href=%{url}>here</a> to create template"

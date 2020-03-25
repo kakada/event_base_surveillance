@@ -68,6 +68,8 @@ Rails.application.routes.draw do
 
   resources :maps
 
+  resources :templates
+
   # API
   namespace :api do
     namespace :v1 do

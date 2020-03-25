@@ -3,9 +3,12 @@
 require 'csv'
 
 class EventService
-  def initialize(events, program)
+  attr_reader :template
+
+  def initialize(events, program, template_id)
     @program = program
     @events = events
+    @template = Template.find(template_id)
   end
 
   def export_csv
@@ -20,12 +23,15 @@ class EventService
 
   private
     def build_csv_record(event)
-      arr = default_columns.map { |col| event.send(col) }
+      arr = default_columns.map { |f| f[:code] }.map { |col| event.send(col) }
       objs = [event].concat(event.event_milestones.includes(:milestone, :field_values))
+
       objs.each do |em|
+        next if em.milestone.nil?
+
         em.milestone.fields.each do |field|
           fv = em.field_values.find_by field_code: field.code
-          arr.push fv.try(:es_value)
+          arr.push fv.try(:es_value) if template.field_ids.include? field.id
         end
       end
 
@@ -33,15 +39,16 @@ class EventService
     end
 
     def default_columns
-      @default_columns ||= %w[uuid event_type_name program_name location_name created_at updated_at close]
+      @default_columns ||= Template.predefined_fields.select { |f| template.properties.include? f[:code] }
     end
 
     def build_columns
-      columns = default_columns.dup
+      columns = default_columns.map { |f| f[:name] }
 
       @program.milestones.each do |milestone|
         milestone.fields.each do |field|
-          columns.push("#{milestone.format_name}.#{field.code}")
+          column_name = @program.milestones.size > 1 ? "#{milestone.name}(#{field.name})" : field.name
+          columns.push(column_name) if template.field_ids.include? field.id
         end
       end
 

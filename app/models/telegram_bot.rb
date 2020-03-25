@@ -28,7 +28,7 @@ class TelegramBot < ApplicationRecord
 
     begin
       request = bot.set_webhook(url: ENV['TELEGRAM_CALLBACK_URL'])
-      self.actived = request["ok"]
+      self.actived = request['ok']
     rescue
       self.actived = false
     end
