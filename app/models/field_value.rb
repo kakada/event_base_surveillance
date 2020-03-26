@@ -75,12 +75,23 @@ class FieldValue < ApplicationRecord
     def set_location_value
       return if Field.roots.pluck(:code).include? field_code
 
-      province = Pumi::Province.find_by_id(properties[:province_id]) if properties[:province_id].present?
-      district = Pumi::District.find_by_id(properties[:district_id]) if province && properties[:district_id].present?
-      commune  = Pumi::Commune.find_by_id(properties[:commune_id]) if district && properties[:commune_id].present?
-      village  = Pumi::Village.find_by_id(properties[:village_id]) if commune && properties[:village_id].present?
+      clear_locations
+      codes = %w[province_id district_id commune_id village_id].map { |co| properties[co] }
+      code = codes[codes.find_index('').to_i - 1]
 
-      self.value = [province, district, commune, village].reverse.reject(&:blank?).map(&:name_km).join(',')
+      return self.value = '' if code.blank?
+
+      self.value = "Pumi::#{Location.location_kind(code).titlecase}".constantize.find_by_id(code).try(:address_km)
+    end
+
+    def clear_locations
+      clear_next = false
+      %w[province_id district_id commune_id village_id].map do |code|
+        next properties[code] = '' if clear_next == true
+        next if properties[code].present?
+
+        clear_next = true
+      end
     end
 
     def handle_mapping_field
