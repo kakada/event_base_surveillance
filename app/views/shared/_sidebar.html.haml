@@ -2,7 +2,7 @@
   #sidebarCollapse.sidebar-header
     %h3
       = ENV['APP_NAME']
-      %span{style: 'font-size: 12px'}= current_user.email
+      %span{style: 'font-size: 12px'}= "#{current_user.full_name}@#{current_program.try(:name)}"
 
     %strong.mr-1= ENV['APP_SHORTCUT_NAME']
     %i.fas.fa-align-left

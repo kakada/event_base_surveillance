@@ -48,4 +48,12 @@ RSpec.describe User, type: :model do
       it { expect(user.location.name_en).to eq('Battambang') }
     end
   end
+
+  describe 'before_create #set_full_name' do
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user, full_name: 'yiyi') }
+
+    it { expect(user1.full_name).to eq(user1.email.split('@').first) }
+    it { expect(user2.full_name).to eq('yiyi') }
+  end
 end

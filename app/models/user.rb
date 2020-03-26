@@ -54,6 +54,8 @@ class User < ApplicationRecord
   validates :program_id, presence: true, unless: -> { role == 'system_admin' }
   validates :province_code, presence: true, if: -> { %(staff guest).include?(role.to_s) }
 
+  before_create :set_full_name
+
   def password_match?
     errors[:password] << I18n.t('errors.messages.blank') if password.blank?
     errors[:password_confirmation] << I18n.t('errors.messages.blank') if password_confirmation.blank?
@@ -96,6 +98,10 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.where(email: data['email']).first
     user
+  end
+
+  def set_full_name
+    self.full_name ||= email.split('@').first
   end
 
   protected
