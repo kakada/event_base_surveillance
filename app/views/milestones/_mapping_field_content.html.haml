@@ -1,9 +1,9 @@
 .mapping-field-wrapper
   %label= t('milestone.mapping_to_root')
   .wrapper
-    - fields = current_program.milestones.root.fields.default
-    = f.select :mapping_field_id, options_for_select( fields.map{ |c| [c.name, c.id, {'data-field_type' => c.field_type, 'data-obj' => c.to_json(methods: :field_type)}]}, selected: f.object.mapping_field_id), {}, class: 'form-control mapping-field'
+    - if fields = current_program.milestones.root.fields.default.presence
+      = f.select :mapping_field_id, options_for_select( fields.map{ |c| [c.name, c.id, {'data-field_type' => c.field_type, 'data-obj' => c.to_json(methods: :field_type)}]}, selected: f.object.mapping_field_id), {}, class: 'form-control mapping-field'
 
-    .mapping-field-type-wrapper
-      .form-control.mapping-field-type.disabled
-        = f.object.parent.try(:field_type) || fields.first.field_type
+      .mapping-field-type-wrapper
+        .form-control.mapping-field-type.disabled
+          = f.object.parent.try(:field_type) || fields.first.field_type
