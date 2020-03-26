@@ -1,5 +1,6 @@
 en:
   devise:
+    no_account: "You don't have account in this system!"
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
@@ -70,4 +71,3 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
-  no_account: "You don't have account in this system!"
