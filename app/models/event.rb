@@ -88,7 +88,7 @@ class Event < ApplicationRecord
 
   # Instant Methods
   def conducted_at
-    @conducted_at ||= field_values.find_by(field_code: 'report_date').value
+    @conducted_at ||= field_values.find_by(field_code: 'report_date').try(:value)
   end
 
   def location_name(address = 'address_km')

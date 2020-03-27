@@ -22,6 +22,10 @@
 
 module FieldValues
   class SelectOneField < ::FieldValue
+    def es_value
+      field.field_options.find_by(value: value).try(:name) || value
+    end
+
     def html_tag
       option = field.field_options.find_by(value: value)
       label = option.try(:name) || value

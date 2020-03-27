@@ -17,14 +17,15 @@
 
       = hidden_field_tag "template[field_ids][]", nil
       - current_program.milestones.each_with_index do |milestone|
-        .form-group
-          %label= "#{milestone.name}"
+        - if fields = milestone.fields.entry_able.presence
+          .form-group
+            %label= "#{milestone.name}"
 
-          .clearfix
-            - milestone.fields.each_with_index do |field, index|
-              .form-check.w-50.float-left.mb-1
-                = check_box_tag "template[field_ids][]", field.id, @template.field_ids.include?(field.id), class: 'form-check-input', id: dom_id(field)
-                %label.form-check-label{for: dom_id(field)}= field.name
+            .clearfix
+              - fields.each_with_index do |field, index|
+                .form-check.w-50.float-left.mb-1
+                  = check_box_tag "template[field_ids][]", field.id, @template.field_ids.include?(field.id), class: 'form-check-input', id: dom_id(field)
+                  %label.form-check-label{for: dom_id(field)}= field.name
 
       .actions
         = f.submit t('shared.save'), class: 'btn btn-primary'
