@@ -45,10 +45,10 @@ module Events
             milestone: {}
           )
 
-          if location_latlng.present?
+          if location.present? && location.latitude.present? && location.longitude.present?
             attrs[:location] = {
-              lat: location_latlng.try(:first),
-              lon: location_latlng.try(:last)
+              lat: location.latitude,
+              lon: location.longitude
             }
           end
 
