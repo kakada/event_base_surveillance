@@ -7,4 +7,12 @@ namespace :user do
       user.update_attributes(province_code: 'all')
     end
   end
+
+  desc 'migrate user full name'
+  task migrate_full_name: :environment do
+    User.all.each do |user|
+      user.set_full_name
+      user.save
+    end
+  end
 end
