@@ -23,6 +23,10 @@ class EventPolicy < ApplicationPolicy
     false
   end
 
+  def download?
+    user.system_admin? || user.program_admin? || user.staff?
+  end
+
   class Scope < Scope
     def resolve
       if user.system_admin?

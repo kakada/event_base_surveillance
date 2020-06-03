@@ -5,10 +5,10 @@ require 'csv'
 class EventService
   attr_reader :template
 
-  def initialize(events, program, template_id)
-    @program = program
+  def initialize(events, template_id)
     @events = events
     @template = Template.find(template_id)
+    @program = @template.program
   end
 
   def export_csv

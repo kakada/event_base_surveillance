@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
   def index
     @pagy, @events = pagy(policy_scope(Event.filter(params).order_desc.includes(:field_values, :event_type, :creator, :program)))
+    @templates = policy_scope(::Template.all)
   end
 
   def show
@@ -47,7 +48,7 @@ class EventsController < ApplicationController
       flash[:alert] = t('event.file_size_is_too_big')
       redirect_to events_url
     else
-      send_data(EventService.new(events, current_program, params[:template_id]).export_csv, filename: 'events.csv')
+      send_data(EventService.new(events, params[:template_id]).export_csv, filename: 'events.csv')
     end
   end
 
