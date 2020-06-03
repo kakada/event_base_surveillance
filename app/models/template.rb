@@ -4,14 +4,12 @@
 #
 # Table name: templates
 #
-#  id                :bigint           not null, primary key
-#  default           :boolean          default(FALSE)
-#  name              :string
-#  predefined_fields :text
-#  properties        :text
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  program_id        :integer
+#  id         :bigint           not null, primary key
+#  name       :string
+#  properties :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  program_id :integer
 #
 
 

@@ -241,7 +241,7 @@ ActiveRecord::Schema.define(version: 2020_03_26_103118) do
   create_table "templates", force: :cascade do |t|
     t.string "name"
     t.integer "program_id"
-    t.boolean "default", default: false
+    t.text "properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

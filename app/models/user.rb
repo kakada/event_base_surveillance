@@ -10,6 +10,7 @@
 #  confirmed_at           :datetime
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default("")
+#  full_name              :string
 #  province_code          :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
