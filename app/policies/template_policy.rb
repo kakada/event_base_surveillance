@@ -23,7 +23,11 @@ class TemplatePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.all
+      if user.system_admin?
+        scope.all
+      elsif user.program_admin? || user.staff?
+        scope.where(program_id: user.program_id)
+      end
     end
   end
 end

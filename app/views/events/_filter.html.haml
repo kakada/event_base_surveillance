@@ -17,7 +17,7 @@
         %i.fas.fa-search
         = t('event.search')
 
-    - if policy(::Template).index?
+    - if policy(Event).download?
       .flex1.btn-download-csv
         %button.btn.btn-outline-info{"data-target" => "#template-model", "data-toggle" => "modal", :type => "button"}
           %i.fas.fa-download
@@ -32,19 +32,21 @@
               %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
                 %span{"aria-hidden" => "true"} ×
             .modal-body
-              - if current_program.templates.present?
+
+              - if @templates.present?
                 .form-group.mb-2
                   %label{ for: :event_event_type }= "#{t('event.please_select_template')}:"
-                  = select_tag 'template_id', options_for_select(current_program.templates.pluck(:name, :id), params[:template_id]), include_blank: false, class: 'form-control'
+                  = select_tag 'template_id', options_for_select(@templates.pluck(:name, :id), params[:template_id]), include_blank: false, class: 'form-control'
 
               - else
                 .text-center= t('event.require_template')
-                .text-center
-                  %span= t('event.click_here_to_create_template', url: new_template_path).html_safe
+                - if policy(::Template).create?
+                  .text-center
+                    %span= t('event.click_here_to_create_template', url: new_template_path).html_safe
 
             .modal-footer
               %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
-              - if current_program.templates.present?
+              - if @templates.present?
                 = link_to download_events_path, target: :_blank, class: 'btn btn-primary btn-download' do
                   %i.fas.fa-download
                   = t('event.download_csv')
