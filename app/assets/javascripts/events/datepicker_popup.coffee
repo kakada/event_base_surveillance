@@ -24,6 +24,7 @@ EBS.DatepickerPopup = do ->
       resetBackupValue()
       resetPopoverValue()
       hideDatePopover()
+      submitForm()
 
   assignBackupValue = (num)->
     dateType = $('.date-type-input').val()
@@ -56,6 +57,7 @@ EBS.DatepickerPopup = do ->
       else
         hideError()
         assignPopoverStartDate()
+        assignValueToForm()
 
   showError = ->
     $('.number-input').addClass('is-invalid')
@@ -69,18 +71,25 @@ EBS.DatepickerPopup = do ->
     $(document).off 'change', '.date-type-input'
     $(document).on 'change', '.date-type-input', (e)->
       assignPopoverStartDate()
+      assignValueToForm()
 
   onClickBtnDone = ->
     $(document).off 'click', '.btn-done'
     $(document).on 'click', '.btn-done', (e) ->
-      num = $('.number-input').val()
-      if num <= 0
-        showError()
-      else
-        dateType = $('.date-type-input').val()
-        assignBackupValue(num)
-        assignDispalyDate(num, dateType)
-        hideDatePopover()
+      hideDatePopover()
+      submitForm()
+
+  submitForm = ->
+    $('[type="submit"]').parents('form').submit()
+
+  assignValueToForm = ->
+    num = $('.number-input').val()
+    if num <= 0
+      return showError()
+
+    dateType = $('.date-type-input').val()
+    assignBackupValue(num)
+    assignDispalyDate(num, dateType)
 
   initDisplayDate = ->
     num = $('.hidden-input').find('.number-input-backup').val()
@@ -118,6 +127,7 @@ EBS.DatepickerPopup = do ->
       $('.hidden-input').find('.start-date-input-backup').val(startDate)
       $('.display-date').val(displayDate)
       hideDatePopover()
+      submitForm()
 
   initDateTimePicker = ->
     startDate = $('.hidden-input').find('.start-date-input-backup').val() || new Date()

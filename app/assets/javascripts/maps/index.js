@@ -24,7 +24,7 @@ EBS.MapsIndex = (() => {
       posRight = $(this).parents('.slide-wrapper').width() - $(this).parent().width();
       right = '-=' + posRight;
 
-      if(parseInt($('.slide-wrapper').css('right')) != 0) {
+      if(parseInt($('.slide-wrapper').css('right')) < 0) {
         right = '+=' + posRight;
       }
 
