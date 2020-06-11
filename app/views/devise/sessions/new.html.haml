@@ -1,7 +1,15 @@
 = render 'devise/shared/logo'
 
 .form-wrapper.pr-1
-  %h3= "#{ENV['APP_NAME']} (#{ENV['APP_SHORTCUT_NAME']})"
+  = link_to omniauth_authorize_path(:user, :google_oauth2), class: 'btn btn-outline-primary w-100' do
+    = image_tag 'google.png', style: 'width: 18px;'
+    = t('devise.sign_in_with', omniauth: 'Gmail')
+
+  .d-flex.flex-row.align-items-center
+    .line.flex-grow-1
+    .or-label OR
+    .line.flex-grow-1
+
 
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .form-group
@@ -17,8 +25,9 @@
         = f.check_box :remember_me, class: 'form-check-input'
         = f.label :remember_me, t('devise.remember_me'), class: 'form-check-label'
     .actions
-      = f.submit t('devise.login'), class: 'btn btn-primary mb-2'
+      = f.submit t('devise.login'), class: 'btn btn-primary w-100 mb-2'
 
-  = render "devise/shared/links"
-  = link_to t('about.about_us'), about_us_path, class: 'btn btn-link'
+  .text-right
+    = render "devise/shared/links"
+    = link_to t('about.about_us'), about_us_path, class: 'btn btn-link'
 
