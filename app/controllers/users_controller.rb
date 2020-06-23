@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @pagy, @users = pagy(policy_scope(authorize User.filter(params).includes(:program, :location)))
+    @pagy, @users = pagy(policy_scope(authorize User.filter(params).order(updated_at: :DESC).includes(:program, :location)))
   end
 
   def new

@@ -43,7 +43,7 @@ class Event < ApplicationRecord
   delegate :name, to: :program, prefix: true
   delegate :enable_telegram?, to: :program, prefix: false
   delegate :enable_email_notification?, to: :program, prefix: false
-  delegate :email, to: :creator, prefix: true
+  delegate :email, to: :creator, prefix: true, allow_nil: true
   delegate :latlng, to: :location, prefix: true, allow_nil: true
 
   # Validation
