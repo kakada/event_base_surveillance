@@ -5,8 +5,8 @@ module Events
     extend ActiveSupport::Concern
 
     included do
-      after_create  :notify_third_party, if: :enable_worker?
-      after_save    :create_document, if: :enable_worker?
+      after_commit  :notify_third_party, on: :create, if: :enable_worker?
+      after_commit  :create_document, on: [:create, :update], if: :enable_worker?
       after_destroy :delete_document, if: :enable_worker?
 
       private
