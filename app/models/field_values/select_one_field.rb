@@ -33,7 +33,7 @@ module FieldValues
 
       return "<span data-relevant=#{field_code} value=#{option_value}>#{label}</span>" unless field_code == 'risk_level'
 
-      "<span data-relevant=#{field_code} value=#{option_value} class='badge' style='background-color: #{color}; color: #fff'>#{opt_value}</span>"
+      "<span data-relevant=#{field_code} value=#{option_value} class='badge' style='background-color: #{color}; color: #fff'>#{label}</span>"
     end
   end
 end
