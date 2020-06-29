@@ -6,15 +6,15 @@ class EventPolicy < ApplicationPolicy
   end
 
   def show?
-    user.system_admin? || user.program_admin? || user.province_code == 'all' || user.province_code == record.location_code
+    user.system_admin? || user.program_admin? || user.province_code == 'all' || user.province_code == record.location_code[0..1]
   end
 
   def create?
-    user.program_admin? || user.staff?
+    user.staff?
   end
 
   def update?
-    return false if record.close? || !(user.program_admin? || user.staff?)
+    return false if record.close? || !user.staff?
 
     record.program_id == user.program_id
   end
