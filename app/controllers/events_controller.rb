@@ -41,6 +41,14 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event = authorize Event.find(params[:id])
+    @event.destroy
+    flash[:notice] = t('event.destroy_success')
+
+    redirect_to events_path
+  end
+
   def download
     events = policy_scope(Event.filter(params).includes(:field_values, :event_milestones))
 

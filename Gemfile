@@ -73,8 +73,8 @@ gem 'wicked_pdf',                 '~> 1.4.0'
 gem 'wkhtmltopdf-binary',         '~> 0.12.5.4'
 
 gem 'sentry-raven',               '~> 2.13.0'
-
 gem 'omniauth-google-oauth2',     '~> 0.8.0'
+gem 'paranoia',                   '~> 2.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

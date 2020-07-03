@@ -45,3 +45,5 @@ km:
     please_select_template: 'សូមជ្រើសរើសគំរូទាញយក'
     require_template: 'យើងតម្រូវឱ្យមានគំរូទាញយក មុនពេលទាញយកព្រឹត្តិការណ៍'
     click_here_to_create_template: "សូមចុច <a class='text-primary' href=%{url}>ទីនេះ</a> ដើម្បីបង្កើតគំរូទាញយក"
+    destroy_success: 'លុបព្រឹត្តិការណ៍ដោយជោគជ័យ'
+    are_you_sure: 'តើអ្នកប្រាកដដែរឬទេ?'

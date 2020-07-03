@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :events, except: [:destroy] do
+  resources :events do
     scope module: :events do
       resources :event_milestones
       resource :preview, only: [:show]

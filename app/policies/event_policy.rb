@@ -20,7 +20,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    user.program_admin?
   end
 
   def download?
