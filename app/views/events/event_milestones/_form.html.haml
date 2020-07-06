@@ -25,5 +25,5 @@
           = render "events/fields/#{field.kind}", field: field, f: builder, main_object: @event_milestone
 
 .actions
-  = f.submit t('shared.save'), class: 'btn btn-primary'
+  = f.submit t('shared.save'), data: (@event_milestone.milestone.final? ? { confirm: t('event.are_you_sure_to_submit_conclusion')} : nil), class: 'btn btn-primary'
   = link_to t('shared.cancel'), event_path(@event), class: 'btn btn-secondary'

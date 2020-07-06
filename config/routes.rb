@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :events, except: [:destroy] do
+  resources :events do
     scope module: :events do
       resources :event_milestones
       resource :preview, only: [:show]
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
     get :download, on: :collection
     get :search, on: :collection
+    put :unlock, on: :member
   end
 
   resources :event_types do

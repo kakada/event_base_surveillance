@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_26_103118) do
+ActiveRecord::Schema.define(version: 2020_07_05_075507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,9 @@ ActiveRecord::Schema.define(version: 2020_03_26_103118) do
     t.boolean "close", default: false
     t.string "link_uuid"
     t.datetime "event_date"
+    t.datetime "deleted_at"
+    t.datetime "lockable_at"
+    t.index ["deleted_at"], name: "index_events_on_deleted_at"
   end
 
   create_table "field_options", force: :cascade do |t|
@@ -208,6 +211,7 @@ ActiveRecord::Schema.define(version: 2020_03_26_103118) do
     t.integer "creator_id"
     t.string "language_code"
     t.boolean "enable_email_notification", default: false
+    t.integer "unlock_event_duration", default: 7
   end
 
   create_table "sections", force: :cascade do |t|

@@ -23,14 +23,17 @@ class Event < ApplicationRecord
   include Events::FieldValueValidation
   include Events::TraceableField
 
+  # Soft delete
+  acts_as_paranoid
+
   # Association
   belongs_to :event_type
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
-  has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid, dependent: :destroy
-  has_many   :field_values, as: :valueable, dependent: :destroy
-  has_many   :tracings, as: :traceable, dependent: :destroy
+  has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid
+  has_many   :field_values, as: :valueable
+  has_many   :tracings, as: :traceable
   belongs_to :link_parent, class_name: 'Event', foreign_key: :link_uuid, optional: true
   has_many   :link_children, class_name: 'Event', foreign_key: :link_uuid
 
@@ -124,6 +127,15 @@ class Event < ApplicationRecord
 
   def verified?
     @verified ||= event_milestones.collect(&:milestone_id).include? program.milestones.verified.try(:id)
+  end
+
+  def unlock!
+    self.lockable_at = program.unlock_event_duration.days.from_now.to_date
+    self.save
+  end
+
+  def unlockable?
+    close? && lockable_at.nil?
   end
 
   private

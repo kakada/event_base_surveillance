@@ -1,0 +1,21 @@
+#unlock-event-duration.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'unlock-event-duration', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      .modal-header
+        .flex-row-vertical-center
+          %h5#exampleModalLabel.modal-title
+            = t('program.unlock_event_duration')
+
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+
+      .modal-body.form-inline
+        .flex-row-vertical-center
+          %label= t('program.unlock_event_duration')
+          .flex1.mr-3
+          = f.input :unlock_event_duration, label: false
+          %label.ml-3= t('program.day')
+
+      .modal-footer
+        = f.submit t('shared.save'), class: 'btn btn-primary'
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')

@@ -14,17 +14,21 @@ class EventPolicy < ApplicationPolicy
   end
 
   def update?
-    return false if record.close? || !user.staff?
+    return false if record.unlockable? || !user.staff?
 
     record.program_id == user.program_id
   end
 
   def destroy?
-    false
+    user.program_admin?
   end
 
   def download?
     user.system_admin? || user.program_admin? || user.staff?
+  end
+
+  def unlock?
+    user.program_admin? && record.unlockable?
   end
 
   class Scope < Scope

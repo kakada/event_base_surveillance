@@ -42,4 +42,16 @@ RSpec.describe EventPolicy do
       it { expect(Pundit.policy_scope!(guest, Event).size).to eq(2) }
     end
   end
+
+  describe 'unlock?' do
+    subject { described_class }
+    let!(:program_admin) { create(:user) }
+    let!(:staff) { create(:user, :staff) }
+    let!(:closed_event) { create(:event, close: true, lockable_at: nil) }
+
+    permissions :unlock? do
+      it { expect(subject).to permit(program_admin, closed_event) }
+      it { expect(subject).not_to permit(staff, closed_event) }
+    end
+  end
 end

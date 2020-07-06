@@ -39,3 +39,17 @@
           = link_to event_preview_path(event, format: 'pdf'), class: 'btn dropdown-item', target: '_blank' do
             %i.fas.fa-eye.drop-menu-icon
             %span= t('event.preview_pdf')
+
+      - elsif current_user.program_admin?
+        %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fas.fa-ellipsis-v
+
+        .dropdown-menu.dropdown-menu-right
+          = link_to event_path(event), method: :delete, data: { confirm: t('event.are_you_sure', event_uuid: event.uuid) }, class: ['btn dropdown-item'] do
+            %i.fa.fa-trash.drop-menu-icon
+            %span= t('shared.delete')
+
+          - if policy(event).unlock?
+            = link_to unlock_event_path(event), method: :put, class: ['btn dropdown-item'] do
+              %i.fas.fa-unlock-alt.drop-menu-icon
+              %span= t('shared.unlock')

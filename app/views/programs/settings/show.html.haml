@@ -29,3 +29,11 @@
       .dotted-line.flex-row
         %label.flex1= t('program.language')
         = f.input :language_code, label: false, collection: Program::LANGUAGES, include_blank: false
+
+      .dotted-line.flex-row
+        %label.flex1= t('program.unlock_event_duration')
+        %div
+          = t('program.unlock_event_days', count: current_program.unlock_event_duration)
+          %a.pointer.badge.badge-info.text-white{'data-target' => '#unlock-event-duration', 'data-toggle' => 'modal'}= t('shared.edit')
+
+          = render 'modal_unlock_event_duration', f: f

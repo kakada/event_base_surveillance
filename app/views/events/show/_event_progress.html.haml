@@ -20,7 +20,7 @@
             %span= milestone.name
             %span.badge.badge-light.btn-edit= t('shared.edit')
 
-          - if pre_milestone.conducted_at.present? && current_milestone.conducted_at.present?
+          - if pre_milestone.present? && pre_milestone.conducted_at.present? && current_milestone.conducted_at.present?
             %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
 
           .at= current_milestone.conducted_at

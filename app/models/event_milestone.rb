@@ -65,6 +65,8 @@ class EventMilestone < ApplicationRecord
 
   private
     def set_event_progress
+      return if event.close?
+
       fv = event.field_values.find_or_initialize_by(field_code: 'progress')
       fv.value = milestone.name
       fv.field_id ||= program.milestones.root.fields.find_by(code: 'progress').id

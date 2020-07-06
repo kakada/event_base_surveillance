@@ -41,6 +41,14 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event = authorize Event.find(params[:id])
+    @event.destroy
+    flash[:notice] = t('event.destroy_success')
+
+    redirect_to events_url
+  end
+
   def download
     events = policy_scope(Event.filter(params).includes(:field_values, :event_milestones))
 
@@ -50,6 +58,13 @@ class EventsController < ApplicationController
     else
       send_data(EventService.new(events, params[:template_id]).export_csv, filename: 'events.csv')
     end
+  end
+
+  def unlock
+    @event = authorize Event.find(params[:id])
+    @event.unlock!
+
+    redirect_to events_url
   end
 
   def search
