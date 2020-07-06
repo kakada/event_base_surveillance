@@ -46,7 +46,7 @@ class EventsController < ApplicationController
     @event.destroy
     flash[:notice] = t('event.destroy_success')
 
-    redirect_to events_path
+    redirect_to events_url
   end
 
   def download
@@ -58,6 +58,13 @@ class EventsController < ApplicationController
     else
       send_data(EventService.new(events, params[:template_id]).export_csv, filename: 'events.csv')
     end
+  end
+
+  def unlock
+    @event = authorize Event.find(params[:id])
+    @event.unlock!
+
+    redirect_to events_url
   end
 
   def search

@@ -47,3 +47,4 @@ km:
     click_here_to_create_template: "សូមចុច <a class='text-primary' href=%{url}>ទីនេះ</a> ដើម្បីបង្កើតគំរូទាញយក"
     destroy_success: 'លុបព្រឹត្តិការណ៍ដោយជោគជ័យ'
     are_you_sure: 'តើអ្នកប្រាកដដែរឬទេ?'
+    will_lock_at: 'នឹងត្រូវចាក់សោវិញនៅថ្ងៃទី %{date}'

@@ -10,3 +10,8 @@ production:
   - ["indexers", 1]
 
 :max_retries: 15
+
+:schedule:
+  lockevent:
+    cron: "0 0 * * *"
+    class: UnlockEventJob

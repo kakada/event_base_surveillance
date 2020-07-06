@@ -47,3 +47,4 @@ en:
     click_here_to_create_template: "Please click <a class='text-primary' href=%{url}>here</a> to create template"
     destroy_success: 'Delete event successfully.'
     are_you_sure: 'Are you sure to delete the event?'
+    will_lock_at: 'Will lock at %{date}'

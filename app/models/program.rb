@@ -33,6 +33,7 @@ class Program < ApplicationRecord
   has_many  :templates
 
   validates :name, presence: true
+  validates :unlock_event_duration, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
 
   before_create :set_default_language
   after_create :create_root_milestone

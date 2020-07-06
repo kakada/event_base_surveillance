@@ -14,3 +14,8 @@ en:
     reindex_successfully: 'Reindex document successfully'
     telegram: 'Telegram'
     telegram_bot: 'Telegram bot'
+    unlock_event_duration: 'Unlock event duration'
+    unlock_event_days:
+      one: '%{count} day'
+      other: '%{count} days'
+    day: 'Day'

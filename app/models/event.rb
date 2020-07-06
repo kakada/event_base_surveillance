@@ -129,6 +129,11 @@ class Event < ApplicationRecord
     @verified ||= event_milestones.collect(&:milestone_id).include? program.milestones.verified.try(:id)
   end
 
+  def unlock!
+    self.lockable_at = program.unlock_event_duration.days.from_now.to_date
+    self.save
+  end
+
   private
     def secure_uuid
       self.uuid ||= SecureRandom.hex(4)

@@ -2,7 +2,7 @@
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
       .flex-row-vertical-center
-        %h3
+        %h3.mb-0
           = "#{@event.event_type_name}: "
           = render 'events/show/tracing_number_field_modal', traceable: @event
           %span.badge.badge-light= @event.uuid
@@ -10,7 +10,7 @@
         = @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
 
       %div
-        - if policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence
+        - if !@event.close? && policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence
 
           = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: ['btn btn-danger', ('disabled' unless @event.verified?)]
 

@@ -14,7 +14,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def update?
-    return false if record.close? || !user.staff?
+    return false if (record.close? && record.lockable_at.nil?) || !user.staff?
 
     record.program_id == user.program_id
   end
@@ -25,6 +25,10 @@ class EventPolicy < ApplicationPolicy
 
   def download?
     user.system_admin? || user.program_admin? || user.staff?
+  end
+
+  def unlock?
+    user.program_admin? && record.close? && record.lockable_at.nil?
   end
 
   class Scope < Scope

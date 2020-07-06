@@ -48,3 +48,8 @@
           = link_to event_path(event), method: :delete, data: { confirm: t('event.are_you_sure') }, class: ['btn dropdown-item'] do
             %i.fa.fa-trash.drop-menu-icon
             %span= t('shared.delete')
+
+          - if policy(event).unlock?
+            = link_to unlock_event_path(event), method: :put, class: ['btn dropdown-item'] do
+              %i.fas.fa-unlock-alt.drop-menu-icon
+              %span= t('shared.unlock')

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
     get :download, on: :collection
     get :search, on: :collection
+    put :unlock, on: :member
   end
 
   resources :event_types do
