@@ -14,7 +14,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def update?
-    return false if (record.close? && record.lockable_at.nil?) || !user.staff?
+    return false if record.unlockable? || !user.staff?
 
     record.program_id == user.program_id
   end
@@ -28,7 +28,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def unlock?
-    user.program_admin? && record.close? && record.lockable_at.nil?
+    user.program_admin? && record.unlockable?
   end
 
   class Scope < Scope

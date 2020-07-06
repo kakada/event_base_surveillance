@@ -98,6 +98,14 @@ RSpec.describe Event, type: :model do
     it { expect(event.location_name('address_latin')).to eq('Khaet Banteay Meanchey') }
   end
 
+  describe '#unlockable?' do
+    let!(:event1) { create(:event, close: true, lockable_at: nil) }
+    let!(:event2) { create(:event, close: true, lockable_at: Date.today) }
+
+    it { expect(event1.unlockable?).to eq(true) }
+    it { expect(event2.unlockable?).to eq(false) }
+  end
+
   private
     def create_field_value(event, code, value)
       root_fields = event.milestone.fields

@@ -134,6 +134,10 @@ class Event < ApplicationRecord
     self.save
   end
 
+  def unlockable?
+    close? && lockable_at.nil?
+  end
+
   private
     def secure_uuid
       self.uuid ||= SecureRandom.hex(4)
