@@ -32,8 +32,8 @@ class EventMilestone < ApplicationRecord
   validates :milestone_id, uniqueness: { scope: [:event_uuid] }
 
   # Callback
-  after_commit :set_event_progress
-  after_commit :set_event_to_close, if: -> { milestone.final? }
+  after_create :set_event_progress
+  after_create :set_event_to_close, if: -> { milestone.final? }
 
   # Nested attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|

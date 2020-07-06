@@ -46,5 +46,6 @@ en:
     require_template: 'It is required to have template before downloading events'
     click_here_to_create_template: "Please click <a class='text-primary' href=%{url}>here</a> to create template"
     destroy_success: 'Delete event successfully.'
-    are_you_sure: 'Are you sure to delete the event?'
+    are_you_sure: 'Are you sure to delete the event %{event_uuid}?'
     will_lock_at: 'Will lock at %{date}'
+    are_you_sure_to_submit_conclusion: 'Are you sure to submit conclusion form?'
