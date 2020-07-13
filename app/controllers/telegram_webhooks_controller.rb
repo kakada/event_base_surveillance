@@ -5,7 +5,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def message(message)
     if group = message['migrate_to_chat_id'].present? && ChatGroup.find_by(chat_id: message['chat']['id'].to_s).presence
-      return group.update(chat_id: message['migrate_to_chat_id'], chat_type: 'supergroup')
+      return group.update(chat_id: message['migrate_to_chat_id'], chat_type: ChatGroup::TELEGRAM_SUPER_GROUP)
     end
 
     # {"id"=>952424355, "is_bot"=>true, "first_name"=>"ebs_bot", "username"=>"ebs_system_bot"}
@@ -14,7 +14,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
     # "chat"=>{"id"=>-369435878, "title"=>"ebs-group-chat", "type"=>"group", "all_members_are_administrators"=>true}
     chat = message['chat']
-    return unless (chat['type'] == 'group' || chat['type'] == 'supergroup')
+    return unless ChatGroup::TELEGRAM_CHAT_TYPES.include?(chat['type'])
 
     if program = TelegramBot.where('token LIKE ?', "#{member['id']}%").first.try(:program).presence
       group = program.chat_groups.find_or_initialize_by(chat_id: chat['id'].to_s, provider: 'Telegram')
