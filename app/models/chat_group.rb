@@ -21,4 +21,8 @@ class ChatGroup < ApplicationRecord
 
   scope :telegrams, -> { where(provider: 'Telegram') }
   scope :actives, -> { where(is_active: true) }
+
+  TELEGRAM_CHAT_TYPES = %w[group supergroup]
+  TELEGRAM_SUPER_GROUP = 'supergroup'
+  TELEGRAM_GROUP = 'group'
 end
