@@ -68,6 +68,7 @@
 //= require telegrams/new
 //= require messages/message
 //= require telegram_bots/new
+//= require programs/index
 //= require programs/settings
 //= require webhooks/new
 //= require maps/index
