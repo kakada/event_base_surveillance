@@ -19,3 +19,4 @@ en:
       one: '%{count} day'
       other: '%{count} days'
     day: 'Day'
+    logo: Logo

@@ -1,11 +1,20 @@
 %nav#sidebar
   #sidebarCollapse.sidebar-header
-    %h3
-      = ENV['APP_NAME']
-      %span{style: 'font-size: 12px'}= "#{current_user.full_name}@#{current_program.try(:name)}"
+    .d-flex.w-100.align-items-center
+      %h3
+        .d-flex.flex-column
+          = ENV['APP_SHORTCUT_NAME']
+          %span.mt-1{style: 'font-size: 12px'}= "#{current_user.full_name}@#{current_program.try(:name)}"
+      .flex-grow-1
+      %strong.mr-2
+        - if current_program.present?
+          .image-wrapper.thumbnail
+            = image_tag current_program.logo_or_default
+        - else
+          = ENV['APP_SHORTCUT_NAME']
 
-    %strong.mr-1= ENV['APP_SHORTCUT_NAME']
-    %i.fas.fa-align-left
+      %span
+        %i.fas.fa-align-left
 
   %ul.list-unstyled.components
     - if current_user.system_admin? || current_user.program_admin?
@@ -50,6 +59,12 @@
           %i.fas.fa-map-marked
           = t('sidebar.map')
 
+    - if policy(::Template).index?
+      %li{class: get_css_active_class('templates') }
+        %a{:href => templates_path}
+          %i.fas.fa-table
+          = t('sidebar.templates')
+
     - if policy(Webhook).index?
       %li{class: get_css_active_class('webhooks') }
         %a{:href => webhooks_path}
@@ -67,12 +82,6 @@
         = link_to setting_path do
           %i.fas.fa-wrench
           = t('sidebar.settings')
-
-    - if policy(::Template).index?
-      %li{class: get_css_active_class('templates') }
-        %a{:href => templates_path}
-          %i.fas.fa-table
-          = t('sidebar.templates')
 
     %li
       = link_to about_us_path do

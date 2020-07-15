@@ -54,6 +54,10 @@ class Program < ApplicationRecord
     self.telegram_bot_enabled
   end
 
+  def logo_or_default
+    logo_url || 'default_logo.png'
+  end
+
   private
     def set_default_language
       self.language_code ||= 'en'

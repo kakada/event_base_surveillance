@@ -1,12 +1,10 @@
 .image-wrapper.position-relative
-  - image_url = @program.logo_url || 'default_logo.png'
-
-  = image_tag image_url, class: 'program-logo', 'data-default' => image_path('default_logo.png')
+  = image_tag @program.logo_or_default, class: 'program-logo', 'data-default' => image_path('default_logo.png')
   = f.input :logo, as: :file, label: false, wrapper_html: { class: 'file_wrapper' }, input_html: { class: 'file_avata' }
 
   = f.input :remove_logo, as: :boolean
   .btn-delete.pointer{class: ('d-none' unless @program.logo_url.present?) }
-    %i.fas.fa-trash-alt{style: 'color: #fff;'}
+    %i.fas.fa-trash-alt.text-white
 
 = f.input :name, label: t('program.name')
 

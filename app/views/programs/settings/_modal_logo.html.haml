@@ -1,0 +1,23 @@
+#logo.modal.fade{'aria-hidden' => 'true', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      .modal-header
+        .flex-row-vertical-center
+          %h5.modal-title
+            = t('program.logo')
+
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+
+      .modal-body
+        .image-wrapper.position-relative
+          = image_tag current_program.logo_or_default, class: 'program-logo', 'data-default' => image_path('default_logo.png')
+          = f.input :logo, as: :file, label: false, wrapper_html: { class: 'file_wrapper' }, input_html: { class: 'file_avata' }
+
+          = f.input :remove_logo, as: :boolean
+          .btn-delete.pointer{class: ('d-none' unless current_program.logo_url.present?) }
+            %i.fas.fa-trash-alt.text-white
+
+      .modal-footer
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
+        = f.submit t('shared.save'), class: 'btn btn-primary'
