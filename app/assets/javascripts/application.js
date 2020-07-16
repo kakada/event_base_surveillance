@@ -79,6 +79,8 @@ document.addEventListener('turbolinks:load', function() {
 
   // Default Setup
   $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="popover"]').popover();
+
   $.fn.datepicker.defaults.format = "yyyy-mm-dd"
   $('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm'})
 

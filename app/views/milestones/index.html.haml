@@ -25,6 +25,10 @@
             .status-wrapper.text-capitalize.flex1
               = milestone.status
 
+            .d-flex
+              = telegram_icon_status(milestone).html_safe
+              = email_icon_status(milestone).html_safe
+
             .text-right
               %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                 %i.fas.fa-ellipsis-v

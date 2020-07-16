@@ -12,7 +12,7 @@
       .modal-body
         .image-wrapper.position-relative
           = image_tag current_program.logo_or_default, class: 'program-logo', 'data-default' => image_path('default_logo.png')
-          = f.input :logo, as: :file, label: false, wrapper_html: { class: 'file_wrapper' }, input_html: { class: 'file_avata' }
+          = f.input :logo, as: :file, label: false, wrapper_html: { class: 'file_wrapper' }, input_html: { class: 'file_avata pointer' }
 
           = f.input :remove_logo, as: :boolean
           .btn-delete.pointer{class: ('d-none' unless current_program.logo_url.present?) }
