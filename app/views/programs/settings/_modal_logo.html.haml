@@ -18,6 +18,9 @@
           .btn-delete.pointer{class: ('d-none' unless current_program.logo_url.present?) }
             %i.fas.fa-trash-alt.text-white
 
+        .text-center.mt-2
+          %small 250 x 250 (32-bit PNG)
+
       .modal-footer
         %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
         = f.submit t('shared.save'), class: 'btn btn-primary'

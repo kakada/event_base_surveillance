@@ -2,10 +2,17 @@
   #sidebarCollapse.sidebar-header
     .d-flex.w-100.align-items-center
       %h3
-        .d-flex.flex-column
-          = ENV['APP_SHORTCUT_NAME']
-          %span.mt-1{style: 'font-size: 12px'}= "#{current_user.full_name}@#{current_program.try(:name)}"
+        .d-flex
+          - if current_program.present?
+            .image-wrapper.thumbnail.mr-2
+              = image_tag current_program.logo_or_default
+
+          .d-flex.flex-column
+            = ENV['APP_SHORTCUT_NAME']
+            %span.mt-1{style: 'font-size: 12px'}= "#{current_user.full_name}@#{current_program.try(:name)}"
+
       .flex-grow-1
+
       %strong.mr-2
         - if current_program.present?
           .image-wrapper.thumbnail

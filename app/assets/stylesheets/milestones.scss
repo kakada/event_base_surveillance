@@ -1,4 +1,18 @@
 #milestones-index {
+  .invalid-config-icon {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+  }
+
+  .active-telegram-icon {
+    color: #0088cc;
+  }
+
+  .font-size-24 {
+    font-size: 24px;
+  }
+
   .list-row {
     padding: 0.7em;
     border-bottom: 1px solid #ddd;
