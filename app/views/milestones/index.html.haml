@@ -12,7 +12,8 @@
   - if @milestones.present?
     .table-header.medium-width.flex-row
       %strong.name-wrapper= t('milestone.name')
-      %strong= t('milestone.flag_as')
+      %strong.w-25= t('milestone.flag_as')
+      %strong.flex= t('milestone.notification')
 
     = form_with(url: reorder_milestones_path, method: 'put', id: 'form') do |f|
       %ol.fields.table.table-hover.medium-width
@@ -22,8 +23,12 @@
               %span.badge.badge-pill.badge-info.mr-1= milestone.fields.size
               = milestone.name
 
-            .status-wrapper.text-capitalize.flex1
+            .status-wrapper.text-capitalize.w-25
               = milestone.status
+
+            .icons-wrapper.d-flex.flex1
+              = telegram_icon_status(milestone).html_safe
+              = email_icon_status(milestone).html_safe
 
             .text-right
               %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

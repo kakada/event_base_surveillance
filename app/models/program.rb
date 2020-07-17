@@ -16,6 +16,8 @@
 class Program < ApplicationRecord
   include Programs::ElasticsearchConcern
 
+  mount_uploader :logo, LogoUploader
+
   belongs_to :creator, class_name: 'User'
   LANGUAGES = [
     %w[English en],
@@ -50,6 +52,10 @@ class Program < ApplicationRecord
 
   def enable_telegram?
     self.telegram_bot_enabled
+  end
+
+  def logo_or_default
+    logo_url || 'default_logo.png'
   end
 
   private

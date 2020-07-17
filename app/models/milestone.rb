@@ -23,6 +23,7 @@ class Milestone < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   has_one    :message
   has_one    :telegram_notification, class_name: 'Notifications::TelegramNotification'
+  has_one    :email_notification, through: :message
   has_many   :sections, dependent: :destroy
   has_many   :fields, dependent: :destroy
 
@@ -88,6 +89,18 @@ class Milestone < ApplicationRecord
     return [['Root', 'root']] if root?
 
     Milestone::STATUSES.drop(1)
+  end
+
+  def telegram_invalid_configure?
+    program.telegram_bot.nil? || !program.telegram_bot.actived?
+  end
+
+  def telegram_not_ready?
+    !program.telegram_bot.enabled? || telegram_notification.nil? || telegram_notification.chat_groups.blank?
+  end
+
+  def email_not_ready?
+    !program.enable_email_notification? || email_notification.nil? || email_notification.emails.blank?
   end
 
   private

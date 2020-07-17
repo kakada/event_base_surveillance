@@ -12,11 +12,15 @@
       %thead
         %tr
           %th= t('program.name')
+          %th= t('program.logo')
           %th
       %tbody
         - @programs.each do |program|
           %tr
             %td= program.name
+            %td
+              .image-wrapper.thumbnail.ml-0
+                = image_tag program.logo_or_default
             %td.text-right
               %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                 %i.fas.fa-ellipsis-v

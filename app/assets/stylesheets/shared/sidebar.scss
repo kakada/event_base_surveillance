@@ -69,7 +69,7 @@ a:focus {
   ul.components {
     padding: 20px 0;
     border-bottom: 1px solid #47748b;
-    overflow: scroll;
+    overflow-y: scroll;
     flex-grow: 1;
   }
 
@@ -195,7 +195,7 @@ a:focus {
   padding-bottom: 0;
   min-height: 100vh;
   transition: all 0.3s;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 #content:after {

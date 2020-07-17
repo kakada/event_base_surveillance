@@ -6,6 +6,8 @@ EBS.ProgramsSettingsShow = do ->
     onChangeEmailToggle()
     onChangeLanguage()
 
+    EBS.ProgramsNew.init()
+
   onChangeLanguage = ->
     $(document).off 'change', '#program_language_code'
     $(document).on 'change', '#program_language_code', (event)->

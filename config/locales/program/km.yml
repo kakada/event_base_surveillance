@@ -19,3 +19,4 @@ km:
       one: '%{count} ថ្ងៃ'
       other: '%{count} ថ្ងៃ'
     day: 'ថ្ងៃ'
+    logo: 'រូបសញ្ញា'

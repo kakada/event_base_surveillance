@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_035713) do
+ActiveRecord::Schema.define(version: 2020_07_15_070324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_035713) do
     t.string "language_code"
     t.boolean "enable_email_notification", default: false
     t.integer "unlock_event_duration", default: 7
+    t.string "logo"
   end
 
   create_table "sections", force: :cascade do |t|

@@ -2,7 +2,7 @@
 
 class MilestonesController < ::ApplicationController
   def index
-    @milestones = current_program.milestones.includes(:fields)
+    @milestones = current_program.milestones.includes(:fields, :message)
   end
 
   def new
