@@ -91,6 +91,18 @@ class Milestone < ApplicationRecord
     Milestone::STATUSES.drop(1)
   end
 
+  def telegram_invalid_configure?
+    program.telegram_bot.nil? || !program.telegram_bot.actived?
+  end
+
+  def telegram_not_ready?
+    !program.telegram_bot.enabled? || telegram_notification.nil? || telegram_notification.chat_groups.blank?
+  end
+
+  def email_not_ready?
+    !program.enable_email_notification? || email_notification.nil? || email_notification.emails.blank?
+  end
+
   private
     def validate_unique_section_name
       validate_uniqueness_of_in_memory(sections, %i[name], 'duplicate')

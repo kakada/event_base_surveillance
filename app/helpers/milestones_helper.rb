@@ -4,9 +4,11 @@ module MilestonesHelper
   def telegram_icon_status(milestone)
     return '' unless milestone.message.present?
 
-    if milestone.program.telegram_bot.nil? || !milestone.program.telegram_bot.actived?
+    if milestone.telegram_invalid_configure?
       return '<a class="btn btn-small text-secondary position-relative" title="Telegram bot is invalid configure" data-toggle="tooltip"><i class="fab fa-telegram font-size-24"></i><i class="far fa-times-circle icon-red invalid-config-icon"></i></a>'
-    elsif !milestone.program.telegram_bot.enabled? || milestone.telegram_notification.nil? || milestone.telegram_notification.chat_groups.blank?
+    end
+
+    if milestone.telegram_not_ready?
       return '<a class="btn btn-small text-secondary" title="Telegram bot is disabled or no group notification selected" data-toggle="tooltip"><i class="fab fa-telegram font-size-24"></i></a>'
     end
 
@@ -16,7 +18,7 @@ module MilestonesHelper
   def email_icon_status(milestone)
     return '' unless milestone.message.present?
 
-    if !milestone.program.enable_email_notification? || milestone.email_notification.nil? || milestone.email_notification.emails.blank?
+    if milestone.email_not_ready?
       return '<a class="btn btn-small text-secondary" title="Email is disabled or no email notification selected" data-toggle="tooltip"><i class="far fa-envelope font-size-24"></i></a>'
     end
 
