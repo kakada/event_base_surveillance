@@ -49,3 +49,4 @@ en:
     are_you_sure: 'Are you sure to delete the event %{event_uuid}?'
     will_lock_at: 'Will lock at %{date}'
     are_you_sure_to_submit_conclusion: 'Are you sure to submit conclusion form?'
+    download_guideline: Download Guideline

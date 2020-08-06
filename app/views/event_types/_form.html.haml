@@ -3,6 +3,20 @@
     = f.input :name, label: t('event_type.name'), disabled: @event_type.default?
     = f.input :color, label: t('event_type.color'), as: :minicolors, input_html: { class: 'color', data: {minicolors: {theme: :bootstrap, position: :right}}}
 
+    %div
+      %label= t('event_type.guideline')
+
+      .guideline-input{ class: ('d-none' if @event_type.guideline.present?) }
+        = f.input :guideline, as: :file, label: false, input_html: { accept: ".xls,.xlsx,.pdf,.zip" }
+        = f.input :remove_guideline, as: :hidden
+
+      - if @event_type.guideline.present?
+        .remove-wrapper
+          .d-flex.align-items-center
+            %i.far.fa-trash-alt.text-danger.remove-guideline.pointer
+
+            = link_to @event_type.guideline.file.filename, @event_type.guideline_url, class: 'btn btn-link pt-0 pb-0'
+
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), event_types_path, class: 'btn btn-secondary'
