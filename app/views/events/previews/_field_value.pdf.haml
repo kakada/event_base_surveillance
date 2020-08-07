@@ -1,6 +1,6 @@
 %li.nobreak{data: skip_logic_data(field)}
-  %span.type= "#{field.name}:"
-  %span.value
+  .type= "#{field.name}:"
+  .value
     - if fvs = field_values.select{ |fv| fv.field_id == field.id }.presence
       - fvs.each do |fv|
         - if fv.field_type == 'Fields::ImageField'
@@ -13,6 +13,12 @@
 
         - else
           = fv.html_tag.html_safe
+
+          - if tracings = field.tracking? && field.field_type != 'Fields::IntegerField' && main_object.tracings.select{ |tracing| tracing.field_id == field.id }.presence
+
+            - tracings = ActiveModelSerializers::SerializableResource.new(tracings.last(5), each_serializer: TracingSerializer).as_json
+            .timeline-wrapper
+              %ul#timeline.timeline{ 'data-tracings' => tracings.to_json }
 
     - else
       = no_value(field).html_safe

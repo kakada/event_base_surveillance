@@ -25,7 +25,7 @@
         %legend= section.name
 
         - section.fields.except_locations.each do |field|
-          = render 'field_value', field_values: @event.field_values, field: field
+          = render 'field_value', field_values: @event.field_values, field: field, main_object: @event
 
   - @event.event_milestones.each do |event_milestone|
     %h4="#{event_milestone.milestone.name}"
@@ -36,4 +36,4 @@
           %legend= section.name
 
           - section.fields.except_locations.each do |field|
-            = render 'field_value', field_values: event_milestone.field_values, field: field
+            = render 'field_value', field_values: event_milestone.field_values, field: field, main_object: event_milestone
