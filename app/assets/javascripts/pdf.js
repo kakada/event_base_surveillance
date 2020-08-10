@@ -18,6 +18,26 @@ EBS.EventsSkipLogic = ( function() {
   function init() {
     renderSkipLogicField();
     handleSectionSkipLogic();
+    initTracingView();
+  }
+
+  function initTracingView() {
+    var data = $('#timeline').data('tracings');
+
+    if (!data) {
+      return;
+    }
+
+    var dom = '';
+
+    for(var i=0; i < data.length; i++) {
+      dom += '<li class="li complete">';
+      dom += '<div class="status"><span>'+ data[i].field_value + '</span></div>';
+      dom += '<div class="timestamp"><div class="date">' + data[i].created_date + '</div></div>';
+      dom += '</li>';
+    }
+
+    $('#timeline').html(dom);
   }
 
   function handleSectionSkipLogic() {
