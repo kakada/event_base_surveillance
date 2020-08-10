@@ -6,14 +6,14 @@
 
       %h3= "#{@event.event_type_name} "
 
-      - if @event.final_event_type_name.present?
+      - if @event.conclude_event_type_name.present?
         .arrow-wrapper
           = wicked_pdf_image_tag 'long-arrow-alt-right-solid.png', :width => "24"
 
-        %span.small-color{style: "background-color: #{@event.final_event_type.color}"}
-          = @event.final_event_type_name[0]
+        %span.small-color{style: "background-color: #{@event.conclude_event_type.color}"}
+          = @event.conclude_event_type_name[0]
 
-        %h3= @event.final_event_type_name
+        %h3= @event.conclude_event_type_name
 
       %h3
         = ":"

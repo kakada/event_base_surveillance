@@ -50,4 +50,4 @@ km:
     will_lock_at: 'នឹងត្រូវចាក់សោវិញនៅថ្ងៃទី %{date}'
     are_you_sure_to_submit_conclusion: 'តើអ្នកពិតជាចង់បិទព្រឹត្តិការណ៍នេះដែរឬទេ?'
     download_guideline: ទាញយកការណែនាំ
-    final_event_type: ប្រភេទព្រឹត្តិការណ៍សន្និដ្ឋានចុងក្រោយ
+    conclude_event_type: ប្រភេទព្រឹត្តិការណ៍សន្និដ្ឋានចុងក្រោយ

@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2020_08_10_024316) do
     t.datetime "event_date"
     t.datetime "deleted_at"
     t.datetime "lockable_at"
-    t.integer "final_event_type_id"
+    t.integer "conclude_event_type_id"
     t.index ["deleted_at"], name: "index_events_on_deleted_at"
   end
 

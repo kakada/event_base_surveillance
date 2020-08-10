@@ -26,7 +26,7 @@
         - if @event_milestone.milestone.final? && section.default?
           = f.fields_for :event do |builder|
             = builder.input :id, as: :hidden
-            = builder.input :final_event_type_id, label: t('event.final_event_type'), collection: @event_types
+            = builder.input :conclude_event_type_id, label: t('event.conclude_event_type'), collection: @event_types
 
         - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id }.first || @event_milestone.field_values.find_or_initialize_by(field_id: field.id)
 

@@ -13,8 +13,8 @@
 
         - if @event_milestone.milestone.final? && section.default?
           %li
-            %span.type= t('event.final_event_type')
-            %span.value= @event_milestone.event.final_event_type_name || '-'
+            %span.type= t('event.conclude_event_type')
+            %span.value= @event_milestone.event.conclude_event_type_name || '-'
 
         - section.fields.each do |field|
           %li{data: skip_logic_data(field)}

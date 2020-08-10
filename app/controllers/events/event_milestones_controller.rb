@@ -46,7 +46,7 @@ module Events
             :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
           ],
           event_attributes: [
-            :id, :final_event_type_id
+            :id, :conclude_event_type_id
           ]
         ).merge(
           submitter_id: current_user.id,

@@ -12,7 +12,7 @@
 
     %ol.fields.sortable
       - if @milestone.final?
-        = sf.fields_for :predefinded_field, Field.final_event_type do |form|
+        = sf.fields_for :predefinded_field, Field.conclude_event_type do |form|
           = render 'predefined_field', form: form
 
       = sf.fields_for :fields, sf.object.fields do |form|

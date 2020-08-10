@@ -96,8 +96,8 @@ class Field < ApplicationRecord
     end
   end
 
-  def self.final_event_type
-    self.new({ code: 'final_event_type', field_type: 'Fields::SelectOneField', name: 'Conclusion event type', is_default: true, field_options_attributes: EventType.pluck(:name).map { |name| { name: name, value: name} } })
+  def self.conclude_event_type
+    self.new({ code: 'conclude_event_type', field_type: 'Fields::SelectOneField', name: 'Conclude event type', is_default: true, field_options_attributes: EventType.pluck(:name).map { |name| { name: name, value: name} } })
   end
 
   def self.defaults
