@@ -30,7 +30,8 @@ class Template < ApplicationRecord
       { code: 'location_name', name: 'Location Name' },
       { code: 'created_at', name: 'Created at' },
       { code: 'updated_at', name: 'Updated at' },
-      { code: 'close', name: 'Close?' }
+      { code: 'close', name: 'Close?' },
+      { code: 'final_event_type_name', name: 'Conclusion event type' }
     ]
   end
 end

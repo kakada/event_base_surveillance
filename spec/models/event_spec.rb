@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do
   it { is_expected.to belong_to(:event_type) }
+  it { is_expected.to belong_to(:final_event_type).class_name('EventType').optional }
   it { is_expected.to belong_to(:program) }
   it { is_expected.to belong_to(:creator).class_name('User').optional }
   it { is_expected.to belong_to(:location).with_foreign_key('location_code').optional }
