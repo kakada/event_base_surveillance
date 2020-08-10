@@ -13,14 +13,23 @@
 
         .fields.mt-2{ class: ('hidden' if field.relevant.present?), data: skip_logic_data(field) }
           = f.label field.name
+
           - if field.description.present?
             %i.fa.fa-question-circle{ data: { toggle: "tooltip", html: "true" }, title: description_html(field.description).html_safe }
+
           = f.fields_for :field_values, obj do |builder|
             = render 'field_value_fields', f: builder, option: { field: field, main_object: @event_milestone }
+
           = link_to_add_fields t('event.add_file'), f, :field_values, { field: field, main_object: @event_milestone }
 
       - else
+        - if @event_milestone.milestone.final? && section.default?
+          = f.fields_for :event do |builder|
+            = builder.input :id, as: :hidden
+            = builder.input :conclude_event_type_id, label: t('event.conclude_event_type'), collection: @event_types
+
         - obj = @event_milestone.field_values.select{ |a| a.field_id==field.id }.first || @event_milestone.field_values.find_or_initialize_by(field_id: field.id)
+
         = f.fields_for :field_values, obj do |builder|
           = render "events/fields/#{field.kind}", field: field, f: builder, main_object: @event_milestone
 

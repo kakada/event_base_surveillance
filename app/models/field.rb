@@ -96,11 +96,19 @@ class Field < ApplicationRecord
     end
   end
 
+  def self.conclude_event_type
+    self.new({ code: 'conclude_event_type', field_type: 'Fields::SelectOneField', name: 'Conclude event type', is_default: true, field_options_attributes: EventType.pluck(:name).map { |name| { name: name, value: name} } })
+  end
+
   def self.defaults
     [
       { code: 'conducted_at', field_type: 'Fields::DateTimeField', name: 'Conducted at', is_default: true, required: true },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', is_default: true, entry_able: false }
     ]
+  end
+
+  def self.untrackable_fields
+    %w(conclude_event_type)
   end
 
   def format_name

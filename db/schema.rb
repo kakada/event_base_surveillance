@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_092632) do
+ActiveRecord::Schema.define(version: 2020_08_10_024316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_092632) do
     t.datetime "event_date"
     t.datetime "deleted_at"
     t.datetime "lockable_at"
+    t.integer "conclude_event_type_id"
     t.index ["deleted_at"], name: "index_events_on_deleted_at"
   end
 

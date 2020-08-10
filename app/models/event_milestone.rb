@@ -25,6 +25,8 @@ class EventMilestone < ApplicationRecord
   has_many   :field_values, as: :valueable, dependent: :destroy
   has_many   :tracings, as: :traceable, dependent: :destroy
 
+  accepts_nested_attributes_for :event
+
   # History
   has_associated_audits
 

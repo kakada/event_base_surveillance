@@ -42,6 +42,7 @@ module Events
             event_type_name: event_type_name,
             program_name: program_name,
             location_name: location_name,
+            conclude_event_type_name: conclude_event_type_name,
             milestone: {}
           )
 

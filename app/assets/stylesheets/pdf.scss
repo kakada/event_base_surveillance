@@ -183,4 +183,24 @@ body#pdf {
     }
   }
 
+  .small-color {
+    color: #fff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    font-size: 16px;
+    display: inline-block;
+    padding: 0.25em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+  }
+
+  .arrow-wrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

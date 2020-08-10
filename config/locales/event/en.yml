@@ -50,3 +50,4 @@ en:
     will_lock_at: 'Will lock at %{date}'
     are_you_sure_to_submit_conclusion: 'Are you sure to submit conclusion form?'
     download_guideline: Download Guideline
+    conclude_event_type: Conclude event type
