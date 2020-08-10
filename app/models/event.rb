@@ -28,6 +28,7 @@ class Event < ApplicationRecord
 
   # Association
   belongs_to :event_type
+  belongs_to :final_event_type, class_name: 'EventType', optional: true
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
@@ -49,6 +50,7 @@ class Event < ApplicationRecord
   delegate :email, to: :creator, prefix: true, allow_nil: true
   delegate :latlng, to: :location, prefix: true, allow_nil: true
   delegate :guideline_url, to: :event_type, prefix: false, allow_nil: true
+  delegate :name, to: :final_event_type, prefix: true, allow_nil: true
 
   # Validation
   validates :event_type_id, presence: true

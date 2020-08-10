@@ -3,6 +3,7 @@
 module Events
   class EventMilestonesController < ::ApplicationController
     before_action :assign_event
+    before_action :set_event_type, only: [:new, :edit, :create, :update]
 
     def show
       @event_milestone = EventMilestone.find(params[:id])
@@ -43,6 +44,9 @@ module Events
           :milestone_id,
           field_values_attributes: [
             :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
+          ],
+          event_attributes: [
+            :id, :final_event_type_id
           ]
         ).merge(
           submitter_id: current_user.id,
@@ -52,6 +56,10 @@ module Events
 
       def assign_event
         @event = Event.find(params[:event_id])
+      end
+
+      def set_event_type
+        @event_types = policy_scope(EventType.all)
       end
   end
 end

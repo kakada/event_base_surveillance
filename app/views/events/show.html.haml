@@ -2,8 +2,20 @@
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
       .flex-row-vertical-center
+        %span.small-color{style: "background-color: #{@event.event_type_color}"}
+          = @event.event_type_name[0]
+
+        %h3.mb-0= "#{@event.event_type_name} "
+
+        - if @event.final_event_type_name.present?
+          %i.fas.fa-long-arrow-alt-right.mr-2.ml-2
+          .small-color{style: "background-color: #{@event.final_event_type.color}"}
+            = @event.final_event_type_name[0]
+          %h3.mb-0
+            = @event.final_event_type_name
+
         %h3.mb-0
-          = "#{@event.event_type_name}: "
+          = ':'
           = render 'events/show/tracing_number_field_modal', traceable: @event
           %span.badge.badge-light= @event.uuid
 

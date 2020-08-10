@@ -11,35 +11,9 @@
         = sf.input :display, label: t('milestone.display_as_section'), input_html: {class: 'form-check-inline'}
 
     %ol.fields.sortable
+      - if @milestone.final?
+        = sf.fields_for :predefinded_field, Field.final_event_type do |form|
+          = render 'predefined_field', form: form
+
       = sf.fields_for :fields, sf.object.fields do |form|
-        %li{class: ('hidden' if form.object.code=='source')}
-          %fieldset.fieldset
-            .field-wrapper
-              %button.btn.move{type: :button}
-
-              .wrapper.flex-row-vertical-center
-                %button.btn.collapse-trigger.mr-1{ type: :button }
-                  %i.fas.fa-caret-right
-
-                %abbr.abbr-required{ :title => 'required', class: ('hidden' if !form.object.required) } *
-
-                .flex-column.flex1
-                  = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.to_json
-                  = form.hidden_field :code
-                  = form.hidden_field :required
-                  = form.hidden_field :is_default
-                  = form.hidden_field :entry_able
-                  = form.hidden_field :display_order, class: 'display-order'
-                  = form.text_field :name, placeholder: t('milestone.field_name'), class: 'form-control field-name'
-                  = form.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
-
-                - if form.object.required
-                  .as-title{style: 'font-weight: normal'}= t('milestone.required')
-
-                .form-check
-                  = form.check_box :tracking, { class: 'form-check-input' }
-                  = form.label :tracking, t('milestone.tracking'), class: 'form-check-label'
-
-            = render 'kinds'
-            .collapse-content
-              = render 'field_option_content', f: form
+        = render 'predefined_field', form: form
