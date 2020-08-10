@@ -107,6 +107,10 @@ class Field < ApplicationRecord
     ]
   end
 
+  def self.untrackable_fields
+    %w(conclude_event_type)
+  end
+
   def format_name
     name.downcase.split(' ').join('_')
   end

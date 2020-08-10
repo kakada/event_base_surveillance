@@ -22,7 +22,7 @@
         - if form.object.required
           .as-title{style: 'font-weight: normal'}= t('milestone.required')
 
-        - unless form.object.code == 'conclude_event_type'
+        - unless Field.untrackable_fields.include? form.object.code
           .form-check
             = form.check_box :tracking, { class: 'form-check-input' }
             = form.label :tracking, t('milestone.tracking'), class: 'form-check-label'
