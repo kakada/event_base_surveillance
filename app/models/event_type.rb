@@ -17,14 +17,21 @@
 #
 
 class EventType < ApplicationRecord
+  # Uploader
+  mount_uploader :guideline, GuidelineUploader
+
+  # Association
   belongs_to :user
   belongs_to :program
   has_many :events, dependent: :destroy
   has_many :event_type_webhooks
   has_many :webhooks, through: :event_type_webhooks
 
+  # Validation
   validates :name, presence: true, uniqueness: { case_sensitive: false, scope: [:program_id] }
   validates :color, presence: true, uniqueness: { scope: [:program_id] }
+
+  # Callback
   before_validation :set_program_id
   before_validation :set_color
   before_create :set_code

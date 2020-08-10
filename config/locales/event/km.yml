@@ -49,3 +49,4 @@ km:
     are_you_sure: 'តើអ្នកពិតជាចង់លុបព្រឹត្តិការណ៍ %{event_uuid} ដែរឬទេ?'
     will_lock_at: 'នឹងត្រូវចាក់សោវិញនៅថ្ងៃទី %{date}'
     are_you_sure_to_submit_conclusion: 'តើអ្នកពិតជាចង់បិទព្រឹត្តិការណ៍នេះដែរឬទេ?'
+    download_guideline: ទាញយកការណែនាំ

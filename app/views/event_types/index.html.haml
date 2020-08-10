@@ -16,6 +16,8 @@
           %th= t('event_type.code')
           %th= t('event_type.last_modified')
           %th= t('event_type.status')
+          %th= t('event_type.guideline')
+
           - if current_user.system_admin?
             %th= t('event_type.program')
           %th
@@ -32,8 +34,13 @@
             %td= event_type.code
             %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
             %td= event_type.shared ? t('event_type.shared') : '-'
+            %td
+              - if guideline = event_type.guideline.presence
+                = link_to guideline.file.filename, event_type.guideline_url, class: 'btn btn-link'
+
             - if current_user.system_admin?
               %td= event_type.program_name
+
             %td.text-right
               - if policy(event_type).update?
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

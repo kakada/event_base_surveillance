@@ -48,6 +48,7 @@ class Event < ApplicationRecord
   delegate :enable_email_notification?, to: :program, prefix: false
   delegate :email, to: :creator, prefix: true, allow_nil: true
   delegate :latlng, to: :location, prefix: true, allow_nil: true
+  delegate :guideline_url, to: :event_type, prefix: false, allow_nil: true
 
   # Validation
   validates :event_type_id, presence: true
