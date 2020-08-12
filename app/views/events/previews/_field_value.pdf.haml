@@ -14,11 +14,10 @@
         - else
           = fv.html_tag.html_safe
 
-          - if tracings = field.tracking? && field.field_type != 'Fields::IntegerField' && main_object.tracings.select{ |tracing| tracing.field_id == field.id }.presence
-
-            - tracings = ActiveModelSerializers::SerializableResource.new(tracings.last(5), each_serializer: TracingSerializer).as_json
+          - field_tracing = @tracings[field.id]
+          - if field_tracing.present? && field_tracing[:display_able]
             .timeline-wrapper
-              %ul#timeline.timeline{ 'data-tracings' => tracings.to_json }
+              %ul.timeline{ 'data-tracings' => field_tracing[:tracings].to_json }
 
     - else
       = no_value(field).html_safe

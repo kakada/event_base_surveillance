@@ -22,22 +22,24 @@ EBS.EventsSkipLogic = ( function() {
   }
 
   function initTracingView() {
-    var data = $('#timeline').data('tracings');
+    $('.timeline').each( function() {
+      var data = $(this).data('tracings');
 
-    if (!data) {
-      return;
-    }
+      if (!data) {
+        return;
+      }
 
-    var dom = '';
+      var dom = '';
 
-    for(var i=0; i < data.length; i++) {
-      dom += '<li class="li complete">';
-      dom += '<div class="status"><span>'+ data[i].field_value + '</span></div>';
-      dom += '<div class="timestamp"><div class="date">' + data[i].created_date + '</div></div>';
-      dom += '</li>';
-    }
+      for(var i=0; i < data.length; i++) {
+        dom += '<li class="li complete">';
+        dom += '<div class="status"><span>'+ data[i].field_value + '</span></div>';
+        dom += '<div class="timestamp"><div class="date">' + data[i].created_date + '</div></div>';
+        dom += '</li>';
+      }
 
-    $('#timeline').html(dom);
+      $(this).html(dom);
+    });
   }
 
   function handleSectionSkipLogic() {
@@ -65,7 +67,9 @@ EBS.EventsSkipLogic = ( function() {
       triggerValue = (typeof fieldValue == 'string') ? fieldValue.toLowerCase() : fieldValue.join(',').toLowerCase();
     }
 
-    $('[data-code=' + fieldCode + ']').each( function(_i, field) {
+    var dataCodes = $("[data-code='" + fieldCode + "']");
+
+    dataCodes.each( function(_i, field) {
       if (!triggerValue) {
         return toggleField(field, false);
       }
