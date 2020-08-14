@@ -21,11 +21,10 @@ class TracingService
     end
 
     def add_field_created_date(tracings)
-      tracings.as_json.each do |tracing|
+      tracings.as_json.map do |tracing|
         tracing['created_date'] = I18n.l(tracing['created_at'], format: :y_m_d_h_mn)
+        tracing
       end
-
-      tracings
     end
 
     def build_field_tracings_hash(field_ids, tracings)
