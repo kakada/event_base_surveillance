@@ -29,6 +29,7 @@ class Program < ApplicationRecord
   has_many  :events
   has_many  :event_types
   has_many  :milestones
+  has_many  :fields, through: :milestones
   has_many  :webhooks
   has_many  :chat_groups
   has_one   :telegram_bot, dependent: :destroy
