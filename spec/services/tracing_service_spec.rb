@@ -9,6 +9,10 @@ RSpec.describe TracingService do
     let!(:risk_level) { event.program.fields.find_by(code: 'risk_level') }
     let(:tracings) { TracingService.new(event).text_tracings }
 
+    context 'format tracing create_date' do
+      it { expect(tracings[risk_level.id][:tracings].first['created_date']).not_to be_nil }
+    end
+
     context 'not display_able' do
       it { expect(tracings[risk_level.id][:display_able]).to be_falsey }
       it { expect(tracings[risk_level.id][:tracings].length).to eq(1) }
