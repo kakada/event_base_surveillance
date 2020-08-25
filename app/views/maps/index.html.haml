@@ -15,7 +15,7 @@
         %i.fas.fa-search
         = t('shared.apply')
 
-  #map{'data-event-data' => @event_data.to_json}
+  #map{'data-event-data' => @event_data.to_json, 'data-province' => current_user.location.try(:to_json)}
 
   - if @event_data.present?
     .slide-wrapper.flex-row

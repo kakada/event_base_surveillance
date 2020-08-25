@@ -39,7 +39,13 @@ EBS.MapsIndex = (() => {
       _renderMarker();
     }
 
-    map.setView(new L.LatLng(cambodiaLat, cambodiaLng), 7);
+    let province = $('#map').data('province');
+    let provinceZoomable = !!province && !!province.latitude && !!province.longitude;
+    let latitude = provinceZoomable ? province.latitude : cambodiaLat;
+    let longitude = provinceZoomable ? province.longitude : cambodiaLng;
+    let zoomLevel = provinceZoomable ? 9 : 7;
+
+    map.setView(new L.LatLng(latitude, longitude), zoomLevel);
 
     _renderOSM();
   }
