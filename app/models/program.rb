@@ -41,8 +41,8 @@ class Program < ApplicationRecord
 
   validates :name, presence: true
   validates :unlock_event_duration, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
-  validates :national_zoom_level, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
-  validates :provincial_zoom_level, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
+  validates :national_zoom_level, inclusion: 0..20
+  validates :provincial_zoom_level, inclusion: 0..20
 
   before_create :set_default_language
   after_create :create_root_milestone
