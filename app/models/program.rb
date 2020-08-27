@@ -7,7 +7,11 @@
 #  id                        :bigint           not null, primary key
 #  enable_email_notification :boolean          default(FALSE)
 #  language_code             :string
+#  logo                      :string
 #  name                      :string
+#  national_zoom_level       :integer          default(7)
+#  provincial_zoom_level     :integer          default(10)
+#  unlock_event_duration     :integer          default(7)
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  creator_id                :integer
@@ -37,6 +41,8 @@ class Program < ApplicationRecord
 
   validates :name, presence: true
   validates :unlock_event_duration, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
+  validates :national_zoom_level, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
+  validates :provincial_zoom_level, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
 
   before_create :set_default_language
   after_create :create_root_milestone

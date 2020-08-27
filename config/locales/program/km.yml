@@ -20,3 +20,8 @@ km:
       other: '%{count} ថ្ងៃ'
     day: 'ថ្ងៃ'
     logo: 'រូបសញ្ញា'
+    map_zoom_level: កម្រិតពង្រីកផែនទី
+    national_zoom_level: កម្រិតពង្រីកផែនទីថ្នាក់ជាតិ
+    provincial_zoom_level: កម្រិតពង្រីកផែនទីថ្នាក់ខេត្ត
+    national: ថ្នាក់ជាតិ
+    provincial: ថ្នាក់ខេត្ត

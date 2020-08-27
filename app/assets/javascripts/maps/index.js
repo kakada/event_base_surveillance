@@ -40,10 +40,12 @@ EBS.MapsIndex = (() => {
     }
 
     let province = $('#map').data('province');
+    let program = $('#map').data('program');
     let provinceZoomable = !!province && !!province.latitude && !!province.longitude;
+
     let latitude = provinceZoomable ? province.latitude : cambodiaLat;
     let longitude = provinceZoomable ? province.longitude : cambodiaLng;
-    let zoomLevel = provinceZoomable ? 9 : 7;
+    let zoomLevel = provinceZoomable ? program.provincial_zoom_level : program.national_zoom_level;
 
     map.setView(new L.LatLng(latitude, longitude), zoomLevel);
 

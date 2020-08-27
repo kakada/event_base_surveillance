@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_024316) do
+ActiveRecord::Schema.define(version: 2020_08_27_044230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,6 +216,8 @@ ActiveRecord::Schema.define(version: 2020_08_10_024316) do
     t.boolean "enable_email_notification", default: false
     t.integer "unlock_event_duration", default: 7
     t.string "logo"
+    t.integer "national_zoom_level", default: 7
+    t.integer "provincial_zoom_level", default: 10
   end
 
   create_table "sections", force: :cascade do |t|

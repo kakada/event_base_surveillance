@@ -5,13 +5,14 @@
 # Table name: chat_groups
 #
 #  id         :bigint           not null, primary key
+#  chat_type  :string           default("group")
 #  is_active  :boolean          default(TRUE)
 #  provider   :string
 #  reason     :text
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  chat_id    :integer
+#  chat_id    :string
 #  program_id :integer
 #
 

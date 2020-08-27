@@ -20,3 +20,8 @@ en:
       other: '%{count} days'
     day: 'Day'
     logo: Logo
+    map_zoom_level: Map zoom level
+    national_zoom_level: National map zoom level
+    provincial_zoom_level: Provincial map zoom level
+    national: National
+    provincial: Provincial
