@@ -9,7 +9,7 @@
 
         - elsif fv.field_type == 'Fields::FileField'
           %div
-            %a.link{href: "#{ENV['HOST_URL']}#{URI.decode(download_path(file: fv.file_url))}"}= fv.file_url.split('/').last
+            %a.link{href: "#{ENV['HOST_URL']}#{URI.decode(download_path(file: fv.file.path))}"}= fv.file_identifier
 
         - else
           = fv.html_tag.html_safe
