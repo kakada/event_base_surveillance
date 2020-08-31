@@ -13,7 +13,7 @@
         %i.far.fa-trash-alt
 
       %small.form-text.text-muted
-        = link_to f.object.file_url.split('/').last, download_path(file: f.object.file_url), target: "_blank", style:'color: #007bff'
+        = link_to f.object.file_identifier, download_path(file: f.object.file.path), target: "_blank", style:'color: #007bff'
 
   - if error_msg.present?
     .invalid-feedback= error_msg.join('; ')

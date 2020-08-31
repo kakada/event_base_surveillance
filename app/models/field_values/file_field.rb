@@ -25,8 +25,8 @@ module FieldValues
     def html_tag
       "
         <div>
-          <a href='#{Rails.application.routes.url_helpers.download_path(file: file_url)}' target='_blank' style='color: #007bff'>
-            #{file_url.split('/').last}
+          <a href='#{Rails.application.routes.url_helpers.download_path(file: file.path)}' target='_blank' style='color: #007bff'>
+            #{file_identifier}
           </a>
         </div>
       "
