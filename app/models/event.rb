@@ -4,16 +4,23 @@
 #
 # Table name: events
 #
-#  close         :boolean          default(FALSE)
-#  event_date    :datetime
-#  link_uuid     :string
-#  location_code :string
-#  uuid          :string(36)       not null, primary key
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  creator_id    :integer
-#  event_type_id :integer
-#  program_id    :integer
+#  close                  :boolean          default(FALSE)
+#  deleted_at             :datetime
+#  event_date             :datetime
+#  link_uuid              :string
+#  location_code          :string
+#  lockable_at            :datetime
+#  uuid                   :string(36)       not null, primary key
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  conclude_event_type_id :integer
+#  creator_id             :integer
+#  event_type_id          :integer
+#  program_id             :integer
+#
+# Indexes
+#
+#  index_events_on_deleted_at  (deleted_at)
 #
 
 class Event < ApplicationRecord

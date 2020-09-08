@@ -1,0 +1,25 @@
+#map-zoom-level.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'map-zoom-level', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      .modal-header
+        .flex-row-vertical-center
+          %h5#exampleModalLabel.modal-title
+            = t('program.map_zoom_level')
+
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+
+      .modal-body.form-inline
+        .flex-row-vertical-center.flex-grow-1.mb-2
+          %label= t('program.national_zoom_level')
+          .flex-grow-1
+          = f.input :national_zoom_level, label: false
+
+        .flex-row-vertical-center.flex-grow-1
+          %label= t('program.provincial_zoom_level')
+          .flex-grow-1
+          = f.input :provincial_zoom_level, label: false
+
+      .modal-footer
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
+        = f.submit t('shared.save'), class: 'btn btn-primary'

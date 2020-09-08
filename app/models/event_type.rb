@@ -5,15 +5,16 @@
 # Table name: event_types
 #
 #  id         :bigint           not null, primary key
-#  name       :string           not null
-#  user_id    :integer
-#  program_id :integer
-#  shared     :boolean
+#  code       :string
 #  color      :string
 #  default    :boolean          default(FALSE)
+#  guideline  :string
+#  name       :string           not null
+#  shared     :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  code       :string
+#  program_id :integer
+#  user_id    :integer
 #
 
 class EventType < ApplicationRecord
