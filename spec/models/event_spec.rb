@@ -108,11 +108,12 @@ RSpec.describe Event, type: :model do
   end
 
   describe ".filter" do
-    let!(:event1) { create(:event) }
+    let!(:event_type) { create(:event_type, name: 'Covid19') }
+    let!(:event1) { create(:event, event_type: event_type) }
     let!(:event2) { create(:event) }
 
     it { expect(Event.filter({keyword: "suspected_event : "}).length).to eq(2) }
-    it { expect(Event.filter({keyword: "suspected_event : #{event1.event_type_name[0..1]}" }).length).to eq(1) }
+    it { expect(Event.filter({keyword: "suspected_event : covi"}).length).to eq(1) }
   end
 
   private
