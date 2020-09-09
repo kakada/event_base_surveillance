@@ -112,8 +112,8 @@ RSpec.describe Event, type: :model do
     let!(:event1) { create(:event, event_type: event_type) }
     let!(:event2) { create(:event) }
 
-    it { expect(Event.filter({keyword: "suspected_event : "}).length).to eq(2) }
-    it { expect(Event.filter({keyword: "suspected_event : covi"}).length).to eq(1) }
+    it { expect(Event.filter({keyword: "suspected_event : "}).count).to eq(2) }
+    it { expect(Event.filter({keyword: "suspected_event : covi"}).count).to eq(1) }
   end
 
   private
