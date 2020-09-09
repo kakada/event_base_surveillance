@@ -107,6 +107,15 @@ RSpec.describe Event, type: :model do
     it { expect(event2.unlockable?).to eq(false) }
   end
 
+  describe ".filter" do
+    let!(:event_type) { create(:event_type, name: 'Covid19') }
+    let!(:event1) { create(:event, event_type: event_type) }
+    let!(:event2) { create(:event) }
+
+    it { expect(Event.filter({keyword: "suspected_event : "}).count).to eq(2) }
+    it { expect(Event.filter({keyword: "suspected_event : covi"}).count).to eq(1) }
+  end
+
   private
     def create_field_value(event, code, value)
       root_fields = event.milestone.fields
