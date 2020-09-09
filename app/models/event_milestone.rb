@@ -18,14 +18,14 @@ class EventMilestone < ApplicationRecord
   include Events::FieldValueValidation
   include Events::TraceableField
 
+  attr_accessor :conclude_event_type_id
+
   belongs_to :event, foreign_key: :event_uuid
   belongs_to :milestone
   belongs_to :program
   belongs_to :submitter, class_name: 'User', optional: true
   has_many   :field_values, as: :valueable, dependent: :destroy
   has_many   :tracings, as: :traceable, dependent: :destroy
-
-  accepts_nested_attributes_for :event
 
   # History
   has_associated_audits
@@ -36,6 +36,7 @@ class EventMilestone < ApplicationRecord
   # Callback
   after_create :set_event_progress
   after_create :set_event_to_close, if: -> { milestone.final? }
+  after_commit :set_event_conclude_event_type_id, if: -> { conclude_event_type_id.present? }, on: [:create, :update]
 
   # Nested attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -78,5 +79,9 @@ class EventMilestone < ApplicationRecord
     def set_event_to_close
       event.close = true
       event.save
+    end
+
+    def set_event_conclude_event_type_id
+      event.update(conclude_event_type_id: conclude_event_type_id)
     end
 end
