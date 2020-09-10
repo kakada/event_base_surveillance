@@ -42,12 +42,10 @@ module Events
       def event_milestone_params
         params.require(:event_milestone).permit(
           :milestone_id,
+          :conclude_event_type_id,
           field_values_attributes: [
             :id, :field_id, :field_code, :value, :image, :file, :image_cache, :_destroy, properties: {}, values: []
           ],
-          event_attributes: [
-            :id, :conclude_event_type_id
-          ]
         ).merge(
           submitter_id: current_user.id,
           program_id: current_program.id
