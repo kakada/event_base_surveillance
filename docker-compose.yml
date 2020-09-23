@@ -47,13 +47,13 @@ services:
     image: redis:5.0.6
 
   elasticsearch:
-    image: elasticsearch:7.4.1
+    image: elasticsearch:7.9.1
     environment:
       - discovery.type=single-node
       - ELASTIC_PASSWORD=elastic
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - xpack.security.enabled=true
-    volumes: 
+    volumes:
       - elastic:/usr/share/elasticsearch/data
     healthcheck:
       test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
