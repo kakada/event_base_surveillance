@@ -1,24 +1,18 @@
 %nav#sidebar
   #sidebarCollapse.sidebar-header
-    .d-flex.w-100.align-items-center
-      %h3
-        .d-flex
-          - if current_program.present?
-            .image-wrapper.thumbnail.mr-2
-              = image_tag current_program.logo_or_default
-
-          .d-flex.flex-column
-            = ENV['APP_SHORTCUT_NAME']
-            %span.mt-1{style: 'font-size: 12px'}= "#{current_user.full_name}@#{current_program.try(:name)}"
-
-      .flex-grow-1
-
-      %strong.mr-2
-        - if current_program.present?
-          .image-wrapper.thumbnail
+    .d-flex.w-100.align-items-center.justify-content-center
+      - if current_program.present?
+        %div
+          .image-wrapper.thumbnail.mr-2
             = image_tag current_program.logo_or_default
-        - else
-          = ENV['APP_SHORTCUT_NAME']
+
+      .long-label.flex-column.mr-1.flex-grow-1
+        %h3= ENV['APP_SHORTCUT_NAME']
+        .email.mt-1= "#{current_user.full_name}@#{current_program.try(:name)}"
+
+      - unless current_program.present?
+        .short-label
+          %strong.ml-3.mr-1= ENV['APP_SHORTCUT_NAME']
 
       %span
         %i.fas.fa-align-left
