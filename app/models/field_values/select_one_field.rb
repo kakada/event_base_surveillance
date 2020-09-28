@@ -23,6 +23,8 @@
 module FieldValues
   class SelectOneField < ::FieldValue
     def es_value
+      return value if field.nil?
+
       field.field_options.find_by(value: value).try(:name) || value
     end
 
