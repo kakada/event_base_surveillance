@@ -17,4 +17,15 @@ FactoryBot.define do
       value       { rand(1...10) }
     end
   end
+
+  factory :field_value_select_one, class: 'FieldValues::SelectOneField' do
+    valueable_id    { create(:event).id }
+    valueable_type  { 'Event' }
+
+    trait :with_hotline_option do
+      field_id    { valueable.milestone.fields.find_by(code: :source_of_information).id }
+      field_code  { field.code }
+      value       { "hotline" }
+    end
+  end
 end
