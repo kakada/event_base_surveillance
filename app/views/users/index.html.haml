@@ -23,7 +23,7 @@
       %tbody
         - @users.each_with_index do |user, index|
           %tr
-            %td= index + 1
+            %td= @pagy.from + index
             %td= user.full_name
             %td= user.email
             %td= user.role.titlecase
