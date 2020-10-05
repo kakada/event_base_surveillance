@@ -9,6 +9,15 @@
   = render partial: "shared/no_data", locals: { items: @users }
 
   - if @users.present?
+    .pagy-wrapper
+      .flex-row.flex1
+        .flex1.flex-row-vertical-center
+          %span= t('user.pagination_title', from: @pagy.from, to: @pagy.to, total: @pagy.count).html_safe
+
+        - if @pagy.pages > 1
+          != pagy_bootstrap_nav(@pagy)
+
+  - if @users.present?
     %table.table.table-hover.medium-width
       %thead
         %tr
@@ -23,7 +32,7 @@
       %tbody
         - @users.each_with_index do |user, index|
           %tr
-            %td= index + 1
+            %td= @pagy.from + index
             %td= user.full_name
             %td= user.email
             %td= user.role.titlecase
