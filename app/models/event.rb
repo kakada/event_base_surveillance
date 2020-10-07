@@ -82,21 +82,11 @@ class Event < ApplicationRecord
 
   # Class Methods
   def self.filter(params = {})
-    keywords = get_keywords(params[:keyword])
     scope = all
-    scope = scope.joins(:event_type).where('LOWER(event_types.name) LIKE ?', "%#{keywords[1].downcase}%") if (keywords.length > 1) && keywords[0] == 'suspected_event'
-    scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', keywords[0], keywords[1]) if (keywords.length > 1) && keywords[0] != 'suspected_event'
+    scope = filter_by_keyword(scope, params)
     scope = scope.where('event_date >= ?', params[:start_date]) if params[:start_date].present?
     scope = scope.where(event_type_id: params[:event_type_id]) if params[:event_type_id].present?
-    scope = scope.joins(:event_type).where('events.uuid LIKE ? OR LOWER(event_types.name) LIKE ?', "%#{params[:search]}%", "%#{params[:search].downcase}%") if params[:search].present?
     scope
-  end
-
-  # "risk_level: 'high'" => ["risk_level", "high"]
-  def self.get_keywords(keyword)
-    return [] unless keyword.present?
-
-    keyword.gsub(/\s/, '').gsub(/"/, '').gsub(/'/, '').split(':')
   end
 
   # Instant Methods
@@ -149,6 +139,30 @@ class Event < ApplicationRecord
   end
 
   private
+    def self.filter_by_keyword(scope, params)
+      keywords = get_keywords(params[:keyword])
+
+      return scope if keywords.length < 2
+
+      case keywords[0]
+      when 'id'
+        scope = scope.where(uuid: keywords[1])
+      when 'suspected_event'
+        scope = scope.joins(:event_type).where('LOWER(event_types.name) LIKE ?', "%#{keywords[1].downcase}%")
+      else
+        scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', keywords[0], keywords[1])
+      end
+
+      scope
+    end
+
+    # "risk_level: 'high'" => ["risk_level", "high"]
+    def self.get_keywords(keyword)
+      return [] unless keyword.present?
+
+      keyword.gsub(/\s/, '').gsub(/"/, '').gsub(/'/, '').split(':')
+    end
+
     def secure_uuid
       self.uuid ||= SecureRandom.hex(4)
 

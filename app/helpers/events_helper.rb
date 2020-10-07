@@ -2,7 +2,7 @@
 
 module EventsHelper
   def option_fields
-    fields = [{ code: 'suspected_event' }].concat(Field.roots).map do |field|
+    fields = [{code: 'id'}, { code: 'suspected_event' }].concat(Field.roots).map do |field|
       "<li class='field-code pointer'>#{field[:code]}</li>"
     end
 
