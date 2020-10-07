@@ -107,6 +107,17 @@ RSpec.describe Event, type: :model do
     it { expect(event2.unlockable?).to eq(false) }
   end
 
+  describe '#event_type_changed?' do
+    let!(:event_type) { create(:event_type) }
+    let!(:event1) { create(:event, close: true, event_type_id: event_type.id, conclude_event_type_id: event_type.id) }
+    let!(:event2) { create(:event, close: true, conclude_event_type_id: event_type.id) }
+    let!(:event3) { create(:event, close: false) }
+
+    it { expect(event1.event_type_changed?).to eq(false) }
+    it { expect(event2.event_type_changed?).to eq(true) }
+    it { expect(event3.event_type_changed?).to eq(false) }
+  end
+
   describe ".filter" do
     let!(:event_type) { create(:event_type, name: 'Covid19') }
     let!(:event1) { create(:event, event_type: event_type) }

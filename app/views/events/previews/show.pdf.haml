@@ -6,7 +6,7 @@
 
       %h3= "#{@event.event_type_name} "
 
-      - if @event.conclude_event_type_name.present?
+      - if @event.event_type_changed?
         .arrow-wrapper
           = wicked_pdf_image_tag 'long-arrow-alt-right-solid.png', :width => "24"
 

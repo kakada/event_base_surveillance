@@ -148,6 +148,10 @@ class Event < ApplicationRecord
     close? && lockable_at.nil?
   end
 
+  def event_type_changed?
+    conclude_event_type_id.present? && event_type_id != conclude_event_type_id
+  end
+
   private
     def secure_uuid
       self.uuid ||= SecureRandom.hex(4)
