@@ -125,6 +125,7 @@ RSpec.describe Event, type: :model do
 
     it { expect(Event.filter({keyword: "suspected_event : "}).count).to eq(2) }
     it { expect(Event.filter({keyword: "suspected_event : covi"}).count).to eq(1) }
+    it { expect(Event.filter({keyword: "id : #{event1.id}"}).count).to eq(1) }
   end
 
   private
