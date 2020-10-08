@@ -4,7 +4,7 @@
       .input-group
         = text_field_tag(:keyword, params[:keyword], class: 'form-control keyword', placeholder: t('event.keyword'), id: 'keyword')
 
-        %a#info.input-group-append.pointer{'data-trigger' => 'focus', 'data-content' => option_fields, 'data-toggle' => 'popover', 'data-html' => 'true', title: "#{t('event.filter_results_that_contain')}: ", href: '#'}
+        %a#info.input-group-append.pointer{'data-trigger' => 'focus', 'data-content' => option_fields, 'data-toggle' => 'popover', 'data-html' => 'true', title: "#{t('event.filter_results_that_contain')}: ", :tabindex => "0"}
           .input-group-text
             %i.fas.fa-info
 
