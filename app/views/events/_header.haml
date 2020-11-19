@@ -1,0 +1,30 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    .flex-row-vertical-center
+      %span.small-color{style: "background-color: #{@event.event_type_color}"}
+        = @event.event_type_name[0]
+
+      %h3.mb-0= "#{@event.event_type_name} "
+
+      - if @event.event_type_changed?
+        %i.fas.fa-long-arrow-alt-right.mr-2.ml-2
+        .small-color{style: "background-color: #{@event.conclude_event_type.color}"}
+          = @event.conclude_event_type_name[0]
+        %h3.mb-0
+          = @event.conclude_event_type_name
+
+      %h3.mb-0
+        = ':'
+        = render 'events/show/tracing_number_field_modal', traceable: @event
+        %span.badge.badge-light= @event.uuid
+
+      = @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
+
+      = render 'btn_download_risk_assessment_guideline'
+
+    .btn-groups
+      - if !@event.close? && policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence
+
+        = link_to t('event.close_event'), new_event_event_milestone_path(event_id: @event.id, milestone_id: milestone.id), class: ['btn btn-danger', ('disabled' unless @event.verified?)]
+
+      = link_to t('event.back'), events_path, class: 'btn btn-info'

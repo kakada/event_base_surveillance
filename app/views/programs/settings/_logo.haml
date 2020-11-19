@@ -1,0 +1,9 @@
+.dotted-line.flex-row
+  %label.flex1= t('program.logo')
+  .d-flex.align-items-center
+    .image-wrapper.thumbnail.mr-1
+      = image_tag current_program.logo_or_default
+
+    %div
+      %a.pointer.badge.badge-info.text-white{'data-target' => '#logo', 'data-toggle' => 'modal'}= t('shared.edit')
+      = render 'modal_logo', f: f

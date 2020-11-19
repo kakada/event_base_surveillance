@@ -1,0 +1,8 @@
+.dotted-line.flex-row
+  %label.flex1= t('program.risk_assessment_guideline')
+  %div
+    = link_to t('shared.download'), download_path(file: current_program.risk_assessment_guideline.path), target: '_blank', class: ['btn btn-link', ('disabled' unless current_program.risk_assessment_guideline.present?)]
+
+    %a.pointer.badge.badge-info.text-white{'data-target' => '#risk-assessment-guideline', 'data-toggle' => 'modal'}= t('shared.edit')
+
+    = render 'modal_risk_assessment_guideline', f: f

@@ -21,6 +21,7 @@ class Program < ApplicationRecord
   include Programs::ElasticsearchConcern
 
   mount_uploader :logo, LogoUploader
+  mount_uploader :risk_assessment_guideline, LogoUploader
 
   belongs_to :creator, class_name: 'User'
   LANGUAGES = [

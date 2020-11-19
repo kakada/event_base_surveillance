@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_27_044230) do
+ActiveRecord::Schema.define(version: 2020_11_19_044406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,6 +218,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_044230) do
     t.string "logo"
     t.integer "national_zoom_level", default: 7
     t.integer "provincial_zoom_level", default: 10
+    t.string "risk_assessment_guideline"
   end
 
   create_table "sections", force: :cascade do |t|
