@@ -18,8 +18,8 @@ RSpec.describe EventMilestone, type: :model do
     it { expect(event_milestone2.save && event_milestone2.errors.messages[:milestone_id]).not_to equal([]) }
   end
 
-  describe ".after_commit" do
-    describe "#set_event_conclude_event_type_id" do
+  describe '.after_commit' do
+    describe '#set_event_conclude_event_type_id' do
       let!(:event) { create(:event) }
 
       context 'conclude_event_type_id is nil' do
@@ -28,7 +28,7 @@ RSpec.describe EventMilestone, type: :model do
         it { expect(event.reload.conclude_event_type_id).to be_nil }
       end
 
-      context "conclude_event_type_id is present" do
+      context 'conclude_event_type_id is present' do
         let!(:event_milestone) { create(:event_milestone, :risk_assessment_with_field_values, event: event, conclude_event_type_id: event.event_type_id) }
 
         it { expect(event.reload.conclude_event_type_id).to eq(event.event_type_id) }

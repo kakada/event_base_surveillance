@@ -25,7 +25,7 @@ FactoryBot.define do
     trait :with_hotline_option do
       field_id    { valueable.milestone.fields.find_by(code: :source_of_information).id }
       field_code  { field.code }
-      value       { "hotline" }
+      value       { 'hotline' }
     end
   end
 end
