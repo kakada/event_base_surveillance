@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe TracingService do
   describe '#text_tracings' do
     let!(:event_milestone) { create(:event_milestone, :risk_assessment_with_field_values) }
-    let!(:event) { event_milestone.event}
+    let!(:event) { event_milestone.event }
     let!(:risk_level) { event.program.fields.find_by(code: 'risk_level') }
     let(:tracings) { TracingService.new(event).text_tracings }
 

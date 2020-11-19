@@ -11,6 +11,7 @@
 #  name                      :string
 #  national_zoom_level       :integer          default(7)
 #  provincial_zoom_level     :integer          default(10)
+#  risk_assessment_guideline :string
 #  unlock_event_duration     :integer          default(7)
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null

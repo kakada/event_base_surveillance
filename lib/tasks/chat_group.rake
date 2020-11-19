@@ -9,12 +9,11 @@ namespace :chat_group do
   end
 
   private
+    def migrate_chat_group(supergroup)
+      chat_group = ChatGroup.where(title: supergroup.title, chat_type: ChatGroup::TELEGRAM_GROUP).first
+      return if chat_group.nil?
 
-  def migrate_chat_group(supergroup)
-    chat_group = ChatGroup.where(title: supergroup.title, chat_type: ChatGroup::TELEGRAM_GROUP).first
-    return if chat_group.nil?
-
-    chat_group.update(chat_id: supergroup.chat_id, chat_type: supergroup.chat_type)
-    supergroup.destroy
-  end
+      chat_group.update(chat_id: supergroup.chat_id, chat_type: supergroup.chat_type)
+      supergroup.destroy
+    end
 end
