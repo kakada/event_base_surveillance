@@ -30,7 +30,7 @@ class Milestone < ApplicationRecord
   enum status: {
     root: 1,
     verified: 2,
-    final: 3
+    final: 3,
   }
 
   STATUSES = statuses.keys.map { |r| [r.titlecase, r] }

@@ -3,4 +3,14 @@
     border-bottom: 1px dotted;
     margin-bottom: 1em;
   }
+
+  .file-control-wrapper {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    input:focus {
+      outline: none;
+    }
+  }
 }

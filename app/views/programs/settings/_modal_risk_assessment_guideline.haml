@@ -1,0 +1,28 @@
+#risk-assessment-guideline.modal.fade{'aria-hidden' => 'true', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      .modal-header
+        .flex-row-vertical-center
+          %h5.modal-title
+            = t('program.risk_assessment_guideline')
+
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+
+      .modal-body.guideline-wrapper
+        .form-control.file-control-wrapper{ class: ('d-none' if f.object.risk_assessment_guideline.present?) }
+          = f.file_field :risk_assessment_guideline, class: 'guideline-input'
+
+        - if f.object.risk_assessment_guideline.present?
+          .remove-guideline-wrapper
+            .d-flex.align-items-center
+              = f.hidden_field :remove_risk_assessment_guideline, class: 'guideline-input-destroy'
+              .remove-guideline.text-danger.mr-2.pointer
+                %i.far.fa-trash-alt
+
+              = link_to download_path(file: f.object.risk_assessment_guideline.path), target: "_blank", class: 'btn btn-link p-0 d-block text-truncate' do
+                = f.object.risk_assessment_guideline_identifier
+
+      .modal-footer
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
+        = f.submit t('shared.save'), class: 'btn btn-primary'

@@ -5,6 +5,8 @@ EBS.ProgramsSettingsShow = do ->
     onChangeTelegramToggle()
     onChangeEmailToggle()
     onChangeLanguage()
+    onRemoveGuideline()
+    onChangeGuideline()
 
     EBS.ProgramsNew.init()
 
@@ -49,5 +51,17 @@ EBS.ProgramsSettingsShow = do ->
       success: (result) ->
         !!callback && callback()
     });
+
+  onRemoveGuideline = ->
+    $(document).on 'click', '.remove-guideline', (e) =>
+      wrapper = $(e.target).parents('.guideline-wrapper')
+      wrapper.find('.guideline-input').parent().removeClass('d-none')
+      wrapper.find('.guideline-input-destroy').val(1)
+      wrapper.find('.remove-guideline-wrapper').hide()
+
+  onChangeGuideline = ->
+    $(document).on 'change', '.guideline-input', (e) =>
+      wrapper = $(e.target).parents('.guideline-wrapper')
+      !!wrapper.find('.guideline-input-destroy') && wrapper.find('.guideline-input-destroy').val(0)
 
   { init: init }

@@ -5,53 +5,10 @@
 
   .w-50.view-center
     = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
-      .dotted-line.flex-row
-        %label.flex1= t('program.logo')
-        .d-flex.align-items-center
-          .image-wrapper.thumbnail.mr-1
-            = image_tag current_program.logo_or_default
-
-          %div
-            %a.pointer.badge.badge-info.text-white{'data-target' => '#logo', 'data-toggle' => 'modal'}= t('shared.edit')
-            = render 'modal_logo', f: f
-
-
-      - bot = current_program.telegram_bot || current_program.build_telegram_bot
-      = f.fields_for :telegram_bot, bot do |ff|
-        .dotted-line.flex-row
-          %label.flex1
-            = t('program.telegram_notification')
-
-            - if bot.enabled? && bot.actived?
-              %i.far.fa-check-circle.icon-green{'data-toggle'=> 'tooltip', title: t('telegram_bot.valid_bot')}
-            - else
-              %i.far.fa-times-circle.icon-red{'data-toggle'=> 'tooltip', title: t('telegram_bot.invalid_bot')}
-
-          %div
-            %a.pointer.badge.badge-info.text-white{'data-target' => '#telegram', 'data-toggle' => 'modal'}= t('shared.edit')
-
-            = render 'modal_telegram', f: ff
-
-      .dotted-line.flex-row
-        %label.flex1= t('program.email_notification')
-        = f.input :enable_email_notification, label: false, input_html: { 'data-size' => 'small' }
-
-      .dotted-line.flex-row
-        %label.flex1= t('program.unlock_event_duration')
-        %div
-          = t('program.unlock_event_days', count: current_program.unlock_event_duration)
-          %a.pointer.badge.badge-info.text-white{'data-target' => '#unlock-event-duration', 'data-toggle' => 'modal'}= t('shared.edit')
-
-          = render 'modal_unlock_event_duration', f: f
-
-      .dotted-line.flex-row
-        %label.flex1= t('program.map_zoom_level')
-        %div
-          = "#{t('program.national')}: #{current_program.national_zoom_level}, #{t('program.provincial')}: #{current_program.provincial_zoom_level}"
-          %a.pointer.badge.badge-info.text-white{'data-target' => '#map-zoom-level', 'data-toggle' => 'modal'}= t('shared.edit')
-
-          = render 'modal_map_zoom_level', f: f
-
-      .dotted-line.flex-row
-        %label.flex1= t('program.language')
-        = f.input :language_code, label: false, collection: Program::LANGUAGES, include_blank: false
+      = render 'logo', f: f
+      = render 'telegram_bot', f: f
+      = render 'email_notification', f: f
+      = render 'unlock_event_duration', f: f
+      = render 'map_zoom_level', f: f
+      = render 'switch_language', f: f
+      = render 'risk_assessment_guideline', f: f

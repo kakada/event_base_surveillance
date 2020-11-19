@@ -1,0 +1,3 @@
+- if @event.event_milestones.present? && current_program.risk_assessment_guideline.present?
+  %a.btn.btn-sm{ "data-toggle" => "tooltip", "data-placement" => "right", "title" => t('program.download_risk_assessment_guideline'), href: download_path(file: current_program.risk_assessment_guideline.path), target: '_blank'}
+    %i.fas.fa-download

@@ -22,7 +22,7 @@ module Programs
       def program_params
         params.require(:program).permit(
           :enable_email_notification, :language_code, :unlock_event_duration, :logo, :remove_logo,
-          :national_zoom_level, :provincial_zoom_level,
+          :national_zoom_level, :provincial_zoom_level, :risk_assessment_guideline, :remove_risk_assessment_guideline,
           telegram_bot_attributes: [
             :token, :username, :enabled
           ]
