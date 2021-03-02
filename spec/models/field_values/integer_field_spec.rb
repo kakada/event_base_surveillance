@@ -3,104 +3,108 @@
 require 'rails_helper'
 
 RSpec.describe FieldValues::DateField do
-  describe '#valid_value?' do
-    let(:fv) { create(:field_value, :integer) }
-    let(:field_value) { fv.type.constantize.new(fv.attributes) }
+  let(:fv) { create(:field_value, :integer) }
+  let(:field_value) { fv.type.constantize.new(fv.attributes) }
 
-    it { expect(field_value.valid_value?).to be_truthy }
+  describe '#validate value' do
+    before {
+      allow(field_value.field).to receive(:required?).and_return(false)
+    }
 
     context 'blank value' do
       it 'is valid' do
         field_value.value = ''
-        expect(field_value.valid_value?).to be_truthy
+        expect(field_value.valid?).to be_truthy
       end
     end
 
-    it 'is invalid' do
-      field_value.value = 'invalid number'
-      expect(field_value.valid_value?).to be_falsey
+    context 'value is string of number' do
+      it 'is valid' do
+        field_value.value = '1'
+        expect(field_value.valid?).to be_truthy
+      end
+    end
+
+    context 'value is string' do
+      it 'is invalid' do
+        field_value.value = 'invalid number'
+        expect(field_value.valid?).to be_falsey
+      end
     end
   end
 
-  describe '#valid_condition?' do
-    let(:event) { create(:event) }
-    let(:fv) { create(:field_value, :integer, valueable_id: event.id) }
-    let(:field_value) { fv.type.constantize.new(fv.attributes) }
-    let(:field) { field_value.field }
+  describe '#validate condition from, to' do
+    context 'no condition from and to' do
+      before {
+        allow(field_value.field).to receive(:validations).and_return({})
+      }
 
-    context 'no validations' do
-      before :each do
-        field_value.field.validations = {}
-      end
-
-      it { expect(field_value.valid_condition?).to be_truthy }
+      it { expect(field_value.valid?).to be_truthy }
     end
 
-    context 'validations from and to is blank' do
-      before :each do
-        field.update_attributes(validations: { from: '', to: '' })
-      end
+    context 'both from and to conditions are blank' do
+      before {
+        allow(field_value.field).to receive(:validations).and_return({ from: '', to: '' })
+      }
 
-      it { expect(field_value.valid_condition?).to be_truthy }
+      it { expect(field_value.valid?).to be_truthy }
     end
 
-    context 'has only from validations' do
-      before :each do
-        field.update_attributes(validations: { from: '5', to: '' })
-      end
+    context 'only from condition exist' do
+      before {
+        allow(field_value).to receive(:validations).and_return({ from: '5', to: '' })
+      }
 
       it 'is valid' do
         field_value.value = '6'
-
-        expect(field_value.valid_condition?).to be_truthy
+        expect(field_value.valid?).to be_truthy
       end
 
       it 'is invalid' do
         field_value.value = '4'
-
-        expect(field_value.valid_condition?).to be_falsey
+        expect(field_value.valid?).to be_falsey
       end
     end
 
-    context 'has only to validations' do
-      before :each do
-        field.update_attributes(validations: { from: '', to: 5 })
-      end
+    context 'only to condition exist' do
+      before {
+        allow(field_value.field).to receive(:validations).and_return({ from: '', to: '5' })
+      }
 
       it 'is valid' do
         field_value.value = '4'
 
-        expect(field_value.valid_condition?).to be_truthy
+        expect(field_value.valid?).to be_truthy
       end
 
       it 'is invalid' do
         field_value.value = '6'
 
-        expect(field_value.valid_condition?).to be_falsey
+        expect(field_value.valid?).to be_falsey
       end
     end
 
-    context 'has both from and to validations' do
-      before :each do
-        field.update_attributes(validations: { from: '5', to: '6' })
-      end
+    context 'both from and to condition exist' do
+      before {
+        allow(field_value.field).to receive(:validations).and_return({ from: '5', to: '6' })
+      }
 
       it 'is valid' do
         field_value.value = '5'
 
-        expect(field_value.valid_condition?).to be_truthy
+        expect(field_value.valid?).to be_truthy
       end
 
-      it 'is return false' do
+      it 'is invalid' do
         field_value.value = '4'
 
-        expect(field_value.valid_condition?).to be_falsey
+        expect(field_value.valid?).to be_falsey
       end
 
       it 'is invalid' do
         field_value.value = '7'
 
-        expect(field_value.valid_condition?).to be_falsey
+        expect(field_value.valid?).to be_falsey
       end
     end
   end

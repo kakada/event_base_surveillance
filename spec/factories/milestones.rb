@@ -6,9 +6,14 @@ FactoryBot.define do
     program
     creator_id { program.creator_id }
 
+    trait :verification do
+      name          {'Verification'}
+      display_order { 2 }
+    end
+
     trait :risk_assessment do
-      name       { 'Risk Assessment' }
-      is_default { false }
+      name          { 'Risk Assessment' }
+      display_order { 3 }
       sections_attributes {
         [{
           name:  'Additional Fields',

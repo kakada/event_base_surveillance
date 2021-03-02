@@ -22,32 +22,19 @@
 
 module FieldValues
   class DateField < ::FieldValue
-    # Validation
-    validate :valid_value?
-    validate :valid_condition?
+    include ::FieldValues::RelevantFieldValidation
+    include ::FieldValues::FromToValidation
 
-    def valid_value?
-      return true if value.blank?
-
-      iso_date = decode(value)
-      time = Time.iso8601(iso_date)
-      iso_value = format_date_iso_string(time)
-      iso_value == iso_date
-    rescue StandardError
-      false
-    end
-
-    def valid_condition?
-      return true if value.blank? || field_validations.blank? || (field_validations[:from].blank? && field_validations[:to].blank?)
-
-      iso_date = decode(value)
-      is_valid = iso_date >= decode(field_validations[:from]) if field_validations[:from].present?
-      is_valid = iso_date <= decode(field_validations[:to]) if field_validations[:to].present?
-      is_valid = iso_date >= decode(field_validations[:from]) && iso_date <= decode(field_validations[:to]) if field_validations[:from].present? && field_validations[:to].present?
-      is_valid
-    end
+    validate  :validate_value, if: -> { value.present? }
 
     private
+      def validate_value
+        iso_date = decode(value)
+        iso_value = format_date_iso_string(Time.iso8601(iso_date))
+
+        errors.add(:value, I18n.t('shared.is_invalid_value')) unless iso_value == iso_date
+      end
+
       def decode(y_m_d_value)
         y_m_d_value.present? ? convert_to_iso8601_string(y_m_d_value) : nil
       rescue StandardError

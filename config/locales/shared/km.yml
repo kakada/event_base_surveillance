@@ -11,7 +11,10 @@ km:
     reset: 'កំណត់ឡើងវិញ'
     cannot_be_blank: 'មិនអាចទទេ'
     is_invalid_value: 'គឺជាតម្លៃមិនត្រឹមត្រូវ'
-    value_should_be_from_to: "តម្លៃគួរតែចាប់បី %{from} ដល់ %{to}"
+    must_be_from_to: "តម្លៃតរ្ូវតែចាប់ពី %{from} ដល់ %{to}"
+    must_be_from: "តម្លៃតរ្ូវតែចាប់ពី %{from}"
+    must_not_over: "តម្លៃមិនតរ្ូវលើសពី %{to}"
+    must_be: "ត្រូវតែចាប់ពី"
     search: 'ស្វែងរក'
     please_select: សូមជ្រើសរើស
     status_on: 'បើក'

@@ -3,30 +3,39 @@
     .field-wrapper
       %button.btn.move{type: :button}
 
-      .wrapper.flex-row-vertical-center
-        %button.btn.collapse-trigger.mr-1{ type: :button }
-          %i.fas.fa-caret-right
+      .flex-row.flex1
+        .wrapper.flex-row-vertical-center
+          %button.btn.collapse-trigger.mr-1{ type: :button }
+            %i.fas.fa-caret-right
 
-        %abbr.abbr-required{ :title => 'required', class: ('hidden' if !form.object.required) } *
+          %abbr.abbr-required{ :title => 'required', class: ('hidden' if !form.object.required) } *
 
-        .flex-column.flex1
-          = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.to_json
-          = form.hidden_field :code
-          = form.hidden_field :required
-          = form.hidden_field :is_default
-          = form.hidden_field :entry_able
-          = form.hidden_field :display_order, class: 'display-order'
-          = form.text_field :name, placeholder: t('milestone.field_name'), class: 'form-control field-name'
-          = form.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
+          .flex-column.flex1
+            = form.hidden_field :field_type, class: 'field-type', 'data-field' => form.object.to_json
+            = form.hidden_field :code
+            = form.hidden_field :required
+            = form.hidden_field :is_default
+            = form.hidden_field :entry_able
+            = form.hidden_field :display_order, class: 'display-order'
+            = form.text_field :name, placeholder: t('milestone.field_name'), class: 'form-control field-name'
+            = form.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
 
-        - if form.object.required
-          .as-title{style: 'font-weight: normal'}= t('milestone.required')
+          - if form.object.required
+            .as-title{style: 'font-weight: normal'}= t('milestone.required')
 
-        - unless Field.untrackable_fields.include? form.object.code
-          .form-check
-            = form.check_box :tracking, { class: 'form-check-input' }
-            = form.label :tracking, t('milestone.tracking'), class: 'form-check-label'
+          - unless Field.untrackable_fields.include? form.object.code
+            .form-check
+              = form.check_box :tracking, { class: 'form-check-input' }
+              = form.label :tracking, t('milestone.tracking'), class: 'form-check-label'
+
+        - if %w(Fields::IntegerField Fields::DateField Fields::DateTimeField).include? form.object.field_type
+          .action.flex-column
+            .btn-setting.pointer.flex1.flex-column-horizontal-center
+              %i.fas.fa-cog.icon-gray
 
     = render 'kinds'
     .collapse-content
       = render 'field_option_content', f: form
+
+    .setting-wrapper
+      = render 'milestones/predefined_fields/setting', f: form

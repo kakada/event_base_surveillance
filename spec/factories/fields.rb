@@ -14,6 +14,24 @@ FactoryBot.define do
       required    { true }
     end
 
+    trait :file do
+      field_type  { 'Fields::FileField' }
+    end
+
+    trait :image do
+      field_type  { 'Fields::ImageField' }
+    end
+
+    trait :select_multiple do
+      field_type  { 'Fields::SelectMultipleField' }
+    end
+
+    trait :other_date do
+      name        { 'Other' }
+      field_type  { 'Fields::DateField' }
+      code        { 'other' }
+    end
+
     trait :risk_level_mapping_field do
       name                { 'Risk Level' }
       field_type          { 'Fields::MappingField' }

@@ -1,0 +1,9 @@
+.d-flex.mt-3
+  .column.mr-2
+    %label=t('milestone.condition')
+    = ff.select(:operator, Field.validation_operators, {:include_blank => t('shared.please_select')}, class: ["form-control custom-select"])
+
+  .column
+    %label=t('milestone.relevant_field')
+    - collection = collection.select {|f| f[:code].split('::').last != field.code}.pluck(:name, :code)
+    = ff.select(:relevant_field_code, collection, {:include_blank => t('shared.please_select')}, class: ["form-control custom-select"])

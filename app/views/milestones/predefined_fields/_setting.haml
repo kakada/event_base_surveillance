@@ -1,0 +1,7 @@
+.flex-row
+  %ul.flex-column.items
+    %li.item.validation-trigger.item-setting{'data-target' => '.validation-criteria-content'}= t('milestone.validation_criteria')
+
+  .contents
+    .content.validation-criteria-content.setting-content
+      = render 'milestones/field_validation_content', f: f

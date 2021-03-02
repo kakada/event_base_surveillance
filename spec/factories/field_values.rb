@@ -16,6 +16,24 @@ FactoryBot.define do
       field_code  { field.code }
       value       { rand(1...10) }
     end
+
+    trait :file do
+      field       { build(:field, :file, section: valueable.milestone.sections.default[0], milestone: valueable.milestone) }
+      field_code  { field.code }
+      file        { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "sample.jpg")) }
+    end
+
+    trait :image do
+      field       { build(:field, :image, section: valueable.milestone.sections.default[0], milestone: valueable.milestone) }
+      field_code  { field.code }
+      image       { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "sample.jpg")) }
+    end
+
+    trait :select_multiple do
+      field       { build(:field, :select_multiple, section: valueable.milestone.sections.default[0], milestone: valueable.milestone) }
+      field_code  { field.code }
+      values      { ['option1', 'option2'] }
+    end
   end
 
   factory :field_value_select_one, class: 'FieldValues::SelectOneField' do

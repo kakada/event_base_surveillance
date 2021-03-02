@@ -3,50 +3,23 @@
     %label.label-header= t('milestone.set_validation')
 
     = f.fields_for :validations, OpenStruct.new(f.object.validations) do |ff|
-      .type-validation.flex-row{'data-validation_type' => 'Fields::IntegerField'}
-        .flex-row-vertical-center.flex1.add-margin
-          %label.add-margin= t('milestone.from')
-          = ff.number_field :from, placeholder: 'number', class: 'form-control flex1 '
+      / IntegerField
+      - if f.object.field_type == 'Fields::IntegerField'
+        .type-validation{'data-validation_type' => 'Fields::IntegerField'}
+          = render 'milestones/validations/integer_from_to', ff: ff
+          = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:number), field: f.object
 
-        .flex-row-vertical-center.flex1
-          %label.add-margin= t('milestone.to')
-          = ff.number_field :to, placeholder: 'number', class: 'form-control flex1'
+      / DateField
+      - if f.object.field_type == 'Fields::DateField'
+        .type-validation{'data-validation_type' => 'Fields::DateField'}
+          = render 'milestones/validations/date_from_to', ff: ff
+          = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:dates), field: f.object
 
-      .type-validation.flex-row{'data-validation_type' => 'Fields::DateField'}
-        .flex-row-vertical-center.flex1.add-margin
-          %label.add-margin= t('milestone.from')
-          .input-group.date{'data-provide' => 'datepicker'}
-            = ff.text_field :from, placeholder: "yyyy-mm-dd", class: 'form-control'
-            .input-group-append
-              .input-group-text
-                %i.fas.fa-calendar-alt
-
-        .flex-row-vertical-center.flex1
-          %label.add-margin= t('milestone.to')
-          .input-group.date{'data-provide' => 'datepicker'}
-            = ff.text_field :to, placeholder: "yyyy-mm-dd", class: 'form-control'
-            .input-group-append
-              .input-group-text
-                %i.fas.fa-calendar-alt
-
-      .type-validation.flex-row{'data-validation_type' => 'Fields::DateTimeField'}
-        .flex-row-vertical-center.flex1.add-margin
-          %label.add-margin= t('milestone.from')
-          .input-group{'data-target-input' => 'nearest'}
-            - id = "milestone_fields_attributes_#{f.index}1_validations_from"
-            = ff.text_field :from, class: 'form-control datetimepicker from', autocomplete: 'off', id: id, data: { target: "##{id}", toggle: 'datetimepicker'}, placeholder: 'yyyy-mm-dd hh:mm'
-            .input-group-append{'data-target' => "##{id}", 'data-toggle' => 'datetimepicker'}
-              .input-group-text
-                %i.far.fa-clock
-
-        .flex-row-vertical-center.flex1
-          %label.add-margin= t('milestone.to')
-          .input-group{'data-target-input' => 'nearest'}
-            - id = "milestone_fields_attributes_#{f.index}2_validations_to"
-            = ff.text_field :to, class: 'form-control datetimepicker to', autocomplete: 'off', id: id, data: { target: "##{id}", toggle: 'datetimepicker'}, placeholder: 'yyyy-mm-dd hh:mm'
-            .input-group-append{'data-target' => "##{id}", 'data-toggle' => 'datetimepicker'}
-              .input-group-text
-                %i.far.fa-clock
+      / DateTimeField
+      - if f.object.field_type == 'Fields::DateTimeField'
+        .type-validation{'data-validation_type' => 'Fields::DateTimeField'}
+          = render 'milestones/validations/datetime_from_to', ff: ff, index: f.index
+          = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:dates), field: f.object
 
       - if error_msg = f.object.name.present? && @milestone.errors[f.object.name.downcase].presence
         .invalid-feedback{style: 'display: block'}= error_msg.join('; ')

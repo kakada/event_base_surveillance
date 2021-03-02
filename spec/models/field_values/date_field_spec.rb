@@ -3,104 +3,63 @@
 require 'rails_helper'
 
 RSpec.describe FieldValues::DateField do
-  describe '#valid_value?' do
-    let(:fv) { create(:field_value, :date) }
-    let(:field_value) { fv.type.constantize.new(fv.attributes) }
+  let!(:fv)     { create(:field_value, :date) }
+  let!(:event)  { fv.valueable }
+  let(:field_value) { fv.type.constantize.new(fv.attributes) }
 
-    it { expect(field_value.valid_value?).to be_truthy }
+  describe 'condition validate_relevant_field' do
+    context 'only operator exist' do
+      before {
+        allow(field_value.field).to receive(:validations).and_return({ operator: '>', relevant_field_code: nil })
+      }
 
-    context 'blank value' do
-      it 'is valid' do
-        field_value.value = ''
-        expect(field_value.valid_value?).to be_truthy
-      end
+      it { expect(field_value).not_to receive(:validate_relevant_field).and_call_original }
+      it { expect(field_value.valid?).to be_truthy }
     end
 
-    it 'is invalid' do
-      field_value.value = 'invalid date'
-      expect(field_value.valid_value?).to be_falsey
-    end
-  end
+    context 'only relevant_field_code exist' do
+      before {
+        allow(field_value.field).to receive(:validations).and_return({ operator: nil, relevant_field_code: '1::1::my_date' })
+        field_value.valid?
+      }
 
-  describe '#valid_condition?' do
-    let(:event) { create(:event) }
-    let(:fv) { create(:field_value, :date, valueable_id: event.id) }
-    let(:field_value) { fv.type.constantize.new(fv.attributes) }
-    let(:field) { field_value.field }
-
-    context 'no validations' do
-      before :each do
-        field_value.field.validations = {}
-      end
-
-      it { expect(field_value.valid_condition?).to be_truthy }
+      it { expect(field_value).not_to receive(:validate_relevant_field).and_call_original }
+      it { expect(field_value.valid?).to be_truthy }
     end
 
-    context 'validations from and to is blank' do
-      before :each do
-        field.update_attributes(validations: { from: '', to: '' })
+    context 'both operator and relevant_field_code exist' do
+      let(:section) { create(:section, name: 'Secondary', milestone_id: event.milestone.id) }
+      let(:field_event_date) { fv.field }
+      let(:fv_event_date) { fv }
+
+      let(:field_other_date) { create(:field, :other_date, section: section, milestone_id: event.milestone.id, validations: { operator: '>', relevant_field_code: "#{event.milestone.id}::#{field_event_date.id}::#{field_event_date.code}" }) }
+      let(:fv_other_date) { fv.type.constantize.new(valueable: event, field_id: field_other_date.id, field_code: field_other_date.code, value: Date.today.to_s) }
+
+      context 'relevant_field is blank' do
+        before {
+          allow(fv_other_date).to receive(:relevant_field).and_return(nil)
+        }
+
+        it { expect(fv_other_date.valid?).to be_truthy }
       end
 
-      it { expect(field_value.valid_condition?).to be_truthy }
-    end
+      context 'relevant_field is smaller' do
+        before {
+          fv_event_date.value = Date.yesterday.to_s
+          allow(fv_other_date).to receive(:relevant_field).and_return(fv_event_date)
+        }
 
-    context 'has only from validations' do
-      before :each do
-        field.update_attributes(validations: { from: Date.today.to_s, to: '' })
+        it { expect(fv_other_date.valid?).to be_truthy }
       end
 
-      it 'is valid' do
-        field_value.value = Date.today.to_s
+      context 'relevant_field is bigger' do
+        before {
+          fv_event_date.value = Date.tomorrow.to_s
+          allow(fv_other_date).to receive(:relevant_field).and_return(fv_event_date)
+          allow(fv_other_date).to receive(:relevant_valueable).and_return(fv_event_date.valueable)
+        }
 
-        expect(field_value.valid_condition?).to be_truthy
-      end
-
-      it 'is invalid' do
-        field_value.value = Date.yesterday.to_s
-
-        expect(field_value.valid_condition?).to be_falsey
-      end
-    end
-
-    context 'has only to validations' do
-      before :each do
-        field.update_attributes(validations: { from: '', to: Date.today.to_s })
-      end
-
-      it 'is valid' do
-        field_value.value = Date.today.to_s
-
-        expect(field_value.valid_condition?).to be_truthy
-      end
-
-      it 'is invalid' do
-        field_value.value = Date.tomorrow.to_s
-
-        expect(field_value.valid_condition?).to be_falsey
-      end
-    end
-
-    context 'has both from and to validations' do
-      before :each do
-        field.update_attributes(validations: { from: Date.today.to_s, to: Date.tomorrow.to_s })
-      end
-
-      it 'is valid' do
-        field_value.value = Date.today.to_s
-
-        expect(field_value.valid_condition?).to be_truthy
-      end
-
-      it 'is return false' do
-        field_value.value = Date.yesterday.to_s
-
-        expect(field_value.valid_condition?).to be_falsey
-      end
-
-      it 'is invalid' do
-        field_value.value = (Date.tomorrow + 1).to_s
-
-        expect(field_value.valid_condition?).to be_falsey
+        it { expect(fv_other_date.valid?).to be_falsey }
       end
     end
   end
