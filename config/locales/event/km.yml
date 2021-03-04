@@ -51,3 +51,6 @@ km:
     are_you_sure_to_submit_conclusion: 'តើអ្នកពិតជាចង់បិទព្រឹត្តិការណ៍នេះដែរឬទេ?'
     download_guideline: ទាញយកការណែនាំ
     conclude_event_type: ប្រភេទព្រឹត្តិការណ៍សន្និដ្ឋានចុងក្រោយ
+    all: ទាំងអស់
+    shared: ចែករំលែក
+    all_and_shared: ទាំងអស់ + ចែករំលែក

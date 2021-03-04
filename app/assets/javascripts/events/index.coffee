@@ -28,7 +28,8 @@ EBS.EventsIndex = do ->
       downloadEvent(this)
 
   downloadEvent = (dom)->
-    url = $(dom).attr('href') + '?start_date=' + params.start_date + '&keyword=' + params.keyword + '&template_id=' + $("[name='template_id']").val()
+    url = $(dom).attr('href') + '?' + $('.filter-form').serialize()
+
     window.open(url, '_blank')
 
   { init: init }

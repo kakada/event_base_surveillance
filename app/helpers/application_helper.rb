@@ -12,8 +12,10 @@ module ApplicationHelper
 
   def get_css_active_class(name)
     return 'active' if params['controller'] == name
+  end
 
-    nil
+  def css_active_tab(is_active)
+    return "active" if is_active
   end
 
   def link_to_add_fields(name, f, association, option = {})

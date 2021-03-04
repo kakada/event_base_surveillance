@@ -2,13 +2,13 @@
 
 = f.fields_for :sections, sections do |sf|
   %fieldset.section
-    %legend.d-inline
+    %legend.d-flex.align-items-center
       .d-inline-block
-        = sf.input :name, label: false, placeholder: t('milestone.section_name')
+        = sf.input :name, label: false, placeholder: t('milestone.section_name'), wrapper_html: { class: 'mb-0' }
         = sf.hidden_field :default
 
       .d-inline-block.form-check.form-check-inline
-        = sf.input :display, label: t('milestone.display_as_section'), input_html: {class: 'form-check-inline'}
+        = sf.input :display, label: t('milestone.display_as_section'), input_html: {class: 'form-check-inline'}, wrapper_html: { class: 'mb-0' }
 
     %ol.fields.sortable
       - if @milestone.final?
