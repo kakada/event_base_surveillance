@@ -22,27 +22,18 @@
 
 module FieldValues
   class IntegerField < ::FieldValue
-    # Validation
-    validate :valid_value?
-    validate :valid_condition?
+    include ::FieldValues::RelevantFieldValidation
+    include ::FieldValues::FromToValidation
 
-    def valid_value?
-      return true if value.blank?
+    validate  :validate_value, if: -> { value.present? }
 
-      value.integer?
+    def validate_value
+      errors.add(:value, I18n.t('shared.is_invalid_value')) unless value.integer?
     end
 
-    def valid_condition?
-      return true if value.blank? || field_validations.blank? || (field_validations[:from].blank? && field_validations[:to].blank?)
-
-      num = value.to_i
-      num_from = field_validations[:from].to_i
-      num_to = field_validations[:to].to_i
-
-      is_valid = num >= num_from if field_validations[:from].present?
-      is_valid = num <= num_to if field_validations[:to].present?
-      is_valid = num >= num_from && num <= num_to if field_validations[:from].present? && field_validations[:to].present?
-      is_valid
-    end
+    private
+      def decode(value)
+        value.to_i
+      end
   end
 end

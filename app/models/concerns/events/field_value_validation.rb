@@ -6,7 +6,7 @@ module Events
 
     included do
       validate :validate_required_field, on: %i[create update]
-      validate :validate_field_value_datatype, on: %i[create update]
+      validate :validate_field_value, on: %i[create update]
 
       private
         def validate_required_field
@@ -24,15 +24,12 @@ module Events
           end
         end
 
-        def validate_field_value_datatype
+        def validate_field_value
           field_values.each do |fv|
             field_value = "FieldValues::#{fv.field_type.split('::').last}".constantize.new(fv.attributes)
+            field_value.tmp_valueable = self
 
-            if field_value.valid_value?
-              errors.add fv.field_name.downcase, I18n.t('shared.value_should_be_from_to', from: fv.field_validations[:from], to: fv.field_validations[:to]) unless field_value.valid_condition?
-            else
-              errors.add fv.field_name.downcase, I18n.t('shared.is_invalid_value')
-            end
+            errors.add fv.field_name.downcase, field_value.errors.full_messages.join(', ') unless field_value.valid?
           end
         end
     end

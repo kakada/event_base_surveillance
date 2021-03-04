@@ -1,0 +1,8 @@
+.d-flex
+  .column.mr-2
+    %label= t('milestone.from')
+    = ff.number_field :from, placeholder: 'number', class: 'form-control '
+
+  .column
+    %label= t('milestone.to')
+    = ff.number_field :to, placeholder: 'number', class: 'form-control'

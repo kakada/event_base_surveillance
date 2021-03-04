@@ -36,7 +36,6 @@ class EventsController < ApplicationController
     if @event.update_attributes(event_params)
       redirect_to @event
     else
-      flash.now[:alert] = @event.errors.full_messages
       render :edit
     end
   end

@@ -23,17 +23,22 @@
 class FieldValue < ApplicationRecord
   self.inheritance_column = :type
 
+  # It is required when validate relevant_field in nested attributes
+  # Because on create event or event_milestone, fv.valueable is nil
+  # @Todo: need to refactor
+  attr_accessor :tmp_valueable
+
   mount_uploader :image, ImageUploader
   mount_uploader :file, FileUploader
 
   belongs_to :field
-  belongs_to :valueable, polymorphic: true
+  belongs_to :valueable, polymorphic: true, optional: true
 
   serialize :properties, Hash
 
   delegate :field_type, to: :field, allow_nil: true
   delegate :name, to: :field, prefix: :field, allow_nil: true
-  delegate :validations, to: :field, prefix: :field, allow_nil: true
+  delegate :validations, to: :field, prefix: false, allow_nil: true
 
   # Validation
   before_validation :set_location_value, if: -> { field_type == 'Fields::LocationField' }
@@ -49,14 +54,6 @@ class FieldValue < ApplicationRecord
 
   def es_value
     value
-  end
-
-  def valid_value?
-    true
-  end
-
-  def valid_condition?
-    true
   end
 
   def html_tag

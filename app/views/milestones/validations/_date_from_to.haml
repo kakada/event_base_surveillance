@@ -1,0 +1,16 @@
+.d-flex
+  .column.mr-2
+    %label= t('milestone.from')
+    .input-group.date{'data-provide' => 'datepicker'}
+      = ff.text_field :from, placeholder: "yyyy-mm-dd", class: 'form-control'
+      .input-group-append
+        .input-group-text
+          %i.fas.fa-calendar-alt
+
+  .column
+    %label= t('milestone.to')
+    .input-group.date{'data-provide' => 'datepicker'}
+      = ff.text_field :to, placeholder: "yyyy-mm-dd", class: 'form-control'
+      .input-group-append
+        .input-group-text
+          %i.fas.fa-calendar-alt

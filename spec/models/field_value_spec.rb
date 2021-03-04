@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe FieldValue, type: :model do
   it { is_expected.to belong_to(:field) }
-  it { is_expected.to belong_to(:valueable) }
+  it { is_expected.to belong_to(:valueable).optional }
 
   describe 'after_save #assign_event_date' do
     let!(:event) { create(:event) }

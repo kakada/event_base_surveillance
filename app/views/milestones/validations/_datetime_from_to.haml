@@ -1,0 +1,18 @@
+.d-flex
+  .column.mr-2
+    %label= t('milestone.from')
+    - id = "milestone_fields_attributes_#{index}1_validations_from"
+    .input-group.date.datetimepicker{id: id, "data-target-input" => "nearest"}
+      = ff.text_field :from, class: ['form-control datetimepicker-input'], autocomplete: 'off', data: { target: "##{id}", toggle: 'datetimepicker'}, placeholder: 'yyyy-mm-dd hh:mm'
+      .input-group-append{"data-target" => "##{id}", "data-toggle" => "datetimepicker"}
+        .input-group-text
+          %i.far.fa-clock
+
+  .column
+    %label= t('milestone.to')
+    - id = "milestone_fields_attributes_#{index}2_validations_to"
+    .input-group.date.datetimepicker{id: id, "data-target-input" => "nearest"}
+      = ff.text_field :to, class: ['form-control datetimepicker-input'], autocomplete: 'off', data: { target: "##{id}", toggle: 'datetimepicker'}, placeholder: 'yyyy-mm-dd hh:mm'
+      .input-group-append{"data-target" => "##{id}", "data-toggle" => "datetimepicker"}
+        .input-group-text
+          %i.far.fa-clock
