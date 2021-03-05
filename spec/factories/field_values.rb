@@ -20,13 +20,13 @@ FactoryBot.define do
     trait :file do
       field       { build(:field, :file, section: valueable.milestone.sections.default[0], milestone: valueable.milestone) }
       field_code  { field.code }
-      file        { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "sample.jpg")) }
+      file        { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'sample.jpg')) }
     end
 
     trait :image do
       field       { build(:field, :image, section: valueable.milestone.sections.default[0], milestone: valueable.milestone) }
       field_code  { field.code }
-      image       { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "sample.jpg")) }
+      image       { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'sample.jpg')) }
     end
 
     trait :select_multiple do

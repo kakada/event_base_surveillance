@@ -68,7 +68,7 @@ RSpec.describe FieldValues::FromToValidation do
         }
 
         it { expect(field_value.valid?).to be_falsey }
-        it { expect(field_value.errors[:value]).to eq [I18n.t('shared.must_not_over', to: field_value.validations[:to])]}
+        it { expect(field_value.errors[:value]).to eq [I18n.t('shared.must_not_over', to: field_value.validations[:to])] }
       end
     end
 
@@ -93,7 +93,6 @@ RSpec.describe FieldValues::FromToValidation do
 
         it { expect(field_value.valid?).to be_falsey }
         it { expect(field_value.errors[:value]).to eq [I18n.t('shared.must_be_from_to', from: field_value.validations[:from], to: field_value.validations[:to])] }
-
       end
 
       context 'bigger than to' do

@@ -25,7 +25,7 @@ module FieldValues
     include ::FieldValues::RelevantFieldValidation
     include ::FieldValues::FromToValidation
 
-    validate  :validate_value, if: -> { value.present? }
+    validate :validate_value, if: -> { value.present? }
 
     private
       def validate_value

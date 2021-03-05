@@ -33,7 +33,7 @@ RSpec.describe FieldValues::RelevantFieldValidation do
       let(:relevant_valueable) { verification_conducted_on.send(:relevant_valueable) }
 
       before {
-        verification_conducted_at.update(validations: { operator: '>', relevant_field_code: "#{event.milestone.id}::#{fv.id}::event_date"})
+        verification_conducted_at.update(validations: { operator: '>', relevant_field_code: "#{event.milestone.id}::#{fv.id}::event_date" })
         verification_conducted_on.tmp_valueable = verification
       }
 
@@ -45,7 +45,7 @@ RSpec.describe FieldValues::RelevantFieldValidation do
       let(:relevant_valueable) { risk_assessment_conducted_on.send(:relevant_valueable) }
 
       before {
-        risk_assessment_conducted_at.update(validations: { operator: '>', relevant_field_code: "#{verification.milestone.id}::#{verification_conducted_at.id}::conducted_at"})
+        risk_assessment_conducted_at.update(validations: { operator: '>', relevant_field_code: "#{verification.milestone.id}::#{verification_conducted_at.id}::conducted_at" })
         risk_assessment_conducted_on.tmp_valueable = risk_assessment
       }
 

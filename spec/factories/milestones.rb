@@ -7,7 +7,7 @@ FactoryBot.define do
     creator_id { program.creator_id }
 
     trait :verification do
-      name          {'Verification'}
+      name          { 'Verification' }
       display_order { 2 }
     end
 

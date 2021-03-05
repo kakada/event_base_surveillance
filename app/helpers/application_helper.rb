@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def css_active_tab(is_active)
-    return "active" if is_active
+    return 'active' if is_active
   end
 
   def link_to_add_fields(name, f, association, option = {})
