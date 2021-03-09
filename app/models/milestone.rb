@@ -107,7 +107,7 @@ class Milestone < ApplicationRecord
   def relevant_fields(scope = :dates)
     fields = self.fields.send(scope).to_a
 
-    if display_order > 1 && prev_milestone = program.milestones.find_by(display_order: display_order - 1).presence
+    if display_order.to_i > 1 && prev_milestone = program.milestones.find_by(display_order: display_order - 1).presence
       fields = prev_milestone.fields.send(scope).to_a + fields
     end
 

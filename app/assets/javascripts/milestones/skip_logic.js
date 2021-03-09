@@ -16,6 +16,7 @@ EBS.SkipLogic = (function () {
   function buildAllRelevantFields() {
     $('.setting-wrapper').each(function (_i, skipLogicForm) {
       var relevantValue = $(skipLogicForm).find('.skip-logic-field').val();
+      if (!relevantValue) { return; }
       var relevantValues = relevantValue.split('||');
       var code = relevantValues[0];
       var operator = relevantValues[1];

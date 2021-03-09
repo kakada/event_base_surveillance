@@ -1,8 +1,17 @@
 .fields{'data-field-required' => field.required?, data: skip_logic_data(field)}
   = f.label field.name do
     = field.name
+
     - if field.required?
       %abbr{:title => "required"} *
+
+    - if field.description.present?
+      %i.fa.fa-question-circle{ data: { toggle: "tooltip", html: "true" }, title: description_html(field.description).html_safe }
+
+    - if field.template_file.present?
+      = link_to field.template_file_url, class: 'btn-link ml-2', target: '_blank', download: true, data: { toggle: "tooltip", title: t('event.download_sample_file') } do
+        %i.fas.fa-cloud-download-alt
+        = field.template_name || field.template_file.identifier
 
   - obj = @event.field_values.select{ |a| a.field_id==field.id } || f.object.field_values.new
   = f.fields_for :field_values, obj do |builder|

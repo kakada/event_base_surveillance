@@ -29,6 +29,8 @@
 class Field < ApplicationRecord
   self.inheritance_column = :field_type
 
+  mount_uploader :template_file, FileUploader
+
   attr_accessor :skip_validation
 
   FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::DateTimeField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze

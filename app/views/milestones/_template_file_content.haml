@@ -1,0 +1,17 @@
+.file-wrapper
+  = f.input :template_name, label: t('event.display_name')
+
+  .form-group{ class: ('d-none' if f.object.template_file.present?) }
+    %label= t('event.template_file')
+    .file-control-wrapper.form-control
+      = f.file_field :template_file, class: 'file-input'
+
+  - if f.object.template_file.present?
+    .remove-file-wrapper
+      .d-flex.align-items-center
+        = f.hidden_field :remove_template_file, class: 'file-input-destroy'
+        %a.remove-file.text-danger.mr-2.pointer
+          %i.far.fa-trash-alt
+
+        = link_to f.object.template_file.url, target: "_blank", class: 'btn btn-link p-0 d-block text-truncate' do
+          = f.object.template_file_identifier
