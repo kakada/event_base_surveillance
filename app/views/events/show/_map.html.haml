@@ -1,9 +1,9 @@
 #map-wrapper
   #map{ data: { latlng: @event.location_latlng, event_type: @event.event_type_name, event_fvs: @event.with_field_value.to_json}}
 
-  - unless @event.location.present?
+  - if @event.location_latlng.nil?
     .no-data.text-center
-      %span= t('shared.no_result_found')
+      %span= t('shared.no_latlng')
 
 :javascript
   locale = {
