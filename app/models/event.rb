@@ -120,6 +120,11 @@ class Event < ApplicationRecord
     conclude_event_type_id.present? && event_type_id != conclude_event_type_id
   end
 
+  def self.search_by_uuid_or_event_type(keyword)
+    joins(:event_type)
+      .where('LOWER(event_types.name) LIKE ? OR LOWER(uuid) LIKE ?', "%#{keyword.downcase}%", "%#{keyword.downcase}%")
+  end
+
   private
     def secure_uuid
       self.uuid ||= SecureRandom.hex(4)
