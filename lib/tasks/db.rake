@@ -10,7 +10,7 @@ namespace :db do
   end
 
   desc 'prepare to run the development'
-  task prepare_for_dev: :environment do
+  task dev: :environment do
     sh 'bin/rails db:environment:set RAILS_ENV=development'
     sh 'bin/rails db:drop RAILS_ENV=development'
     sh 'bin/rails db:create RAILS_ENV=development'
