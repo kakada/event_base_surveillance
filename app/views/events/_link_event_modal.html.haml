@@ -6,12 +6,15 @@
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
       .modal-body
-        = form_tag search_events_path, method: 'get', id: 'form_search' do |f|
+        = form_tag search_events_path, method: 'get', id: 'form_search', remote: true do |f|
           .form-group
             = text_field_tag :search, params[:search], class: 'form-control', placeholder: t('event.search_link_event')
 
         .event-wrapper
           .event-list
+
+          .loading.text-center.d-none
+            = image_tag 'loading.gif'
 
         #div_next_link
           = render 'next_link'

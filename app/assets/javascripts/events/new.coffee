@@ -3,6 +3,7 @@ EBS.EventsNew = do ->
     EBS.EventsEvent_milestonesNew.init()
     onClickLinkEvent()
     onKeyupSearch()
+    onSubmitSearchForm()
     onScrollEventList()
     onClickEventItem()
     onHideLinkEventModal()
@@ -33,14 +34,13 @@ EBS.EventsNew = do ->
   onKeyupSearch = ->
     $('#search').off 'keyup'
     $('#search').on 'keyup', ->
-      form = $('#form_search')
       eventList = $(".event-list")
-
       if $(this).val().length == 0
         eventList.hide()
-      else
-        eventList.show()
-        $.get( form.attr('action'), form.serialize() )
+
+  onSubmitSearchForm = ->
+    $('#form_search').on 'submit', ->
+      $('.loading').removeClass('d-none');
 
   onScrollEventList = ->
     $('.event-wrapper').off 'scroll'

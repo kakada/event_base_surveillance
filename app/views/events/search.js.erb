@@ -5,3 +5,11 @@
 <% end %>
 
 $('#div_next_link').html("<%= escape_javascript(render('next_link')) %>");
+
+if($('#search').val().length == 0) {
+  $(".event-list").hide()
+} else {
+  $(".event-list").show()
+}
+
+$('.loading').addClass('d-none');

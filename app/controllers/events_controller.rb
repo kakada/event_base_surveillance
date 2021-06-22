@@ -67,7 +67,7 @@ class EventsController < ApplicationController
   end
 
   def search
-    @pagy, @events = pagy(policy_scope(Event.filter(filter_params)), link_extra: 'data-remote="true"')
+    @pagy, @events = pagy(policy_scope(Event.search_by_uuid_or_event_type(params[:search])), link_extra: 'data-remote="true"')
   end
 
   private
