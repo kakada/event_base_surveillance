@@ -27,7 +27,7 @@ module FieldValues
     end
 
     def html_tag
-      value.to_s
+      value.present? ? I18n.l(DateTime.strptime(value, '%Y-%m-%d')) : value.to_s
     end
   end
 end
