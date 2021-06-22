@@ -5,8 +5,12 @@ module Events
     extend ActiveSupport::Concern
 
     included do
-      def unlockable?
+      def locked?
         close? && lockable_at.nil?
+      end
+
+      def unlockable?
+        locked?
       end
 
       def unlock_access!
