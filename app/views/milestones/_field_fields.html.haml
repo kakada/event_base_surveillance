@@ -19,7 +19,8 @@
             - if error_msg = f.object.errors[:name].presence
               .error-message.text-danger.small= error_msg.join('; ')
 
-            = f.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
+            .flex1
+              = f.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
 
           %button.btn.btn-outline-primary.btn-add-field{type: 'button'}= t('milestone.add_field')
 

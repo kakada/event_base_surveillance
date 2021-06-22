@@ -1,4 +1,4 @@
-.d-flex.mt-3
+.d-flex.mt-3.pt-2.border-top
   .column.mr-2
     %label=t('milestone.condition')
     = ff.select(:operator, Field.validation_operators, {:include_blank => t('shared.please_select')}, class: ["form-control custom-select"])

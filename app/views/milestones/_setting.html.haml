@@ -3,6 +3,7 @@
     %li.item.item-setting{'data-target' => '.setting-content'}= t('milestone.setting')
     %li.item.validation-trigger{'data-target' => '.validation-criteria-content'}= t('milestone.validation_criteria')
     %li.item.skip-logic{'data-target' => '.skip-logic-content'}= t('milestone.skip_logic')
+    %li.item.template-trigger{'data-target' => '.template-content'}= t('milestone.template')
 
   .contents
     .content.setting-content
@@ -28,3 +29,6 @@
       .form-group.row
         %label.col-3=t('milestone.value')
         %textarea#relevant-value.form-control.relevant-value.col-9
+
+    .content.template-content
+      = render 'template_file_content', f: f

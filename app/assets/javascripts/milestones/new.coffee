@@ -5,12 +5,14 @@ EBS.MilestonesNew = do ->
   dateField = 'Fields::DateField'
   dateTimeField = 'Fields::DateTimeField'
   integerField = 'Fields::IntegerField'
+  fileField = 'Fields::FileField'
 
   init = ->
     initView()
     initSortable()
     initMiniColorPicker()
     initSetting()
+    EBS.SelectFile.init()
 
     onClickAddSection()
     onClickAddField()
@@ -72,11 +74,17 @@ EBS.MilestonesNew = do ->
 
   # Validation-----------start
   initValidationView = (dom)->
+    if dom.value != fileField
+      hideTemplateTrigger(dom)
+
     if isValidationFieldType(dom.value)
       removeNoneUseValidator(dom)
     else
       hideValidationTrigger(dom)
       removeValidationContent(dom)
+
+  hideTemplateTrigger = (dom) ->
+    $(dom).parents('.fieldset').find('.template-trigger').hide()
 
   isValidationFieldType = (value)->
     return [dateField, dateTimeField, integerField].includes(value)

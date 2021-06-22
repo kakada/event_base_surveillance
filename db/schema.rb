@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_044406) do
+ActiveRecord::Schema.define(version: 2021_03_05_084649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,8 @@ ActiveRecord::Schema.define(version: 2020_11_19_044406) do
     t.integer "section_id"
     t.string "relevant"
     t.integer "mapping_field_id"
+    t.string "template_file"
+    t.string "template_name"
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|

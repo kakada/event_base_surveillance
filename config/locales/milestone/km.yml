@@ -50,3 +50,6 @@ km:
     go_to_setting: "សូមចូលទៅកាន់ <a href=%{url} class='text-primary'>ការកំណត់</a> ដើម្បីបើកដំណើរការ ការជូនដំណឹងតាមអ៊ីម៉ែល ឬតាមតេលេក្រាម"
     to_enable_email: "ដើម្បីបើកដំណើរការ ការជូនដំណឹងតាមអ៊ីម៉ែល, សូមចូលទៅកាន់ <a href=%{url} class='text-primary'>ការកំណត់</a>"
     to_enable_telegram: "ដើម្បីបើកដំណើរការ ការជូនដំណឹងតាមតេលេក្រាម, សូមចូលទៅកាន់ <a href=%{url} class='text-primary'>ការកំណត់</a>"
+    display_name: បង្ហាញឈ្មោះ
+    template_file: File គម្រូ
+    template: គម្រូ

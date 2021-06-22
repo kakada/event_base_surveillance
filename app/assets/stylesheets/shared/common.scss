@@ -235,3 +235,14 @@ pre {
   position: absolute;
   margin-left: 3px;
 }
+
+
+.file-control-wrapper {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  input:focus {
+    outline: none;
+  }
+}

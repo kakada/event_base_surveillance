@@ -49,3 +49,6 @@ en:
     go_to_setting: "Please go to <a href=%{url} class='text-primary'>Setting</a> to enable Email or Telegram notification"
     to_enable_email: "To enable email notification, please to go <a href=%{url} class='text-primary'>setting</a>"
     to_enable_telegram: "To enable telegram notification, please to go <a href=%{url} class='text-primary'>setting</a>"
+    display_name: Display name
+    template_file: Template file
+    template: Template

@@ -48,6 +48,7 @@
 //= require common/location
 
 // All Pages
+//= require milestones/select_file
 //= require milestones/new
 //= require milestones/index
 //= require milestones/field_type
