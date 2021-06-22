@@ -55,3 +55,8 @@ km:
     shared: ចែករំលែក
     all_and_shared: ទាំងអស់ + ចែករំលែក
     download_sample_file: ចុចលើវាដើម្បីទាញយក File គម្រូ
+    created_date: កាលបរិច្ឆេទបង្កើត
+    event_date: កាលបរិច្ឆេទព្រឹត្តិការណ៍
+    conducted_date: កាលបរិច្ឆេទដែលបានធ្វើ
+    start_date: ថ្ងៃចាប់ផ្តើម
+    conducted_on: កាលបរិច្ឆេទដែលបានធ្វើ

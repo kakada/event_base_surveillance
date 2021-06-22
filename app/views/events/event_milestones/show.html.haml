@@ -1,9 +1,14 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3
-        ="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
-        = render 'events/show/tracing_number_field_modal', traceable: @event_milestone
+      .flex1
+        %h3
+          ="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
+          = render 'events/show/tracing_number_field_modal', traceable: @event_milestone
+
+        - if conducted_date = @event_milestone.fv_conducted_at.presence
+          .text-muted.text-sm= "#{t('event.' + conducted_date.field.format_name)}: #{conducted_date.html_tag.html_safe}"
+
       %div= link_to t('shared.back'), event_path(@event), class: 'btn btn-info'
 
   %ul.list.flex1
@@ -16,9 +21,13 @@
             %span.type= t('event.conclude_event_type')
             %span.value= @event_milestone.event.conclude_event_type_name || '-'
 
-        - section.fields.each do |field|
+        - section.fields.except_fields.each do |field|
           %li{data: skip_logic_data(field)}
             %span.type= field.name
             = render 'events/show/field_value', field: field, main_object: @event_milestone
+
+    %li
+      %span.type= t('event.created_date')
+      %span.value= l(@event_milestone.created_at)
 
 = render 'events/show/tracing_text_field_modal'

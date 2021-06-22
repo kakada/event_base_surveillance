@@ -61,7 +61,6 @@ class Field < ApplicationRecord
   scope :tracking, -> { where(tracking: true) }
   scope :number, -> { where(field_type: 'Fields::IntegerField') }
   scope :text, -> { where.not(field_type: 'Fields::IntegerField') }
-  scope :except_locations, -> { where.not(code: %w(province_id district_id commune_id village_id progress)) }
   scope :dates, -> { where(field_type: %w(Fields::DateTimeField Fields::DateField)) }
 
   # Nested attributes
@@ -116,6 +115,10 @@ class Field < ApplicationRecord
 
   def self.untrackable_fields
     %w(conclude_event_type)
+  end
+
+  def self.except_fields
+    self.select { |field| %w(province_id district_id commune_id village_id progress source).exclude? field.code }
   end
 
   def format_name

@@ -59,7 +59,11 @@ class EventMilestone < ApplicationRecord
 
   # Instant Methods
   def conducted_at
-    field_values.find_by(field_code: 'conducted_at').value
+    fv_conducted_at.value
+  end
+
+  def fv_conducted_at
+    @fv_conducted_at ||= field_values.find_by(field_code: 'conducted_at')
   end
 
   def telegram_message

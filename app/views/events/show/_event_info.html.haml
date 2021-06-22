@@ -17,9 +17,13 @@
     %fieldset.section{class: ('not-section' unless section.display?)}
       %legend= section.name
 
-      - section.fields.except_locations.each do |field|
+      - section.fields.except_fields.each do |field|
         %li{data: skip_logic_data(field)}
           %span.type= field.name
           = render 'events/show/field_value', field: field, main_object: @event
+
+  %li
+    %span.type= t('event.created_date')
+    %span.value= l(@event.created_at)
 
 = render 'events/show/tracing_text_field_modal'

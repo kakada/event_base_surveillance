@@ -55,3 +55,8 @@ en:
     shared: Shared
     all_and_shared: All + Shared
     download_sample_file: Click to download sample file
+    created_date: Created date
+    event_date: Event Date
+    conducted_date: Conducted date
+    start_date: Start date
+    conducted_on: Conducted on

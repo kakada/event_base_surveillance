@@ -1,5 +1,6 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    / Event Title
     .flex-row-vertical-center
       %span.small-color{style: "background-color: #{@event.event_type_color}"}
         = @event.event_type_name[0]
@@ -9,18 +10,22 @@
       - if @event.event_type_changed?
         .arrow-wrapper
           = wicked_pdf_image_tag 'long-arrow-alt-right-solid.png', :width => "24"
-
         %span.small-color{style: "background-color: #{@event.conclude_event_type.color}"}
           = @event.conclude_event_type_name[0]
-
         %h3= @event.conclude_event_type_name
 
+      / event code
       %h3
         = ":"
         %span.badge.badge-light= @event.uuid
 
+      / Progress status
       = @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
 
+    / event_date
+    .text-muted.text-sm{style: 'margin-top: -24px'}= "#{t('event.event_date')}: #{l(@event.event_date)}"
+
+  / Event attributes
   %ul.list.flex1
     %li
       %span.type= "#{t('event.suspected_event_type')}:"
@@ -38,16 +43,30 @@
       %fieldset.section{class: ('not-section' unless section.display?)}
         %legend= section.name
 
-        - section.fields.except_locations.each do |field|
+        - section.fields.except_fields.each do |field|
           = render 'field_value', field_values: @event.field_values, field: field, main_object: @event
+    %li
+      %span.type= t('event.created_date')
+      %span.value= l(@event.created_at)
 
+  / Event milestones
   - @event.event_milestones.each do |event_milestone|
+    / Milestones title
     %h4="#{event_milestone.milestone.name}"
 
+    / Milestone conducted date
+    - if conducted_at = event_milestone.fv_conducted_at.presence
+      .text-muted.text-sm= "#{t('event.' + conducted_at.field.format_name)}: #{conducted_at.html_tag.html_safe}"
+
+    / Milestones attributes
     %ul.list.flex1
       - event_milestone.milestone.sections.each do |section|
         %fieldset.section{class: ('not-section' unless section.display?)}
           %legend= section.name
 
-          - section.fields.except_locations.each do |field|
+          - section.fields.except_fields.each do |field|
             = render 'field_value', field_values: event_milestone.field_values, field: field, main_object: event_milestone
+
+      %li
+        %span.type= t('event.created_date')
+        %span.value= l(event_milestone.created_at)
