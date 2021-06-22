@@ -26,6 +26,8 @@ module Events
 
         def validate_field_value
           field_values.each do |fv|
+            next unless fv.field_type.present?
+
             field_value = "FieldValues::#{fv.field_type.split('::').last}".constantize.new(fv.attributes)
             field_value.tmp_valueable = self
 

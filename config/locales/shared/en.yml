@@ -27,3 +27,4 @@ en:
     apply: 'Apply'
     unlock: 'Unlock'
     download: 'Download'
+    no_latlng: No latitude and longitude for this location

@@ -26,6 +26,8 @@ class Location < ApplicationRecord
   belongs_to :parent, class_name: 'Location', optional: true
 
   def latlng
+    return unless latitude.present? && longitude.present?
+
     [latitude, longitude]
   end
 
