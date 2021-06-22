@@ -12,6 +12,7 @@ module Events
         indexes :location, type: :geo_point
         indexes :created_at, type: :date
         indexes :updated_at, type: :date
+        indexes :event_date, type: :date
       end
 
       def self.mappings_hash(program)
