@@ -29,6 +29,9 @@ class Event < ApplicationRecord
   include Events::TemplateField
   include Events::FieldValueValidation
   include Events::TraceableField
+  include Events::Filter
+  include Events::Lockable
+  include Events::Location
 
   # Soft delete
   acts_as_paranoid
@@ -39,9 +42,11 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
+
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid
   has_many   :field_values, as: :valueable
   has_many   :tracings, as: :traceable
+
   belongs_to :link_parent, class_name: 'Event', foreign_key: :link_uuid, optional: true
   has_many   :link_children, class_name: 'Event', foreign_key: :link_uuid
 
@@ -64,12 +69,9 @@ class Event < ApplicationRecord
 
   # Callback
   before_validation :set_program_id
-  before_validation :assign_nil_locations
-  before_validation :set_location_code
   before_create :secure_uuid
 
   after_create :set_event_progress
-
 
   # Scope
   scope :order_desc, -> { order(event_date: :desc) }
@@ -80,24 +82,9 @@ class Event < ApplicationRecord
   }
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
-  # Class Methods
-  def self.filter(params = {})
-    scope = all
-    scope = filter_by_keyword(scope, params)
-    scope = scope.where('event_date >= ?', params[:start_date]) if params[:start_date].present?
-    scope = scope.where(event_type_id: params[:event_type_id]) if params[:event_type_id].present?
-    scope
-  end
-
   # Instant Methods
   def conducted_at
     @conducted_at ||= field_values.find_by(field_code: 'report_date').try(:value)
-  end
-
-  def location_name(address = 'address_km')
-    return if location_code.blank?
-
-    "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
   end
 
   def milestone
@@ -129,44 +116,11 @@ class Event < ApplicationRecord
     @verified ||= event_milestones.collect(&:milestone_id).include? program.milestones.verified.try(:id)
   end
 
-  def unlock!
-    self.lockable_at = program.unlock_event_duration.days.from_now.to_date
-    self.save
-  end
-
-  def unlockable?
-    close? && lockable_at.nil?
-  end
-
   def event_type_changed?
     conclude_event_type_id.present? && event_type_id != conclude_event_type_id
   end
 
   private
-    def self.filter_by_keyword(scope, params)
-      keywords = get_keywords(params[:keyword])
-
-      return scope if keywords.length < 2
-
-      case keywords[0]
-      when 'id'
-        scope = scope.where(uuid: keywords[1])
-      when 'suspected_event'
-        scope = scope.joins(:event_type).where('LOWER(event_types.name) LIKE ?', "%#{keywords[1].downcase}%")
-      else
-        scope = scope.joins(:field_values).where('field_values.field_code = ? and field_values.value = ?', keywords[0], keywords[1])
-      end
-
-      scope
-    end
-
-    # "risk_level: 'high'" => ["risk_level", "high"]
-    def self.get_keywords(keyword)
-      return [] unless keyword.present?
-
-      keyword.gsub(/\s/, '').gsub(/"/, '').gsub(/'/, '').split(':')
-    end
-
     def secure_uuid
       self.uuid ||= SecureRandom.hex(4)
 
@@ -174,28 +128,6 @@ class Event < ApplicationRecord
 
       self.uuid = SecureRandom.hex(4)
       secure_uuid
-    end
-
-    def assign_nil_locations
-      fvs = %w[province_id district_id commune_id village_id].map do |code|
-        field_values.select { |fv| fv.field_code == code }.first
-      end
-
-      clear_next = false
-      fvs.each do |fv|
-        next if fv.nil?
-
-        fv.value = nil if clear_next == true
-        clear_next = fv.value.blank?
-      end
-    end
-
-    def set_location_code
-      codes = %w[province_id district_id commune_id village_id].map do |code|
-        field_values.select { |fv| fv.field_code == code }.first.try(:value).to_s
-      end
-
-      self.location_code = codes[codes.find_index('').to_i - 1]
     end
 
     def set_program_id

@@ -153,4 +153,12 @@
   #info {
     outline: none;
   }
+
+  a.nav-link  {
+    color: #007bff;
+  }
+
+  a.nav-link.active {
+    color: #495057;
+  }
 }

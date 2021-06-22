@@ -25,7 +25,7 @@ module EventsHelper
   end
 
   def filter_date_popover
-    dom = render('events/filter_date_popover_content')
+    dom = render('events/index/filter_date_popover_content')
     content_tag(:div, '', class: 'hidden filter-date', data: { html: dom.gsub("\n", '') })
   end
 

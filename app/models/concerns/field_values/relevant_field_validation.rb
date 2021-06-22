@@ -5,7 +5,7 @@ module FieldValues
     extend ActiveSupport::Concern
 
     included do
-      validate  :validate_relevant_field, if: -> { value.present? && validations[:operator].present? && validations[:relevant_field_code].present? }
+      validate :validate_relevant_field, if: -> { value.present? && validations[:operator].present? && validations[:relevant_field_code].present? }
 
       private
         def validate_relevant_field

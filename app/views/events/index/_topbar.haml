@@ -1,0 +1,7 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    %h3= t('event.event')
+
+    - if policy(Event).create?
+      = link_to new_event_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus

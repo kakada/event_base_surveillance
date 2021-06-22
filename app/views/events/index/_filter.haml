@@ -1,0 +1,34 @@
+%form.filter-form{ action: '/events', method: 'get' }
+  .form-row.medium-width
+    .col-auto.form-group
+      .input-group
+        = text_field_tag(:keyword, params[:keyword], class: 'form-control keyword', placeholder: t('event.keyword'), id: 'keyword')
+
+        %a#info.input-group-append.pointer{'data-trigger' => 'focus', 'data-content' => option_fields, 'data-toggle' => 'popover', 'data-html' => 'true', title: "#{t('event.filter_results_that_contain')}: ", :tabindex => "0"}
+          .input-group-text
+            %i.fas.fa-info
+
+      %small.text-muted= t('event.filter_example')
+
+    = render 'events/index/filter_date'
+
+    .col-auto
+      %button.btn.btn-light{type: :submit}
+        %i.fas.fa-search
+        = t('event.search')
+
+    - if policy(Event).download?
+      .flex1.btn-download-csv
+        %button.btn.btn-outline-info{"data-target" => "#template-model", "data-toggle" => "modal", :type => "button"}
+          %i.fas.fa-download
+          = t('event.download_csv')
+
+      = render 'events/index/modal_download'
+
+  = hidden_field_tag :filter, params[:filter]
+
+:javascript
+  params = {
+    keyword: "#{params[:keyword]}",
+    start_date: "#{params[:start_date]}"
+  }

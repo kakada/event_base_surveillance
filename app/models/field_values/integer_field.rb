@@ -25,7 +25,7 @@ module FieldValues
     include ::FieldValues::RelevantFieldValidation
     include ::FieldValues::FromToValidation
 
-    validate  :validate_value, if: -> { value.present? }
+    validate :validate_value, if: -> { value.present? }
 
     def validate_value
       errors.add(:value, I18n.t('shared.is_invalid_value')) unless value.integer?

@@ -1,0 +1,10 @@
+- if !current_user.system_admin?
+  %ul.nav.nav-tabs.medium-width.mb-3
+    %li.nav-item
+      = link_to t('event.all'), events_path(filter: 'all'), class: ['nav-link', css_active_tab(params[:filter].blank? || params[:filter] == 'all')]
+
+    %li.nav-item
+      = link_to t('event.shared'), events_path(filter: 'shared'), class: ['nav-link', css_active_tab(params[:filter] == 'shared')]
+
+    %li.nav-item
+      = link_to t('event.all_and_shared'), events_path(filter: 'all_and_shared'), class: ['nav-link', css_active_tab(params[:filter] == 'all_and_shared')]

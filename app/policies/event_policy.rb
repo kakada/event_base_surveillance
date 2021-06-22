@@ -38,7 +38,8 @@ class EventPolicy < ApplicationPolicy
       elsif user.program_admin? || user.province_code == 'all'
         scope.joins(:event_type).where('events.program_id = ? or event_types.shared = ?', user.program_id, true)
       else
-        scope.where(program_id: user.program_id)
+        scope.joins(:event_type)
+             .where('events.program_id = ? or event_types.shared = ?', user.program_id, true)
              .where('location_code LIKE ?', "#{user.province_code}%")
       end
     end

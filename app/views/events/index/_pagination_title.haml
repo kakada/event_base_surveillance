@@ -1,0 +1,7 @@
+.pagy-wrapper.mb-2
+  .flex-row.flex1
+    .flex1.flex-row-vertical-center
+      %span= t('event.pagination_title', from: @pagy.from, to: @pagy.to, total: @pagy.count).html_safe
+
+    - if @pagy.pages > 1
+      != pagy_bootstrap_nav(@pagy)
