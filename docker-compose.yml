@@ -47,7 +47,7 @@ services:
     image: redis:5.0.6
 
   elasticsearch:
-    image: elasticsearch:7.9.1
+    image: elasticsearch:7.13.1
     environment:
       - discovery.type=single-node
       - ELASTIC_PASSWORD=elastic

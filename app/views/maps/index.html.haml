@@ -9,7 +9,7 @@
         = select_tag 'event_type_id', options_for_select(select_options(current_user, @event_types), params[:event_type_id]), include_blank: t('map.all'), class: 'form-control'
 
       .form-group.mb-2
-        = render 'events/filter_date'
+        = render 'events/index/filter_date'
 
       %button.btn.btn-primary.mb-2{ type: 'submit' }
         %i.fas.fa-search
