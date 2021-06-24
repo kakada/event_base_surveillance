@@ -33,7 +33,7 @@ module Fields
     end
 
     def self.es_datatype
-      :text
+
     end
   end
 end
