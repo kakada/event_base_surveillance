@@ -25,7 +25,7 @@ module FieldValues
     def es_value
       return if values.blank?
 
-      values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }.join(', ')
+      values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }
     end
 
     def html_tag
