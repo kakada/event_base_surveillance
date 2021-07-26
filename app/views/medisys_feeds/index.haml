@@ -1,0 +1,37 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= t('medisy.medisys_feeds')
+
+  = render 'filter'
+
+  = render partial: "shared/no_data", locals: { items: @medisys_feeds }
+
+  - if @medisys_feeds.present?
+    - @medisys_feeds.each_with_index do |feed, index|
+      - if index == 0 || feed.time_ago != @medisys_feeds[index - 1].time_ago
+        .timeslot_title
+          %p.center_heading_timeslot= "Articles published more than #{feed.time_ago}"
+      .articlebox_big{:dir => "ltr"}
+        %p.center_story.center_headline_top
+          %a.headline_link{:href => feed.link, :target => "_blank"}
+            = feed.title
+
+        %p.center_headline_source
+          = l(feed.pub_date, format: :medisys)
+          %a.link_normal.show-more info
+          [
+          %a.more_link{}> other
+          ]
+        #alert_more.alert_more{:name => "alert_more"}
+          %p.center_reason= "Trigger words: #{feed.keywords}"
+          %p.center_also
+            Other categories:
+            - feed.medisys_categories.each do |cate|
+              %a.more_link{:href => "#"}= cate.name
+
+        %p.center_leadin= "#{feed.description}..."
+
+    - if true || @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)

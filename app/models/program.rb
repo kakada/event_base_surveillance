@@ -40,6 +40,7 @@ class Program < ApplicationRecord
   has_many  :chat_groups
   has_one   :telegram_bot, dependent: :destroy
   has_many  :templates
+  has_many  :medisies
 
   validates :name, presence: true
   validates :unlock_event_duration, numericality: { greater_than_or_equal_to: 1,  only_integer: true }

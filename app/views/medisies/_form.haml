@@ -1,0 +1,9 @@
+.w-50.view-center
+  = simple_form_for @medisy do |f|
+    = f.input :name, label: t('medisy.name')
+    = f.input :url, label: t('medisy.url')
+    = f.input :program_id, label: t('medisy.program_name'), collection: policy_scope(Program.all)
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), medisies_path, class: 'btn btn-secondary'
