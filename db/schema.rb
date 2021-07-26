@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_033205) do
+ActiveRecord::Schema.define(version: 2021_07_26_083648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,13 @@ ActiveRecord::Schema.define(version: 2021_07_23_033205) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "medisys_countries", force: :cascade do |t|
+    t.string "code"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "medisys_feeds", force: :cascade do |t|
     t.string "title"
     t.string "link"
@@ -200,6 +207,10 @@ ActiveRecord::Schema.define(version: 2021_07_23_033205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "medisy_id"
+    t.string "category_trigger"
+    t.string "source_url"
+    t.integer "medisys_country_id"
+    t.string "source_name"
   end
 
   create_table "medisys_feeds_categories", force: :cascade do |t|

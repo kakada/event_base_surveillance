@@ -10,6 +10,10 @@ class CreateMedisysFeeds < ActiveRecord::Migration[5.2]
       t.string :iso_language
       t.string :georss_point
       t.integer :medisy_id
+      t.string :category_trigger
+      t.string :source_name
+      t.string :source_url
+      t.integer :medisys_country_id
 
       t.timestamps
     end

@@ -77,9 +77,8 @@ gem 'omniauth-google-oauth2',     '~> 0.8.0'
 gem 'paranoia',                   '~> 2.2'
 
 # Feed from Medisys
-# read xml content
+# get request
 gem "httparty", "~> 0.18.1"
-gem "feedjira", "~> 3.2.0"
 # crol content
 gem "ruby-readability", :require => 'readability'
 

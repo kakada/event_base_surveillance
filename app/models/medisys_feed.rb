@@ -2,6 +2,7 @@ include ActionView::Helpers::DateHelper
 
 class MedisysFeed < ApplicationRecord
   belongs_to :medisy
+  belongs_to :medisys_country
   has_many :medisys_feeds_categories
   has_many :medisys_categories, through: :medisys_feeds_categories
 
@@ -15,7 +16,7 @@ class MedisysFeed < ApplicationRecord
   end
 
   def time_ago
-    distance_of_time_in_words(Time.now, pub_date)
+    distance_of_time_in_words(Time.zone.now, pub_date)
   end
 
   def self.filter(params)
