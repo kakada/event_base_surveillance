@@ -81,6 +81,7 @@ gem 'paranoia',                   '~> 2.2'
 gem "httparty", "~> 0.18.1"
 # crol content
 gem "ruby-readability", :require => 'readability'
+gem "pdf-reader", "~> 2.5.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
