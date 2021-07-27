@@ -131,5 +131,16 @@
     background-color: #007bff;
     border-color: #007bff;
   }
+
+  .acknowledge {
+    position: sticky;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    padding-right: 0;
+    z-index: 1;
+  }
 }
 

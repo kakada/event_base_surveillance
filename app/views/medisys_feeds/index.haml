@@ -1,7 +1,7 @@
-#content
+#content.position-relative
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3= t('medisy.medisys_feeds')
+      %h3= t('medisy.media_monitoring')
 
   = render 'filter'
 
@@ -32,10 +32,12 @@
 
         %p.center_leadin= "#{feed.description}..."
 
-    .d-flex.mt-4
-      .d-flex.flex-grow-1
-        %span.mr-1 Sourced by
-        = link_to "Medysis", "https://medisys.newsbrief.eu/", target: '_blank'
-
-      - if @pagy.pages > 1
+    - if @pagy.pages > 1
+      .pagy-wrapper
         != pagy_bootstrap_nav(@pagy)
+
+  .acknowledge
+    .d-flex.flex-grow-1.align-items-center.justify-content-end
+      %span.mr-1 EBS media monitoring is powered by
+      = link_to "Medysis", "https://ec.europa.eu/jrc/en/scientific-tool/medical-information-system", target: '_blank', class: 'mr-1'
+      = image_tag "medisys_logo.png", height: 20
