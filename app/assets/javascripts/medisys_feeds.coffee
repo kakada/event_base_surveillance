@@ -4,8 +4,20 @@
 
 EBS.Medisys_feedsIndex = do ->
   init = ->
+    firebase.analytics().logEvent("page_view_medisys")
+
     onClickShowMore()
-    EBS.DatepickerPopup.init();
+    onClickFeedLink()
+    EBS.DatepickerPopup.init()
+
+  onClickFeedLink = ->
+    $(document).off('click', '.headline_link')
+    $(document).on 'click', '.headline_link', (event)->
+      firebase.analytics().logEvent "click_feed_link",
+        title: $(event.target).html()
+        url: $(event.target).attr('href')
+
+      true
 
   onClickShowMore = ->
     $(document).off('click', '.show-more')
