@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MedisyPolicy < ApplicationPolicy
   def index?
     user.system_admin?

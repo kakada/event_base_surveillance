@@ -1,3 +1,18 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: medisies
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  url        :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  program_id :integer
+#
+
+
 class Medisy < ApplicationRecord
   belongs_to :program
   has_many :medisys_feeds, dependent: :destroy

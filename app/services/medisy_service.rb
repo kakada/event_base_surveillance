@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
 include ActionView::Helpers::SanitizeHelper
 
@@ -26,7 +28,7 @@ class MedisyService
         pub_date: item.at('pubDate').text,
         guid: item.at('guid').text,
         medisy_id: @medisy.id,
-        medisys_categories_attributes: item.search('category').map {|category| { name: category.text } },
+        medisys_categories_attributes: item.search('category').map { |category| { name: category.text } },
         source_name: item.at('source').text,
         source_url: item.at('source').attributes['url'].value,
         medisys_country_id: get_country_id(item)

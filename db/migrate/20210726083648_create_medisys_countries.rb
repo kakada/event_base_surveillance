@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateMedisysCountries < ActiveRecord::Migration[5.2]
   def change
     create_table :medisys_countries do |t|

@@ -1,3 +1,29 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: medisys_feeds
+#
+#  id                 :bigint           not null, primary key
+#  category_trigger   :string
+#  description        :string
+#  georss_point       :string
+#  guid               :string
+#  inside_cambodia    :boolean
+#  iso_language       :string
+#  keywords           :string
+#  link               :string
+#  pub_date           :datetime
+#  source_name        :string
+#  source_url         :string
+#  title              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  medisy_id          :integer
+#  medisys_country_id :integer
+#
+
+
 include ActionView::Helpers::DateHelper
 
 class MedisysFeed < ApplicationRecord
@@ -5,6 +31,9 @@ class MedisysFeed < ApplicationRecord
   belongs_to :medisys_country
   has_many :medisys_feeds_categories
   has_many :medisys_categories, through: :medisys_feeds_categories
+
+  validates :title, presence: true
+  validates :link, presence: true
 
   accepts_nested_attributes_for :medisys_categories
 

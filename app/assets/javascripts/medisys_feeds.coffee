@@ -8,7 +8,13 @@ EBS.Medisys_feedsIndex = do ->
 
     onClickShowMore()
     onClickFeedLink()
+    onChangeMedisySelect()
     EBS.DatepickerPopup.init()
+
+  onChangeMedisySelect = ->
+    $(document).off('change', '#medisy_id')
+    $(document).on 'change', '#medisy_id', (event)->
+      $('[type="submit"]').parents('form').submit()
 
   onClickFeedLink = ->
     $(document).off('click', '.headline_link')

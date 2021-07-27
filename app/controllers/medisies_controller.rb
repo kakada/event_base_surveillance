@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class MedisiesController < ApplicationController
   def index
-    @pagy, @medisies = pagy(policy_scope(Medisy.order("created_at ASC").includes(:program)))
+    @pagy, @medisies = pagy(policy_scope(Medisy.order('created_at ASC').includes(:program)))
   end
 
   def new
