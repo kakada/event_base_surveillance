@@ -14,6 +14,7 @@
 #  keywords           :string
 #  link               :string
 #  pub_date           :datetime
+#  reason             :string
 #  source_name        :string
 #  source_url         :string
 #  title              :string

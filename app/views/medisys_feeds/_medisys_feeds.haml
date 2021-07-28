@@ -1,0 +1,27 @@
+- @medisys_feeds.each_with_index do |feed, index|
+  - if index == 0 || feed.time_ago != @medisys_feeds[index - 1].time_ago
+    .timeslot_title
+      %p.center_heading_timeslot= "Articles published more than #{feed.time_ago}"
+
+  .articlebox_big{:dir => "ltr"}
+    %p.center_story.center_headline_top
+      %a.headline_link{:href => feed.link, :target => "_blank"}
+        = feed.title
+      - if feed.reason.present?
+        %span{ "data-toggle" => "tooltip", "data-placement" => "right", "title" => feed.reason }
+          %i.far.fa-eye-slash
+
+    %p.center_headline_source
+      = image_tag feed.medisys_country.image_url, height: 9
+      = link_to feed.source_name, feed.source_url, target: '_blank'
+      = l(feed.pub_date, format: :medisys)
+      %a.link_normal.show-more info
+      = "<a class='more_link'>[other]</a>".html_safe
+
+    #alert_more.alert_more{:name => "alert_more"}
+      %p.center_reason= "Trigger words: #{feed.category_trigger}"
+      %p.center_also
+        Other categories:
+        = feed.medisys_categories.map {|cate| "<a class='more_link'>#{cate.name}</a>"}.join('; ').html_safe
+
+    %p.center_leadin= "#{feed.description}..."
