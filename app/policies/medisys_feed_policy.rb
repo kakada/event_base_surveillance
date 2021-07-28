@@ -2,7 +2,7 @@
 
 class MedisysFeedPolicy < ApplicationPolicy
   def index?
-    user.system_admin? || user.program_admin? || user.staff?
+    true
   end
 
   class Scope < Scope
