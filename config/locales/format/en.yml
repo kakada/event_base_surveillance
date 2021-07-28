@@ -12,6 +12,7 @@ en:
       long: "%I:%M%p, %A, %d %B %Y"
       nice: "%I:%M %P, %d %b %Y"
       y_m_d_h_mn: '%y-%m-%d %H:%M'
+      medisys: "%A, %B %d, %Y %I:%M %P"
 
   datetime:
     formats:

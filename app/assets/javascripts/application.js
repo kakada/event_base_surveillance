@@ -73,6 +73,7 @@
 //= require programs/settings
 //= require webhooks/new
 //= require maps/index
+//= require medisys_feeds
 
 
 document.addEventListener('turbolinks:load', function() {

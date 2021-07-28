@@ -1,0 +1,146 @@
+// Place all the styles related to the medisys_feeds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#medisys_feeds-index #content{
+  font-family: "Lucida Grande", "Lucida Sans", sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  background: white;
+  color: #818181;
+
+  .articlebox_big {
+    clear: both;
+    margin-left: 40px;
+    margin-right: 5px;
+    margin-top: 2px;
+    padding-bottom: 0px;
+    background-position: left bottom;
+    background-repeat: repeat-x;
+  }
+
+  p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+
+  .center_headline_top {
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 1.2;
+    page-break-after: avoid;
+    margin-top: 11px;
+    margin-bottom: 0px;
+  }
+
+
+
+  .headline_link_hover {
+    font-weight: bold;
+    color: #0086CE;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .center_headline_source {
+    font-weight: normal;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .alert_more {
+    font-size: 11px;
+    line-height: 1.5;
+    display: none;
+    margin-left: 10px;
+    padding-left: 5px;
+    border-left: 2px solid #808080;
+  }
+
+  p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+
+  .center_reason {
+    color: #808080;
+    font-weight: normal;
+  }
+
+  .center_also {
+    color: #808080;
+    font-weight: normal;
+  }
+
+  .center_also .more_link {
+    color: #0086CE;
+  }
+
+  a {
+    color: #2E6589;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .headline_link {
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .center_leadin {
+    font-size: 12px;
+    line-height: 1.5;
+    mso-pagination: widow-orphan lines-together;
+    color: #303030;
+    margin-top: 5px;
+  }
+
+  .timeslot_title {
+    clear: left;
+  }
+
+  .center_heading_timeslot {
+    color: #808080;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 1.2;
+    page-break-after: avoid;
+    margin-top: 11px;
+    margin-bottom: 11px;
+  }
+
+  .pagy-wrapper {
+    width: 100%;
+  }
+
+  select {
+    width: 300px;
+  }
+
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #fff !important;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .acknowledge {
+    position: sticky;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    padding-right: 0;
+    z-index: 1;
+  }
+}
+

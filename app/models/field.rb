@@ -17,6 +17,8 @@
 #  name               :string
 #  relevant           :string
 #  required           :boolean
+#  template_file      :string
+#  template_name      :string
 #  tracking           :boolean          default(FALSE)
 #  validations        :text
 #  created_at         :datetime         not null

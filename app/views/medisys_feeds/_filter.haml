@@ -1,0 +1,16 @@
+%form{ action: '/medisys_feeds', method: 'get' }
+  .d-flex
+    .d-flex.flex-grow-1
+      = select_tag "medisy_id", options_from_collection_for_select(@medisies, "id", "name", @medisy_id), class: 'form-control custom-select'
+
+      = render 'events/index/filter_date'
+
+      %div
+        %button.btn.btn-light{type: :submit}
+          .d-flex.align-items-center
+            %i.fas.fa-search.mr-1
+            = t('event.search')
+
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)

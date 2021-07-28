@@ -21,7 +21,7 @@ module Samples
       end
     end
 
-    def self.simulation(count=2)
+    def self.simulation(count = 2)
       (1..count).each do
         create_event(Pumi::Village.all.sample.id)
       end

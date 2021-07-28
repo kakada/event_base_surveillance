@@ -15,3 +15,8 @@ production:
   lockevent:
     cron: "0 0 * * *"
     class: UnlockEventJob
+
+  process_feed:
+    # every one hour
+    cron: "0 * * * *"
+    class: MedisyWorker

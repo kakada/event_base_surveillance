@@ -6,7 +6,9 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.0/css/all.css", :integrity => "sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", :rel => "stylesheet"}
+
+    %link{:crossorigin => "anonymous", :href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css", :integrity => "sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==", :referrerpolicy => "no-referrer", :rel => "stylesheet"}
+
     = favicon_link_tag asset_path('favicon.png')
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
@@ -15,3 +17,22 @@
     .wrapper
       = render 'shared/sidebar'
       = yield
+
+  / The core Firebase JS SDK is always required and must be listed first
+  %script{:src => "https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"}
+  %script{:src => "https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"}
+  :javascript
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "#{ENV['API_KEY']}",
+      authDomain: "#{ENV['AUTH_DOMAIN']}",
+      projectId: "#{ENV['PROJECT_ID']}",
+      storageBucket: "#{ENV['STORAGE_BUCKET']}",
+      messagingSenderId: "#{ENV['MESSAGING_SENDERID']}",
+      appId: "#{ENV['APP_ID']}",
+      measurementId: "#{ENV['MEASUREMENT_ID']}"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();

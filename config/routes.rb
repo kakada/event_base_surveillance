@@ -39,6 +39,9 @@ Rails.application.routes.draw do
     put :unlock, on: :member
   end
 
+  resources :medisies
+  resources :medisys_feeds, only: :index
+
   resources :event_types do
     get :shared, on: :member
     get :unshared, on: :member
