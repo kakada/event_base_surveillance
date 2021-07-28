@@ -7,8 +7,8 @@
     %p.center_story.center_headline_top
       %a.headline_link{:href => feed.link, :target => "_blank"}
         = feed.title
-      - if feed.reason.present?
-        %span{ "data-toggle" => "tooltip", "data-placement" => "right", "title" => feed.reason }
+      - if feed.fail_reason.present?
+        %span{ "data-toggle" => "tooltip", "data-placement" => "right", "title" => feed.fail_reason }
           %i.far.fa-eye-slash
 
     %p.center_headline_source

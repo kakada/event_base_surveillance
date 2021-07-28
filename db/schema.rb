@@ -211,7 +211,7 @@ ActiveRecord::Schema.define(version: 2021_07_28_034918) do
     t.string "source_url"
     t.integer "medisys_country_id"
     t.string "source_name"
-    t.string "reason"
+    t.string "fail_reason"
   end
 
   create_table "medisys_feeds_categories", force: :cascade do |t|

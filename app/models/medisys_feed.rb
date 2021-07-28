@@ -7,6 +7,7 @@
 #  id                 :bigint           not null, primary key
 #  category_trigger   :string
 #  description        :string
+#  fail_reason        :string
 #  georss_point       :string
 #  guid               :string
 #  inside_cambodia    :boolean
@@ -14,7 +15,6 @@
 #  keywords           :string
 #  link               :string
 #  pub_date           :datetime
-#  reason             :string
 #  source_name        :string
 #  source_url         :string
 #  title              :string

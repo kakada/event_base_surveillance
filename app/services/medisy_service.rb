@@ -42,7 +42,7 @@ class MedisyService
       if res[:status] == :success
         param[:description] = strip_tags(res[:content])[0..300]
       else
-        param[:reason] = res[:content]
+        param[:fail_reason] = res[:content]
       end
 
       param
