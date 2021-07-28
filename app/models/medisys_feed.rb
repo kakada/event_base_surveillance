@@ -7,6 +7,7 @@
 #  id                 :bigint           not null, primary key
 #  category_trigger   :string
 #  description        :string
+#  fail_reason        :string
 #  georss_point       :string
 #  guid               :string
 #  inside_cambodia    :boolean

@@ -18,12 +18,10 @@ class MedisyService
   end
 
   private
-    # @Todo: extract content should validate request format: pdf
     def feed_params(item)
       param = {
         title: item.at('title').text,
         link: item.at('link').text,
-        description: strip_tags(ExtractContentService.new.fetch(item.at('link').text))[0..254],
         keywords: item.at('description').text,
         pub_date: item.at('pubDate').text,
         guid: item.at('guid').text,
@@ -33,10 +31,26 @@ class MedisyService
         source_url: item.at('source').attributes['url'].value,
         medisys_country_id: get_country_id(item)
       }
-      item.search('category').each do |cate|
-        param[:category_trigger] = "[#{cate.text}]#{cate.attributes['trigger'].text}" if cate.attributes['trigger'].present?
+
+      param = assign_description_content(item, param)
+      param = assign_category_trigger(item, param)
+      param
+    end
+
+    def assign_description_content(item, param)
+      res = ExtractContentService.new.fetch(item.at('link').text)
+      if res[:status] == :success
+        param[:description] = strip_tags(res[:content])[0..300]
+      else
+        param[:fail_reason] = res[:content]
       end
 
+      param
+    end
+
+    def assign_category_trigger(item, param)
+      cate = item.search('category').select { |c| c.attributes['trigger'].present? }.first
+      param[:category_trigger] = "[#{cate.text}]#{cate.attributes['trigger'].text}" if cate.present?
       param
     end
 

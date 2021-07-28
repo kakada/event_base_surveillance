@@ -5,16 +5,21 @@ require 'readability'
 
 class ExtractContentService
   def fetch(url)
-    return read_from_pdf(url) if url.match(/.pdf$/).present?
+    content = url.match(/.pdf$/).present? ? read_from_pdf(url) : read_from_link(url)
 
-    source = open(url).read
-    Readability::Document.new(source).content
+    { status: :success, content: content }
+  rescue Exception => e
+    { status: :failure, content: e.message }
   end
 
   private
     def read_from_pdf(url)
-      io = open(url)
-      reader = PDF::Reader.new(io)
+      reader = PDF::Reader.new(open(url))
       reader.pages.first.text
+    end
+
+    def read_from_link(url)
+      source = open(url).read
+      Readability::Document.new(source).content
     end
 end

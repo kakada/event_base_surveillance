@@ -35,7 +35,6 @@ module Fields
     end
 
     def self.es_datatype
-
     end
   end
 end
