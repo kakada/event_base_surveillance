@@ -18,6 +18,7 @@ class Medisy < ApplicationRecord
   has_many :medisys_feeds, dependent: :destroy
 
   validates :name, presence: true
-  validates :url, presence: true
+  validates :url, presence: true, format: { with: /\A((http|https):\/\/medisys.newsbrief.eu\/rss\/\?)/ix,
+    message: 'must start with https://medisys.newsbrief.eu/rss/?' }
   validates :program_id, presence: true
 end

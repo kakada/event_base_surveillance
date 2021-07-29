@@ -17,5 +17,6 @@
   .acknowledge
     .d-flex.flex-grow-1.align-items-center.justify-content-end
       %span.mr-1 EBS media monitoring is powered by
-      = link_to "Medysis", "https://ec.europa.eu/jrc/en/scientific-tool/medical-information-system", target: '_blank', class: 'mr-1'
-      = image_tag "medisys_logo.png", height: 20
+      = link_to "https://medisys.newsbrief.eu/medisys/homeedition/en/home.html", target: '_blank' do
+        %span Medysis
+        = image_tag "medisys_logo.png", height: 20

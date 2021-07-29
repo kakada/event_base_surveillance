@@ -1,0 +1,31 @@
+#content.flex-column
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= t('medisy.medisys_help')
+      = link_to t('shared.done'), medisies_url, class: 'btn btn-light'
+
+  .medium-width
+    %p= t('medisy.medisys_configure')
+
+    %h5= t('medisy.visit_medisys_website')
+    %p
+      %div
+        = link_to t('medisy.filter_result'), "https://medisys.newsbrief.eu/", class: 'btn btn-link', target: '_blank'
+        = t('medisy.that_you_want_to_display')
+
+      = image_tag 'medisy/filter_result.png', class: 'image'
+
+      %div
+        = t('medisy.click_on_rss').html_safe
+
+    %h5= t('medisy.copy_the_url')
+    %p
+      = "#{t('medisy.example')}:"
+      %code
+        https://medisys.newsbrief.eu/rss/?type=category&id=CamCDCMediaMonitor&language=all&duplicates=false
+      = image_tag 'medisy/xml_url.png', class: 'image'
+
+    %h5= t('medisy.pass_the_url')
+    %p
+      = image_tag 'medisy/pass_text.png', class: 'image'
+

@@ -12,7 +12,7 @@ class MedisyService
     xml = HTTParty.get(@medisy.url).body
     doc = Nokogiri::XML(xml)
     doc.search('item').each do |item|
-      medisys_feed = MedisysFeed.find_or_initialize_by(title: item.at('title').text, medisy_id: @medisy.id)
+      medisys_feed = @medisy.medisys_feeds.find_or_initialize_by(title: item.at('title').text, medisy_id: @medisy.id)
       medisys_feed.update(feed_params(item)) if medisys_feed.new_record?
     end
   end
@@ -29,7 +29,8 @@ class MedisyService
         medisys_categories_attributes: item.search('category').map { |category| { name: category.text } },
         source_name: item.at('source').text,
         source_url: item.at('source').attributes['url'].value,
-        medisys_country_id: get_country_id(item)
+        medisys_country_id: get_country_id(item),
+        program_id: @medisy.program_id
       }
 
       param = assign_description_content(item, param)

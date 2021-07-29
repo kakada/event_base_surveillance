@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :medisy do
     name { FFaker::Name.name }
-    url  { FFaker::Internet.http_url }
+    url  { "https://medisys.newsbrief.eu/rss/?" }
     program
   end
 end
