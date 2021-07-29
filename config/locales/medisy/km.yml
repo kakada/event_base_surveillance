@@ -5,3 +5,12 @@ km:
     feed_url: Feed Url
     program_name: ប្រូក្រាម
     media_monitoring: Media Monitoring
+    medisys_help: ទំព័រជំនួយអំពី Medisys
+    medisys_configure: អ្នកអាចកំណត់ Medisys ដើម្បីទទួលបានមតិព័ត៌មានសម្រាប់បង្ហាញក្នុងទំព័រ Median Monitoring។
+    visit_medisys_website: ចូលទៅកាន់គេហទំព័រ Medisys
+    that_you_want_to_display: ដែលអ្នកចង់បង្ហាញ
+    filter_result: ច្រោះលទ្ធផល
+    click_on_rss: "បន្ទាប់មកចុចលើតំណភ្ជាប់ <span class='text-primary'> RSS </span> នៅជ្រុងខាងស្តាំដើម្បីបើកមាតិកា XML នៅក្នុងផ្ទាំងថ្មី"
+    copy_the_url: ចម្លង URL
+    example: ឧទាហរណ៍
+    pass_the_url: បញ្ចូល URL ដែលបានចម្លងនោះទៅក្នុងកម្មវិធី

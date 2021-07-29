@@ -5,3 +5,12 @@ en:
     feed_url: Feed Url
     program: Program
     media_monitoring: Media Monitoring
+    medisys_help: Medisys Help
+    medisys_configure: You can configure Medisys to get feeds for displaying in Media Monitoring.
+    visit_medisys_website: Visit the Medisys website
+    that_you_want_to_display: that you want to display
+    filter_result: Filter feed result
+    click_on_rss: "Then click on <span class='text-primary'> RSS </span> link at the right corner to open the XML content in a new tab"
+    copy_the_url: Copy the Url
+    example: Example
+    pass_the_url: Pass the copied url into the application

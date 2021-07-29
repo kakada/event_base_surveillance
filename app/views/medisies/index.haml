@@ -15,7 +15,8 @@
           %th #
           %th= t('medisy.name')
           %th= t('medisy.feed_url')
-          %th= t('medisy.program')
+          - if current_user.system_admin?
+            %th= t('medisy.program')
           %th
 
       %tbody
@@ -24,7 +25,8 @@
             %td= @pagy.from + index
             %td= medi.name
             %td= medi.url
-            %td= medi.program.name
+            - if current_user.system_admin?
+              %td= medi.program.name
             %td.text-right
               - if policy(medi).update?
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

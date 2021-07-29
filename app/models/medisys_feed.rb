@@ -22,6 +22,7 @@
 #  updated_at         :datetime         not null
 #  medisy_id          :integer
 #  medisys_country_id :integer
+#  program_id         :integer
 #
 
 

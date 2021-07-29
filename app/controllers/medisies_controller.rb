@@ -40,6 +40,9 @@ class MedisiesController < ApplicationController
     redirect_to medisies_url
   end
 
+  def help
+  end
+
   private
     def medisys_params
       params.require(:medisy).permit(:name, :url, :program_id)
