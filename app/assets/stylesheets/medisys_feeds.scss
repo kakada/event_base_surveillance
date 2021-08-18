@@ -8,6 +8,10 @@
   background: white;
   color: #818181;
 
+  &:after {
+    height: 0;
+  }
+
   .articlebox_big {
     clear: both;
     margin-left: 40px;
