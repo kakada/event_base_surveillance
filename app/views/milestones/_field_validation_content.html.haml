@@ -1,25 +1,21 @@
 .field-validation-wrapper
   .flex-column
     %label.label-header= t('milestone.set_validation')
-
     = f.fields_for :validations, OpenStruct.new(f.object.validations) do |ff|
       / IntegerField
-      - if f.object.field_type == 'Fields::IntegerField'
-        .type-validation{'data-validation_type' => 'Fields::IntegerField'}
-          = render 'milestones/validations/integer_from_to', ff: ff
-          = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:number), field: f.object
+      .type-validation{'data-validation_type' => 'Fields::IntegerField'}
+        = render 'milestones/validations/integer_from_to', ff: ff
+        = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:number), field: f.object
 
       / DateField
-      - if f.object.field_type == 'Fields::DateField'
-        .type-validation{'data-validation_type' => 'Fields::DateField'}
-          = render 'milestones/validations/date_from_to', ff: ff
-          = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:dates), field: f.object
+      .type-validation{'data-validation_type' => 'Fields::DateField'}
+        = render 'milestones/validations/date_from_to', ff: ff
+        = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:dates), field: f.object
 
       / DateTimeField
-      - if f.object.field_type == 'Fields::DateTimeField'
-        .type-validation{'data-validation_type' => 'Fields::DateTimeField'}
-          = render 'milestones/validations/datetime_from_to', ff: ff, index: f.index
-          = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:dates), field: f.object
+      .type-validation{'data-validation_type' => 'Fields::DateTimeField'}
+        = render 'milestones/validations/datetime_from_to', ff: ff, index: f.index
+        = render 'milestones/validations/relevant_field', ff: ff, collection: @milestone.relevant_fields(:dates), field: f.object
 
       - if error_msg = f.object.name.present? && @milestone.errors[f.object.name.downcase].presence
         .invalid-feedback{style: 'display: block'}= error_msg.join('; ')

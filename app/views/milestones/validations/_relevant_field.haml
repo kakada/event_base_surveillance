@@ -5,5 +5,8 @@
 
   .column
     %label=t('milestone.relevant_field')
-    - collection = collection.select {|f| f[:code].split('::').last != field.code}.pluck(:name, :code)
+
+    - field_code = "#{field.milestone_id}::#{field.id}::#{field.code}"
+    - collection = collection.select {|f| f[:code] != field_code}.pluck(:name, :code)
+
     = ff.select(:relevant_field_code, collection, {:include_blank => t('shared.please_select')}, class: ["form-control custom-select"])
