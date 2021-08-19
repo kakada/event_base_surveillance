@@ -103,20 +103,13 @@ class Milestone < ApplicationRecord
     !program.enable_email_notification? || email_notification.nil? || email_notification.emails.blank?
   end
 
-  # relevant_field_code => "milestone_id::field_id::field_code"
   def relevant_fields(scope = :dates)
-    fields = self.fields.send(scope).to_a
+    fields = Field.unscoped.joins(:milestone).send(scope)
+              .where("milestones.display_order": (1..display_order).to_a)
+              .where("milestones.program_id": program_id)
+              .order("milestones.display_order ASC")
 
-    if display_order.to_i > 1 && prev_milestone = program.milestones.find_by(display_order: display_order - 1).presence
-      fields = prev_milestone.fields.send(scope).to_a + fields
-    end
-
-    fields.map do |field|
-      {
-        name: "#{field.milestone.name}::#{field.name}",
-        code: "#{field.milestone.id}::#{field.id}::#{field.code}"
-      }
-    end
+    fields.includes(:milestone).map { |field| field.relevant_format }
   end
 
   private

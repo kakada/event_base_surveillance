@@ -3,7 +3,7 @@ FROM ruby:2.6.3
 LABEL maintainer="Kakada Chheang <kakada@instedd.org>"
 
 # Updating nodejs version
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
 
 # Install dependencies
 RUN apt-get update && \
