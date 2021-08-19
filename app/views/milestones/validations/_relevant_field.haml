@@ -6,7 +6,6 @@
   .column
     %label=t('milestone.relevant_field')
 
-    - field_code = "#{field.milestone_id}::#{field.id}::#{field.code}"
-    - collection = collection.select {|f| f[:code] != field_code}.pluck(:name, :code)
+    - collection = collection.select {|f| f[:code] != field.relevant_format_code}.pluck(:name, :code)
 
     = ff.select(:relevant_field_code, collection, {:include_blank => t('shared.please_select')}, class: ["form-control custom-select"])

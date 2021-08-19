@@ -127,6 +127,21 @@ class Field < ApplicationRecord
     name.downcase.split(' ').join('_')
   end
 
+  def relevant_format_code
+    "#{milestone_id}::#{id}::#{code}"
+  end
+
+  def relevant_format_name
+    "#{milestone.name}::#{name}"
+  end
+
+  def relevant_format
+    {
+      name: relevant_format_name,
+      code: relevant_format_code
+    }
+  end
+
   private
     def set_field_code
       self.code ||= format_name
