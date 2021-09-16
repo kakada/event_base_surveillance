@@ -2,7 +2,7 @@
   %tr
     %td
       .flex-row-vertical-center
-        = link_to event.id, event_path(event), class: 'btn btn-link pt-0 pb-0 pl-0 uuid'
+        = link_to event.id, event_path(event), class: 'text-primary uuid'
         %span{ 'data-toggle' => 'tooltip', title: "#{t('event.creator')}: #{event.creator_email}" }
           %i.far.fa-user
     %td
