@@ -22,7 +22,7 @@ class MedisyService
       param = {
         title: item.at('title').text,
         link: item.at('link').text,
-        keywords: item.at('description').text,
+        keywords: item.at('description').try(:text),
         pub_date: item.at('pubDate').text,
         guid: item.at('guid').text,
         medisy_id: @medisy.id,

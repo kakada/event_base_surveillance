@@ -203,14 +203,13 @@ ActiveRecord::Schema.define(version: 2021_07_29_020704) do
     t.string "guid"
     t.string "iso_language"
     t.string "georss_point"
-    t.boolean "inside_cambodia"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "medisy_id"
     t.string "category_trigger"
+    t.string "source_name"
     t.string "source_url"
     t.integer "medisys_country_id"
-    t.string "source_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "fail_reason"
     t.integer "program_id"
   end
