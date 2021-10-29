@@ -10,7 +10,6 @@
 #  fail_reason        :string
 #  georss_point       :string
 #  guid               :string
-#  inside_cambodia    :boolean
 #  iso_language       :string
 #  keywords           :string
 #  link               :string
