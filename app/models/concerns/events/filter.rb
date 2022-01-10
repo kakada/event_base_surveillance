@@ -26,7 +26,7 @@ module Events
         def self.filter_by_keyword(scope, params)
           keywords = get_keywords(params[:keyword])
 
-          return scope if keywords.length < 2
+          return scope unless keywords.length > 1 && keywords.all?(&:present?)
 
           case keywords[0]
           when 'id'
@@ -44,7 +44,7 @@ module Events
         def self.get_keywords(keyword)
           return [] unless keyword.present?
 
-          keyword.gsub(/\s/, '').gsub(/"/, '').gsub(/'/, '').split(':')
+          keyword.split(':').map{ |k| k.strip }
         end
     end
   end
