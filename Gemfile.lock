@@ -543,7 +543,7 @@ DEPENDENCIES
   pumi!
   pundit (~> 2.0.1)
   rack-cors (~> 1.0.5)
-  rails (~> 5.2.4, >= 5.2.4.3)
+  rails (~> 5.2.6)
   rest-client (~> 2.1.0)
   rspec-rails (~> 3.8.2)
   rubocop-performance
