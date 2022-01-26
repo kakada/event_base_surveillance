@@ -24,6 +24,6 @@
 
   %li
     %span.type= t('event.created_date')
-    %span.value= l(@event.created_at)
+    %span.value= l(@event.created_at, format: :nice)
 
 = render 'events/show/tracing_text_field_modal'
