@@ -1,0 +1,107 @@
+km:
+  date:
+    abbr_day_names:
+      - អា
+      - ច
+      - អ
+      - ពុ
+      - ព្រហ
+      - សុ
+      - ស
+    abbr_month_names:
+      -
+      - មករា
+      - កុម្ភៈ
+      - មិនា
+      - មេសា
+      - ឧសភា
+      - មិថុនា
+      - កក្កដា
+      - សីហា
+      - កញ្ញា
+      - តុលា
+      - វិច្ឆិកា
+      - ធ្នូ
+    day_names:
+      - អាទិត្យ
+      - ចន្ទ
+      - អង្គារ
+      - ពុធ
+      - ព្រហស្បតិ៍
+      - សុក្រ
+      - សៅរ៍
+    formats:
+      default: "%d %B %Y"
+      long: ថ្ងៃ%A ទី%e ខែ%B ឆ្នាំ%Y
+      short: "%d %b"
+    month_names:
+      -
+      - មករា
+      - កុម្ភៈ
+      - មិនា
+      - មេសា
+      - ឧសភា
+      - មិថុនា
+      - កក្កដា
+      - សីហា
+      - កញ្ញា
+      - តុលា
+      - វិច្ឆិកា
+      - ធ្នូ
+    order:
+      - :day
+      - :month
+      - :year
+  time:
+    formats:
+      default: "%d %b %Y"
+      long: "%d %B %Y %H:%M"
+      nice: "%d %b %Y, %I:%M %P"
+    am: ព្រឹក
+    pm: "ល្ងាច"
+  datetime:
+    formats:
+      default: "%d %b %Y"
+
+    distance_in_words:
+      half_a_minute: "កន្លះនាទីមុន"
+      less_than_x_seconds:
+        one:   "តិចជាង 1 វិនាទីមុន"
+        other: "តិចជាង %{count} វិនាទីមុន"
+      x_seconds:
+        one:   "1 វិនាទីមុន"
+        other: "%{count} វិនាទីមុន"
+      less_than_x_minutes:
+        one:   "តិចជាង 1 នាទីមុន"
+        other: "តិចជាង %{count} នាទីមុន"
+      x_minutes:
+        one:   "1 នាទីមុន"
+        other: "%{count} នាទីមុន"
+      about_x_hours:
+        one:   "ប្រហែល 1 ម៉ោងមុន"
+        other: "ប្រហែល %{count} ម៉ោងមុន"
+      x_days:
+        one:   "1 ថ្ងៃមុន"
+        other: "%{count} ថ្ងៃមុន"
+      about_x_months:
+        one:   "ប្រហែលជា 1 ខែមុន"
+        other: "ប្រហែលជា %{count} ខែមុន"
+      x_months:
+        one:   "1 ខែកន្លងទៅ"
+        other: "%{count} ខែកន្លងទៅ"
+      about_x_years:
+        one:   "ប្រហែល 1 ឆ្នាំហើយ"
+        other: "ប្រហែល %{count} ឆ្នាំហើយ"
+      over_x_years:
+        one:   "ជាង 1 ឆ្នាំហើយ"
+        other: "ជាង %{count} ឆ្នាំហើយ"
+      almost_x_years:
+        one:   "ជិត 1 ឆ្នាំហើយ"
+        other: "ជិត %{count} ឆ្នាំហើយ"
+    prompts:
+      second: វិនាទី
+      minute: នាទី
+      hour: ម៉ោង
+      day: ថ្ងៃ
+      month: ខែ
+      year: ឆ្នាំ
