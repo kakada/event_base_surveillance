@@ -16,18 +16,18 @@ RSpec.describe FieldValues::RelevantFieldValidation do
 
       context "Fail" do
         before {
-          verification_conducted_at.update(validations: {"operator"=>">", "relevant_field_code"=> report_date.field.relevant_format_code})
-          verification.update_attributes(field_values_attributes: [{ id: verification_conducted_at_value.id, value: Time.parse(report_date.value) - 1.minute }])
+          verification_conducted_at.update(validations: { operator: ">", relevant_field_code: report_date.field.relevant_format_code })
+          verification.update_attributes(field_values_attributes: [{ id: verification_conducted_at_value.id, value: Time.zone.parse(report_date.value) - 1.minute }])
         }
 
         it { expect(verification.valid?).to be_falsey }
-        it { expect(verification.errors.messages[:'conducted at']).not_to be_nil }
+        it { expect(verification.errors.messages[:'conducted at']).not_to eq [] }
       end
 
       context "Success" do
         before {
           verification_conducted_at.update(validations: {"operator"=>">", "relevant_field_code"=> report_date.field.relevant_format_code})
-          verification.update_attributes(field_values_attributes: [{ id: verification_conducted_at_value.id, value: Time.parse(report_date.value) + 1.minute }])
+          verification.update_attributes(field_values_attributes: [{ id: verification_conducted_at_value.id, value: Time.zone.parse(report_date.value) + 1.minute }])
         }
 
         it { expect(verification.valid?).to be_truthy }
@@ -37,12 +37,12 @@ RSpec.describe FieldValues::RelevantFieldValidation do
     context "#date" do
       let(:verification) { create(:event_milestone, :verification, event: event, program: event.program) }
       let(:milestone) { verification.milestone }
-      let(:test_field) { milestone.fields.create(code: 'test_date', name: 'test date', field_type: 'Fields::DateField', validations: {"operator"=>">", "relevant_field_code"=> report_date.field.relevant_format_code}, section_id: milestone.sections.first.id) }
-      let(:test_fv) { verification.field_values.create(field_code: test_field.code, field_id: test_field.id, value: "#{Time.parse(report_date.value) + 1.day}", type: "FieldValues::DateField") }
+      let(:test_field) { milestone.fields.create(code: 'test_date', name: 'test date', field_type: 'Fields::DateField', validations: {operator: ">", relevant_field_code: report_date.field.relevant_format_code}, section_id: milestone.sections.first.id) }
+      let(:test_fv) { verification.field_values.create(field_code: test_field.code, field_id: test_field.id, value: "#{Time.zone.parse(report_date.value) + 1.day}", type: "FieldValues::DateField") }
 
       context "Fail" do
         before {
-          verification.update_attributes(field_values_attributes: [{ id: test_fv.id, value: "#{Time.parse(report_date.value) + 1.minute}" }])
+          verification.update_attributes(field_values_attributes: [{ id: test_fv.id, value: "#{Time.zone.parse(report_date.value) + 1.minute}" }])
         }
 
         it { expect(verification.valid?).to be_falsey }
@@ -51,7 +51,7 @@ RSpec.describe FieldValues::RelevantFieldValidation do
 
       context "Success" do
         before {
-          verification.update_attributes(field_values_attributes: [{ id: test_fv.id, value: "#{Time.parse(report_date.value) + 1.day}" }])
+          verification.update_attributes(field_values_attributes: [{ id: test_fv.id, value: "#{Time.zone.parse(report_date.value) + 1.day}" }])
         }
 
         it { expect(verification.valid?).to be_truthy }
