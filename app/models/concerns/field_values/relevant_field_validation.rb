@@ -5,7 +5,7 @@ module FieldValues
     extend ActiveSupport::Concern
 
     included do
-      validate :validate_relevant_field, if: -> { value.present? && validations[:operator].present? && validations[:relevant_field_code].present? }
+      validate :validate_relevant_field, if: -> { value.present? && validations["operator"].present? && validations["relevant_field_code"].present? }
 
       private
         def validate_relevant_field
@@ -13,7 +13,7 @@ module FieldValues
 
           current_value = decode(value)
           relevant_value = decode(relevant_field.value)
-          is_valid = current_value.send(validations[:operator], relevant_value)
+          is_valid = current_value.send(validations["operator"], relevant_value)
 
           errors.add :value, error_msg unless is_valid
         end
@@ -22,7 +22,7 @@ module FieldValues
         def relevant_field
           return if tmp_valueable.nil?
 
-          relevant_collection.select { |fv| fv.field_id == validations[:relevant_field_code].split('::')[1].to_i }[0]
+          relevant_collection.select { |fv| fv.field_id == validations["relevant_field_code"].split('::')[1].to_i }[0]
         end
 
         def relevant_collection
