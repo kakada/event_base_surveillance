@@ -2,16 +2,16 @@
 
 class MilestonesController < ::ApplicationController
   def index
-    @milestones = current_program.milestones.includes(:fields, :message)
+    @milestones = authorize current_program.milestones.includes(:fields, :message)
   end
 
   def new
-    @milestone = current_program.milestones.new
+    @milestone = authorize current_program.milestones.new
     @milestone.build_default_section
   end
 
   def create
-    @milestone = current_program.milestones.new(milestone_params)
+    @milestone = authorize current_program.milestones.new(milestone_params)
 
     if @milestone.save
       redirect_to milestones_url
@@ -21,11 +21,11 @@ class MilestonesController < ::ApplicationController
   end
 
   def edit
-    @milestone = Milestone.find(params[:id])
+    @milestone = authorize Milestone.find(params[:id])
   end
 
   def update
-    @milestone = Milestone.find(params[:id])
+    @milestone = authorize Milestone.find(params[:id])
 
     if @milestone.update_attributes(milestone_params)
       redirect_to milestones_url
@@ -35,13 +35,15 @@ class MilestonesController < ::ApplicationController
   end
 
   def destroy
-    @milestone = Milestone.find(params[:id])
+    @milestone = authorize Milestone.find(params[:id])
     @milestone.destroy
 
     redirect_to milestones_url
   end
 
   def reorder
+    authorize Milestone, :update?
+
     current_program.milestones.update_order!(params[:ids])
   end
 

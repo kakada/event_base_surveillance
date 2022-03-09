@@ -47,7 +47,7 @@
           = render 'field_value', field_values: @event.field_values, field: field, main_object: @event
     %li
       %span.type= t('event.created_date')
-      %span.value= l(@event.created_at, format: :nice)
+      %span.value= l(@event.created_at)
 
   / Event milestones
   - @event.event_milestones.each do |event_milestone|
@@ -69,4 +69,4 @@
 
       %li
         %span.type= t('event.created_date')
-        %span.value= l(event_milestone.created_at, format: :nice)
+        %span.value= l(event_milestone.created_at)

@@ -31,7 +31,8 @@ km:
       - សុក្រ
       - សៅរ៍
     formats:
-      default: "%d %B %Y"
+      short: "%d %B %Y"
+      default: "%d %b %Y, %I:%M %P"
       long: ថ្ងៃ%A ទី%e ខែ%B ឆ្នាំ%Y
       short: "%d %b"
     month_names:
@@ -54,14 +55,15 @@ km:
       - :year
   time:
     formats:
-      default: "%d %b %Y"
+      short: "%d %b %Y"
+      default: "%d %b %Y, %I:%M %P"
       long: "%d %B %Y %H:%M"
-      nice: "%d %b %Y, %I:%M %P"
     am: ព្រឹក
     pm: "ល្ងាច"
   datetime:
     formats:
-      default: "%d %b %Y"
+      short: "%d %b %Y"
+      default: "%d %b %Y, %I:%M %P"
 
     distance_in_words:
       half_a_minute: "កន្លះនាទីមុន"

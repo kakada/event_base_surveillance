@@ -27,6 +27,10 @@ module FieldValues
 
     validate :validate_value, if: -> { value.present? }
 
+    def html_tag
+      value.present? ? I18n.l(Time.zone.parse(value), format: :short) : value.to_s
+    end
+
     private
       def validate_value
         iso_date = decode(value)

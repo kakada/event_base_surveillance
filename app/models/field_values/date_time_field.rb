@@ -27,7 +27,7 @@ module FieldValues
     end
 
     def html_tag
-      value.present? ? I18n.l(DateTime.strptime(value, '%Y-%m-%d')) : value.to_s
+      value.present? ? I18n.l(Time.zone.parse(value)) : value.to_s
     end
 
     private
@@ -36,7 +36,7 @@ module FieldValues
       end
 
       def parse_date(y_m_d_value)
-        Time.parse y_m_d_value
+        Time.zone.parse y_m_d_value
       end
   end
 end

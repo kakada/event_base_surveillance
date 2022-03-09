@@ -30,7 +30,7 @@
         - @client_apps.each do |client_app|
           %tr
             %td= client_app.name
-            %td= l(client_app.created_at, format: :long)
+            %td= l(client_app.created_at)
             %td= client_app.ip_address
             %td
               %span= client_app.access_token
