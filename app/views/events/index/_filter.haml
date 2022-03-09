@@ -18,7 +18,7 @@
         = t('event.search')
 
     - if policy(Event).download?
-      .flex1.btn-download-csv
+      .flex1.btn-download-csv.mb-2
         %button.btn.btn-outline-info{"data-target" => "#template-model", "data-toggle" => "modal", :type => "button"}
           %i.fas.fa-download
           = t('event.download_csv')

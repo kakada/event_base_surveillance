@@ -14,3 +14,4 @@ en:
     program: 'Program'
     code: 'Code'
     guideline: Guideline
+    pagination_title: "Displaying event type <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"

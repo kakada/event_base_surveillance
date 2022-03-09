@@ -2,7 +2,7 @@
 
 class EventTypesController < ApplicationController
   def index
-    @event_types = policy_scope(EventType.includes(:program))
+    @pagy, @event_types = pagy(authorize policy_scope(EventType.includes(:program)))
   end
 
   def new
