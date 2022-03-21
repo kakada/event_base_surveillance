@@ -15,7 +15,7 @@ module Events
 
       def unlock_access!
         self.lockable_at = program.unlock_event_duration.days.from_now.to_date
-        self.save
+        self.save(validate: false)
       end
     end
   end
