@@ -31,7 +31,10 @@ class Template < ApplicationRecord
       { code: 'created_at', name: 'Created at' },
       { code: 'updated_at', name: 'Updated at' },
       { code: 'close', name: 'Close?' },
-      { code: 'conclude_event_type_name', name: 'Conclude event type' }
+      { code: 'conclude_event_type_name', name: 'Conclude event type' },
+      { code: 'progress', name: 'Event progress' },
+      { code: 'creator_full_name', name: 'Creator name' },
+      { code: 'creator_email', name: 'Creator email' }
     ]
   end
 end
