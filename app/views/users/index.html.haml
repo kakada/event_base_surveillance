@@ -28,6 +28,7 @@
           %th= t('user.program')
           %th= t('user.province')
           %th= t('user.status')
+          %th= t('user.last_sign_in_at')
           %th
       %tbody
         - @users.each_with_index do |user, index|
@@ -41,6 +42,10 @@
 
             %td.status{ class: ('active' if user.confirmed?) }
               = user.confirmed? ? t('user.active') : t('user.pending')
+
+            %td
+              = I18n.l(user.last_sign_in_at) if user.last_sign_in_at.present?
+
             %td.text-right
               - if policy(user).destroy?
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
