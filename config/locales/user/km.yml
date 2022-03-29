@@ -16,3 +16,4 @@ km:
     edit_user: 'កែសម្រួល User'
     full_name: 'ឈ្មោះពេញ'
     pagination_title: "បង្ហាញអ្នកប្រើប្រាស់ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
+    last_sign_in_at: កាលបរិច្ឆេទចូលគណនីចុងក្រោយ
