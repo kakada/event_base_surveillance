@@ -54,6 +54,7 @@ class User < ApplicationRecord
   validates :role, presence: true
   validates :program_id, presence: true, unless: -> { role == 'system_admin' }
   validates :province_code, presence: true, if: -> { %(staff guest).include?(role.to_s) }
+  validates :phone_number, uniqueness: { allow_blank: true }
 
   before_create :set_full_name
 

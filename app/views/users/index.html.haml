@@ -24,6 +24,7 @@
           %th= t('user.number')
           %th= t('user.full_name')
           %th= t('user.email')
+          %th= t('user.phone_number')
           %th= t('user.role')
           %th= t('user.program')
           %th= t('user.province')
@@ -36,6 +37,7 @@
             %td= @pagy.from + index
             %td= user.full_name
             %td= user.email
+            %td= user.phone_number
             %td= user.role.titlecase
             %td= user.program_name
             %td= user.location.try(:name_km)

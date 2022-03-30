@@ -24,7 +24,9 @@
 
           = render 'btn_download_risk_assessment_guideline'
 
-        .text-muted.text-sm= "#{t('event.event_date')}(#{l(@event.event_date)})"
+        .text-muted.text-sm
+          = "#{t('event.event_date')}(#{l(@event.event_date)})"
+          = ", #{t('event.created_by')}(#{creator_info_tooltip})".html_safe
 
       .btn-groups
         - if !@event.close? && policy(@event).update? && milestone = current_program.milestones.where(final: true).first.presence

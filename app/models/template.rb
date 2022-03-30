@@ -34,7 +34,8 @@ class Template < ApplicationRecord
       { code: 'conclude_event_type_name', name: 'Conclude event type' },
       { code: 'progress', name: 'Event progress' },
       { code: 'creator_full_name', name: 'Creator name' },
-      { code: 'creator_email', name: 'Creator email' }
+      { code: 'creator_email', name: 'Creator email' },
+      { code: 'creator_phone_number', name: 'Creator phone number' }
     ]
   end
 end

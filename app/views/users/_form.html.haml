@@ -2,6 +2,7 @@
   = simple_form_for @user do |f|
     = f.input :full_name, label: t('user.full_name')
     = f.input :email, label: t('user.email'), input_html: { readonly: @user.persisted? }
+    = f.input :phone_number, label: t('user.phone_number')
     = f.input :role, label: t('user.role'), collection: policy(User).roles, input_html: { class: 'role' }
 
     .province-code{class: ('hidden' if %w(staff guest).exclude? @user.role.to_s)}
