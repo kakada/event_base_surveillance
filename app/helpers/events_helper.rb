@@ -55,4 +55,14 @@ module EventsHelper
 
     "<span data-relevant='#{field_code(field.code)}'>-</span>"
   end
+
+  def creator_info_tooltip
+    title = "<div class=\"text-left\">"
+    title += "<div>#{t('user.name')}: #{@event.creator_full_name}</div>"
+    title += "<div>#{t('user.email')}: #{@event.creator.email}</div>"
+    title += "<div>#{t('user.phone_number')}: #{@event.creator.phone_number}</div>" if @event.creator.phone_number.present?
+    title += "</div>"
+
+    "<span data-title='#{title}' data-toggle='tooltip' data-html='true'>#{@event.creator_full_name}</span>"
+  end
 end

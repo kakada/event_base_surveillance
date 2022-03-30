@@ -23,7 +23,9 @@
       = @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
 
     / event_date
-    .text-muted.text-sm{style: 'margin-top: -24px'}= "#{t('event.event_date')}: #{l(@event.event_date)}"
+    .text-muted.text-sm{style: 'margin-top: -24px'}
+      = "#{t('event.event_date')}: #{l(@event.event_date)}"
+      = ", #{t('event.created_by')}(#{@event.creator_full_name})"
 
   / Event attributes
   %ul.list.flex1

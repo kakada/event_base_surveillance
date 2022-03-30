@@ -59,7 +59,7 @@ class Event < ApplicationRecord
   delegate :name, to: :program, prefix: true
   delegate :enable_telegram?, to: :program, prefix: false
   delegate :enable_email_notification?, to: :program, prefix: false
-  delegate :email, :full_name, to: :creator, prefix: true, allow_nil: true
+  delegate :email, :full_name, :phone_number, to: :creator, prefix: true, allow_nil: true
   delegate :latlng, to: :location, prefix: true, allow_nil: true
   delegate :guideline_url, to: :event_type, prefix: false, allow_nil: true
   delegate :name, to: :conclude_event_type, prefix: true, allow_nil: true

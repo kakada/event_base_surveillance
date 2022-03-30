@@ -17,3 +17,5 @@ en:
     full_name: 'Full name'
     pagination_title: "Displaying users <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"
     last_sign_in_at: Last sign in at
+    phone_number: Phone number
+    name: Name
