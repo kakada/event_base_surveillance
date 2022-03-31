@@ -54,6 +54,7 @@
 //= require milestones/field_type
 //= require milestones/skip_logic_constant
 //= require milestones/skip_logic
+
 //= require event_milestones/new
 //= require events/skip_logic
 //= require events/datepicker_popup
@@ -62,8 +63,10 @@
 //= require event_milestones/show
 //= require events/index
 //= require event_types/new
+
 //= require users/index
 //= require users/new
+
 //= require client_apps/index
 //= require client_apps/new
 //= require telegrams/new

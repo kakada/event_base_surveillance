@@ -4,7 +4,8 @@
       = link_to edit_event_path(event), class: 'btn btn-link text-left pl-0' do
         = event.milestone.name
         %span.badge.badge-light.btn-edit= t('shared.edit')
-      .at= l(Time.zone.parse(event.conducted_at))
+
+      .at= conducted_at_html(event, event.milestone).html_safe
 
     - is_next = true
     - event_milestones = event.event_milestones
@@ -23,7 +24,7 @@
           - if pre_milestone.present? && pre_milestone.conducted_at.present? && current_milestone.conducted_at.present?
             %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
 
-          .at= l(Time.zone.parse(current_milestone.conducted_at))
+          .at= conducted_at_html(current_milestone, milestone).html_safe
 
         - else
           - if event.verified?

@@ -2,6 +2,12 @@
   %ul.flex-column.items
     %li.item.validation-trigger.item-setting{'data-target' => '.validation-criteria-content'}= t('milestone.validation_criteria')
 
+    %li.item.milestone-datetime-trigger{'data-target' => '.milestone-datetime-content'}= t('milestone.marked_display_date')
+
   .contents
     .content.validation-criteria-content.setting-content
       = render 'milestones/field_validation_content', f: f
+
+    / Marked as display date
+    .content.milestone-datetime-content
+      = render 'milestones/form/setting_milestone_datetime', f: f

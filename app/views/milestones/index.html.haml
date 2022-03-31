@@ -44,7 +44,7 @@
                     %i.fas.fa-pen.drop-menu-icon
                     %span= t('shared.edit')
 
-                - if policy(milestone).delete?
+                - if policy(milestone).destroy?
                   = link_to milestone_path(milestone), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('milestone.are_you_sure_to_delete')} do
                     %i.fas.fa-trash-alt.drop-menu-icon
                     %span= t('shared.delete')

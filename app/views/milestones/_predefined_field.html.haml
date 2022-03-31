@@ -33,7 +33,9 @@
             .btn-setting.pointer.flex1.flex-column-horizontal-center
               %i.fas.fa-cog.icon-gray
 
-    = render 'kinds'
+    / all field type for choosing
+    = render 'milestones/form/field_types'
+
     .collapse-content
       = render 'field_option_content', f: form
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_042227) do
+ActiveRecord::Schema.define(version: 2022_03_30_084151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,8 @@ ActiveRecord::Schema.define(version: 2022_03_30_042227) do
     t.integer "mapping_field_id"
     t.string "template_file"
     t.string "template_name"
+    t.boolean "is_milestone_datetime", default: false
+    t.integer "milestone_datetime_order"
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|

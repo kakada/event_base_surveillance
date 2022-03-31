@@ -11,4 +11,18 @@ namespace :field do
       root_field.field_options = field.field_options if field.field_options.present?
     end
   end
+
+  desc 'migrate is_milestone_datetime fields and its order'
+  task migrate_is_milestone_datetime: :environment do
+    migrate_fields = [
+      { code: 'event_date', display_order: 1 },
+      { code: 'report_date', display_order: 2 },
+      { code: 'conducted_at', display_order: 1 },
+    ]
+
+    migrate_fields.each do |field|
+      fields = Field.where(code: field[:code])
+      fields.update_all(is_milestone_datetime: true, milestone_datetime_order: field[:display_order])
+    end
+  end
 end

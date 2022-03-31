@@ -9,7 +9,7 @@ class MilestonePolicy < ApplicationPolicy
     user.program_admin?
   end
 
-  def delete?
+  def destroy?
     user.program_admin? && !record.root?
   end
 

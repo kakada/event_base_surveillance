@@ -27,11 +27,10 @@ class Event < ApplicationRecord
   include Events::Searchable
   include Events::Callback
   include Events::TemplateField
-  include Events::FieldValueValidation
-  include Events::TraceableField
   include Events::Filter
   include Events::Lockable
   include Events::Location
+  include Events::Valueable
 
   # Soft delete
   acts_as_paranoid
@@ -42,13 +41,9 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User', optional: true
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
-
-  has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid
-  has_many   :field_values, as: :valueable
-  has_many   :tracings, as: :traceable
-
   belongs_to :link_parent, class_name: 'Event', foreign_key: :link_uuid, optional: true
   has_many   :link_children, class_name: 'Event', foreign_key: :link_uuid
+  has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid
 
   # History
   has_associated_audits
@@ -84,7 +79,7 @@ class Event < ApplicationRecord
 
   # Instant Methods
   def conducted_at
-    @conducted_at ||= field_values.find_by(field_code: 'report_date').try(:value)
+    @conducted_at ||= get_value_by_code('event_date').try(:value)
   end
 
   def milestone
