@@ -7,7 +7,10 @@
           = render 'events/show/tracing_number_field_modal', traceable: @event_milestone
 
         - if conducted_date = @event_milestone.fv_conducted_at.presence
-          .text-muted.text-sm= "#{t('event.' + conducted_date.field.format_name)}: #{conducted_date.html_tag.html_safe}"
+          .text-muted.text-sm
+            = "#{conducted_date.field.name}: #{conducted_date.html_tag}".html_safe
+
+            = "; #{t('event.created_by')}: #{creator_info_tooltip(@event_milestone.submitter)}".html_safe
 
       %div= link_to t('shared.back'), event_path(@event), class: 'btn btn-info'
 

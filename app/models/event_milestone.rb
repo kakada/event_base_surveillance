@@ -15,8 +15,7 @@
 
 class EventMilestone < ApplicationRecord
   include Events::Callback
-  include Events::FieldValueValidation
-  include Events::TraceableField
+  include Events::Valueable
 
   attr_accessor :conclude_event_type_id
 
@@ -24,8 +23,6 @@ class EventMilestone < ApplicationRecord
   belongs_to :milestone
   belongs_to :program
   belongs_to :submitter, class_name: 'User', optional: true
-  has_many   :field_values, as: :valueable, dependent: :destroy
-  has_many   :tracings, as: :traceable, dependent: :destroy
 
   # History
   has_associated_audits
@@ -63,7 +60,7 @@ class EventMilestone < ApplicationRecord
   end
 
   def fv_conducted_at
-    @fv_conducted_at ||= field_values.find_by(field_code: 'conducted_at')
+    @fv_conducted_at ||= get_value_by_code('conducted_at')
   end
 
   def telegram_message

@@ -24,6 +24,7 @@
 
           = render 'btn_download_risk_assessment_guideline'
 
+        / Description
         .text-muted.text-sm
           = "#{t('event.event_date')}: #{l(@event.event_date)}"
           = "; #{t('event.created_by')}: #{creator_info_tooltip(@event.creator)}".html_safe if @event.creator.present?

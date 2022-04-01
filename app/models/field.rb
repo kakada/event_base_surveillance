@@ -4,28 +4,30 @@
 #
 # Table name: fields
 #
-#  id                 :bigint           not null, primary key
-#  code               :string
-#  color_required     :boolean          default(FALSE)
-#  description        :text
-#  display_order      :integer
-#  entry_able         :boolean          default(TRUE)
-#  field_type         :string
-#  is_default         :boolean          default(FALSE)
-#  mapping_field      :string
-#  mapping_field_type :string
-#  name               :string
-#  relevant           :string
-#  required           :boolean
-#  template_file      :string
-#  template_name      :string
-#  tracking           :boolean          default(FALSE)
-#  validations        :text
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  mapping_field_id   :integer
-#  milestone_id       :integer
-#  section_id         :integer
+#  id                       :bigint           not null, primary key
+#  code                     :string
+#  color_required           :boolean          default(FALSE)
+#  description              :text
+#  display_order            :integer
+#  entry_able               :boolean          default(TRUE)
+#  field_type               :string
+#  is_default               :boolean          default(FALSE)
+#  is_milestone_datetime    :boolean          default(FALSE)
+#  mapping_field            :string
+#  mapping_field_type       :string
+#  milestone_datetime_order :integer
+#  name                     :string
+#  relevant                 :string
+#  required                 :boolean
+#  template_file            :string
+#  template_name            :string
+#  tracking                 :boolean          default(FALSE)
+#  validations              :text
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  mapping_field_id         :integer
+#  milestone_id             :integer
+#  section_id               :integer
 #
 
 class Field < ApplicationRecord
@@ -54,6 +56,7 @@ class Field < ApplicationRecord
   before_validation :set_mapping_field_type
   before_validation :set_milestone
   before_create :set_display_order
+  after_validation :set_milestone_datetime_order
 
   # Scope
   default_scope { order(is_default: :desc).order(display_order: :asc) }
@@ -64,6 +67,7 @@ class Field < ApplicationRecord
   scope :number, -> { where(field_type: 'Fields::IntegerField') }
   scope :text, -> { where.not(field_type: 'Fields::IntegerField') }
   scope :dates, -> { where(field_type: %w(Fields::DateTimeField Fields::DateField)) }
+  scope :milestone_datetimes, -> { dates.where(is_milestone_datetime: true).order(:milestone_datetime_order) }
 
   # Nested attributes
   accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
@@ -92,8 +96,8 @@ class Field < ApplicationRecord
       { code: 'district_id', field_type: 'Fields::LocationField', name: 'District' },
       { code: 'commune_id', field_type: 'Fields::LocationField', name: 'Commune' },
       { code: 'village_id', field_type: 'Fields::LocationField', name: 'Village' },
-      { code: 'event_date', field_type: 'Fields::DateTimeField', name: 'Onset date', required: true },
-      { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true },
+      { code: 'event_date', field_type: 'Fields::DateTimeField', name: 'Onset date', required: true, is_milestone_datetime: true, milestone_datetime_order: 1 },
+      { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true, is_milestone_datetime: true, milestone_datetime_order: 2 },
       { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
       { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true, tracking: true, field_options_attributes: [{ name: 'Low', color: '#51b8b8' }, { name: 'Moderate', color: '#51b865' }, { name: 'High', color: '#d68bb2' }, { name: 'Very high', color: '#e81c2a' }] },
       { code: 'source_of_information', field_type: 'Fields::SelectOneField', name: 'Source of information', field_options_attributes: [{ name: 'Hotline' }, { name: 'Facebook' }, { name: 'Website' }, { name: 'Newspaper' }] }
@@ -110,7 +114,7 @@ class Field < ApplicationRecord
 
   def self.defaults
     [
-      { code: 'conducted_at', field_type: 'Fields::DateTimeField', name: 'Conducted at', is_default: true, required: true },
+      { code: 'conducted_at', field_type: 'Fields::DateTimeField', name: 'Conducted at', is_default: true, required: true, is_milestone_datetime: true, milestone_datetime_order: 1 },
       { code: 'source', field_type: 'Fields::TextField', name: 'Source', is_default: true, entry_able: false }
     ]
   end
@@ -161,5 +165,11 @@ class Field < ApplicationRecord
       event_mapping_field = self.class.roots.find { |obj| obj[:code] == mapping_field }
       self.mapping_field_type = event_mapping_field.present? && event_mapping_field[:field_type]
       self.color_required = event_mapping_field.present? && event_mapping_field[:color_required]
+    end
+
+    def set_milestone_datetime_order
+      return unless is_milestone_datetime?
+
+      self.milestone_datetime_order ||= milestone.fields.maximum(:milestone_datetime_order).to_i + 1
     end
 end

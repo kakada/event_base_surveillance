@@ -1,11 +1,16 @@
 .flex-row
+  / Setting menu
   %ul.flex-column.items
     %li.item.item-setting{'data-target' => '.setting-content'}= t('milestone.setting')
     %li.item.validation-trigger{'data-target' => '.validation-criteria-content'}= t('milestone.validation_criteria')
     %li.item.skip-logic{'data-target' => '.skip-logic-content'}= t('milestone.skip_logic')
     %li.item.template-trigger{'data-target' => '.template-content'}= t('milestone.template')
 
+    %li.item.milestone-datetime-trigger{'data-target' => '.milestone-datetime-content'}= t('milestone.marked_display_date')
+
+  / Menu content
   .contents
+    / Setting such are require, tracking, and milestone display
     .content.setting-content
       .form-check
         = f.check_box :required, { class: 'form-check-input field-required' }
@@ -15,9 +20,11 @@
         = f.check_box :tracking, { class: 'form-check-input' }
         = f.label :tracking, t('milestone.tracking'), class: 'form-check-label'
 
+    / Setting validation from to
     .content.validation-criteria-content
       = render 'field_validation_content', f: f
 
+    / Setting skip logic
     .content.skip-logic-content
       = f.hidden_field :relevant, class: 'skip-logic-field'
       .form-group.row
@@ -30,5 +37,10 @@
         %label.col-3=t('milestone.value')
         %textarea#relevant-value.form-control.relevant-value.col-9
 
+    / Setting for milestone manual information
     .content.template-content
       = render 'template_file_content', f: f
+
+    / Marked as display date
+    .content.milestone-datetime-content
+      = render 'milestones/form/setting_milestone_datetime', f: f

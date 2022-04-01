@@ -1,7 +1,7 @@
 .circles-list {
   ol {
     list-style-type: none;
-    margin-left: 1.25em;
+    margin-left: 1em;
     padding-left: 2.5em;
     counter-reset: li-counter;
     border-left: 1px solid #00c4cc;
@@ -10,7 +10,7 @@
 
   ol > li {
     position: relative;
-    margin-bottom: 6em;
+    margin-bottom: 9em;
     clear: both;
   }
 
@@ -39,11 +39,20 @@
 
   .at {
     position: absolute;
+    top: 30px;
+    width: 100%;
+
+    small {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+    }
   }
 
   .duration {
     position: absolute;
-    top: -4em;
+    top: -5em;
     display: block;
   }
 

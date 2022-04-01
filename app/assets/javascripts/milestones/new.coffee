@@ -70,18 +70,14 @@ EBS.MilestonesNew = do ->
       initBtnMove(dom)
       initFieldNameStyleAsTitle(dom)
       initCollapseContent(dom)
-      initValidationView(dom)
+      initSettingView(dom)
 
   # Validation-----------start
-  initValidationView = (dom)->
-    if dom.value != fileField
-      hideTemplateTrigger(dom)
+  initSettingView = (dom)->
+    hideTemplateTrigger(dom) if dom.value != fileField
 
-    if isValidationFieldType(dom.value)
-      removeNoneUseValidator(dom)
-    else
-      hideValidationTrigger(dom)
-      removeValidationContent(dom)
+    handleValidationSetting(dom, dom.value)
+    handleMilestoneDisplayDateSetting(dom, dom.value)
 
   hideTemplateTrigger = (dom) ->
     $(dom).parents('.fieldset').find('.template-trigger').hide()
@@ -103,12 +99,16 @@ EBS.MilestonesNew = do ->
     $(parent).find('.field-validation-wrapper').remove()
 
     #handle it when choose fieldType
-  handleValidation = (dom, field_type) ->
+  handleValidationSetting = (dom, field_type) ->
     if isValidationFieldType(field_type)
       removeNoneUseValidator(dom)
     else
       hideValidationTrigger(dom)
       removeValidationContent(dom)
+
+  handleMilestoneDisplayDateSetting = (dom, field_type) ->
+    if ![dateField, dateTimeField].includes(field_type)
+      $(dom).parents('.fieldset').find('.milestone-display-trigger').hide()
 
   # Validation-----------end
 
@@ -239,7 +239,8 @@ EBS.MilestonesNew = do ->
       assignBtnMove(dom)
       assignFieldType(dom, field_type)
       handleCollapseContent(dom, field_type)
-      handleValidation(dom, field_type)
+      handleValidationSetting(dom, field_type)
+      handleMilestoneDisplayDateSetting(dom, field_type)
       showBtnSetting(dom)
 
   showBtnSetting = (dom)->

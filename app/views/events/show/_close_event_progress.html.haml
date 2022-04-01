@@ -2,7 +2,8 @@
   %ol
     %li
       %a.btn.btn-link.pl-0.text-left= event.milestone.name
-      .at= l(Time.zone.parse(event.conducted_at))
+
+      .at= conducted_at_html(event, event.milestone).html_safe
 
     - event_milestones = event.event_milestones
     - milestone_ids = event_milestones.collect(&:milestone_id)
@@ -17,7 +18,8 @@
 
           - if pre_milestone.present?
             %span.badge.badge-light.duration= distance_of_time_in_words(current_milestone.conducted_at, pre_milestone.conducted_at)
-          .at= l(Time.zone.parse(current_milestone.conducted_at))
+
+          .at= conducted_at_html(current_milestone, milestone).html_safe
 
         - else
           = link_to milestone.name, '#', class: 'btn btn-link text-left pl-0 disabled'

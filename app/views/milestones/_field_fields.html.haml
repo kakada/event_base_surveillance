@@ -31,11 +31,16 @@
           .remove_fields.pointer.flex1.flex-column-horizontal-center
             %i.fas.fa-trash-alt.icon-delete
 
-    = render 'kinds'
+
+    / All setting contents-----------
+
+    / all field type for choosing
+    = render 'milestones/form/field_types'
 
     .collapse-content
       = render 'mapping_field_content', f: f
       = render 'field_option_content', f: f
 
+    / Sidebar setting
     .setting-wrapper
       = render 'setting', f: f

@@ -105,7 +105,7 @@ class Milestone < ApplicationRecord
 
   def relevant_fields(scope = :dates)
     fields = Field.unscoped.joins(:milestone).send(scope)
-              .where("milestones.display_order": (1..display_order).to_a)
+              .where("milestones.display_order": (1..display_order.to_i).to_a)
               .where("milestones.program_id": program_id)
               .order("milestones.display_order ASC")
 

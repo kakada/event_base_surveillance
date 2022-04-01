@@ -1,26 +1,20 @@
 = f.input :name
 
-- error_msg = f.object.errors[:status]
-.milestone-status.form-group{ class: ('form-group-invalid' if error_msg.present?) }
-  %span= t('milestone.flag_as')
+/ Flag as
+= render 'milestones/form/flag_as', f: f
 
-  = f.collection_radio_buttons :status, @milestone.status_collection, :last, :first
-
-  - unless @milestone.root?
-    %span.reset-flag.pointer{ 'data-toggle' => 'tooltip', title: 'Reset flag' }
-      %i.fas.fa-redo
-
-  - if error_msg.present?
-    .invalid-feedback= error_msg.join('; ')
-
+/ Default section
 = render 'predefined_fields', f: f
 
-- sections = f.object.sections.select{ |section| !section.default }
-= f.fields_for :sections, sections do |sf|
+/ Dynamic section
+- other_sections = f.object.sections.select{ |section| !section.default }
+
+= f.fields_for :sections, other_sections do |sf|
   = render 'section_fields', f: sf
 
 = link_to_add_fields t('milestone.add_section'), f, :sections
 
+/ Action button
 .actions
   = f.submit t('shared.save'), class: 'btn btn-primary'
   = link_to t('shared.cancel'), milestones_path, class: 'btn btn-secondary'
