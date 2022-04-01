@@ -36,7 +36,7 @@ module Fields
       :select_multiple
     end
 
-    def self.es_datatype
+    def es_datatype
     end
   end
 end

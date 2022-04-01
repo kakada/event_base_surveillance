@@ -36,7 +36,9 @@ module Fields
       :text
     end
 
-    def self.es_datatype
+    def es_datatype
+      return :keyword if code == 'progress'
+
       :text
     end
   end

@@ -36,7 +36,7 @@ module Fields
       :file
     end
 
-    def self.es_datatype
+    def es_datatype
       :text
     end
   end
