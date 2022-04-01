@@ -22,9 +22,9 @@ module Events
           es_milestone = { type: 'object', properties: { created_at: { type: 'date' }, updated_at: { type: 'date' } } }
 
           milestone.fields.each do |field|
-            next unless field[:field_type].constantize.es_datatype.present?
+            next unless field.es_datatype.present?
 
-            es_milestone[:properties][field[:code]] = { type: field[:field_type].constantize.es_datatype }
+            es_milestone[:properties][field[:code]] = { type: field.es_datatype }
           end
 
           structure[:properties][milestone.format_name] = es_milestone

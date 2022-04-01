@@ -5,7 +5,7 @@ class FieldSerializer < ActiveModel::Serializer
              :display_order, :type, :label, :code
 
   def type
-    object.class.es_datatype
+    object.es_datatype
   end
 
   def label

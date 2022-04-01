@@ -36,7 +36,7 @@ module Fields
       :select_one
     end
 
-    def self.es_datatype
+    def es_datatype
       :keyword
     end
   end
