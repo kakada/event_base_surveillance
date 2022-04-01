@@ -74,6 +74,5 @@ module EventsHelper
 
       "<small>#{fv.html_tag}</small> <small class='text-muted'>(#{field.name})</small>"
     end.join('')
->>>>>>> Event: display multiple date in progress information
   end
 end
