@@ -25,7 +25,9 @@
     / event_date
     .text-muted.text-sm{style: 'margin-top: -24px'}
       = "#{t('event.event_date')}: #{l(@event.event_date)}"
-      = "; #{t('event.created_by')}: #{@event.creator_full_name}"
+
+      -  if @event.creator.present?
+        = "; #{t('event.entry_by')}: #{@event.creator_full_name}"
 
   / Event attributes
   %ul.list.flex1
@@ -60,7 +62,9 @@
     - if conducted_at = event_milestone.fv_conducted_at.presence
       .text-muted.text-sm
         = "#{t('event.' + conducted_at.field.format_name)}: #{conducted_at.html_tag.html_safe}"
-        = "; #{t('event.created_by')}: #{creator_info_tooltip(event_milestone.submitter)}".html_safe
+
+        - if event_milestone.submitter.present?
+          = "; #{t('event.entry_by')}: #{creator_info_tooltip(event_milestone.submitter)}".html_safe
 
     / Milestones attributes
     %ul.list.flex1
