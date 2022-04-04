@@ -22,6 +22,10 @@
 
 module FieldValues
   class ImageField < ::FieldValue
+    def display_value
+      image_url
+    end
+
     def html_tag
       "
         <div class='image-wrapper'>

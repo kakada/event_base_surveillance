@@ -22,6 +22,10 @@
 
 module FieldValues
   class TextField < ::FieldValue
+    def display_value
+      value
+    end
+
     def html_tag
       return (value || '-').to_s unless field_code == 'progress'
       return "<span class='badge #{valueable.close? ? 'badge-success' : 'badge-warning'}'>#{value}</span>" if valueable.lockable_at.nil?

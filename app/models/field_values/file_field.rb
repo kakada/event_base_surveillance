@@ -22,6 +22,10 @@
 
 module FieldValues
   class FileField < ::FieldValue
+    def display_value
+      file_url
+    end
+
     def html_tag
       "
         <div>

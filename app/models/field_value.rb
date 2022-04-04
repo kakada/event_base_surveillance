@@ -56,6 +56,10 @@ class FieldValue < ApplicationRecord
     value
   end
 
+  def display_value
+    value
+  end
+
   def html_tag
     value.to_s
   end
