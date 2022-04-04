@@ -6,7 +6,10 @@ class EventPolicy < ApplicationPolicy
   end
 
   def show?
-    user.system_admin? || user.program_admin? || user.province_code == 'all' || user.province_code == record.location_code[0..1]
+    return true if user.system_admin?
+    return false unless (record.program_id == user.program_id) || record.shared?
+
+    user.program_admin? || user.province_code == 'all' || user.province_code == record.location_code[0..1]
   end
 
   def create?
