@@ -31,6 +31,12 @@ module FieldValues
       value.present? ? I18n.l(Time.zone.parse(value), format: :short) : value.to_s
     end
 
+    def display_value
+      return "" unless value.present?
+
+      I18n.l(Time.zone.parse(value), format: :short)
+    end
+
     private
       def validate_value
         iso_date = decode(value)

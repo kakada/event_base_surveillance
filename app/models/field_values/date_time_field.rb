@@ -26,6 +26,12 @@ module FieldValues
       Time.zone.parse(value) if value.present?
     end
 
+    def display_value
+      return "" unless value.present?
+
+      I18n.l(Time.zone.parse(value))
+    end
+
     def html_tag
       value.present? ? I18n.l(Time.zone.parse(value)) : value.to_s
     end

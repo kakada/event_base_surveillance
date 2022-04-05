@@ -31,6 +31,10 @@ module FieldValues
       errors.add(:value, I18n.t('shared.is_invalid_value')) unless value.integer?
     end
 
+    def display_value
+      value
+    end
+
     private
       def decode(value)
         value.to_i

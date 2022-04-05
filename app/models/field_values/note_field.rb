@@ -22,5 +22,8 @@
 
 module FieldValues
   class NoteField < ::FieldValue
+    def display_value
+      value
+    end
   end
 end

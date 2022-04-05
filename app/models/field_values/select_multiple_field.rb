@@ -28,6 +28,10 @@ module FieldValues
       values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }
     end
 
+    def display_value
+      es_value
+    end
+
     def html_tag
       label = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }.join(', ')
       opt_values = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:value) || v }.join(',')

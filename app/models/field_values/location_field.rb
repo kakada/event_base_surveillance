@@ -28,6 +28,10 @@ module FieldValues
       location.name_en.split(' ').join('_') if location.present?
     end
 
+    def display_value
+      value
+    end
+
     def html_tag
       return (value.presence || '-').to_s if %w(province_id district_id commune_id village_id).exclude? field_code
 

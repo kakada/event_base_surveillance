@@ -22,6 +22,10 @@
 
 module FieldValues
   class MappingField < ::FieldValue
+    def display_value
+      value
+    end
+
     def html_tag
       return value.to_s if field.parent.nil? || ['Fields::SelectOneField', 'Fields::SelectMultipleField'].exclude?(field.parent.field_type)
 
