@@ -71,8 +71,7 @@ module EventsHelper
   def conducted_at_html(em, milestone)
     milestone.fields.milestone_datetimes.map do |field|
       fv = em.get_value_by_code(field.code)
-
-      "<small>#{fv.html_tag}</small> <small class='text-muted'>(#{field.name})</small>"
+      fv.present? ? "<small>#{fv.html_tag}</small> <small class='text-muted'>(#{field.name})</small>" : ""
     end.join('')
   end
 end
