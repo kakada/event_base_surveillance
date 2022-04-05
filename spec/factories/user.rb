@@ -14,6 +14,15 @@ FactoryBot.define do
       program_id  { nil }
     end
 
+    trait :program_admin do
+      role    { 'program_admin' }
+    end
+
+    trait :national_staff do
+      role          { 'staff' }
+      province_code { 'all' }
+    end
+
     trait :staff do
       role          { 'staff' }
       province_code { Pumi::Province.all.pluck(:id).sample }
