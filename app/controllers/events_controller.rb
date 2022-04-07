@@ -83,7 +83,7 @@ class EventsController < ApplicationController
 
     def filter_params
       params.permit(
-        :start_date, :event_type_id, :keyword, :filter
+        :start_date, :end_date, :event_type_id, :keyword, :filter
       ).merge(program_id: current_user.program_id)
     end
 

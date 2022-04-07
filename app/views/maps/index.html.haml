@@ -1,8 +1,5 @@
 #content
   .flex-row-vertical-center
-    .flex1.mb-2
-      %span= t('map.title', total_count: @event_data.inject(0){|sum,e| sum + e[:total_count] }, location_count: @event_data.size).html_safe
-
     %form#event-form.form-inline.justify-content-end{ method: :get }
       .form-group.mb-2
         %label.mr-1{ for: :event_event_type }= "#{t('map.event')}:"
@@ -14,6 +11,10 @@
       %button.btn.btn-primary.mb-2{ type: 'submit' }
         %i.fas.fa-search
         = t('shared.apply')
+
+
+    .mb-2.flex1.text-right
+      %span= t('map.title', total_count: @event_data.inject(0){|sum,e| sum + e[:total_count] }, location_count: @event_data.size).html_safe
 
   #map{ data: {'event-data' => @event_data.to_json, province: current_user.location.try(:to_json), program: current_program.to_json }}
 
