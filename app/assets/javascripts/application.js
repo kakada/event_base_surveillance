@@ -26,21 +26,19 @@
 //= require bootstrap-toggle.min
 //= require bootstrap-datepicker.min
 
-// **DateTime picker: Usage: https://tempusdominus.github.io/bootstrap-4/Usage/
-//= require moment
-//= require tempusdominus-bootstrap-4.js
-
 //= require leaflet
-//= require moment.min
+//= require moment
+//= require moment-with-locales
+//= require daterangepicker
+//= require tagify.min
+
+// **DateTime picker: Usage: https://tempusdominus.github.io/bootstrap-4/Usage/
+//= require tempusdominus-bootstrap-4.js
 
 // **Bar Chart
 //= require chart
 
-//= require tagify.min
-
 // ** Main js
-//= require tagify.min
-
 //= require application/namespace
 //= require application/util
 
@@ -57,7 +55,8 @@
 
 //= require event_milestones/new
 //= require events/skip_logic
-//= require events/datepicker_popup
+//= require events/locale
+//= require events/daterange_picker
 //= require events/new
 //= require events/show
 //= require event_milestones/show

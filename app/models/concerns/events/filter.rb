@@ -9,7 +9,7 @@ module Events
       def self.filter(params = {})
         scope = all
         scope = filter_by_keyword(scope, params)
-        scope = scope.where('event_date >= ?', params[:start_date]) if params[:start_date].present?
+        scope = scope.where("event_date BETWEEN ? AND ?", params[:start_date], params[:end_date]) if params[:start_date].present? && params[:end_date].present?
         scope = scope.where(event_type_id: params[:event_type_id]) if params[:event_type_id].present?
         scope = filter_by_type(scope, params)
         scope
