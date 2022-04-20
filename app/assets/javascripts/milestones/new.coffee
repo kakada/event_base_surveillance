@@ -108,7 +108,7 @@ EBS.MilestonesNew = do ->
 
   handleMilestoneDisplayDateSetting = (dom, field_type) ->
     if ![dateField, dateTimeField].includes(field_type)
-      $(dom).parents('.fieldset').find('.milestone-display-trigger').hide()
+      $(dom).parents('.fieldset').find('.milestone-datetime-trigger').hide()
 
   # Validation-----------end
 
