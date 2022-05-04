@@ -11,10 +11,10 @@ RSpec.describe MapService do
     let!(:program_b) { admin_b.program }
 
     let!(:influenza_a)   { create(:event_type, program: program_a) }
-    let!(:h5n1_a_shared) { create(:event_type, shared: true, program: program_a) }
+    let!(:h5n1_a_shared) { create(:event_type, shared: true, program: program_a, program_shared_ids: [program_b.id]) }
 
     let!(:pes_jruk_b)    { create(:event_type, program: program_b) }
-    let!(:h1n1_b_shared) { create(:event_type, shared: true, program: program_b) }
+    let!(:h1n1_b_shared) { create(:event_type, shared: true, program: program_b, program_shared_ids: [program_a.id]) }
 
     let!(:event_influenza_a)   { create(:event, event_type: influenza_a, program: program_a) }
     let!(:event_h5n1_a_shared) { create(:event, event_type: h5n1_a_shared, program: program_a) }

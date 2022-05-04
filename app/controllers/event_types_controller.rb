@@ -2,7 +2,7 @@
 
 class EventTypesController < ApplicationController
   def index
-    @pagy, @event_types = pagy(authorize policy_scope(EventType.includes(:program)))
+    @pagy, @event_types = pagy(authorize policy_scope(EventType.includes(:program, :program_shareds)))
   end
 
   def new
@@ -68,7 +68,8 @@ class EventTypesController < ApplicationController
           field_options_attributes: %i[
             id name value color _destroy
           ]
-        ]
+        ],
+        program_shared_ids: []
       )
     end
 end

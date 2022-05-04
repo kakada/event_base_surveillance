@@ -33,7 +33,7 @@ module FieldValues
     end
 
     def html_tag
-      option = field.field_options.find_by(value: value)
+      option = field.field_options.select { |o| o.value == value }.first
       label = option.try(:name) || value
       option_value = option.try(:value) || value
 

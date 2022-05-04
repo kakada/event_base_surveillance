@@ -23,11 +23,11 @@
           %th= t('event_type.name')
           %th= t('event_type.code')
           %th= t('event_type.last_modified')
-          %th= t('event_type.status')
           %th= t('event_type.guideline')
 
           - if current_user.system_admin?
             %th= t('event_type.program')
+          %th= t('event_type.program_share')
           %th
 
       %tbody
@@ -41,13 +41,14 @@
 
             %td= event_type.code
             %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
-            %td= event_type.shared ? t('event_type.shared') : '-'
             %td
               - if guideline = event_type.guideline.presence
                 = link_to guideline.file.filename, event_type.guideline_url, class: 'btn btn-link'
 
             - if current_user.system_admin?
               %td= event_type.program_name
+
+            %td= event_type.program_shareds.collect(&:name).join(', ')
 
             %td.text-right
               - if policy(event_type).update?
@@ -58,16 +59,6 @@
                   = link_to edit_event_type_path(event_type), class: "btn dropdown-item" do
                     %i.fas.fa-pen.drop-menu-icon
                     %span= t('shared.edit')
-
-                  - unless event_type.shared?
-                    = link_to shared_event_type_path(event_type), class: "btn dropdown-item" do
-                      %i.fas.fa-share-alt.drop-menu-icon
-                      %span= t('event_type.shared_data')
-
-                  - if event_type.shared?
-                    = link_to unshared_event_type_path(event_type), class: "btn dropdown-item" do
-                      %i.fas.fa-share-alt.drop-menu-icon
-                      %span= t('event_type.unshared_data')
 
                   - if policy(event_type).destroy?
                     = link_to event_type_path(event_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('event_type.are_you_sure_to_delete')} do

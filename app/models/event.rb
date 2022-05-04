@@ -44,13 +44,14 @@ class Event < ApplicationRecord
   belongs_to :link_parent, class_name: 'Event', foreign_key: :link_uuid, optional: true
   has_many   :link_children, class_name: 'Event', foreign_key: :link_uuid
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid
+  has_many   :event_shareds
+  has_many   :program_shareds, through: :event_shareds, source: :program
 
   # History
   has_associated_audits
 
   # Deligation
   delegate :name, :color, to: :event_type, prefix: :event_type
-  delegate :shared?, to: :event_type, prefix: false
   delegate :name, to: :program, prefix: true
   delegate :enable_telegram?, to: :program, prefix: false
   delegate :enable_email_notification?, to: :program, prefix: false
@@ -67,6 +68,7 @@ class Event < ApplicationRecord
   before_create :secure_uuid
 
   after_create :set_event_progress
+  after_create :set_event_share
 
   # Scope
   scope :order_desc, -> { order(event_date: :desc) }
@@ -119,6 +121,10 @@ class Event < ApplicationRecord
     conclude_event_type_id.present? && event_type_id != conclude_event_type_id
   end
 
+  def shared_with?(program_id)
+    program_shared_ids.include?(program_id)
+  end
+
   def self.search_by_uuid_or_event_type(keyword)
     joins(:event_type)
       .where('LOWER(event_types.name) LIKE ? OR LOWER(uuid) LIKE ?', "%#{keyword.downcase}%", "%#{keyword.downcase}%")
@@ -136,5 +142,9 @@ class Event < ApplicationRecord
 
     def set_program_id
       self.program_id = creator.present? && creator.program_id
+    end
+
+    def set_event_share
+      self.program_shared_ids = event_type.program_shared_ids
     end
 end

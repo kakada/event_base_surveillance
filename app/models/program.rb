@@ -68,6 +68,10 @@ class Program < ApplicationRecord
     logo_url || 'default_logo.png'
   end
 
+  def siblings
+    self.class.where.not(id: id)
+  end
+
   private
     def set_default_language
       self.language_code ||= 'en'
