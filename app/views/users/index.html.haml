@@ -49,6 +49,8 @@
               = I18n.l(user.last_sign_in_at) if user.last_sign_in_at.present?
 
             %td.text-right
+              = telegram_icon_status(user).html_safe
+
               - if policy(user).destroy?
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                   %i.fas.fa-ellipsis-v

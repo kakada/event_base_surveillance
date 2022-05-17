@@ -15,4 +15,9 @@ namespace :user do
       user.save
     end
   end
+
+  desc 'migrate program_admin province_code'
+  task migrate_province_code: :environment do
+    User.where(role: :program_admin).update_all(province_code: 'all')
+  end
 end

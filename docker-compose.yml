@@ -69,3 +69,4 @@ services:
       - 4040:4040
     environment:
       NGROK_PORT: 'web:3000'
+      NGROK_AUTH: YourAuthTokenFromNgrok

@@ -35,3 +35,9 @@ km:
     successfully_added_to_group: 'bot ត្រូវបានបញ្ចូលក្នុងក្រុមដោយជោគជ័យ'
     added_group_to_system: 'បានបញ្ចូលទៅក្នុងប្រព័ន្ធ'
     successfully_added_to_system: 'ឈ្មោះក្រុមត្រូវបានបញ្ចូលក្នុងប្រព័ន្ធដោយខ្លួនឯង'
+
+    welcome_message: "ជំរាបសួរ <strong>%{username}</strong>! សូមស្វាគមន៍មកកាន់ <strong>ប្រព័ន្ធតាមដានព្រឹត្តិការណ៍ជំងឺឆ្លង!</strong> ដើម្បីចុះឈ្មោះគណនីរបស់អ្នក សូមវាយ <code>/connect លេខទូរស័ព្ទឬអ៊ីម៉ែល លេខកូដ_ឬ_ឈ្មោះខេត្តភាសាខ្មែរ/ឈ្មោះភាសាអង់គ្លេស</code> ឧទាហរណ៍៖ <code>/connect 011222333 01</code> ឬ <code>/connect 011222333 Banteay Meanchey</code> ឬ <code>/connect 011222333 បន្ទាយមានជ័យ</code> ឬ <code>/connect abc@email.com 01</code> ឬ <code>/connect abc@email.com Banteay Meanchey</code> ឬ <code>/connect abc@email.com បន្ទាយមានជ័យ</code> ឬ <code>/connect abc@email.com ថ្នាក់ជាតិ</code>"
+    invalid_info_message: "សូមអភ័យទោស <b>%{username}!</b> អ្នកកំពុងផ្តល់ព័ត៌មានគណនីមិនត្រឹមត្រូវ។ ចំណាំ៖ <code>/%{command} phone_number_or_email province_code_or_name</code>"
+    congratulation_message: "សូមអបអរសាទរ <b>%{username}!</b> អ្នកបានភ្ជាប់ <b> ប្រព័ន្ធតាមដានព្រឹត្តិការណ៍ជំងឺឆ្លង</b>ដោយជោគជ័យជាមួយនឹងគណនី Telegram របស់អ្នក។ អ្នកនឹងទទួលបានការជូនដំណឹងទាំងអស់សម្រាប់ <b>%{location}</b>។"
+    already_associated: ភ្ជាប់ជាមួយគណនី %{username} រួចហើយ!
+    disconnect_message: "សួស្តី <b>%{username}!</b> អ្នកបានផ្ដាច់គណនី Telegram របស់អ្នកចេញពី <b> ប្រព័ន្ធតាមដានព្រឹត្តិការណ៍ជំងឺឆ្លង</b>ដោយជោគជ័យ។ អ្នកនឹងលែងទទួលបានការជូនដំណឹងសម្រាប់ <b>%{location}</b> ទៀតហើយ។"
