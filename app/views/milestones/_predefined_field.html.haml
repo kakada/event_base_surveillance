@@ -18,7 +18,9 @@
             = form.hidden_field :entry_able
             = form.hidden_field :display_order, class: 'display-order'
             = form.text_field :name, placeholder: t('milestone.field_name'), class: 'form-control field-name'
-            = form.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
+
+            %div
+              = form.text_field :description, placeholder: t('milestone.field_hint'), class: "form-control field-definition no-style as-hint"
 
           - if form.object.required
             .as-title{style: 'font-weight: normal'}= t('milestone.required')
