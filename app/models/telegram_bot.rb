@@ -14,7 +14,6 @@
 #  program_id :integer
 #
 
-
 class TelegramBot < ApplicationRecord
   belongs_to :program
 
@@ -32,5 +31,10 @@ class TelegramBot < ApplicationRecord
     rescue
       self.actived = false
     end
+  end
+
+  def self.send_message(chat_id, message)
+    ::Telegram::Bot::Client.new(ENV['TELEGRAM_TOKEN'], ENV['TELEGRAM_USERNAME'])
+                           .send_message(chat_id: chat_id, text: message, parse_mode: :HTML)
   end
 end

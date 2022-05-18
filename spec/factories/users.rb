@@ -15,7 +15,8 @@ FactoryBot.define do
     end
 
     trait :program_admin do
-      role    { 'program_admin' }
+      role          { 'program_admin' }
+      province_code { 'all' }
     end
 
     trait :national_staff do

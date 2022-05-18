@@ -355,6 +355,8 @@ ActiveRecord::Schema.define(version: 2022_05_18_030807) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "phone_number"
+    t.string "telegram_chat_id"
+    t.string "telegram_username"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

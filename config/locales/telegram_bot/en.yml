@@ -35,3 +35,9 @@ en:
     successfully_added_to_group: 'The bot is successfully added to the group'
     added_group_to_system: 'Added group to the system'
     successfully_added_to_system: 'The group is automatically added to the system'
+
+    welcome_message: "Hello <strong>%{username}</strong>! Welcome to <strong>Cambodia Event Monitoring System!</strong> To register your account, please type <code>/connect <b>your_phone_number_or_email</b> <i>your_office_province_code_or_name.</i></code> Example: <code>/connect 011222333 01</code> ឬ <code>/connect 011222333 Banteay Meanchey</code> ឬ <code>/connect 011222333 បន្ទាយមានជ័យ</code> ឬ <code>/connect abc@email.com 01</code> ឬ <code>/connect abc@email.com Banteay Meanchey</code> ឬ <code>/connect abc@email.com បន្ទាយមានជ័យ</code> ឬ <code>/connect abc@email.com national</code>"
+    invalid_info_message: "Sorry <b>%{username}!</b> You're providing invalid account information. Note: <code>/%{command} phone_number_or_email province_code_or_name</code>"
+    congratulation_message: "Congratulations, <b>%{username}!</b> You're successfully connected your <b>Cambodia Event Monitoring System</b> with your Telegram account, you will receive any notification for reports belonging to <b>%{location}</b>."
+    already_associated: Associated with %{username} account!
+    disconnect_message: "Hi <b>%{username}!</b> you have been disconnected your Telegram account from <b>Cambodia Event Monitoring System</b>successfully. You will no longer receive notifications for <b>%{location}</b>."
