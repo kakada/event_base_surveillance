@@ -15,3 +15,4 @@ km:
     code: 'កូដ'
     guideline: ការណែនាំ
     pagination_title: "បង្ហាញប្រភេទព្រឹត្តិការណ៍ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
+    program_share: ចែករំលែកទៅកាន់ប្រូក្រាម

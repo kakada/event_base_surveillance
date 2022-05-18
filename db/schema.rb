@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_084151) do
+ActiveRecord::Schema.define(version: 2022_05_18_030807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2022_03_30_084151) do
     t.index ["associated_type", "associated_id"], name: "associated_index"
     t.index ["auditable_type", "auditable_id", "version"], name: "auditable_index"
     t.index ["created_at"], name: "index_audits_on_created_at"
-    t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
@@ -72,6 +71,20 @@ ActiveRecord::Schema.define(version: 2022_03_30_084151) do
     t.string "event_uuid"
     t.integer "milestone_id"
     t.integer "submitter_id"
+    t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_shareds", force: :cascade do |t|
+    t.string "event_id"
+    t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_type_shareds", force: :cascade do |t|
+    t.integer "event_type_id"
     t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

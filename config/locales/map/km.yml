@@ -3,7 +3,7 @@ km:
     title: "ព្រឹត្តិការណ៍ដែលរាយការណ៍មានចំនួន <b>%{total_count}</b>, មានក្នុងទីតាំងចំនួន <b>%{location_count}</b>"
     legend: Legend
     event: ព្រឹត្តិការណ៍
-    shared_from: 'បានចែករំលែកពី'
+    shared_from: 'ចែករំលែកពី'
     all: 'ទាំងអស់'
     suspected_event: 'ព្រឹត្តិការណ៍សង្ស័យ'
     location: 'ទីតាំង'

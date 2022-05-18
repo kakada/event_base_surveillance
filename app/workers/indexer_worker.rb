@@ -27,9 +27,7 @@ class IndexerWorker
       # events_cdc
       index_document("#{Event.index_name}_#{program.format_name}", event)
 
-      return unless event.event_type.shared?
-
-      Program.where.not(id: program.id).each do |target_program|
+      event.program_shareds.each do |target_program|
         # gdaph_p#{cdc.id}_shared
         index_name = "#{target_program.format_name}_p#{program.id}_shared"
         index_document(index_name, event)

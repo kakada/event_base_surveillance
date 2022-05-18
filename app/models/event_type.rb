@@ -18,6 +18,8 @@
 #
 
 class EventType < ApplicationRecord
+  has_associated_audits
+
   # Uploader
   mount_uploader :guideline, GuidelineUploader
 
@@ -27,6 +29,8 @@ class EventType < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :event_type_webhooks
   has_many :webhooks, through: :event_type_webhooks
+  has_many :event_type_shareds
+  has_many :program_shareds, through: :event_type_shareds, source: :program
 
   # Validation
   validates :name, presence: true, uniqueness: { case_sensitive: false, scope: [:program_id] }
@@ -39,10 +43,14 @@ class EventType < ApplicationRecord
 
   # Scope
   scope :root, -> { where(default: true).first }
-  scope :with_shared, -> (program_id) { where('program_id = ? OR shared = ?', program_id, true) }
+  scope :with_shared, -> (program_id) { left_joins(:event_type_shareds).where('program_id = ? OR program_share_id = ?', program_id, program_id) }
 
   # Deligation
   delegate :name, to: :program, prefix: :program
+
+  def shared_with?(program_id)
+    program_shared_ids.include?(program_id)
+  end
 
   # Class methods
   def self.create_root(user_id)

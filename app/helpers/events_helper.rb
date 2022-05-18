@@ -47,7 +47,7 @@ module EventsHelper
   end
 
   def shared_event?(user, event)
-    !user.system_admin? && event.shared? && event.program_id != user.program_id
+    !user.system_admin? && event.shared_with?(user.program_id)
   end
 
   def no_value(field)

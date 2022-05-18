@@ -1,6 +1,6 @@
 #content
-  .flex-row-vertical-center
-    %form#event-form.form-inline.justify-content-end{ method: :get }
+  .flex-row-vertical-center{style: 'flex-wrap: wrap'}
+    %form#event-form.form-inline.justify-content-start.flex-grow-1{ method: :get }
       .form-group.mb-2
         %label.mr-1{ for: :event_event_type }= "#{t('map.event')}:"
         = select_tag 'event_type_id', options_for_select(select_options(current_user, @event_types), params[:event_type_id]), include_blank: t('map.all'), class: 'form-control'
@@ -12,8 +12,7 @@
         %i.fas.fa-search
         = t('shared.apply')
 
-
-    .mb-2.flex1.text-right
+    .mb-2
       %span= t('map.title', total_count: @event_data.inject(0){|sum,e| sum + e[:total_count] }, location_count: @event_data.size).html_safe
 
   #map{ data: {'event-data' => @event_data.to_json, province: current_user.location.try(:to_json), program: current_program.to_json }}

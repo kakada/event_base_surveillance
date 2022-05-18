@@ -3,6 +3,12 @@
     = f.input :name, label: t('event_type.name'), disabled: @event_type.default?
     = f.input :color, label: t('event_type.color'), as: :minicolors, input_html: { class: 'color', data: {minicolors: {theme: :bootstrap, position: :right}}}
 
+    - if programs = current_program.siblings.presence
+      .form-group
+        %label= t('event_type.program_share')
+        %fieldset
+          = f.collection_check_boxes :program_shared_ids, programs.pluck(:id, :name), :first, :last
+
     %div
       %label= t('event_type.guideline')
 

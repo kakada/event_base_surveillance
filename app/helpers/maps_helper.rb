@@ -4,7 +4,7 @@ module MapsHelper
   def select_options(user, event_types)
     event_types.map do |event_type|
       label = event_type.name
-      label = "#{label} (#{t('map.shared_from')} #{event_type.program_name})" if shared_event?(user, event_type)
+      label = "#{label} (#{t('map.shared_from')} #{event_type.program_name})" if event_type.shared_with?(user.program_id)
 
       option = []
       option.push(label)

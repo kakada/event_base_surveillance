@@ -11,4 +11,20 @@ namespace :event do
       event.update_attributes(event_date: field_value.es_value)
     end
   end
+
+  desc 'migrate shared event'
+  task migrate_shared_event: :environment do
+    EventType.where(shared: true).includes(:program, :events).each do |event_type|
+      event_type.program_shared_ids = event_type.program.siblings.map(&:id)
+
+      update_share_event(event_type)
+    end
+  end
+
+  private
+    def update_share_event(event_type)
+      event_type.events.each do |event|
+        event.program_shared_ids = event_type.program_shared_ids
+      end
+    end
 end

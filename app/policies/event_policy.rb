@@ -7,7 +7,7 @@ class EventPolicy < ApplicationPolicy
 
   def show?
     return true if user.system_admin?
-    return false unless (record.program_id == user.program_id) || record.shared?
+    return false unless (record.program_id == user.program_id) || record.shared_with?(user.program_id)
 
     user.program_admin? || user.province_code == 'all' || user.province_code == record.location_code[0..1]
   end
@@ -39,12 +39,15 @@ class EventPolicy < ApplicationPolicy
       if user.system_admin?
         scope.all
       elsif user.program_admin? || user.province_code == 'all'
-        scope.joins(:event_type).where('events.program_id = ? or event_types.shared = ?', user.program_id, true)
+        program_event_and_shared_events
       else
-        scope.joins(:event_type)
-             .where('events.program_id = ? or event_types.shared = ?', user.program_id, true)
-             .where('location_code LIKE ?', "#{user.province_code}%")
+        program_event_and_shared_events.where('location_code LIKE ?', "#{user.province_code}%")
       end
     end
+
+    private
+      def program_event_and_shared_events
+        scope.left_joins(:event_shareds).where('events.program_id = ? OR event_shareds.program_id = ?', user.program_id, user.program_id)
+      end
   end
 end
