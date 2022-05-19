@@ -46,6 +46,7 @@ class Event < ApplicationRecord
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid
   has_many   :event_shareds
   has_many   :program_shareds, through: :event_shareds, source: :program
+  has_many   :follow_ups
 
   # History
   has_associated_audits

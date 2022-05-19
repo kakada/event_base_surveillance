@@ -1,7 +1,16 @@
+/ Follow up button
+.follow-up{ class: ('d-none' unless event.follow_ups.present?), id: event.id }
+  = render 'events/index/follow_up', event: event
+
+/ Other Buttons
 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
   %i.fas.fa-ellipsis-v
 
 .dropdown-menu.dropdown-menu-right
+  = link_to new_event_follow_up_path(event), class: ['btn dropdown-item', ('disabled' if event.locked?)], remote: true do
+    %i.fas.fa-bell.drop-menu-icon
+    %span= t('event.follow_up')
+
   = link_to event.guideline_url, class: "btn dropdown-item #{'disabled' unless event.guideline_url.present?}", target: '_blank' do
     %i.fas.fa-download.drop-menu-icon
     %span= t('event.download_guideline')

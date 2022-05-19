@@ -74,4 +74,19 @@ module EventsHelper
       fv.present? ? "<small>#{fv.html_tag}</small> <small class='text-muted'>(#{field.name})</small>" : ""
     end.join('')
   end
+
+  def icon_telegram
+    '<i class="fab fa-telegram icon-telegram"></i>'
+  end
+
+  def icon_email
+    '<i class="fas fa-envelope icon-email"></i>'
+  end
+
+  def telegram_tooltip(event)
+    return "" if event.creator.telegram?
+    return t("event.no_system_bot_configure") unless TelegramBot.has_system_bot?
+
+    t("event.event_creator_no_telegram_account")
+  end
 end

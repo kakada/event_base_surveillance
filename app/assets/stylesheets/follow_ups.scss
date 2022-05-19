@@ -1,0 +1,91 @@
+#events-index {
+  .popover {
+    max-width: 420px;
+  }
+
+  .pop-header {
+    margin: -0.5rem -0.75rem 0.5rem;
+    color: #212529;
+  }
+
+  .popover-body {
+    color: #111;
+  }
+
+  .popup-body {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: -0.5rem -0.75rem;
+    padding: 0.5rem 0.75rem;
+    background-color: #f8f9fc;
+  }
+
+  .full-stop {
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    display: block;
+    right: 6px;
+    top: 0px;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .flag {
+    right: 0;
+    top: 0;
+    padding: 2px 6px;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 0 3px;
+    position: absolute;
+    font-size: 0.7rem;
+  }
+
+  .flag.rejected {
+    background-color: #dc3545;
+  }
+
+  .channel {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    position: relative;
+
+    .tick-icon {
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      color: #007bff;
+      display: none;
+    }
+  }
+
+  .channel.disabled {
+    pointer-events:none;
+    background-color: rgba(0,0,0,0.1);
+    border: 1px solid #dee2e6 !important;
+
+    i {
+      color: gray;
+    }
+  }
+
+  .channel.active {
+    border: 1px solid #007bff;
+
+    .tick-icon {
+      display: block;
+    }
+  }
+
+  .follower, .followee {
+    small {
+      width: 94px;
+      line-height: 22px;
+    }
+  }
+}
