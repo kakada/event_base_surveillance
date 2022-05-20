@@ -27,3 +27,13 @@ km:
     provincial: ថ្នាក់ខេត្ត
     risk_assessment_guideline: គោលការណ៍ណែនាំស្តីពីការវាយតម្លៃហានិភ័យ
     download_risk_assessment_guideline: ទាញយក គោលការណ៍ណែនាំស្តីពីការវាយតម្លៃហានិភ័យ
+    interval_follow_up: ការតាមដានតាមចន្លោះពេល
+    interval_follow_up_notification: ការជូនដំណឹងតាមដានតាមចន្លោះពេល
+    use_channel: ប្រើប្រាស់ឆានែល
+    email: អ៊ីម៉ែល
+    telegram: តេលេក្រាម
+    enabled: បានបើកដំណើរការ
+    disabled: បានបិទដំណើរការ
+    duration_in_day: គម្លាតពេលគិតជាថ្ងៃ
+    duration_in_hour: ជូនដំណឹងនៅម៉ោង
+    message: សារ

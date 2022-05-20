@@ -1,0 +1,7 @@
+$('.modal-body-content').html('<%= j render("programs/interval_follow_ups/form") %>');
+$("#interval-follow-up").modal("show");
+
+EBS.ProgramsSettingsShow.initToggle();
+EBS.ProgramsSettingsShow.onChangeToggle();
+
+EBS.FollowUpForm.init();

@@ -187,6 +187,17 @@ ActiveRecord::Schema.define(version: 2022_05_19_105458) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "interval_follow_ups", force: :cascade do |t|
+    t.integer "duration_in_day"
+    t.integer "duration_in_hour"
+    t.boolean "enabled"
+    t.text "message"
+    t.string "channels", default: [], array: true
+    t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
     t.string "name_en", null: false
     t.string "name_km", null: false
