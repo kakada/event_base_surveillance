@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   scope module: :programs do
     resource :setting, only: [:show, :update]
+    resource :interval_follow_up, only: [:show, :update]
   end
 
   resources :users

@@ -14,10 +14,15 @@ module Events
 
     def create
       @follow_up = @event.follow_ups.new(follow_up_params)
-      @follow_up.save
 
       respond_to do |format|
-        format.js
+        format.js {
+          if @follow_up.save
+            flash[:notice] = "The follow up message is created successfully!"
+          else
+            flash[:alert] = "Fail to create follow up message!"
+          end
+        }
       end
     end
 

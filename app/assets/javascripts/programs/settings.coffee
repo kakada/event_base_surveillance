@@ -2,7 +2,7 @@ EBS.ProgramsSettingsShow = do ->
   init = ->
     initToggle()
     initEmailToggle()
-    onChangeTelegramToggle()
+    onChangeToggle()
     onChangeEmailToggle()
     onChangeLanguage()
     onRemoveGuideline()
@@ -18,7 +18,7 @@ EBS.ProgramsSettingsShow = do ->
       )
 
   initToggle = ->
-    $('#toggle-telegram').bootstrapToggle({
+    $('.bt-toggle').bootstrapToggle({
       on: 'On',
       off: 'Off',
       size: 'small'
@@ -32,13 +32,13 @@ EBS.ProgramsSettingsShow = do ->
     $(document).on 'change', '#program_enable_email_notification', (event)->
       _updateProgram({ enable_email_notification: $(event.target).prop('checked') })
 
-  onChangeTelegramToggle = ->
-    $(document).off 'change', '#toggle-telegram'
-    $(document).on 'change', '#toggle-telegram', (event)->
+  onChangeToggle = ->
+    $(document).off 'change', '.bt-toggle'
+    $(document).on 'change', '.bt-toggle', (event)->
       if $(this).prop('checked')
-        $('.tokens').removeClass('hidden')
+        $(this).parents('.modal-body').find('.collapse-section').removeClass('d-none')
       else
-        $('.tokens').addClass('hidden')
+        $(this).parents('.modal-body').find('.collapse-section').addClass('d-none')
 
   _updateProgram = (params={}, callback)->
     $.ajax({
@@ -64,4 +64,8 @@ EBS.ProgramsSettingsShow = do ->
       wrapper = $(e.target).parents('.guideline-wrapper')
       !!wrapper.find('.guideline-input-destroy') && wrapper.find('.guideline-input-destroy').val(0)
 
-  { init: init }
+  {
+    init,
+    initToggle,
+    onChangeToggle,
+  }
