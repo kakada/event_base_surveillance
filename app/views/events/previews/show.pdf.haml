@@ -53,6 +53,10 @@
       %span.type= t('event.created_date')
       %span.value= l(@event.created_at)
 
+    %li
+      %span.type= t('event.updated_date')
+      %span.value= l(@event.updated_at)
+
   / Event milestones
   - @event.event_milestones.each do |event_milestone|
     / Milestones title
@@ -78,3 +82,7 @@
       %li
         %span.type= t('event.created_date')
         %span.value= l(event_milestone.created_at)
+
+      %li
+        %span.type= t('event.updated_date')
+        %span.value= l(event_milestone.updated_at)
