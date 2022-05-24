@@ -19,7 +19,7 @@ class EventMilestone < ApplicationRecord
 
   attr_accessor :conclude_event_type_id
 
-  belongs_to :event, foreign_key: :event_uuid
+  belongs_to :event, foreign_key: :event_uuid, touch: true
   belongs_to :milestone
   belongs_to :program
   belongs_to :submitter, class_name: 'User', optional: true

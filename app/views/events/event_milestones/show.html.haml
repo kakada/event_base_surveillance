@@ -33,4 +33,8 @@
       %span.type= t('event.created_date')
       %span.value= l(@event_milestone.created_at)
 
+    %li
+      %span.type= t('event.updated_date')
+      %span.value= l(@event_milestone.updated_at)
+
 = render 'events/show/tracing_text_field_modal'
