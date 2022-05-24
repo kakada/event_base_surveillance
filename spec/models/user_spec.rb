@@ -35,14 +35,14 @@ RSpec.describe User, type: :model do
   describe 'location' do
     context 'db location exist' do
       let(:province) { create(:location) }
-      let(:user)  { create(:user, province_code: province.id) }
+      let(:user)  { create(:user, :staff, province_code: province.id) }
 
       it { expect(user.location.class.name).to eq('Location') }
       it { expect(user.location.kind).to eq('province') }
     end
 
     context 'db location does not exist' do
-      let(:user)  { create(:user, province_code: '02') }
+      let(:user)  { create(:user, :staff, province_code: '02') }
 
       it { expect(user.location.class.name).to eq('Pumi::Province') }
       it { expect(user.location.name_en).to eq('Battambang') }
