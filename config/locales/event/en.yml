@@ -64,3 +64,14 @@ en:
     received_date: Received Date
     conducted_at: Conducted at
     entry_by: Created by
+    follow_up: Follow up
+    following_up: Follow up
+    message: Message
+    channel: Channel
+    follower: Follower
+    followee: Event creator
+    use_channel: Use channel
+    email: Email
+    telegram: Telegram
+    event_creator_no_telegram_account: The event creator didn't connect to telegram account!
+    no_system_bot_configure: "No telegram bot is configured!"

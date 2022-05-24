@@ -62,6 +62,7 @@
 //= require event_milestones/show
 //= require events/index
 //= require event_types/new
+//= require events/follow_up
 
 //= require users/index
 //= require users/new
@@ -76,7 +77,6 @@
 //= require webhooks/new
 //= require maps/index
 //= require medisys_feeds
-
 
 document.addEventListener('turbolinks:load', function() {
   EBS.Common.Sidebar.init();

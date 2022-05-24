@@ -1,0 +1,14 @@
+<% if @follow_up.valid? %>
+  $("#formModal").modal("hide");
+
+  $("#<%= @follow_up.event_id %>").html('<%= j render("events/index/follow_up", event: @event)%>')
+  $("#<%= @follow_up.event_id %>").removeClass('d-none');
+
+  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="popover"]').popover();
+
+<% else %>
+  $('#formModal .modal-body').html('<%= j render("form") %>');
+
+   EBS.FollowUpForm.init();
+<% end %>

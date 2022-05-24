@@ -64,3 +64,14 @@ km:
     received_date: កាលបរិច្ឆេទដែលបានទទួល
     conducted_at: កាលបរិច្ឆេទអនុវត្ត
     entry_by: បញ្ចូលដោយ
+    follow_up: តាមដាន
+    following_up: ការតាមដាន
+    message: សារ
+    channel: ឆានែល
+    follower: អ្នកស្នើសុំកែសម្រួល
+    followee: អ្នកបញ្ចូលព្រឹត្តិការណ៍
+    use_channel: ប្រើប្រាស់ឆានែល
+    email: អ៊ីម៉ែល
+    telegram: តេលេក្រាម
+    event_creator_no_telegram_account: អ្នកបញ្ចូលព្រឹត្តិការណ៍មិនបានភ្ជាប់គណនីតេឡេក្រាមទេ!
+    no_system_bot_configure: កម្មវិធីមិនបានតម្លើងតេលេក្រាម!

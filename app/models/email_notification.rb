@@ -12,7 +12,6 @@
 #  updated_at   :datetime         not null
 #
 
-
 class EmailNotification < ApplicationRecord
   belongs_to :message, optional: true
 end

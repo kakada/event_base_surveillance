@@ -1,0 +1,35 @@
+%h3.popover-header.pop-header.d-flex
+  .flex-grow-1.d-flex.align-items-center
+    = t('event.following_up')
+
+%div.popup-body
+  - event.follow_ups.each do |fu|
+    .card.mb-2
+      .card-body
+        %div
+          .d-flex
+            .text-capitalize.mr-2
+              .btn.btn-circle.rounded-circle.border
+                = fu.follower.email[0]
+
+            .flex-grow-1
+              .follower.d-flex.align-items-start
+                %small.text-muted.mr-2= "#{t('event.follower')}: "
+                %h6.mb-0.text-break= fu.follower.email
+              .followee.d-flex.align-items-start
+                %small.text-muted.mr-2= "#{t('event.followee')}: "
+                %h6.mb-0.text-break= fu.followee.email
+
+              %small.text-muted
+                = l(fu.updated_at)
+
+        .my-2
+          %strong= t('event.message')
+          %span= ": #{fu.message}"
+
+        .my-2.d-flex.align-items-center
+          %small.text-muted= "#{t('event.use_channel')}: "
+          .d-flex
+            - fu.channels.each do |ch|
+              .ml-2
+                = send("icon_#{ch}").html_safe

@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :set_event_type, only: %i[new create edit update]
 
   def index
-    @pagy, @events = pagy(policy_scope(Event.filter(filter_params).order_desc.includes(:event_type, :conclude_event_type, :creator, :program, :program_shareds, field_values: { field: :field_options })))
+    @pagy, @events = pagy(policy_scope(Event.filter(filter_params).order_desc.includes(:event_type, :conclude_event_type, :creator, :program, :program_shareds, :follow_ups, field_values: { field: :field_options })))
     @templates = policy_scope(::Template.all)
   end
 
