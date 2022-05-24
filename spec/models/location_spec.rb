@@ -56,7 +56,7 @@ RSpec.describe Location, type: :model do
     end
 
     context 'province_code is a code' do
-      let(:user) { create(:user, province_code: '01') }
+      let(:user) { create(:user, :staff, province_code: '01') }
 
       it { expect(Location.pumi_provinces(user).size).to eq(1) }
     end
