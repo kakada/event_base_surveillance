@@ -4,7 +4,7 @@ en:
     name: Name
     feed_url: Feed Url
     program: Program
-    media_monitoring: Media Monitoring
+    medisys_feeds: Medisys Feeds
     medisys_help: Medisys Help
     medisys_configure: You can configure Medisys to get feeds for displaying in Media Monitoring.
     visit_medisys_website: Visit the Medisys website

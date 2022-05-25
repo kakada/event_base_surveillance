@@ -9,6 +9,8 @@ class MedisysFeedsController < ApplicationController
   private
     def feed_params
       @medisy_id = params[:medisy_id] || current_program.try(:medisies).try(:first).try(:id) || Medisy.first.try(:id)
-      params.merge(medisy_id: @medisy_id)
+
+      params.permit(:start_date, :end_date)
+            .merge(medisy_id: @medisy_id)
     end
 end

@@ -1,6 +1,6 @@
 EBS.EventsIndex = do ->
   init = ->
-    EBS.DaterangPicker.init()
+    EBS.DateRangePicker.init()
 
     initFilterKeywordPopover()
     onClickKeywordItem()

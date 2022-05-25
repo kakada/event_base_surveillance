@@ -1,4 +1,4 @@
-EBS.DaterangPicker = (() => {
+EBS.DateRangePicker = (() => {
   var tr = {};
 
   function init() {

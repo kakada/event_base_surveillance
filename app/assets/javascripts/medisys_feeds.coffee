@@ -9,7 +9,8 @@ EBS.Medisys_feedsIndex = do ->
     onClickShowMore()
     onClickFeedLink()
     onChangeMedisySelect()
-    EBS.DatepickerPopup.init()
+
+    EBS.DateRangePicker.init()
 
   onChangeMedisySelect = ->
     $(document).off('change', '#medisy_id')
