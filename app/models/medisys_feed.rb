@@ -52,7 +52,7 @@ class MedisysFeed < ApplicationRecord
   def self.filter(params)
     scope = all
     scope = scope.where(medisy_id: params[:medisy_id]) if params[:medisy_id].present?
-    scope = scope.where('pub_date >= ?', params[:start_date]) if params[:start_date].present?
+    scope = scope.where("pub_date BETWEEN ? AND ?", params[:start_date], params[:end_date]) if params[:start_date].present? && params[:end_date].present?
     scope
   end
 end

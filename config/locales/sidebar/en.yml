@@ -15,5 +15,5 @@ en:
     map: 'Map'
     version: 'Version'
     templates: 'Templates'
-    medisys: Medisys
-    media_monitoring: Media Monitoring
+    medisys: Medisys Setting
+    media_monitoring: Medisys Feeds
