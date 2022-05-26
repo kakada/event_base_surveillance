@@ -31,7 +31,7 @@ class Event < ApplicationRecord
   include Events::Lockable
   include Events::Location
   include Events::Valueable
-  include Events::IntervalFollowUp
+  include Events::FollowUp
 
   # Soft delete
   acts_as_paranoid
@@ -74,7 +74,7 @@ class Event < ApplicationRecord
 
   # Scope
   scope :order_desc, -> { order(event_date: :desc) }
-  scope :no_lockeds, -> { where(close: false, lockable_at: nil) }
+  scope :uncloseds, -> { where(close: false, lockable_at: nil) }
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|

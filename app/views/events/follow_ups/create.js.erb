@@ -10,7 +10,7 @@
 <% else %>
   $('#formModal .modal-body-content').html('<%= j render("form") %>');
 
-   EBS.FollowUpForm.init();
+   EBS.ChannelsForm.init();
 <% end %>
 
 $("#flash").html('<%= j render("shared/notify_message") %>');

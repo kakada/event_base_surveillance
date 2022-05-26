@@ -21,10 +21,17 @@ km:
     status_off: 'បិទ'
     setup: 'Setup'
     change: 'Change'
-    learn_more: 'ស្វែង​យល់​បន្ថែម'
+    learn_more: 'ស្វែងយល់បន្ថែម'
     need_help: 'ត្រូវការជំនួយ?'
     no_result_found: 'មិនមានទិន្ន័យ!'
     apply: 'ស្វែងរក'
     unlock: 'ដោះសោ'
     download: 'ទាញយក'
     no_latlng: គ្មានរយៈទទឹងនិងរយៈបណ្តោយសម្រាប់ទីតាំងនេះទេ
+    number: លេខរៀង
+    email: អ៊ីម៉ែល
+    telegram: តេលេក្រាម
+    active: សកម្ម
+    inactive: មិនសកម្ម
+    deactivate: ធ្វើឱ្យអសកម្ម
+    activate: ធ្វើឱ្យសកម្ម

@@ -90,6 +90,12 @@
           %i.api-icon API
           = t('sidebar.api_and_services')
 
+    - if policy(Schedule).create?
+      %li{class: get_css_active_class('schedules') }
+        = link_to schedules_path do
+          %i.far.fa-calendar
+          = t('sidebar.schedules')
+
     - if current_program.present? && policy(Program).update?
       %li{class: get_css_active_class('programs/settings') }
         = link_to setting_path do

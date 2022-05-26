@@ -5,7 +5,7 @@ module Events
     before_action :set_event
 
     def new
-      @follow_up = @event.follow_ups.new(channels: FollowUp::CHANNELS)
+      @follow_up = @event.follow_ups.new(channels: ::FollowUp::CHANNELS)
 
       respond_to do |format|
         format.js

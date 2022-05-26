@@ -25,7 +25,6 @@ Rails.application.routes.draw do
 
   scope module: :programs do
     resource :setting, only: [:show, :update]
-    resource :interval_follow_up, only: [:show, :update]
   end
 
   resources :users
@@ -39,6 +38,11 @@ Rails.application.routes.draw do
     get :download, on: :collection
     get :search, on: :collection
     put :unlock, on: :member
+  end
+
+  resources :schedules do
+    get :activate, on: :member
+    get :deactivate, on: :member
   end
 
   resources :medisys_feeds, only: :index

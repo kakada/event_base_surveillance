@@ -39,7 +39,6 @@ class Program < ApplicationRecord
   has_many  :webhooks
   has_many  :chat_groups
   has_one   :telegram_bot, dependent: :destroy
-  has_one   :interval_follow_up, dependent: :destroy
   has_many  :templates
   has_many  :medisies
 
@@ -56,10 +55,6 @@ class Program < ApplicationRecord
   accepts_nested_attributes_for :telegram_bot, allow_destroy: true
 
   delegate :enabled, to: :telegram_bot, prefix: :telegram_bot, allow_nil: true
-
-  def interval_follow_up
-    super || build_interval_follow_up
-  end
 
   def format_name
     name.downcase.split(' ').join('_')

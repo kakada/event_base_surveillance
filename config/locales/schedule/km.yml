@@ -1,0 +1,25 @@
+km:
+  schedule:
+    schedule: កាលវិភាគជូនដំណឹង
+    new_schedule: កាលវិភាគជូនដំណឹងថ្មី
+    edit_schedule: កែសម្រួលកាលវិភាគជូនដំណឹង
+    name: ឈ្មោះ
+    type: ប្រភេទ
+    message: សារ
+    interval_type: ប្រភេទគម្លាតពេលគិតជា
+    interval_value: គម្លាតពេលជូនដំណឹង
+    follow_up_hour: ម៉ោងជូនដំណឹង
+    date_number: នៅថ្ងៃ
+    use_channel: ប្រើឆានែល
+    interval_time: គម្លាតរយៈពេល
+    status: ស្ថានភាព
+    every: រៀងរាល់
+    schedule_notify: កាលវិភាគជូនដំណឹង
+    at: នៅម៉ោង
+    day: ថ្ងៃ
+    week: សប្តាហ៍
+    month: ខែ
+    schedule_info: "នឹងជូនសារតាមដានលើព្រឹត្តិការណ៍រាល់ %{interval_value} %{interval_type} ម្តង គិតចាប់ពីពេលធ្វើបច្ចុប្បន្នភាពចុងក្រោយ។ ហើយយើងនឹងផ្ញើសារនៅម៉ោង %{follow_up_hour}"
+    are_you_sure_to_delete: តើអ្នកប្រាកដចិត្តថាចង់លុបកាលវិភាគ %{name} នេះឬទេ?
+    are_you_sure_to_deactivate: តើអ្នកប្រាកដចិត្តថាចង់ធ្វើអោយអសកម្មលើកាលវិភាគ %{name} នេះឬទេ?
+    short_display: រៀងរាល់ %{interval_value} %{interval_type} ម្តង នៅម៉ោង %{follow_up_hour}

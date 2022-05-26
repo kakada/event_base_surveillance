@@ -1,0 +1,67 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= t('schedule.schedule')
+      - if policy(Schedule).create?
+        = link_to new_schedule_path, class: 'btn btn-primary' do
+          %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @schedules }
+
+  - if @schedules.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th= t('shared.number')
+          %th= t('schedule.name')
+          %th= t('schedule.schedule')
+          %th= t('schedule.message')
+          %th= t('schedule.use_channel')
+          %th= t('schedule.status')
+          %th
+
+      %tbody
+        - @schedules.each_with_index do |schedule, index|
+          %tr
+            %td= @pagy.from + index
+            %td= schedule.name
+            %td
+              = display_schedule_info(schedule, "short_display").html_safe
+              %span{ 'data-toggle' => 'tooltip', 'data-title' => display_schedule_info(schedule), "data-html" => "true" }
+                %i.fas.fa-info-circle.icon-24
+            %td
+              .multi-ellipsis= schedule.message
+            %td
+              - schedule.channels.each do |ch|
+                %span.ml-2.icon-24{'data-toggle' => 'tooltip', 'data-title' => t("shared.#{ch}")}
+                  = send("icon_#{ch}").html_safe
+            %th= status_html(schedule.enabled?).html_safe
+            %td.text-right
+              - if policy(schedule).update?
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
+
+                .dropdown-menu.dropdown-menu-right
+                  - if schedule.enabled?
+                    = link_to deactivate_schedule_path(schedule), class: "btn dropdown-item", :data => {:confirm => t('schedule.are_you_sure_to_deactivate', name: schedule.name)} do
+                      %i.fas.fa-ban.drop-menu-icon
+                      %span= t('shared.deactivate')
+
+                  - else
+                    = link_to activate_schedule_path(schedule), class: "btn dropdown-item" do
+                      %i.fas.fa-check.drop-menu-icon
+                      %span= t('shared.activate')
+
+                  - if policy(schedule).update?
+                    = link_to edit_schedule_path(schedule), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span= t('shared.edit')
+
+                  - if policy(schedule).destroy?
+                    = link_to schedule_path(schedule), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('schedule.are_you_sure_to_delete', name: schedule.name)} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span= t('shared.delete')
+
+  - if @pagy.pages > 1
+    .pagy-wrapper
+      != pagy_bootstrap_nav(@pagy)

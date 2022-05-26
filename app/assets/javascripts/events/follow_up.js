@@ -1,4 +1,4 @@
-EBS.FollowUpForm = (() => {
+EBS.ChannelsForm = (() => {
   return { init }
 
   function init() {

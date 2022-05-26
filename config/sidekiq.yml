@@ -21,7 +21,7 @@ production:
     cron: "0 * * * *"
     class: MedisyWorker
 
-  interval_follow_up:
+  schedule_follow_up:
     # every one hour
     cron: "0 * * * *"
-    class: IntervalFollowUpWorker
+    class: ScheduleWorker

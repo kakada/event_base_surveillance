@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Events::IntervalFollowUp do
+RSpec.describe Events::FollowUp do
   describe '#reached_intervals' do
-    let!(:interval_follow_up) { create(:interval_follow_up, duration_in_day: 3) }
-    let!(:program) { interval_follow_up.program }
+    let!(:schedule) { create(:schedule, interval_value: 3) }
+    let!(:program) { schedule.program }
     let!(:event) { create(:event, program: program) }
-    let(:query) { program.events.reached_intervals(interval_follow_up.duration_in_day) }
+    let(:query) { program.events.uncloseds.reached_intervals(schedule.interval_value) }
 
     context "reach duration date" do
       before { event.update_column(:updated_at, 3.days.ago) }

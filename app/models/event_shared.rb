@@ -11,7 +11,6 @@
 #  program_id :integer
 #
 
-
 class EventShared < ApplicationRecord
   belongs_to :event
   belongs_to :program
