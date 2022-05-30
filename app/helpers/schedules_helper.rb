@@ -4,12 +4,4 @@ module SchedulesHelper
 
     "<span class='text-danger'>#{t('shared.inactive')}</span>"
   end
-
-  def display_schedule_info(schedule, label="schedule_info")
-    t("schedule.#{label}",
-      interval_value: "<b>#{schedule.interval_value}</b>",
-      interval_type: '<b>' + t("schedule.#{schedule.interval_type}") + '</b>',
-      follow_up_hour: "<b>#{schedule.follow_up_hour}:00</b>"
-    )
-  end
 end

@@ -1,8 +1,7 @@
-class Notifiers::EventScheduleEmailNotifier
-  attr_reader :schedule, :event
+class Notifiers::SummaryScheduleEmailNotifier
+  attr_reader :schedule
 
-  def initialize(schedule, event)
-    @event = event
+  def initialize(schedule)
     @schedule = schedule
   end
 
@@ -12,15 +11,15 @@ class Notifiers::EventScheduleEmailNotifier
   end
 
   def recipients
-    [event.creator.email]
+    schedule.emails
   end
 
   def display_message
-    schedule.display_message(event)
+    schedule.display_message
   end
 
   def display_title
-    "CamEMS follow up case: #{event.id}"
+    "Summary Report for #{schedule.program.name}"
   end
 
   def bot_token

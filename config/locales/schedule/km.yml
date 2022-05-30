@@ -19,7 +19,16 @@ km:
     day: ថ្ងៃ
     week: សប្តាហ៍
     month: ខែ
-    schedule_info: "នឹងជូនសារតាមដានលើព្រឹត្តិការណ៍រាល់ %{interval_value} %{interval_type} ម្តង គិតចាប់ពីពេលធ្វើបច្ចុប្បន្នភាពចុងក្រោយ។ ហើយយើងនឹងផ្ញើសារនៅម៉ោង %{follow_up_hour}"
     are_you_sure_to_delete: តើអ្នកប្រាកដចិត្តថាចង់លុបកាលវិភាគ %{name} នេះឬទេ?
-    are_you_sure_to_deactivate: តើអ្នកប្រាកដចិត្តថាចង់ធ្វើអោយអសកម្មលើកាលវិភាគ %{name} នេះឬទេ?
-    short_display: រៀងរាល់ %{interval_value} %{interval_type} ម្តង នៅម៉ោង %{follow_up_hour}
+    are_you_sure_to_deactivate: តើអ្នកប្រាកដចិត្តថាចង់បិទដំណើរការលើកាលវិភាគ %{name} នេះឬទេ?
+    event_schedule_full_info: "នឹងជូនសារតាមដានលើព្រឹត្តិការណ៍រាល់ %{interval_value} %{interval_type} ម្តង គិតចាប់ពីពេលធ្វើបច្ចុប្បន្នភាពចុងក្រោយ។ ហើយយើងនឹងផ្ញើសារនៅម៉ោង %{follow_up_hour}"
+    event_schedule_short_info: រៀងរាល់ %{interval_value} %{interval_type} ម្តង នៅម៉ោង %{follow_up_hour}
+    summary_schedule_full_info: នឹងផ្ញើរបាយការណ៍សង្ខេបរៀងរាល់ %{interval_type} នៅថ្ងៃ %{date_index} នៅវេលាម៉ោង %{follow_up_hour}
+    summary_schedule_short_info: រៀងរាល់ %{interval_type} នៅថ្ងៃ %{date_index} នៅវេលាម៉ោង %{follow_up_hour}
+    new_event_schedule: បង្កើតកាលវិភាគតាមដានព្រឹត្តិការណ៍
+    new_summary_schedule: បង្កើតកាលវិភាគតាមដានរបាយការណ៍សង្ខេប
+    at_day: នៅថ្ងៃ
+    emails: អ៊ីម៉ែល
+    to: ផ្ញើរទៅកាន់ <abbr title="ទាមទារ">*</abbr>
+    notify_to_channel: ជូនដំណឹងទៅកាន់អ្នកបញ្ចូលព្រឹត្តិការណ៍តាមរយៈ
+    dealine_duration: លក្ខខណ្ឌរយៈពេលកំណត់សម្រាប់ការបិទព្រឹត្តិការណ៍ (គិតជាថ្ងៃ) <abbr title="ទាមទារ">*</abbr>

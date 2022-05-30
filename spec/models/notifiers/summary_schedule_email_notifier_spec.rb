@@ -2,10 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe Notifiers::EventScheduleEmailNotifier, type: :model do
-  let!(:schedule) { create(:event_schedule) }
-  let!(:event)    { create(:event, program: schedule.program) }
-  let(:notifier)  { Notifiers::EventScheduleEmailNotifier.new(schedule, event) }
+RSpec.describe Notifiers::SummaryScheduleEmailNotifier, type: :model do
+  let!(:schedule) { create(:summary_schedule) }
+  let(:notifier)  { Notifiers::SummaryScheduleEmailNotifier.new(schedule) }
 
   describe "#enabled?" do
     context "has channels email" do
@@ -18,7 +17,7 @@ RSpec.describe Notifiers::EventScheduleEmailNotifier, type: :model do
 
     context "no channels email" do
       before {
-        schedule.channels = ['telegram']
+        schedule.channels = []
       }
 
       it { expect(notifier.enabled?).to be_falsey }
@@ -26,7 +25,7 @@ RSpec.describe Notifiers::EventScheduleEmailNotifier, type: :model do
   end
 
   describe "#recipients" do
-    it { expect(notifier.recipients).to eq([event.creator.email]) }
+    it { expect(notifier.recipients).to eq(schedule.emails) }
   end
 
   describe "#display_message" do
@@ -38,10 +37,10 @@ RSpec.describe Notifiers::EventScheduleEmailNotifier, type: :model do
   end
 
   describe "#display_title" do
-    it { expect(notifier.display_title).to eq("CamEMS follow up case: #{event.id}") }
+    it { expect(notifier.display_title).to eq("Summary Report for #{schedule.program.name}") }
   end
 
   describe "#bot_token" do
-    it { expect { notifier.bot_token }.to raise_error('It is for telegram channel only') }
+    it { expect { notifier.bot_token }.to raise_error("It is for telegram channel only") }
   end
 end

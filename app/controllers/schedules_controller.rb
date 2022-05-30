@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
   end
 
   def new
-    @schedule = authorize Schedule.new
+    @schedule = authorize Schedule.new(type: params[:type])
   end
 
   def create
@@ -58,7 +58,9 @@ class SchedulesController < ApplicationController
     def schedule_params
       params.require(:schedule)
             .permit(:name, :type, :interval_type, :interval_value,
-              :follow_up_hour, :date_number, :message, channels: []
+              :follow_up_hour, :date_number, :message, :emails,
+              :date_index, :deadline_duration_in_day,
+              channels: []
             ).merge(program_id: current_program.id)
     end
 end

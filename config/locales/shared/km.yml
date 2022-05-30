@@ -31,9 +31,9 @@ km:
     number: លេខរៀង
     email: អ៊ីម៉ែល
     telegram: តេលេក្រាម
-    active: សកម្ម
-    inactive: មិនសកម្ម
-    deactivate: ធ្វើឱ្យអសកម្ម
-    activate: ធ្វើឱ្យសកម្ម
     add_new: បន្ថែម%{name}ថ្មី
     pagination_title: "បង្ហាញ%{name} <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
+    active: ដំណើរការ
+    inactive: មិនដំណើរការ
+    deactivate: បិទដំណើរការ
+    activate: បើកដំណើរការ

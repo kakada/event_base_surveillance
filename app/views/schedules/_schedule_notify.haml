@@ -1,0 +1,21 @@
+.form-group.schedule-notify
+  %label= t('schedule.schedule_notify')
+  .d-flex.align-items-center
+    %label.mb-0.mr-2= t('schedule.every')
+    - if f.object.event_schedule?
+      = f.input :interval_value, label: false, input_html: {style: 'width: 100px;', class: 'input'}, wrapper_html: {class: 'mb-0 mr-2'}
+
+    = f.input :interval_type, label: false, collection: Schedule.interval_types.keys.map { |k| [t("schedule.#{k}"), k] }, include_blank: false, input_html: {style: 'width: 100px;', class: 'input'}, wrapper_html: {class: 'mb-0 mr-2'}
+
+    - if f.object.summary_schedule?
+      .date-index{ 'data-week' => I18n.t('date.day_names').to_json }
+        .d-flex.align-items-center
+          %label.mb-0.mx-2= t('schedule.at_day')
+          = f.input :date_index, as: :select, label: false, input_html: {style: 'width: 120px;', class: 'input'}, wrapper_html: {class: 'mb-0 mr-2'}
+
+    %label.mb-0.mr-2= t('schedule.at')
+    = f.input :follow_up_hour, label: false, collection: (0..23).to_a.map { |h| ["#{h}:00", h] }, include_blank: false, input_html: {style: 'width: 100px;', class: 'input'}, wrapper_html: {class: 'mb-0'}
+
+    .ml-2
+      %span.info.round-icon{ 'data-toggle' => 'tooltip', 'data-title' => '', 'data-info' => t("schedule.#{f.object.type.split('::').last.underscore}_full_info") }
+        %i.fas.fa-info

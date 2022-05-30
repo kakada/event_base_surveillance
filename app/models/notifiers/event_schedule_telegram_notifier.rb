@@ -17,7 +17,7 @@ class Notifiers::EventScheduleTelegramNotifier
   end
 
   def display_message
-    ScheduleMessageInterpreter.new(schedule.id, event.id).interpreted_message
+    schedule.display_message(event)
   end
 
   def display_title
