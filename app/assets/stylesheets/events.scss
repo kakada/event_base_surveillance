@@ -162,3 +162,13 @@
     color: #495057;
   }
 }
+
+
+.filter-input {
+  width: 280px;
+  margin-right: 12px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

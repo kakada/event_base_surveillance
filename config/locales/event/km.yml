@@ -75,3 +75,15 @@ km:
     telegram: តេលេក្រាម
     event_creator_no_telegram_account: អ្នកបញ្ចូលព្រឹត្តិការណ៍មិនបានភ្ជាប់គណនីតេឡេក្រាមទេ!
     no_system_bot_configure: កម្មវិធីមិនបានតម្លើងតេលេក្រាម!
+    any_event_type: គ្រប់ប្រភេទព្រឹត្តិការណ៍
+    any_province: គ្រប់ខេត្ត
+    provinces_selected: ខេត្តត្រូវបានជ្រើសរើស
+    event_types_selected: ប្រភេទព្រឹត្តិការណ៍ត្រូវបានជ្រើសរើស
+    any_event_type: គ្រប់ប្រភេទព្រឹត្តិការណ៍
+    risk_levels_selected: កម្រិតហានិភ័យត្រូវបានជ្រើសរើស
+    any_risk_level: គ្រប់កម្រិតហានិភ័យ
+    progresses_selected: ដំណើរការត្រូវបានជ្រើសរើស
+    any_progress: គ្រប់ដំណើរការ
+    source_of_informations_selected: ប្រភពព័ត៌មានត្រូវបានជ្រើសរើស
+    any_source_of_information: គ្រប់ប្រភពព័ត៌មាន
+    advance_search: ស្វែងរកបន្ថែម

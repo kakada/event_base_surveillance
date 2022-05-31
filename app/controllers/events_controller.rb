@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :set_event_type, only: %i[new create edit update]
 
   def index
-    @pagy, @events = pagy(policy_scope(Event.filter(filter_params).order_desc.includes(:event_type, :conclude_event_type, :creator, :program, :program_shareds, :follow_ups, field_values: { field: :field_options })))
+    @pagy, @events = pagy(get_events)
     @templates = policy_scope(::Template.all)
   end
 
@@ -49,7 +49,7 @@ class EventsController < ApplicationController
   end
 
   def download
-    events = policy_scope(Event.filter(filter_params).includes(:field_values, :event_milestones))
+    events = get_events
 
     if events.length > ENV['MAXIMUM_DOWNLOAD_RECORDS'].to_i
       flash[:alert] = t('event.file_size_is_too_big')
@@ -83,11 +83,21 @@ class EventsController < ApplicationController
 
     def filter_params
       params.permit(
-        :start_date, :end_date, :event_type_id, :keyword, :filter
+        :uuid, :start_date, :end_date, :filter,
+        event_type_ids: [], province_ids: [], risk_levels: [], progresses: [], source_of_informations: []
       ).merge(program_id: current_user.program_id)
     end
 
     def set_event_type
       @event_types = policy_scope(EventType.all)
+    end
+
+    def get_events
+      policy_scope(Event.group_filter(filter_params).order_desc
+        .includes(:event_type, :conclude_event_type, :creator,
+                  :program, :program_shareds, follow_ups: :follower,
+                  field_values: { field: :field_options }
+                 )
+      )
     end
 end

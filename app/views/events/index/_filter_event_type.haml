@@ -1,0 +1,4 @@
+- @event_types = EventType.with_shared(current_program.id).includes(:program, :event_type_shareds, :program_shareds)
+
+.filter-input.tooltips{ 'data-toggle' => 'tooltip' }
+  = select_tag 'event_type_ids[]', options_for_select(select_options(current_user, @event_types), params[:event_type_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('event.event_types_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("event.any_event_type"), class: 'selectpicker form-control'

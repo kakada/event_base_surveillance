@@ -1,0 +1,2 @@
+.filter-input.tooltips{ 'data-toggle' => 'tooltip' }
+  = select_tag 'province_ids[]', options_for_select(Pumi::Province.all.map { |s| [s["name_#{I18n.locale}"], s.id] }, params[:province_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('event.provinces_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("event.any_province"), class: 'selectpicker form-control'
