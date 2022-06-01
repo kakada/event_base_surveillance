@@ -1,9 +1,9 @@
-%form.filter-form{ action: '/events', method: 'get' }
+%form.filter-form.mb-3{ action: '/events', method: 'get' }
   = hidden_field_tag :filter, params[:filter]
 
   .form-row.medium-width
-    .form-group
-      = text_field_tag(:uuid, params[:uuid], class: 'form-control filter-input keyword', placeholder: t('event.id'))
+    .mb-2
+      = text_field_tag(:uuid, params[:uuid], class: 'form-control filter-input keyword', placeholder: t('event.search_by_id'))
 
     = render 'events/index/filter_date'
 
@@ -18,7 +18,7 @@
           %span.d-none.d-lg-inline= t('event.search')
 
     - if policy(Event).download?
-      .flex1.btn-download-csv.mb-2
+      .btn-download-csv.mb-2{style: 'position: absolute; right: 20px; margin-top: -63px;'}
         %button.btn.btn-outline-info{"data-target" => "#template-model", "data-toggle" => "modal", :type => "button"}
           %i.fas.fa-download
           = t('event.download_csv')
@@ -26,16 +26,10 @@
       = render 'events/index/modal_download'
 
   / Advance filter
-  #collapseExample.collapse.show
-    .d-lg-flex.mb-3
+  #collapseExample.collapse
+    .d-lg-flex
       = render 'events/index/filter_province'
       = render 'events/index/filter_event_type'
       = render 'events/index/filter_risk_level'
       = render 'events/index/filter_progress'
       = render 'events/index/filter_source_of_information'
-
-:javascript
-  params = {
-    keyword: "#{params[:keyword]}",
-    start_date: "#{params[:start_date]}"
-  }

@@ -1,4 +1,2 @@
-- risk_levels = current_program.milestones.root.sections.default.first.fields.find_by(code: 'risk_level').field_options.pluck(:name, :value)
-
 .filter-input.tooltips{ 'data-toggle' => 'tooltip' }
-  = select_tag 'risk_levels[]', options_for_select(risk_levels, params[:risk_levels]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('event.risk_levels_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("event.any_risk_level"), class: 'selectpicker form-control'
+  = select_tag 'risk_levels[]', options_for_select(@risk_levels.pluck(:name, :value), params[:risk_levels]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('event.risk_levels_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("event.any_risk_level"), class: 'selectpicker form-control'

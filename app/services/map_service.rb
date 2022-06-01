@@ -3,7 +3,7 @@
 class MapService
   def initialize(user)
     @user = user
-    @event_types = EventType.with_shared(user.program_id)
+    @event_types = EventType.with_shared(user.program_id).includes(:program_shareds, program: :fields)
   end
 
   def get_event_data(params = {})
@@ -21,12 +21,16 @@ class MapService
         number_of_death: get_total_by('number_of_death', event_type.id, data[4]),
       }
 
-      data['number_of_hospitalized'] = get_total_by('number_of_hospitalized', event_type.id, data[4]) if event_type.program.milestones.root.fields.pluck(:code).include? 'number_of_hospitalized'
+      data['number_of_hospitalized'] = get_total_by('number_of_hospitalized', event_type.id, data[4]) if has_hospitalized_field?(event_type.program)
       data
     end
   end
 
   private
+    def has_hospitalized_field?(program)
+      program.fields.map(&:code).include?('number_of_hospitalized')
+    end
+
     def get_total_by(case_name, event_type_id, location_code)
       all_cases.select { |obj| obj['event_type_id'] == event_type_id && obj['location_code'] == location_code && obj['field_code'] == case_name }.first.try(:[], 'total')
     end

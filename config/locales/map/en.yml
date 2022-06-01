@@ -1,6 +1,6 @@
 en:
   map:
-    title: "Total suspected event reported is <b>%{total_count}</b>, happened in <b>%{location_count}</b> locations"
+    title: "Total suspected reports: <b>%{total_count}</b> in <b>%{location_count}</b> locations"
     legend: Legend
     event: Event
     shared_from: 'Shared from'

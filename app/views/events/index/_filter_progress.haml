@@ -1,4 +1,2 @@
-- progresses = current_program.milestones.pluck(:name)
-
 .filter-input.tooltips{ 'data-toggle' => 'tooltip' }
-  = select_tag 'progresses[]', options_for_select(progresses, params[:progresses]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('event.progresses_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("event.any_progress"), class: 'selectpicker form-control'
+  = select_tag 'progresses[]', options_for_select(@progresses, params[:progresses]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('event.progresses_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("event.any_progress"), class: 'selectpicker form-control'

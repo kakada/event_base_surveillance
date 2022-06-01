@@ -6,6 +6,33 @@ EBS.EventsIndex = do ->
     onClickKeywordItem()
     onClickBtnDownload()
 
+    handleDisplayCollapseContent()
+    onShowCollapse()
+    onHideCollapse()
+
+  handleDisplayCollapseContent = ->
+    if window.localStorage.getItem('show_collapse') == "true"
+      $('.collapse').addClass('show')
+      hideArrowDown()
+
+  onShowCollapse = ->
+    $('.collapse').on 'show.bs.collapse', ()->
+      window.localStorage.setItem('show_collapse', true)
+      hideArrowDown()
+
+  onHideCollapse = ->
+    $('.collapse').on 'hide.bs.collapse', ->
+      window.localStorage.setItem('show_collapse', false)
+      showArrowDown()
+
+  showArrowDown = ->
+    $('.advance-search i').removeClass('fa-angle-up')
+    $('.advance-search i').addClass('fa-angle-down')
+
+  hideArrowDown = ->
+    $('.advance-search i').removeClass('fa-angle-down')
+    $('.advance-search i').addClass('fa-angle-up')
+
   initFilterKeywordPopover = ->
     $('[data-toggle="popover"]').popover()
     $(document).off 'click', '[data-toggle="popover"]'

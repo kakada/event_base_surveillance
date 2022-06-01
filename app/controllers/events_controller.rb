@@ -2,6 +2,7 @@
 
 class EventsController < ApplicationController
   before_action :set_event_type, only: %i[new create edit update]
+  before_action :set_filters, only: [:index, :download]
 
   def index
     @pagy, @events = pagy(get_events)
@@ -93,11 +94,20 @@ class EventsController < ApplicationController
     end
 
     def get_events
-      policy_scope(Event.group_filter(filter_params).order_desc
+      policy_scope(Event.filter(filter_params).order_desc
         .includes(:event_type, :conclude_event_type, :creator,
-                  :program, :program_shareds, follow_ups: :follower,
+                  :program, :program_shareds, follow_ups: [:follower, :followee],
                   field_values: { field: :field_options }
                  )
       )
+    end
+
+    def set_filters
+      fields = current_program.fields.includes(:field_options)
+
+      @source_of_informations = fields.select { |f| f.code == 'source_of_information' }.first.field_options
+      @risk_levels = fields.select { |f| f.code == 'risk_level' }.first.field_options
+      @event_types = EventType.with_shared(current_program.id).includes(:program, :program_shareds)
+      @progresses  = current_program.milestones.pluck(:name)
     end
 end
