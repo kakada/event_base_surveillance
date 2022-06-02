@@ -1,69 +1,58 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('event_type.event_type')
-      - if policy(EventType).create?
-        = link_to new_event_type_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+- content_for :header_title do
+  = t('event_type.event_type')
 
-  = render partial: "shared/no_data", locals: { items: @event_types }
+.d-flex.justify-content-end.mb-3
+  = render "shared/add_new_button", path: new_event_type_path, name: t('event_type.event_type') if policy(EventType).update?
 
-  - if @event_types.present?
-    .pagy-wrapper.mb-2
-      .flex-row.flex1
-        .flex1.flex-row-vertical-center
-          %span= t('event_type.pagination_title', from: @pagy.from, to: @pagy.to, total: @pagy.count).html_safe
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @event_types }
 
-        - if @pagy.pages > 1
-          != pagy_bootstrap_nav(@pagy)
+    - if @event_types.present?
+      .pagy-wrapper.mb-2
+        .flex-row.flex1
+          .flex1.flex-row-vertical-center
+            %span= t('event_type.pagination_title', from: @pagy.from, to: @pagy.to, total: @pagy.count).html_safe
 
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th= t('event_type.name')
-          %th= t('event_type.code')
-          %th= t('event_type.last_modified')
-          %th= t('event_type.guideline')
+          - if @pagy.pages > 1
+            != pagy_bootstrap_nav(@pagy)
 
-          - if current_user.system_admin?
-            %th= t('event_type.program')
-          %th= t('event_type.program_share')
-          %th
-
-      %tbody
-        - @event_types.each do |event_type|
+      %table.table.table-hover.medium-width
+        %thead
           %tr
-            %td
-              .flex-row-vertical-center
-                .small-color{style: "background-color: #{event_type.color}"}
-                  = event_type.name[0]
-                %span= event_type.name
-
-            %td= event_type.code
-            %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
-            %td
-              - if guideline = event_type.guideline.presence
-                = link_to guideline.file.filename, event_type.guideline_url, class: 'btn btn-link'
+            %th= t('event_type.name')
+            %th= t('event_type.code')
+            %th= t('event_type.last_modified')
+            %th= t('event_type.guideline')
 
             - if current_user.system_admin?
-              %td= event_type.program_name
+              %th= t('event_type.program')
+            %th= t('event_type.program_share')
+            %th
 
-            %td= event_type.program_shareds.collect(&:name).join(', ')
+        %tbody
+          - @event_types.each do |event_type|
+            %tr
+              %td
+                .flex-row-vertical-center
+                  .small-color{style: "background-color: #{event_type.color}"}
+                    = event_type.name[0]
+                  %span= event_type.name
 
-            %td.text-right
-              - if policy(event_type).update?
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+              %td= event_type.code
+              %td= distance_of_time_in_words(Time.now, event_type.updated_at) + ' ago'
+              %td
+                - if guideline = event_type.guideline.presence
+                  = link_to guideline.file.filename, event_type.guideline_url, class: 'btn btn-link'
 
-                .dropdown-menu.dropdown-menu-right
-                  = link_to edit_event_type_path(event_type), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+              - if current_user.system_admin?
+                %td= event_type.program_name
 
-                  - if policy(event_type).destroy?
-                    = link_to event_type_path(event_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('event_type.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+              %td= event_type.program_shareds.collect(&:name).join(', ')
 
-    - if @pagy.pages > 1
-      != pagy_bootstrap_nav(@pagy)
+              %td.text-right
+                = render 'action_buttons', event_type: event_type
+
+      - if @pagy.pages > 1
+        .pagy-wrapper
+          != pagy_bootstrap_nav(@pagy)
