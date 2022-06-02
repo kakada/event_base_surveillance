@@ -78,6 +78,7 @@
 //= require webhooks/new
 //= require maps/index
 //= require medisys_feeds
+//= require schedules/new
 
 document.addEventListener('turbolinks:load', function() {
   EBS.Common.Sidebar.init();

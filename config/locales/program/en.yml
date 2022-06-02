@@ -27,3 +27,11 @@ en:
     provincial: Provincial
     risk_assessment_guideline: Risk assessment guideline
     download_risk_assessment_guideline: Download risk assessment guideline
+    use_channel: Use channel
+    email: Email
+    telegram: Telegram
+    enabled: Enabled
+    disabled: Disabled
+    duration_in_day: Duration(days)
+    duration_in_hour: Notify at the hour
+    message: Message

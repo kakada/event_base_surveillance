@@ -5,7 +5,7 @@ module UsersHelper
     return "" unless user.telegram?
 
     title = t('telegram_bot.already_associated', username: user.telegram_username)
-    str = "<span class='p-1 pointer text-primary' data-trigger='hover' title='#{title}' data-toggle='tooltip'>"
+    str = "<span class='p-1 pointer icon-telegram' data-trigger='hover' title='#{title}' data-toggle='tooltip'>"
     str += "<i class='fab fa-telegram telegram-icon' aria-hidden='true'></i>"
     str + "</span>"
   end

@@ -1,0 +1,25 @@
+en:
+  schedule:
+    schedule: Schedule
+    new_schedule: New schedule
+    edit_schedule: Edit schedule
+    name: Name
+    type: Type
+    message: Message
+    interval_type: Interval type
+    interval_value: Interval value
+    follow_up_hour: Follow up hour
+    date_number: Date number
+    use_channel: Use channels
+    interval_time: Interval Time
+    status: Status
+    every: Every
+    schedule_notify: Schedule notification
+    at: At
+    day: Day
+    week: Week
+    month: Month
+    schedule_info: "Will send event follow-up messages every %{interval_value} %{interval_type} from the last update. And we will send a message at %{follow_up_hour}"
+    are_you_sure_to_delete: Are you sure to delete this %{name} schedule?
+    are_you_sure_to_deactivate: Are you sure to deactivate this %{name} schedule?
+    short_display: Every %{interval_value} %{interval_type} at %{follow_up_hour}

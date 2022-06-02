@@ -12,9 +12,9 @@
       .modal-body
         .flex-row
           %label.flex1= t('program.telegram_notification')
-          = f.input :enabled, label: false, input_html: {id: 'toggle-telegram'}
+          = f.input :enabled, label: false, input_html: {id: 'toggle-telegram', class: 'bt-toggle'}
 
-        .tokens{class: ('hidden' unless f.object.enabled?)}
+        .collapse-section{class: ('d-none' unless f.object.enabled?)}
           = f.input :token
           = f.input :username
 

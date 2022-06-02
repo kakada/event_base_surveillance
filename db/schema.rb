@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_105458) do
+ActiveRecord::Schema.define(version: 2022_05_25_070142) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
@@ -78,16 +80,16 @@ ActiveRecord::Schema.define(version: 2022_05_19_105458) do
 
   create_table "event_shareds", force: :cascade do |t|
     t.string "event_id"
-    t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "program_id"
   end
 
   create_table "event_type_shareds", force: :cascade do |t|
     t.integer "event_type_id"
-    t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "program_id"
   end
 
   create_table "event_type_webhooks", force: :cascade do |t|
@@ -294,6 +296,22 @@ ActiveRecord::Schema.define(version: 2022_05_19_105458) do
     t.integer "national_zoom_level", default: 7
     t.integer "provincial_zoom_level", default: 10
     t.string "risk_assessment_guideline"
+  end
+
+  create_table "schedules", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.boolean "enabled", default: true
+    t.text "message"
+    t.integer "interval_type"
+    t.integer "interval_value"
+    t.integer "date_index"
+    t.integer "follow_up_hour"
+    t.text "emails"
+    t.string "channels", default: [], array: true
+    t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sections", force: :cascade do |t|

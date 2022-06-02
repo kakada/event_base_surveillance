@@ -15,6 +15,8 @@
 #
 
 class FollowUp < ApplicationRecord
+  include FollowUps::Channel
+
   # Association
   belongs_to :follower, class_name: 'User'
   belongs_to :followee, class_name: 'User'
@@ -24,17 +26,9 @@ class FollowUp < ApplicationRecord
   after_create :send_notification_async
 
   # Validation
-  validate :correct_channels
   validates :message, presence: true
 
   CHANNELS = %w(email telegram)
-
-  def correct_channels
-    channels.reject!(&:blank?)
-
-    errors.add(:channels, "Channels can't be blank") if channels.blank?
-    errors.add(:channels, "Channels is invalid") if channels.detect { |s| !(CHANNELS.include? s) }
-  end
 
   def notify_email
     title = "CamEMS follow up case: #{event_id}"

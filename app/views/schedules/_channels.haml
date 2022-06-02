@@ -1,0 +1,30 @@
+/ Channels
+.form-group
+  %label
+    = t('program.use_channel')
+    %abbr{title: 'required'} *
+
+  = hidden_field_tag "schedule[channels][]", nil
+
+  .d-flex
+    / Channel: Email
+    .mr-2
+      %label.channel.flex-grow-1{ for: "email" }
+        %i.fas.fa-check-circle.tick-icon
+        = icon_email.html_safe
+        %span= t("event.email")
+
+        %input#email.form-check-input.invisible{ type: "checkbox", value: "email", name: "schedule[channels][]", checked: f.object.channels.include?('email') }
+
+    / Channel: Telegram
+    - title = TelegramBot.has_system_bot? ? '' : t("event.no_system_bot_configure")
+    .ml-2{ 'data-toggle' => 'tooltip', 'data-title' => title }
+      %label.channel{ for: 'ch_telegram', class: ('disabled' unless TelegramBot.has_system_bot? ) }
+        %i.fas.fa-check-circle.tick-icon
+        = icon_telegram.html_safe
+        %span= t("event.telegram")
+
+        %input#ch_telegram.form-check-input.invisible{ type: "checkbox", value: "telegram", name: "schedule[channels][]", checked: f.object.channels.include?('telegram') }
+
+  .d-block.invalid-feedback
+    = f.object.errors[:channels].join(', ')

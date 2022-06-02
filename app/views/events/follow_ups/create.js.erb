@@ -8,7 +8,9 @@
   $('[data-toggle="popover"]').popover();
 
 <% else %>
-  $('#formModal .modal-body').html('<%= j render("form") %>');
+  $('#formModal .modal-body-content').html('<%= j render("form") %>');
 
-   EBS.FollowUpForm.init();
+   EBS.ChannelsForm.init();
 <% end %>
+
+$("#flash").html('<%= j render("shared/notify_message") %>');

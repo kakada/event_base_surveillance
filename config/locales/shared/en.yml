@@ -28,3 +28,10 @@ en:
     unlock: 'Unlock'
     download: 'Download'
     no_latlng: No latitude and longitude for this location
+    number: '#'
+    email: Email
+    telegram: Telegram
+    active: 'Active'
+    inactive: 'Inactive'
+    deactivate: Deactivate
+    activate: Activate

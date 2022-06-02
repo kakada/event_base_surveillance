@@ -1,33 +1,34 @@
 = simple_form_for [@event, @follow_up], remote: true, url: event_follow_ups_path(@event) do |f|
-  = f.input :message, label: t('event.message')
+  .modal-body
+    = f.input :message, label: t('event.message')
 
-  .form-group
-    %label
-      = t('event.use_channel')
-      %abbr{title: 'required'} *
+    .form-group
+      %label
+        = t('event.use_channel')
+        %abbr{title: 'required'} *
 
-    .d-flex
-      / Channel: Email
-      .flex-grow-1.mr-1
-        %label.channel.flex-grow-1{ for: "email" }
-          %i.fas.fa-check-circle.tick-icon
-          = icon_email.html_safe
-          %span= t("event.email")
+      .d-flex
+        / Channel: Email
+        .mr-1
+          %label.channel.flex-grow-1{ for: "email" }
+            %i.fas.fa-check-circle.tick-icon
+            = icon_email.html_safe
+            %span= t("event.email")
 
-          %input#email.form-check-input.invisible{ type: "checkbox", value: "email", name: "follow_up[channels][]", checked: f.object.channels.include?('email') }
+            %input#email.form-check-input.invisible{ type: "checkbox", value: "email", name: "follow_up[channels][]", checked: f.object.channels.include?('email') }
 
-      / Channel: Telegram
-      .flex-grow-1.ml-1{ 'data-toggle' => 'tooltip', 'data-title' => telegram_tooltip(@event) }
-        %label.channel{ for: 'telegram', class: ('disabled' unless @event.creator.telegram? ) }
-          %i.fas.fa-check-circle.tick-icon
-          = icon_telegram.html_safe
-          %span= t("event.telegram")
+        / Channel: Telegram
+        .ml-1{ 'data-toggle' => 'tooltip', 'data-title' => telegram_tooltip(@event) }
+          %label.channel{ for: 'telegram', class: ('disabled' unless @event.creator.telegram? ) }
+            %i.fas.fa-check-circle.tick-icon
+            = icon_telegram.html_safe
+            %span= t("event.telegram")
 
-          %input#telegram.form-check-input.invisible{ type: "checkbox", value: "telegram", name: "follow_up[channels][]", checked: (f.object.channels.include?('telegram') && @event.creator.telegram?) }
+            %input#telegram.form-check-input.invisible{ type: "checkbox", value: "telegram", name: "follow_up[channels][]", checked: (f.object.channels.include?('telegram') && @event.creator.telegram?) }
 
-    .d-block.invalid-feedback
-      = @follow_up.errors[:channels].join(', ')
+      .d-block.invalid-feedback
+        = @follow_up.errors[:channels].join(', ')
 
-  .actions
+  .modal-footer
     %button.btn.btn-secondary{type: 'button', 'data-dismiss' => 'modal'}= t('shared.cancel')
     = f.submit t('shared.save'), class: 'btn btn-primary'

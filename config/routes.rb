@@ -40,6 +40,11 @@ Rails.application.routes.draw do
     put :unlock, on: :member
   end
 
+  resources :schedules do
+    get :activate, on: :member
+    get :deactivate, on: :member
+  end
+
   resources :medisys_feeds, only: :index
   resources :medisies do
     get :help, on: :collection

@@ -13,7 +13,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body{ id: css_class_name }
-    = render 'shared/notify_message'
+    #flash
+      = render 'shared/notify_message'
     .wrapper
       = render 'shared/sidebar'
       = yield
