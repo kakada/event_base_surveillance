@@ -1,6 +1,4 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('template.new_template')
+- content_for :header_title do
+  = t('template.new_template')
 
-  = render 'form'
+= render 'form'
