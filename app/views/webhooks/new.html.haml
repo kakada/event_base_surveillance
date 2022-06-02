@@ -1,6 +1,4 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('webhook.new_webhook')
+- content_for :header_title do
+  = t('webhook.new_webhook')
 
-  = render 'form'
+= render 'form'

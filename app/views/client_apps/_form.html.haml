@@ -6,13 +6,12 @@
 
     - if token = @client_app.access_token.presence
       .form-row
-        .form-group.col-md-9
+        .form-group.col-md-8
           %label= t('client_app.access_token')
           .form-control.access-token-view= token
           = f.input :access_token, as: :hidden, input_html: {class: 'access-token'}
 
-        .form-group.col-md-3
-          %label
+        .form-group.col-md-4.d-flex.align-items-end
           %button.btn.btn-light.btn-regenerate-token{type: 'button'}
             %i.fas.fa-redo-alt
             = t('client_app.regenerate_token')

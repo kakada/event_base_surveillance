@@ -9,6 +9,8 @@
     = render partial: "shared/no_data", locals: { items: @medisies }
 
     - if @medisies.present?
+      = render 'shared/pagination_title', name: t('medisy.medisys')
+
       %table.table.table-hover.medium-width
         %thead
           %tr
@@ -41,3 +43,5 @@
                       = link_to medisy_path(medi), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('medisy.are_you_sure_to_delete')} do
                         %i.fas.fa-trash-alt.drop-menu-icon
                         %span= t('shared.delete')
+
+    = render 'shared/pagination'

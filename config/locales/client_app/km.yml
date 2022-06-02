@@ -2,7 +2,7 @@ km:
   client_app:
     client_app: 'Client App'
     app_name: 'ឈ្មោះ App'
-    creation_date: 'កាលបរិច្ឆេទ​បង្កើត'
+    creation_date: 'កាលបរិច្ឆេទបង្កើត'
     ip_address: 'អាសយដ្ឋាន Ip'
     access_token: 'Access token'
     permissions: 'សិទ្ធិអនុញ្ញាតិ'
@@ -14,10 +14,11 @@ km:
     are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
     api_key: 'API key'
     edit_api_key: 'កែសម្រួល API key'
+    new_api_key: API key ថ្មី
     name: 'ឈ្មោះ'
     regenerate_token: 'បង្កើតTokenឡើងវិញ'
-    learn_more: 'ស្វែង​យល់​បន្ថែម'
-    need_help: 'ត្រូវការ​ជំនួយ?'
+    learn_more: 'ស្វែងយល់បន្ថែម'
+    need_help: 'ត្រូវការជំនួយ?'
     you_can_link_to_ebs: 'អ្នកអាចភ្ជាប់ទិន្នន័យរបស់អ្នកដែលបានប្រមូលជាមួយ EBS ទៅនឹងម៉ាស៊ីនមេឬសេវាកម្មផ្សេងទៀតដែលអ្នកគ្រប់គ្រង។ ឧទាហរណ៍បញ្ចូល URL របស់ម៉ាស៊ីនមេដើម្បីអាចបញ្ជូនទិន្នន័យ។'
     api: 'API'
     ebs_has_only_one_api: 'EBS មាន API បឋមតែមួយប៉ុណ្ណោះសម្រាប់ការផ្ញើរនិងទាញយកទិន្នន័យ។'

@@ -1,55 +1,34 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('webhook.webhook')
-      - if policy(Webhook).create?
-        = link_to new_webhook_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+- content_for :header_title do
+  = t('webhook.webhook')
 
-  = render partial: "shared/no_data", locals: { items: @webhooks }
+.d-flex.justify-content-end.mb-3
+  = render "shared/add_new_button", path: new_webhook_path, name: t('webhook.webhook') if policy(Webhook).create?
 
-  - if @webhooks.present?
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th= t('webhook.name')
-          %th= t('webhook.authentication_type')
-          %th= t('webhook.url')
-          %th= t('webhook.status')
-          %th
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @webhooks }
 
-      %tbody
-        - @webhooks.each do |webhook|
+    - if @webhooks.present?
+      = render 'shared/pagination_title', name: t('webhook.webhook')
+
+      %table.table.table-hover.medium-width
+        %thead
           %tr
-            %td= webhook.name
-            %td= webhook.type
-            %td= webhook.url || '-'
-            %td.status{ class: ('active' if webhook.active?)}
-              = webhook.active? ? t('webhook.active') : t('webhook.inactive')
-            %td.text-right
-              - if policy(webhook).update?
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+            %th= t('webhook.name')
+            %th= t('webhook.authentication_type')
+            %th= t('webhook.url')
+            %th= t('webhook.status')
+            %th
 
-                .dropdown-menu.dropdown-menu-right
-                  = link_to edit_webhook_path(webhook), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+        %tbody
+          - @webhooks.each do |webhook|
+            %tr
+              %td= webhook.name
+              %td= webhook.type
+              %td= webhook.url || '-'
+              %td.status{ class: ('active' if webhook.active?)}
+                = webhook.active? ? t('webhook.active') : t('webhook.inactive')
+              %td.text-right
+                = render 'action_buttons', webhook: webhook
 
-                  - unless webhook.active?
-                    = link_to activate_webhook_path(webhook), class: "btn dropdown-item" do
-                      %i.fas.fa-check.drop-menu-icon
-                      %span= t('webhook.activate')
-                  - if webhook.active?
-                    = link_to deactivate_webhook_path(webhook), class: "btn dropdown-item" do
-                      %i.fas.fa-ban.drop-menu-icon
-                      %span= t('webhook.deactivate')
-
-                  - if policy(webhook).destroy?
-                    = link_to webhook_path(webhook), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('webhook.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
-
-  - if @pagy.pages > 1
-    .pagy-wrapper
-      != pagy_bootstrap_nav(@pagy)
+    = render 'shared/pagination'

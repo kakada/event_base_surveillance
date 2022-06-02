@@ -10,9 +10,7 @@
     - if @medisys_feeds.present?
       = render 'medisys_feeds'
 
-      - if @pagy.pages > 1
-        .pagy-wrapper.mt-3
-          != pagy_bootstrap_nav(@pagy)
+      = render 'shared/pagination'
 
     .acknowledge
       .d-flex.flex-grow-1.align-items-center.justify-content-end
