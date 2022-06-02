@@ -1,43 +1,43 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('medisy.Medisys')
-      - if policy(Medisy).create?
-        = link_to new_medisy_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+- content_for :header_title do
+  = t('medisy.medisys')
 
-  = render partial: "shared/no_data", locals: { items: @medisies }
+.d-flex.justify-content-end.mb-3
+  = render "shared/add_new_button", path: new_medisy_path, name: t('medisy.medisys') if policy(Medisy).create?
 
-  - if @medisies.present?
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th #
-          %th= t('medisy.name')
-          %th= t('medisy.feed_url')
-          - if current_user.system_admin?
-            %th= t('medisy.program')
-          %th
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @medisies }
 
-      %tbody
-        - @medisies.each_with_index do |medi, index|
+    - if @medisies.present?
+      %table.table.table-hover.medium-width
+        %thead
           %tr
-            %td= @pagy.from + index
-            %td= medi.name
-            %td= medi.url
+            %th #
+            %th= t('medisy.name')
+            %th= t('medisy.feed_url')
             - if current_user.system_admin?
-              %td= medi.program.name
-            %td.text-right
-              - if policy(medi).update?
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+              %th= t('medisy.program')
+            %th
 
-                .dropdown-menu.dropdown-menu-right
-                  = link_to edit_medisy_path(medi), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+        %tbody
+          - @medisies.each_with_index do |medi, index|
+            %tr
+              %td= @pagy.from + index
+              %td= medi.name
+              %td= medi.url
+              - if current_user.system_admin?
+                %td= medi.program.name
+              %td.text-right
+                - if policy(medi).update?
+                  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                    %i.fas.fa-ellipsis-v
 
-                  - if policy(medi).destroy?
-                    = link_to medisy_path(medi), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('medisy.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                  .dropdown-menu.dropdown-menu-right
+                    = link_to edit_medisy_path(medi), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span= t('shared.edit')
+
+                    - if policy(medi).destroy?
+                      = link_to medisy_path(medi), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('medisy.are_you_sure_to_delete')} do
+                        %i.fas.fa-trash-alt.drop-menu-icon
+                        %span= t('shared.delete')
