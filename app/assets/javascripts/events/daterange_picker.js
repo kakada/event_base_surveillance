@@ -1,10 +1,10 @@
 EBS.DateRangePicker = (() => {
   var tr = {};
 
-  function init() {
+  function init(open_direction='right') {
     setDefaultLocale();
     handleDisplayDate();
-    initDateRangePicker();
+    initDateRangePicker(open_direction);
 
     onApplyDateRange();
     onCancelDateRange();
@@ -27,7 +27,7 @@ EBS.DateRangePicker = (() => {
     }
   }
 
-  function initDateRangePicker() {
+  function initDateRangePicker(open_direction) {
     let options = {
       ranges: customRange(),
       locale: {
@@ -36,6 +36,7 @@ EBS.DateRangePicker = (() => {
         customRangeLabel: tr.customRange
       },
       alwaysShowCalendars: true,
+      opens: open_direction
     }
 
     let start = $('.start-date').val();
@@ -84,6 +85,10 @@ EBS.DateRangePicker = (() => {
 
     if (!!start && !!end) {
       display = start.locale(tr.locale).format(tr.format) + ' - ' + end.locale(tr.locale).format(tr.format);
+
+      $('#daterange span').css('color', '#111');
+    } else {
+      $('#daterange span').css('color', '#6e707e');
     }
 
     $('#daterange span').html(display);

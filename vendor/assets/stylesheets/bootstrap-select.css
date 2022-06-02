@@ -396,3 +396,7 @@ select.selectpicker {
   float: none;
 }
 /*# sourceMappingURL=bootstrap-select.css.map */
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder {
+  color: #6e707e;
+}

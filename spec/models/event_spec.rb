@@ -123,9 +123,14 @@ RSpec.describe Event, type: :model do
     let!(:event1) { create(:event, event_type: event_type) }
     let!(:event2) { create(:event) }
 
-    it { expect(Event.filter({ keyword: 'suspected_event : ' }).count).to eq(2) }
-    it { expect(Event.filter({ keyword: 'suspected_event : covi' }).count).to eq(1) }
-    it { expect(Event.filter({ keyword: "id : #{event1.id}" }).count).to eq(1) }
+    before {
+      event1.update_column(:location_code, '0102')
+      event2.update_column(:location_code, '0303')
+    }
+
+    it { expect(Event.filter( event_type_ids: [event_type.id] ).count).to eq(1) }
+    it { expect(Event.filter( province_ids: ['01'] ).count).to eq(1) }
+    it { expect(Event.filter( province_ids: ['02'] ).count).to eq(0) }
   end
 
   private

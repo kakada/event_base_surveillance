@@ -1,6 +1,7 @@
 / Follow up button
 .follow-up{ class: ('d-none' unless event.follow_ups.present?), id: event.id }
-  = render 'events/index/follow_up', event: event
+  - if event.follow_ups.present?
+    = render 'events/index/follow_up', event: event
 
 / Other Buttons
 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

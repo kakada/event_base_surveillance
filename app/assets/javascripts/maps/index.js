@@ -14,7 +14,7 @@ EBS.MapsIndex = (() => {
   function init() {
     eventData = $('#map').data('event-data');
 
-    EBS.DateRangePicker.init();
+    EBS.DateRangePicker.init('left');
 
     _renderMap();
     _initLegendSliding();

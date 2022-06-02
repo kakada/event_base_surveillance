@@ -44,6 +44,7 @@
 
 //= require common/sidebar
 //= require common/location
+//= require common/select_picker
 
 // All Pages
 //= require milestones/select_file
@@ -80,6 +81,7 @@
 
 document.addEventListener('turbolinks:load', function() {
   EBS.Common.Sidebar.init();
+  EBS.Common.SelectPicker.init();
 
   // Default Setup
   $('[data-toggle="tooltip"]').tooltip();

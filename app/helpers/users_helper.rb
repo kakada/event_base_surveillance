@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module UsersHelper
-  def telegram_icon_status(user)
+  def telegram_icon(user)
     return "" unless user.telegram?
 
     title = t('telegram_bot.already_associated', username: user.telegram_username)

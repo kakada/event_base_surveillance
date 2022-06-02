@@ -142,10 +142,6 @@
     }
   }
 
-  .keyword, #daterange {
-    width: 300px;
-  }
-
   .btn-download-csv {
     text-align: right;
   }
@@ -160,5 +156,29 @@
 
   a.nav-link.active {
     color: #495057;
+  }
+}
+
+
+.filter-input {
+  width: 280px;
+  margin-right: 8px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.keyword {
+  color: #111;
+}
+
+#daterange {
+  .form-control {
+    width: 280px;
+  }
+
+  [data-placeholder] {
+    color: #6e707e;
   }
 }

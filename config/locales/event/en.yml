@@ -26,7 +26,8 @@ en:
     relative: 'Relative'
     absolute: 'Absolute'
     start_date: 'Start date'
-    filter_by_date: 'Filter by date'
+    search_by_date: 'Search by date'
+    search_by_id: 'Search by ID'
     search_link_event: 'Search event by uuid or event type'
     link_to_event: 'Link to event'
     show_more: 'Show more'
@@ -75,3 +76,15 @@ en:
     telegram: Telegram
     event_creator_no_telegram_account: The event creator didn't connect to telegram account!
     no_system_bot_configure: "No telegram bot is configured!"
+    any_event_type: Any event type
+    any_province: Any province
+    provinces_selected: provinces selected
+    event_types_selected: event types selected
+    any_event_type: Any event type
+    risk_levels_selected: risk levels selected
+    any_risk_level: Any risk level
+    progresses_selected: progresses selected
+    any_progress: Any progress
+    source_of_informations_selected: source of informations selected
+    any_source_of_information: Any source of information
+    advance_search: Advance Search

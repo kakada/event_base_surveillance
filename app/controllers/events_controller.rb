@@ -2,9 +2,10 @@
 
 class EventsController < ApplicationController
   before_action :set_event_type, only: %i[new create edit update]
+  before_action :set_filters, only: [:index, :download]
 
   def index
-    @pagy, @events = pagy(policy_scope(Event.filter(filter_params).order_desc.includes(:event_type, :conclude_event_type, :creator, :program, :program_shareds, :follow_ups, field_values: { field: :field_options })))
+    @pagy, @events = pagy(get_events)
     @templates = policy_scope(::Template.all)
   end
 
@@ -49,7 +50,7 @@ class EventsController < ApplicationController
   end
 
   def download
-    events = policy_scope(Event.filter(filter_params).includes(:field_values, :event_milestones))
+    events = get_events
 
     if events.length > ENV['MAXIMUM_DOWNLOAD_RECORDS'].to_i
       flash[:alert] = t('event.file_size_is_too_big')
@@ -83,11 +84,30 @@ class EventsController < ApplicationController
 
     def filter_params
       params.permit(
-        :start_date, :end_date, :event_type_id, :keyword, :filter
+        :uuid, :start_date, :end_date, :filter,
+        event_type_ids: [], province_ids: [], risk_levels: [], progresses: [], source_of_informations: []
       ).merge(program_id: current_user.program_id)
     end
 
     def set_event_type
       @event_types = policy_scope(EventType.all)
+    end
+
+    def get_events
+      policy_scope(Event.filter(filter_params).order_desc
+        .includes(:event_type, :conclude_event_type, :creator,
+                  :program, :program_shareds, follow_ups: [:follower, :followee],
+                  field_values: { field: :field_options }
+                 )
+      )
+    end
+
+    def set_filters
+      fields = current_program.fields.includes(:field_options)
+
+      @source_of_informations = fields.select { |f| f.code == 'source_of_information' }.first.field_options
+      @risk_levels = fields.select { |f| f.code == 'risk_level' }.first.field_options
+      @event_types = EventType.with_shared(current_program.id).includes(:program, :program_shareds)
+      @progresses  = current_program.milestones.pluck(:name)
     end
 end

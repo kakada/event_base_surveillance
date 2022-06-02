@@ -1,0 +1,10 @@
+%form#event-form.form-inline.justify-content-start{ method: :get }
+  .form-group
+    = render 'events/index/filter_event_type', tooltip_placement: 'left'
+
+  .form-group
+    = render 'events/index/filter_date'
+
+  %button.btn.btn-primary{ type: 'submit' }
+    %i.fas.fa-search
+    = t('shared.apply')

@@ -1,0 +1,2 @@
+.filter-input.tooltips{ 'data-toggle' => 'tooltip' }
+  = select_tag 'risk_levels[]', options_for_select(@risk_levels.pluck(:name, :value), params[:risk_levels]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('event.risk_levels_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("event.any_risk_level"), class: 'selectpicker form-control'

@@ -15,7 +15,7 @@ km:
     edit_event: 'កែសម្រួលព្រឹត្តិការណ៍'
     add_file: '+ បន្ថែមឯកសារ'
     close_event: 'បិទព្រឹត្តិការណ៍'
-    progress: 'ដំណើរការ'
+    progress: 'ដំណាក់កាល'
     filter_results_that_contain: 'ច្រោះលទ្ធផលដែលមាន'
     search: 'ស្វែងរក'
     filter_example: 'ឧទាហរណ៍ number_of_case : 1'
@@ -26,7 +26,8 @@ km:
     relative: 'Relative'
     absolute: 'Absolute'
     start_date: 'ថ្ងៃចាប់ផ្ដើម'
-    filter_by_date: 'ច្រោះតាមកាលបរិច្ឆេទ'
+    search_by_date: 'ស្វែងរកតាមកាលបរិច្ឆេទ'
+    search_by_id: 'ស្វែងរកតាមលេខសម្គាល់'
     search_link_event: 'ស្វែងរកព្រឹត្តិការណ៍តាមរយៈ uuid ឬប្រភេទព្រឹត្តិការណ៍'
     link_to_event: 'ភ្ជាប់ទៅព្រឹត្តិការណ៍'
     show_more: 'បង្ហាញថែម'
@@ -75,3 +76,15 @@ km:
     telegram: តេលេក្រាម
     event_creator_no_telegram_account: អ្នកបញ្ចូលព្រឹត្តិការណ៍មិនបានភ្ជាប់គណនីតេឡេក្រាមទេ!
     no_system_bot_configure: កម្មវិធីមិនបានតម្លើងតេលេក្រាម!
+    any_event_type: គ្រប់ប្រភេទព្រឹត្តិការណ៍
+    any_province: គ្រប់ខេត្ត
+    provinces_selected: ខេត្តត្រូវបានជ្រើសរើស
+    event_types_selected: ប្រភេទព្រឹត្តិការណ៍ត្រូវបានជ្រើសរើស
+    any_event_type: គ្រប់ប្រភេទព្រឹត្តិការណ៍
+    risk_levels_selected: កម្រិតហានិភ័យត្រូវបានជ្រើសរើស
+    any_risk_level: គ្រប់កម្រិតហានិភ័យ
+    progresses_selected: ដំណាក់កាលត្រូវបានជ្រើសរើស
+    any_progress: គ្រប់ដំណាក់កាល
+    source_of_informations_selected: ប្រភពព័ត៌មានត្រូវបានជ្រើសរើស
+    any_source_of_information: គ្រប់ប្រភពព័ត៌មាន
+    advance_search: ស្វែងរកបន្ថែម

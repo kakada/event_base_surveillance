@@ -1,18 +1,13 @@
 # frozen_string_literal: true
 
 class MapsController < ApplicationController
-  before_action :set_date_range
-
   def index
-    @event_types = EventType.with_shared(current_program.id)
-    @event_data = MapService.new(current_user).get_event_data(params)
+    @event_types = EventType.with_shared(current_program.id).includes(:program, :program_shareds)
+    @event_data = MapService.new(current_user).get_event_data(filter_params)
   end
 
   private
-    def set_date_range
-      @start_date = params[:start_date].present? ? Date.parse(params[:start_date]) : Time.zone.today - 29
-      params[:number] = 30 if params[:start_date].blank?
-      params[:date_type] = 'Day' if params[:start_date].blank?
-      params[:start_date] = @start_date if params[:start_date].blank?
+    def filter_params
+      params.permit( :start_date, :end_date, event_type_ids: [] )
     end
 end

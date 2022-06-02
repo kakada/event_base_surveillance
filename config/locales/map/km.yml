@@ -1,6 +1,6 @@
 km:
   map:
-    title: "ព្រឹត្តិការណ៍ដែលរាយការណ៍មានចំនួន <b>%{total_count}</b>, មានក្នុងទីតាំងចំនួន <b>%{location_count}</b>"
+    title: "ចំនួនព្រឹត្តិការណ៍រាយការណ៍សរុប <b>%{total_count}</b> នៅ <b>%{location_count}</b> ទីតាំង"
     legend: Legend
     event: ព្រឹត្តិការណ៍
     shared_from: 'ចែករំលែកពី'

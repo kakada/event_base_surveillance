@@ -10,6 +10,7 @@
     overflow: hidden;
     padding: 12px;
     padding-bottom: 0;
+    padding-top: 0;
   }
 
   #map {
@@ -32,13 +33,20 @@
   }
 
   .legend {
-    padding: 10px 16px;
     font: 12px Arial, Helvetica, sans-serif;
     background: white;
     background: rgba(255, 255, 255, 1);
     line-height: 24px;
     color: #555;
     max-width: 220px;
+
+    .title {
+      padding: 10px 16px;
+    }
+
+    .event-types {
+      padding: 0 16px;
+    }
 
     span {
       position: relative;
@@ -115,7 +123,12 @@
   }
 
   #daterange {
-    min-width: 220px;
+    .form-control {
+      width: 270px;
+    }
+  }
+  .filter-input {
+    width: 270px;
   }
 
   .icon-share {

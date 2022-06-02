@@ -1,20 +1,15 @@
 #content
-  .flex-row-vertical-center{style: 'flex-wrap: wrap'}
-    %form#event-form.form-inline.justify-content-start.flex-grow-1{ method: :get }
-      .form-group.mb-2
-        %label.mr-1{ for: :event_event_type }= "#{t('map.event')}:"
-        = select_tag 'event_type_id', options_for_select(select_options(current_user, @event_types), params[:event_type_id]), include_blank: t('map.all'), class: 'form-control'
+  .d-flex.align-items-center.flex-row-reverse.flex-wrap.py-2
+    / Filter
+    = render "filter"
 
-      .form-group.mb-2
-        = render 'events/index/filter_date'
+    .flex-grow-1
 
-      %button.btn.btn-primary.mb-2{ type: 'submit' }
-        %i.fas.fa-search
-        = t('shared.apply')
+    / Title
+    .flex-grow-1.text-left.py-1
+      = t('map.title', total_count: @event_data.inject(0){|sum,e| sum + e[:total_count] }, location_count: @event_data.size).html_safe
 
-    .mb-2
-      %span= t('map.title', total_count: @event_data.inject(0){|sum,e| sum + e[:total_count] }, location_count: @event_data.size).html_safe
-
+  / Map
   #map{ data: {'event-data' => @event_data.to_json, province: current_user.location.try(:to_json), program: current_program.to_json }}
 
   - if @event_data.present?
@@ -25,9 +20,9 @@
           .vericaltext= t('map.legend')
 
       .legend.flex-column
-        %strong= t('event.suspected_event_type')
+        %strong.title= t('event.suspected_event_type')
 
-        .flex1.overflow-auto
+        .flex1.overflow-auto.event-types
           - @event_data.uniq{ |ed| ed[:event_type] }.each do |data|
             .flex-row-vertical-center.pt-1.pb-1
               %i{style:"background: #{data[:event_type].color}"}

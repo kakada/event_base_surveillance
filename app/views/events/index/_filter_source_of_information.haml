@@ -1,0 +1,2 @@
+.filter-input.tooltips{ 'data-toggle' => 'tooltip' }
+  = select_tag 'source_of_informations[]', options_for_select(@source_of_informations.pluck(:name, :value), params[:source_of_informations]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('event.source_of_informations_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("event.any_source_of_information"), class: 'selectpicker form-control'
