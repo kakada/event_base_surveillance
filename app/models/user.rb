@@ -86,6 +86,10 @@ class User < ApplicationRecord
     @telegram ||= TelegramBot.has_system_bot? && telegram_chat_id.present?
   end
 
+  def display_name
+    email.split("@").first.upcase
+  end
+
   private
     def set_province_code
       self.province_code = 'all'

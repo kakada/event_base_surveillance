@@ -35,3 +35,4 @@ en:
     inactive: 'Inactive'
     deactivate: Deactivate
     activate: Activate
+    add_new: Add new %{name}

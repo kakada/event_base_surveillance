@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_locale
-      I18n.locale = current_program.try(:language_code) || I18n.default_locale
+      I18n.locale = current_user.try(:language_code) || I18n.default_locale
     end
 
     def set_raven_context

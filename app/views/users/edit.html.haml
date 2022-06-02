@@ -1,6 +1,4 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('user.edit_user')
+- content_for :header_title do
+  = t('user.edit_user')
 
-  = render 'form'
+= render 'form'

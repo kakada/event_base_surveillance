@@ -1,0 +1,7 @@
+- path ||= '#'
+- name ||= ''
+
+%div
+  = link_to path, class: 'btn btn-primary btn-sm shadow-sm' do
+    %i.fas.fa-plus
+    = t('shared.add_new', name: name)

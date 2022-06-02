@@ -27,7 +27,9 @@ Rails.application.routes.draw do
     resource :setting, only: [:show, :update]
   end
 
-  resources :users
+  resources :users do
+    post :update_locale, on: :collection
+  end
   resources :events do
     scope module: :events do
       resources :event_milestones

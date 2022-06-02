@@ -35,3 +35,4 @@ km:
     inactive: មិនសកម្ម
     deactivate: ធ្វើឱ្យអសកម្ម
     activate: ធ្វើឱ្យសកម្ម
+    add_new: បន្ថែម%{name}ថ្មី

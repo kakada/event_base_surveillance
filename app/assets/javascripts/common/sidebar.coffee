@@ -8,7 +8,7 @@ EBS.Common.Sidebar = do ->
     $('#sidebar').addClass cssClass
 
   onClickSidebar = ->
-    $('#sidebarCollapse').on 'click', ->
+    $('.sidebarCollapse').on 'click', ->
       $('#sidebar').toggleClass 'active'
       localStorage.setItem('miniSidebar', $('#sidebar').hasClass('active'));
 
