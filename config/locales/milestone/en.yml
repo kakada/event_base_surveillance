@@ -1,5 +1,6 @@
 en:
   milestone:
+    milestone: Milestone
     milestones: 'Milestones'
     name: 'Name'
     status: 'Status'

@@ -4,5 +4,4 @@
       %i.fas.fa-download
       = t('event.download_csv')
 
-  - if policy(Event).create?
-    = render 'shared/add_new_button', path: new_event_path, name: t('event.event')
+  = render 'shared/add_new_button', path: new_event_path, name: t('event.event') if policy(Event).create?
