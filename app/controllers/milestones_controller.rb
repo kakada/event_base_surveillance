@@ -2,7 +2,7 @@
 
 class MilestonesController < ::ApplicationController
   def index
-    @milestones = authorize current_program.milestones.includes(:fields, :message)
+    @pagy, @milestones = pagy(authorize current_program.milestones.includes(:fields, :message))
   end
 
   def new

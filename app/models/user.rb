@@ -13,6 +13,7 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default("")
 #  full_name              :string
+#  language_code          :string           default("km")
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
 #  phone_number           :string

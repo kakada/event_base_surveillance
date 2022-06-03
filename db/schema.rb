@@ -311,7 +311,6 @@ ActiveRecord::Schema.define(version: 2022_06_02_041017) do
     t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "deadline_duration_in_day"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -385,7 +384,6 @@ ActiveRecord::Schema.define(version: 2022_06_02_041017) do
     t.string "phone_number"
     t.string "telegram_chat_id"
     t.string "telegram_username"
-    t.string "notification_channels", default: [], array: true
     t.string "language_code", default: "km"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

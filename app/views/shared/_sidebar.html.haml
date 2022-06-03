@@ -106,10 +106,6 @@
       = link_to about_us_path do
         %i.fas.fa-info
         = t('sidebar.about_us')
-    %li
-      = link_to destroy_user_session_path, method: :delete do
-        %i.fas.fa-key
-        = t('sidebar.logout')
 
   .copyright
     - version = "#{t('sidebar.version')}: #{ENV.fetch('APP_VERSION') { 'development' }}"

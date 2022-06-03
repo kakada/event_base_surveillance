@@ -103,6 +103,8 @@ class EventsController < ApplicationController
     end
 
     def set_filters
+      return unless current_program.present?
+
       fields = current_program.fields.includes(:field_options)
 
       @source_of_informations = fields.select { |f| f.code == 'source_of_information' }.first.field_options

@@ -23,7 +23,9 @@
   #collapseExample.collapse
     .d-lg-flex
       = render 'events/index/filter_province'
-      = render 'events/index/filter_event_type'
-      = render 'events/index/filter_risk_level'
-      = render 'events/index/filter_progress'
-      = render 'events/index/filter_source_of_information'
+
+      - if current_program.present?
+        = render 'events/index/filter_event_type'
+        = render 'events/index/filter_risk_level'
+        = render 'events/index/filter_progress'
+        = render 'events/index/filter_source_of_information'

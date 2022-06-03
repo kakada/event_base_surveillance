@@ -1,11 +1,12 @@
-#content.flex-column
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('telegram_bot.telegram_bot')
-      - done_url = current_user.system_admin? ? programs_path : setting_path
-      = link_to t('shared.done'), done_url, class: 'btn btn-light'
+- content_for :header_title do
+  = t('telegram_bot.telegram_bot')
 
-  .medium-width
+.d-flex.justify-content-end.mb-3
+  - done_url = current_user.system_admin? ? programs_path : setting_path
+  = link_to t('shared.done'), done_url, class: 'btn btn-primary btn-sm'
+
+.card.shadow.mb-4.medium-width
+  .card-body
     %p= t('telegram_bot.you_can_configure_your_bot')
 
     %div
