@@ -10,6 +10,9 @@
     width: $size;
     background-color: #e1e1e1;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     img {
       height: $size;

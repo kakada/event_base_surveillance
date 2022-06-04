@@ -21,7 +21,7 @@
             %th= t('user.email')
             %th= t('user.phone_number')
             %th= t('user.role')
-            %th= t('user.program')
+            %th= t('user.program') if current_program.nil?
             %th= t('user.province')
             %th= t('user.status')
             %th= t('user.last_sign_in_at')
@@ -34,7 +34,7 @@
               %td= user.email
               %td= user.phone_number
               %td= user.role.titlecase
-              %td= user.program_name
+              %td= user.program_name if current_program.nil?
               %td= user.location.try(:name_km)
 
               %td.status{ class: ('active' if user.confirmed?) }

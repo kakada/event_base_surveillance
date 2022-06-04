@@ -30,7 +30,7 @@
           %i.fas.fa-tasks
           = t('sidebar.programs')
 
-    - if policy(User).update?
+    - if policy(User).create?
       %li{class: get_css_active_class('users') }
         = link_to users_path do
           %i.fas.fa-users

@@ -1,20 +1,22 @@
-#content.flex-column
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= "#{@milestone.name}: #{t('milestone.notification')}"
-      = link_to t('shared.done'), milestones_path, class: 'btn btn-light'
+- content_for :header_title do
+  = "#{@milestone.name}: #{t('milestone.notification')}"
 
-  - if !current_program.enable_email_notification? && !current_program.enable_telegram?
-    .w-50.view-center.flex1.flex-row-vertical-center
-      .flex1.text-center= t('milestone.go_to_setting', url: setting_path).html_safe
+.d-flex.justify-content-end.mb-3
+  = link_to t('shared.done'), milestones_path, class: 'btn btn-primary btn-sm'
 
-  - else
-    - if @message.present?
-      = render 'message'
+.card.shadow.mb-4
+  .card-body
+    - if !current_program.enable_email_notification? && !current_program.enable_telegram?
+      .w-50.view-center.flex1.flex-row-vertical-center
+        .flex1.text-center= t('milestone.go_to_setting', url: setting_path).html_safe
 
     - else
-      .w-50.view-center.flex1.flex-row-vertical-center
-        .flex1.text-center
-          %div= t('milestone.setup_message_instruction')
-          .actions
-            = link_to t('milestone.setup'), new_milestone_message_path(@milestone), class: 'btn btn-primary'
+      - if @message.present?
+        = render 'message'
+
+      - else
+        .w-50.view-center.flex1.flex-row-vertical-center
+          .flex1.text-center
+            %div= t('milestone.setup_message_instruction')
+            .actions
+              = link_to t('milestone.setup'), new_milestone_message_path(@milestone), class: 'btn btn-primary'

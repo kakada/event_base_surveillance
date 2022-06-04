@@ -1,6 +1,4 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('schedule.edit_schedule')
+- content_for :header_title do
+  = t('schedule.edit_schedule')
 
-  = render 'form'
+= render 'form'
