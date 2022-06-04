@@ -1,0 +1,30 @@
+- field_name = "user[notification_channels][]"
+
+/ Channels
+.form-group
+  %label
+    = t('user.use_channel')
+
+  = hidden_field_tag field_name, nil
+
+  .d-flex
+    / Channel: Email
+    .mr-2
+      %label.channel.flex-grow-1{ for: "email" }
+        %i.fas.fa-check-circle.tick-icon
+        = icon_email.html_safe
+        %span= t("event.email")
+
+        %input#email.form-check-input.invisible{ type: "checkbox", value: "email", name: field_name, checked: f.object.notification_channels.include?('email') }
+
+    / Channel: Telegram
+    .ml-2{ 'data-toggle' => 'tooltip', 'data-title' => telegram_tooltip(current_user) }
+      %label.channel{ for: 'ch_telegram', class: ('disabled' unless current_user.telegram? ) }
+        %i.fas.fa-check-circle.tick-icon
+        = icon_telegram.html_safe
+        %span= t("event.telegram")
+
+        %input#ch_telegram.form-check-input.invisible{ type: "checkbox", value: "telegram", name: field_name, checked: f.object.notification_channels.include?('telegram') }
+
+  .d-block.invalid-feedback
+    = f.object.errors[:notification_channels].join(', ')

@@ -23,11 +23,18 @@
 module Schedules
   class EventSchedule < ::Schedule
     def send_notification_async
-      events = program.events.uncloseds.reached_intervals(duration_in_day)
-
-      events.each do |event|
-        event.send_notification_async(id)
+      channels.each do |channel|
+        notify_to_events(channel)
       end
     end
+
+    private
+      def notify_to_events(channel)
+        events = program.events.uncloseds.reached_intervals(duration_in_day)
+
+        events.each do |event|
+          notify("Notifiers::EventSchedule#{channel.titlecase}Notifier".constantize.new(self, event), channel)
+        end
+      end
   end
 end

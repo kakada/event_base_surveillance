@@ -5,8 +5,16 @@ class UserPolicy < ApplicationPolicy
     user.system_admin? || user.program_admin?
   end
 
+  def show?
+    index? || user.id == record.id
+  end
+
   def create?
     user.system_admin? || user.program_admin?
+  end
+
+  def update?
+    create? || user.id == record.id
   end
 
   def destroy?

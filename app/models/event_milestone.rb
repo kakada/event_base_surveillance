@@ -34,6 +34,8 @@ class EventMilestone < ApplicationRecord
   after_create :set_event_progress
   after_create :set_event_to_close, if: -> { milestone.final? }
   after_commit :set_event_conclude_event_type_id, if: -> { conclude_event_type_id.present? }, on: [:create, :update]
+  after_create_commit :notify_that_milestone_created_async, unless: -> { event.creator_id == submitter_id  }
+  after_update_commit :notify_that_milestone_updated_async, unless: -> { event.creator_id == submitter_id  }
 
   # Nested attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
@@ -84,5 +86,23 @@ class EventMilestone < ApplicationRecord
 
     def set_event_conclude_event_type_id
       event.update(conclude_event_type_id: conclude_event_type_id)
+    end
+
+    def notify_that_milestone_created_async
+      message = "Event {{event_uuid}}, there is a new milestone('{{milestone_name}}') has been created by user {{submitter_email}}. Click <a href='{{event_url}}'>here</a> to view event detail in CamEMS"
+
+      notify_creator_async(message)
+    end
+
+    def notify_that_milestone_updated_async
+      message = "Event {{event_uuid}} in {{milestone_name}} milestone is being modified by user {{submitter_email}}. Click <a href='{{event_url}}'>here</a> to view event detail in CamEMS"
+
+      notify_creator_async(message)
+    end
+
+    def notify_creator_async(message)
+      event.creator.notification_channels.each do |channel|
+        notify("Notifiers::EventCreator#{channel.titlecase}Notifier".constantize.new(self, message), channel)
+      end
     end
 end

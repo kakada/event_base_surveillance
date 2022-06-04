@@ -27,8 +27,9 @@ module Events
         end
 
         def notify_third_party
-          TelegramWorker.perform_async(id, self.class.to_s) if enable_telegram?
-          EmailNotificationWorker.perform_async(id, self.class.to_s) if enable_email_notification?
+          ::Message::CHANNELS.each do |channel|
+            notify("Notifiers::EventMilestone#{channel.titlecase}Notifier".constantize.new(self), channel)
+          end
 
           event_type.webhooks.each do |webhook|
             next unless webhook.active?

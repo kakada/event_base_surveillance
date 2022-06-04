@@ -13,6 +13,8 @@
 
 
 class Message < ApplicationRecord
+  CHANNELS = %w(email telegram)
+
   belongs_to :milestone
   has_one :telegram_notification, class_name: 'Notifications::TelegramNotification', dependent: :destroy
   has_one :email_notification, dependent: :destroy

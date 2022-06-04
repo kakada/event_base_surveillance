@@ -12,4 +12,9 @@ class ApplicationRecord < ActiveRecord::Base
       where(id: id).update_all(display_order: index + 1)
     end
   end
+
+  def notify(notifier, channel)
+    adapter = Adapter.for(notifier, channel)
+    adapter.process
+  end
 end

@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :clear_flash, on: [:update]
+
   def index
     @pagy, @users = pagy(policy_scope(authorize User.filter(params).order(updated_at: :DESC).includes(:program, :location)))
+  end
+
+  def show
+    authorize current_user
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new
@@ -28,11 +38,25 @@ class UsersController < ApplicationController
   def update
     @user = authorize User.find(params[:id])
 
-    if @user.update_attributes(user_params)
-      redirect_to users_url
-    else
-      flash.now[:alert] = @user.errors.full_messages
-      render :edit
+    respond_to do |format|
+      format.html {
+        if @user.update(user_params)
+          redirect_to users_url
+        else
+          flash.now[:alert] = @user.errors.full_messages
+          render :edit
+        end
+      }
+
+      format.js {
+        @user.update(user_params)
+
+        if @user.notification_channels.present?
+          flash[:notice] = t('user.notification_channels', channels: @user.notification_channels.map { |ch| I18n.t("shared.#{ch}") }.join(', '))
+        else
+          flash[:alert] = t('user.no_notification_channels')
+        end
+      }
     end
   end
 
@@ -45,6 +69,12 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :full_name, :role, :program_id, :province_code, :phone_number)
+      params.require(:user).permit(:email, :full_name, :role,
+        :program_id, :province_code, :phone_number, notification_channels: []
+      )
+    end
+
+    def clear_flash
+      flash.clear
     end
 end
