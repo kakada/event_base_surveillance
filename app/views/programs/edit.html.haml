@@ -1,8 +1,6 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('program.edit_program')
+- content_for :header_title do
+  = t('program.edit_program')
 
-  .w-50.view-center
-    = simple_form_for @program do |f|
-      = render 'form', f: f
+.w-50.view-center
+  = simple_form_for @program do |f|
+    = render 'form', f: f

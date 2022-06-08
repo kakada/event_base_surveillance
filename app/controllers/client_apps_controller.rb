@@ -2,7 +2,7 @@
 
 class ClientAppsController < ApplicationController
   def index
-    @client_apps = policy_scope(ClientApp.all)
+    @pagy, @client_apps = pagy(policy_scope(authorize ClientApp.all))
   end
 
   def new

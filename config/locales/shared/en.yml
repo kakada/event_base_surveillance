@@ -35,3 +35,5 @@ en:
     inactive: 'Inactive'
     deactivate: Deactivate
     activate: Activate
+    add_new: Add new %{name}
+    pagination_title: "Displaying %{name} <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"

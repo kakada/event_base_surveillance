@@ -1,40 +1,42 @@
-#content
-  .d-flex.align-items-center.flex-row-reverse.flex-wrap.py-2
-    / Filter
-    = render "filter"
+- content_for :header_title do
+  = t('map.map')
 
-    .flex-grow-1
+.d-flex.align-items-center.flex-row-reverse.flex-wrap.py-2
+  / Filter
+  = render "filter"
 
-    / Title
-    .flex-grow-1.text-left.py-1
-      = t('map.title', total_count: @event_data.inject(0){|sum,e| sum + e[:total_count] }, location_count: @event_data.size).html_safe
+  .flex-grow-1
 
-  / Map
-  #map{ data: {'event-data' => @event_data.to_json, province: current_user.location.try(:to_json), program: current_program.to_json }}
+  / Title
+  .flex-grow-1.text-left.py-1
+    = t('map.title', total_count: @event_data.inject(0){|sum,e| sum + e[:total_count] }, location_count: @event_data.size).html_safe
 
-  - if @event_data.present?
-    .slide-wrapper.flex-row
-      .flex-row.align-items-end
-        .btn-slide.flex-column.pointer.align-items-center
-          %i.fas.fa-angle-double-left.fa-angle-double-right
-          .vericaltext= t('map.legend')
+/ Map
+#map{ data: {'event-data' => @event_data.to_json, province: current_user.location.try(:to_json), program: current_program.to_json }}
 
-      .legend.flex-column
-        %strong.title= t('event.suspected_event_type')
+- if @event_data.present?
+  .slide-wrapper.flex-row
+    .flex-row.align-items-end
+      .btn-slide.flex-column.pointer.align-items-center
+        %i.fas.fa-angle-double-left.fa-angle-double-right
+        .vericaltext= t('map.legend')
 
-        .flex1.overflow-auto.event-types
-          - @event_data.uniq{ |ed| ed[:event_type] }.each do |data|
-            .flex-row-vertical-center.pt-1.pb-1
-              %i{style:"background: #{data[:event_type].color}"}
-              .ellipsis= data[:event_type].name
+    .legend.flex-column
+      %strong.title= t('event.suspected_event_type')
 
-              - if shared_event?(current_user, data[:event_type])
-                .pl-1.pr-1{ 'data-toggle' => 'tooltip', title: "#{t('map.shared_from')}: #{data[:event_type].program_name}"}
-                  = image_tag 'share.png', class: 'icon-share'
+      .flex1.overflow-auto.event-types
+        - @event_data.uniq{ |ed| ed[:event_type] }.each do |data|
+          .flex-row-vertical-center.pt-1.pb-1
+            %i{style:"background: #{data[:event_type].color}"}
+            .ellipsis= data[:event_type].name
 
-  - else
-    .no-data.text-center
-      %span= t('shared.no_result_found')
+            - if shared_event?(current_user, data[:event_type])
+              .pl-1.pr-1{ 'data-toggle' => 'tooltip', title: "#{t('map.shared_from')}: #{data[:event_type].program_name}"}
+                = image_tag 'share.png', class: 'icon-share'
+
+- else
+  .no-data.text-center
+    %span= t('shared.no_result_found')
 
 :javascript
   locale = {

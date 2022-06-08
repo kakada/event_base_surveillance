@@ -1,39 +1,44 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('template.line_list_title')
-      - if policy(::Template).create?
-        = link_to new_template_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+- content_for :header_title do
+  = t('template.line_list_title')
 
-  = render partial: "shared/no_data", locals: { items: @templates }
+.d-flex.justify-content-end.mb-3
+  = render "shared/add_new_button", path: new_template_path, name: t('template.line_list_title') if policy(Milestone).create?
 
-  - if @templates.present?
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th= t('template.name')
-          %th= t('template.number_of_fields')
-          %th
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @templates }
 
-      %tbody
-        - @templates.each do |template|
+    = render 'shared/pagination_title', name: t('template.line_list_title') if @templates.present?
+
+    - if @templates.present?
+      %table.table.table-hover.medium-width
+        %thead
           %tr
-            %td
-              = template.name
-            %td
-              %span.badge.badge-pill.badge-info.mr-1= template.fields.size + template.properties.size
-            %td.text-right
-              - if policy(template).update?
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+            %th= t('template.name')
+            %th= t('template.number_of_fields')
+            %th
 
-                .dropdown-menu.dropdown-menu-right
-                  = link_to edit_template_path(template), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+        %tbody
+          - @templates.each do |template|
+            %tr
+              %td
+                = template.name
+              %td
+                %span.badge.badge-pill.badge-info.mr-1= template.fields.size + template.properties.size
+              %td.text-right
+                - if policy(template).update?
+                  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                    %i.fas.fa-ellipsis-v
 
-                  - if policy(template).destroy?
-                    = link_to template_path(template), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('template.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                  .dropdown-menu.dropdown-menu-right
+                    = link_to edit_template_path(template), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span= t('shared.edit')
+
+                    - if policy(template).destroy?
+                      = link_to template_path(template), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('template.are_you_sure_to_delete')} do
+                        %i.fas.fa-trash-alt.drop-menu-icon
+                        %span= t('shared.delete')
+
+
+    = render 'shared/pagination'

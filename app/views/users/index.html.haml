@@ -1,80 +1,52 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('user.users')
-      = link_to new_user_path, class: 'btn btn-primary' do
-        %i.fas.fa-plus
+- content_for :header_title do
+  = t('user.users')
 
+.d-flex
   = render 'filter'
-  = render partial: "shared/no_data", locals: { items: @users }
+  .flex-grow-1
+  = render 'shared/add_new_button', path: new_user_path, name: t('user.user') if policy(User).create?
 
-  - if @users.present?
-    .pagy-wrapper.mb-2
-      .flex-row.flex1
-        .flex1.flex-row-vertical-center
-          %span= t('user.pagination_title', from: @pagy.from, to: @pagy.to, total: @pagy.count).html_safe
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @users }
 
-        - if @pagy.pages > 1
-          != pagy_bootstrap_nav(@pagy)
+    - if @users.present?
+      = render 'shared/pagination_title', name: t('user.user')
 
-  - if @users.present?
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th= t('user.number')
-          %th= t('user.full_name')
-          %th= t('user.email')
-          %th= t('user.phone_number')
-          %th= t('user.role')
-          %th= t('user.program')
-          %th= t('user.province')
-          %th= t('user.status')
-          %th= t('user.last_sign_in_at')
-          %th
-      %tbody
-        - @users.each_with_index do |user, index|
+      %table.table.table-hover.medium-width
+        %thead
           %tr
-            %td= @pagy.from + index
-            %td= user.full_name
-            %td= user.email
-            %td= user.phone_number
-            %td= user.role.titlecase
-            %td= user.program_name
-            %td= user.location.try(:name_km)
+            %th= t('user.number')
+            %th= t('user.full_name')
+            %th= t('user.email')
+            %th= t('user.phone_number')
+            %th= t('user.role')
+            %th= t('user.program') if current_program.nil?
+            %th= t('user.province')
+            %th= t('user.status')
+            %th= t('user.last_sign_in_at')
+            %th
+        %tbody
+          - @users.each_with_index do |user, index|
+            %tr
+              %td= @pagy.from + index
+              %td= user.full_name
+              %td= user.email
+              %td= user.phone_number
+              %td= user.role.titlecase
+              %td= user.program_name if current_program.nil?
+              %td= user.location.try(:name_km)
 
-            %td.status{ class: ('active' if user.confirmed?) }
-              = user.confirmed? ? t('user.active') : t('user.pending')
+              %td.status{ class: ('active' if user.confirmed?) }
+                = user.confirmed? ? t('user.active') : t('user.pending')
 
-            %td
-              = I18n.l(user.last_sign_in_at) if user.last_sign_in_at.present?
+              %td
+                = I18n.l(user.last_sign_in_at) if user.last_sign_in_at.present?
 
-            %td.text-right
-              = telegram_icon(user).html_safe
+              %td.text-right
+                = render 'action_buttons', user: user
 
-              - if policy(user).destroy?
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
-
-                .dropdown-menu.dropdown-menu-right
-                  - unless user.confirmed?
-                    %input.confirm-link{ value: confirmation_url(user, confirmation_token: user.confirmation_token) }
-                    = link_to '#', class: "btn dropdown-item btn-copy" do
-                      %i.far.fa-copy.drop-menu-icon
-                      %span= t('user.copy_confirm_link')
-
-                  - if policy(user).update?
-                    = link_to edit_user_path(user), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
-
-                  - if policy(user).destroy?
-                    = link_to user_path(user), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('user.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
-
-    - if @pagy.pages > 1
-      .pagy-wrapper
-        != pagy_bootstrap_nav(@pagy)
+      = render 'shared/pagination'
 
 .toast-wrapper{"aria-atomic" => "true", "aria-live" => "polite"}
   .toast

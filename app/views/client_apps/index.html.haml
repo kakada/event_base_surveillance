@@ -1,67 +1,47 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('client_app.client_app')
-      - if policy(ClientApp).create?
-        = link_to new_client_app_path, class: 'btn btn-primary' do
-          %i.fas.fa-plus
+- content_for :header_title do
+  = t('client_app.api_key')
 
-  = render partial: "shared/no_data", locals: { items: @client_apps }
+.d-flex.justify-content-end.mb-3
+  = render 'need_help_button'
+  = render "shared/add_new_button", path: new_client_app_path, name: t('client_app.api_key') if policy(ClientApp).create?
 
-  - label = @client_apps.blank? ? t('client_app.learn_more') : t('client_app.need_help')
-  - align = @client_apps.blank? ? 'center' : 'right'
-  %div{style: "text-align: #{align}"}
-    = link_to label, info_client_apps_path, class: 'btn btn-link'
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @client_apps }
 
-  - if @client_apps.present?
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th= t('client_app.app_name')
-          %th= t('client_app.creation_date')
-          %th= t('client_app.ip_address')
-          %th= t('client_app.access_token')
-          %th= t('client_app.permissions')
-          %th= t('client_app.status')
-          - if current_user.system_admin?
-            %th= t('client_app.program')
-          %th
-      %tbody
-        - @client_apps.each do |client_app|
+    - if @client_apps.present?
+      = render 'shared/pagination_title', name: t('client_app.api_key')
+
+      %table.table.table-hover.medium-width
+        %thead
           %tr
-            %td= client_app.name
-            %td= l(client_app.created_at)
-            %td= client_app.ip_address
-            %td
-              %span= client_app.access_token
-              %input.access-token{ value: client_app.access_token }
-              %button.btn.btn-copy{ 'data-toggle' => 'tooltip', title: 'copy to clipboard' }
-                %i.far.fa-copy
-            %td= client_app.permissions.join(', ')
-            %td{ class: ['status', ('active' if client_app.active?)] }
-              = client_app.active? ? t('client_app.active') : t('client_app.inactive')
-            - if current_user.system_admin?
-              %td= client_app.program_name
-            %td.text-right
-              - if policy(client_app).update?
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+            %th= t('client_app.app_name')
+            %th= t('client_app.creation_date')
+            %th= t('client_app.ip_address')
+            %th= t('client_app.access_token')
+            %th= t('client_app.permissions')
+            %th= t('client_app.status')
+            %th= t('client_app.program') if current_user.system_admin?
+            %th
 
-                .dropdown-menu.dropdown-menu-right
-                  = link_to edit_client_app_path(client_app), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+        %tbody
+          - @client_apps.each do |client_app|
+            %tr
+              %td= client_app.name
+              %td= l(client_app.created_at)
+              %td= client_app.ip_address
+              %td
+                %span= client_app.access_token
+                %input.access-token{ value: client_app.access_token }
+                %button.btn.btn-copy{ 'data-toggle' => 'tooltip', title: 'copy to clipboard' }
+                  %i.far.fa-copy
+              %td= client_app.permissions.join(', ')
+              %td{ class: ['status', ('active' if client_app.active?)] }
+                = client_app.active? ? t('client_app.active') : t('client_app.inactive')
 
-                  - unless client_app.active?
-                    = link_to activate_client_app_path(client_app), class: "btn dropdown-item" do
-                      %i.fas.fa-check.drop-menu-icon
-                      %span= t('client_app.activate')
+              %td= client_app.program_name if current_user.system_admin?
 
-                  - if client_app.active?
-                    = link_to deactivate_client_app_path(client_app), class: "btn dropdown-item" do
-                      %i.fas.fa-ban.drop-menu-icon
-                      %span= t('client_app.deactivate')
+              %td.text-right
+                = render 'action_buttons', client_app: client_app
 
-                  = link_to client_app_path(client_app), method: :delete, class: 'btn dropdown-item', :data => {confirm: t('client_app.are_you_sure_to_delete')} do
-                    %i.fas.fa-trash-alt.drop-menu-icon
-                    %span= t('shared.delete')
+    = render 'shared/pagination'

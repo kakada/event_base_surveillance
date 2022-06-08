@@ -1,6 +1,4 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('client_app.edit_api_key')
+- content_for :header_title do
+  = t('client_app.edit_api_key')
 
-  = render 'form'
+= render 'form'

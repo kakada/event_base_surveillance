@@ -1,5 +1,5 @@
 %nav#sidebar
-  #sidebarCollapse.sidebar-header
+  #sidebarCollapse.sidebarCollapse.sidebar-header
     .d-flex.w-100.align-items-center.justify-content-center
       - if current_program.present?
         %div
@@ -30,7 +30,7 @@
           %i.fas.fa-tasks
           = t('sidebar.programs')
 
-    - if policy(User).update?
+    - if policy(User).create?
       %li{class: get_css_active_class('users') }
         = link_to users_path do
           %i.fas.fa-users
@@ -106,10 +106,6 @@
       = link_to about_us_path do
         %i.fas.fa-info
         = t('sidebar.about_us')
-    %li
-      = link_to destroy_user_session_path, method: :delete do
-        %i.fas.fa-key
-        = t('sidebar.logout')
 
   .copyright
     - version = "#{t('sidebar.version')}: #{ENV.fetch('APP_VERSION') { 'development' }}"

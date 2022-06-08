@@ -1,50 +1,53 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('milestone.milestones')
-      %div
-        - if policy(Milestone).update?
-          = link_to new_milestone_path, class: 'btn btn-primary' do
-            %i.fas.fa-plus
+- content_for :header_title do
+  = t('milestone.milestone')
 
-  = render partial: "shared/no_data", locals: { items: @milestones }
+.d-flex.justify-content-end.mb-3
+  = render "shared/add_new_button", path: new_milestone_path, name: t('milestone.milestone') if policy(Milestone).update?
 
-  - if @milestones.present?
-    .table-header.medium-width.flex-row
-      %strong.name-wrapper= t('milestone.name')
-      %strong.w-25= t('milestone.flag_as')
-      %strong.flex= t('milestone.notification')
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @milestones }
 
-    = form_with(url: reorder_milestones_path, method: 'put', id: 'form') do |f|
-      %ol.fields.table.table-hover.medium-width
-        - @milestones.each do |milestone|
-          %li.move.flex-row.list-row{'data-id' => milestone.id}
-            .name-wrapper
-              %span.badge.badge-pill.badge-info.mr-1= milestone.fields.size
-              = milestone.name
+    - if @milestones.present?
+      = render 'shared/pagination_title', name: t('milestone.milestone')
 
-            .status-wrapper.text-capitalize.w-25
-              = milestone.status
+      .table-header.medium-width.flex-row
+        %strong.name-wrapper= t('milestone.name')
+        %strong.w-25= t('milestone.flag_as')
+        %strong.flex= t('milestone.notification')
 
-            .icons-wrapper.d-flex.flex1
-              = telegram_icon_status(milestone).html_safe
-              = email_icon_status(milestone).html_safe
+      = form_with(url: reorder_milestones_path, method: 'put', id: 'form') do |f|
+        %ol.fields.table.table-hover.medium-width
+          - @milestones.each do |milestone|
+            %li.move.flex-row.list-row{'data-id' => milestone.id}
+              .name-wrapper
+                %span.badge.badge-pill.badge-info.mr-1= milestone.fields.size
+                = milestone.name
 
-            .text-right
-              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                %i.fas.fa-ellipsis-v
+              .status-wrapper.text-capitalize.w-25
+                = milestone.status
 
-              .dropdown-menu.dropdown-menu-right
-                = link_to milestone_message_path(milestone), class: "btn dropdown-item" do
-                  %i.fas.fa-bell.drop-menu-icon
-                  %span= t('milestone.notification')
+              .icons-wrapper.d-flex.flex1
+                = telegram_icon_status(milestone).html_safe
+                = email_icon_status(milestone).html_safe
 
-                - if policy(Milestone).update?
-                  = link_to edit_milestone_path(milestone), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+              .text-right
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
 
-                - if policy(milestone).destroy?
-                  = link_to milestone_path(milestone), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('milestone.are_you_sure_to_delete')} do
-                    %i.fas.fa-trash-alt.drop-menu-icon
-                    %span= t('shared.delete')
+                .dropdown-menu.dropdown-menu-right
+                  = link_to milestone_message_path(milestone), class: "btn dropdown-item" do
+                    %i.fas.fa-bell.drop-menu-icon
+                    %span= t('milestone.notification')
+
+                  - if policy(Milestone).update?
+                    = link_to edit_milestone_path(milestone), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span= t('shared.edit')
+
+                  - if policy(milestone).destroy?
+                    = link_to milestone_path(milestone), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('milestone.are_you_sure_to_delete')} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span= t('shared.delete')
+
+    = render 'shared/pagination'

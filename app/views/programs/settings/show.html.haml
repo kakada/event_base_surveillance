@@ -1,14 +1,11 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('program.program_settings')
+- content_for :header_title do
+  = t('program.program_settings')
 
-  .w-50.view-center
-    = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
-      = render 'logo', f: f
-      = render 'telegram_bot', f: f
-      = render 'email_notification', f: f
-      = render 'unlock_event_duration', f: f
-      = render 'map_zoom_level', f: f
-      = render 'switch_language', f: f
-      = render 'risk_assessment_guideline', f: f
+.w-50.view-center
+  = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
+    = render 'logo', f: f
+    = render 'telegram_bot', f: f
+    = render 'email_notification', f: f
+    = render 'unlock_event_duration', f: f
+    = render 'map_zoom_level', f: f
+    = render 'risk_assessment_guideline', f: f

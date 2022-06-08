@@ -1,31 +1,34 @@
-#content
-  - unless user_signed_in?
-    = link_to 'Back', new_user_session_path, class: 'btn btn-link'
-  .row
-    .col-md-12
-      %h2.text-center= ENV['APP_NAME']
-      %h2.text-center= "(#{ENV['APP_SHORTCUT_NAME']})"
-  .d-flex.justify-content-center.my-4.mx-auto.introduction
-    = t('about.introduction')
+- content_for :header_title do
+  = t('about.about_us')
+
+- unless user_signed_in?
+  = link_to 'Back', new_user_session_path, class: 'btn btn-link'
+
+.row
+  .col-md-12
+    %h2.text-center= ENV['APP_NAME']
+    %h2.text-center= "(#{ENV['APP_SHORTCUT_NAME']})"
+.d-flex.justify-content-center.my-4.mx-auto.introduction
+  = t('about.introduction')
 
 
-  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
-    %h5= t('about.implemented_by')
-  .d-flex.justify-content-center.align-items-center.program-logo
-    = link_to 'http://cdcmoh.gov.kh/', target: '_blank' do
-      = image_tag 'cdc.jpg', class: 'about-logo mr-2', alt: 'Communicable Disease Control Department'
+.d-flex.justify-content-center.align-items-center.mt-5.mb-3
+  %h5= t('about.implemented_by')
+.d-flex.justify-content-center.align-items-center.program-logo
+  = link_to 'http://cdcmoh.gov.kh/', target: '_blank' do
+    = image_tag 'cdc.jpg', class: 'about-logo mr-2', alt: 'Communicable Disease Control Department'
 
-    = link_to 'https://gdahp.maff.gov.kh/', target: '_blank', class: 'mr-3' do
-      = image_tag 'gdahp.jpg', class: 'about-logo', alt: 'General Department of Animal Health and Production'
+  = link_to 'https://gdahp.maff.gov.kh/', target: '_blank', class: 'mr-3' do
+    = image_tag 'gdahp.jpg', class: 'about-logo', alt: 'General Department of Animal Health and Production'
 
-  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
-    %h5= t('about.developed_by')
-  .d-flex.justify-content-center.align-items-center
-    = link_to 'http://ilabsoutheastasia.org', target: '_blank' do
-      = image_tag 'instedd-ilabsea.png', class: 'about-logo mr-2', alt: 'InSTEDD iLab Southeast Asia'
+.d-flex.justify-content-center.align-items-center.mt-5.mb-3
+  %h5= t('about.developed_by')
+.d-flex.justify-content-center.align-items-center
+  = link_to 'http://ilabsoutheastasia.org', target: '_blank' do
+    = image_tag 'instedd-ilabsea.png', class: 'about-logo mr-2', alt: 'InSTEDD iLab Southeast Asia'
 
-  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
-    %h5= t('about.funded_by')
-  .d-flex.justify-content-center.align-items-center
-    = link_to 'https://endingpandemics.org', target: '_blank' do
-      = image_tag 'ending-pandemics.png', class: 'about-logo mr-2', alt: 'Ending Pandemics'
+.d-flex.justify-content-center.align-items-center.mt-5.mb-3
+  %h5= t('about.funded_by')
+.d-flex.justify-content-center.align-items-center
+  = link_to 'https://endingpandemics.org', target: '_blank' do
+    = image_tag 'ending-pandemics.png', class: 'about-logo mr-2', alt: 'Ending Pandemics'

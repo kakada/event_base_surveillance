@@ -1,74 +1,78 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('sidebar.api_and_services')
-      = link_to t('shared.back'), client_apps_path, class: 'btn btn-primary'
+- content_for :header_title do
+  = t('client_app.api_key')
 
-  .medium-width
-    %p= t('client_app.you_can_link_to_ebs')
-    %h5= t('client_app.api')
-    %p= t('client_app.ebs_has_only_one_api')
+.d-flex.justify-content-end.mb-3
+  = link_to client_apps_path, class: 'btn btn-primary btn-sm' do
+    %i.fas.fa-angle-left
+    = t('shared.back')
 
-    %p
-      = t('client_app.base_url_is')
-      %code= request.base_url
+.card.shadow.mb-4
+  .card-body
+    .medium-width
+      %p= t('client_app.you_can_link_to_ebs')
+      %h5= t('client_app.api')
+      %p= t('client_app.ebs_has_only_one_api')
 
-    %h5= t('client_app.token')
-    %p= t('client_app.see_setup_instruction')
-    %p= t('client_app.click_plus_button')
+      %p
+        = t('client_app.base_url_is')
+        %code= request.base_url
 
-    %p
-      = t('client_app.fill_in_the_information')
-      %ul
-        %li= "#{t('client_app.name')}: #{t('client_app.your_given_name')}"
-        %li= "#{t('client_app.ip_address')}: #{t('client_app.your_ip_address')}"
-        %li= "#{t('client_app.permissions')}: #{t('client_app.choose_permissions')}"
+      %h5= t('client_app.token')
+      %p= t('client_app.see_setup_instruction')
+      %p= t('client_app.click_plus_button')
 
-    %p
-      = t('client_app.system_build_a_token')
-      .image-wrapper= image_tag 'token.png'
+      %p
+        = t('client_app.fill_in_the_information')
+        %ul
+          %li= "#{t('client_app.name')}: #{t('client_app.your_given_name')}"
+          %li= "#{t('client_app.ip_address')}: #{t('client_app.your_ip_address')}"
+          %li= "#{t('client_app.permissions')}: #{t('client_app.choose_permissions')}"
 
-    %h5= t('client_app.url')
-    %p= t('client_app.stand_on_own_server_and_send_request')
+      %p
+        = t('client_app.system_build_a_token')
+        .image-wrapper= image_tag 'token.png'
 
-    %pre
-      %code
-        curl -X GET https://[Base_Url]/api/v1/event_types?format=json -H "Authorization: Token [your_token_goes_here]"
+      %h5= t('client_app.url')
+      %p= t('client_app.stand_on_own_server_and_send_request')
 
-    %p= t('client_app.this_is_your_request_and_result')
+      %pre
+        %code
+          curl -X GET https://[Base_Url]/api/v1/event_types?format=json -H "Authorization: Token [your_token_goes_here]"
 
-    %pre
-      %code
-        :preserve
-          {
-            "event_types": [
-              {
-                  "id": 1,
-                  "name": "Unknown",
-                  "program": {
-                      "id": 1,
-                      ...
-                  }
-              },
-              ...
-            ],
+      %p= t('client_app.this_is_your_request_and_result')
 
-            "meta": {
-              ...
+      %pre
+        %code
+          :preserve
+            {
+              "event_types": [
+                {
+                    "id": 1,
+                    "name": "Unknown",
+                    "program": {
+                        "id": 1,
+                        ...
+                    }
+                },
+                ...
+              ],
+
+              "meta": {
+                ...
+              }
             }
-          }
 
-    %h5= t('client_app.other_endpoints')
+      %h5= t('client_app.other_endpoints')
 
-    %h6= t('client_app.milestones')
-    = render 'guideline_milestones'
+      %h6= t('client_app.milestones')
+      = render 'guideline_milestones'
 
-    %h6= t('client_app.events')
-    = render 'guideline_events'
-    = render 'guideline_event'
-    = render 'guideline_post_event'
-    = render 'guideline_put_event'
+      %h6= t('client_app.events')
+      = render 'guideline_events'
+      = render 'guideline_event'
+      = render 'guideline_post_event'
+      = render 'guideline_put_event'
 
-    %h6= t('client_app.event_milestone')
-    = render 'guideline_post_event_milestone'
-    = render 'guideline_put_event_milestone'
+      %h6= t('client_app.event_milestone')
+      = render 'guideline_post_event_milestone'
+      = render 'guideline_put_event_milestone'

@@ -1,5 +1,6 @@
 en:
   user:
+    user: user
     users: 'Users'
     email: 'Email'
     role: 'Role'
@@ -19,3 +20,6 @@ en:
     last_sign_in_at: Last sign in at
     phone_number: Phone number
     name: Name
+    km: ខ្មែរ
+    en: English
+    search_by_email: Search by email

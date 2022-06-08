@@ -1,37 +1,40 @@
-#content.flex-column
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= "#{@program.name}: #{t('telegram_bot.telegram_bot')}"
-      = link_to t('shared.done'), programs_path, class: 'btn btn-light'
+- content_for :header_title do
+  = "#{@program.name}: #{t('telegram_bot.telegram_bot')}"
 
-  - if @bot.present?
-    = link_to t('shared.need_help'), help_telegram_bot_path, class: 'btn btn-link text-right'
+.d-flex.justify-content-end.mb-3
+  = link_to t('shared.need_help'), help_telegram_bot_path, class: 'btn btn-link text-right'
 
-    .w-75.view-center
-      %ul.list.flex1.pt-0.px-3.event-bubble
-        %li
-          %span.type= "#{t('telegram_bot.enabled_notification')}:"
-          %span.value= @bot.enabled
+  %div
+    = link_to t('shared.done'), programs_path, class: 'btn btn-primary btn-sm'
 
-        %li
-          %span.type= "#{t('telegram_bot.token')}:"
-          %span.value= @bot.token || '-'
+.card.shadow.mb-4
+  .card-body
+    - if @bot.present?
+      .w-75.view-center
+        %ul.list.flex1.pt-0.px-3.event-bubble
+          %li
+            %span.type= "#{t('telegram_bot.enabled_notification')}:"
+            %span.value= @bot.enabled
 
-        %li
-          %span.type= "#{t('telegram_bot.username')}:"
-          %span.value= @bot.username || '-'
+          %li
+            %span.type= "#{t('telegram_bot.token')}:"
+            %span.value= @bot.token || '-'
 
-        %li
-          %span.type= "#{t('telegram_bot.valid_bot')}:"
-          %span.value= @bot.actived
+          %li
+            %span.type= "#{t('telegram_bot.username')}:"
+            %span.value= @bot.username || '-'
 
-      .actions
-        = link_to t('shared.change'), edit_program_telegram_bot_path(@program), class: 'btn btn-primary'
+          %li
+            %span.type= "#{t('telegram_bot.valid_bot')}:"
+            %span.value= @bot.actived
 
-  - else
-    .w-50.view-center.flex1.flex-row-vertical-center
-      .flex1.text-center
-        %div= t('telegram_bot.setup_instruction')
-        %div= link_to t('shared.learn_more'), help_telegram_bot_path, class: 'btn btn-link'
         .actions
-          = link_to t('shared.setup'), new_program_telegram_bot_path(@program), class: 'btn btn-primary'
+          = link_to t('shared.change'), edit_program_telegram_bot_path(@program), class: 'btn btn-primary'
+
+    - else
+      .w-50.view-center.flex1.flex-row-vertical-center
+        .flex1.text-center
+          %div= t('telegram_bot.setup_instruction')
+          %div= link_to t('shared.learn_more'), help_telegram_bot_path, class: 'btn btn-link'
+          .actions
+            = link_to t('shared.setup'), new_program_telegram_bot_path(@program), class: 'btn btn-primary'

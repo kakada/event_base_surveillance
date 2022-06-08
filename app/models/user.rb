@@ -15,6 +15,7 @@
 #  full_name              :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
+#  locale                 :string           default("km")
 #  phone_number           :string
 #  province_code          :string
 #  remember_created_at    :datetime
@@ -84,6 +85,10 @@ class User < ApplicationRecord
 
   def telegram?
     @telegram ||= TelegramBot.has_system_bot? && telegram_chat_id.present?
+  end
+
+  def display_name
+    email.split("@").first.upcase
   end
 
   private

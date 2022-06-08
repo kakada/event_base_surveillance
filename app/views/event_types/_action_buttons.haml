@@ -1,0 +1,13 @@
+- if policy(event_type).update?
+  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+    %i.fas.fa-ellipsis-v
+
+  .dropdown-menu.dropdown-menu-right
+    = link_to edit_event_type_path(event_type), class: "btn dropdown-item" do
+      %i.fas.fa-pen.drop-menu-icon
+      %span= t('shared.edit')
+
+    - if policy(event_type).destroy?
+      = link_to event_type_path(event_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('event_type.are_you_sure_to_delete')} do
+        %i.fas.fa-trash-alt.drop-menu-icon
+        %span= t('shared.delete')

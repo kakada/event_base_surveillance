@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
+  resource :locale, only: [:update]
+
   resources :events do
     scope module: :events do
       resources :event_milestones

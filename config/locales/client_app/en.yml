@@ -14,6 +14,7 @@ en:
     are_you_sure_to_delete: 'Are you sure to delete this key?'
     api_key: 'API key'
     edit_api_key: 'Edit API key'
+    new_api_key: New API key
     name: 'Name'
     regenerate_token: 'Regenerate token'
     learn_more: 'Learn more'

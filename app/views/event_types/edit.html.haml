@@ -1,6 +1,4 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('event_type.edit_event_type')
+- content_for :header_title do
+  = t('event_type.edit_event_type')
 
-  = render 'form'
+= render 'form'

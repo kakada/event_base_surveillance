@@ -2,7 +2,7 @@
 
 class TemplatesController < ApplicationController
   def index
-    @templates = authorize policy_scope(::Template.includes(:fields))
+    @pagy, @templates = pagy(policy_scope(authorize ::Template.includes(:fields)))
   end
 
   def new

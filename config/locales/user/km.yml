@@ -1,9 +1,10 @@
 km:
   user:
+    user: អ្នកប្រើប្រាស់
     users: 'អ្នកប្រើប្រាស់'
     email: 'អ៊ីមែល'
     role: 'តួនាទី'
-    program: 'Program'
+    program: ប្រូក្រាម
     status: 'ស្ថានភាព'
     copy_confirm_link: 'ចម្លងតំណបញ្ជាក់'
     are_you_sure_to_delete: 'តើអ្នកប្រាកដចិត្តថាចង់លុបវាឬទេ?'
@@ -12,10 +13,13 @@ km:
     active: 'សកម្ម'
     pending: 'រង់ចាំ'
     number: 'លេខរៀង'
-    province_code: 'ខេត្ត'
-    edit_user: 'កែសម្រួល User'
+    province: 'ខេត្ត'
+    edit_user: 'កែសម្រួលអ្នកប្រើប្រាស់'
     full_name: 'ឈ្មោះពេញ'
     pagination_title: "បង្ហាញអ្នកប្រើប្រាស់ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
     last_sign_in_at: កាលបរិច្ឆេទចូលគណនីចុងក្រោយ
     phone_number: លេខទូរស័ព្ទ
     name: ឈ្មោះ
+    km: ខ្មែរ
+    en: English
+    search_by_email: ស្វែងរកតាមអ៊ីម៉ែល

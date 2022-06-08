@@ -1,4 +1,4 @@
-%form.filter-form.mb-3{ action: '/events', method: 'get' }
+%form.filter-form.mb-2{ action: '/events', method: 'get' }
   = hidden_field_tag :filter, params[:filter]
 
   .form-row.medium-width
@@ -17,19 +17,15 @@
           %i.fas.fa-search
           %span.d-none.d-lg-inline= t('event.search')
 
-    - if policy(Event).download?
-      .btn-download-csv.mb-2{style: 'position: absolute; right: 20px; margin-top: -63px;'}
-        %button.btn.btn-outline-info{"data-target" => "#template-model", "data-toggle" => "modal", :type => "button"}
-          %i.fas.fa-download
-          = t('event.download_csv')
-
-      = render 'events/index/modal_download'
+    = render 'events/index/modal_download' if policy(Event).download?
 
   / Advance filter
   #collapseExample.collapse
     .d-lg-flex
       = render 'events/index/filter_province'
-      = render 'events/index/filter_event_type'
-      = render 'events/index/filter_risk_level'
-      = render 'events/index/filter_progress'
-      = render 'events/index/filter_source_of_information'
+
+      - if current_program.present?
+        = render 'events/index/filter_event_type'
+        = render 'events/index/filter_risk_level'
+        = render 'events/index/filter_progress'
+        = render 'events/index/filter_source_of_information'

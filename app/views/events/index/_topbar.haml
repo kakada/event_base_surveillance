@@ -1,7 +1,7 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  .container-fluid
-    %h3= t('event.event')
+.d-flex{style: 'position: absolute; right: 20px;'}
+  - if policy(Event).download?
+    %button.btn.btn-outline-info.btn-sm.shadow-sm.mr-2{"data-target" => "#template-model", "data-toggle" => "modal", :type => "button"}
+      %i.fas.fa-download
+      = t('event.download_csv')
 
-    - if policy(Event).create?
-      = link_to new_event_path, class: 'btn btn-primary' do
-        %i.fas.fa-plus
+  = render 'shared/add_new_button', path: new_event_path, name: t('event.event') if policy(Event).create?

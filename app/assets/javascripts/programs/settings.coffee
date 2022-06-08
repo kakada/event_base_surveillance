@@ -4,18 +4,10 @@ EBS.ProgramsSettingsShow = do ->
     initEmailToggle()
     onChangeToggle()
     onChangeEmailToggle()
-    onChangeLanguage()
     onRemoveGuideline()
     onChangeGuideline()
 
     EBS.ProgramsNew.init()
-
-  onChangeLanguage = ->
-    $(document).off 'change', '#program_language_code'
-    $(document).on 'change', '#program_language_code', (event)->
-      _updateProgram({ language_code: this.value }, ->
-        window.location.reload()
-      )
 
   initToggle = ->
     $('.bt-toggle').bootstrapToggle({
