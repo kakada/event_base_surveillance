@@ -28,7 +28,7 @@ module ApplicationHelper
     link_to(name, '#', class: "add_#{association} btn", data: { id: id, fields: fields.gsub("\n", '') })
   end
 
-  def program_languages
+  def available_locales
     [
       { code: "km", label: I18n.t("user.km"), image: "khmer.png" },
       { code: "en", label: I18n.t("user.en"), image: "english.png" }

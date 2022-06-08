@@ -13,9 +13,9 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default("")
 #  full_name              :string
-#  language_code          :string           default("km")
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
+#  locale                 :string           default("km")
 #  phone_number           :string
 #  province_code          :string
 #  remember_created_at    :datetime

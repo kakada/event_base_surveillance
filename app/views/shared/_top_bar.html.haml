@@ -17,14 +17,14 @@
 
       / Language dropdown list
       .dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in.p-0{"aria-labelledby" => "languageDropdown"}
-        = simple_form_for(current_user, url: update_locale_users_path, method: :post, remote: true, html: { id: "switch-language" }) do |f|
-          = f.hidden_field :language_code
+        = simple_form_for(current_user, url: locale_path, method: :put, remote: true, html: { id: "switch-locale" }) do |f|
+          = f.hidden_field :locale
 
-          - program_languages.each_with_index do |language, index|
-            %a.switch-language.dropdown-item.d-flex.align-items-center.small{'data-language' => language[:code], href: '#', class: ('border-bottom' if index < program_languages.length)}
+          - available_locales.each_with_index do |locale, index|
+            %a.switch-locale.dropdown-item.d-flex.align-items-center.small{'data-locale' => locale[:code], href: '#', class: ('border-bottom' if index < available_locales.length)}
               .dropdown-list-image.mr-3
-                = image_tag language[:image], alt: "locale", size: "24x24", class: "mr-2"
-              .text-truncate= language[:label]
+                = image_tag locale[:image], alt: "locale", size: "24x24"
+              .text-truncate= locale[:label]
 
     .topbar-divider.d-none.d-sm-block
 
