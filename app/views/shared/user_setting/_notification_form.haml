@@ -1,0 +1,8 @@
+= simple_form_for current_user, remote: true do |f|
+  .modal-body
+    = render 'shared/user_setting/notification_channels', f: f
+
+  .modal-footer
+    %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
+
+    = f.submit t('shared.save'), class: 'btn btn-primary'

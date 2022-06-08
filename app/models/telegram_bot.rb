@@ -41,4 +41,13 @@ class TelegramBot < ApplicationRecord
   def self.has_system_bot?
     ENV['TELEGRAM_TOKEN'].present? && ENV['TELEGRAM_USERNAME'].present?
   end
+
+  def self.system_bot_token
+    ENV['TELEGRAM_TOKEN']
+  end
+
+  def self.client_send_message(token, chat_id, message)
+    ::Telegram::Bot::Client.new(token)
+                           .send_message(chat_id: chat_id, text: message, parse_mode: :HTML)
+  end
 end

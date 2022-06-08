@@ -23,3 +23,7 @@ en:
     km: ខ្មែរ
     en: English
     search_by_email: Search by email
+    event_notification_setting: Event notification setting
+    use_channel: Notify every update on my events through the following channels
+    notification_channels: You will have notifications in %{channels} as soon as your events are updated.
+    no_notification_channels: Your notification is turned off, and you won't get anny notification from your updated events.

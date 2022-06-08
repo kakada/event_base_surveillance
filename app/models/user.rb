@@ -53,6 +53,7 @@ class User < ApplicationRecord
     guest: 4
   }
 
+  CHANNELS = %w(email telegram)
   ROLES = roles.keys.map { |r| [r.titlecase, r] }
 
   # Association
@@ -70,6 +71,7 @@ class User < ApplicationRecord
   validates :program_id, presence: true, unless: -> { role == 'system_admin' }
   validates :province_code, presence: true, if: -> { %(staff guest).include?(role.to_s) }
   validates :phone_number, uniqueness: { allow_blank: true }
+  validate  :correct_channels
 
   # Callback
   before_create :set_full_name
@@ -94,5 +96,13 @@ class User < ApplicationRecord
   private
     def set_province_code
       self.province_code = 'all'
+    end
+
+    def correct_channels
+      notification_channels.reject!(&:blank?)
+
+      return unless notification_channels.present?
+
+      errors.add(:notification_channels, "Channels is invalid") if notification_channels.detect { |s| !(CHANNELS.include? s) }
     end
 end

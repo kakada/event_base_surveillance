@@ -18,7 +18,7 @@
             %input#email.form-check-input.invisible{ type: "checkbox", value: "email", name: "follow_up[channels][]", checked: f.object.channels.include?('email') }
 
         / Channel: Telegram
-        .ml-1{ 'data-toggle' => 'tooltip', 'data-title' => telegram_tooltip(@event) }
+        .ml-1{ 'data-toggle' => 'tooltip', 'data-title' => telegram_tooltip(@event.creator) }
           %label.channel{ for: 'telegram', class: ('disabled' unless @event.creator.telegram? ) }
             %i.fas.fa-check-circle.tick-icon
             = icon_telegram.html_safe
