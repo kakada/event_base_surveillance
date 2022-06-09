@@ -9,7 +9,7 @@
 
     %div
       .btn-search-wrapper.d-block.d-md-flex
-        %a.btn.btn-outline-secondary.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
+        %a.btn.btn-outline-secondary.advance-search{"aria-controls" => "collapseFilter", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseFilter", :role => "button"}
           %span.d-none.d-lg-inline= t('event.advance_search')
           %i.fas.fa-angle-down
 
@@ -20,7 +20,7 @@
     = render 'events/index/modal_download' if policy(Event).download?
 
   / Advance filter
-  #collapseExample.collapse
+  #collapseFilter.collapse
     .d-lg-flex
       = render 'events/index/filter_province'
 

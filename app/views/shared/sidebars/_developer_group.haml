@@ -1,0 +1,18 @@
+- isActive = %w(webhooks client_apps).include? params['controller']
+
+%li.nav-item
+  %a.nav-link{"aria-controls" => "collapseDeveloper", "aria-expanded" => "#{isActive}", "data-target" => "#collapseDeveloper", "data-toggle" => "collapse", :href => "#", class: ('collapsed' unless isActive)}
+    %i.fab.fa-dev
+    %span= t('sidebar.developer')
+
+  #collapseDeveloper.collapse{"data-parent" => "#accordionSidebar", class: ('show' if isActive)}
+    .collapse-inner
+      - if policy(Webhook).index?
+        %a.collapse-item{href: webhooks_path, class: get_css_active_class('webhooks') }
+          %i.fas.fa-check-double
+          = t('sidebar.webhooks')
+
+      - if policy(ClientApp).index?
+        %a.collapse-item{href: client_apps_path, class: get_css_active_class('client_apps')}
+          %i.api-icon API
+          = t('sidebar.client_apps')

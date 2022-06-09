@@ -1,0 +1,41 @@
+- isActive = %w(users event_types milestones templates schedules programs/settings milestones/messages).include? params['controller']
+
+%li.nav-item
+  %a.nav-link{"aria-controls" => "collapseSetting", "aria-expanded" => "#{isActive}", "data-target" => "#collapseSetting", "data-toggle" => "collapse", :href => "#", class: ('collapsed' unless isActive)}
+    %i.fas.fa-wrench
+    %span= t('sidebar.settings')
+
+  #collapseSetting.collapse{"data-parent" => "#accordionSidebar", class: ('show' if isActive)}
+    .collapse-inner
+      - if policy(EventType).index?
+        %a.collapse-item{href: event_types_path, class: get_css_active_class('event_types') }
+          %i.fas.fa-calendar
+          = t('sidebar.event_types')
+
+      - if policy(Milestone).index?
+        %a.collapse-item{href: milestones_path, class: [get_css_active_class('milestones'), get_css_active_class('milestones/messages')] }
+          %i.fas.fa-tasks
+          = t('sidebar.milestones')
+
+      - if policy(::Template).index?
+        %a.collapse-item{href: templates_path, class: get_css_active_class('templates') }
+          %i.fas.fa-table
+          = t('sidebar.templates')
+
+      - if policy(Schedule).create?
+        %a.collapse-item{href: schedules_path, class: get_css_active_class('schedules') }
+          %i.far.fa-calendar
+          = t('sidebar.schedules')
+
+      - if policy(User).create?
+        %a.collapse-item{href: users_path, class: get_css_active_class('users') }
+          %i.fas.fa-users
+          = t('sidebar.users')
+
+      - if current_program.present? && policy(Program).update?
+        %a.collapse-item{href: setting_path, class: get_css_active_class('programs/settings')}
+          %i.fas.fa-wrench
+          = t('sidebar.settings')
+
+
+

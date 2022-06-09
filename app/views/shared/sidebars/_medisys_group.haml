@@ -1,0 +1,18 @@
+- isActive = %w(medisies medisys_feeds).include? params['controller']
+
+%li.nav-item
+  %a.nav-link{"aria-controls" => "collapseMedisys", "aria-expanded" => "#{isActive}", "data-target" => "#collapseMedisys", "data-toggle" => "collapse", :href => "#", class: ('collapsed' unless isActive)}
+    %i.fas.fa-virus
+    %span Medisys
+
+  #collapseMedisys.collapse{"data-parent" => "#accordionSidebar", class: ('show' if isActive)}
+    .collapse-inner
+      - if policy(MedisysFeed).index?
+        %a.collapse-item{href: medisys_feeds_path, class: get_css_active_class('medisys_feeds')}
+          %i.fas.fa-viruses
+          = t('sidebar.media_monitoring')
+
+      - if policy(Medisy).index?
+        %a.collapse-item{href: medisies_path, class: get_css_active_class('medisies') }
+          %i.fas.fa-virus
+          = t('sidebar.medisys')

@@ -17,93 +17,14 @@
       %span
         %i.fas.fa-align-left
 
-  %ul.list-unstyled.components
+  %ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion.list-unstyled.components
     - if current_user.system_admin? || current_user.program_admin?
-      %li{class: get_css_active_class('dashboards') }
-        = link_to ENV['DASHBOARD_URL'], target: '_blank' do
-          %i.fas.fa-tachometer-alt
-          = t('sidebar.dashboard')
+      = render "shared/sidebars/admin_sidebar"
+    - else
+      = render "shared/sidebars/user_sidebar"
 
-    - if policy(Program).create?
-      %li{class: get_css_active_class('programs') }
-        = link_to programs_path do
-          %i.fas.fa-tasks
-          = t('sidebar.programs')
-
-    - if policy(User).create?
-      %li{class: get_css_active_class('users') }
-        = link_to users_path do
-          %i.fas.fa-users
-          = t('sidebar.users')
-
-    - if policy(Milestone).index?
-      %li{class: get_css_active_class('milestones')}
-        = link_to milestones_path do
-          %i.fas.fa-tasks
-          = t('sidebar.milestones')
-
-    - if policy(EventType).index?
-      %li{class: get_css_active_class('event_types') }
-        = link_to event_types_path do
-          %i.fas.fa-calendar
-          = t('sidebar.event_types')
-
-    - if policy(Event).index?
-      %li{class: get_css_active_class('events') }
-        = link_to events_path do
-          %i.fas.fa-calendar-alt
-          = t('sidebar.events')
-
-    - if policy(Medisy).index?
-      %li{class: get_css_active_class('medisies') }
-        = link_to medisies_path do
-          %i.fas.fa-virus
-          = t('sidebar.medisys')
-
-    - if policy(MedisysFeed).index?
-      %li{class: get_css_active_class('medisys_feeds') }
-        = link_to medisys_feeds_path do
-          %i.fas.fa-viruses
-          = t('sidebar.media_monitoring')
-
-    - if current_user.program_id.present?
-      %li{class: get_css_active_class('maps') }
-        = link_to maps_path do
-          %i.fas.fa-map-marked
-          = t('sidebar.map')
-
-    - if policy(::Template).index?
-      %li{class: get_css_active_class('templates') }
-        %a{:href => templates_path}
-          %i.fas.fa-table
-          = t('sidebar.templates')
-
-    - if policy(Webhook).index?
-      %li{class: get_css_active_class('webhooks') }
-        %a{:href => webhooks_path}
-          %i.fas.fa-check-double
-          = t('sidebar.webhooks')
-
-    - if policy(ClientApp).index?
-      %li{class: get_css_active_class('client_apps') }
-        %a{:href => client_apps_path}
-          %i.api-icon API
-          = t('sidebar.api_and_services')
-
-    - if policy(Schedule).create?
-      %li{class: get_css_active_class('schedules') }
-        = link_to schedules_path do
-          %i.far.fa-calendar
-          = t('sidebar.schedules')
-
-    - if current_program.present? && policy(Program).update?
-      %li{class: get_css_active_class('programs/settings') }
-        = link_to setting_path do
-          %i.fas.fa-wrench
-          = t('sidebar.settings')
-
-    %li
-      = link_to about_us_path do
+    %li.nav-item
+      = link_to about_us_path, class: ['nav-link', get_css_active_class('about_us')] do
         %i.fas.fa-info
         = t('sidebar.about_us')
 

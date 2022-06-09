@@ -1,0 +1,18 @@
+- isActive = %w(events maps).include? params['controller']
+
+%li.nav-item
+  %a.nav-link{"aria-controls" => "collapseEvents", "aria-expanded" => "#{isActive}", "data-target" => "#collapseEvents", "data-toggle" => "collapse", :href => "#", class: ('collapsed' unless isActive)}
+    %i.fas.fa-calendar-alt
+    %span= t('sidebar.events')
+
+  #collapseEvents.collapse{"data-parent" => "#accordionSidebar", class: ('show' if isActive)}
+    .collapse-inner
+      - if policy(Event).index?
+        %a.collapse-item{href: events_path, class: get_css_active_class('events') }
+          %i.fas.fa-list
+          = t('sidebar.event_list')
+
+      - if current_user.program_id.present?
+        %a.collapse-item{href: maps_path, class: get_css_active_class('maps')}
+          %i.fas.fa-map-marked
+          = t('sidebar.map')

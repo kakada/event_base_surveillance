@@ -12,7 +12,7 @@ EBS.EventsIndex = do ->
 
   handleDisplayCollapseContent = ->
     if window.localStorage.getItem('show_collapse') == "true"
-      $('.collapse').addClass('show')
+      $('#collapseFilter').addClass('show')
       hideArrowDown()
 
   onShowCollapse = ->
