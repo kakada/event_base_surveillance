@@ -19,7 +19,16 @@ en:
     day: Day
     week: Week
     month: Month
-    schedule_info: "Will send event follow-up messages every %{interval_value} %{interval_type} from the last update. And we will send a message at %{follow_up_hour}"
     are_you_sure_to_delete: Are you sure to delete this %{name} schedule?
     are_you_sure_to_deactivate: Are you sure to deactivate this %{name} schedule?
-    short_display: Every %{interval_value} %{interval_type} at %{follow_up_hour}
+    event_schedule_full_info: Will send event follow-up messages every %{interval_value} %{interval_type} from the last update. And we will send a message at %{follow_up_hour}
+    event_schedule_short_info: Every %{interval_value} %{interval_type} at %{follow_up_hour}
+    summary_schedule_full_info: Will send summary report on every %{interval_type} on %{date_index} at %{follow_up_hour}
+    summary_schedule_short_info: Every %{interval_type} on %{date_index} at %{follow_up_hour}
+    new_event_schedule: New Event Schedule
+    new_summary_schedule: New Summary Schedule
+    at_day: at day
+    emails: Emails
+    to: Send to <abbr title="required">*</abbr>
+    notify_to_channel: Notify to event creator through
+    dealine_duration: Deadline condition for event closures (day) <abbr title="required">*</abbr>

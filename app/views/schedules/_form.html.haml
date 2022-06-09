@@ -1,28 +1,26 @@
-.w-50.view-center
+.w-50.view-center.form-wrapper
   = simple_form_for @schedule do |f|
     = f.input :name, label: t('schedule.name')
+    = f.input :type, as: :hidden
 
-    .form-group.schedule-notify
-      %label= t('schedule.schedule_notify')
-      .d-flex.align-items-center
-        %label.mb-0.mr-2= t('schedule.every')
-        = f.input :interval_value, label: false, input_html: {style: 'width: 100px;', class: 'input'}, wrapper_html: {class: 'mb-0 mr-2'}
-
-        = f.input :interval_type, label: false, collection: Schedule.interval_types.keys.map { |k| [t("schedule.#{k}"), k] }, include_blank: false, input_html: {style: 'width: 120px;', class: 'input'}, wrapper_html: {class: 'mb-0 mr-2'}
-
-        %label.mb-0.mr-2= t('schedule.at')
-        = f.input :follow_up_hour, label: false, collection: (0..23).to_a.map { |h| ["#{h}:00", h] }, include_blank: false, input_html: {style: 'width: 120px;', class: 'input'}, wrapper_html: {class: 'mb-0'}
-
-        .ml-2
-          %span.info{ 'data-toggle' => 'tooltip', 'data-title' => '', 'data-info' => t('schedule.schedule_info') }
-            %i.fas.fa-info-circle.icon-24
+    = render "schedule_notify", f: f
 
     = f.input :message, label: t('schedule.message')
+
     .form-group
       - @schedule.template_fields.each do |field|
-        = link_to "{{#{field[:name]}}}", '#', class: 'template-field text-primary mr-2', data: {code: field[:code]}
+        %span{ 'data-toggle' => 'tooltip', 'data-title' => field[:description], 'data-html' => 'true'}
+          = link_to "{{#{field[:code]}}}", '#', class: 'template-field text-primary mr-2', data: {code: field[:code]}
 
-    = render "channels", f: f
+    - if f.object.summary_schedule?
+      = f.input :deadline_duration_in_day, label: t('schedule.dealine_duration').html_safe, input_html: { min: 1 }
+
+      .form-group
+        %label= t('schedule.to').html_safe
+        %input#schedule_emails.form-control{:name => "schedule[emails]", 'data-emails' => current_program.users.pluck(:email).to_json, value: @schedule.emails.join(', ') }
+
+    - if f.object.event_schedule?
+      = render "channels", f: f
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'

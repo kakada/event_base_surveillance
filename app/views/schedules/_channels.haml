@@ -1,7 +1,7 @@
 / Channels
 .form-group
   %label
-    = t('program.use_channel')
+    = t('schedule.notify_to_channel')
     %abbr{title: 'required'} *
 
   = hidden_field_tag "schedule[channels][]", nil
@@ -15,6 +15,7 @@
         %span= t("event.email")
 
         %input#email.form-check-input.invisible{ type: "checkbox", value: "email", name: "schedule[channels][]", checked: f.object.channels.include?('email') }
+
 
     / Channel: Telegram
     - title = TelegramBot.has_system_bot? ? '' : t("event.no_system_bot_configure")

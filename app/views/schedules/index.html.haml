@@ -2,7 +2,17 @@
   = t('schedule.schedule')
 
 .d-flex.justify-content-end.mb-3
-  = render 'shared/add_new_button', path: new_schedule_path, name: t('schedule.schedule') if policy(Schedule).create?
+  - if policy(Schedule).create?
+    .btn-group
+      %button.btn.btn-primary.btn-sm.shadow-sm.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+        %i.fas.fa-plus
+        = t('shared.add_new', name: t('schedule.schedule'))
+
+      .dropdown-menu.dropdown-menu-right
+        - Schedule::TYPES.each_with_index do |type, index|
+          %a.dropdown-item{href: new_schedule_path(type: type), class: ('border-bottom' if index < Schedule::TYPES.length - 1)}
+            %i.fas.fa-plus.mr-2
+            = t("schedule.new_#{type.split('::').last.underscore}")
 
 .card.shadow.mb-4
   .card-body
@@ -28,8 +38,8 @@
               %td= @pagy.from + index
               %td= schedule.name
               %td
-                = display_schedule_info(schedule, "short_display").html_safe
-                %span{ 'data-toggle' => 'tooltip', 'data-title' => display_schedule_info(schedule), "data-html" => "true" }
+                = schedule.short_display_info.html_safe
+                %span{ 'data-toggle' => 'tooltip', 'data-title' => schedule.full_display_info, "data-html" => "true" }
                   %i.fas.fa-info-circle.icon-24
               %td
                 .multi-ellipsis= schedule.message

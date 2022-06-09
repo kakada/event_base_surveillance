@@ -22,49 +22,55 @@
 #
 
 module Schedules
-  class EventSchedule < ::Schedule
+  class SummarySchedule < ::Schedule
     # Intant method
     def send_notification_async
       channels.each do |channel|
-        notify_to_events(channel)
+        notify("Notifiers::SummarySchedule#{channel.titlecase}Notifier".constantize.new(self), channel)
       end
     end
 
     def template_fields
-      ::Templates::EventScheduleField.all
+      ::Templates::SummaryScheduleField.all
     end
 
     def reached_time?
-      follow_up_hour == Time.zone.now.hour
+      follow_up_hour == Time.zone.now.hour && reached_day?
+    end
+
+    def reached_day?
+      return true if day?
+      return date_index == Time.zone.now.wday if week?
+
+      date_index == Time.zone.now.mday
     end
 
     def short_display_info
-      display('event_schedule_short_info')
+      display('summary_schedule_short_info')
     end
 
     def full_display_info
-      display('event_schedule_full_info')
+      display('summary_schedule_full_info')
     end
 
-    def display_message(event)
-      ScheduleMessageInterpreter.new(self, event).interpreted_message
+    def display_message
+      ScheduleMessageInterpreter.new(self).interpreted_message
     end
 
     private
       def display(label)
         I18n.t("schedule.#{label}",
-          interval_value: "<b>#{interval_value}</b>",
           interval_type: "<b>" + I18n.t("schedule.#{interval_type}") + "</b>",
-          follow_up_hour: "<b>#{follow_up_hour}:00</b>"
+          follow_up_hour: "<b>#{follow_up_hour}:00</b>",
+          date_index: "<b>#{display_date_index}</b>"
         )
       end
 
-      def notify_to_events(channel)
-        events = program.events.uncloseds.reached_intervals(duration_in_day)
+      def display_date_index
+        return "" if day?
+        return I18n.t('date.day_names')[date_index] if week?
 
-        events.each do |event|
-          notify("Notifiers::EventSchedule#{channel.titlecase}Notifier".constantize.new(self, event), channel)
-        end
+        date_index
       end
   end
 end

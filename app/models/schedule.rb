@@ -4,20 +4,21 @@
 #
 # Table name: schedules
 #
-#  id             :uuid             not null, primary key
-#  channels       :string           default([]), is an Array
-#  date_index     :integer
-#  emails         :text
-#  enabled        :boolean          default(TRUE)
-#  follow_up_hour :integer
-#  interval_type  :integer
-#  interval_value :integer
-#  message        :text
-#  name           :string
-#  type           :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  program_id     :integer
+#  id                       :uuid             not null, primary key
+#  channels                 :string           default([]), is an Array
+#  date_index               :integer
+#  deadline_duration_in_day :integer
+#  emails                   :text             default([]), is an Array
+#  enabled                  :boolean          default(TRUE)
+#  follow_up_hour           :integer
+#  interval_type            :integer
+#  interval_value           :integer
+#  message                  :text
+#  name                     :string
+#  type                     :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  program_id               :integer
 #
 
 class Schedule < ApplicationRecord
@@ -34,6 +35,9 @@ class Schedule < ApplicationRecord
   validates :interval_value, presence: true
   validates :follow_up_hour, presence: true
   validates :follow_up_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 23 }, allow_nil: true
+  validates :emails, presence: true, if: :summary_schedule?
+  validates :deadline_duration_in_day, presence: true, if: :summary_schedule?
+  validates :deadline_duration_in_day, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
   enum interval_type: {
     day: 1,
@@ -42,21 +46,30 @@ class Schedule < ApplicationRecord
   }
 
   before_validation :set_type
+  before_validation :set_interval_value_and_channel, if: :summary_schedule?
 
   # Contant
-  TYPES = %w(Schedules::EventSchedule)
+  TYPES = %w(Schedules::EventSchedule Schedules::SummarySchedule)
 
   # Instant method
-  def reached_hour?
-    follow_up_hour == Time.zone.now.hour
+  def reached_time?
+    raise 'Abstract Method'
+  end
+
+  def display_message
+    raise 'Abstract Method'
   end
 
   def duration_in_day
     interval_value * duration_in_type
   end
 
-  def template_fields
-    ::Templates::EventScheduleField.all
+  def summary_schedule?
+    type == "Schedules::SummarySchedule"
+  end
+
+  def event_schedule?
+    type == "Schedules::EventSchedule"
   end
 
   def duration_in_type
@@ -87,5 +100,10 @@ class Schedule < ApplicationRecord
   private
     def set_type
       self.type ||= "Schedules::EventSchedule"
+    end
+
+    def set_interval_value_and_channel
+      self.interval_value = 1
+      self.channels = ['email']
     end
 end

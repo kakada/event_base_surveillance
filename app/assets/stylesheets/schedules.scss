@@ -10,3 +10,18 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.round-icon {
+  border: 1px solid #000;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  i {
+    font-size: 16px;
+    margin-left: 1px;
+  }
+}

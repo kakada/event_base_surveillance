@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Notifiers::EventScheduleTelegramNotifier, type: :model do
-  let!(:schedule) { create(:schedule) }
+  let!(:schedule) { create(:event_schedule) }
   let!(:event)    { create(:event, program: schedule.program) }
   let!(:creator)  { event.creator }
   let(:notifier)  { Notifiers::EventScheduleTelegramNotifier.new(schedule, event) }

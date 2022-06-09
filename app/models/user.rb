@@ -16,6 +16,7 @@
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
 #  locale                 :string           default("km")
+#  notification_channels  :string           default([]), is an Array
 #  phone_number           :string
 #  province_code          :string
 #  remember_created_at    :datetime
