@@ -11,6 +11,17 @@ EBS.SkipLogic = (function () {
     onFormSubmit();
     addEventToCodeField();
     addEventToOperatorField();
+
+    onChangeSkipLogicFormControl();
+    onChangeFieldRequired();
+  }
+
+  function onChangeFieldRequired() {
+    $(document).on('change', '.field-required', function(e) {
+      $(e.target).parents('.contents').find('.skip-logic-content .form-control').attr('disabled', this.checked);
+      $(e.target).parents('.contents').find('.skip-logic-content .disabled-layer').toggleClass('d-none', !this.checked);
+      $('[data-toggle="tooltip"]').tooltip();
+    })
   }
 
   function buildAllRelevantFields() {
@@ -49,22 +60,28 @@ EBS.SkipLogic = (function () {
   function onFormSubmit() {
     $('.milestone-form form').on('submit', function () {
       $('.skip-logic-content').each(function (_i, skipLogic) {
-        var submitValue = '';
-        var value = $(skipLogic).find('#relevant-value').val();
-        var code = $(skipLogic).find('#relevant-code').val();
-        var operator = $(skipLogic).find('#relevant-operator').val();
-
-        if (value && code && operator) {
-          var transformValue = JSON.parse(value).map(function (x) {
-            return x.value;
-          }).join(',');
-          submitValue = "".concat(code, "||").concat(operator, "||").concat(transformValue);
-        }
-
+        var submitValue = getSkipLogicContent(skipLogic);
         var skiLogicField = $(skipLogic).find('input.skip-logic-field').first();
+
         skiLogicField.val(submitValue);
       });
     });
+  }
+
+  function getSkipLogicContent(skipLogicContentWrapper) {
+    var submitValue = '';
+    var value = $(skipLogicContentWrapper).find('#relevant-value').val();
+    var code = $(skipLogicContentWrapper).find('#relevant-code').val();
+    var operator = $(skipLogicContentWrapper).find('#relevant-operator').val();
+
+    if (value && code && operator) {
+      var transformValue = JSON.parse(value).map(function (x) {
+        return x.value;
+      }).join(',');
+      submitValue = "".concat(code, "||").concat(operator, "||").concat(transformValue);
+    }
+
+    return submitValue;
   }
 
   function addEventToCodeField() {
@@ -194,7 +211,35 @@ EBS.SkipLogic = (function () {
 
     var tags = $(skipLogicForm).find('tags.relevant-value');
     tags.remove();
-    new Tagify(relevantValue[0], tagOption);
+    var tagify = new Tagify(relevantValue[0], tagOption);
+
+    tagify.on('remove', handleTagChange);
+    tagify.on('add', handleTagChange);
+  }
+
+  function handleTagChange(e) {
+    var skipLogicContentWrapper = $(e.detail.tagify.DOM.originalInput).parents('.skip-logic-content');
+
+    toggleFieldRequired(skipLogicContentWrapper);
+  }
+
+  function toggleFieldRequired(skipLogicContentWrapper) {
+    var isSkipLogic = !!getSkipLogicContent(skipLogicContentWrapper).length;
+    var fieldRequied = $(skipLogicContentWrapper.parents('.setting-wrapper')).find('.field-required');
+    var title = isSkipLogic ? "Skip logic field cannot be required!" : "";
+
+    fieldRequied.prop('disabled', isSkipLogic);
+    fieldRequied.prop('checked', false);
+    $(fieldRequied.parent()).attr('data-original-title', title);
+  }
+
+  function onChangeSkipLogicFormControl() {
+    $(document).off('change', '.skip-logic-content .form-control')
+    $(document).on('change', '.skip-logic-content .form-control', function(e) {
+      var skipLogicContentWrapper = $(e.target).parents('.skip-logic-content');
+
+      toggleFieldRequired(skipLogicContentWrapper);
+    });
   }
 
   function reBuildValue(operatorControl) {

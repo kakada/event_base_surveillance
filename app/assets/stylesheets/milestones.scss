@@ -78,4 +78,12 @@
   .column {
     width: 300px;
   }
+
+  .disabled-layer {
+    background-color: rgba(0,0,0,0.1);
+    width: auto;
+    left: -6px;
+    right: -20px;
+    z-index: 9;
+  }
 }
