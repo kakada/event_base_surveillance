@@ -22,7 +22,7 @@
   / Advance filter
   #collapseFilter.collapse
     .d-lg-flex
-      = render 'events/index/filter_province'
+      = render 'events/index/filter_province' unless current_user.phd?
 
       - if current_program.present?
         = render 'events/index/filter_event_type'

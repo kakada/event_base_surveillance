@@ -29,6 +29,9 @@ en:
     new_summary_schedule: New Summary Schedule
     at_day: at day
     emails: Emails
-    to: Send to <abbr title="required">*</abbr>
+    to: Send to emails <abbr title="required">*</abbr>
     notify_to_channel: Notify to event creator through
     dealine_duration: Deadline condition for event closures (day) <abbr title="required">*</abbr>
+    notify_to: Notify to
+    event_schedule: Event Schedule
+    summary_schedule: Summary Schedule

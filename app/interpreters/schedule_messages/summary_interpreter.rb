@@ -24,7 +24,7 @@ module ScheduleMessages
       def build_lists(milestones)
         milestones = milestones.select { |m| progress_hash.keys.include?(m.name) }
         milestones.map do |milestone|
-          "<li><a href='#{events_url(milestone)}'>#{milestone.name}</a>: #{progress_hash[milestone.name]}</li>"
+          "<li>#{milestone.name}: #{progress_hash[milestone.name]} (<a href='#{events_url(milestone)}' target='_blank'>view in CamEMS</a>)</li>"
         end.join("")
       end
 
