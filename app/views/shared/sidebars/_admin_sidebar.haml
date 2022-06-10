@@ -1,0 +1,16 @@
+- if current_user.system_admin? || current_user.program_admin?
+  %li{class: get_css_active_class('dashboards') }
+    = link_to ENV['DASHBOARD_URL'], target: '_blank' do
+      %i.fas.fa-tachometer-alt
+      = t('sidebar.dashboard')
+
+- if policy(Program).create?
+  %li.nav-item
+    = link_to programs_path, class: ['nav-link', get_css_active_class('programs')] do
+      %i.fas.fa-tasks
+      = t('sidebar.programs')
+
+= render "shared/sidebars/event_group"
+= render "shared/sidebars/medisys_group"
+= render "shared/sidebars/developer_group"
+= render "shared/sidebars/setting_group"

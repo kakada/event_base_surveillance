@@ -1,0 +1,17 @@
+- if policy(Event).index?
+  %li.nav-item
+    = link_to events_path, class: ['nav-link', get_css_active_class('events')] do
+      %i.fas.fa-calendar-alt
+      = t('sidebar.events')
+
+- if current_user.program_id.present?
+  %li.nav-item
+    = link_to maps_path, class: ['nav-link', get_css_active_class('maps')] do
+      %i.fas.fa-map-marked
+      = t('sidebar.map')
+
+- if policy(MedisysFeed).index?
+  %li.nav-item
+    = link_to medisys_feeds_path, class: ['nav-link', get_css_active_class('medisys_feeds')] do
+      %i.fas.fa-viruses
+      = t('sidebar.media_monitoring')

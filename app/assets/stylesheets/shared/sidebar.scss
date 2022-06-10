@@ -3,7 +3,7 @@ a:hover,
 a:focus {
   color: inherit;
   text-decoration: none;
-  transition: all 0.3s;
+  // transition: all 0.3s;
 }
 
 .navbar {
@@ -38,7 +38,7 @@ a:focus {
   max-width: 250px;
   background: #7386D5;
   color: #fff;
-  transition: all 0.3s;
+  // transition: all 0.3s;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -88,8 +88,8 @@ a:focus {
   }
 
   ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    color: #7386D5 !important;
+    background: #fff !important;
   }
 
   ul li a i {
@@ -97,10 +97,10 @@ a:focus {
     padding-right: 2px;
   }
 
-  ul li.active>a,
-  a[aria-expanded="true"] {
+  ul li>a.active {
     color: #fff;
-    background: #6d7fcc;
+    background-color: rgba(109,127,186,0.9);
+    font-weight: 700;
   }
 
   .copyright {
@@ -146,6 +146,15 @@ a:focus {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  }
+
+  .collapse-item {
+    padding: 10px 10px 10px 36px;
+  }
+
+  .sidebar .nav-item .collapse .collapse-inner .collapse-item.active {
+    font-weight: 700;
+    background-color: rgba(109,127,186,0.9);
   }
 }
 
@@ -200,6 +209,10 @@ a:focus {
     height: auto;
     width: 70px;
   }
+
+  .collapse-item {
+    padding: 20px 10px;
+  }
 }
 
 /* ---------------------------------------------------
@@ -210,7 +223,7 @@ a:focus {
   width: 100%;
   // padding: 20px;
   padding-bottom: 0;
-  transition: all 0.3s;
+  // transition: all 0.3s;
   overflow-y: scroll;
 }
 
@@ -275,4 +288,28 @@ a:focus {
   #sidebarCollapse span {
     display: none;
   }
+}
+
+// ---------------------------------
+@media (min-width: 768px) {
+  #accordionSidebar.sidebar .nav-item .nav-link[data-toggle=collapse].collapsed::after {
+    content: '\f105';
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar .nav-item .nav-link[data-toggle=collapse]::after {
+    width: 1rem;
+    text-align: center;
+    float: right;
+    vertical-align: 0;
+    border: 0;
+    font-weight: 900;
+    content: '\f107';
+    font-family: 'Font Awesome 5 Free';
+  }
+}
+
+#accordionSidebar.sidebar-dark .nav-item .nav-link {
+  color: rgba(255,255,255,1);
 }
