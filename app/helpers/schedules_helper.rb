@@ -10,12 +10,12 @@ module SchedulesHelper
   def schedule_types
     [
       {
-        type: 'Schedules::EventSchedule',
-        label: t('schedule.new_event_schedule'),
+        type: "Schedules::EventSchedule",
+        label: t("schedule.new_event_schedule"),
         icon: "<i class='fas fa-calendar-check'></i>"
       },
-      { type: 'Schedules::SummarySchedule',
-        label: t('schedule.new_summary_schedule'),
+      { type: "Schedules::SummarySchedule",
+        label: t("schedule.new_summary_schedule"),
         icon: "<i class='fas fa-clipboard-list'></i>"
       }
     ]

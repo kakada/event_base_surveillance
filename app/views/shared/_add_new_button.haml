@@ -1,7 +1,8 @@
 - path ||= '#'
 - name ||= ''
+- disabled ||= false
 
 %div
-  = link_to path, class: 'btn btn-primary btn-sm shadow-sm' do
+  = link_to path, class: ['btn btn-primary btn-sm shadow-sm', ('disabled' if disabled)] do
     %i.fas.fa-plus
     = t('shared.add_new', name: name)

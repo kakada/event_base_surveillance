@@ -6,6 +6,10 @@ class MilestonePolicy < ApplicationPolicy
   end
 
   def create?
+    user.program_admin? && !user.program.has_final_milestone?
+  end
+
+  def update?
     user.program_admin?
   end
 

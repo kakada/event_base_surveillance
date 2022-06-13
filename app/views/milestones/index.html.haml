@@ -2,7 +2,11 @@
   = t('milestone.milestone')
 
 .d-flex.justify-content-end.mb-3
-  = render "shared/add_new_button", path: new_milestone_path, name: t('milestone.milestone') if policy(Milestone).update?
+  - if policy(Milestone).create?
+    = render "shared/add_new_button", path: new_milestone_path, name: t('milestone.milestone')
+  - else
+    %span{ 'data-toggle' => 'tooltip', title: t('milestone.disable_to_add_new') }
+      = render "shared/add_new_button", path: '#', name: t('milestone.milestone'), disabled: true
 
 .card.shadow.mb-4
   .card-body

@@ -56,3 +56,4 @@ en:
     marked_display_date: Marked displayed date
     skip_logic_cannot_be_required: Skip logic field cannot be required
     required_field_cannot_have_skip_logic: Required field cannot have skip logic
+    disable_to_add_new: Could not create more milestones because the final milestone is already set, please reset the final milestone if you want to create more.

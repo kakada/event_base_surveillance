@@ -46,7 +46,7 @@ class Milestone < ApplicationRecord
   # Scope
   default_scope { order(display_order: :asc) }
   scope :root, -> { where(status: :root).first }
-  scope :final, -> { where(status: :final).first }
+  scope :finals, -> { where(status: :final) }
   scope :verified, -> { where(status: :verified).first }
 
   # Deligation
