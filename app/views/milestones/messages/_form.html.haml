@@ -27,7 +27,7 @@
             %label
               = t('milestone.telegram_chat_group')
               - if current_program.enable_telegram? && @chat_groups.present?
-                = link_to t('shared.need_help'), help_telegram_bot_path(anchor: 'group'), class: 'small text-primary', 'data-turbolinks': false
+                = link_to t('shared.need_help'), helps_how_to_connect_telegram_bot_path(anchor: 'group'), class: 'small text-primary', 'data-turbolinks': false
 
             - if !current_program.enable_telegram?
               .small.ml-4= t('milestone.to_enable_telegram', url: setting_path).html_safe
@@ -44,7 +44,7 @@
 
               - unless @chat_groups.present?
                 %div
-                  %span.small.ml-4= t('milestone.learn_more_to_add_bot_to_group', url: help_telegram_bot_path(anchor: 'group')).html_safe
+                  %span.small.ml-4= t('milestone.learn_more_to_add_bot_to_group', url: helps_how_to_connect_telegram_bot_path(anchor: 'group')).html_safe
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'

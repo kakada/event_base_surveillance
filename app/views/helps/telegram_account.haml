@@ -8,30 +8,30 @@
     %div
       %h5= t('help.open_telegram_app')
       %label= t('help.search_bot_name')
-      = image_tag 'telegram_account/search_bot.png', class: 'image'
+      %div= image_tag 'telegram_account/search_bot.png', class: 'image'
 
     %div
       %h5= t('help.open_chat')
       %label= t('help.to_chat_with_bot')
-      = image_tag 'telegram_account/click_on_start.png', class: 'image'
+      %div= image_tag 'telegram_account/click_on_start.png', class: 'image'
 
     %div
       %h5= t('help.bot_welcome')
       %label= t('help.bot_reponse_welcome')
-      = image_tag 'telegram_account/bot_welcome.png', class: 'image'
+      %div= image_tag 'telegram_account/bot_welcome.png', class: 'image'
 
     %div
       %h5= t('help.connect_your_account')
       %label= t('help.bot_connect_instruction').html_safe
 
       %h5.mt-3= t('help.insert_command')
-      = image_tag 'telegram_account/connect_command.png', class: 'image'
+      %div= image_tag 'telegram_account/connect_command.png', class: 'image'
 
       %label= t('help.insert_wrong_info')
-      = image_tag 'telegram_account/wrong_info.png', class: 'image'
+      %div= image_tag 'telegram_account/wrong_info.png', class: 'image'
 
       %label= t('help.insert_right_info')
-      = image_tag 'telegram_account/right_info.png', class: 'image'
+      %div= image_tag 'telegram_account/right_info.png', class: 'image'
 
     %div
       %h5= t('help.how_to_disconnect_account')
@@ -43,4 +43,4 @@
           = t('help.insert_command')
           %code /disconnect phone_number_or_email province_name_or_code
 
-      = image_tag 'telegram_account/disconnect.png', class: 'image'
+      %div= image_tag 'telegram_account/disconnect.png', class: 'image'

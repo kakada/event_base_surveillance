@@ -25,8 +25,8 @@ module Users
 
         def from_omniauth(access_token)
           data = access_token.info
-          user = User.where(email: data["email"]).first
-          user
+
+          User.find_by(email: data["email"])
         end
 
         private

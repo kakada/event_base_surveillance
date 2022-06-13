@@ -1,4 +1,4 @@
-FROM ruby:2.6.3
+FROM ruby:2.7.4
 
 LABEL maintainer="Kakada Chheang <kakada@instedd.org>"
 
@@ -18,7 +18,7 @@ WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 
-RUN gem install bundler:2.0.2 && \
+RUN gem install bundler:2.1.4 && \
   bundle install --jobs 20 --deployment --without development test
 
 # Install the application
