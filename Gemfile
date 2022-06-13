@@ -39,7 +39,7 @@ gem "jbuilder", "~> 2.5"
 gem "bootsnap",       ">= 1.1.0", require: false
 gem "devise",         "~> 4.7.1"
 
-gem "sidekiq",        "~> 5.2.7"
+gem "sidekiq",        "~> 5.2.10"
 gem "sidekiq-scheduler"
 gem "sidekiq-unique-jobs"
 gem "sinatra", require: nil
