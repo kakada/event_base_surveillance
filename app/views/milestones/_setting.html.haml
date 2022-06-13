@@ -12,8 +12,8 @@
   .contents
     / Setting such are require, tracking, and milestone display
     .content.setting-content
-      .form-check
-        = f.check_box :required, { class: 'form-check-input field-required' }
+      .form-check{ 'data-toggle' => 'tooltip', 'title' => (t('milestone.skip_logic_cannot_be_required') if f.object.relevant.present?) }
+        = f.check_box :required, { class: 'form-check-input field-required', disabled: f.object.relevant.present? }
         = f.label :required, t('milestone.required'), class: 'form-check-label required-label'
 
       .form-check
@@ -25,7 +25,7 @@
       = render 'field_validation_content', f: f
 
     / Setting skip logic
-    .content.skip-logic-content
+    .content.skip-logic-content.position-relative
       = f.hidden_field :relevant, class: 'skip-logic-field'
       .form-group.row
         %label.col-3=t('milestone.question')
@@ -36,6 +36,8 @@
       .form-group.row
         %label.col-3=t('milestone.value')
         %textarea#relevant-value.form-control.relevant-value.col-9
+
+      .disabled-layer{ 'data-toggle' => 'tooltip', title: t('milestone.required_field_cannot_have_skip_logic'), class: ('d-none' unless f.object.required) }
 
     / Setting for milestone manual information
     .content.template-content

@@ -55,3 +55,5 @@ km:
     template_file: File គម្រូ
     template: គម្រូ
     marked_display_date: សម្គាល់ថាជាកាលបរិច្ឆេទត្រូវបង្ហាញ
+    skip_logic_cannot_be_required: Skip logic field cannot be required
+    required_field_cannot_have_skip_logic: Required field cannot have skip logic

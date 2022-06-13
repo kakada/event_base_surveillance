@@ -25,4 +25,9 @@ namespace :field do
       fields.update_all(is_milestone_datetime: true, milestone_datetime_order: field[:display_order])
     end
   end
+
+  desc 'migrate skip logic fields not to required'
+  task migrate_skip_logic_fields_not_to_required: :environment do
+    Field.where(required: true).where.not(relevant: nil).update_all(required: false)
+  end
 end
