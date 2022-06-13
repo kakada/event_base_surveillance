@@ -22,7 +22,7 @@ class EventTypePolicy < ApplicationPolicy
       if user.system_admin?
         scope.all
       else
-        scope.where('program_id = ?', user.program_id)
+        scope.where("program_id = ?", user.program_id)
       end
     end
   end

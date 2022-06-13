@@ -7,10 +7,10 @@ module Events
     included do
       def self.template_fields(program)
         fields = [
-          { code: 'event_type_name', label: 'Event Type' },
-          { code: 'creator_email', label: 'Creator' },
-          { code: 'program_name', label: 'Program' },
-          { code: 'location_name', label: 'Location Name' }
+          { code: "event_type_name", label: "Event Type" },
+          { code: "creator_email", label: "Creator" },
+          { code: "program_name", label: "Program" },
+          { code: "location_name", label: "Location Name" }
 
         ]
         fields.each { |field| field[:code] = "#{default_template_code}#{field[:code]}" }
@@ -19,11 +19,11 @@ module Events
       end
 
       def self.default_template_code
-        'de_'
+        "de_"
       end
 
       def self.dynamic_template_code
-        'dy_'
+        "dy_"
       end
     end
   end

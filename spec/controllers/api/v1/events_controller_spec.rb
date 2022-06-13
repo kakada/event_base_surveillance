@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::V1::EventsController, type: :controller do
   let! (:client_app) { create(:client_app) }
   let! (:program) { client_app.program }
   let! (:province) { create(:location) }
-  let! (:commune) { create(:location, code: '110402', kind: 'commune') }
+  let! (:commune) { create(:location, code: "110402", kind: "commune") }
   let! (:h5n1) { create(:event_type, program: program) }
-  let! (:influenza) { create(:event_type, name: 'Influenza', program: program) }
+  let! (:influenza) { create(:event_type, name: "Influenza", program: program) }
   let  (:event_attributes) {
     field_values = {
       province_id: province.code,
@@ -38,15 +38,15 @@ RSpec.describe Api::V1::EventsController, type: :controller do
     allow(controller).to receive(:current_client_app).and_return(client_app)
   end
 
-  describe 'POST #create' do
-    it 'creates an event' do
+  describe "POST #create" do
+    it "creates an event" do
       post :create, params: event_attributes
 
       expect(response.status).to eq(200)
     end
   end
 
-  describe 'PUT #update/:id' do
+  describe "PUT #update/:id" do
     let! (:event)      { create(:event, event_type: h5n1, program: client_app.program) }
 
     before(:each) do

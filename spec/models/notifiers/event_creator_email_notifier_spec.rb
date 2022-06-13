@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notifiers::EventCreatorEmailNotifier, type: :model do
   let!(:em)      { create(:event_milestone, :verification) }
@@ -8,10 +8,10 @@ RSpec.describe Notifiers::EventCreatorEmailNotifier, type: :model do
   let!(:message) { "Event {{event_uuid}}: There is a new milestone('{{milestone_name}}') has been created by user {{submitter_email}}. Click <a href='{{event_url}}'>here</a> to view event detail in CamEMS" }
   let(:notifier) { Notifiers::EventCreatorEmailNotifier.new(em, message) }
 
-  describe '#enabled?' do
+  describe "#enabled?" do
     context "notification_channels has email" do
       before {
-        creator.notification_channels = ['email']
+        creator.notification_channels = ["email"]
       }
 
       it { expect(notifier.enabled?).to be_truthy }
@@ -19,7 +19,7 @@ RSpec.describe Notifiers::EventCreatorEmailNotifier, type: :model do
 
     context "notification_channels has only telegram" do
       before {
-        creator.notification_channels = ['telegram']
+        creator.notification_channels = ["telegram"]
       }
 
       it { expect(notifier.enabled?).to be_falsey }
@@ -28,7 +28,7 @@ RSpec.describe Notifiers::EventCreatorEmailNotifier, type: :model do
 
   describe "#recipients" do
     before {
-      creator.notification_channels = ['email']
+      creator.notification_channels = ["email"]
     }
 
     it { expect(notifier.recipients).to eq([creator.email]) }
@@ -47,6 +47,6 @@ RSpec.describe Notifiers::EventCreatorEmailNotifier, type: :model do
   end
 
   describe "#bot_token" do
-    it { expect { notifier.bot_token }.to raise_error('It is for telegram channel only') }
+    it { expect { notifier.bot_token }.to raise_error("It is for telegram channel only") }
   end
 end

@@ -30,7 +30,7 @@ module Programs
         end
 
         def clear_index(indice_name)
-          client.delete_by_query(index: indice_name, q: '*'); rescue
+          client.delete_by_query(index: indice_name, q: "*"); rescue
         end
 
         def create_indice(index_name, program)

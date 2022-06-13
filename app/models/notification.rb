@@ -23,10 +23,10 @@ class Notification < ApplicationRecord
 
   accepts_nested_attributes_for :notification_chat_groups, allow_destroy: true
 
-  scope :telegrams, -> { where(provider: 'Telegram') }
+  scope :telegrams, -> { where(provider: "Telegram") }
 
   def notify_groups(_message)
-    raise 'Abstract Method'
+    raise "Abstract Method"
   end
 
   # Class Methods

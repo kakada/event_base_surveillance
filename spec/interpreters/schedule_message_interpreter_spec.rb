@@ -41,7 +41,7 @@ RSpec.describe ScheduleMessageInterpreter do
 
     context "valid template code" do
       let(:interpreter) { ScheduleMessageInterpreter.new(schedule, event) }
-      let(:url) { Rails.application.routes.url_helpers.event_url(event, host: ENV['HOST_URL'])}
+      let(:url) { Rails.application.routes.url_helpers.event_url(event, host: ENV["HOST_URL"]) }
       let(:display_message) { "Your created event <b>#{event.uuid}</b> has been keep a part for a while. Your last update date <b>#{event.updated_at}</b> on step on the event is <b>#{event.progress}</b>. Would you consider to update next progress? <b><a href='#{url}'>#{url}</a></b>" }
 
       it { expect(interpreter.interpreted_message).to eq(display_message) }

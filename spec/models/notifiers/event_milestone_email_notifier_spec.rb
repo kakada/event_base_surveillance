@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notifiers::EventMilestoneEmailNotifier, type: :model do
   let!(:em)      { create(:event_milestone, :verification) }
@@ -10,7 +10,7 @@ RSpec.describe Notifiers::EventMilestoneEmailNotifier, type: :model do
     let!(:event)   { em.event }
     let!(:program) { event.program }
     let!(:message) { create(:message, milestone: event.milestone) }
-    let!(:email_notification) { create(:email_notification, message: message, emails: ['abc@gmail.com']) }
+    let!(:email_notification) { create(:email_notification, message: message, emails: ["abc@gmail.com"]) }
     let(:notifier) { Notifiers::EventMilestoneEmailNotifier.new(event) }
 
     describe "#enabled?" do
@@ -32,7 +32,7 @@ RSpec.describe Notifiers::EventMilestoneEmailNotifier, type: :model do
     end
 
     describe "#recipients" do
-      it { expect(notifier.recipients).to eq(['abc@gmail.com']) }
+      it { expect(notifier.recipients).to eq(["abc@gmail.com"]) }
     end
 
     describe "#display_message" do
@@ -48,14 +48,14 @@ RSpec.describe Notifiers::EventMilestoneEmailNotifier, type: :model do
     end
 
     describe "#bot_token" do
-      it { expect { notifier.bot_token }.to raise_error('It is for telegram channel only') }
+      it { expect { notifier.bot_token }.to raise_error("It is for telegram channel only") }
     end
   end
 
   context "event milestone" do
     let!(:program) { em.program }
     let!(:message) { create(:message, milestone: em.milestone) }
-    let!(:email_notification) { create(:email_notification, message: message, emails: ['abc1@gmail.com']) }
+    let!(:email_notification) { create(:email_notification, message: message, emails: ["abc1@gmail.com"]) }
     let(:notifier) { Notifiers::EventMilestoneEmailNotifier.new(em) }
 
     describe "#enabled?" do
@@ -77,7 +77,7 @@ RSpec.describe Notifiers::EventMilestoneEmailNotifier, type: :model do
     end
 
     describe "#recipients" do
-      it { expect(notifier.recipients).to eq(['abc1@gmail.com']) }
+      it { expect(notifier.recipients).to eq(["abc1@gmail.com"]) }
     end
 
     describe "#display_message" do
@@ -93,7 +93,7 @@ RSpec.describe Notifiers::EventMilestoneEmailNotifier, type: :model do
     end
 
     describe "#bot_token" do
-      it { expect { notifier.bot_token }.to raise_error('It is for telegram channel only') }
+      it { expect { notifier.bot_token }.to raise_error("It is for telegram channel only") }
     end
   end
 end

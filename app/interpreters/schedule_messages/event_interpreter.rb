@@ -16,7 +16,7 @@ module ScheduleMessages
     end
 
     def event_url
-      url = Rails.application.routes.url_helpers.event_url(@event, host: ENV['HOST_URL'])
+      url = Rails.application.routes.url_helpers.event_url(@event, host: ENV["HOST_URL"])
 
       "<a href='#{url}'>#{url}</a>"
     end

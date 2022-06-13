@@ -25,11 +25,11 @@ module ScheduleMessages
         milestones = milestones.select { |m| progress_hash.keys.include?(m.name) }
         milestones.map do |milestone|
           "<li><a href='#{events_url(milestone)}'>#{milestone.name}</a>: #{progress_hash[milestone.name]}</li>"
-        end.join('')
+        end.join("")
       end
 
       def progress_hash
-        @progress_hash ||= @schedule.program.events.uncloseds.joins(:field_values).where("field_values.field_code = 'progress'").where('events.updated_at <= ?', deadline).group('field_values.value').count
+        @progress_hash ||= @schedule.program.events.uncloseds.joins(:field_values).where("field_values.field_code = 'progress'").where("events.updated_at <= ?", deadline).group("field_values.value").count
       end
 
       def deadline
@@ -37,7 +37,7 @@ module ScheduleMessages
       end
 
       def events_url(milestone)
-        Rails.application.routes.url_helpers.events_url(host: ENV['HOST_URL']) + "?" + { 'progresses[]': milestone.name }.to_query
+        Rails.application.routes.url_helpers.events_url(host: ENV["HOST_URL"]) + "?" + { 'progresses[]': milestone.name }.to_query
       end
   end
 end

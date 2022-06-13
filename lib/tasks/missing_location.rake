@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 namespace :missing_location do
-  desc 'migrate missing locaiton'
+  desc "migrate missing locaiton"
   task migrate: :environment do
     locations = [
-      { old: '12010801', new: '12130501' },
-      { old: '120108', new: '121305' },
-      { old: '120102', new: '121301' },
-      { old: '15010906', new:  '15070106' }
+      { old: "12010801", new: "12130501" },
+      { old: "120108", new: "121305" },
+      { old: "120102", new: "121301" },
+      { old: "15010906", new:  "15070106" }
     ]
 
     locations.each do |location|
@@ -34,15 +34,15 @@ namespace :missing_location do
     def update_locations(filename)
       locations = get_data(filename)
       locations.each do |location|
-        lo = ::Location.find_by(code: location['old'])
-        lo.update_attributes(code: location['new']) if lo.present?
+        lo = ::Location.find_by(code: location["old"])
+        lo.update_attributes(code: location["new"]) if lo.present?
       end
     end
 
     def create_new_locations(filename)
       locations = get_data(filename)
       locations.each do |location|
-        location_code = location['code']
+        location_code = location["code"]
         location_kind = ::Location.location_kind(location_code)
         pumi_loc = "Pumi::#{location_kind.titlecase}".constantize.find_by_id(location_code)
 

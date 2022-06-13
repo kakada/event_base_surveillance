@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Api::V1::EventTypesController, type: :controller do
   let! (:client_app) { create(:client_app) }
@@ -12,13 +12,13 @@ RSpec.describe Api::V1::EventTypesController, type: :controller do
     allow(controller).to receive(:current_program).and_return(event_type.program)
   end
 
-  describe 'GET #index' do
+  describe "GET #index" do
     before(:each) do
       get :index
     end
 
-    it { expect(JSON.parse(response.body)['event_types']).not_to be_nil }
-    it { expect(JSON.parse(response.body)['meta']).not_to be_nil }
+    it { expect(JSON.parse(response.body)["event_types"]).not_to be_nil }
+    it { expect(JSON.parse(response.body)["meta"]).not_to be_nil }
     it { expect(response.status).to eq(200) }
   end
 end

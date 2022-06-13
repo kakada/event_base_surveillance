@@ -38,12 +38,12 @@ class Event < ApplicationRecord
 
   # Association
   belongs_to :event_type
-  belongs_to :conclude_event_type, class_name: 'EventType', optional: true
-  belongs_to :creator, class_name: 'User', optional: true
+  belongs_to :conclude_event_type, class_name: "EventType", optional: true
+  belongs_to :creator, class_name: "User", optional: true
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
-  belongs_to :link_parent, class_name: 'Event', foreign_key: :link_uuid, optional: true
-  has_many   :link_children, class_name: 'Event', foreign_key: :link_uuid
+  belongs_to :link_parent, class_name: "Event", foreign_key: :link_uuid, optional: true
+  has_many   :link_children, class_name: "Event", foreign_key: :link_uuid
   has_many   :event_milestones, foreign_key: :event_uuid, primary_key: :uuid
   has_many   :event_shareds
   has_many   :program_shareds, through: :event_shareds, source: :program
@@ -78,13 +78,13 @@ class Event < ApplicationRecord
 
   # Nested Attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
-    attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank? && attributes['file'].blank?
+    attributes["id"].blank? && attributes["value"].blank? && attributes["image"].blank? && attributes["values"].blank? && attributes["file"].blank?
   }
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
 
   # Instant Methods
   def conducted_at
-    @conducted_at ||= get_value_by_code('event_date').try(:value)
+    @conducted_at ||= get_value_by_code("event_date").try(:value)
   end
 
   def milestone
@@ -92,7 +92,7 @@ class Event < ApplicationRecord
   end
 
   def progress
-    @progress ||= field_values.find_by(field_code: 'progress').try(:value)
+    @progress ||= field_values.find_by(field_code: "progress").try(:value)
   end
 
   def telegram_message
@@ -100,9 +100,9 @@ class Event < ApplicationRecord
   end
 
   def set_event_progress
-    fv = field_values.find_or_initialize_by(field_code: 'progress')
+    fv = field_values.find_or_initialize_by(field_code: "progress")
     fv.value = milestone.name
-    fv.field_id ||= milestone.fields.find_by(code: 'progress').id
+    fv.field_id ||= milestone.fields.find_by(code: "progress").id
     fv.save
   end
 
@@ -130,7 +130,7 @@ class Event < ApplicationRecord
 
   def self.search_by_uuid_or_event_type(keyword)
     joins(:event_type)
-      .where('LOWER(event_types.name) LIKE ? OR LOWER(uuid) LIKE ?', "%#{keyword.downcase}%", "%#{keyword.downcase}%")
+      .where("LOWER(event_types.name) LIKE ? OR LOWER(uuid) LIKE ?", "%#{keyword.downcase}%", "%#{keyword.downcase}%")
   end
 
   private

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notifiers::EventScheduleTelegramNotifier, type: :model do
   let!(:schedule) { create(:event_schedule) }
@@ -10,13 +10,13 @@ RSpec.describe Notifiers::EventScheduleTelegramNotifier, type: :model do
 
   describe "#enabled?" do
     before {
-      creator.telegram_chat_id = '-1234'
+      creator.telegram_chat_id = "-1234"
       allow(::TelegramBot).to receive(:has_system_bot?).and_return(true)
     }
 
     context "has channels telegram" do
       before {
-        schedule.channels = ['telegram']
+        schedule.channels = ["telegram"]
       }
 
       it { expect(notifier.enabled?).to be_truthy }
@@ -24,7 +24,7 @@ RSpec.describe Notifiers::EventScheduleTelegramNotifier, type: :model do
 
     context "no channels telegram" do
       before {
-        schedule.channels = ['email']
+        schedule.channels = ["email"]
       }
 
       it { expect(notifier.enabled?).to be_falsey }
@@ -33,10 +33,10 @@ RSpec.describe Notifiers::EventScheduleTelegramNotifier, type: :model do
 
   describe "#recipients" do
     before {
-      creator.telegram_chat_id = '-1234'
+      creator.telegram_chat_id = "-1234"
     }
 
-    it { expect(notifier.recipients).to eq(['-1234']) }
+    it { expect(notifier.recipients).to eq(["-1234"]) }
   end
 
   describe "#display_message" do

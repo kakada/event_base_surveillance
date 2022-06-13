@@ -28,7 +28,7 @@ module FieldValues
     validate :validate_value, if: -> { value.present? }
 
     def validate_value
-      errors.add(:value, I18n.t('shared.is_invalid_value')) unless value.integer?
+      errors.add(:value, I18n.t("shared.is_invalid_value")) unless value.integer?
     end
 
     def display_value

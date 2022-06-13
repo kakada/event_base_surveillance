@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :chat_group do
-  desc 'migrate super chat group'
+  desc "migrate super chat group"
   task migrate_supergroup: :environment do
     ChatGroup.where(chat_type: ChatGroup::TELEGRAM_SUPER_GROUP).each do |supergroup|
       migrate_chat_group(supergroup)

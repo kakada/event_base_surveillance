@@ -8,7 +8,7 @@ module Events
       before_validation :assign_nil_locations
       before_validation :set_location_code
 
-      def location_name(address = 'address_km')
+      def location_name(address = "address_km")
         return if location_code.blank?
 
         "Pumi::#{::Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
@@ -34,7 +34,7 @@ module Events
             field_values.select { |fv| fv.field_code == code }.first.try(:value).to_s
           end
 
-          self.location_code = codes[codes.find_index('').to_i - 1]
+          self.location_code = codes[codes.find_index("").to_i - 1]
         end
     end
   end

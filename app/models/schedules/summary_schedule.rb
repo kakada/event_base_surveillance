@@ -46,11 +46,11 @@ module Schedules
     end
 
     def short_display_info
-      display('summary_schedule_short_info')
+      display("summary_schedule_short_info")
     end
 
     def full_display_info
-      display('summary_schedule_full_info')
+      display("summary_schedule_full_info")
     end
 
     def display_message
@@ -68,7 +68,7 @@ module Schedules
 
       def display_date_index
         return "" if day?
-        return I18n.t('date.day_names')[date_index] if week?
+        return I18n.t("date.day_names")[date_index] if week?
 
         date_index
       end

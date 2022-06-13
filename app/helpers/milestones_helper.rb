@@ -2,7 +2,7 @@
 
 module MilestonesHelper
   def telegram_icon_status(milestone)
-    return '' unless milestone.message.present?
+    return "" unless milestone.message.present?
 
     if milestone.telegram_invalid_configure?
       return '<a class="btn btn-small text-secondary position-relative" title="Telegram bot is invalid configure" data-toggle="tooltip"><i class="fab fa-telegram font-size-24"></i><i class="far fa-times-circle icon-red invalid-config-icon"></i></a>'
@@ -16,7 +16,7 @@ module MilestonesHelper
   end
 
   def email_icon_status(milestone)
-    return '' unless milestone.message.present?
+    return "" unless milestone.message.present?
 
     if milestone.email_not_ready?
       return '<a class="btn btn-small text-secondary" title="Email is disabled or no email notification selected" data-toggle="tooltip"><i class="far fa-envelope font-size-24"></i></a>'

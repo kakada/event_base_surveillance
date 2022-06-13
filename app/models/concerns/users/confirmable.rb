@@ -5,9 +5,9 @@ module Users::Confirmable
 
   included do
     def password_match?
-      errors[:password] << I18n.t('errors.messages.blank') if password.blank?
-      errors[:password_confirmation] << I18n.t('errors.messages.blank') if password_confirmation.blank?
-      errors[:password_confirmation] << I18n.translate('errors.messages.confirmation', attribute: 'password') if password != password_confirmation
+      errors[:password] << I18n.t("errors.messages.blank") if password.blank?
+      errors[:password_confirmation] << I18n.t("errors.messages.blank") if password_confirmation.blank?
+      errors[:password_confirmation] << I18n.translate("errors.messages.confirmation", attribute: "password") if password != password_confirmation
       password == password_confirmation && !password.blank?
     end
 

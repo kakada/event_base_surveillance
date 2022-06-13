@@ -7,13 +7,13 @@ FactoryBot.define do
     program
 
     trait :basic_auth do
-      type     { 'Webhooks::BasicAuth' }
+      type     { "Webhooks::BasicAuth" }
       username { FFaker::Internet.user_name }
       password { FFaker::Internet.password }
     end
 
     trait :token_auth do
-      type     { 'Webhooks::TokenAuth' }
+      type     { "Webhooks::TokenAuth" }
       token    { SecureRandom.hex }
     end
   end

@@ -43,7 +43,7 @@ class EventType < ApplicationRecord
 
   # Scope
   scope :root, -> { where(default: true).first }
-  scope :with_shared, -> (program_id) { left_joins(:event_type_shareds).where('event_types.program_id = ? OR event_type_shareds.program_id = ?', program_id, program_id) }
+  scope :with_shared, -> (program_id) { left_joins(:event_type_shareds).where("event_types.program_id = ? OR event_type_shareds.program_id = ?", program_id, program_id) }
 
   # Deligation
   delegate :name, to: :program, prefix: :program
@@ -54,7 +54,7 @@ class EventType < ApplicationRecord
 
   # Class methods
   def self.create_root(user_id)
-    create(name: 'Unknown', default: true, color: "##{SecureRandom.hex(3)}", user_id: user_id)
+    create(name: "Unknown", default: true, color: "##{SecureRandom.hex(3)}", user_id: user_id)
   end
 
   private
@@ -67,6 +67,6 @@ class EventType < ApplicationRecord
     end
 
     def set_code
-      self.code = name.downcase.split(' ').join('_')
+      self.code = name.downcase.split(" ").join("_")
     end
 end

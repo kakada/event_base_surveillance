@@ -18,10 +18,10 @@
 class ClientApp < ApplicationRecord
   PERMISSIONS = %w[read write].freeze
   PERMISSION_ACTION = {
-    get: 'read',
-    post: 'write',
-    put: 'write',
-    patch: 'write'
+    get: "read",
+    post: "write",
+    put: "write",
+    patch: "write"
   }.freeze
 
   belongs_to :program

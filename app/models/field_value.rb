@@ -41,13 +41,13 @@ class FieldValue < ApplicationRecord
   delegate :validations, to: :field, prefix: false, allow_nil: true
 
   # Validation
-  before_validation :set_location_value, if: -> { field_type == 'Fields::LocationField' }
+  before_validation :set_location_value, if: -> { field_type == "Fields::LocationField" }
   before_validation :cleanup_values
   before_validation :assign_type, if: -> { field_type.present? }
 
   # Callback
-  after_save :handle_mapping_field, if: -> { field_type == 'Fields::MappingField' }
-  after_save :assign_event_date,    if: -> { field_code == 'event_date' && valueable_type == 'Event' }
+  after_save :handle_mapping_field, if: -> { field_type == "Fields::MappingField" }
+  after_save :assign_event_date,    if: -> { field_code == "event_date" && valueable_type == "Event" }
 
   # History
   audited associated_with: :valueable
@@ -78,9 +78,9 @@ class FieldValue < ApplicationRecord
 
       clear_locations
       codes = %w[province_id district_id commune_id village_id].map { |co| properties[co] }
-      code = codes[codes.find_index('').to_i - 1]
+      code = codes[codes.find_index("").to_i - 1]
 
-      return self.value = '' if code.blank?
+      return self.value = "" if code.blank?
 
       self.value = "Pumi::#{Location.location_kind(code).titlecase}".constantize.find_by_id(code).try(:address_km)
     end
@@ -88,7 +88,7 @@ class FieldValue < ApplicationRecord
     def clear_locations
       clear_next = false
       %w[province_id district_id commune_id village_id].map do |code|
-        next properties[code] = '' if clear_next == true
+        next properties[code] = "" if clear_next == true
         next if properties[code].present?
 
         clear_next = true
@@ -98,8 +98,8 @@ class FieldValue < ApplicationRecord
     def handle_mapping_field
       fv = valueable.event.field_values.find_or_initialize_by(field_id: field.parent.id)
       fv.field_code ||= field.parent.code
-      fv.value = value.downcase.split(' ').join('_')
-      fv.color = field.parent.field_options.find_by('LOWER(value)= ?', fv.value).try(:color) if field.parent.field_options.present?
+      fv.value = value.downcase.split(" ").join("_")
+      fv.color = field.parent.field_options.find_by("LOWER(value)= ?", fv.value).try(:color) if field.parent.field_options.present?
       fv.save
 
       handle_tracking(fv)
@@ -109,7 +109,7 @@ class FieldValue < ApplicationRecord
       return unless field_value.field.tracking?
 
       event = valueable.event
-      return event.tracings.create(field_id: field_value.field_id, field_value: field_value.value, type: 'Tracings::TextTracing') if field_value.field_type != 'Fields::IntegerField'
+      return event.tracings.create(field_id: field_value.field_id, field_value: field_value.value, type: "Tracings::TextTracing") if field_value.field_type != "Fields::IntegerField"
 
       tracking_codes = event.milestone.fields.tracking.number.pluck(:code)
       fvs = event.field_values.select { |field_v| tracking_codes.include? field_v.field_code }.pluck(:field_code, :value).to_h
@@ -118,7 +118,7 @@ class FieldValue < ApplicationRecord
         props[code] = fvs[code] || 0
       end
 
-      event.tracings.create(properties: props, type: 'Tracings::NumberTracing')
+      event.tracings.create(properties: props, type: "Tracings::NumberTracing")
     end
 
     def cleanup_values

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 namespace :field do
-  desc 'migrate mapping_field_id'
+  desc "migrate mapping_field_id"
   task migrate_mapping_field: :environment do
-    Field.where(field_type: 'Fields::MappingField').each do |field|
+    Field.where(field_type: "Fields::MappingField").each do |field|
       root_field = field.milestone.program.milestones.root.fields.find_by(code: field.mapping_field)
       field.mapping_field_id = root_field.id
       field.save
@@ -12,12 +12,12 @@ namespace :field do
     end
   end
 
-  desc 'migrate is_milestone_datetime fields and its order'
+  desc "migrate is_milestone_datetime fields and its order"
   task migrate_is_milestone_datetime: :environment do
     migrate_fields = [
-      { code: 'event_date', display_order: 1 },
-      { code: 'report_date', display_order: 2 },
-      { code: 'conducted_at', display_order: 1 },
+      { code: "event_date", display_order: 1 },
+      { code: "report_date", display_order: 2 },
+      { code: "conducted_at", display_order: 1 },
     ]
 
     migrate_fields.each do |field|

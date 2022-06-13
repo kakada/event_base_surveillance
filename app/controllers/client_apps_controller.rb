@@ -48,7 +48,7 @@ class ClientAppsController < ApplicationController
     authorize @client_app, :update?
 
     @client_app.update_attributes(active: false)
-    flash[:notice] = 'deactivate successfully'
+    flash[:notice] = "deactivate successfully"
     redirect_to client_apps_url
   end
 
@@ -57,7 +57,7 @@ class ClientAppsController < ApplicationController
     authorize @client_app, :update?
 
     @client_app.update_attributes(active: true)
-    flash[:notice] = 'activate successfully'
+    flash[:notice] = "activate successfully"
     redirect_to client_apps_url
   end
 

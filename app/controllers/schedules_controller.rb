@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SchedulesController < ApplicationController
   def index
     @pagy, @schedules = pagy(policy_scope(authorize Schedule.all))
@@ -42,7 +44,7 @@ class SchedulesController < ApplicationController
     @schedule = authorize Schedule.find(params[:id]), :update?
     @schedule.update(enabled: true)
 
-    flash[:notice] = 'Activate successfully'
+    flash[:notice] = "Activate successfully"
     redirect_to schedules_url
   end
 
@@ -50,7 +52,7 @@ class SchedulesController < ApplicationController
     @schedule = authorize Schedule.find(params[:id]), :update?
     @schedule.update(enabled: false)
 
-    flash[:notice] = 'Deactivate successfully'
+    flash[:notice] = "Deactivate successfully"
     redirect_to schedules_url
   end
 

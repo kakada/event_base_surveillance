@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notifiers::SummaryScheduleEmailNotifier, type: :model do
   let!(:schedule) { create(:summary_schedule) }
@@ -9,7 +9,7 @@ RSpec.describe Notifiers::SummaryScheduleEmailNotifier, type: :model do
   describe "#enabled?" do
     context "has channels email" do
       before {
-        schedule.channels = ['email']
+        schedule.channels = ["email"]
       }
 
       it { expect(notifier.enabled?).to be_truthy }

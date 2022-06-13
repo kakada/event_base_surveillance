@@ -19,6 +19,6 @@ class Tracing < ApplicationRecord
   belongs_to :traceable, polymorphic: true
   serialize :properties, Hash
 
-  scope :number, -> { where(type: 'Tracings::NumberTracing') }
-  scope :text, -> { where(type: 'Tracings::TextTracing') }
+  scope :number, -> { where(type: "Tracings::NumberTracing") }
+  scope :text, -> { where(type: "Tracings::TextTracing") }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Adapters::EmailAdapter
   attr_reader :notifier
 
@@ -8,7 +10,7 @@ class Adapters::EmailAdapter
   def process
     return unless notifier.enabled?
 
-    params = { recipient: notifier.recipients.join(','), message: notifier.display_message, title: notifier.display_title }.stringify_keys
+    params = { recipient: notifier.recipients.join(","), message: notifier.display_message, title: notifier.display_title }.stringify_keys
 
     ::EmailAdapterWorker.perform_async(params)
   end

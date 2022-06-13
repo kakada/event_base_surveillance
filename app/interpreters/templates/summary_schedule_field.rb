@@ -14,7 +14,7 @@ module Templates
       str += "<li>Verification: 2</li>"
       str += "<li>Risk assessment: 2</li>"
       str += "<li>...</li>"
-      str += "</ul>"
+      str + "</ul>"
     end
   end
 end

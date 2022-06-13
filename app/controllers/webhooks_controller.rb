@@ -47,7 +47,7 @@ class WebhooksController < ApplicationController
     authorize @webhook, :update?
 
     @webhook.update_attributes(active: false)
-    flash[:notice] = 'deactivate successfully'
+    flash[:notice] = "deactivate successfully"
     redirect_to webhooks_url
   end
 
@@ -56,7 +56,7 @@ class WebhooksController < ApplicationController
     authorize @webhook, :update?
 
     @webhook.update_attributes(active: true)
-    flash[:notice] = 'activate successfully'
+    flash[:notice] = "activate successfully"
     redirect_to webhooks_url
   end
 

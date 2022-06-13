@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notifiers::EventScheduleTelegramNotifier
   attr_reader :schedule, :event
 
@@ -8,7 +10,7 @@ class Notifiers::EventScheduleTelegramNotifier
 
   def enabled?
     schedule.enabled? &&
-    schedule.channels.include?('telegram') &&
+    schedule.channels.include?("telegram") &&
     event.creator.telegram?
   end
 

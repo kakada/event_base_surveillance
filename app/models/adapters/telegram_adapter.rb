@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Adapters::TelegramAdapter
   attr_reader :notifier
 

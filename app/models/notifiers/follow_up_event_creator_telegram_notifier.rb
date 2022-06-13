@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notifiers::FollowUpEventCreatorTelegramNotifier
   attr_reader :follow_up
 
@@ -6,7 +8,7 @@ class Notifiers::FollowUpEventCreatorTelegramNotifier
   end
 
   def enabled?
-    follow_up.channels.include?('telegram') &&
+    follow_up.channels.include?("telegram") &&
     follow_up.followee.telegram?
   end
 

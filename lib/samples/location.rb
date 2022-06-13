@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'csv'
+require "csv"
 
 module Samples
   class Location
@@ -29,10 +29,10 @@ module Samples
 
     def self.export
       file_path = "#{Rails.root}/tmp/locations.csv"
-      CSV.open(file_path, 'w') do |csv|
+      CSV.open(file_path, "w") do |csv|
         csv << %w[code name_en name_km kind parent_id latitude longitude]
 
-        provinces = ::Location.where(kind: 'province').order(code: :asc)
+        provinces = ::Location.where(kind: "province").order(code: :asc)
         provinces.each do |province|
           location_to_csv province, csv
         end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Events::FollowUp do
-  describe '#reached_intervals' do
+  describe "#reached_intervals" do
     let!(:schedule) { create(:schedule, interval_value: 3) }
     let!(:program) { schedule.program }
     let!(:event) { create(:event, program: program) }

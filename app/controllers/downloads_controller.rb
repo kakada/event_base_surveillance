@@ -2,6 +2,6 @@
 
 class DownloadsController < ApplicationController
   def show
-    send_file params[:file], disposition: 'attachment'
+    send_file params[:file], disposition: "attachment"
   end
 end

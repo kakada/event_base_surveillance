@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 namespace :event do
-  desc 'migrate event_date'
+  desc "migrate event_date"
   task migrate_event_date: :environment do
     Event.all.includes(:field_values).each do |event|
-      field_value = event.field_values.select { |fv| fv.field_code == 'event_date' }.first
+      field_value = event.field_values.select { |fv| fv.field_code == "event_date" }.first
 
       next if field_value.nil?
 
@@ -12,7 +12,7 @@ namespace :event do
     end
   end
 
-  desc 'migrate shared event'
+  desc "migrate shared event"
   task migrate_shared_event: :environment do
     EventType.where(shared: true).includes(:program, :events).each do |event_type|
       event_type.program_shared_ids = event_type.program.siblings.map(&:id)

@@ -16,7 +16,7 @@ module ActiveRecord
       end
 
       if collection.length > hashes.length
-        association = collection.class.to_s.split('::').first.pluralize.downcase
+        association = collection.class.to_s.split("::").first.pluralize.downcase
         self.errors.add(association, message)
       end
     end

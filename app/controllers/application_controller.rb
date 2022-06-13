@@ -23,12 +23,12 @@ class ApplicationController < ActionController::Base
 
   protected
     def set_layout
-      devise_controller? ? 'layouts/minimal' : 'layouts/application'
+      devise_controller? ? "layouts/minimal" : "layouts/application"
     end
 
   private
     def user_not_authorized
-      flash[:alert] = 'You are not authorized to perform this action.'
+      flash[:alert] = "You are not authorized to perform this action."
       redirect_to(request.referrer || root_path)
     end
 

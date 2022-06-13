@@ -30,7 +30,7 @@ class EventMilestoneMessageInterpreter
         event_uuid: event_milestone.event_uuid,
         milestone_name: event_milestone.milestone.name,
         submitter_email: event_milestone.submitter.email,
-        event_url: Rails.application.routes.url_helpers.event_url(event_milestone.event, host: ENV['HOST_URL'])
+        event_url: Rails.application.routes.url_helpers.event_url(event_milestone.event, host: ENV["HOST_URL"])
       }
     end
 end

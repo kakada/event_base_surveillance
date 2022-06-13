@@ -17,7 +17,7 @@ FactoryBot.define do
                                 number_of_case: rand(1..5),
                                 event_date: Date.today - rand(0..30),
                                 report_date: Date.today,
-                                progress: 'New'
+                                progress: "New"
                               }
 
                               field_values.map do |k, v|

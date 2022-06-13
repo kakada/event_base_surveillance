@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe MapService do
-  describe 'get_event_data' do
+  describe "get_event_data" do
     let!(:admin_a) { create(:user) }
     let!(:admin_b) { create(:user) }
 
@@ -23,7 +23,7 @@ RSpec.describe MapService do
     let!(:event_pes_jruk2_b)   { create(:event, event_type: pes_jruk_b, program: program_b) }
     let!(:event_h1n1_b_shared) { create(:event, event_type: h1n1_b_shared, program: program_b) }
 
-    context 'admin_a' do
+    context "admin_a" do
       let!(:data) { MapService.new(admin_a).get_event_data }
       let!(:influenza_a_fv) { data.select { |d| d[:event_type].id == influenza_a.id }.first }
       let!(:h5n1_a_shared_fv) { data.select { |d| d[:event_type].id == h5n1_a_shared.id }.first }
@@ -39,17 +39,17 @@ RSpec.describe MapService do
       it { expect(h5n1_a_shared_fv[:total_count]).to eq(1) }
       it { expect(h1n1_b_shared_fv[:total_count]).to eq(1) }
 
-      it { expect(influenza_a_fv[:number_of_case]).to eq(event_influenza_a.field_values.find_by(field_code: 'number_of_case').value) }
-      it { expect(h5n1_a_shared_fv[:number_of_case]).to eq(event_h5n1_a_shared.field_values.find_by(field_code: 'number_of_case').value) }
-      it { expect(h1n1_b_shared_fv[:number_of_case]).to eq(event_h1n1_b_shared.field_values.find_by(field_code: 'number_of_case').value) }
+      it { expect(influenza_a_fv[:number_of_case]).to eq(event_influenza_a.field_values.find_by(field_code: "number_of_case").value) }
+      it { expect(h5n1_a_shared_fv[:number_of_case]).to eq(event_h5n1_a_shared.field_values.find_by(field_code: "number_of_case").value) }
+      it { expect(h1n1_b_shared_fv[:number_of_case]).to eq(event_h1n1_b_shared.field_values.find_by(field_code: "number_of_case").value) }
     end
 
-    context 'admin_b' do
+    context "admin_b" do
       let!(:data) { MapService.new(admin_b).get_event_data }
       let!(:pes_jruk_b_fv) { data.select { |d| d[:event_type].id == pes_jruk_b.id }.first }
       let!(:h1n1_b_shared_fv) { data.select { |d| d[:event_type].id == h1n1_b_shared.id }.first }
       let!(:h5n1_a_shared_fv) { data.select { |d| d[:event_type].id == h5n1_a_shared.id }.first }
-      let!(:number_of_case_event_pes_jruk) { event_pes_jruk_b.field_values.find_by(field_code: 'number_of_case').value.to_i + event_pes_jruk2_b.field_values.find_by(field_code: 'number_of_case').value.to_i }
+      let!(:number_of_case_event_pes_jruk) { event_pes_jruk_b.field_values.find_by(field_code: "number_of_case").value.to_i + event_pes_jruk2_b.field_values.find_by(field_code: "number_of_case").value.to_i }
 
       it { expect(data.length).to eq(3) }
 
@@ -62,8 +62,8 @@ RSpec.describe MapService do
       it { expect(h1n1_b_shared_fv[:total_count]).to eq(1) }
 
       it { expect(pes_jruk_b_fv[:number_of_case]).to eq(number_of_case_event_pes_jruk.to_s) }
-      it { expect(h5n1_a_shared_fv[:number_of_case]).to eq(event_h5n1_a_shared.field_values.find_by(field_code: 'number_of_case').value) }
-      it { expect(h1n1_b_shared_fv[:number_of_case]).to eq(event_h1n1_b_shared.field_values.find_by(field_code: 'number_of_case').value) }
+      it { expect(h5n1_a_shared_fv[:number_of_case]).to eq(event_h5n1_a_shared.field_values.find_by(field_code: "number_of_case").value) }
+      it { expect(h1n1_b_shared_fv[:number_of_case]).to eq(event_h1n1_b_shared.field_values.find_by(field_code: "number_of_case").value) }
     end
   end
 end

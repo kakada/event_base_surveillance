@@ -45,7 +45,7 @@ class MessageInterpretor
 
       dynamic_fields = select_elements_starting_with(fields, template_code)
       dynamic_fields.each do |field|
-        field_id = field.split('_')[1].to_i
+        field_id = field.split("_")[1].to_i
         fv       = obj.field_values.select { |field_value| field_value.field_id == field_id }.first
         field_value = "<b>#{fv.try(:display_value)}</b>"
         field_template = "{{#{field}}}"

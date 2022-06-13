@@ -3,8 +3,8 @@
 class TelegramAdapterWorker
   include Sidekiq::Worker
 
-  def perform(option={})
+  def perform(option = {})
     # What happen if sending fails
-    ::TelegramBot.client_send_message(option['bot_token'], option['recipient'], option['message'] )
+    ::TelegramBot.client_send_message(option["bot_token"], option["recipient"], option["message"])
   end
 end

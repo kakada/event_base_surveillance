@@ -22,6 +22,6 @@ class FieldOption < ApplicationRecord
 
   private
     def set_option_value
-      self.value = (value.presence || name).downcase.split(' ').join('_')
+      self.value = (value.presence || name).downcase.split(" ").join("_")
     end
 end
