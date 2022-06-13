@@ -8,6 +8,6 @@ class MapsController < ApplicationController
 
   private
     def filter_params
-      params.permit( :start_date, :end_date, event_type_ids: [] )
+      params.permit(:start_date, :end_date, event_type_ids: [])
     end
 end

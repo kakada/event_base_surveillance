@@ -44,7 +44,7 @@ class EventsController < ApplicationController
   def destroy
     @event = authorize Event.find(params[:id])
     @event.destroy
-    flash[:notice] = t('event.destroy_success')
+    flash[:notice] = t("event.destroy_success")
 
     redirect_to events_url
   end
@@ -52,11 +52,11 @@ class EventsController < ApplicationController
   def download
     events = get_events
 
-    if events.length > ENV['MAXIMUM_DOWNLOAD_RECORDS'].to_i
-      flash[:alert] = t('event.file_size_is_too_big')
+    if events.length > ENV["MAXIMUM_DOWNLOAD_RECORDS"].to_i
+      flash[:alert] = t("event.file_size_is_too_big")
       redirect_to events_url
     else
-      send_data(EventService.new(events, params[:template_id]).export_csv, filename: 'events.csv')
+      send_data(EventService.new(events, params[:template_id]).export_csv, filename: "events.csv")
     end
   end
 
@@ -107,8 +107,8 @@ class EventsController < ApplicationController
 
       fields = current_program.fields.includes(:field_options)
 
-      @source_of_informations = fields.select { |f| f.code == 'source_of_information' }.first.field_options
-      @risk_levels = fields.select { |f| f.code == 'risk_level' }.first.field_options
+      @source_of_informations = fields.select { |f| f.code == "source_of_information" }.first.field_options
+      @risk_levels = fields.select { |f| f.code == "risk_level" }.first.field_options
       @event_types = EventType.with_shared(current_program.id).includes(:program, :program_shareds)
       @progresses  = current_program.milestones.pluck(:name)
     end

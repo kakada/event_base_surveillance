@@ -18,8 +18,8 @@ class FollowUp < ApplicationRecord
   include FollowUps::Channel
 
   # Association
-  belongs_to :follower, class_name: 'User'
-  belongs_to :followee, class_name: 'User'
+  belongs_to :follower, class_name: "User"
+  belongs_to :followee, class_name: "User"
   belongs_to :event
 
   # Callback

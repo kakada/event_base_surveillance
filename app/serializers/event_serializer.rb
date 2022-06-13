@@ -11,7 +11,7 @@ class EventSerializer < ActiveModel::Serializer
     customized_event_milestones = []
 
     object.event_milestones.each do |event_milestone|
-      custom_milestone = event_milestone.attributes.except('milestone_id', 'created_at', 'updated_at')
+      custom_milestone = event_milestone.attributes.except("milestone_id", "created_at", "updated_at")
       custom_milestone[:milestone] = event_milestone.milestone.slice(:id, :name)
       custom_milestone[:field_values] = event_milestone.field_values.collect do |field_value|
         fv = field_value.slice(:id, :field_id, :value, :values, :properties, :image, :file)

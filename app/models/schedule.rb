@@ -53,11 +53,11 @@ class Schedule < ApplicationRecord
 
   # Instant method
   def reached_time?
-    raise 'Abstract Method'
+    raise "Abstract Method"
   end
 
   def display_message
-    raise 'Abstract Method'
+    raise "Abstract Method"
   end
 
   def duration_in_day
@@ -74,9 +74,9 @@ class Schedule < ApplicationRecord
 
   def duration_in_type
     case interval_type
-    when 'week'
+    when "week"
       7
-    when 'month'
+    when "month"
       30
     else
       1
@@ -85,7 +85,7 @@ class Schedule < ApplicationRecord
 
   # Class method
   def self.types
-    TYPES.map { |t| [t.split('::').last, t] }
+    TYPES.map { |t| [t.split("::").last, t] }
   end
 
   def self.inherited(child)
@@ -104,6 +104,6 @@ class Schedule < ApplicationRecord
 
     def set_interval_value_and_channel
       self.interval_value = 1
-      self.channels = ['email']
+      self.channels = ["email"]
     end
 end

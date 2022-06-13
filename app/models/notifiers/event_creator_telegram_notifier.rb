@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notifiers::EventCreatorTelegramNotifier
   attr_reader :event_milestone, :creator
 
@@ -9,7 +11,7 @@ class Notifiers::EventCreatorTelegramNotifier
 
   def enabled?
     creator.telegram? &&
-    creator.notification_channels.include?('telegram')
+    creator.notification_channels.include?("telegram")
   end
 
   def recipients

@@ -52,9 +52,9 @@ class UsersController < ApplicationController
         @user.update(user_params)
 
         if @user.notification_channels.present?
-          flash[:notice] = t('user.notification_channels', channels: @user.notification_channels.map { |ch| I18n.t("shared.#{ch}") }.join(', '))
+          flash[:notice] = t("user.notification_channels", channels: @user.notification_channels.map { |ch| I18n.t("shared.#{ch}") }.join(", "))
         else
-          flash[:alert] = t('user.no_notification_channels')
+          flash[:alert] = t("user.no_notification_channels")
         end
       }
     end

@@ -20,9 +20,9 @@
 class Milestone < ApplicationRecord
   # Association
   belongs_to :program
-  belongs_to :creator, class_name: 'User'
+  belongs_to :creator, class_name: "User"
   has_one    :message
-  has_one    :telegram_notification, class_name: 'Notifications::TelegramNotification'
+  has_one    :telegram_notification, class_name: "Notifications::TelegramNotification"
   has_one    :email_notification, through: :message
   has_many   :sections, dependent: :destroy
   has_many   :fields, dependent: :destroy
@@ -58,7 +58,7 @@ class Milestone < ApplicationRecord
 
   # Class methods
   def self.create_root(creator_id)
-    create(name: 'New', status: :root, sections_attributes: Section.roots, creator_id: creator_id)
+    create(name: "New", status: :root, sections_attributes: Section.roots, creator_id: creator_id)
   end
 
   # Instand methods
@@ -74,11 +74,11 @@ class Milestone < ApplicationRecord
   end
 
   def extra_fields
-    root? ? [{ code: :event_type_id, type: :integer, label: 'Event Type ID' }] : [{ code: :event_uuid, type: :string, label: 'Event Uuid' }]
+    root? ? [{ code: :event_type_id, type: :integer, label: "Event Type ID" }] : [{ code: :event_uuid, type: :string, label: "Event Uuid" }]
   end
 
   def format_name
-    name.downcase.split(' ').join('_')
+    name.downcase.split(" ").join("_")
   end
 
   def build_default_section
@@ -86,7 +86,7 @@ class Milestone < ApplicationRecord
   end
 
   def status_collection
-    return [['Root', 'root']] if root?
+    return [["Root", "root"]] if root?
 
     Milestone::STATUSES.drop(1)
   end
@@ -114,7 +114,7 @@ class Milestone < ApplicationRecord
 
   private
     def validate_unique_section_name
-      validate_uniqueness_of_in_memory(sections, %i[name], 'duplicate')
+      validate_uniqueness_of_in_memory(sections, %i[name], "duplicate")
     end
 
     def set_display_order

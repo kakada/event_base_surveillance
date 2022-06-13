@@ -24,7 +24,7 @@ class Program < ApplicationRecord
   mount_uploader :logo, LogoUploader
   mount_uploader :risk_assessment_guideline, LogoUploader
 
-  belongs_to :creator, class_name: 'User'
+  belongs_to :creator, class_name: "User"
   LANGUAGES = [
     %w[English en],
     %w[ខ្មែរ km]
@@ -57,7 +57,7 @@ class Program < ApplicationRecord
   delegate :enabled, to: :telegram_bot, prefix: :telegram_bot, allow_nil: true
 
   def format_name
-    name.downcase.split(' ').join('_')
+    name.downcase.split(" ").join("_")
   end
 
   def enable_telegram?
@@ -65,7 +65,7 @@ class Program < ApplicationRecord
   end
 
   def logo_or_default
-    logo_url || 'default_logo.png'
+    logo_url || "default_logo.png"
   end
 
   def siblings
@@ -74,7 +74,7 @@ class Program < ApplicationRecord
 
   private
     def set_default_language
-      self.language_code ||= 'en'
+      self.language_code ||= "en"
     end
 
     def create_root_milestone

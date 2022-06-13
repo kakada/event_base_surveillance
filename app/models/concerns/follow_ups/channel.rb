@@ -7,7 +7,7 @@ module FollowUps
     included do
       CHANNELS = %w(email telegram)
 
-      validate  :correct_channels
+      validate :correct_channels
 
       private
         def correct_channels

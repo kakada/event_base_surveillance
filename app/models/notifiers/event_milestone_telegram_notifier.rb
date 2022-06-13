@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notifiers::EventMilestoneTelegramNotifier
   attr_reader :event, :message
 

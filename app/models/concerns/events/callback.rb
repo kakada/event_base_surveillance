@@ -23,7 +23,7 @@ module Events
         end
 
         def enable_worker?
-          ENV['ENABLE_EVENT_WORKER'] == 'true'
+          ENV["ENABLE_EVENT_WORKER"] == "true"
         end
 
         def notify_third_party

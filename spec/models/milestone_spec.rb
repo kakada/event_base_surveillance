@@ -1,41 +1,41 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Milestone, type: :model do
   it { is_expected.to belong_to(:program) }
-  it { is_expected.to belong_to(:creator).class_name('User') }
+  it { is_expected.to belong_to(:creator).class_name("User") }
   it { is_expected.to have_one(:message) }
-  it { is_expected.to have_one(:telegram_notification).class_name('Notifications::TelegramNotification') }
+  it { is_expected.to have_one(:telegram_notification).class_name("Notifications::TelegramNotification") }
   it { is_expected.to have_many(:sections).dependent(:destroy) }
   it { is_expected.to have_many(:fields).dependent(:destroy) }
   it { is_expected.to validate_presence_of(:name) }
 
-  describe 'validation' do
+  describe "validation" do
     let!(:program) { create(:program) }
 
-    context 'only_one_final_milestone' do
+    context "only_one_final_milestone" do
       let!(:milestone1) { create(:milestone, program: program, status: :final) }
       let!(:milestone2) { build(:milestone, program: program, status: :final) }
 
-      it 'raises error include final' do
+      it "raises error include final" do
         milestone2.save
         expect(milestone2.errors).to include(:status)
       end
     end
 
-    context 'only_one_verified_milestone' do
+    context "only_one_verified_milestone" do
       let!(:milestone1) { create(:milestone, program: program, status: :verified) }
       let!(:milestone2) { build(:milestone, program: program, status: :verified) }
 
-      it 'raises error include verified' do
+      it "raises error include verified" do
         milestone2.save
         expect(milestone2.errors).to include(:status)
       end
     end
   end
 
-  describe '#update_order' do
+  describe "#update_order" do
     let!(:program) { create(:program) }
     let!(:milestone1) { program.milestones.root }
     let!(:milestone2) { create(:milestone, program: program, display_order: 2) }

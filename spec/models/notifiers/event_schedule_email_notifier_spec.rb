@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notifiers::EventScheduleEmailNotifier, type: :model do
   let!(:schedule) { create(:event_schedule) }
@@ -10,7 +10,7 @@ RSpec.describe Notifiers::EventScheduleEmailNotifier, type: :model do
   describe "#enabled?" do
     context "has channels email" do
       before {
-        schedule.channels = ['email']
+        schedule.channels = ["email"]
       }
 
       it { expect(notifier.enabled?).to be_truthy }
@@ -18,7 +18,7 @@ RSpec.describe Notifiers::EventScheduleEmailNotifier, type: :model do
 
     context "no channels email" do
       before {
-        schedule.channels = ['telegram']
+        schedule.channels = ["telegram"]
       }
 
       it { expect(notifier.enabled?).to be_falsey }
@@ -42,6 +42,6 @@ RSpec.describe Notifiers::EventScheduleEmailNotifier, type: :model do
   end
 
   describe "#bot_token" do
-    it { expect { notifier.bot_token }.to raise_error('It is for telegram channel only') }
+    it { expect { notifier.bot_token }.to raise_error("It is for telegram channel only") }
   end
 end

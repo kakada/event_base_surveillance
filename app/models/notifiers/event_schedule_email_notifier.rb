@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notifiers::EventScheduleEmailNotifier
   attr_reader :schedule, :event
 
@@ -8,7 +10,7 @@ class Notifiers::EventScheduleEmailNotifier
 
   def enabled?
     schedule.enabled? &&
-    schedule.channels.include?('email')
+    schedule.channels.include?("email")
   end
 
   def recipients

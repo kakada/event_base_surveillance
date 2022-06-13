@@ -26,24 +26,24 @@ class TelegramBot < ApplicationRecord
     bot = Telegram::Bot::Client.new(token: token, username: username)
 
     begin
-      request = bot.set_webhook(url: ENV['TELEGRAM_CALLBACK_URL'])
-      self.actived = request['ok']
+      request = bot.set_webhook(url: ENV["TELEGRAM_CALLBACK_URL"])
+      self.actived = request["ok"]
     rescue
       self.actived = false
     end
   end
 
   def self.send_message(chat_id, message)
-    ::Telegram::Bot::Client.new(ENV['TELEGRAM_TOKEN'], ENV['TELEGRAM_USERNAME'])
+    ::Telegram::Bot::Client.new(ENV["TELEGRAM_TOKEN"], ENV["TELEGRAM_USERNAME"])
                            .send_message(chat_id: chat_id, text: message, parse_mode: :HTML)
   end
 
   def self.has_system_bot?
-    ENV['TELEGRAM_TOKEN'].present? && ENV['TELEGRAM_USERNAME'].present?
+    ENV["TELEGRAM_TOKEN"].present? && ENV["TELEGRAM_USERNAME"].present?
   end
 
   def self.system_bot_token
-    ENV['TELEGRAM_TOKEN']
+    ENV["TELEGRAM_TOKEN"]
   end
 
   def self.client_send_message(token, chat_id, message)

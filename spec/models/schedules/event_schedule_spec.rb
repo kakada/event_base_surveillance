@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe Schedules::EventSchedule, type: :model do
   it { is_expected.to validate_presence_of(:interval_type) }
@@ -8,7 +10,7 @@ RSpec.describe Schedules::EventSchedule, type: :model do
   it { is_expected.to validate_numericality_of(:follow_up_hour).only_integer }
   it { is_expected.to validate_numericality_of(:follow_up_hour).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(23) }
 
-  describe '#reached_time?' do
+  describe "#reached_time?" do
     let!(:schedule) { build(:event_schedule) }
 
     context "now is reached_time" do

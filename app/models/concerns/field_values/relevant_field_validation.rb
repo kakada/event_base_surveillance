@@ -22,7 +22,7 @@ module FieldValues
         def relevant_field
           return if tmp_valueable.nil?
 
-          relevant_collection.select { |fv| fv.field_id == validations[:relevant_field_code].split('::')[1].to_i }[0]
+          relevant_collection.select { |fv| fv.field_id == validations[:relevant_field_code].split("::")[1].to_i }[0]
         end
 
         def relevant_collection
@@ -33,7 +33,7 @@ module FieldValues
           return if tmp_valueable.milestone.root?
           return tmp_valueable.event if tmp_valueable.milestone.display_order == 2
 
-          tmp_valueable.event.event_milestones.find_by(milestone_id: validations[:relevant_field_code].split('::')[0].to_i)
+          tmp_valueable.event.event_milestones.find_by(milestone_id: validations[:relevant_field_code].split("::")[0].to_i)
         end
 
         def error_msg

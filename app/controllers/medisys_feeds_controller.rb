@@ -2,7 +2,7 @@
 
 class MedisysFeedsController < ApplicationController
   def index
-    @medisies = policy_scope(Medisy.order('created_at ASC'))
+    @medisies = policy_scope(Medisy.order("created_at ASC"))
     @pagy, @medisys_feeds = pagy(policy_scope(authorize MedisysFeed.filter(feed_params).order(pub_date: :DESC)))
   end
 

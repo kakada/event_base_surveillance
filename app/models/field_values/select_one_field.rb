@@ -37,7 +37,7 @@ module FieldValues
       label = option.try(:name) || value
       option_value = option.try(:value) || value
 
-      return "<span data-relevant=#{field_code} value=#{option_value}>#{label}</span>" unless field_code == 'risk_level'
+      return "<span data-relevant=#{field_code} value=#{option_value}>#{label}</span>" unless field_code == "risk_level"
 
       "<span data-relevant=#{field_code} value=#{option_value} class='badge' style='background-color: #{color}; color: #fff'>#{label}</span>"
     end

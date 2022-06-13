@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'sidekiq-scheduler'
+require "sidekiq-scheduler"
 
 class MedisyWorker
   include Sidekiq::Worker

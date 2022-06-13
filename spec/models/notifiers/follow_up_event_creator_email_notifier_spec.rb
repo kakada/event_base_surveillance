@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notifiers::FollowUpEventCreatorEmailNotifier, type: :model do
   let!(:event)    { create(:event) }
-  let!(:follow_up){ create(:follow_up, event: event, message: "please check this event") }
+  let!(:follow_up) { create(:follow_up, event: event, message: "please check this event") }
   let(:notifier)  { Notifiers::FollowUpEventCreatorEmailNotifier.new(follow_up) }
 
   describe "#enabled?" do
@@ -18,7 +18,7 @@ RSpec.describe Notifiers::FollowUpEventCreatorEmailNotifier, type: :model do
 
     context "no channels email" do
       before {
-        follow_up.channels = ['telegram']
+        follow_up.channels = ["telegram"]
       }
 
       it { expect(notifier.enabled?).to be_falsey }
@@ -38,6 +38,6 @@ RSpec.describe Notifiers::FollowUpEventCreatorEmailNotifier, type: :model do
   end
 
   describe "#bot_token" do
-    it { expect { notifier.bot_token }.to raise_error('It is for telegram channel only') }
+    it { expect { notifier.bot_token }.to raise_error("It is for telegram channel only") }
   end
 end

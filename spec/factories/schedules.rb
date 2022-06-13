@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :schedule do
-    name  { 'Follow up Event Creator' }
+    name  { "Follow up Event Creator" }
     type  { Schedules::EventSchedule }
     interval_type { :day }
     interval_value { 3 }
@@ -10,8 +12,8 @@ FactoryBot.define do
     program
   end
 
-  factory :event_schedule, class: 'Schedules::EventSchedule' do
-    name  { 'Follow up Event Creator' }
+  factory :event_schedule, class: "Schedules::EventSchedule" do
+    name  { "Follow up Event Creator" }
     type  { Schedules::EventSchedule }
     interval_type { :day }
     interval_value { 3 }
@@ -21,17 +23,17 @@ FactoryBot.define do
     program
   end
 
-  factory :summary_schedule, class: 'Schedules::SummarySchedule' do
-    name  { 'Summary Schedule' }
+  factory :summary_schedule, class: "Schedules::SummarySchedule" do
+    name  { "Summary Schedule" }
     type  { Schedules::SummarySchedule }
     interval_type { :week }
     interval_value { nil }
     follow_up_hour { 12 }
     date_index     { 1 }
     deadline_duration_in_day { 15 }
-    channels { 'email' }
+    channels { "email" }
     message { "{{summary.event_report}}" }
-    emails {['abc@gmail.com']}
+    emails { ["abc@gmail.com"] }
     program
   end
 end

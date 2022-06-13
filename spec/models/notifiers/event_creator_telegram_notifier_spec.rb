@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notifiers::EventCreatorTelegramNotifier, type: :model do
   let!(:em)      { create(:event_milestone, :verification) }
@@ -8,7 +8,7 @@ RSpec.describe Notifiers::EventCreatorTelegramNotifier, type: :model do
   let!(:message) { "Event {{event_uuid}}: There is a new milestone('{{milestone_name}}') has been created by user {{submitter_email}}. Click <a href='{{event_url}}'>here</a> to view event detail in CamEMS" }
   let(:notifier) { Notifiers::EventCreatorTelegramNotifier.new(em, message) }
 
-  describe '#enabled?' do
+  describe "#enabled?" do
     before {
       creator.telegram_chat_id = "-123"
       allow(::TelegramBot).to receive(:has_system_bot?).and_return(true)
@@ -16,7 +16,7 @@ RSpec.describe Notifiers::EventCreatorTelegramNotifier, type: :model do
 
     context "notification_channels has telegram" do
       before {
-        creator.notification_channels = ['telegram']
+        creator.notification_channels = ["telegram"]
       }
 
       it { expect(notifier.enabled?).to be_truthy }
@@ -25,7 +25,7 @@ RSpec.describe Notifiers::EventCreatorTelegramNotifier, type: :model do
 
     context "notification_channels has only email" do
       before {
-        creator.notification_channels = ['email']
+        creator.notification_channels = ["email"]
       }
 
       it { expect(notifier.enabled?).to be_falsey }
@@ -34,7 +34,7 @@ RSpec.describe Notifiers::EventCreatorTelegramNotifier, type: :model do
 
   describe "#recipients" do
     before {
-      creator.telegram_chat_id = '-123'
+      creator.telegram_chat_id = "-123"
     }
 
     it { expect(notifier.recipients).to eq([creator.telegram_chat_id]) }

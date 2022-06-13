@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe Schedules::SummarySchedule, type: :model do
   it { is_expected.to belong_to(:program) }
@@ -12,15 +14,15 @@ RSpec.describe Schedules::SummarySchedule, type: :model do
   it { is_expected.to validate_numericality_of(:follow_up_hour).only_integer }
   it { is_expected.to validate_numericality_of(:follow_up_hour).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(23) }
 
-  describe 'before_validation, set_interval_value_and_channel' do
+  describe "before_validation, set_interval_value_and_channel" do
     let(:schedule) { build(:summary_schedule, interval_value: nil) }
 
     before { schedule.valid? }
 
-    it { expect(schedule.interval_value).to eq(1)}
+    it { expect(schedule.interval_value).to eq(1) }
   end
 
-  describe '#reached_time?' do
+  describe "#reached_time?" do
     let!(:schedule) { build(:summary_schedule) }
 
     context "now is reached_time" do
@@ -56,7 +58,7 @@ RSpec.describe Schedules::SummarySchedule, type: :model do
 
     context "day" do
       before {
-        schedule.interval_type = 'day'
+        schedule.interval_type = "day"
       }
 
       it { expect(schedule.reached_day?).to be_truthy }
@@ -64,16 +66,16 @@ RSpec.describe Schedules::SummarySchedule, type: :model do
 
     context "week" do
       before {
-        schedule.interval_type = 'week'
+        schedule.interval_type = "week"
       }
 
-      it 'returns true' do
+      it "returns true" do
         allow(schedule).to receive(:date_index).and_return(Time.zone.now.wday)
 
         expect(schedule.reached_day?).to be_truthy
       end
 
-      it 'returns false' do
+      it "returns false" do
         allow(schedule).to receive(:date_index).and_return(Time.zone.now.wday + 1)
 
         expect(schedule.reached_day?).to be_falsey
@@ -82,16 +84,16 @@ RSpec.describe Schedules::SummarySchedule, type: :model do
 
     context "month" do
       before {
-        schedule.interval_type = 'month'
+        schedule.interval_type = "month"
       }
 
-      it 'returns true' do
+      it "returns true" do
         allow(schedule).to receive(:date_index).and_return(Time.zone.now.mday)
 
         expect(schedule.reached_day?).to be_truthy
       end
 
-      it 'returns false' do
+      it "returns false" do
         allow(schedule).to receive(:date_index).and_return(Time.zone.now.mday + 1)
 
         expect(schedule.reached_day?).to be_falsey

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notifiers::EventMilestoneTelegramNotifier, type: :model do
   let!(:em)      { create(:event_milestone, :verification) }
@@ -48,7 +48,7 @@ RSpec.describe Notifiers::EventMilestoneTelegramNotifier, type: :model do
     end
 
     describe "#bot_token" do
-      let!(:telegram_bot) { build(:telegram_bot, program: program, token: '123:ABC') }
+      let!(:telegram_bot) { build(:telegram_bot, program: program, token: "123:ABC") }
 
       it { expect(notifier.bot_token).to eq("123:ABC") }
     end
@@ -95,7 +95,7 @@ RSpec.describe Notifiers::EventMilestoneTelegramNotifier, type: :model do
     end
 
     describe "#bot_token" do
-      let!(:telegram_bot) { build(:telegram_bot, program: program, token: '123:ABC') }
+      let!(:telegram_bot) { build(:telegram_bot, program: program, token: "123:ABC") }
 
       it { expect(notifier.bot_token).to eq("123:ABC") }
     end

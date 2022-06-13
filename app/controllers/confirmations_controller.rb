@@ -23,7 +23,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     return if @confirmable.errors.empty?
 
     self.resource = @confirmable
-    render 'devise/confirmations/new'
+    render "devise/confirmations/new"
   end
 
   # GET /resource/confirmation?confirmation_token=abcdef
@@ -39,7 +39,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     return if @confirmable.errors.empty?
 
     self.resource = @confirmable
-    render 'devise/confirmations/new'
+    render "devise/confirmations/new"
   end
 
   protected
@@ -52,7 +52,7 @@ class ConfirmationsController < Devise::ConfirmationsController
       @confirmation_token = params[:confirmation_token]
       @requires_password = true
       self.resource = @confirmable
-      render 'devise/confirmations/show'
+      render "devise/confirmations/show"
     end
 
     def do_confirm

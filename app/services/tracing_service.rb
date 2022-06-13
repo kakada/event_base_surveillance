@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'csv'
+require "csv"
 
 class TracingService
   def initialize(event)
@@ -17,12 +17,12 @@ class TracingService
 
   private
     def get_text_tracings_by_fields(field_ids)
-      Tracing.text.where(field_id: field_ids).where("(traceable_id = ? AND traceable_type = 'Event') OR (traceable_id IN (?) AND traceable_type = 'EventMilestone')", @event.id, @event.event_milestone_ids.join(','))
+      Tracing.text.where(field_id: field_ids).where("(traceable_id = ? AND traceable_type = 'Event') OR (traceable_id IN (?) AND traceable_type = 'EventMilestone')", @event.id, @event.event_milestone_ids.join(","))
     end
 
     def add_field_created_date(tracings)
       tracings.as_json.map do |tracing|
-        tracing['created_date'] = I18n.l(tracing['created_at'], format: :y_m_d_h_mn)
+        tracing["created_date"] = I18n.l(tracing["created_at"], format: :y_m_d_h_mn)
         tracing
       end
     end
@@ -31,7 +31,7 @@ class TracingService
       hash_obj = {}
 
       field_ids.each do |field_id|
-        sub_tracings = tracings.select { |tracing| tracing['field_id'] == field_id }
+        sub_tracings = tracings.select { |tracing| tracing["field_id"] == field_id }
 
         hash_obj[field_id] = {
           display_able: sub_tracings.length > 1,

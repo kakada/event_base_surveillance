@@ -17,12 +17,12 @@ module Events
         def build_text_field
           fvs = tracking_fvs(text_tracking_codes)
           fvs.each do |fv|
-            tracings.build(field_id: fv.field_id, field_value: fv.value, type: 'Tracings::TextTracing') if fv.value_changed?
+            tracings.build(field_id: fv.field_id, field_value: fv.value, type: "Tracings::TextTracing") if fv.value_changed?
           end
         end
 
         def build_number_field
-          tracings.build(properties: build_number_props, type: 'Tracings::NumberTracing') if number_field_change?
+          tracings.build(properties: build_number_props, type: "Tracings::NumberTracing") if number_field_change?
         end
 
         def number_field_change?

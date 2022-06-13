@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -19,19 +19,19 @@ module Ebs
     # the framework and any gems in your application.
     config.active_job.queue_adapter = :sidekiq
 
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.fallbacks = true
     config.i18n.fallbacks = [:en]
     config.i18n.available_locales = [:en, :km]
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :options]
+        origins "*"
+        resource "*", headers: :any, methods: [:get, :post, :options]
       end
     end
 
-    config.time_zone = 'Bangkok'
+    config.time_zone = "Bangkok"
     config.active_record.default_timezone = :local
   end
 end

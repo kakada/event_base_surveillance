@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notifiers::EventCreatorEmailNotifier
   attr_reader :event_milestone, :creator
 
@@ -8,7 +10,7 @@ class Notifiers::EventCreatorEmailNotifier
   end
 
   def enabled?
-    creator.notification_channels.include?('email')
+    creator.notification_channels.include?("email")
   end
 
   def recipients

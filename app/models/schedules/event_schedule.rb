@@ -39,11 +39,11 @@ module Schedules
     end
 
     def short_display_info
-      display('event_schedule_short_info')
+      display("event_schedule_short_info")
     end
 
     def full_display_info
-      display('event_schedule_full_info')
+      display("event_schedule_full_info")
     end
 
     def display_message(event)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'open-uri'
-require 'readability'
+require "open-uri"
+require "readability"
 
 class ExtractContentService
   def fetch(url)

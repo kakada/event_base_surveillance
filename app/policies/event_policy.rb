@@ -9,7 +9,7 @@ class EventPolicy < ApplicationPolicy
     return true if user.system_admin?
     return false unless (record.program_id == user.program_id) || record.shared_with?(user.program_id)
 
-    user.program_admin? || user.province_code == 'all' || user.province_code == record.location_code[0..1]
+    user.program_admin? || user.province_code == "all" || user.province_code == record.location_code[0..1]
   end
 
   def create?
@@ -38,16 +38,16 @@ class EventPolicy < ApplicationPolicy
     def resolve
       if user.system_admin?
         scope.all
-      elsif user.program_admin? || user.province_code == 'all'
+      elsif user.program_admin? || user.province_code == "all"
         program_event_and_shared_events
       else
-        program_event_and_shared_events.where('location_code LIKE ?', "#{user.province_code}%")
+        program_event_and_shared_events.where("location_code LIKE ?", "#{user.province_code}%")
       end
     end
 
     private
       def program_event_and_shared_events
-        scope.left_joins(:event_shareds).where('events.program_id = ? OR event_shareds.program_id = ?', user.program_id, user.program_id)
+        scope.left_joins(:event_shareds).where("events.program_id = ? OR event_shareds.program_id = ?", user.program_id, user.program_id)
       end
   end
 end

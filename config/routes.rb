@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require 'sidekiq/web'
-require 'sidekiq-scheduler/web'
+require "sidekiq/web"
+require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: 'events#index'
-  devise_for :users, path: '/', controllers: { confirmations: 'confirmations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  root to: "events#index"
+  devise_for :users, path: "/", controllers: { confirmations: "confirmations", omniauth_callbacks: "users/omniauth_callbacks" }
 
   # https://github.com/plataformatec/devise/wiki/How-To:-Override-confirmations-so-users-can-pick-their-own-passwords-as-part-of-confirmation-activation
   as :user do
-    match '/confirmation' => 'confirmations#update', :via => :put, :as => :update_user_confirmation
+    match "/confirmation" => "confirmations#update", :via => :put, :as => :update_user_confirmation
   end
 
   resources :programs do
@@ -89,7 +89,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :milestones do
-        resources :fields, only: [:index], module: 'milestone'
+        resources :fields, only: [:index], module: "milestone"
       end
       resources :event_types, only: [:index]
       resources :events, except: [:new, :edit, :destroy]
@@ -98,7 +98,7 @@ Rails.application.routes.draw do
   end
 
   # Pumi
-  mount Pumi::Engine => '/pumi'
+  mount Pumi::Engine => "/pumi"
 
   # Telegram
   telegram_webhook TelegramWebhooksController
@@ -106,7 +106,7 @@ Rails.application.routes.draw do
   if Rails.env.production?
     # Sidekiq
     authenticate :user, lambda { |u| u.system_admin? } do
-      mount Sidekiq::Web => '/sidekiq'
+      mount Sidekiq::Web => "/sidekiq"
     end
 
     # Dashboard
@@ -114,7 +114,7 @@ Rails.application.routes.draw do
       resource :dashboard, only: :show
     end
   else
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web => "/sidekiq"
     resource :dashboard, only: :show
   end
 end

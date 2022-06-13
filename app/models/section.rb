@@ -18,7 +18,7 @@ class Section < ApplicationRecord
   belongs_to :milestone
   has_many :fields, dependent: :destroy
 
-  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+  accepts_nested_attributes_for :fields, allow_destroy: true, reject_if: ->(attributes) { attributes["name"].blank? }
 
   # Validation
   validates :name, presence: true, uniqueness: { scope: [:milestone_id] }
@@ -35,11 +35,11 @@ class Section < ApplicationRecord
 
   # Class methods
   def self.roots
-    [{ name: 'Primary Fields', default: true, fields_attributes: Field.roots }]
+    [{ name: "Primary Fields", default: true, fields_attributes: Field.roots }]
   end
 
   def self.defaults
-    [{ name: 'Primary Fields', default: true, fields_attributes: Field.defaults }]
+    [{ name: "Primary Fields", default: true, fields_attributes: Field.defaults }]
   end
 
   private
@@ -49,17 +49,17 @@ class Section < ApplicationRecord
 
     def validate_field_from_to
       fields.each do |field|
-        errors.add field.name.downcase, I18n.t('milestone.both_must_exist') if field.validations[:from].present? != field.validations[:to].present?
+        errors.add field.name.downcase, I18n.t("milestone.both_must_exist") if field.validations[:from].present? != field.validations[:to].present?
       end
     end
 
     def validate_unique_field_name
-      validate_uniqueness_of_in_memory(fields, %i[name], 'duplicate')
+      validate_uniqueness_of_in_memory(fields, %i[name], "duplicate")
     end
 
     def validate_unique_field_type_location
-      return if fields.select { |field| field.field_type == 'Fields::LocationField' }.length < 2
+      return if fields.select { |field| field.field_type == "Fields::LocationField" }.length < 2
 
-      errors.add :field_type, 'location cannot be more than one'
+      errors.add :field_type, "location cannot be more than one"
     end
 end

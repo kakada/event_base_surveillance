@@ -44,7 +44,7 @@ class ProgramsController < ApplicationController
     @program = authorize Program.find(params[:id])
     @program.reindex_documents
 
-    redirect_to programs_url, notice: t('program.reindex_successfully')
+    redirect_to programs_url, notice: t("program.reindex_successfully")
   end
 
   private

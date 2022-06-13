@@ -5,11 +5,11 @@ class MigrateSectionAndFields < ActiveRecord::Migration[5.2]
     Milestone.all.each do |milestone|
       sections = [
         {
-          name: 'Primary Fields',
+          name: "Primary Fields",
           is_default: true
         },
         {
-          name: 'Additional Fields',
+          name: "Additional Fields",
           is_default: false
         }
       ]

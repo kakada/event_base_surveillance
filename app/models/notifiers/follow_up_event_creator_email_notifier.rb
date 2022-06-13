@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notifiers::FollowUpEventCreatorEmailNotifier
   attr_reader :follow_up
 
@@ -6,7 +8,7 @@ class Notifiers::FollowUpEventCreatorEmailNotifier
   end
 
   def enabled?
-    follow_up.channels.include?('email')
+    follow_up.channels.include?("email")
   end
 
   def recipients

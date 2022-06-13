@@ -22,7 +22,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(harmony: true)
@@ -72,16 +72,16 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: ENV['SETTINGS__SMTP__HOST'] }
-  config.action_mailer.default_options = { from: ENV['SETTINGS__SMTP__DEFAULT_FROM'] }
+  config.action_mailer.default_url_options = { host: ENV["SETTINGS__SMTP__HOST"] }
+  config.action_mailer.default_options = { from: ENV["SETTINGS__SMTP__DEFAULT_FROM"] }
   config.action_mailer.smtp_settings = {
-    address: ENV['SETTINGS__SMTP__ADDRESS'],
-    port: ENV.fetch('SETTINGS__SMTP__PORT') { 25 },
-    authentication: ENV.fetch('SETTINGS__SMTP__AUTHENTICATION') { 'plain' },
-    enable_starttls_auto: ENV.fetch('SETTINGS__SMTP__ENABLE__STARTTLS__AUTO') { true },
-    user_name: ENV['SETTINGS__SMTP__USER_NAME'],
-    password: ENV['SETTINGS__SMTP__PASSWORD'],
-    domain: ENV['SETTINGS__SMTP__DOMAIN']
+    address: ENV["SETTINGS__SMTP__ADDRESS"],
+    port: ENV.fetch("SETTINGS__SMTP__PORT") { 25 },
+    authentication: ENV.fetch("SETTINGS__SMTP__AUTHENTICATION") { "plain" },
+    enable_starttls_auto: ENV.fetch("SETTINGS__SMTP__ENABLE__STARTTLS__AUTO") { true },
+    user_name: ENV["SETTINGS__SMTP__USER_NAME"],
+    password: ENV["SETTINGS__SMTP__PASSWORD"],
+    domain: ENV["SETTINGS__SMTP__DOMAIN"]
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -98,7 +98,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)

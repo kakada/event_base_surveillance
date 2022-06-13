@@ -69,7 +69,7 @@ class User < ApplicationRecord
 
   # Validation
   validates :role, presence: true
-  validates :program_id, presence: true, unless: -> { role == 'system_admin' }
+  validates :program_id, presence: true, unless: -> { role == "system_admin" }
   validates :province_code, presence: true, if: -> { %(staff guest).include?(role.to_s) }
   validates :phone_number, uniqueness: { allow_blank: true }
   validate  :correct_channels
@@ -83,7 +83,7 @@ class User < ApplicationRecord
   end
 
   def set_full_name
-    self.full_name ||= email.split('@').first
+    self.full_name ||= email.split("@").first
   end
 
   def telegram?
@@ -96,7 +96,7 @@ class User < ApplicationRecord
 
   private
     def set_province_code
-      self.province_code = 'all'
+      self.province_code = "all"
     end
 
     def correct_channels

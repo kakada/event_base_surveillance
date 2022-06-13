@@ -19,7 +19,7 @@ module Events
         structure = mappings.to_hash
 
         program.milestones.each do |milestone|
-          es_milestone = { type: 'object', properties: { created_at: { type: 'date' }, updated_at: { type: 'date' } } }
+          es_milestone = { type: "object", properties: { created_at: { type: "date" }, updated_at: { type: "date" } } }
 
           milestone.fields.each do |field|
             next unless field.es_datatype.present?

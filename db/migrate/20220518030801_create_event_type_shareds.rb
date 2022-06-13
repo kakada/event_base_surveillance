@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEventTypeShareds < ActiveRecord::Migration[5.2]
   def change
     create_table :event_type_shareds do |t|

@@ -28,10 +28,10 @@ class Webhook < ApplicationRecord
   validates :url, presence: true, format: { with: %r{\A^(https?\://)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,6}((/|\?)\S*)?$\z} }
 
   def self.types
-    [['Basic Auth', Webhooks::BasicAuth.name], ['Token Auth', Webhooks::TokenAuth.name]]
+    [["Basic Auth", Webhooks::BasicAuth.name], ["Token Auth", Webhooks::TokenAuth.name]]
   end
 
   def notify(_params = {})
-    raise 'you have to implement in subclass'
+    raise "you have to implement in subclass"
   end
 end

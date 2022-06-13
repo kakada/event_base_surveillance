@@ -22,7 +22,7 @@ class EventMilestone < ApplicationRecord
   belongs_to :event, foreign_key: :event_uuid, touch: true
   belongs_to :milestone
   belongs_to :program
-  belongs_to :submitter, class_name: 'User', optional: true
+  belongs_to :submitter, class_name: "User", optional: true
 
   # History
   has_associated_audits
@@ -39,7 +39,7 @@ class EventMilestone < ApplicationRecord
 
   # Nested attributes
   accepts_nested_attributes_for :field_values, allow_destroy: true, reject_if: lambda { |attributes|
-    attributes['id'].blank? && attributes['value'].blank? && attributes['image'].blank? && attributes['values'].blank? && attributes['file'].blank?
+    attributes["id"].blank? && attributes["value"].blank? && attributes["image"].blank? && attributes["values"].blank? && attributes["file"].blank?
   }
 
   # Deligation
@@ -49,11 +49,11 @@ class EventMilestone < ApplicationRecord
 
   # Class Methods
   def self.default_template_code
-    'emde_'
+    "emde_"
   end
 
   def self.dynamic_template_code
-    'emdy_'
+    "emdy_"
   end
 
   # Instant Methods
@@ -62,7 +62,7 @@ class EventMilestone < ApplicationRecord
   end
 
   def fv_conducted_at
-    @fv_conducted_at ||= get_value_by_code('conducted_at')
+    @fv_conducted_at ||= get_value_by_code("conducted_at")
   end
 
   def telegram_message
@@ -73,9 +73,9 @@ class EventMilestone < ApplicationRecord
     def set_event_progress
       return if event.close?
 
-      fv = event.field_values.find_or_initialize_by(field_code: 'progress')
+      fv = event.field_values.find_or_initialize_by(field_code: "progress")
       fv.value = milestone.name
-      fv.field_id ||= program.milestones.root.fields.find_by(code: 'progress').id
+      fv.field_id ||= program.milestones.root.fields.find_by(code: "progress").id
       fv.save
     end
 

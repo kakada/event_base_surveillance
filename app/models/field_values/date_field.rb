@@ -42,7 +42,7 @@ module FieldValues
         iso_date = decode(value)
         iso_value = format_date_iso_string(Time.iso8601(iso_date))
 
-        errors.add(:value, I18n.t('shared.is_invalid_value')) unless iso_value == iso_date
+        errors.add(:value, I18n.t("shared.is_invalid_value")) unless iso_value == iso_date
       end
 
       def decode(y_m_d_value)
@@ -52,7 +52,7 @@ module FieldValues
       end
 
       def invalid_field_message
-        'Invalid date value'
+        "Invalid date value"
       end
 
       def convert_to_iso8601_string(y_m_d_value)
@@ -60,11 +60,11 @@ module FieldValues
       end
 
       def format_date_iso_string(time)
-        time.strftime '%Y-%m-%dT00:00:00Z'
+        time.strftime "%Y-%m-%dT00:00:00Z"
       end
 
       def parse_date(y_m_d_value)
-        Time.strptime y_m_d_value, '%Y-%m-%d'
+        Time.strptime y_m_d_value, "%Y-%m-%d"
       end
   end
 end

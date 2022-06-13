@@ -33,7 +33,7 @@ class UserPolicy < ApplicationPolicy
     if user.system_admin?
       User::ROLES
     else
-      User.roles.keys.reject { |r| r == 'system_admin' }.map { |r| [r.titlecase, r] }
+      User.roles.keys.reject { |r| r == "system_admin" }.map { |r| [r.titlecase, r] }
     end
   end
 

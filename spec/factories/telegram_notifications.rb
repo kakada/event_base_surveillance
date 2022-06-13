@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :telegram_notification, class: 'Notifications::TelegramNotification' do
+  factory :telegram_notification, class: "Notifications::TelegramNotification" do
     message
     milestone { message.milestone }
 

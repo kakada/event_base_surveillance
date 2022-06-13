@@ -42,15 +42,15 @@ class Field < ApplicationRecord
   # Association
   belongs_to :section
   belongs_to :milestone
-  belongs_to :parent, foreign_key: :mapping_field_id, class_name: 'Field', optional: true
+  belongs_to :parent, foreign_key: :mapping_field_id, class_name: "Field", optional: true
   has_many   :field_options, dependent: :destroy
   has_many   :field_values
 
   # Validation
-  validates :code, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
-  validates :name, presence: true, uniqueness: { scope: :section_id, message: 'already exist' }
+  validates :code, presence: true, uniqueness: { scope: :section_id, message: "already exist" }
+  validates :name, presence: true, uniqueness: { scope: :section_id, message: "already exist" }
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
-  validates :mapping_field_id, presence: true, if: -> { field_type == 'Fields::MappingField' && !skip_validation }
+  validates :mapping_field_id, presence: true, if: -> { field_type == "Fields::MappingField" && !skip_validation }
 
   before_validation :set_field_code, if: -> { name.present? }
   before_validation :set_mapping_field_type
@@ -64,43 +64,43 @@ class Field < ApplicationRecord
   scope :default, -> { where(is_default: true) }
   scope :entry_able, -> { where(entry_able: true) }
   scope :tracking, -> { where(tracking: true) }
-  scope :number, -> { where(field_type: 'Fields::IntegerField') }
-  scope :text, -> { where.not(field_type: 'Fields::IntegerField') }
+  scope :number, -> { where(field_type: "Fields::IntegerField") }
+  scope :text, -> { where.not(field_type: "Fields::IntegerField") }
   scope :dates, -> { where(field_type: %w(Fields::DateTimeField Fields::DateField)) }
   scope :milestone_datetimes, -> { dates.where(is_milestone_datetime: true).order(:milestone_datetime_order) }
 
   # Nested attributes
-  accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes['name'].blank? }
+  accepts_nested_attributes_for :field_options, allow_destroy: true, reject_if: ->(attributes) { attributes["name"].blank? }
 
   serialize :validations, Hash
 
   def kind
-    raise 'you have to implement in subclass'
+    raise "you have to implement in subclass"
   end
 
   def es_datatype
-    raise 'you have to implement in subclass'
+    raise "you have to implement in subclass"
   end
 
   def self.validation_operators
-    ['<', '<=', '=', '>', '>=']
+    ["<", "<=", "=", ">", ">="]
   end
 
   # Class methods
   def self.roots
     fields = [
-      { code: 'number_of_case', field_type: 'Fields::IntegerField', name: 'Number of case', required: true, tracking: true },
-      { code: 'number_of_death', field_type: 'Fields::IntegerField', name: 'Number of death', tracking: true },
-      { code: 'description', field_type: 'Fields::NoteField', name: 'Description' },
-      { code: 'province_id', field_type: 'Fields::LocationField', name: 'Province', required: true },
-      { code: 'district_id', field_type: 'Fields::LocationField', name: 'District' },
-      { code: 'commune_id', field_type: 'Fields::LocationField', name: 'Commune' },
-      { code: 'village_id', field_type: 'Fields::LocationField', name: 'Village' },
-      { code: 'event_date', field_type: 'Fields::DateTimeField', name: 'Onset date', required: true, is_milestone_datetime: true, milestone_datetime_order: 1 },
-      { code: 'report_date', field_type: 'Fields::DateTimeField', name: 'Report date', required: true, is_milestone_datetime: true, milestone_datetime_order: 2 },
-      { code: 'progress', field_type: 'Fields::TextField', name: 'Progress', entry_able: false },
-      { code: 'risk_level', field_type: 'Fields::SelectOneField', name: 'Risk level', entry_able: false, color_required: true, tracking: true, field_options_attributes: [{ name: 'Low', color: '#51b8b8' }, { name: 'Moderate', color: '#51b865' }, { name: 'High', color: '#d68bb2' }, { name: 'Very high', color: '#e81c2a' }] },
-      { code: 'source_of_information', field_type: 'Fields::SelectOneField', name: 'Source of information', field_options_attributes: [{ name: 'Hotline' }, { name: 'Facebook' }, { name: 'Website' }, { name: 'Newspaper' }] }
+      { code: "number_of_case", field_type: "Fields::IntegerField", name: "Number of case", required: true, tracking: true },
+      { code: "number_of_death", field_type: "Fields::IntegerField", name: "Number of death", tracking: true },
+      { code: "description", field_type: "Fields::NoteField", name: "Description" },
+      { code: "province_id", field_type: "Fields::LocationField", name: "Province", required: true },
+      { code: "district_id", field_type: "Fields::LocationField", name: "District" },
+      { code: "commune_id", field_type: "Fields::LocationField", name: "Commune" },
+      { code: "village_id", field_type: "Fields::LocationField", name: "Village" },
+      { code: "event_date", field_type: "Fields::DateTimeField", name: "Onset date", required: true, is_milestone_datetime: true, milestone_datetime_order: 1 },
+      { code: "report_date", field_type: "Fields::DateTimeField", name: "Report date", required: true, is_milestone_datetime: true, milestone_datetime_order: 2 },
+      { code: "progress", field_type: "Fields::TextField", name: "Progress", entry_able: false },
+      { code: "risk_level", field_type: "Fields::SelectOneField", name: "Risk level", entry_able: false, color_required: true, tracking: true, field_options_attributes: [{ name: "Low", color: "#51b8b8" }, { name: "Moderate", color: "#51b865" }, { name: "High", color: "#d68bb2" }, { name: "Very high", color: "#e81c2a" }] },
+      { code: "source_of_information", field_type: "Fields::SelectOneField", name: "Source of information", field_options_attributes: [{ name: "Hotline" }, { name: "Facebook" }, { name: "Website" }, { name: "Newspaper" }] }
     ]
     fields.each_with_index do |field, index|
       field[:display_order] = index + 1
@@ -109,13 +109,13 @@ class Field < ApplicationRecord
   end
 
   def self.conclude_event_type
-    self.new({ code: 'conclude_event_type', field_type: 'Fields::SelectOneField', name: 'Conclude event type', is_default: true, field_options_attributes: EventType.pluck(:name).map { |name| { name: name, value: name } } })
+    self.new({ code: "conclude_event_type", field_type: "Fields::SelectOneField", name: "Conclude event type", is_default: true, field_options_attributes: EventType.pluck(:name).map { |name| { name: name, value: name } } })
   end
 
   def self.defaults
     [
-      { code: 'conducted_at', field_type: 'Fields::DateTimeField', name: 'Conducted at', is_default: true, required: true, is_milestone_datetime: true, milestone_datetime_order: 1 },
-      { code: 'source', field_type: 'Fields::TextField', name: 'Source', is_default: true, entry_able: false }
+      { code: "conducted_at", field_type: "Fields::DateTimeField", name: "Conducted at", is_default: true, required: true, is_milestone_datetime: true, milestone_datetime_order: 1 },
+      { code: "source", field_type: "Fields::TextField", name: "Source", is_default: true, entry_able: false }
     ]
   end
 
@@ -128,7 +128,7 @@ class Field < ApplicationRecord
   end
 
   def format_name
-    name.downcase.split(' ').join('_')
+    name.downcase.split(" ").join("_")
   end
 
   def relevant_format_code
@@ -160,7 +160,7 @@ class Field < ApplicationRecord
     end
 
     def set_mapping_field_type
-      return unless field_type == 'mapping_field'
+      return unless field_type == "mapping_field"
 
       event_mapping_field = self.class.roots.find { |obj| obj[:code] == mapping_field }
       self.mapping_field_type = event_mapping_field.present? && event_mapping_field[:field_type]

@@ -20,10 +20,10 @@ class ChatGroup < ApplicationRecord
   has_many :notification_chat_groups
   has_many :notifications, through: :notification_chat_groups
 
-  scope :telegrams, -> { where(provider: 'Telegram') }
+  scope :telegrams, -> { where(provider: "Telegram") }
   scope :actives, -> { where(is_active: true) }
 
   TELEGRAM_CHAT_TYPES = %w[group supergroup]
-  TELEGRAM_SUPER_GROUP = 'supergroup'
-  TELEGRAM_GROUP = 'group'
+  TELEGRAM_SUPER_GROUP = "supergroup"
+  TELEGRAM_GROUP = "group"
 end

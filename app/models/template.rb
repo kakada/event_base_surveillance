@@ -24,18 +24,18 @@ class Template < ApplicationRecord
 
   def self.predefined_fields
     [
-      { code: 'uuid', name: 'Uuid' },
-      { code: 'event_type_name', name: 'Suspected Event' },
-      { code: 'program_name', name: 'Program Name' },
-      { code: 'location_name', name: 'Location Name' },
-      { code: 'created_at', name: 'Created at' },
-      { code: 'updated_at', name: 'Updated at' },
-      { code: 'close', name: 'Close?' },
-      { code: 'conclude_event_type_name', name: 'Conclude event type' },
-      { code: 'progress', name: 'Event progress' },
-      { code: 'creator_full_name', name: 'Creator name' },
-      { code: 'creator_email', name: 'Creator email' },
-      { code: 'creator_phone_number', name: 'Creator phone number' }
+      { code: "uuid", name: "Uuid" },
+      { code: "event_type_name", name: "Suspected Event" },
+      { code: "program_name", name: "Program Name" },
+      { code: "location_name", name: "Location Name" },
+      { code: "created_at", name: "Created at" },
+      { code: "updated_at", name: "Updated at" },
+      { code: "close", name: "Close?" },
+      { code: "conclude_event_type_name", name: "Conclude event type" },
+      { code: "progress", name: "Event progress" },
+      { code: "creator_full_name", name: "Creator name" },
+      { code: "creator_email", name: "Creator email" },
+      { code: "creator_phone_number", name: "Creator phone number" }
     ]
   end
 end

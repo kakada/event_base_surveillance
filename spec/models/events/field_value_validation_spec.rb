@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Events::FieldValueValidation do
-  describe '#validate_required_field' do
+  describe "#validate_required_field" do
     let!(:program) { create(:program) }
     let!(:event) { create(:event, program: program) }
     let!(:milestone) { create(:milestone, program: program) }
 
-    context 'valid' do
+    context "valid" do
       let!(:conducted_at) {
         {
-          field_id: milestone.fields.find_by(code: 'conducted_at').id,
-          field_code: 'conducted_at',
+          field_id: milestone.fields.find_by(code: "conducted_at").id,
+          field_code: "conducted_at",
           value: Date.today.to_s
         }
       }
@@ -22,7 +22,7 @@ RSpec.describe Events::FieldValueValidation do
       it { expect(event_milestone.save).to be_truthy }
     end
 
-    context 'invalid' do
+    context "invalid" do
       before :each do
         @event_milestone = build(:event_milestone, program: program, milestone: milestone, event: event, field_values_attributes: [])
         @event_milestone.save
@@ -33,34 +33,34 @@ RSpec.describe Events::FieldValueValidation do
     end
   end
 
-  describe '#validate_field_value_datatype' do
+  describe "#validate_field_value_datatype" do
     let!(:program) { create(:program) }
     let!(:event) { create(:event, program: program) }
-    let!(:my_number_field) { { name: 'my_number', field_type: 'Fields::IntegerField', validations: { from: 1, to: 3 } } }
-    let!(:milestone) { create(:milestone, program: program, sections_attributes: [{ name: 'section', fields_attributes: [my_number_field] }]) }
+    let!(:my_number_field) { { name: "my_number", field_type: "Fields::IntegerField", validations: { from: 1, to: 3 } } }
+    let!(:milestone) { create(:milestone, program: program, sections_attributes: [{ name: "section", fields_attributes: [my_number_field] }]) }
     let!(:conducted_at) {
       {
-        field_id: milestone.fields.find_by(code: 'conducted_at').id,
-        field_code: 'conducted_at',
+        field_id: milestone.fields.find_by(code: "conducted_at").id,
+        field_code: "conducted_at",
         value: Date.today.to_s
       }
     }
 
     let(:my_number) {
       {
-        field_id: milestone.fields.find_by(code: 'my_number').id,
-        field_code: 'my_number',
+        field_id: milestone.fields.find_by(code: "my_number").id,
+        field_code: "my_number",
         value: 1
       }
     }
 
     let(:event_milestone) { build(:event_milestone, program: program, milestone: milestone, event: event, field_values_attributes: [conducted_at, my_number]) }
 
-    context 'valid data type' do
+    context "valid data type" do
       it { expect(event_milestone.save).to be_truthy }
     end
 
-    context 'valid number range' do
+    context "valid number range" do
       before :each do
         my_number[:value] = 3
       end
@@ -68,7 +68,7 @@ RSpec.describe Events::FieldValueValidation do
       it { expect(event_milestone.save).to be_truthy }
     end
 
-    context 'invalid number range' do
+    context "invalid number range" do
       before :each do
         my_number[:value] = 0
       end
@@ -76,9 +76,9 @@ RSpec.describe Events::FieldValueValidation do
       it { expect(event_milestone.save).to be_falsy }
     end
 
-    context 'invalid data type' do
+    context "invalid data type" do
       before :each do
-        my_number[:value] = 'abc'
+        my_number[:value] = "abc"
       end
 
       it { expect(event_milestone.save).to be_falsy }
