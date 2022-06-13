@@ -1,4 +1,4 @@
 - content_for :header_title do
-  = t('schedule.edit_schedule')
+  = "#{t('schedule.edit_schedule')}: #{@schedule.display_type}"
 
 = render 'form'

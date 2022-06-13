@@ -94,6 +94,10 @@ class User < ApplicationRecord
     email.split("@").first.upcase
   end
 
+  def phd?
+    province_code.length == 2
+  end
+
   private
     def set_province_code
       self.province_code = "all"

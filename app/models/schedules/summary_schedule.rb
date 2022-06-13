@@ -45,20 +45,28 @@ module Schedules
       date_index == Time.zone.now.mday
     end
 
-    def short_display_info
-      display("summary_schedule_short_info")
+    def short_description
+      discription('summary_schedule_short_info')
     end
 
-    def full_display_info
-      display("summary_schedule_full_info")
+    def full_description
+      discription('summary_schedule_full_info')
     end
 
     def display_message
       ScheduleMessageInterpreter.new(self).interpreted_message
     end
 
+    def icon_html
+      "<i class='fas fa-clipboard-list'></i>"
+    end
+
+    def display_type
+      I18n.t('schedule.summary_schedule')
+    end
+
     private
-      def display(label)
+      def discription(label)
         I18n.t("schedule.#{label}",
           interval_type: "<b>" + I18n.t("schedule.#{interval_type}") + "</b>",
           follow_up_hour: "<b>#{follow_up_hour}:00</b>",

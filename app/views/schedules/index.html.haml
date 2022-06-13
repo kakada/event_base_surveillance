@@ -9,10 +9,10 @@
         = t('shared.add_new', name: t('schedule.schedule'))
 
       .dropdown-menu.dropdown-menu-right
-        - Schedule::TYPES.each_with_index do |type, index|
-          %a.dropdown-item{href: new_schedule_path(type: type), class: ('border-bottom' if index < Schedule::TYPES.length - 1)}
-            %i.fas.fa-plus.mr-2
-            = t("schedule.new_#{type.split('::').last.underscore}")
+        - schedule_types.each_with_index do |st, index|
+          %a.dropdown-item{href: new_schedule_path(type: st[:type]), class: ('border-bottom' if index < schedule_types.length - 1)}
+            %span.mr-2= st[:icon].html_safe
+            = st[:label]
 
 .card.shadow.mb-4
   .card-body
@@ -28,7 +28,7 @@
             %th= t('schedule.name')
             %th= t('schedule.schedule')
             %th= t('schedule.message')
-            %th= t('schedule.use_channel')
+            %th= t('schedule.notify_to')
             %th= t('schedule.status')
             %th
 
@@ -36,17 +36,25 @@
           - @schedules.each_with_index do |schedule, index|
             %tr
               %td= @pagy.from + index
-              %td= schedule.name
               %td
-                = schedule.short_display_info.html_safe
-                %span{ 'data-toggle' => 'tooltip', 'data-title' => schedule.full_display_info, "data-html" => "true" }
+                %span.mr-2{ 'data-toggle' => 'tooltip', 'title' => schedule.display_type }
+                  = schedule.icon_html.html_safe
+                = schedule.name
+              %td
+                = schedule.short_description.html_safe
+                %span{ 'data-toggle' => 'tooltip', 'data-title' => schedule.full_description, "data-html" => "true" }
                   %i.fas.fa-info-circle.icon-24
               %td
                 .multi-ellipsis= schedule.message
               %td
-                - schedule.channels.each do |ch|
-                  %span.ml-2.icon-24{'data-toggle' => 'tooltip', 'data-title' => t("shared.#{ch}")}
-                    = send("icon_#{ch}").html_safe
+                - if schedule.event_schedule?
+                  - schedule.channels.each do |ch|
+                    %span.ml-2.icon-24{'data-toggle' => 'tooltip', 'data-title' => t("shared.#{ch}")}
+                      = send("icon_#{ch}").html_safe
+                - else
+                  %span.ml-2.icon-24{'data-toggle' => 'tooltip', 'data-title' => schedule.emails.join(', ')}
+                    = send("icon_email").html_safe
+
               %th= status_html(schedule.enabled?).html_safe
 
               %td.text-right

@@ -38,20 +38,28 @@ module Schedules
       follow_up_hour == Time.zone.now.hour
     end
 
-    def short_display_info
-      display("event_schedule_short_info")
+    def short_description
+      description('event_schedule_short_info')
     end
 
-    def full_display_info
-      display("event_schedule_full_info")
+    def full_description
+      description('event_schedule_full_info')
     end
 
     def display_message(event)
       ScheduleMessageInterpreter.new(self, event).interpreted_message
     end
 
+    def icon_html
+      "<i class='fas fa-calendar-check'></i>"
+    end
+
+    def display_type
+      I18n.t('schedule.event_schedule')
+    end
+
     private
-      def display(label)
+      def description(label)
         I18n.t("schedule.#{label}",
           interval_value: "<b>#{interval_value}</b>",
           interval_type: "<b>" + I18n.t("schedule.#{interval_type}") + "</b>",
