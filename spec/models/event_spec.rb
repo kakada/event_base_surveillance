@@ -133,6 +133,12 @@ RSpec.describe Event, type: :model do
     it { expect(Event.filter(province_ids: ["02"]).count).to eq(0) }
   end
 
+  describe "#relevant_event_milestone" do
+    let!(:event)    { create(:event) }
+
+    it { expect(event.relevant_event_milestone).to be_nil }
+  end
+
   private
     def create_field_value(event, code, value)
       root_fields = event.milestone.fields
