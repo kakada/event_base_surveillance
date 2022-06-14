@@ -46,11 +46,11 @@ module Schedules
     end
 
     def short_description
-      discription('summary_schedule_short_info')
+      discription("summary_schedule_short_info")
     end
 
     def full_description
-      discription('summary_schedule_full_info')
+      discription("summary_schedule_full_info")
     end
 
     def display_message
@@ -62,7 +62,7 @@ module Schedules
     end
 
     def display_type
-      I18n.t('schedule.summary_schedule')
+      I18n.t("schedule.summary_schedule")
     end
 
     private

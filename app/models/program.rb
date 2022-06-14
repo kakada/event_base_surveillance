@@ -72,6 +72,10 @@ class Program < ApplicationRecord
     self.class.where.not(id: id)
   end
 
+  def has_final_milestone?
+    milestones.finals.present?
+  end
+
   private
     def set_default_language
       self.language_code ||= "en"

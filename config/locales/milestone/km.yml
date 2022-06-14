@@ -57,3 +57,4 @@ km:
     marked_display_date: សម្គាល់ថាជាកាលបរិច្ឆេទត្រូវបង្ហាញ
     skip_logic_cannot_be_required: Skip logic field cannot be required
     required_field_cannot_have_skip_logic: Required field cannot have skip logic
+    disable_to_add_new: មិនអាចបន្ថែម milestone ទៀតទេព្រោះមាន milestone ចុងក្រោយរួចហើយ។ សូមធ្វើការកំណត់ឡើងវិញនៅ milestone ចុងក្រោយ ដើម្បីអាចបន្ថែម milestone ថ្មី។

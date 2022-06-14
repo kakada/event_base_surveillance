@@ -39,11 +39,11 @@ module Schedules
     end
 
     def short_description
-      description('event_schedule_short_info')
+      description("event_schedule_short_info")
     end
 
     def full_description
-      description('event_schedule_full_info')
+      description("event_schedule_full_info")
     end
 
     def display_message(event)
@@ -55,7 +55,7 @@ module Schedules
     end
 
     def display_type
-      I18n.t('schedule.event_schedule')
+      I18n.t("schedule.event_schedule")
     end
 
     private

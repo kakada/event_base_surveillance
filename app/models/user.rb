@@ -95,7 +95,7 @@ class User < ApplicationRecord
   end
 
   def phd?
-    province_code.length == 2
+    province_code.to_s.length == 2
   end
 
   private
