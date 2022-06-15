@@ -1,0 +1,20 @@
+- current_locale = available_locales.find { |locale| locale[:code] == I18n.locale.to_s }
+
+%li.nav-item.dropdown.no-arrow.mx-1
+  / Language display
+  %a#languageDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+
+    = image_tag current_locale[:image], alt: "locale", size: "24x24", class: "mr-2", 'data-language-code' => I18n.locale
+    %span.text-gray-600.small= current_locale[:label]
+    %i.fas.fa-angle-down.fa-fw
+
+  / Language dropdown list
+  .dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in.p-0{"aria-labelledby" => "languageDropdown"}
+    = simple_form_for(current_user, url: locale_path, method: :put, remote: true, html: { id: "switch-locale" }) do |f|
+      = f.hidden_field :locale
+
+      - available_locales.each_with_index do |locale, index|
+        %a.switch-locale.dropdown-item.d-flex.align-items-center.small{'data-locale' => locale[:code], href: '#', class: ('border-bottom' if index < available_locales.length)}
+          .dropdown-list-image.mr-3
+            = image_tag locale[:image], alt: "locale", size: "24x24"
+          .text-truncate= locale[:label]

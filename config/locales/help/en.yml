@@ -1,0 +1,17 @@
+en:
+  help:
+    telegram_account: Telegram Account
+    you_can_connect_telegram_account: You can connect your telegram for getting notifications from the system.
+    open_telegram_app: Open Telegram Application to search bot
+    search_bot_name: Open Telegram and search the name of the bot "camemsbot"
+    open_chat: Open chat with the bot
+    to_chat_with_bot: After you found the bot name ("camemsbot"), click on start button to chat with CamEms Bot.
+    bot_welcome: CamEms bot responds with a welcome message
+    bot_reponse_welcome: The bot will respond with a welcome message and instruction command to connect your account to the system
+    connect_your_account: Connect your telegram account
+    bot_connect_instruction: "To register your account, please type <div><code>/connect <b>your_phone_number_or_email</b> <i>your_office_province_code_or_name.</i></code></div> <div>Example:</div><div> <code>/connect 011222333 01</code> ឬ</div> <div><code>/connect 011222333 Banteay Meanchey</code> ឬ </div><div><code>/connect 011222333 បន្ទាយមានជ័យ</code> ឬ </div><div><code>/connect abc@email.com 01</code> ឬ </div><div><code>/connect abc@email.com Banteay Meanchey</code> ឬ</div><div> <code>/connect abc@email.com បន្ទាយមានជ័យ</code> ឬ </div><div><code>/connect abc@email.com national</code></div>"
+    insert_command: Insert the command to the chat
+    insert_wrong_info: I insert the wrong information, so the bot will response with sorry message
+    insert_right_info: Then I insert the right information, so the bot will respond with a congratulation message
+    how_to_disconnect_account: How to disconnect telegram account
+    way_to_disconnect: The way to disconnect your telegram account is similar to connect

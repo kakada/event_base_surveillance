@@ -1,0 +1,40 @@
+%li.nav-item.dropdown.no-arrow
+  / User display
+  %a#userDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+    %span.mr-2.d-none.d-lg-inline.text-gray-600.small= current_user.display_name
+
+    = image_tag 'default_profile.png', alt: 'profile', class: 'img-profile rounded-circle'
+
+  / Profile dropdown
+  .dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in.p-0{"aria-labelledby" => "userDropdown"}
+
+    / Profile email
+    .dropdown-item.profile-wrapper.small.border-bottom
+      .dropdown-list-image.mr-2
+        = image_tag 'default_profile.png', alt: 'profile', class: 'img-profile rounded-circle'
+      %strong.ellipsis.flex-grow-1{title: current_user.email}
+        = current_user.email
+
+      - if current_user.telegram?
+        = telegram_icon(current_user).html_safe
+      - else
+        %span.text-gray-600{'data-toggle' => 'tooltip', title: t('user.telegram_account_is_not_connected')}
+          = icon_telegram.html_safe
+
+    / Event Setting
+    = link_to user_path(current_user), class: 'dropdown-item d-flex align-items-center small border-bottom', remote: true do
+      .dropdown-list-image.mr-2
+        %i.fas.fa-bell.fa-sm.text-gray-600
+      = t('user.event_notification_setting')
+
+    / Telegram account help
+    = link_to helps_how_to_connect_telegram_account_path, class: 'dropdown-item d-flex align-items-center small border-bottom' do
+      .dropdown-list-image.mr-2.text-gray-600{'data-toggle' => 'tooltip', 'title' => 'test'}
+        = icon_telegram.html_safe
+      = t('user.telegram_account_help')
+
+    / Logout
+    = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item d-flex align-items-center small' do
+      .dropdown-list-image.mr-2
+        %i.fas.fa-sign-out-alt.fa-sm.text-gray-600
+      = t("sidebar.logout")

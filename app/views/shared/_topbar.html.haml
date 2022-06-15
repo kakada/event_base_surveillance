@@ -1,0 +1,17 @@
+%nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
+  / Sidebar Toggle (Topbar)
+  %button#sidebarToggleTop.btn.btn-link.d-md-none.rounded-circle.mr-3.sidebarCollapse
+    %i.fa.fa-bars
+
+  %h4.ml-1
+    = yield :header_title
+
+  / Topbar Navbar
+  %ul.navbar-nav.ml-auto
+    = render "shared/topbars/switch_locale"
+
+    .topbar-divider.d-none.d-sm-block
+
+    = render "shared/topbars/user_profile"
+
+= render 'shared/user_setting/event_notification_setting_modal'
