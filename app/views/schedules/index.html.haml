@@ -30,6 +30,7 @@
             %th= t('schedule.message')
             %th= t('schedule.notify_to')
             %th= t('schedule.status')
+            %th= t('shared.updated_at')
             %th
 
         %tbody
@@ -55,8 +56,8 @@
                   %span.ml-2.icon-24{'data-toggle' => 'tooltip', 'data-title' => schedule.emails.join(', ')}
                     = send("icon_email").html_safe
 
-              %th= status_html(schedule.enabled?).html_safe
-
+              %td= status_html(schedule.enabled?).html_safe
+              %td= l(schedule.updated_at)
               %td.text-right
                 = render 'action_buttons', schedule: schedule
 

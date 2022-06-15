@@ -11,7 +11,7 @@
       .date-index{ 'data-week' => I18n.t('date.day_names').to_json }
         .d-flex.align-items-center
           %label.mb-0.mx-2= t('schedule.at_day')
-          = f.input :date_index, as: :select, label: false, input_html: {style: 'width: 120px;', class: 'input'}, wrapper_html: {class: 'mb-0 mr-2'}
+          = f.input :date_index, as: :select, label: false, input_html: {style: 'width: 120px;', class: 'input', 'data-value' => f.object.date_index}, wrapper_html: {class: 'mb-0 mr-2'}
 
     %label.mb-0.mr-2= t('schedule.at')
     = f.input :follow_up_hour, label: false, collection: (0..23).to_a.map { |h| ["#{h}:00", h] }, include_blank: false, input_html: {style: 'width: 100px;', class: 'input'}, wrapper_html: {class: 'mb-0'}
