@@ -29,4 +29,14 @@ RSpec.describe Field, type: :model do
       it { is_expected.not_to validate_presence_of(:mapping_field_id) }
     end
   end
+
+  describe ".before_validation, set_code" do
+    let(:field) { build(:field, name: "Any possible to having new case?", code: nil) }
+
+    it "sets code with clearing special character" do
+      field.valid?
+
+      expect(field.code).to eq("any_possible_to_having_new_case")
+    end
+  end
 end
