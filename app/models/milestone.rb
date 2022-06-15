@@ -34,6 +34,7 @@ class Milestone < ApplicationRecord
   }
 
   STATUSES = statuses.keys.map { |r| [r.titlecase, r] }
+  PREVIOUS_MILESTONE = "previous_milestone"
 
   # Validation
   validates :name, presence: true, uniqueness: { scope: [:program_id] }
@@ -108,8 +109,9 @@ class Milestone < ApplicationRecord
               .where("milestones.display_order": (1..display_order.to_i).to_a)
               .where("milestones.program_id": program_id)
               .order("milestones.display_order ASC")
-
-    fields.includes(:milestone).map { |field| field.relevant_format }
+    arr = fields.includes(:milestone).map { |field| field.relevant_format }
+    arr.push(previous_milestone_field) if scope == :dates && !self.root?
+    arr
   end
 
   private
@@ -123,5 +125,12 @@ class Milestone < ApplicationRecord
 
     def set_default_section
       self.sections_attributes = Section.defaults if sections.select { |section| section.default }.length == 0
+    end
+
+    def previous_milestone_field
+      {
+        name: "Previous milestone::Conducted on",
+        code: "#{PREVIOUS_MILESTONE}::conducted_at"
+      }
     end
 end

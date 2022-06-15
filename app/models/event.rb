@@ -84,15 +84,23 @@ class Event < ApplicationRecord
 
   # Instant Methods
   def conducted_at
-    @conducted_at ||= get_value_by_code("event_date").try(:value)
+    @conducted_at ||= fv_conducted_at.try(:value)
+  end
+
+  def fv_conducted_at
+    @fv_conducted_at ||= get_value_by_code("event_date")
   end
 
   def milestone
     @milestone ||= program.milestones.root
   end
 
+  def milestone_id
+    @milestone_id ||= milestone.id
+  end
+
   def progress
-    @progress ||= field_values.find_by(field_code: "progress").try(:value)
+    @progress ||= get_value_by_code("progress").try(:value)
   end
 
   def telegram_message
@@ -126,6 +134,10 @@ class Event < ApplicationRecord
 
   def shared_with?(program_id)
     program_shared_ids.include?(program_id)
+  end
+
+  def relevant_event_milestone(relevant_milestone_id = nil)
+    nil
   end
 
   def self.search_by_uuid_or_event_type(keyword)

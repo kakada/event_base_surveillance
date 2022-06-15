@@ -78,7 +78,7 @@ RSpec.describe FieldValues::RelevantFieldValidation do
       }
 
       it { expect(event_report_date.send(:relevant_valueable)).to be_nil }
-      it { expect(event_report_date.send(:relevant_collection)).to eq event.field_values }
+      it { expect(event_report_date.send(:relevant_values)).to eq event.field_values }
     end
 
     context "is verification" do
@@ -90,7 +90,7 @@ RSpec.describe FieldValues::RelevantFieldValidation do
       }
 
       it { expect(relevant_valueable).to eq(event) }
-      it { expect(verification_conducted_on.send(:relevant_collection)).to eq(verification.field_values.to_a + relevant_valueable.field_values.to_a) }
+      it { expect(verification_conducted_on.send(:relevant_values)).to eq(verification.field_values.to_a + relevant_valueable.field_values.to_a) }
     end
 
     context "is risk_assessment" do
@@ -102,7 +102,7 @@ RSpec.describe FieldValues::RelevantFieldValidation do
       }
 
       it { expect(relevant_valueable).to eq(verification) }
-      it { expect(risk_assessment_conducted_on.send(:relevant_collection)).to eq(risk_assessment.field_values.to_a + relevant_valueable.field_values.to_a) }
+      it { expect(risk_assessment_conducted_on.send(:relevant_values)).to eq(risk_assessment.field_values.to_a + relevant_valueable.field_values.to_a) }
     end
   end
 end
