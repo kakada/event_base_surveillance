@@ -10,6 +10,7 @@ module Users
         def filter(params)
           scope = all
           scope = scope.where("email LIKE ?", "%#{params[:email]}%") if params[:email].present?
+          scope = scope.where(province_code: params[:province_ids]) if params[:province_ids].present?
           scope
         end
 

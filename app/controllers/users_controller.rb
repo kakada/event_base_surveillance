@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :clear_flash, on: [:update]
 
   def index
-    @pagy, @users = pagy(policy_scope(authorize User.filter(params).order(updated_at: :DESC).includes(:program, :location)))
+    @pagy, @users = pagy(policy_scope(authorize User.filter(filter_params).order(updated_at: :DESC).includes(:program, :location)))
   end
 
   def show
@@ -72,6 +72,10 @@ class UsersController < ApplicationController
       params.require(:user).permit(:email, :full_name, :role,
         :program_id, :province_code, :phone_number, notification_channels: []
       )
+    end
+
+    def filter_params
+      params.permit(:email, province_ids: [])
     end
 
     def clear_flash
