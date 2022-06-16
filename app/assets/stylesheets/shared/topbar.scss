@@ -50,6 +50,10 @@
 
 .text-gray-600 {
   color: #858796 !important;
+
+  i {
+    color: #858796 !important;
+  }
 }
 
 .small {
@@ -78,4 +82,10 @@
   .topbar .dropdown-list .dropdown-item .text-truncate {
     max-width: 13.375rem;
   }
+}
+
+.profile-wrapper {
+  background-color: rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
 }

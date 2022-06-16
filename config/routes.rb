@@ -19,9 +19,8 @@ Rails.application.routes.draw do
     resource :telegram_bot
   end
 
-  resource :telegram_bot, only: [] do
-    get :help, on: :collection
-  end
+  get "helps/how-to-connect-telegram-bot", to: "helps#telegram_bot"
+  get "helps/how-to-connect-telegram-account", to: "helps#telegram_account"
 
   scope module: :programs do
     resource :setting, only: [:show, :update]

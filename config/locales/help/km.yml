@@ -1,0 +1,17 @@
+km:
+  help:
+    telegram_account: គណនីតេលេក្រាម
+    you_can_connect_telegram_account: អ្នកអាចភ្ជាប់គណនីតេលេក្រាមរបស់អ្នកដើម្បីទទួលបានការជូនដំណឹងពីប្រព័ន្ធតាមដានព្រឹត្តិការណ៍កម្ពុជា
+    open_telegram_app: បើកកម្មវិធី Telegram ដើម្បីស្វែងរក Bot
+    search_bot_name: បើក Telegram ហើយស្វែងរកឈ្មោះ Bot "camemsbot"
+    open_chat: បើកការជជែកជាមួយ Bot
+    to_chat_with_bot: បន្ទាប់ពីអ្នកបានរកឃើញឈ្មោះ bot ("camemsbot") សូមចុចលើប៊ូតុង Start ដើម្បីបើកការជជែកជាមួយ CamEms Bot។
+    bot_welcome: CamEms Bot ឆ្លើយតបជាមួយសារស្វាគមន៍
+    bot_reponse_welcome: Bot នឹងឆ្លើយតបជាមួយនឹងសារស្វាគមន៍ និងពាក្យបញ្ជាណែនាំ ដើម្បីភ្ជាប់គណនីរបស់អ្នកទៅកាន់ប្រព័ន្ធ
+    connect_your_account: ភ្ជាប់គណនីតេឡេក្រាមរបស់អ្នក។
+    bot_connect_instruction: ដើម្បីចុះឈ្មោះគណនីរបស់អ្នក សូមវាយ <div><code>/connect <b>your_phone_number_or_email</b> <i>your_office_province_code_or_name។</i></code></div> <div>ឧទាហរណ៍៖</div> <div> <code>/connect 011222333 01</code> ឬ</div> <div><code>/connect 011222333 បន្ទាយមានជ័យ</code> ឬ </div><div><code>/connect 011222333 បន្ទាយមានជ័យ</code> ឬ </div><div><code>/connect abc@email.com 01</code> ឬ </div><div><code>/connect abc@email.com បន្ទាយមានជ័យ</code> ឬ </div><div> <code>/connect abc@email.com បន្ទាយមានជ័យ</code> ឬ </div><div><code>/connect abc@email.com national</code></div>
+    insert_command: បញ្ចូលពាក្យបញ្ជាទៅកាន់ប្រអប់សារ
+    insert_wrong_info: ខ្ញុំបញ្ចូលព័ត៌មានខុស ដូច្នេះ bot នឹងឆ្លើយតបជាមួយសារសុំទោស
+    insert_right_info: បន្ទាប់មកខ្ញុំបញ្ចូលព័ត៌មានត្រឹមត្រូវ ដូច្នេះ bot នឹងឆ្លើយតបជាមួយនឹងសារអបអរសាទរ
+    how_to_disconnect_account: វិធីផ្តាច់គណនីតេឡេក្រាម
+    way_to_disconnect: វិធីដើម្បីផ្តាច់គណនីតេឡេក្រាមរបស់អ្នកគឺស្រដៀងគ្នានឹងវិធីភ្ជាប់ភ្ជាប់ដែរ

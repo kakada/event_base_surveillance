@@ -1,0 +1,73 @@
+- content_for :header_title do
+  = t('telegram_bot.telegram_bot')
+
+.d-flex.justify-content-end.mb-3
+  - done_url = current_user.system_admin? ? programs_path : setting_path
+  = link_to t('shared.done'), done_url, class: 'btn btn-primary btn-sm'
+
+.card.shadow.mb-4.medium-width
+  .card-body
+    %p= t('telegram_bot.you_can_configure_your_bot')
+
+    %div
+      %h5= t('telegram_bot.visit_bot_father_to_create_newbot')
+      %div
+        = link_to t('telegram_bot.create_new_bot'), 'https://telegram.me/botfather', class: 'btn btn-link'
+        %span= t('telegram_bot.using_the_bot_father')
+      = image_tag 'telegram_bot/bot_father.png', class: 'image'
+
+    %div
+      %h5= t('telegram_bot.create_new_bot')
+      %div= "#{t('telegram_bot.to_create_a_newbot')}, #{t('telegram_bot.send_command')} <code>\/newbot</code>.".html_safe
+      = image_tag 'telegram_bot/newbot.png', class: 'image'
+
+    %div
+      %h5= t('telegram_bot.specify_a_friendly_name')
+      %div= t('telegram_bot.give_the_bot_a_friendly_name')
+      = image_tag 'telegram_bot/bot_name.png', class: 'image'
+
+    %div
+      %h5= t('telegram_bot.specify_a_username')
+      %div= t('telegram_bot.give_the_bot_a_unique_username')
+      %div= t('telegram_bot.username_note')
+      = image_tag 'telegram_bot/bot_username.png', class: 'image'
+
+    %div
+      %h5= t('telegram_bot.copy_the_access_token')
+      %div= t('telegram_bot.copy_the_bot_access_token')
+      %div= t('telegram_bot.token_note').html_safe
+      = image_tag 'telegram_bot/bot_token.png', class: 'image'
+
+    %div
+      %h5= t('telegram_bot.enter_the_bot_token')
+      %div= t('telegram_bot.go_to_setting').html_safe
+      = image_tag 'telegram_bot/setting.png', class: 'image'
+      %div= t('telegram_bot.enable_telegram_notification').html_safe
+      = image_tag 'telegram_bot/telegram_off.png', class: 'image'
+      = image_tag 'telegram_bot/telegram_on.png', class: 'image'
+
+    #group
+      %div
+        %h2= t('telegram_bot.telegram_chat_group')
+        %div= t('telegram_bot.to_add_group_chat')
+        = image_tag 'telegram_bot/group_step1.png', class: 'image'
+
+      %div
+        %h5= t('telegram_bot.add_member')
+        %div= t('telegram_bot.to_add_member')
+        = image_tag 'telegram_bot/group_step2.png', class: 'image'
+
+      %div
+        %h5= t('telegram_bot.search_bot_name')
+        %div= t('telegram_bot.to_search_bot_name')
+        = image_tag 'telegram_bot/group_step3.png', class: 'image'
+
+      %div
+        %h5= t('telegram_bot.added_to_the_group')
+        %div= t('telegram_bot.successfully_added_to_group')
+        = image_tag 'telegram_bot/group_step4.png', class: 'image'
+
+      %div
+        %h5= t('telegram_bot.added_group_to_system')
+        %div= t('telegram_bot.successfully_added_to_system')
+        = image_tag 'telegram_bot/group_step5.png', class: 'image'
