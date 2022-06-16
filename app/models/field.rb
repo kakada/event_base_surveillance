@@ -38,6 +38,7 @@ class Field < ApplicationRecord
   attr_accessor :skip_validation
 
   FIELD_TYPES = %w[Fields::TextField Fields::NoteField Fields::IntegerField Fields::DateField Fields::DateTimeField Fields::SelectOneField Fields::SelectMultipleField Fields::ImageField Fields::FileField Fields::LocationField Fields::MappingField].freeze
+  SPECIAL_CHARATER_REG_EXP="[^0-9A-Za-z\_]"
 
   # Association
   belongs_to :section
@@ -52,7 +53,7 @@ class Field < ApplicationRecord
   validates :field_type, presence: true, inclusion: { in: FIELD_TYPES }
   validates :mapping_field_id, presence: true, if: -> { field_type == "Fields::MappingField" && !skip_validation }
 
-  before_validation :set_field_code, if: -> { name.present? }
+  before_validation :set_code, if: -> { name.present? }
   before_validation :set_mapping_field_type
   before_validation :set_milestone
   before_create :set_display_order
@@ -128,7 +129,7 @@ class Field < ApplicationRecord
   end
 
   def format_name
-    name.downcase.split(" ").join("_")
+    name.downcase.split(" ").join("_").gsub(/#{SPECIAL_CHARATER_REG_EXP}/, "")
   end
 
   def relevant_format_code
@@ -147,7 +148,7 @@ class Field < ApplicationRecord
   end
 
   private
-    def set_field_code
+    def set_code
       self.code ||= format_name
     end
 
