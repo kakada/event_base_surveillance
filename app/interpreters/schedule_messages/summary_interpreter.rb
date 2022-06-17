@@ -15,7 +15,8 @@ module ScheduleMessages
     end
 
     def event_report
-      str = "<ul>"
+      str = "<div>There are <b>#{progress_hash.values.sum}</b> unclosed events out of a total of #{@schedule.program.events.length} in-progress below:</div>"
+      str += "<ul>"
       str += build_lists(@schedule.program.milestones)
       str + "</ul>"
     end

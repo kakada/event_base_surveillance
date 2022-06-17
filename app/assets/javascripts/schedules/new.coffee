@@ -76,17 +76,22 @@ EBS.SchedulesNew = do ->
 
   updateDisplayDateIndex = ->
     interval_type = $('#schedule_interval_type').val()
+    dateIndexSelect = $('.date-index select')
+
     if interval_type == 'day'
       $('.date-index').hide()
-      $('.date-index select').html('')
+      dateIndexSelect.html('')
     else
       $('.date-index').show()
-      $('.date-index select').html(buildOption(interval_type))
+      dateIndexSelect.html(buildOptions(interval_type))
+      dateIndexSelect.val(dateIndexSelect.data('value'))
+      dateIndexSelect.data('value', 1)
 
-  buildOption = (interval_type) ->
+  buildOptions = (interval_type) ->
     options = []
-    for k,v of calendar()[interval_type]
-      options.push("<option value='"+ k + "'>" + v + "</option>")
+
+    for value,label of calendar()[interval_type]
+      options.push("<option value='"+ value + "'>" + label + "</option>")
 
     return options
 

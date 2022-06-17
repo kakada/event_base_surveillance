@@ -48,6 +48,8 @@ class Schedule < ApplicationRecord
   before_validation :set_type
   before_validation :set_interval_value_and_channel, if: :summary_schedule?
 
+  default_scope { order(updated_at: :desc) }
+
   # Contant
   TYPES = %w(Schedules::EventSchedule Schedules::SummarySchedule)
 
