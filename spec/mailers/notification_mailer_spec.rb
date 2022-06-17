@@ -9,7 +9,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("CamEMS Notification")
       expect(mail.to).to eq(["receiver@instedd.org"])
-      expect(mail.from).to eq([ENV["SETTINGS__SMTP__DEFAULT_FROM"]])
+      expect(NotificationMailer.default[:from]).to eq(ENV["SETTINGS__SMTP__DEFAULT_FROM"])
     end
 
     it "renders the body" do

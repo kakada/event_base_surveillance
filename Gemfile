@@ -3,10 +3,11 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.6.3"
+ruby "2.7.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 5.2.6"
+gem "rails", "~> 5.2.8"
+
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
 # Use Puma as the app server
@@ -36,8 +37,11 @@ gem "jbuilder", "~> 2.5"
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap",       ">= 1.1.0", require: false
-gem "devise",         "~> 4.7.1"
+gem "bootsnap",       "~> 1.12.0", require: false
+
+gem "devise", "~> 4.8.1"
+gem "omniauth-rails_csrf_protection", "~> 1.0.0"
+gem "omniauth-google-oauth2", "~> 1.0.0"
 
 gem "sidekiq",        "~> 5.2.10"
 gem "sidekiq-scheduler"
@@ -47,6 +51,9 @@ gem "sinatra", require: nil
 gem "haml-rails",     "~> 2.0"
 gem "jquery-rails",   "~> 4.3.5"
 gem "bootstrap",      "~> 4.3.1"
+
+# In Ruby 2.7.0 thwait is no longer bundled
+gem "thwait", "~> 0.2.0"
 
 # Datetime Picker
 gem "font-awesome-rails", "~> 4.7.0.5"
@@ -74,7 +81,6 @@ gem "wicked_pdf",                 "~> 1.4.0"
 gem "wkhtmltopdf-binary",         "~> 0.12.5.4"
 
 gem "sentry-raven",               "~> 2.13.0"
-gem "omniauth-google-oauth2",     "~> 0.8.0"
 gem "paranoia",                   "~> 2.2"
 
 # Feed from Medisys
