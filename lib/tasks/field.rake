@@ -31,7 +31,7 @@ namespace :field do
     Field.where(required: true).where.not(relevant: nil).update_all(required: false)
   end
 
-  desc "migrate field codes that have special character" do
+  desc "migrate field codes that have special character"
   task migrate_field_code_having_special_character: :environment do
     fields = Field.where("code ~* ?", Field::SPECIAL_CHARATER_REG_EXP)
     fields.includes(:field_values).each do |field|
