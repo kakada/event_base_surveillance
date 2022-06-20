@@ -2,6 +2,7 @@
 
 require "sidekiq/web"
 require "sidekiq-scheduler/web"
+require_relative "whitelist"
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -99,8 +100,10 @@ Rails.application.routes.draw do
   # Pumi
   mount Pumi::Engine => "/pumi"
 
-  # Telegram
-  telegram_webhook TelegramWebhooksController
+  constraints Whitelist do
+    # Telegram
+    telegram_webhook TelegramWebhooksController
+  end
 
   if Rails.env.production?
     # Sidekiq
