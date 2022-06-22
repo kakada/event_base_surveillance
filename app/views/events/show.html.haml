@@ -1,6 +1,7 @@
-#content
+- content_for :custom_header_title do
   = render 'header'
 
+#contents
   .flex-row
     - if policy(@event).update?
       = render "events/show/event_progress", event: @event

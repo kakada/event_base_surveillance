@@ -1,19 +1,7 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      .flex1
-        %h3
-          ="#{@event.event_type_name}: #{@event_milestone.milestone.name} "
-          = render 'events/show/tracing_number_field_modal', traceable: @event_milestone
+- content_for :custom_header_title do
+  = render 'header'
 
-        - if conducted_date = @event_milestone.fv_conducted_at.presence
-          .text-muted.text-sm
-            = "#{conducted_date.field.name}: #{conducted_date.html_tag}".html_safe
-
-            = "; #{t('event.entry_by')}: #{creator_info_tooltip(@event_milestone.submitter)}".html_safe if @event_milestone.submitter.present?
-
-      %div= link_to t('shared.back'), event_path(@event), class: 'btn btn-info'
-
+#contents
   %ul.list.flex1
     - @event_milestone.milestone.sections.each do |section|
       %fieldset.section{class: ('not-section' unless section.display?)}
