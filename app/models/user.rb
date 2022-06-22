@@ -41,6 +41,9 @@
 class User < ApplicationRecord
   include Users::Confirmable
   include Users::Filter
+  include Users::ThirdPartyNotification
+
+  audited
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -78,6 +81,9 @@ class User < ApplicationRecord
   before_create :set_full_name
   before_create :set_province_code, if: :program_admin?
 
+  # Scope
+  scope :telegrams, -> { where.not(telegram_chat_id: nil) }
+
   def location
     super || Location.pumi_all_provinces.select { |p| p.id == province_code }.first
   end
@@ -87,7 +93,7 @@ class User < ApplicationRecord
   end
 
   def telegram?
-    @telegram ||= TelegramBot.has_system_bot? && telegram_chat_id.present?
+    TelegramBot.has_system_bot? && telegram_chat_id.present?
   end
 
   def display_name

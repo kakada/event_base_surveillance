@@ -1,7 +1,8 @@
-.dotted-line.flex-row
-  %label.flex1= t('program.map_zoom_level')
-  %div
-    = "#{t('program.national')}: #{current_program.national_zoom_level}, #{t('program.provincial')}: #{current_program.provincial_zoom_level}"
-    %a.pointer.badge.badge-info.text-white{'data-target' => '#map-zoom-level', 'data-toggle' => 'modal'}= t('shared.edit')
+= simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
+  .dotted-line.flex-row
+    %label.flex1= t('program.map_zoom_level')
+    %div
+      = "#{t('program.national')}: #{current_program.national_zoom_level}, #{t('program.provincial')}: #{current_program.provincial_zoom_level}"
+      %a.pointer.badge.badge-info.text-white{'data-target' => '#map-zoom-level', 'data-toggle' => 'modal'}= t('shared.edit')
 
-    = render 'modal_map_zoom_level', f: f
+      = render 'programs/settings/modals/modal_map_zoom_level', f: f

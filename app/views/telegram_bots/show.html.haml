@@ -25,7 +25,7 @@
             %span.value= @bot.username || '-'
 
           %li
-            %span.type= "#{t('telegram_bot.valid_bot')}:"
+            %span.type= "#{t('telegram_bot.valid_bot', bot_name: @bot.username)}:"
             %span.value= @bot.actived
 
         .actions

@@ -8,6 +8,7 @@ EBS.ProgramsSettingsShow = do ->
     onChangeGuideline()
 
     EBS.ProgramsNew.init()
+    EBS.TelegramNotificationReceiver.init()
 
   initToggle = ->
     $('.bt-toggle').bootstrapToggle({

@@ -1,9 +1,10 @@
-.dotted-line.flex-row
-  %label.flex1= t('program.logo')
-  .d-flex.align-items-center
-    .image-wrapper.thumbnail.mr-1
-      = image_tag current_program.logo_or_default
+= simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
+  .dotted-line.flex-row
+    %label.flex1= t('program.logo')
+    .d-flex.align-items-center
+      .image-wrapper.thumbnail.mr-1
+        = image_tag current_program.logo_or_default
 
-    %div
-      %a.pointer.badge.badge-info.text-white{'data-target' => '#logo', 'data-toggle' => 'modal'}= t('shared.edit')
-      = render 'modal_logo', f: f
+      %div
+        %a.pointer.badge.badge-info.text-white{'data-target' => '#logo', 'data-toggle' => 'modal'}= t('shared.edit')
+        = render 'programs/settings/modals/modal_logo', f: f

@@ -1,11 +1,18 @@
 - content_for :header_title do
   = t('program.program_settings')
 
-.w-50.view-center
-  = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
-    = render 'logo', f: f
-    = render 'telegram_bot', f: f
-    = render 'email_notification', f: f
-    = render 'unlock_event_duration', f: f
-    = render 'map_zoom_level', f: f
-    = render 'risk_assessment_guideline', f: f
+.w-75.view-center
+  %div
+    %small.text-muted= t('program.general')
+    .ml-5
+      = render 'logo'
+      = render 'unlock_event_duration'
+      = render 'map_zoom_level'
+      = render 'risk_assessment_guideline'
+
+  %div
+    %small.text-muted= t('program.notification')
+    .ml-5
+      = render 'email_notification'
+      = render 'telegram_bot'
+      = render 'telegram_notification_receiver'

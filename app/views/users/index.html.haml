@@ -30,7 +30,10 @@
           - @users.each_with_index do |user, index|
             %tr
               %td= @pagy.from + index
-              %td= user.full_name
+              %td
+                = user.full_name
+                %span{id: "telegramIconWrapper#{user.id}"}
+                  = telegram_icon(user).html_safe
               %td= user.email
               %td= user.phone_number
               %td= user.role.titlecase
@@ -43,7 +46,7 @@
               %td
                 = I18n.l(user.last_sign_in_at) if user.last_sign_in_at.present?
 
-              %td.text-right
+              %td.text-right{id: "userAction#{user.id}"}
                 = render 'action_buttons', user: user
 
       = render 'shared/pagination'

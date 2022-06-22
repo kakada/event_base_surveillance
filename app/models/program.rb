@@ -42,6 +42,9 @@ class Program < ApplicationRecord
   has_many  :templates
   has_many  :medisies
 
+  has_many  :program_telegram_notifications
+  has_many  :telegram_notification_receivers, through: :program_telegram_notifications, source: :user
+
   validates :name, presence: true
   validates :unlock_event_duration, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
   validates :national_zoom_level, inclusion: 0..20

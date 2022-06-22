@@ -35,3 +35,7 @@ km:
     duration_in_day: គម្លាតពេលគិតជាថ្ងៃ
     duration_in_hour: ជូនដំណឹងនៅម៉ោង
     message: សារ
+    telegram_notification_receiver: អ្នកទទួលបានការជូនដំណឹងតាមតេលេក្រាម
+    set_who_get_telegram_notification: កំណត់បុគ្គលទទួលបានការជូនដំណឹងអំពីការភ្ជាប់ឬផ្ដាច់ Telegram
+    general: ទូទៅ
+    notification: ការជូនដំណឹង

@@ -8,7 +8,7 @@ module Programs
       @program = authorize current_program
 
       respond_to do |format|
-        if @program.update_attributes(program_params)
+        if @program.update(program_params)
           format.html { redirect_to setting_path }
           format.json { render json: @program }
         else
@@ -23,6 +23,7 @@ module Programs
         params.require(:program).permit(
           :enable_email_notification, :unlock_event_duration, :logo, :remove_logo,
           :national_zoom_level, :provincial_zoom_level, :risk_assessment_guideline, :remove_risk_assessment_guideline,
+          telegram_notification_receiver_ids: [],
           telegram_bot_attributes: [
             :token, :username, :enabled
           ]

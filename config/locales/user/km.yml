@@ -22,10 +22,16 @@ km:
     name: ឈ្មោះ
     km: ខ្មែរ
     en: English
-    search_by_email: ស្វែងរកតាមអ៊ីម៉ែល
+    search_by_email_or_phone: ស្វែងរកតាមអ៊ីម៉ែល ឬលេខទូរស័ព្ទ
     event_notification_setting: ការជូនដំណឹងអំពីព្រឹត្តិការណ៍
     use_channel: ជូនដំណឹងរាល់ការអាប់ដេតអំពីព្រឹត្តិការណ៍របស់ខ្ញុំតាមរយៈឆានែលខាងក្រោម
     notification_channels: អ្នកនឹងមានការជូនដំណឹងនៅក្នុង %{channels} ភ្លាមៗនៅពេលដែលព្រឹត្តិការណ៍របស់អ្នកត្រូវបានធ្វើបច្ចុប្បន្នភាព។
     no_notification_channels: ការជូនដំណឹងរបស់អ្នកត្រូវបានបិទ អ្នកនឹងមិនទទួលបានការជូនដំណឹងណាមួយពីព្រឹត្តិការណ៍ដែលបានធ្វើបច្ចុប្បន្នភាពរបស់អ្នកទេ។
     telegram_account_help: របៀបភ្ជាប់គណនីតេលេក្រាម
     telegram_account_is_not_connected: គណនីតេឡេក្រាមរបស់អ្នកមិនទាន់ត្រូវបានភ្ជាប់ទេ!
+    disconnect_telegram: ផ្តាច់គណនីតេឡេក្រាម
+    are_you_sure_to_disconnect_telegram: តើអ្នកប្រាកដក្នុងការផ្តាច់គណនីតេឡេក្រាមនេះចេញពីអ៊ីម៉ែល %{email} ឬទេ?
+    disconnect_telegram_successfully: ផ្តាច់គណនីតេឡេក្រាមដោយជោគជ័យ!
+    telegram_account_connect: មានគណនីតេឡេក្រាម '%{telegram_username}' ភ្ជាប់ជាមួយលេខទូរស័ព្ទ %{phone_number} ទីតាំង %{province}
+    telegram_account_disconnect: មានគណនីតេឡេក្រាម '%{telegram_username}' ត្រូវបានផ្តាច់ជាមួយលេខទូរស័ព្ទ %{phone_number} ទីតាំង %{province}
+    your_telegram_account_disconnected: គណនីតេលេក្រាមរបស់អ្នកត្រូវបានផ្តាច់ចេញពីប្រព័ន្ធ CamEMS។ លេខទូរស័ព្ទ %{phone_number} ទីតាំង %{province}

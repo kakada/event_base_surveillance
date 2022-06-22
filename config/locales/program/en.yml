@@ -35,3 +35,7 @@ en:
     duration_in_day: Duration(days)
     duration_in_hour: Notify at the hour
     message: Message
+    telegram_notification_receiver: Telegram Notification Receiver
+    set_who_get_telegram_notification: Identify Telegram connection/disconnect notification recipients
+    general: General
+    notification: Notification

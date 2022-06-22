@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_03_033430) do
+ActiveRecord::Schema.define(version: 2022_06_21_073230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -282,6 +282,13 @@ ActiveRecord::Schema.define(version: 2022_06_03_033430) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "message_id"
+  end
+
+  create_table "program_telegram_notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "program_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "programs", force: :cascade do |t|

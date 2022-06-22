@@ -1,0 +1,10 @@
+= simple_form_for current_program, url: '/setting', method: :put, class: 'setting-notification' do |f|
+  .dotted-line.d-flex
+    %label.flex-grow-1= t('program.telegram_notification_receiver')
+
+    .d-flex.ellipsis
+      .ellipsis{style: 'max-width: 270px;'}= current_program.telegram_notification_receivers.pluck(:email).join('; ')
+      .ml-1
+        %a.pointer.badge.badge-info.text-white{'data-target' => '#telegramNotificationReceiverModal', 'data-toggle' => 'modal'}= t('shared.edit')
+
+      = render 'programs/settings/modals/modal_telegram_notification_receiver', f: f

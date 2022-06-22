@@ -1,0 +1,24 @@
+#telegramNotificationReceiverModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'exampleModalLabel', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      .modal-header
+        .flex-row-vertical-center
+          %h5#exampleModalLabel.modal-title
+            = t('program.telegram_notification_receiver')
+
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+      .modal-body
+        .form-group
+          %label= t('program.set_who_get_telegram_notification')
+
+          - users = ActiveModel::Serializer::CollectionSerializer.new(current_program.users.telegrams.includes(:location), each_serializer: UserSerializer)
+
+          .d-none
+            = f.input :telegram_notification_receiver_ids, collection: users.as_json.pluck(:value), input_html: { multiple: true }
+
+          %input.users-list-tags.form-control{value: current_program.telegram_notification_receiver_ids.join(','), "data-users" => users.to_json }
+
+      .modal-footer
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
+        = f.submit t('shared.save'), class: 'btn btn-primary'
