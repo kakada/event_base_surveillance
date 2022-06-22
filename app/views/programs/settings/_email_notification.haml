@@ -1,3 +1,4 @@
-.dotted-line.flex-row
-  %label.flex1= t('program.email_notification')
-  = f.input :enable_email_notification, label: false, input_html: { 'data-size' => 'small' }
+= simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
+  .dotted-line.flex-row
+    %label.flex1= t('program.email_notification')
+    = f.input :enable_email_notification, label: false, input_html: { 'data-size' => 'small' }

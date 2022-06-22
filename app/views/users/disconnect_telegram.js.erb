@@ -1,0 +1,4 @@
+$("#telegramIconWrapper<%= @user.id %>").html("")
+$("#userAction<%= @user.id %>").html('<%= j render("users/action_buttons", user: @user) %>')
+
+$("#flash").html('<%= j render("shared/notify_message") %>');

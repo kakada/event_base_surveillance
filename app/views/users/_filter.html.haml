@@ -1,7 +1,7 @@
 %form{ action: '/users', method: 'get' }
   .d-flex
     .form-group.mr-2
-      = text_field_tag(:email, params[:email], class: 'form-control filter-input', placeholder: t('user.search_by_email'), id: 'email')
+      = text_field_tag(:email, params[:email], class: 'form-control filter-input', placeholder: t('user.search_by_email_or_phone'), id: 'email')
 
     = render 'events/index/filter_province', provinces: Location.pumi_all_provinces, placeholder: t('shared.search_by_province')
 

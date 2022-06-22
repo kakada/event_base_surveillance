@@ -22,10 +22,16 @@ en:
     name: Name
     km: ខ្មែរ
     en: English
-    search_by_email: Search by email
+    search_by_email_or_phone: Search by email or phone number
     event_notification_setting: Event notification setting
     use_channel: Notify every update on my events through the following channels
     notification_channels: You will have notifications in %{channels} as soon as your events are updated.
     no_notification_channels: Your notification is turned off, and you won't get anny notification from your updated events.
     telegram_account_help: Way to connect telegram account
     telegram_account_is_not_connected: Your telegram account is not connected yet!
+    disconnect_telegram: Disconnect telegram
+    are_you_sure_to_disconnect_telegram: Are you sure to disconnect this telegram account from %{email}?
+    disconnect_telegram_successfully: Disconnect telegram account successfully!
+    telegram_account_connect: There is a telegram account '%{telegram_username}' connected with phone number %{phone_number} location %{province}
+    telegram_account_disconnect: There is a telegram account '%{telegram_username}' disconnected with phone number %{phone_number} location %{province}
+    your_telegram_account_disconnected: Your Telegram account has been disconnected from CamEMS system. Phone number %{phone_number} location %{province}

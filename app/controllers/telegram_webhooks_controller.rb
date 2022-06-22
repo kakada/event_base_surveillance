@@ -39,7 +39,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     sms = I18n.t("telegram_bot.invalid_info_message", command: "connect", username: chat["first_name"])
 
     if user.present?
-      user.update(telegram_chat_id: chat["id"], telegram_username: chat["first_name"])
+      user.connect_telegram(chat)
       sms = I18n.t("telegram_bot.congratulation_message", username: chat["first_name"], location: user.location.name_km)
     end
 

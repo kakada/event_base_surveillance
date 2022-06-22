@@ -31,6 +31,7 @@
 //= require moment-with-locales
 //= require daterangepicker
 //= require tagify.min
+//= require tagify.polyfills.min.js
 
 // **DateTime picker: Usage: https://tempusdominus.github.io/bootstrap-4/Usage/
 //= require tempusdominus-bootstrap-4.js
@@ -74,6 +75,7 @@
 //= require telegrams/new
 //= require messages/message
 //= require telegram_bots/new
+//= require programs/telegram_notification_receiver
 //= require programs/index
 //= require programs/settings
 //= require webhooks/new

@@ -26,7 +26,9 @@ Rails.application.routes.draw do
     resource :setting, only: [:show, :update]
   end
 
-  resources :users
+  resources :users do
+    put :disconnect_telegram, on: :member
+  end
 
   resource :locale, only: [:update]
 

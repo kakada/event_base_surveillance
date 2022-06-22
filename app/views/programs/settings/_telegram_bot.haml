@@ -1,15 +1,16 @@
-- bot = current_program.telegram_bot || current_program.build_telegram_bot
-= f.fields_for :telegram_bot, bot do |ff|
-  .dotted-line.flex-row
-    %label.flex1
-      = t('program.telegram_notification')
+= simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
+  - bot = current_program.telegram_bot || current_program.build_telegram_bot
+  = f.fields_for :telegram_bot, bot do |ff|
+    .dotted-line.flex-row
+      %label.flex1
+        = t('program.telegram_notification')
 
-      - if bot.enabled? && bot.actived?
-        %i.far.fa-check-circle.icon-green{'data-toggle'=> 'tooltip', title: t('telegram_bot.valid_bot')}
-      - else
-        %i.far.fa-times-circle.icon-red{'data-toggle'=> 'tooltip', title: t('telegram_bot.invalid_bot')}
+        - if bot.enabled? && bot.actived?
+          %i.far.fa-check-circle.icon-green{'data-toggle'=> 'tooltip', title: t('telegram_bot.valid_bot', bot_name: bot.username)}
+        - else
+          %i.far.fa-times-circle.icon-red{'data-toggle'=> 'tooltip', title: t('telegram_bot.invalid_bot', bot_name: bot.username)}
 
-    %div
-      %a.pointer.badge.badge-info.text-white{'data-target' => '#telegram', 'data-toggle' => 'modal'}= t('shared.edit')
+      %div
+        %a.pointer.badge.badge-info.text-white{'data-target' => '#telegram', 'data-toggle' => 'modal'}= t('shared.edit')
 
-      = render 'modal_telegram', f: ff
+        = render 'programs/settings/modals/modal_telegram', f: ff

@@ -14,3 +14,40 @@
     }
   }
 }
+
+/* Suggestions items */
+.tagify__dropdown.users-list .tagify__dropdown__item{
+  padding: .5em .7em;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1em;
+  grid-template-areas: "avatar name"
+                       "avatar email";
+}
+
+.tagify__dropdown.users-list .tagify__dropdown__item:hover .tagify__dropdown__item__avatar-wrap{
+  transform: scale(1.2);
+}
+
+.tagify__dropdown.users-list img{
+  width: 100%;
+  vertical-align: top;
+}
+
+.tagify__dropdown.users-list strong{
+  grid-area: name;
+  width: 100%;
+  align-self: center;
+}
+
+.tagify__dropdown.users-list span{
+  grid-area: email;
+  width: 100%;
+  font-size: .9em;
+  opacity: .6;
+}
+
+/* Tags items */
+#users-list .tagify__tag{
+  white-space: nowrap;
+}

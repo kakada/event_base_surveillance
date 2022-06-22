@@ -67,6 +67,18 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def disconnect_telegram
+    @user = authorize User.find(params[:id]), :update?
+
+    respond_to do |format|
+      format.js {
+        @user.disconnect_telegram
+
+        flash[:notice] = t("user.disconnect_telegram_successfully")
+      }
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(:email, :full_name, :role,
