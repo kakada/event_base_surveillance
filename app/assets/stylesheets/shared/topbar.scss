@@ -77,7 +77,7 @@
     right: 0;
   }
   .topbar .dropdown-list {
-    width: 16rem !important;
+    min-width: 16rem !important;
   }
   .topbar .dropdown-list .dropdown-item .text-truncate {
     max-width: 13.375rem;
