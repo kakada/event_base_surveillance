@@ -24,7 +24,7 @@ class ScheduleMessageInterpreter
       field = embeded_field.split(".")[1]
       value = "ScheduleMessages::#{model.camelcase}Interpreter".constantize.new(schedule, event).load(field)
 
-      "<b>#{value}</b>"
+      "#{value}"
       rescue
         Rails.logger.warn "Model #{model} and field #{field} is unknwon"
         ""
