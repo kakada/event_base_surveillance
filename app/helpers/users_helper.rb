@@ -9,4 +9,10 @@ module UsersHelper
     str += "<i class='fab fa-telegram telegram-icon' aria-hidden='true'></i>"
     str + "</span>"
   end
+
+  def telegram_account_status(user)
+    return telegram_icon(user) if current_user.telegram?
+
+    "<span class='text-gray-600 p-1' data-toggle='tooltip' title='#{t('user.telegram_account_is_not_connected')}'>#{icon_telegram}</span>"
+  end
 end

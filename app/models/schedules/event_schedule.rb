@@ -51,7 +51,7 @@ module Schedules
     end
 
     def icon_html
-      "<i class='fas fa-calendar-check'></i>"
+      "<i class='fa-regular fa-calendar-check'></i>"
     end
 
     def display_type

@@ -12,11 +12,11 @@ module SchedulesHelper
       {
         type: "Schedules::EventSchedule",
         label: t("schedule.new_event_schedule"),
-        icon: "<i class='fas fa-calendar-check'></i>"
+        icon: "<i class='fa-regular fa-calendar-check'></i>"
       },
       { type: "Schedules::SummarySchedule",
         label: t("schedule.new_summary_schedule"),
-        icon: "<i class='fas fa-clipboard-list'></i>"
+        icon: "<i class='fa-regular fa-clipboard'></i>"
       }
     ]
   end

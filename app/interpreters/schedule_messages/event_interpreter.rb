@@ -8,11 +8,7 @@ module ScheduleMessages
     end
 
     def load(field)
-      if self.respond_to?(field.to_sym)
-        self.send(field.to_sym)
-      else
-        @event.send(field.to_sym)
-      end
+      "<b>#{interpret(field)}</b>"
     end
 
     def event_url
@@ -20,5 +16,14 @@ module ScheduleMessages
 
       "<a href='#{url}'>#{url}</a>"
     end
+
+    private
+      def interpret(field)
+        if self.respond_to?(field.to_sym)
+          self.send(field.to_sym)
+        else
+          @event.send(field.to_sym)
+        end
+      end
   end
 end

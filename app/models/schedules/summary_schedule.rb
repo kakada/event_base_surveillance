@@ -58,7 +58,7 @@ module Schedules
     end
 
     def icon_html
-      "<i class='fas fa-clipboard-list'></i>"
+      "<i class='fa-regular fa-clipboard'></i>"
     end
 
     def display_type
