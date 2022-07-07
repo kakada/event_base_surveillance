@@ -12,4 +12,10 @@ class SchedulePolicy < ApplicationPolicy
   def destroy?
     create?
   end
+
+  class Scope < Scope
+    def resolve
+      scope.where(program_id: user.program_id)
+    end
+  end
 end
