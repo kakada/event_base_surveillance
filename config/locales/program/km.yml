@@ -14,7 +14,7 @@ km:
     reindex_successfully: 'Reindex document ដោយជោគជ័យ'
     telegram: 'Telegram'
     telegram_bot: 'Telegram bot'
-    unlock_event_duration: 'រយៈពេលដោះសោព្រឹត្តិការណ៍'
+    unlock_event_duration: 'រយៈពេលនឹងត្រូវចាក់សោព្រឹត្តិការណ៍'
     unlock_event_days:
       one: '%{count} ថ្ងៃ'
       other: '%{count} ថ្ងៃ'

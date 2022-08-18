@@ -31,5 +31,10 @@ FactoryBot.define do
         }]
       }
     end
+
+    trait :close do
+      name    { "Close" }
+      status   { "final" }
+    end
   end
 end
