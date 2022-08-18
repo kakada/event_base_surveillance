@@ -1,12 +1,15 @@
 %li.nav-item.dropdown.no-arrow
   / User display
   %a#userDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-    %span.mr-2.d-none.d-lg-inline.text-gray-600.small= current_user.display_name
+    .d-flex
+      .d-flex.flex-column.align-items-center.mr-2
+        %span.d-none.d-lg-inline.text-gray-600.small= current_user.display_name
+        %small.text-gray-600.program-name= "@#{current_program.try(:name) || 'SYSTEM'}"
 
-    = image_tag 'default_profile.png', alt: 'profile', class: 'img-profile rounded-circle'
+      = image_tag 'default_profile.png', alt: 'profile', class: 'img-profile rounded-circle'
 
-    %span.small.position-absolute{style: 'top: 0; right: 0;'}
-      = telegram_account_status(current_user).html_safe
+      %span.small.position-absolute{style: 'top: 0; right: 0;'}
+        = telegram_account_status(current_user).html_safe
 
   / Profile dropdown
   .dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in.p-0{"aria-labelledby" => "userDropdown"}
