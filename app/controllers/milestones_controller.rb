@@ -57,7 +57,7 @@ class MilestonesController < ::ApplicationController
             :id, :name, :field_type, :required, :display_order, :code, :entry_able,
             :mapping_field_id, :_destroy, :tracking, :description, :relevant, :is_milestone_datetime,
             :template_file, :template_name, :remove_template_file, validations: {},
-            field_options_attributes: %i[id name value color _destroy]
+            field_options_attributes: %i[id name value color display_order _destroy]
           ]
         ]
       ).merge(creator_id: current_user.id)

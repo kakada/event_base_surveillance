@@ -9,10 +9,11 @@ EBS.MilestonesNew = do ->
 
   init = ->
     initView()
-    initSortable()
     initMiniColorPicker()
     initSetting()
     EBS.SelectFile.init()
+    EBS.Sortable.initFieldSortable()
+    EBS.Sortable.initFieldOptionSortable()
 
     onClickAddSection()
     onClickAddField()
@@ -242,6 +243,7 @@ EBS.MilestonesNew = do ->
       handleValidationSetting(dom, field_type)
       handleMilestoneDisplayDateSetting(dom, field_type)
       showBtnSetting(dom)
+      EBS.Sortable.initFieldOptionSortable()
 
   showBtnSetting = (dom)->
     $(dom).parents('.fieldset').find('.btn-setting').removeClass('hidden')
@@ -319,25 +321,9 @@ EBS.MilestonesNew = do ->
   initOneOption = (dom)->
     $(dom).parents('.fieldset').find('.add_field_options').click()
 
-  animateListItems = ($item, container, _super) ->
-    $clonedItem = $('<li/>').css(height: 0)
-    $item.before $clonedItem
-    $clonedItem.animate 'height': $item.height()
-    $item.animate $clonedItem.position(), ->
-      $clonedItem.detach()
-      _super $item, container
-    return
-
   assignDisplayOrderToListItem = ->
     $('ol.fields li').each (index)->
       $(this).find('.display-order').val(index)
-
-  initSortable = ->
-    $(document).find('ol.fields.sortable').sortable
-      handle: '.move'
-      onDrop: ($item, container, _super) ->
-        animateListItems($item, container, _super)
-        assignDisplayOrderToListItem()
 
   initMiniColorPicker = ->
     $(document).find('input.field-option-color').minicolors()
