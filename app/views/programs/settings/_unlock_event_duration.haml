@@ -1,6 +1,12 @@
 = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
   .dotted-line.flex-row
-    %label.flex1= t('program.unlock_event_duration')
+    %label.flex1
+      = t('program.unlock_event_duration')
+
+      - tooltip_title = sanitize(render('programs/settings/event_lock_due_tooltip_title'))
+      %span{ 'data-toggle': 'tooltip', 'data-placement': 'right', 'data-html': 'true', title: "#{tooltip_title}" }
+        %i.fa-solid.fa-circle-exclamation
+
     %div
       = t('program.unlock_event_days', count: current_program.unlock_event_duration)
       %a.pointer.badge.badge-info.text-white{'data-target' => '#unlock-event-duration', 'data-toggle' => 'modal'}= t('shared.edit')

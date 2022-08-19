@@ -35,4 +35,36 @@ RSpec.describe EventMilestone, type: :model do
       end
     end
   end
+
+  describe "after_create, #set_event_to_close" do
+    let!(:em_verification) { create(:event_milestone, :verification) }
+    let!(:program) { em_verification.program }
+    let(:event) { em_verification.event }
+
+    context "program unlock_event_duration is positive" do
+      before {
+        allow(program).to receive(:unlock_event_duration).and_return(7)
+
+        create(:event_milestone, :close, event: event, program: program)
+      }
+
+      it "close event with lock due date" do
+        expect(event.close?).to be_truthy
+        expect(event.lockable_at).not_to be_nil
+      end
+    end
+
+    context "program unlock_event_duration is zero" do
+      before {
+        allow(program).to receive(:unlock_event_duration).and_return(0)
+
+        create(:event_milestone, :close, event: event, program: program)
+      }
+
+      it "close event without lock due date" do
+        expect(event.close?).to be_truthy
+        expect(event.lockable_at).to be_nil
+      end
+    end
+  end
 end

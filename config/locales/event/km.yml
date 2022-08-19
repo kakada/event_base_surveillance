@@ -48,7 +48,7 @@ km:
     click_here_to_create_template: "សូមចុច <a class='text-primary' href=%{url}>ទីនេះ</a> ដើម្បីបង្កើតគំរូទាញយក"
     destroy_success: 'លុបព្រឹត្តិការណ៍ដោយជោគជ័យ'
     are_you_sure: 'តើអ្នកពិតជាចង់លុបព្រឹត្តិការណ៍ %{event_uuid} ដែរឬទេ?'
-    will_lock_at: 'នឹងត្រូវចាក់សោវិញនៅថ្ងៃទី %{date}'
+    will_lock_at: 'នឹងត្រូវចាក់សោនៅថ្ងៃទី %{date}'
     are_you_sure_to_submit_conclusion: 'តើអ្នកពិតជាចង់បិទព្រឹត្តិការណ៍នេះដែរឬទេ?'
     download_guideline: ទាញយកការណែនាំ
     conclude_event_type: ប្រភេទព្រឹត្តិការណ៍សន្និដ្ឋានចុងក្រោយ

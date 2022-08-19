@@ -29,5 +29,15 @@ FactoryBot.define do
         ]
       }
     end
+
+    trait :close do
+      milestone { create(:milestone, :close, program: program) }
+
+      field_values_attributes {
+        [
+          { field_id: milestone.fields.find_by(code: "conducted_at").id, field_code: "conducted_at", value: Date.today },
+        ]
+      }
+    end
   end
 end

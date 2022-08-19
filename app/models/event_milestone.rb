@@ -81,6 +81,7 @@ class EventMilestone < ApplicationRecord
 
     def set_event_to_close
       event.close = true
+      event.lockable_at = program.unlock_event_duration.days.from_now.to_date if program.unlock_event_duration.positive?
       event.save
     end
 
