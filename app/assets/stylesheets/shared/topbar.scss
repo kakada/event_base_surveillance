@@ -68,6 +68,21 @@
   margin: auto 1rem;
 }
 
+.topbar {
+  .program-name {
+    font-size: 8px;
+  }
+
+  .user-display-name {
+    max-width: 100px;
+  }
+
+  .nav-item .nav-link .img-profile {
+    height: 24px;
+    width: 24px;
+  }
+}
+
 @media (min-width: 576px) {
   .topbar .dropdown {
     position: relative;
