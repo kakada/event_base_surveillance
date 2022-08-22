@@ -22,7 +22,7 @@ class Notifiers::ReceiveProgramNotificationTelegramNotifier
       telegram_username: user.telegram_username,
       phone_number: user.phone_number,
       province: user.location.try(:name_km),
-      locale: 'km'
+      locale: "km"
     )
   end
 

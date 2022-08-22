@@ -129,14 +129,6 @@ EBS.MilestonesNew = do ->
   showCollapseTrigger = (dom)->
     $(dom).parents('.fieldset').find('.collapse-trigger').show()
 
-  handleDisplayOptionColor = (dom)->
-    data = $(dom).data('field')
-
-    if !data
-      return
-
-    if data.color_required
-      visibleColorFieldOption(dom)
 
   initFieldNameStyleAsTitle = (dom) ->
     parentDom = $(dom).parents('.fieldset')
@@ -151,12 +143,7 @@ EBS.MilestonesNew = do ->
     btnMove.append(icon)
     btnMove.show()
 
-  visibleColorFieldOption = (dom)->
-    $(dom).parents('.fieldset').find('.options-wrapper').addClass('visible-color')
-    initMiniColorPicker()
 
-  hideColorFieldOption = (dom)->
-    $(dom).parents('.fieldset').find('.options-wrapper').removeClass('visible-color')
 
   onClickBtnAdd = ->
     $(document).off('click', '.btn-add-field')
@@ -290,7 +277,6 @@ EBS.MilestonesNew = do ->
 
   showOption = (dom)->
     $(dom).parents('.fieldset').find('.options-wrapper').show()
-    handleDisplayOptionColor(dom)
 
   hideOption = (dom)->
     $(dom).parents('.fieldset').find('.options-wrapper').hide()
