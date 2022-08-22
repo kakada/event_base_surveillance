@@ -60,7 +60,7 @@ class Event < ApplicationRecord
   delegate :email, :full_name, :phone_number, to: :creator, prefix: true, allow_nil: true
   delegate :latlng, to: :location, prefix: true, allow_nil: true
   delegate :guideline_url, to: :event_type, prefix: false, allow_nil: true
-  delegate :name, to: :conclude_event_type, prefix: true, allow_nil: true
+  delegate :name, :color, to: :conclude_event_type, prefix: true, allow_nil: true
 
   # Validation
   validates :event_type_id, presence: true

@@ -39,3 +39,4 @@ en:
     pagination_title: "Displaying %{name} <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"
     search_by_province: Search by province
     updated_at: Updated at
+    copied: Copied

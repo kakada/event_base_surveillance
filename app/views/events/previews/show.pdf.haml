@@ -2,16 +2,16 @@
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     / Event Title
     .flex-row-vertical-center
-      %span.small-color{style: "background-color: #{@event.event_type_color}"}
-        = @event.event_type_name[0]
+      = letter_badge(@event.event_type_color, @event.event_type_name[0]).html_safe
 
       %h3= "#{@event.event_type_name} "
 
       - if @event.event_type_changed?
         .arrow-wrapper
           = wicked_pdf_image_tag 'long-arrow-alt-right-solid.png', :width => "24"
-        %span.small-color{style: "background-color: #{@event.conclude_event_type.color}"}
-          = @event.conclude_event_type_name[0]
+
+        = letter_badge(@event.conclude_event_type_color, @event.conclude_event_type_name[0]).html_safe
+
         %h3= @event.conclude_event_type_name
 
       / event code

@@ -1,21 +1,26 @@
 - @events.each do |event|
   %tr
     %td
-      .flex-row-vertical-center
-        = link_to event.id, event_path(event), class: 'text-primary uuid'
-        %span{ 'data-toggle' => 'tooltip', title: "#{t('event.creator')}: #{event.creator_email}" }
-          %i.far.fa-user
+      .line-badge{ style: "border-color: #{event.event_type_changed? ? event.conclude_event_type_color : event.event_type_color}" }
+        .flex-row-vertical-center
+          / Event code
+          = link_to event.id, event_path(event), class: 'text-primary uuid'
+
+          / Copy code
+          .mr-1= render "shared/buttons/copy_button", value: event.uuid
+
+          / Creator email
+          %span{ 'data-toggle' => 'tooltip', title: "#{t('event.creator')}: #{event.creator_email}" }
+            %i.far.fa-user
     %td
       .flex-row-vertical-center
-        .small-color{style: "background-color: #{event.event_type_color}"}
-          = event.event_type_name[0]
+        = letter_badge(event.event_type_color, event.event_type_name[0]).html_safe
         %span= event.event_type_name
 
         - if event.event_type_changed?
           %i.fas.fa-long-arrow-alt-right.mr-1
 
-          .small-color{style: "background-color: #{event.conclude_event_type.color}"}
-            = event.conclude_event_type_name[0]
+          = letter_badge(event.conclude_event_type_color, event.conclude_event_type_name[0]).html_safe
 
           %span= event.conclude_event_type_name
 

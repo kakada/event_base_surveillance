@@ -89,4 +89,8 @@ module EventsHelper
 
     t("event.event_creator_no_telegram_account")
   end
+
+  def letter_badge(color, letter)
+    "<div class='small-color' style='border-color:#{color}; color: #{color}'>#{letter}</div>"
+  end
 end
