@@ -189,7 +189,7 @@ body#pdf {
     width: 16px;
     height: 16px;
     margin-right: 5px;
-    font-size: 16px;
+    font-size: 14px;
     display: inline-block;
     padding: 0.25em;
     font-weight: 700;
@@ -197,6 +197,7 @@ body#pdf {
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
+    border: 1px solid #ccc;
   }
 
   .arrow-wrapper {
@@ -208,5 +209,9 @@ body#pdf {
     color: #6c757d !important;
     font-size: 14px;
     margin-top: -16px;
+  }
+
+  .badge {
+    font-weight: 400;
   }
 }

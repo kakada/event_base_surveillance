@@ -20,5 +20,6 @@ WickedPdf.config = {
   # Layout file to be used for all PDFs
   # (but can be overridden in `render :pdf` calls)
   layout: "pdf.html",
-  margin:  { top: 20, bottom: 20, left: 20, right: 20 }
+  margin:  { top: 20, bottom: 20, left: 20, right: 20 },
+  enable_local_file_access: true
 }

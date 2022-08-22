@@ -6,15 +6,15 @@
   / title
   .flex1
     .flex-row-vertical-center
-      %span.small-color{style: "background-color: #{@event.event_type_color}"}
-        = @event.event_type_name[0]
+      = letter_badge(@event.event_type_color, @event.event_type_name[0]).html_safe
 
       %h4.mb-0= "#{@event.event_type_name} "
 
       - if @event.event_type_changed?
         %i.fas.fa-long-arrow-alt-right.mr-2.ml-2
-        .small-color{style: "background-color: #{@event.conclude_event_type.color}"}
-          = @event.conclude_event_type_name[0]
+
+        = letter_badge(@event.conclude_event_type_color, @event.conclude_event_type_name[0]).html_safe
+
         %h4.mb-0
           = @event.conclude_event_type_name
 
