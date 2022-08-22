@@ -147,12 +147,16 @@ class Event < ApplicationRecord
 
   private
     def secure_uuid
-      self.uuid ||= SecureRandom.hex(4)
+      self.uuid ||= digit_random
 
       return unless self.class.exists?(uuid: uuid)
 
-      self.uuid = SecureRandom.hex(4)
+      self.uuid = digit_random
       secure_uuid
+    end
+
+    def digit_random
+      SecureRandom.random_number(1..99999999).to_s.rjust(8, "0")
     end
 
     def set_program_id
