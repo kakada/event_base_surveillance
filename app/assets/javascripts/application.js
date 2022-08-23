@@ -50,6 +50,7 @@
 //= require common/copy
 
 // All Pages
+//= require milestones/sortable
 //= require milestones/select_file
 //= require milestones/new
 //= require milestones/index
