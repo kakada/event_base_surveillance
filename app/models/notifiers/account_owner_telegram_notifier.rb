@@ -19,7 +19,7 @@ class Notifiers::AccountOwnerTelegramNotifier
     I18n.t("user.your_telegram_account_disconnected",
       phone_number: user.phone_number,
       province: user.location.try(:name_km),
-      locale: 'km'
+      locale: "km"
     )
   end
 

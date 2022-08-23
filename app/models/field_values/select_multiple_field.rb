@@ -21,7 +21,7 @@
 #
 
 module FieldValues
-  class SelectMultipleField < ::FieldValue
+  class SelectMultipleField < SelectOneField
     def es_value
       return if values.blank?
 
@@ -33,7 +33,7 @@ module FieldValues
     end
 
     def html_tag
-      label = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:name) || v }.join(", ")
+      label = values.map { |v| option_html_tag(v) }.join(", ")
       opt_values = values.map { |v| field.field_options.select { |opt| opt.value == v }.first.try(:value) || v }.join(",")
 
       "<span data-relevant=#{field_code} value=#{opt_values}>#{label.presence || '-'}</span>"

@@ -33,13 +33,20 @@ module FieldValues
     end
 
     def html_tag
+      label = option_html_tag(value)
       option = field.field_options.select { |o| o.value == value }.first
-      label = option.try(:name) || value
       option_value = option.try(:value) || value
 
-      return "<span data-relevant=#{field_code} value=#{option_value}>#{label}</span>" unless field_code == "risk_level"
-
-      "<span data-relevant=#{field_code} value=#{option_value} class='badge' style='background-color: #{color}; color: #fff'>#{label}</span>"
+      "<span data-relevant=#{field_code} value=#{option_value}>#{label}</span>"
     end
+
+    private
+      def option_html_tag(val)
+        option = field.field_options.select { |opt| opt.value == val }.first
+
+        return option.try(:name) || val unless option&.color.present?
+
+        "<span class='badge-outline' style='border-color: #{option.color}; color: #{option.color}'>#{option.name}</span>"
+      end
   end
 end
