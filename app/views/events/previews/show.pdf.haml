@@ -1,10 +1,14 @@
 #content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  %nav
     / Event Title
-    .flex-row-vertical-center
-      = letter_badge(@event.event_type_color, @event.event_type_name[0]).html_safe
+    .flex-row-vertical-center.line-badge{ style: "border-color: #{@event.event_type_changed? ? @event.conclude_event_type_color : @event.event_type_color}" }
 
-      %h3= "#{@event.event_type_name} "
+      / event code
+      %span= @event.uuid
+
+      .ml-2= letter_badge(@event.event_type_color, @event.event_type_name[0]).html_safe
+
+      %h3.m-0= "#{@event.event_type_name}"
 
       - if @event.event_type_changed?
         .arrow-wrapper
@@ -12,18 +16,13 @@
 
         = letter_badge(@event.conclude_event_type_color, @event.conclude_event_type_name[0]).html_safe
 
-        %h3= @event.conclude_event_type_name
-
-      / event code
-      %h3
-        = ":"
-        %span.badge.badge-light= @event.uuid
+        %h3.m-0= @event.conclude_event_type_name
 
       / Progress status
-      = @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
+      .ml-2= @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
 
     / event_date
-    .text-muted.text-sm{style: 'margin-top: -24px'}
+    .text-muted
       = "#{t('event.event_date')}: #{l(@event.event_date)}"
 
       -  if @event.creator.present?

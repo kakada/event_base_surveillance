@@ -10,7 +10,6 @@
     .or-label OR
     .line.flex-grow-1
 
-
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .form-group
       = f.label :email, t('devise.email')
@@ -24,6 +23,10 @@
       .form-group.form-check
         = f.check_box :remember_me, class: 'form-check-input'
         = f.label :remember_me, t('devise.remember_me'), class: 'form-check-label'
+
+    - unless disable_recaptcha?
+      .mb-3= recaptcha_tags
+
     .actions
       = f.submit t('devise.login'), class: 'btn btn-primary w-100 mb-2'
 

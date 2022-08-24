@@ -5,7 +5,10 @@
 
   / title
   .flex1
-    .flex-row-vertical-center
+    .flex-row-vertical-center.line-badge{ style: "border-color: #{@event.event_type_changed? ? @event.conclude_event_type_color : @event.event_type_color}" }
+
+      %span.mr-2= @event.uuid
+
       = letter_badge(@event.event_type_color, @event.event_type_name[0]).html_safe
 
       %h4.mb-0= "#{@event.event_type_name} "
@@ -19,11 +22,9 @@
           = @event.conclude_event_type_name
 
       %h4.mb-0
-        = ':'
         = render 'events/show/tracing_number_field_modal', traceable: @event
-        %span.badge.badge-light= @event.uuid
 
-      = @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
+      .ml-2= @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
 
       = render 'btn_download_risk_assessment_guideline'
 
