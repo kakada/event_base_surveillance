@@ -44,7 +44,9 @@
                 = user.confirmed? ? t('user.active') : t('user.pending')
 
               %td
-                = I18n.l(user.last_sign_in_at) if user.last_sign_in_at.present?
+                - if user.last_sign_in_at.present?
+                  = image_tag "#{user.sign_in_type}.png", width: 16
+                  = I18n.l(user.last_sign_in_at)
 
               %td.text-right{id: "userAction#{user.id}"}
                 = render 'action_buttons', user: user

@@ -24,6 +24,7 @@
 #  reset_password_token   :string
 #  role                   :integer          not null
 #  sign_in_count          :integer          default(0), not null
+#  sign_in_type           :integer          default("system")
 #  telegram_username      :string
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
@@ -57,6 +58,14 @@ class User < ApplicationRecord
     guest: 4
   }
 
+  enum sign_in_type: {
+    system: 1,
+    google: 2
+  }
+
+  # Constant
+  GOOGLE = "google"
+  SYSTEM = "system"
   CHANNELS = %w(email telegram)
   ROLES = roles.keys.map { |r| [r.titlecase, r] }
 
