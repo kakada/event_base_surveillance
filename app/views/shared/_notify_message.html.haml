@@ -1,11 +1,20 @@
 - if notice.present?
-  .alert.alert-success.notify-message
-    %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+  .alert.alert-success.notify-message.alert-dismissible.fade.show{role: 'alert'}
     = notice
-- if alert.present?
-  .alert.alert-danger.notify-message
     %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+      %span{'aria-hidden': true} &times;
+
+- if alert.present?
+  .alert.alert-danger.notify-message.alert-dismissible.fade.show{role: 'alert'}
     = alert
+    %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+      %span{'aria-hidden': true} &times;
+
+- if flash[:recaptcha_error].present?
+  .alert.alert-warning.notify-message.alert-dismissible.fade.show{role: 'alert'}
+    = flash[:recaptcha_error]
+    %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+      %span{'aria-hidden': true} &times;
 
 :javascript
   setTimeout(function() {

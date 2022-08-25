@@ -15,4 +15,8 @@ module UsersHelper
 
     "<span class='text-gray-600 p-1' data-toggle='tooltip' title='#{t('user.telegram_account_is_not_connected')}'>#{icon_telegram}</span>"
   end
+
+  def disable_recaptcha?
+    Rails.env.development? || ENV["RECAPTCHA_ENABLED"].blank? || ENV["RECAPTCHA_ENABLED"] == "false"
+  end
 end
