@@ -4,7 +4,7 @@
 
     .d-flex.ellipsis.text-right{style: 'width: 35%'}
       - emails = current_program.telegram_notification_receivers.pluck(:email).join(', ')
-      .ellipsis{'data-toggle' => 'tooltip', title: emails}= emails
+      .ellipsis.flex-grow-1{'data-toggle' => 'tooltip', title: emails}= emails
       .ml-1
         %a.pointer.badge.badge-info.text-white{'data-target' => '#telegramNotificationReceiverModal', 'data-toggle' => 'modal'}= t('shared.edit')
 
