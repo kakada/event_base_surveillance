@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_25_023837) do
+ActiveRecord::Schema.define(version: 2022_08_29_080612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2022_08_25_023837) do
     t.datetime "deleted_at"
     t.datetime "lockable_at"
     t.integer "conclude_event_type_id"
+    t.string "referrer"
     t.index ["deleted_at"], name: "index_events_on_deleted_at"
   end
 
