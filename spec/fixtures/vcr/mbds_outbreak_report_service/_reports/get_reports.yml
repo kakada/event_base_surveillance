@@ -1,0 +1,94 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<MBDS_BASE_URI>/oauth/token"
+    body:
+      encoding: UTF-8
+      string: grant_type=password&password=<MBDS_PASSWORD>&username=<MBDS_USERNAME>
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Charset:
+      - utf-8
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.19.4
+      Date:
+      - Thu, 01 Sep 2022 03:03:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, no-store
+      Pragma:
+      - no-cache
+      Etag:
+      - W/"0ef6c6196c8e8057572af8ef19e08524"
+      X-Request-Id:
+      - 817d1c53-2cd5-44f7-b3b1-84444b4e53a1
+      X-Runtime:
+      - '0.162413'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"111","token_type":"Bearer","refresh_token":"222","created_at":1662001435,"user_id":86,"user_role":"Admin","full_name":"","email":"<MBDS_USERNAME>@kawsang.com","country_id":1,"province_id":null}'
+  recorded_at: Thu, 01 Sep 2022 03:03:55 GMT
+- request:
+    method: get
+    uri: "<MBDS_BASE_URI>/api/events?access_token=111&country_id=1&event_type=human_event&from_date=2022-07-30&till_date=2022-09-01"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.19.4
+      Date:
+      - Thu, 01 Sep 2022 03:03:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Per-Page:
+      - '50'
+      Total:
+      - '1'
+      Etag:
+      - W/"805acaadda08530444c8d49ef32d03a5"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 73a7b3ce-9d6f-4b18-9b9d-aaf32a51492b
+      X-Runtime:
+      - '0.026253'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJkYXRhIjpbeyJpZCI6MzYwMiwidXNlcl9pZCI6NzMsImV2ZW50X2RhdGUiOiIyMDIyLTA3LTMwVDExOjU4OjAwLjAwMCswNzowMCIsImxhdCI6bnVsbCwibG5nIjpudWxsLCJjYXNlX21hbmFnZW1lbnQiOlsiY2xpbmljYWxfbW9uaXRvciIsImlzb2xhdGlvbiJdLCJtYW5hZ2VtZW50X2RldGFpbCI6InN0YXkgYXQgcG9uaGVha3JlayBob3NwaXRhbCIsImNvbnN1bHRpbmdfZGV0YWlsIjoiIiwicGhvdG8xIjoiPE1CRFNfQkFTRV9VUkk+L3JhaWxzL2FjdGl2ZV9zdG9yYWdlL2Jsb2JzL2V5SmZjbUZwYkhNaU9uc2liV1Z6YzJGblpTSTZJa0pCYUhCV2R6MDlJaXdpWlhod0lqcHVkV3hzTENKd2RYSWlPaUppYkc5aVgybGtJbjE5LS04ZThlZTRhYmI5ZTNjYjM3NGRkMTlkNTgzOTkzYzczZDI0ZGI3OWU2L0lNR18yMDIyMDczMF8xMjExNThfMzM5LmpwZyIsInBob3RvMiI6IjxNQkRTX0JBU0VfVVJJPi9yYWlscy9hY3RpdmVfc3RvcmFnZS9ibG9icy9leUpmY21GcGJITWlPbnNpYldWemMyRm5aU0k2SWtKQmFIQlhRVDA5SWl3aVpYaHdJanB1ZFd4c0xDSndkWElpT2lKaWJHOWlYMmxrSW4xOS0tZjNiYzExZmQ0NTU1NzkxN2E0YmMzYTI1NGJiY2YyYTRhNzczY2VlOC9JTUdfMjAyMjA3MzBfMTIxMTUyXzE3NC5qcGciLCJwaG90bzMiOiI8TUJEU19CQVNFX1VSST4vcmFpbHMvYWN0aXZlX3N0b3JhZ2UvYmxvYnMvZXlKZmNtRnBiSE1pT25zaWJXVnpjMkZuWlNJNklrSkJhSEJYVVQwOUlpd2laWGh3SWpwdWRXeHNMQ0p3ZFhJaU9pSmliRzlpWDJsa0luMTktLThiZGRjMjVlNjMyYWYzZTExNDYyMGE0ZTYxZDBkNTdkYWY0YjU5Y2YvSU1HXzIwMjIwNzMwXzEyMTE0N181NTUuanBnIiwiY291bnRyeV9pZCI6MSwicHJvdmluY2VfaWQiOjI1LCJjcmVhdGVkX2F0IjoiMjAyMi0wNy0zMFQxMjoxODo0My4wMDArMDc6MDAiLCJ1cGRhdGVkX2F0IjoiMjAyMi0wNy0zMFQxMjoxODo0My4wMDArMDc6MDAiLCJ0eXBlIjoiSHVtYW5FdmVudCIsImljb24iOiIvaHVtYW5fZXZlbnQucG5nIiwiZXZlbnRfb3JpZyI6bnVsbCwiZXZlbnRhYmxlIjp7InR5cGUiOiJodW1hbl9ldmVudCIsImh1bWFuX2V2ZW50Ijp7ImZ1bGxfbmFtZSI6IllhbiBSaXRoa2VvdmltZWFuIiwiYWdlIjoyLCJnZW5kZXIiOiJGZW1hbGUiLCJvY2N1cGF0aW9uIjoic3R1ZGVudCIsInN1cHBvcnRlZF9oaXN0b3J5IjpudWxsLCJzeW1wdG9tc19saXN0IjpbImZldmVyIiwiaGVhZGFjaGUiLCJtdXNjbGVfcGFpbiIsImFiZG9taW5hbF9wYWluIiwic2tpbl9sZXNpb24iXSwib3RoZXJfc3ltcHRvbSI6IiIsImxhYm9yYXRvcnkiOiJsYWJfd2FpdGluZyIsInByb3Zpc2lvbmFsX2RpYWdub3NpcyI6W10sInRyYXZlbF9oaXN0b3J5Ijoi4Z6Y4Z634Z6T4Z6S4Z+S4Z6b4Z624Z6U4Z+L4Z6R4Z+F4Z6O4Z624Z6R4Z+BIiwicGFzdF9tZWRpY2FsX2hpc3RvcnkiOiJmZXZlciAsIGN1dGFuZW91cyByYXNoICwgIOGeluGehOGekeGeueGegOGen+GfkuGelOGfguGegOGem+GevuGeiuGfg+Geh+GevuGehCIsInBhc3Rfc3VyZ2ljYWxfaGlzdG9yeSI6Im5vIn19fV0sIm1ldGEiOnsidG90YWxfcGFnZXMiOjEsInRvdGFsX2NvdW50IjoxLCJjdXJyZW50X3BhZ2UiOjEsImxhc3RfdXBkYXRlZF9hdCI6IjIwMjItMDctMzBUMTI6MTg6NDMuMDAwKzA3OjAwIn19
+  recorded_at: Thu, 01 Sep 2022 03:03:55 GMT
+recorded_with: VCR 6.1.0

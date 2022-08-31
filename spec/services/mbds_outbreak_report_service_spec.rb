@@ -7,7 +7,23 @@ RSpec.describe MbdsOutbreakReportService do
   let!(:program) { milestone.program }
   let!(:event_type) { create(:event_type, program: program, name: "Chikungunya", code: "Chikungunya") }
   let!(:user) { create(:user, program: program) }
-  let(:service) { MbdsOutbreakReportService.new(user) }
+  let(:service) { MbdsOutbreakReportService.new(user, '2022-07-30') }
+
+  if ENV["MBDS_BASE_URI"].present?
+    describe "#access_token" do
+      it "get access_token", :vcr do
+        token = service.access_token
+        expect(token).not_to be_nil
+      end
+    end
+
+    describe "#reports" do
+      it "get reports", :vcr do
+        reports = service.reports
+        expect(reports).not_to be_empty
+      end
+    end
+  end
 
   describe "#upsert_event(report)" do
     let(:report) {

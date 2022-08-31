@@ -39,11 +39,11 @@ class MbdsOutbreakReportService
     @event.update(event_params(report))
   end
 
-  private
-    def access_token
-      @access_token ||= get_token
-    end
+  def access_token
+    @access_token ||= get_token
+  end
 
+  private
     def get_token
       options = { grant_type: "password", username: ENV["MBDS_USERNAME"], password: ENV["MBDS_PASSWORD"] }
 

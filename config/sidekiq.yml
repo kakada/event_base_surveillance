@@ -27,7 +27,7 @@ production:
     cron: "0 * * * *"
     class: ScheduleWorker
 
-  process_outbreak_report:
+  pull_mbds_outbreak_report:
     # at At 00:00.
     cron: "0 0 * * *"
     class: MbdsOutbreakReportWorker

@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<MBDS_BASE_URI>/oauth/token"
+    body:
+      encoding: UTF-8
+      string: grant_type=password&password=<MBDS_PASSWORD>&username=<MBDS_USERNAME>
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Charset:
+      - utf-8
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.19.4
+      Date:
+      - Thu, 01 Sep 2022 03:02:28 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, no-store
+      Pragma:
+      - no-cache
+      Etag:
+      - W/"168aac5e194904fec8630f7b25e57747"
+      X-Request-Id:
+      - bb6de9ef-331e-4c2e-8e7c-b9cd1b756303
+      X-Runtime:
+      - '0.164708'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"zKdddzUZU8EbZI2Uq7OsCSR5Yvsbym_4LDT51gsx4Cw","token_type":"Bearer","refresh_token":"h9PiSkv31t-AFTICCY9C0q4dkG4TaA8DD2wnOmHTIIk","created_at":1662001348,"user_id":86,"user_role":"Admin","full_name":"","email":"<MBDS_USERNAME>@kawsang.com","country_id":1,"province_id":null}'
+  recorded_at: Thu, 01 Sep 2022 03:02:28 GMT
+recorded_with: VCR 6.1.0
