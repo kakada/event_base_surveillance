@@ -63,7 +63,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   private
     def send_message(chat_id, sms)
-      ::TelegramBot.send_message(chat_id, sms)
+      ::TelegramBot.client_send_message(ENV["TELEGRAM_TOKEN"], chat_id, sms)
     end
 
     def set_locale

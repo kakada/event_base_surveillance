@@ -17,14 +17,10 @@ module Notifications
   class TelegramNotification < ::Notification
     def notify_groups(sms)
       chat_groups.actives.each do |group|
-        bot.send_message(chat_id: group.chat_id, text: sms, parse_mode: :HTML)
+        ::TelegramBot.client_send_message(milestone.program.telegram_bot.token, group.chat_id, sms)
       rescue ::Telegram::Bot::Forbidden => e
         group.update_attributes(is_active: false, reason: e)
       end
-    end
-
-    def bot
-      @bot ||= ::Telegram::Bot::Client.new(milestone.program.telegram_bot.token, milestone.program.telegram_bot.username)
     end
   end
 end
