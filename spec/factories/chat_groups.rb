@@ -6,5 +6,9 @@ FactoryBot.define do
     is_active   { true }
     title       { "test group" }
     chat_id     { "123" }
+
+    trait :telegram do
+      provider { "Telegram" }
+    end
   end
 end
