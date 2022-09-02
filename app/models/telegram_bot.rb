@@ -33,11 +33,6 @@ class TelegramBot < ApplicationRecord
     end
   end
 
-  def self.send_message(chat_id, message)
-    ::Telegram::Bot::Client.new(ENV["TELEGRAM_TOKEN"], ENV["TELEGRAM_USERNAME"])
-                           .send_message(chat_id: chat_id, text: message, parse_mode: :HTML)
-  end
-
   def self.has_system_bot?
     ENV["TELEGRAM_TOKEN"].present? && ENV["TELEGRAM_USERNAME"].present?
   end
@@ -47,7 +42,11 @@ class TelegramBot < ApplicationRecord
   end
 
   def self.client_send_message(token, chat_id, message)
+    return if TelegramBlackList.exists?(chat_id: chat_id)
+
     ::Telegram::Bot::Client.new(token)
                            .send_message(chat_id: chat_id, text: message, parse_mode: :HTML)
+    rescue
+      TelegramBlackList.create(chat_id: chat_id)
   end
 end
