@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     scope module: :events do
       resources :event_milestones
       resource :preview, only: [:show]
-      resources :follow_ups, only: [:new, :create]
+      resources :follow_ups, only: [:new, :create, :update]
     end
 
     get :download, on: :collection

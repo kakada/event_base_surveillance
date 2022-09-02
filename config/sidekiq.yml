@@ -15,7 +15,7 @@ production:
   lockevent:
     # at At 00:00.
     cron: "0 0 * * *"
-    class: UnlockEventJob
+    class: LockEventJob
 
   process_feed:
     # every one hour

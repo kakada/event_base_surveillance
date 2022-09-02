@@ -7,7 +7,7 @@ RSpec.describe MbdsOutbreakReportService do
   let!(:program) { milestone.program }
   let!(:event_type) { create(:event_type, program: program, name: "Chikungunya", code: "Chikungunya") }
   let!(:user) { create(:user, program: program) }
-  let(:service) { MbdsOutbreakReportService.new(user, '2022-07-30') }
+  let(:service) { MbdsOutbreakReportService.new(user, "2022-07-30") }
 
   if ENV["MBDS_BASE_URI"].present?
     describe "#access_token" do

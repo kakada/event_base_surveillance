@@ -7,6 +7,7 @@
 #  id          :bigint           not null, primary key
 #  channels    :string           default([]), is an Array
 #  message     :text
+#  resolved_at :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  event_id    :string

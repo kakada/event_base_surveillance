@@ -6,22 +6,23 @@
   - event.follow_ups.each do |fu|
     .card.mb-2
       .card-body
+        .flag.resolved{class: ('d-none' unless fu.resolved_at.present?)}
+          = t("shared.resolved")
+
         %div
           .d-flex
             .text-capitalize.mr-2
               .btn.btn-circle.rounded-circle.border
                 = fu.follower.email[0]
 
-            .flex-grow-1
+            .flex-grow-1.overflow-auto
               .follower.d-flex.align-items-start
                 %small.text-muted.mr-2= "#{t('event.follower')}: "
-                %h6.mb-0.text-break= fu.follower.email
+                %h6.mb-0.text-truncate= fu.follower.email
+
               .followee.d-flex.align-items-start
                 %small.text-muted.mr-2= "#{t('event.followee')}: "
-                %h6.mb-0.text-break= fu.followee.email
-
-              %small.text-muted
-                = l(fu.updated_at)
+                %h6.mb-0.text-truncate= fu.followee.email
 
         .my-2
           %strong= t('event.message')
@@ -29,7 +30,13 @@
 
         .my-2.d-flex.align-items-center
           %small.text-muted= "#{t('event.use_channel')}: "
-          .d-flex
+          .d-flex.flex-grow-1
             - fu.channels.each do |ch|
               .ml-2
                 = send("icon_#{ch}").html_safe
+
+          %small.text-muted= l(fu.updated_at)
+
+        - if fu.resolved_at.blank?
+          .text-right
+            = link_to t('shared.resolve'), event_follow_up_path(event, fu), class: "btn btn-default btn-sm btn-resolve"

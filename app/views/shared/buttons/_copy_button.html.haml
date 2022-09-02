@@ -5,8 +5,8 @@
   %input.input-for-copy{ value: value }
 
   / Copied label
-  %a.btn.btn-copy.p-0.text-dark{href: '#', style: 'height: 26px;'}
+  %a.btn.btn-copy.p-0.text-dark{href: '#', style: 'height: 26px;', 'data-toggle' => 'tooltip', title: t('shared.copy')}
     %i.far.fa-copy
 
-  %span.btn-check.d-none{"data-placement" => "right", :title => tooltip_title, "data-trigger": :focus, style: 'height: 26px;'}
+  %span.btn-check.d-none{"data-placement" => "top", :title => tooltip_title, "data-trigger": :focus, style: 'height: 26px;'}
     %i.fas.fa-check.text-success
