@@ -13,6 +13,7 @@ production:
 
 :schedule:
   lockevent:
+    # at At 00:00.
     cron: "0 0 * * *"
     class: UnlockEventJob
 
@@ -25,3 +26,8 @@ production:
     # every one hour
     cron: "0 * * * *"
     class: ScheduleWorker
+
+  pull_mbds_outbreak_report:
+    # at At 00:00.
+    cron: "0 0 * * *"
+    class: MbdsOutbreakReportWorker

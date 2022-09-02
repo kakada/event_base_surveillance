@@ -15,6 +15,8 @@ require "capybara/rspec"
 require "database_cleaner"
 require "support/factory_bot"
 require "sidekiq/testing"
+require "support/vcr"
+require "webmock/rspec"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -140,25 +142,3 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
-
-# RSpec.configure do |config|
-#   config.before(:suite) do
-#     DatabaseCleaner.clean_with(:truncation)
-#   end
-
-#   config.before(:each) do
-#     DatabaseCleaner.strategy = :transaction
-#   end
-
-#   config.before(:each, :js => true) do
-#     DatabaseCleaner.strategy = :truncation
-#   end
-
-#   config.before(:each) do
-#     DatabaseCleaner.start
-#   end
-
-#   config.after(:each) do
-#     DatabaseCleaner.clean
-#   end
-# end

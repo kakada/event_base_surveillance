@@ -10,6 +10,7 @@
 #  link_uuid              :string
 #  location_code          :string
 #  lockable_at            :datetime
+#  referrer               :string
 #  uuid                   :string(36)       not null, primary key
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -81,6 +82,9 @@ class Event < ApplicationRecord
     attributes["id"].blank? && attributes["value"].blank? && attributes["image"].blank? && attributes["values"].blank? && attributes["file"].blank?
   }
   accepts_nested_attributes_for :event_milestones, allow_destroy: true
+
+  # Serialier
+  serialize :referrer, Hash
 
   # Instant Methods
   def conducted_at
