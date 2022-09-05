@@ -33,5 +33,10 @@ module Ebs
 
     config.time_zone = "Bangkok"
     config.active_record.default_timezone = :local
+
+    # Fixed: Psych::DisallowedClass
+    # https://stackoverflow.com/questions/71332602/upgrading-to-ruby-3-1-causes-psychdisallowedclass-exception-when-using-yaml-lo
+    # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
+    config.active_record.yaml_column_permitted_classes = [Symbol, Date, DateTime, Time, Hash, Array, ActiveSupport::HashWithIndifferentAccess]
   end
 end
