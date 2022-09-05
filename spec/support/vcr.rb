@@ -1,4 +1,6 @@
-require 'vcr'
+# frozen_string_literal: true
+
+require "vcr"
 
 VCR.configure do |config|
   config.cassette_library_dir = Rails.root.join("spec/fixtures/vcr")
@@ -27,7 +29,7 @@ RSpec.configure do |config|
         parent = parent.parent
       end
 
-      name = path_data.map{|str| str.underscore.gsub(/\./,'').gsub(/[^\w\/]+/, '_').gsub(/\/$/, '')}.reverse.join("/")
+      name = path_data.map { |str| str.underscore.gsub(/\./, "").gsub(/[^\w\/]+/, "_").gsub(/\/$/, "") }.reverse.join("/")
 
       VCR.use_cassette(name, options, &example)
     end

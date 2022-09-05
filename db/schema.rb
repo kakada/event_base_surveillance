@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_060527) do
+ActiveRecord::Schema.define(version: 2022_09_02_070833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_060527) do
     t.string "channels", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "resolved_at"
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|

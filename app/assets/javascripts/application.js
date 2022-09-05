@@ -67,6 +67,7 @@
 //= require event_milestones/show
 //= require events/index
 //= require event_types/new
+//= require events/channels_form
 //= require events/follow_up
 
 //= require users/index

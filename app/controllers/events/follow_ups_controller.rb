@@ -26,6 +26,12 @@ module Events
       end
     end
 
+    def update
+      @follow_up = @event.follow_ups.find(params[:id])
+
+      @follow_up.update(resolved_at: Time.zone.now)
+    end
+
     private
       def set_event
         @event = Event.find(params[:event_id])

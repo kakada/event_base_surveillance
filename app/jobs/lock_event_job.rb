@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UnlockEventJob < ApplicationJob
+class LockEventJob < ApplicationJob
   queue_as :default
 
   def perform(*args)

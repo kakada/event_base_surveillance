@@ -71,7 +71,7 @@ en:
     channel: Channel
     follower: Follower
     followee: Event creator
-    use_channel: Use channel
+    use_channel: To
     email: Email
     telegram: Telegram
     event_creator_no_telegram_account: The event creator didn't connect to telegram account!
