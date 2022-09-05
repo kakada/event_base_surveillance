@@ -29,6 +29,9 @@ class FollowUp < ApplicationRecord
   # Validation
   validates :message, presence: true
 
+  # Scope
+  default_scope { order(updated_at: :desc) }
+
   private
     def send_notification_async
       channels.each do |channel|
