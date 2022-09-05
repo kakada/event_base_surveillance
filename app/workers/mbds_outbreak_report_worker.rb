@@ -10,7 +10,7 @@ class MbdsOutbreakReportWorker
     # ignore if not found.
     creator = program.users.find_by email: ENV["MBDS_CREATOR_EMAIL"]
 
-    return if creator.nil?
+    return if creator.nil? || !(ENV['MBDS_ENABLED'] == "true")
 
     MbdsOutbreakReportService.new(creator).process
   end
