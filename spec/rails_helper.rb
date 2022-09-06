@@ -14,9 +14,14 @@ require "webdrivers/chromedriver"
 require "capybara/rspec"
 require "database_cleaner"
 require "support/factory_bot"
-require "sidekiq/testing"
+
+# VCR and webmock
 require "support/vcr"
 require "webmock/rspec"
+
+# Sidekiq
+require "sidekiq/testing"
+require "support/rspec_sidekiq"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
