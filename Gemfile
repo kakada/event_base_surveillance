@@ -128,6 +128,7 @@ group :test do
   gem "database_cleaner",       "~> 1.7.0"
   gem "vcr",                    "~> 6.1.0"
   gem "webmock",                "~> 3.18.1"
+  gem "rspec-sidekiq"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
