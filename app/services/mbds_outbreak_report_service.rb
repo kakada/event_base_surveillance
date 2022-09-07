@@ -16,7 +16,7 @@ class MbdsOutbreakReportService
 
   def process
     reports.each do |report|
-      upsert_event(report)
+      create_event(report)
     end
   end
 
@@ -32,11 +32,12 @@ class MbdsOutbreakReportService
     self.class.get("/api/events?#{options.to_query}").parsed_response["data"]
   end
 
-  def upsert_event(report)
+  def create_event(report)
     referrer = { source: "mbds", id: report["id"] }
 
-    @event = @program.events.find_or_initialize_by(referrer: referrer)
-    @event.update(event_params(report))
+    return if @program.events.find_by(referrer: referrer).present?
+
+    @program.events.create(event_params(report))
   end
 
   def access_token
@@ -60,6 +61,7 @@ class MbdsOutbreakReportService
       {
         event_type_id: event_type(report).id,
         creator_id: @user.id,
+        referrer: { source: "mbds", id: report["id"] },
         field_values_attributes: [
           field_value("number_of_case", 1),
           field_value("description", description(report)),
@@ -79,9 +81,8 @@ class MbdsOutbreakReportService
 
     def field_value(field_code, value)
       field = @fields.select { |f| f.code == field_code }.first
-      fv = @event.get_value_by_code(field_code)
 
-      { id: fv.try(:id), field_id: field.id, field_code: field.code, value: value }
+      { field_id: field.id, field_code: field.code, value: value }
     end
 
     def description(report)

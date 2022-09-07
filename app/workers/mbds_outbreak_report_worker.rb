@@ -6,7 +6,7 @@ class MbdsOutbreakReportWorker
   include Sidekiq::Worker
 
   def perform(*args)
-    return unless (ENV["MBDS_ENABLED"] == "true" && creator.present?)
+    return unless ENV["MBDS_ENABLED"] == "true" && creator.present?
 
     MbdsOutbreakReportService.new(creator).process
   end

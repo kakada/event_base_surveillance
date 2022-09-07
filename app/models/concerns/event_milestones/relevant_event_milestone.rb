@@ -12,7 +12,7 @@ module EventMilestones
       end
 
       def previous_event_milestone
-        index = event_milestones.index{ |em| em.milestone_id == milestone_id }
+        index = event_milestones.index { |em| em.milestone_id == milestone_id }
 
         event_milestones[0..index].last(2).first
       end
