@@ -28,6 +28,6 @@ production:
     class: ScheduleWorker
 
   pull_mbds_outbreak_report:
-    # at At 00:00.
-    cron: "0 0 * * *"
+    # At every 5th minute.
+    cron: "*/5 * * * *"
     class: MbdsOutbreakReportWorker

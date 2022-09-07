@@ -25,7 +25,7 @@ RSpec.describe MbdsOutbreakReportService do
     end
   end
 
-  describe "#upsert_event(report)" do
+  describe "#create_event(report)" do
     let(:report) {
       {
         "id"=>1,
@@ -67,20 +67,14 @@ RSpec.describe MbdsOutbreakReportService do
     }
 
     it "create event" do
-      expect { service.upsert_event(report) }.to change { Event.count }.by(1)
+      expect { service.create_event(report) }.to change { Event.count }.by(1)
     end
 
     context "existing event" do
       let!(:event) { create(:event, program: program, referrer: { source: "mbds", id: 1 }, event_date: 1.month.ago) }
 
       it "doen't create new" do
-        expect { service.upsert_event(report) }.not_to change { Event.count }
-      end
-
-      it "update event" do
-        service.upsert_event(report)
-
-        expect(event.reload.event_date).to eq(Time.zone.parse(report["event_date"]))
+        expect { service.create_event(report) }.not_to change { Event.count }
       end
     end
   end

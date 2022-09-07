@@ -35,7 +35,7 @@ RSpec.describe MbdsOutbreakReportWorker, type: :worker do
 
     context "MBDS_ENABLED is true and creator is present" do
       let!(:creator) { create(:user) }
-      let!(:service) { instance_double(MbdsOutbreakReportService, process: 'process') }
+      let!(:service) { instance_double(MbdsOutbreakReportService, process: "process") }
 
       before {
         ENV["MBDS_ENABLED"] = "true"
