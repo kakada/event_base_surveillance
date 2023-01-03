@@ -85,7 +85,7 @@ gem "paranoia",                   "~> 2.2"
 
 # Feed from Medisys
 # get request
-gem "httparty", "~> 0.18.1"
+gem "httparty", "~> 0.21.0"
 # crol content
 gem "ruby-readability", require: "readability"
 gem "pdf-reader", "~> 2.5.0"
