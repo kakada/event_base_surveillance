@@ -39,5 +39,9 @@ module Fields
     def es_datatype
       :date
     end
+
+    def target_migratable_types
+      ["Fields::DateTimeField"]
+    end
   end
 end
