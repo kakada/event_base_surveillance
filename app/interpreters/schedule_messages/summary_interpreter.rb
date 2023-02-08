@@ -2,6 +2,8 @@
 
 module ScheduleMessages
   class SummaryInterpreter
+    attr_reader :schedule
+
     def initialize(schedule, event = nil)
       @schedule = schedule
     end
@@ -21,11 +23,21 @@ module ScheduleMessages
       str + "</ul>"
     end
 
+    def event_progressing
+      data = EventProgressing.new(schedule.program_id, schedule.start_date).data
+
+      str = "<div>There are <b>#{data.total_count}</b> changes/modifiers within #{I18n.l(schedule.start_date)} to #{I18n.l(Time.zone.now)}</div>"
+      str += "<ul>"
+      str += "<li>New events: <b>#{data.new_event_count}</b>#{view_in_camems('uuid': data.new_event_uuids.join(', '))}</li>"
+      str += "<li>Having progress: <b>#{data.progressing_event_count}</b>#{view_in_camems('uuid': data.progressing_event_uuids.join(', '))}</li>"
+      str + "</ul>"
+    end
+
     private
       def build_lists(milestones)
         milestones = milestones.select { |m| progress_hash.keys.include?(m.name) }
         milestones.map do |milestone|
-          "<li>#{milestone.name}: <b>#{progress_hash[milestone.name]}</b> (<a href='#{events_url(milestone)}' target='_blank'>view in CamEMS</a>)</li>"
+          "<li>#{milestone.name}: <b>#{progress_hash[milestone.name]}</b> #{view_in_camems('progresses[]': milestone.name)}</li>"
         end.join("")
       end
 
@@ -37,8 +49,12 @@ module ScheduleMessages
         @deadline ||= Date.today - @schedule.deadline_duration_in_day.days
       end
 
-      def events_url(milestone)
-        Rails.application.routes.url_helpers.events_url(host: ENV["HOST_URL"]) + "?" + { 'progresses[]': milestone.name }.to_query
+      def events_url(params={})
+        Rails.application.routes.url_helpers.events_url(host: ENV["HOST_URL"]) + "?" + params.to_query
+      end
+
+      def view_in_camems(params)
+        "(<a href='#{events_url(params)}' target='_blank'>view in CamEMS</a>)"
       end
   end
 end
