@@ -85,6 +85,10 @@ class Schedule < ApplicationRecord
     end
   end
 
+  def start_date
+    interval_value.send("#{interval_type}").ago
+  end
+
   # Class method
   def self.types
     TYPES.map { |t| [t.split("::").last, t] }

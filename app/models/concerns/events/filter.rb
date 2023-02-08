@@ -8,7 +8,7 @@ module Events
       # Class Methods
       def self.filter(params = {})
         scope = all
-        scope = scope.where(uuid: params[:uuid]) if params[:uuid].present?
+        scope = scope.where(uuid: params[:uuid].split(/\s*,\s*/)) if params[:uuid].present?
         scope = scope.where("substring(location_code from 1 for 2) in (?)", params[:province_ids]) if params[:province_ids].present?
         scope = scope.where(event_type_id: params[:event_type_ids]) if params[:event_type_ids].present?
         scope = scope.where("event_date BETWEEN ? AND ?", params[:start_date], params[:end_date]) if params[:start_date].present? && params[:end_date].present?
