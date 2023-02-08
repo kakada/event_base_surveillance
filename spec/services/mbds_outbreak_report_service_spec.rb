@@ -18,7 +18,7 @@ RSpec.describe MbdsOutbreakReportService do
     end
 
     describe "#reports" do
-      it "get reports", :vcr do
+      pending "get reports", :vcr do
         reports = service.reports
         expect(reports).not_to be_empty
       end

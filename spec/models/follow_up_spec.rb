@@ -5,11 +5,11 @@ require "rails_helper"
 RSpec.describe FollowUp, type: :model do
   describe "#after_create, send_notification_async" do
     let!(:event) { create(:event) }
-    let!(:creator) { event.creator }
     let(:follow_up) { build(:follow_up, event: event) }
 
     before {
-      creator.telegram_chat_id = "-123"
+      allow(TelegramBot).to receive(:has_system_bot?).and_return(true)
+      allow(event.creator).to receive(:telegram_chat_id).and_return("-123")
     }
 
     it { expect { follow_up.save }.to change(EmailAdapterWorker.jobs, :size).by(1) }
