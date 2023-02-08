@@ -23,22 +23,29 @@ namespace :milestone do
     end
   end
 
-  desc "migrate event_date to datetime"
-  task migrate_end_date_field_type_to_datetime: :environment do
-    program = Program.find_by name: "GDAHP"
-    milestones = program.milestones.where(name: ["Investigation", "Intervention/Response"])
+  # bundle exec rake milestone:migrate_date_field_to_datetime_field[GDAHP,Investigation,end_date]
+  # bundle exec rake milestone:migrate_date_field_to_datetime_field[GDAHP,Intervention/Response,end_date]
+  # bundle exec rake milestone:migrate_date_field_to_datetime_field[CDC,Investigation,end_date]
+  desc "migrate date field to datetime field. Ex: bundle exec rake milestone:migrate_date_field_to_datetime_field[CDC,Investigation,end_date]"
+  task :migrate_date_field_to_datetime_field, [:program_name, :milestone_name, :date_type_field_code] => :environment do |t, args|
+    program = Program.find_by name: args.program_name
+    milestone = program.milestones.find_by(name: args.milestone_name)
+    update_field_type_to_datetime(milestone, args.date_type_field_code)
 
-    milestones.each do |milestone|
-      update_field_type_to_datetime(milestone)
-    end
+    puts "**Migrate successfully**"
+  rescue => e
+    puts e
   end
 
   private
-    def update_field_type_to_datetime(milestone)
-      fields = milestone.fields.where(code: "end_date")
+    def update_field_type_to_datetime(milestone, field_code="end_date")
+      fields = milestone.fields.where(code: field_code)
+      target_field_type = "Fields::DateTimeField"
 
       fields.each do |field|
-        field.update(field_type: "Fields::DateTimeField")
+        raise "#{field.name}(#{field.field_type}) is unsupported to migrate to #{target_field_type}" unless field.migratable_to?(target_field_type)
+
+        field.update(field_type: target_field_type)
         field.field_values.update_all(type: "FieldValues::DateTimeField")
       end
     end

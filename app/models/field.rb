@@ -83,11 +83,19 @@ class Field < ApplicationRecord
     raise "you have to implement in subclass"
   end
 
+  def target_migratable_types
+    []
+  end
+
+  def migratable_to?(target_field_type)
+    target_migratable_types.include? target_field_type
+  end
+
+  # Class methods
   def self.validation_operators
     ["<", "<=", "=", ">", ">="]
   end
 
-  # Class methods
   def self.roots
     fields = [
       { code: "number_of_case", field_type: "Fields::IntegerField", name: "Number of case", required: true, tracking: true },
