@@ -9,6 +9,7 @@ RSpec.describe EventMilestones::NotifyEventCreatorCallback do
 
     context "creator has channels" do
       before {
+        allow(TelegramBot).to receive(:has_system_bot?).and_return(true)
         allow(event.creator).to receive(:notification_channels).and_return(["email", "telegram"])
         allow(event.creator).to receive(:telegram_chat_id).and_return("-123")
       }
