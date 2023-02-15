@@ -35,3 +35,10 @@ en:
     notify_to: Notify to
     event_schedule: Event Schedule
     summary_schedule: Summary Schedule
+    # schedule summary
+    unclosedEventWithCount:
+      one: "There is <b>1</b> unclosed event out of %{total_count} in-progress below:"
+      other: "There are <b>%{count}</b> unclosed events out of %{total_count} in-progress below:"
+    progressingEventWithCount:
+      one: "There is <b>1</b> change/modification within %{start_date} to %{end_date}"
+      other: "There are <b>%{count}</b> changes/modifications within %{start_date} to %{end_date}"

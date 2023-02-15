@@ -17,7 +17,7 @@ module ScheduleMessages
     end
 
     def event_report
-      str = "<div>There are <b>#{progress_hash.values.sum}</b> unclosed events out of a total of #{@schedule.program.events.length} in-progress below:</div>"
+      str = "<div>#{I18n.t('schedule.unclosedEventWithCount', {count: progress_hash.values.sum, total_count: @schedule.program.events.length})}</div>"
       str += "<ul>"
       str += build_lists(@schedule.program.milestones)
       str + "</ul>"
@@ -26,10 +26,10 @@ module ScheduleMessages
     def event_progressing
       data = EventProgressing.new(schedule.program_id, schedule.start_date).data
 
-      str = "<div>There are <b>#{data.total_count}</b> changes/modifiers within #{I18n.l(schedule.start_date)} to #{I18n.l(Time.zone.now)}</div>"
+      str = "<div>#{I18n.t('schedule.progressingEventWithCount', {count: data.total_count, start_date: I18n.l(schedule.start_date), end_date: I18n.l(Time.zone.now)})}</div>"
       str += "<ul>"
-      str += "<li>New events: <b>#{data.new_event_count}</b>#{view_in_camems('uuid': data.new_event_uuids.join(', '))}</li>"
-      str += "<li>Having progress: <b>#{data.progressing_event_count}</b>#{view_in_camems('uuid': data.progressing_event_uuids.join(', '))}</li>"
+      str += list_item("New event", data.new_event_count, {'uuid': data.new_event_uuids.join(', ')})
+      str += list_item("Having progress", data.progressing_event_count, {'uuid': data.progressing_event_uuids.join(', ')})
       str + "</ul>"
     end
 
@@ -37,8 +37,14 @@ module ScheduleMessages
       def build_lists(milestones)
         milestones = milestones.select { |m| progress_hash.keys.include?(m.name) }
         milestones.map do |milestone|
-          "<li>#{milestone.name}: <b>#{progress_hash[milestone.name]}</b> #{view_in_camems('progresses[]': milestone.name)}</li>"
+          list_item(milestone.name, progress_hash[milestone.name], {'progresses[]': milestone.name})
         end.join("")
+      end
+
+      def list_item(name, value, params)
+        str = "<li><span>#{name}</span>: <b>#{value}</b> "
+        str += view_in_camems(params) if value.positive?
+        str + "</li>"
       end
 
       def progress_hash
