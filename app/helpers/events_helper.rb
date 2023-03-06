@@ -95,6 +95,8 @@ module EventsHelper
   end
 
   def creator_info(event)
+    return "#{t('event.creator')}: has been removed!" if event.creator.nil?
+
     "#{t('event.creator')}: #{event.creator_email} (#{event.creator.location_name})"
   end
 end
