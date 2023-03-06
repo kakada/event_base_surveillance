@@ -61,7 +61,7 @@ module EventsHelper
 
     title = '<div class="text-left">'
     title += "<div>#{t('user.name')}: #{user.full_name}</div>"
-    title += "<div>#{t('user.email')}: #{user.email}</div>"
+    title += "<div>#{t('user.email')}: #{user.email} (#{user.location_name})</div>"
     title += "<div>#{t('user.phone_number')}: #{user.phone_number}</div>" if user.phone_number.present?
     title += "</div>"
 
@@ -92,5 +92,9 @@ module EventsHelper
 
   def letter_badge(color, letter)
     "<div class='small-color' style='border-color:#{color}; color: #{color}'>#{letter}</div>"
+  end
+
+  def creator_info(event)
+    "#{t('event.creator')}: #{event.creator_email} (#{event.creator.location_name})"
   end
 end

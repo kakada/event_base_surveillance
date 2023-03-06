@@ -97,6 +97,10 @@ class User < ApplicationRecord
     super || Location.pumi_all_provinces.select { |p| p.id == province_code }.first
   end
 
+  def location_name
+    location.try("name_#{I18n.locale}")
+  end
+
   def set_full_name
     self.full_name ||= email.split("@").first
   end

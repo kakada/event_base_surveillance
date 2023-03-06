@@ -38,7 +38,7 @@ class Location < ApplicationRecord
   end
 
   def self.pumi_all_provinces
-    @@pumi_all_provinces ||= [Pumi::Province.new(id: "all", name_km: "គ្រប់ខេត្ត/ក្រុង", name_en: "All")].concat(Pumi::Province.all)
+    @pumi_all_provinces ||= [Pumi::Province.new(id: "all", name_km: "ថ្នាក់ជាតិ", name_en: "National level")].concat(Pumi::Province.all)
   end
 
   def self.location_kind(code)

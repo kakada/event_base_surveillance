@@ -95,8 +95,8 @@ class EventsController < ApplicationController
 
     def get_events
       policy_scope(Event.filter(filter_params).order_desc
-        .includes(:event_type, :conclude_event_type, :creator,
-                  :program, :program_shareds, follow_ups: [:follower, :followee],
+        .includes(:event_type, :conclude_event_type, :program, :program_shareds,
+                  creator: :location, follow_ups: [:follower, :followee],
                   field_values: { field: :field_options }
                  )
       )

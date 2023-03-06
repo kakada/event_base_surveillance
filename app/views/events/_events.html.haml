@@ -10,7 +10,7 @@
           .mr-1= render "shared/buttons/copy_button", value: event.uuid
 
           / Creator email
-          %span{ 'data-toggle' => 'tooltip', title: "#{t('event.creator')}: #{event.creator_email}" }
+          %span{ 'data-toggle' => 'tooltip', title: creator_info(event), 'data-html': "true" }
             %i.far.fa-user
     %td
       .flex-row-vertical-center
