@@ -46,8 +46,12 @@ module EventsHelper
     css_class.join(" ")
   end
 
-  def shared_event?(user, event)
+  def shared_in?(user, event)
     !user.system_admin? && event.shared_with?(user.program_id)
+  end
+
+  def shared_out?(user, event)
+    !user.system_admin? && event.shared_out?(user.program_id)
   end
 
   def no_value(field)

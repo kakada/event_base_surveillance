@@ -18,6 +18,8 @@
 #
 
 class EventType < ApplicationRecord
+  include Events::ShareStatus
+
   has_associated_audits
 
   # Uploader
@@ -47,10 +49,6 @@ class EventType < ApplicationRecord
 
   # Deligation
   delegate :name, to: :program, prefix: :program
-
-  def shared_with?(program_id)
-    program_shared_ids.include?(program_id)
-  end
 
   # Class methods
   def self.create_root(user_id)

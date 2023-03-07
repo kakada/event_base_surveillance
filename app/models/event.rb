@@ -33,6 +33,7 @@ class Event < ApplicationRecord
   include Events::Location
   include Events::Valueable
   include Events::FollowUp
+  include Events::ShareStatus
 
   # Soft delete
   acts_as_paranoid
@@ -134,10 +135,6 @@ class Event < ApplicationRecord
 
   def event_type_changed?
     conclude_event_type_id.present? && event_type_id != conclude_event_type_id
-  end
-
-  def shared_with?(program_id)
-    program_shared_ids.include?(program_id)
   end
 
   def relevant_event_milestone(relevant_milestone_id = nil)

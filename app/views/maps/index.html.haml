@@ -30,9 +30,7 @@
             %i{style:"background: #{data[:event_type].color}"}
             .ellipsis= data[:event_type].name
 
-            - if shared_event?(current_user, data[:event_type])
-              .pl-1.pr-1{ 'data-toggle' => 'tooltip', title: "#{t('map.shared_from')}: #{data[:event_type].program_name}"}
-                = image_tag 'share.png', class: 'icon-share'
+            = render "events/index/share_icon", event: data[:event_type]
 
 - else
   .no-data.text-center
