@@ -24,9 +24,8 @@
 
           %span= event.conclude_event_type_name
 
-        - if shared_event?(current_user, event)
-          %span.ml-2{ 'data-toggle' => 'tooltip', title: "#{t('event.shared_from')}: #{event.program_name}" }
-            = image_tag 'share.png', class: 'icon-share'
+        / Share icon
+        = render 'events/index/share_icon', event: event
 
     %td= event.location_name
 

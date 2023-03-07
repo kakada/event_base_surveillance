@@ -1,0 +1,10 @@
+/ Share in?
+- if shared_in?(current_user, event)
+  %span.ml-2{ 'data-toggle' => 'tooltip', title: "#{t('event.shared_from')}: #{event.program_name}" }
+    %i.fa-solid.fa-reply{style: 'color: red'}
+
+/ Share out?
+- if shared_out?(current_user, event)
+  - names = event.program_shareds.map(&:name).join(', ')
+  %span.ml-2{ 'data-toggle' => 'tooltip', title: "#{t('event.shared_to')}: #{names}" }
+    %i.fa-solid.fa-share{style: 'color: green'}

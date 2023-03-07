@@ -24,6 +24,9 @@
       %h4.mb-0
         = render 'events/show/tracing_number_field_modal', traceable: @event
 
+      / Share icon
+      = render 'events/index/share_icon', event: @event
+
       .ml-2= @event.field_values.select{ |fv| fv.field_code == 'progress' }.first.try(:html_tag).try(:html_safe)
 
       = render 'btn_download_risk_assessment_guideline'
