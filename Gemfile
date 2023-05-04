@@ -49,7 +49,7 @@ gem "sidekiq-unique-jobs"
 gem "sinatra", require: nil
 
 gem "haml-rails",     "~> 2.0"
-gem "jquery-rails",   "~> 4.3.5"
+gem "jquery-rails",   "~> 4.4.0"
 gem "bootstrap",      "~> 4.3.1"
 
 # In Ruby 2.7.0 thwait is no longer bundled
