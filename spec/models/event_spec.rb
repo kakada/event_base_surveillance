@@ -85,7 +85,7 @@ RSpec.describe Event, type: :model do
   end
 
   describe "#secure_uuid" do
-    let!(:uuid) { SecureRandom.hex(4) }
+    let!(:uuid) { SecureRandom.random_number(1..99999999).to_s.rjust(8, "0") }
     let!(:event1) { create(:event, uuid: uuid) }
     let!(:event2) { create(:event, uuid: uuid) }
 
