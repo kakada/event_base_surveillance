@@ -43,7 +43,7 @@ gem "devise", "~> 4.8.1"
 gem "omniauth-rails_csrf_protection", "~> 1.0.0"
 gem "omniauth-google-oauth2", "~> 1.0.0"
 
-gem "sidekiq",        "~> 5.2.10"
+gem "sidekiq",        "~> 7.0.8"
 gem "sidekiq-scheduler"
 gem "sidekiq-unique-jobs"
 gem "sinatra", require: nil
